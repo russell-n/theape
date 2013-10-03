@@ -1,0 +1,14 @@
+Interface
+=========
+
+<<name='imports', echo=False>>=
+# this package
+from arachneape.index_builder import create_toctree
+@
+
+This sub-folder holds the modules that create the command-line interface
+
+<<name='toctree', echo=False, results='sphinx'>>=
+create_toctree()
+@
+

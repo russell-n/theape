@@ -1,0 +1,61 @@
+The Base Plugin
+===============
+.. currentmodule:: arachneape.plugins.base_plugin
+<<name='imports', echo=False>>=
+# python standard library
+from abc import ABCMeta, abstractmethod, abstractproperty
+
+# this package 
+from arachneape.baseclass import BaseClass
+@
+.. _base-plugin:
+In order to make the plugins a little more predictable they should inherit their interface from this (abstract) base-class.
+
+.. uml::
+
+   BasePlugin -|> BaseClass
+
+.. autosummary::
+   :toctree: api
+
+   BasePlugin
+   BasePlugin.help
+   BasePlugin.product
+   BasePlugin.fetch
+
+<<name='BasePlugin', echo=False>>=
+class BasePlugin(BaseClass):
+    """
+    An abstract base-class for plugins
+    """
+    __metaclass__ = ABCMeta
+    def __init__(self, configuration=None):
+        super(BasePlugin, self).__init__()
+        self._logger = None
+        self._help = None
+        self._fetch = None
+        self._product is None
+        return
+
+    @abstractproperty
+    def help(self):
+        """
+        A help string for this plugin
+        """
+        return
+
+    @abstractproperty
+    def product(self):
+        """
+        The plugin (BaseProduct implementation)
+        """
+        return
+
+    @abstractproperty    
+    def fetch(self):
+        """
+        Get sample config-file snippet required by this plugin
+        """
+        return
+# end class BasePlugin                
+@

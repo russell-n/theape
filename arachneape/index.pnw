@@ -1,7 +1,10 @@
 ArachneApe
 ==========
 
-
+<<name='imports', echo=False>>=
+# this package
+from arachneape.index_builder import create_toctree
+@
 This is an attempt to re-start the `Project Arachne` revision of the `APE`. After randomly getting pushed to other projects for the last six months or so I think it might be safer to start from scratch and think things through one at a time.
 
 Written Documentation
@@ -19,15 +22,7 @@ Auto-Generated Documentation
 
 These are the documents created from the source files.
 
-
-.. toctree::
-   :maxdepth: 1
-
-   BaseClass <baseclass.rst>
-   The Main Entry Point <main.rst>
-   Index Builder <index_builder.rst>
-   Log Setter <log_setter.rst>
-   Interface <interface/index.rst>
-   Plugins <plugins/index.rst>
-
+<<name='toctree', echo=False, results='sphinx'>>=
+create_toctree()
+@
 

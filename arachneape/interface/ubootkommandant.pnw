@@ -1,0 +1,55 @@
+The UbootKommandant
+===================
+.. currentmodule:: arachneape.interface.ubootkommandant
+
+The try-except Decorator
+------------------------
+
+Since this is a user-level class (it is part of the command-line interface), exceptions are caught and logged, rather than allowing the interpreter to dump the stack-trace (it still logs and displays the stack-trace). To make this simpler a decorator is used to catch `Exception`.
+
+.. autosummary::
+   :toctree: api
+
+   try_except
+   
+<<name='try_except', echo=False>>=
+def try_except(func):
+    """
+    A decorator method to catch Exceptions
+
+    :param:
+
+     - `func`: A function to call
+    """
+    def wrapped(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except Exception as error:
+            import traceback
+            log = BaseClass()
+            log.logger.error(error)
+            log.logger.debug(traceback.format_exc())
+    return wrapped
+@
+
+.. _uboot-kommandant:
+This is a holder of sub-commands for the :ref:`ArgumentClinic <argument-clinic>`.
+
+.. uml::
+
+   UbootKommandant
+   UbootKommandant o-- QuarterMaster
+
+.. autosummary::
+   :toctree: api
+
+   UbootKommandant
+   UbootKommandant.help
+   UbootKommandant.run
+   UbootKommandant.fetch
+   UbootKommandant.list
+   UbootKommandant.test
+
+<<name='UbootKommandant', echo=False>>=
+pass
+@
