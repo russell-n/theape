@@ -88,7 +88,7 @@ The ``inspect.getfile`` method takes an object and tells you the file where it c
 ::
 
     ./dummy.py
-    <dummy.DummyClass object at 0x2c5b7d0> is not a module, class, method, function, traceback, frame, or code object
+    <dummy.DummyClass object at 0x2c1f890> is not a module, class, method, function, traceback, frame, or code object
     
 
 
@@ -190,7 +190,7 @@ One of the things that maybe can be done is import modules on the fly. Here I wi
                 name, definition = member
                 print name
                 m = definition()
-                print inspect.getdoc(m.help_string)
+                print 'Help:'
                 print m.help_string
                 print "Config:"
                 print m.config
@@ -201,10 +201,7 @@ One of the things that maybe can be done is import modules on the fly. Here I wi
 ::
 
     ConcretePlugin
-    str(object='') -> string
-    
-    Return a nice string representation of the object.
-    If the argument is a string, the return value is the same object.
+    Help:
     
             Now is the winter of our disconcent.
             

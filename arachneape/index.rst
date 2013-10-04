@@ -23,11 +23,14 @@ These are the documents created from the source files.
 .. toctree::
    :maxdepth: 1
 
-   BaseClass <baseclass.rst>
    The Main Entry Point <main.rst>
-   Index Builder <index_builder.rst>
    Log Setter <log_setter.rst>
+
+.. toctree::
+   :maxdepth: 1
+
    Interface <interface/index.rst>
    Plugins <plugins/index.rst>
+   Common Code <commoncode/index.rst>
 
 

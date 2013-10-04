@@ -1,13 +1,20 @@
 The Appendices
 ==============
 
+
 Code Explorations
 -----------------
 
 A place for exploring code examples.
 
+
 .. toctree::
    :maxdepth: 2
 
-   Python Inspect <explore_inspect/explore_inspect>
+
+.. toctree::
+   :maxdepth: 2
+
+   Explore Inspect <explore_inspect/index.rst>
+
 

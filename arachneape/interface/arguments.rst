@@ -20,5 +20,4 @@ This is the module that builds the command-line interface for the ArachneApe. It
 The ArgumentClinic uses sub-parsers to enable the use of :ref:`sub-commands <untersee-boot>`.
 
 
-Namespace(debug=False, pdb=False, pudb=False, silent=False)
 

@@ -18,4 +18,5 @@ def try_except(func):
     return wrapped
 
 
-pass
+class UbootKommandant(object):
+    pass

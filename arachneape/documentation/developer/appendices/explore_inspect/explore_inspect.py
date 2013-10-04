@@ -52,7 +52,7 @@ for filename in os.listdir(os.getcwd()):
             name, definition = member
             print name
             m = definition()
-            print inspect.getdoc(m.help_string)
+            print 'Help:'
             print m.help_string
             print "Config:"
             print m.config

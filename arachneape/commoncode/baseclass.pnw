@@ -6,7 +6,7 @@ This is a module to hold base-classes for others to sub-class.
 API
 ---
 
-.. currentmodule:: arachne.baseclass
+.. currentmodule:: arachne.commoncode.baseclass
 
 .. autosummary::
    :toctree: api
