@@ -6,7 +6,7 @@ The Base Plugin
 from abc import ABCMeta, abstractmethod, abstractproperty
 
 # this package 
-from arachneape.baseclass import BaseClass
+from arachneape.commoncode.baseclass import BaseClass
 @
 .. _base-plugin:
 In order to make the plugins a little more predictable they should inherit their interface from this (abstract) base-class.

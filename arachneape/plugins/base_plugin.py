@@ -3,7 +3,7 @@
 from abc import ABCMeta, abstractmethod, abstractproperty
 
 # this package 
-from arachneape.baseclass import BaseClass
+from arachneape.commoncode.baseclass import BaseClass
 
 
 class BasePlugin(BaseClass):

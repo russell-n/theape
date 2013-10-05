@@ -16,6 +16,10 @@ This is the module that builds the command-line interface for the ArachneApe. It
    :toctree: api
 
    ArgumentClinic
+   ArgumentClinic.args
+   ArgumentClinic.__call__
+   ArgumentClinic.add_arguments
+   ArgumentClinic.add_subparsers
 
 The ArgumentClinic uses sub-parsers to enable the use of :ref:`sub-commands <untersee-boot>`.
 

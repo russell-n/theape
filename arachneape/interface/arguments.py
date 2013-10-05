@@ -89,7 +89,7 @@ class ArgumentClinic(object):
         fetcher.set_defaults(function=self.subcommands.fetch)
 
         lister = self.subparsers.add_parser("list", help="List available plugins.")
-        lister.set_defaults(function=self.subcommands.list)
+        lister.set_defaults(function=self.subcommands.list_plugins)
 
         checker = self.subparsers.add_parser('check', help='Check your setup.')
         checker.add_argument("configfiles", help="List of config files (e.g. *.ini - default='%(default)s').",
@@ -269,7 +269,7 @@ class TestArgumentClinic(unittest.TestCase):
 
     def test_list_subparser(self):
         list_mock = MagicMock(name='list')
-        self.subcommander.list = list_mock
+        self.subcommander.list_plugins = list_mock
 
         self.clinic.add_subparsers()
         argv = 'command list'.split()
@@ -281,4 +281,5 @@ class TestArgumentClinic(unittest.TestCase):
 
     def test_call(self):
         command = ['command']
-        option = random.choice('--debug --')
+        option = random.choice(self.flags)
+

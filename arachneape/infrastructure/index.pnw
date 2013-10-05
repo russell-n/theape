@@ -1,12 +1,13 @@
-The Command Line Interface
-==========================
+The Infrastructure
+==================
 
+.. _the-infrastructure::
 <<name='imports', echo=False>>=
 # this package
 from arachneape.commoncode.index_builder import create_toctree
 @
 
-This sub-folder holds the modules that create the command-line interface for the user.
+The Infrastructure is the code that holds the pieces together and keeps them running. 
 
 <<name='toctree', echo=False, results='sphinx'>>=
 create_toctree()
