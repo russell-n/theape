@@ -3,7 +3,7 @@ Plugins
 
 <<name='imports', echo=False>>=
 # this package
-from arachneape.index_builder import create_toctree
+from arachneape.commoncode.index_builder import create_toctree
 @
 
 This is a folder to contain plugins. Plugins are meant to be the code available to the user to pick via the configuration file. This differentiates them from components which are available to plugin-creators to use but not meant to be used directly by the end user (if a component can be used a plugin front-end should be built for it).

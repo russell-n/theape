@@ -15,5 +15,6 @@ In order to make the plugins a little more predictable they should inherit their
    BasePlugin
    BasePlugin.help
    BasePlugin.product
-   BasePlugin.fetch
+   BasePlugin.config
+   BasePlugin.author
 

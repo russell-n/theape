@@ -14,7 +14,13 @@ These are the documents created from the source files.
 .. toctree::
    :maxdepth: 1
 
+   The QuarterMaster <quartermaster.rst>
    The Base Plugin <base_plugin.rst>
    Plugin Constants <constants.rst>
+   The ArachneApe Plugin <arachneapeplugin.rst>
+
+.. toctree::
+   :maxdepth: 1
+
 
 

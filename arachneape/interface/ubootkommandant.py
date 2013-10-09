@@ -14,7 +14,7 @@ def try_except(method):
     """
     def wrapped(self, *args, **kwargs):
         try:
-            return method(*args, **kwargs)
+            return method(self, *args, **kwargs)
         except Exception as error:
             import traceback
             self.logger.error(error)
@@ -44,13 +44,62 @@ class UbootKommandant(BaseClass):
         return self._quartermaster
 
     @try_except
-    def list_plugins(self):
+    def list_plugins(self, args):
         """
-        calls the QuarterMaster and lists plugins
+        Calls the QuarterMaster and lists plugins
+
+        :param:
+
+         - `args`: not used
         """
         self.quartermaster.list_plugins()
         return
-# end class UbootKommandant    
+
+    @try_except
+    def run(self, args):
+        """
+        Builds and runs the code
+        """
+        self.logger.warning('UbootKommandant.run has not been implemented')
+        return
+
+    @try_except
+    def fetch(self, args):
+        """
+        'fetch' a sample plugin config-file
+
+        :param:
+
+         - `args`: namespace with 'names' list attribute
+        """
+        self.quartermaster.fetch(args.names)
+        return
+
+    @try_except
+    def check(self, args):
+        """
+        Builds and checks the configuration
+
+        :param:
+
+         - `args`: namespace with `configfiles` list
+        """
+        self.logger.warning('UbootKommandant.check has not been implemented')
+        return
+
+    @try_except
+    def handle_help(self, args):
+        """
+        Sends a help message to stdout
+
+        :param:
+
+         - `args`: namespace with a 'name' attribute
+        """
+        plugin = self.quartermaster.get_plugin(args.name)
+        print plugin().help
+        return
+#
 
 
 # python standard library
@@ -62,7 +111,9 @@ from mock import MagicMock, patch
 
 class TestUbootKommandant(unittest.TestCase):
     def setUp(self):
+        self.logger = MagicMock('uboot_logger')
         self.subcommander = UbootKommandant()
+        self.subcommander._logger = self.logger
         return
 
     def test_list_plugins(self):
@@ -70,8 +121,8 @@ class TestUbootKommandant(unittest.TestCase):
         Does it call the quarter master's list_plugins?
         """
         qm = MagicMock()
-        with patch('arachneape.plugins.quartermaster.QuarterMaster', qm):
-            self.subcommander.list_plugins()
+        #with patch('arachneape.plugins.quartermaster.QuarterMaster', qm):
+        #    self.subcommander.list_plugins()
         #qm.list_plugins.assert_called_with()
         return
 # end TestUbootKommandant

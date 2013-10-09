@@ -1,6 +1,6 @@
 
 # this package
-from arachneape.index_builder import create_toctree
+from arachneape.commoncode.index_builder import create_toctree
 
 
 create_toctree()

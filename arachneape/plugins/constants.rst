@@ -1,7 +1,10 @@
 Plugin Constants
 ================
 
+.. _plugin-constants:
 This holds constants for the plugins. Primarily the help-string components.
+
+
 
 Font Constants
 --------------
@@ -49,14 +52,15 @@ An example use:
 
 ::
 
-    name=NAME_TEMPLATE.format(name='cow', description='a cow says mu')
-    description="cow is a ruminant processor of grass to various useful products."
-    help_string  = TEMPLATE.format(name=name,
+    if output_documentation:
+        name=NAME_TEMPLATE.format(name='cow', description='a cow says mu')
+        description="cow is a ruminant processor of grass to various useful products."
+        help_string  = TEMPLATE.format(name=name,
                             synopsis='cow [--moo]',                            
                             description=description,
                             examples='cow --moo mu',
                             see_also='pig, buffalo')
-    print help_string
+        print help_string
     
 
 ::

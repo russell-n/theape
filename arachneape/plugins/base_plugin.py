@@ -15,16 +15,16 @@ class BasePlugin(BaseClass):
         super(BasePlugin, self).__init__()
         self._logger = None
         self._help = None
-        self._fetch = None
-        self._product is None
+        self._config = None
+        self._product = None
         return
 
-    @abstractproperty
+    @property
     def help(self):
         """
         A help string for this plugin
         """
-        return
+        return "'{0}' offers you no help. Such is life.".format(self.__class__.__name__)
 
     @abstractproperty
     def product(self):
@@ -33,10 +33,11 @@ class BasePlugin(BaseClass):
         """
         return
 
-    @abstractproperty    
-    def fetch(self):
+    @property    
+    def config(self):
         """
         Get sample config-file snippet required by this plugin
         """
-        return
+        return "'{0}' has no configuration sample.".format(self.__class__.__name__)
+
 # end class BasePlugin                

@@ -102,7 +102,7 @@ class ArgumentClinic(object):
         helper = self.subparsers.add_parser("help", help="Show more help")
         helper.add_argument('name',
                             help="A specific plugin to inquire about.",
-                            nargs="?", default='arachneape')
+                            nargs="?", default='ArachneApe')
         helper.set_defaults(function=self.subcommands.handle_help)
         return
     
