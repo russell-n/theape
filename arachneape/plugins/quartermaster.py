@@ -104,7 +104,7 @@ if document_this:
 if document_this:
     # remember we need the package
     package = base_plugin.__package__
-    exclude = "__init__.py index.py constants.py quartermaster.py".split()
+    exclude = "__init__.py index.py constants.py quartermaster.py helppage.py".split()
     names = sorted(name for name in os.listdir(path)
                    if name.endswith('.py') and not name in exclude)
     basenames_extensions = (os.path.splitext(name) for name in names)
@@ -115,7 +115,7 @@ if document_this:
     isclass = inspect.isclass
     def is_plugin(o):
         return isclass(o) and o.__base__ is BasePlugin
-    
+            
     for module in modules:
         members = inspect.getmembers(module,
                                      predicate=is_plugin)

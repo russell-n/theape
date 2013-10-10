@@ -1,5 +1,6 @@
 The QuarterMaster
 =================
+
 .. currentmodule:: arachneape.plugins.quartermaster
 .. _quarter-master:
 The `QuarterMaster <http://en.wikipedia.org/wiki/Quartermaster>`_ handles finding and interacting with the plugins.
@@ -69,6 +70,12 @@ The first step is to gather the file-names of potential plugins. Potential plugi
 
 The `os.listdir <http://docs.python.org/2/library/os.html#files-and-directories>`_ function takes a path string and returns a list of entries in the directory in arbitrary order (other than hidden directories). So we need the path to the ``plugins`` directory. In this case I am putting the `QuarterMaster` in the same directory so it is a matter of the QuarterMaster knowing its own directory. If you look at the `import <http://docs.python.org/2/reference/simple_stmts.html#import>`_ statement you will see that whenever a module is imported, it gets a `__file__` variable added to its namespace:
 
+.. currentmodule:: os
+.. autosummary::
+
+   os.listdir
+   os.path.dirname
+
 ::
 
     if document_this:
@@ -99,6 +106,7 @@ Looking at the output you can see that the ``__file__`` contains the path to the
     arachneapeplugin.py
     base_plugin.py
     constants.py
+    helppage.py
     index.py
     quartermaster.py
     
@@ -135,12 +143,18 @@ To figure out if something in a file we have discovered is a Plugin we need to k
 
 Besides filtering on the extension, I am also going to exclude some other files because importing them executes all the code in them and I am getting extraneous strings appearing in the output for this documentation. Also, once the extension is removed from the name I prepend the package. The import module says that it takes the package name as an argument, but that uses relative importing so there would be some dot-notation to figure out. This seems easier.
 
+.. currentmodule:: importlib
+
+.. autosummary::
+
+   importlib.import_module
+   
 ::
 
     if document_this:
         # remember we need the package
         package = base_plugin.__package__
-        exclude = "__init__.py index.py constants.py quartermaster.py".split()
+        exclude = "__init__.py index.py constants.py quartermaster.py helppage.py".split()
         names = sorted(name for name in os.listdir(path)
                        if name.endswith('.py') and not name in exclude)
         basenames_extensions = (os.path.splitext(name) for name in names)
@@ -157,13 +171,22 @@ The signature of the ``getmembers`` function is this::
 
 The `predicate` argument is an optional function that you pass in to filter what ``getmembers`` returns. It ``getmembers`` will only return objects that evaluate to True when passed to the predicate function, so if we pass in a function that checks if an object is the child of the BasePlugin, this should give us our plugins:
 
+.. currentmodule:: inspect
+
+.. autosummary::
+
+   inspect.isclass
+   inspect.getmembers
+
+.. warning:: It looks like importing python-standard-library classes will not give them a ``__base__`` attribute so the ``is_plugin`` has to trap for ``AttributeError`` exceptions or any python file that imports a python standard library module has to be excluded from the files that are imported.
+
 ::
 
     if document_this:
         isclass = inspect.isclass
         def is_plugin(o):
             return isclass(o) and o.__base__ is BasePlugin
-        
+                
         for module in modules:
             members = inspect.getmembers(module,
                                          predicate=is_plugin)
@@ -178,6 +201,13 @@ The `predicate` argument is an optional function that you pass in to filter what
 
 Oops. What happened there? Well, it turns out that now that we are using the full import path, we need to add the full path for ``BasePlugin`` when we do our check or it will fail.
 
+.. currentmodule:: os
+
+.. autosummary::
+
+   os.path.splitext
+
+   
 ::
 
     if document_this:
