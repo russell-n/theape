@@ -1,11 +1,4 @@
-Help Page
-=========
 
-.. currentmodule:: arachneape.plugins.helppage
-.. _help-page:
-This is a module to help with creating help-pages.
-
-<<name='imports', echo=False>>=
 # python standard library
 import textwrap
 import subprocess
@@ -14,51 +7,14 @@ from itertools import izip
 
 # this package
 from arachneape.commoncode.baseclass import BaseClass
-@
-<<name='constants', echo=False>>=
-NEWLINE = '\n'
-@
-<<name='check_weave', echo=False>>=
+from arachneape.commoncode.strings import NEWLINE, BLUE, BOLD, RED, RESET
+
+
 output_documentation = __name__ == '__builtin__'
-@
 
-Font Constants
---------------
 
-ASCII codes are used to change the text sent to standard output. The available codes are:
-
-   * BLUE
-   * RED
-   * RESET
-   * BOLD
-
-* RESET gets rid of the previously set codes (it turns off bold and makes the color black).
-* These codes are used in the TEMPLATE so you can use them but it is not required.
-
-<<name='color_constants', echo=False>>=
-BLUE = "\033[34m"
-RED  = "\033[31m"
-BOLD = "\033[1m"
-RESET = "\033[0;0m"
-@
-
-Python TextWrapper
-------------------
-
-`TextWrapper <http://docs.python.org/2/library/textwrap.html#textwrap.TextWrapper>`_ is being used to make the output (hopefully) a little nicer. This is are some notes generated while I figure out how to use it. TextWrapper has many options and two methods but I will only use the `width`, and `subsequent_indent` attributes and the `fill(text)` method.
-
-.. currentmodule:: textwrap
-.. autosummary::
-
-   textwrap.TextWrapper
-   textwrap.TextWrapper.width
-   textwrap.TextWrapper.drop_whitespace
-   textwrap.TextWrapper.subsequent_indent
-   textwrap.TextWrapper.fill
-
-<<name='TextWrapper', wrap=False>>=
 if output_documentation:
-    indent =' ' * 5
+    indent = ' ' * 5
     tw = textwrap.TextWrapper(width=40, subsequent_indent=indent,
                               drop_whitespace=False)
     text = """
@@ -71,15 +27,8 @@ In the deep bosom of the ocean buried.
 """
     wrapped_text = tw.fill(text)
     print wrapped_text
-@
 
-That was not really what I wanted -- I thought that the empty line before the paragraph would be preserved. It looks like in order to do what I wanted you would need to do it as two separate print calls (and and initial indent added so that the body will be entirely indented).
 
-.. autosummary::
-
-   textwrap.TextWrapper.initial_indent
-
-<<name='text_with_header', wrap=False>>=
 if output_documentation:
     tw.initial_indent = indent
     header = 'A Little Text:\n'
@@ -92,48 +41,22 @@ In the deep bosom of the ocean buried.
     print header
     headerless_wrapped_text = tw.fill(text)
     print headerless_wrapped_text
-@
 
-Okay, but now the output is all blocky. Try again with the `drop_whitespace` set to True.
 
-<<name='drop_whitespace', wrap=False>>=
 if output_documentation:
     tw.drop_whitespace = True    
     print header
     headerless_wrapped_text = tw.fill(text)
     print headerless_wrapped_text
-@
 
-Well, it *is* closer, but that first line in the body is still mysteriously off.
 
-<<name='less_indent', wrap=False>>=
 if output_documentation:
     tw.initial_indent = ' ' * 4
     headerless_wrapped_text = tw.fill(text)
     print header
     print headerless_wrapped_text
-@
 
-.. warning:: I initially misspelled ``initial_indent`` and it just silently did not change the output behavior -- use the constructor instead of assinging the values like I do here.
 
-Less is More
-------------
-
-In addition to using `TextWrap` I will use the less command to keep the text from rolling off the screen.
-
-This will break if the computer does not have `less`, which seems unlikely since I do not run Windows, but just in case I will use `check_call` so that it can fall back to printing.
-
-.. currentmodule:: subprocess
-.. autosummary::
-
-   subprocess.check_call
-
-.. currentmodule:: shlex
-.. autosummary::
-
-   shlex.split
-
-<<name='subprocess_check_call', wrap=False>>=
 if output_documentation:
     long_text = text * 100
     long_wrapped_text = tw.fill(long_text)
@@ -144,59 +67,28 @@ if output_documentation:
         subprocess.check_call('ummagumma')
     except OSError as error:
         print wrapped_text    
-@
 
-The output from the first call will not show up in the documentation output, so it might not be obvious that it does not work. Apparently to do a pipe you need to use ``Popen`` and ``communicate``.
 
-.. currentmodule:: subprocess
-.. autosummary::
-
-   Popen
-   Popen.communicate
-   PIPE
-
-So you need to do something like this::
-
-    command = 'less -R'.split()
-    subprocess.Popen(command, stdin=subprocess.PIPE).communicate(input=long_wrapped_text)
-
-The HelpPage
-------------
-
-With that background material to the aside, here is the actual pager.
-
-.. uml::
-
-   HelpPage -|> BaseClass
-   HelpPage o- subprocess.Popen
-   HelpPage o- textwrap.TextWrapper
-
-.. currentmodule:: arachneape.plugins.helppage
-.. autosummary::
-
-   HelpPage
-   HelpPage.__call__
-   
-<<name='HelpPage', echo=False>>=
 class HelpPage(BaseClass):
     """
     A class to construct and print help-pages.
     """
-    def __init__(self, headers, sections, wrap=70, pager='less -R', body_indent="    ",
+    def __init__(self, sections, headers=None, wrap=70, pager='less -R',
+                 body_indent="    ",
                  add_formatting=True):
         """
         HelpPage constructor
 
         :param:
 
-         - `headers` : a list of keys for the sections (in the order you want them)
          - `sections`: a dict of header: section-text
+         - `headers` : a list of keys for the sections (in the order you want them)
          - `wrap`: Maximum width for the output
          - `pager`: Command to pipe the output to
          - `body_indent`: string to use to indent the section-text
          - `add_formatting`: If False, print without ANSI codes
         """
-        self.headers = headers
+        self._headers = headers
         self.sections = sections
         self.wrap = wrap
         self.pager = pager
@@ -212,12 +104,21 @@ class HelpPage(BaseClass):
         return
 
     @property
+    def headers(self):
+        """
+        The headers for the text
+        """
+        if self._headers is None:
+            self._headers = self.sections.keys()
+        return self._headers
+    
+    @property
     def text_wrapper(self):
         """
         TextWrapper to fill the text
         """
         if self._text_wrapper is None:
-            initial_indent = ' ' * (len(self.body_indent) - 1)
+            initial_indent = self.body_indent
             self._text_wrapper = textwrap.TextWrapper(width=self.wrap,
                                                       initial_indent=initial_indent,
                                                       subsequent_indent=self.body_indent)
@@ -266,9 +167,9 @@ class HelpPage(BaseClass):
                 lines = text.splitlines()
                 lines = [self.text_wrapper.fill(line) for line in lines]
                 return NEWLINE.join(lines)
-            formatted = (self.sections[header].format(**self.formatting) for header in headers)
+            formatted = (self.sections[header].format(**self.formatting) for header in self.headers)
             filled = (fill(text) for text in formatted)
-            self._formatted_text = dict(izip(headers, filled))
+            self._formatted_text = dict(izip(self.headers, filled))
         return self._formatted_text
             
     @property
@@ -292,37 +193,12 @@ class HelpPage(BaseClass):
             print self.text
         return
 # end class HelpPage    
-@
 
-Suggested Sections
-------------------
 
-My original idea was to put suggested sections in the HelpPage but it made the constructor-signature too big (and seemed too inflexible). So here are what the sections were going to be (taken from `man pages <http://man7.org/linux/man-pages/man7/man-pages.7.html>`_):
-
-.. csv-table:: Suggested Sections
-   :header: Header, Contents
-
-   NAME, The topic of the help and a short description.
-   SYNOPSIS, Comprehensive listing of usage options.
-   CONFIGURATION, Setting up.
-   DESCRIPTION, The main body of the help describing the topic.
-   OPTIONS, Description of the options.
-   RETURN VALUE, Values returned on exit (if any).
-   ERRORS, Possible errors raised.
-   FILES, Paths to relevant files.
-   NOTES, Miscellaneous notes.
-   BUGS, Known bugs.
-   EXAMPLE, Usage examples.
-   AUTHORS, Code authors.
-   SEE ALSO, Related topics.
-
-The man-pages have other sections but these were the ones I thought might be the most relevant for the way I am planning to use this.   
-
-<<name='test_imports', echo=False>>=
 #python standard library
 import unittest    
-@
-<<name='TestHelpPage', echo=False>>=
+
+
 class TestHelpPage(unittest.TestCase):
     """
     Trying to mock the subprocess calls is too much
@@ -360,19 +236,8 @@ class TestHelpPage(unittest.TestCase):
         self.assertEqual('less -R'.split(), pager.command)
         self.assertEqual(True, pager.add_formatting)
         return
-@
-<%
-for case in (TestHelpPage, ):
-    suite = unittest.TestLoader().loadTestsFromTestCase(case)    
-    unittest.TextTestRunner(verbosity=2).run(suite)
-%>
 
-Example Use
------------
 
-It is getting too hard to test this thing, so I will just do a plain old usage check.
-
-<<name='test_help', wrap=False>>=
 if __name__ == '__main__':
     headers = 'title poem author source'.split()
     poem = """
@@ -399,4 +264,3 @@ if __name__ == '__main__':
     pager = HelpPage(headers = headers,
                      sections = sections)
     pager()
-@

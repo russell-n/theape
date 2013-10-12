@@ -29,6 +29,7 @@ These are the documents created from the source files.
 .. toctree::
    :maxdepth: 1
 
+   Components <components/index.rst>
    The Command Line Interface <interface/index.rst>
    The Infrastructure <infrastructure/index.rst>
    Plugins <plugins/index.rst>

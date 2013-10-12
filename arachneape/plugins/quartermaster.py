@@ -14,6 +14,9 @@ class QuarterMaster(BaseClass):
     A plugin manager
     """
     def __init__(self):
+        """
+        The Plugin Manager
+        """
         super(QuarterMaster, self).__init__()
         self._plugins = None
         return
@@ -104,7 +107,7 @@ if document_this:
 if document_this:
     # remember we need the package
     package = base_plugin.__package__
-    exclude = "__init__.py index.py constants.py quartermaster.py helppage.py".split()
+    exclude = "__init__.py index.py constants.py quartermaster.py".split()
     names = sorted(name for name in os.listdir(path)
                    if name.endswith('.py') and not name in exclude)
     basenames_extensions = (os.path.splitext(name) for name in names)

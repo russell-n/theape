@@ -20,12 +20,10 @@ ASCII codes are used to change the text sent to standard output. The available c
 * RESET gets rid of the previously set codes (it turns off bold and makes the color black).
 * These codes are used in the TEMPLATE so you can use them but it is not required.
 
-
-
 Python TextWrapper
 ------------------
 
-`TextWrapper <http://docs.python.org/2/library/textwrap.html#textwrap.TextWrapper>`_ is being used to make the output (hopefully) a little nicer. This is are some notes generated while I figure out how to use it. TextWrapper has many options and two methods but I will only use the `width`, and `subsequent_indent` attributes and the `fill(text)` method.
+`TextWrapper <http://docs.python.org/2/library/textwrap.html#textwrap.TextWrapper>`_ is being used to make the output (hopefully) a little nicer. These are some notes generated while I figure out how to use it. TextWrapper has many options and two methods but I anticipate only use the `width`, and `subsequent_indent` attributes and the `fill(text)` method.
 
 .. currentmodule:: textwrap
 .. autosummary::
@@ -39,7 +37,7 @@ Python TextWrapper
 ::
 
     if output_documentation:
-        indent =' ' * 5
+        indent = ' ' * 5
         tw = textwrap.TextWrapper(width=40, subsequent_indent=indent,
                                   drop_whitespace=False)
         text = """
@@ -152,7 +150,7 @@ Well, it *is* closer, but that first line in the body is still mysteriously off.
 
 
 
-.. warning:: I initially misspelled ``initial_indent`` and it just silently did not change the output behavior -- use the constructor instead of assinging the values like I do here.
+.. warning:: I initially misspelled ``initial_indent`` and it just silently did not change the output behavior -- use the constructor instead of assigning the values like I do here.
 
 Less is More
 ------------
@@ -224,9 +222,15 @@ With that background material to the aside, here is the actual pager.
 
 .. currentmodule:: arachneape.plugins.helppage
 .. autosummary::
+   :toctree: api
 
    HelpPage
    HelpPage.__call__
+   HelpPage.text
+
+.. warning:: The HelpPage is using the `string.format <http://docs.python.org/2/library/stdtypes.html#str.format`_ method so putting curly braces ('{}') in the help-strings is probably a bad idea. If you need them, make sure to double them -- ('{{like this}}').
+
+If the `headers` argument is not set then the keys from the `sections` argument will be used (this way an ordered dict can be used to make things simpler).
    
 
 

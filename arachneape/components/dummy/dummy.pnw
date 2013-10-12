@@ -1,0 +1,118 @@
+The Dummy
+=========
+<<name='imports', echo=False>>=
+# this package
+from arachneape.commoncode.baseclass import BaseClass
+from arachneape.commoncode.strings import CREATION, ARGS, KWARGS
+from arachneape.commoncode.strings import CALLED_ON, CALLED, NOT_IMPLEMENTED
+
+# this module
+from callclass import CallClass
+@
+<<name='check_pweave', echo=False>>=
+output_documentation = __name__ == '__builtin__'
+@
+.. currentmodule:: arachneape.components.dummy.dummy
+.. _dummy-class:
+The Dummy module holds dummy classes that does nothing. It is primarily used to test implementations of infrastructure components.
+
+.. uml::
+
+   DummyClass -|> BaseClass
+   DummyClass o- CallClass
+
+.. autosummary::
+   :toctree: api
+
+   DummyClass
+
+The Dummy Class logs (at the `info`) level when it is created and when it is called.
+
+<<name='DummyClass', echo=False>>=
+class DummyClass(BaseClass):
+    """
+    The Dummy Class does nothing
+    """
+    def __init__(self, *args, **kwargs):
+        """
+        Dummy class constructor
+        """
+        super(DummyClass, self).__init__()
+        self._logger = None
+        self.logger.info(CREATION.format(thing=self))
+        self.logger.info(ARGS.format(value=args))
+        self.logger.info(KWARGS.format(value=kwargs))
+        return
+
+    def __call__(self, *args, **kwargs):
+        """
+        Logs the fact that it was called
+        """
+        self.logger.info(CALLED.format(thing=self))
+        self.logger.info(ARGS.format(value=args))
+        self.logger.info(KWARGS.format(value=kwargs))
+        return
+
+    def __str__(self):
+        """
+        Returns the class name
+        """
+        return self.__class__.__name__
+
+    def __getattr__(self, attribute):
+        """
+        To catch unimplemented parts of the class and log them
+        """
+        self.logger.info(CALLED_ON.format(attribute=attribute,
+                                          thing=self))
+        return CallClass(NOT_IMPLEMENTED.format(thing=self))
+# end class Dummy    
+@
+
+An Example
+----------
+
+As an example we can create an operator and make some fake calls to it (I do not think the logging will get captured by Pweave, though).
+
+<<name='test_dummy', wrap=False>>=
+if output_documentation:
+    class FakeLogger(object):
+        def info(self, output):
+            print output
+            
+    class KingKong(DummyClass):
+        def __init__(self, *args, **kwargs):
+            super(KingKong, self).__init__(*args, **kwargs)
+            self._logger = FakeLogger()
+            return
+    
+
+    kongs = (KingKong(index, name) for index,name in enumerate('Kong MightyJoe'.split()))
+    for kong in kongs:
+        kong.rampage()
+        kong('fay wray')
+@
+
+I had to add a fake logger because pweave does not capture logging output. If you run this module::
+
+    python dummy.py
+
+You should see what is being sent to the logger in full color (without the extra ANSI codes).
+
+<<name='dummy_live', echo=False>>=
+if __name__ == '__main__':
+    class FakeLogger(object):
+        def info(self, output):
+            print output
+            
+    class KingKong(DummyClass):
+        def __init__(self, *args, **kwargs):
+            super(KingKong, self).__init__(*args, **kwargs)
+            self._logger = FakeLogger()
+            return    
+
+    kongs = (KingKong(index, name) for index,name in enumerate('Kong MightyJoe'.split()))
+    for kong in kongs:
+        kong.rampage()
+        kong('fay wray')
+@

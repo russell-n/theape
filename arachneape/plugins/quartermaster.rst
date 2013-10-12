@@ -106,7 +106,7 @@ Looking at the output you can see that the ``__file__`` contains the path to the
     arachneapeplugin.py
     base_plugin.py
     constants.py
-    helppage.py
+    dummyplugin.py
     index.py
     quartermaster.py
     
@@ -154,7 +154,7 @@ Besides filtering on the extension, I am also going to exclude some other files 
     if document_this:
         # remember we need the package
         package = base_plugin.__package__
-        exclude = "__init__.py index.py constants.py quartermaster.py helppage.py".split()
+        exclude = "__init__.py index.py constants.py quartermaster.py".split()
         names = sorted(name for name in os.listdir(path)
                        if name.endswith('.py') and not name in exclude)
         basenames_extensions = (os.path.splitext(name) for name in names)
@@ -233,6 +233,7 @@ Oops. What happened there? Well, it turns out that now that we are using the ful
 ::
 
     ArachneApe
+    DummyPlugin
     
 
 

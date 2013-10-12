@@ -8,6 +8,7 @@ In order to make the plugins a little more predictable they should inherit their
 .. uml::
 
    BasePlugin -|> BaseClass
+   BasePlugin o- HelpPage
 
 .. autosummary::
    :toctree: api

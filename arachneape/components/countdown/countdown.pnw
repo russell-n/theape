@@ -1,0 +1,64 @@
+The Countdown
+=============
+<<name='imports', echo=False>>=
+# this package
+from arachneape.components.dummy.dummy import DummyClass
+@
+.. currentmodule:: arachneape.components.countdown.countdown
+.. _countdown-class:
+
+<<name='imports', echo=False>>=
+# python standard library
+import datetime
+@
+The CountDown keeyps track of elapsed time and estimates remaining time either by repetitions or total allowed time.
+
+.. uml::
+
+   CountDown -|> DummyClass
+
+.. autosummary::
+   :toctree: api
+
+   CountDown
+   CountDown.start_timer
+   CountDown.next_iteration
+   CountDown.remaining_time
+   CountDown.remaining_iterations
+   CountDown.elapsed_time
+
+To start off it will only take expected iterations and estimate time-remaining based on time elapsed. 
+   
+<<name='CountDown', echo=False>>=
+class CountDown(DummyClass):
+    """
+    A countdown timer
+    """
+    def __init__(self, iterations, *args, **kwargs):
+        """
+        CountDown Constructor
+
+        :param:
+
+         - `iterations`: Number of expected iterations.
+        """
+        super(CountDown, self).__init__(*args, **kwargs)
+        self.iterations = iterations
+        return
+
+    def start_timer(self):
+        """
+        Sets the start_time and lap_start_time to now
+        """
+        self.start_time = datetime.datetime.now()
+        self.lap_start_time = self.start_time
+        return
+
+    def next_iteration(self):
+        """
+        Saves the lap time
+        """
+        return
+# end class CountDown
+@
+

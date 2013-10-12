@@ -1,6 +1,7 @@
 
 # this package
 from arachneape.commoncode.baseclass import BaseClass
+from arachneape.commoncode.strings import RED, BOLD, RESET
 from arachneape.plugins.quartermaster import QuarterMaster
 
 
@@ -16,8 +17,27 @@ def try_except(method):
         try:
             return method(self, *args, **kwargs)
         except Exception as error:
+            red_error = "{red}{bold}{{error}}{reset}".format(red=RED,
+                                                             bold=BOLD,
+                                                             reset=RESET)
+            crash_notice = "{bold}********** Oops, I Crapped My Pants **********{reset}".format(red=RED,
+                                                                             bold=BOLD,
+                                                                             reset=RESET)
+            self.logger.error(crash_notice)
+            
             import traceback
-            self.logger.error(error)
+            import sys
+            import os
+            
+            exc_type, exc_value, exc_tb = sys.exc_info()
+            tb_info = traceback.extract_tb(exc_tb)
+            filename, linenum, funcname, source = tb_info[-1]
+            
+            self.logger.error(red_error.format(error=error))
+            self.logger.error(red_error.format(error="Failed Line: {0}".format(source)))
+            self.logger.error(red_error.format(error="In Function: {0}".format(funcname)))
+            self.logger.error(red_error.format(error="In File: {0}".format(os.path.basename(filename))))
+            self.logger.error(red_error.format(error="At Line: {0}".format(linenum)))
             self.logger.debug(traceback.format_exc())
     return wrapped
 
@@ -60,7 +80,9 @@ class UbootKommandant(BaseClass):
         """
         Builds and runs the code
         """
-        self.logger.warning('UbootKommandant.run has not been implemented')
+        plugin = self.quartermaster.get_plugin('ArachneApe')
+        ape = plugin().product
+        ape()
         return
 
     @try_except
@@ -72,7 +94,11 @@ class UbootKommandant(BaseClass):
 
          - `args`: namespace with 'names' list attribute
         """
-        self.quartermaster.fetch(args.names)
+        for name in args.names:
+            self.logger.debug("Getting Plugin: {0}".format(name))
+            plugin = self.quartermaster.get_plugin(name)
+            # the quartermaster returns definitions, not instances
+            plugin().fetch_config()
         return
 
     @try_except
@@ -94,10 +120,16 @@ class UbootKommandant(BaseClass):
 
         :param:
 
-         - `args`: namespace with a 'name' attribute
+         - `args`: namespace with 'name' and width attributes
         """
         plugin = self.quartermaster.get_plugin(args.name)
-        print plugin().help
+        try:
+            plugin().help(args.width)
+        except TypeError as error:
+            self.logger.debug(error)
+            print "'{0}' is not a known plugin.\n".format(args.name)
+            print "These are the known plugins:\n"
+            self.quartermaster.list_plugins()
         return
 #
 

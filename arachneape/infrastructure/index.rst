@@ -10,7 +10,8 @@ The Infrastructure is the code that holds the pieces together and keeps them run
 .. toctree::
    :maxdepth: 1
 
-   The QuarterMaster <quartermaster.rst>
+   The Operator <theoperator.rst>
+   The Hortator <hortator.rst>
 
 .. toctree::
    :maxdepth: 1

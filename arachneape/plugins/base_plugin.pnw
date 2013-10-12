@@ -7,6 +7,7 @@ from abc import ABCMeta, abstractmethod, abstractproperty
 
 # this package 
 from arachneape.commoncode.baseclass import BaseClass
+from arachneape.components.helppage.helppage import HelpPage
 @
 .. _base-plugin:
 In order to make the plugins a little more predictable they should inherit their interface from this (abstract) base-class.
@@ -14,6 +15,7 @@ In order to make the plugins a little more predictable they should inherit their
 .. uml::
 
    BasePlugin -|> BaseClass
+   BasePlugin o- HelpPage
 
 .. autosummary::
    :toctree: api
@@ -36,14 +38,40 @@ class BasePlugin(BaseClass):
         self._help = None
         self._config = None
         self._product = None
+        self._help_page = None        
+        self._sections = None
         return
 
     @property
-    def help(self):
+    def sections(self):
         """
-        A help string for this plugin
+        A (ordered) dictionary for the help page
         """
-        return "'{0}' offers you no help. Such is life.".format(self.__class__.__name__)
+        return self._sections
+
+    @property
+    def help_page(self):
+        """
+        A HelpPage to use if self.sections has been defined
+        """
+        if self._help_page is None and self.sections is not None:
+            self._help_page = HelpPage(sections=self.sections)
+        return self._help_page                        
+
+    def help(self, width=80):
+        """
+        Prints a help-string for the plugin
+
+        :param:
+
+         - `width`: number of characters wide to print help
+        """
+        if self.sections is None:
+            print "'{0}' offers you no help. Such is life.".format(self.__class__.__name__)
+        else:
+            self.help_page.wrap = width
+            self.help_page()
+        return
 
     @abstractproperty
     def product(self):
@@ -52,12 +80,11 @@ class BasePlugin(BaseClass):
         """
         return
 
-    @property    
-    def config(self):
+    def fetch_config(self):
         """
         Get sample config-file snippet required by this plugin
         """
-        return "'{0}' has no configuration sample.".format(self.__class__.__name__)
-
+        print "'{0}' has no configuration sample.".format(self.__class__.__name__)
+        return   
 # end class BasePlugin                
 @
