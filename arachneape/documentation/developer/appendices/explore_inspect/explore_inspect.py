@@ -46,7 +46,13 @@ for filename in os.listdir(os.getcwd()):
     # the print statements in this module are showing up in the output when I import it
     if filename.endswith('.py') and not filename=='explore_inspect.py':
         base, extension = os.path.splitext(filename)
-        candidate = importlib.import_module(base)
+        try:
+            candidate = importlib.import_module(base)
+        except ImportError as error:
+            # for some reason nose is using /usr/lib/python2.7/importlib
+            # and this is causing it to fail
+            print error
+            continue        
         members = inspect.getmembers(candidate, lambda o: inspect.isclass(o) and o.__base__ is PluginBase)
         for member in members:
             name, definition = member

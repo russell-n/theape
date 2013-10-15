@@ -87,8 +87,8 @@ The ``inspect.getfile`` method takes an object and tells you the file where it c
 
 ::
 
-    ./dummy.py
-    <dummy.DummyClass object at 0x2c1f890> is not a module, class, method, function, traceback, frame, or code object
+    ./dummy.pyc
+    <dummy.DummyClass object at 0x3a919d0> is not a module, class, method, function, traceback, frame, or code object
     
 
 
@@ -200,6 +200,17 @@ One of the things that maybe can be done is import modules on the fly. Here I wi
 
 ::
 
+    
+    .. toctree::
+       :maxdepth: 2
+    
+       Python Inspect <explore_inspect.rst>
+       The Dummy Module <dummy.rst>
+    
+    .. toctree::
+       :maxdepth: 2
+    
+    
     ConcretePlugin
     Help:
     
