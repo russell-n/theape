@@ -11,6 +11,7 @@ from collections import OrderedDict
 from arachneape.interface.arguments import ArgumentClinic
 from arachneape.infrastructure.hortator import TheHortator
 from arachneape.components.dummy.dummy import DummyClass
+from arachneape.infrastructure.theoperator import OperatorError
 from base_plugin import BasePlugin
 @
 <<name='constants', echo=False>>=
@@ -116,7 +117,16 @@ class ArachneApe(BasePlugin):
 
         op_1 = Operator(name='op_1')
         op_2 = Operator(name='op_2')
-        exhort = TheHortator([op_1, op_2])
+
+        class BadOperator(Operator):
+            def __init__(self, *args, **kwargs):
+                super(BadOperator, self).__init__(*args, **kwargs)
+                
+            def __call__(self):
+                raise OperatorError('this is an operator error')
+            
+        op_3 = BadOperator(name='op_3')
+        exhort = TheHortator([op_1, op_2, op_3])
         return exhort
 
     def fetch_config(self):
@@ -139,7 +149,6 @@ To print the help-message the ArachneApe will use the help page, but since it is
 
 <<name='format_usage', wrap=False>>=
 if output_documentation:
-    from arachneape.interface.arguments import ArgumentClinic
     arguments = ArgumentClinic()
     arguments.add_arguments()
     arguments.add_subparsers()
@@ -174,7 +183,7 @@ After taking a break I decided to just add the sub-commands to the ArgumentClini
 if output_documentation:
     subs = (arguments.runner, arguments.fetcher,
             arguments.lister, arguments.checker, arguments.helper)
-    import re
+
     program = 'arachneape[.\w]*'
     expression = re.compile(program)
     for sub in subs:

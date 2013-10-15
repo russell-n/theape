@@ -6,6 +6,7 @@ from collections import OrderedDict
 from arachneape.interface.arguments import ArgumentClinic
 from arachneape.infrastructure.hortator import TheHortator
 from arachneape.components.dummy.dummy import DummyClass
+from arachneape.infrastructure.theoperator import OperatorError
 from base_plugin import BasePlugin
 
 
@@ -96,7 +97,16 @@ class ArachneApe(BasePlugin):
 
         op_1 = Operator(name='op_1')
         op_2 = Operator(name='op_2')
-        exhort = TheHortator([op_1, op_2])
+
+        class BadOperator(Operator):
+            def __init__(self, *args, **kwargs):
+                super(BadOperator, self).__init__(*args, **kwargs)
+                
+            def __call__(self):
+                raise OperatorError('this is an operator error')
+            
+        op_3 = BadOperator(name='op_3')
+        exhort = TheHortator([op_1, op_2, op_3])
         return exhort
 
     def fetch_config(self):
@@ -108,7 +118,6 @@ class ArachneApe(BasePlugin):
 
 
 if output_documentation:
-    from arachneape.interface.arguments import ArgumentClinic
     arguments = ArgumentClinic()
     arguments.add_arguments()
     arguments.add_subparsers()
@@ -124,7 +133,7 @@ if output_documentation:
 if output_documentation:
     subs = (arguments.runner, arguments.fetcher,
             arguments.lister, arguments.checker, arguments.helper)
-    import re
+
     program = 'arachneape[.\w]*'
     expression = re.compile(program)
     for sub in subs:

@@ -44,7 +44,15 @@ class CountDown(DummyClass):
         """
         super(CountDown, self).__init__(*args, **kwargs)
         self.iterations = iterations
+        self.iteration = 0
         return
+
+    @property
+    def time_remaining(self):
+        """
+        An estimate of the time remaining
+        """
+        return self.iterations - self.iteration
 
     def start_timer(self):
         """
@@ -56,9 +64,36 @@ class CountDown(DummyClass):
 
     def next_iteration(self):
         """
-        Saves the lap time
+        Increments the iterations and saves the lap-time
         """
+        self.iteration += 1
         return
 # end class CountDown
 @
+<<name='test_imports', echo=False>>=
+# python standard library
+import unittest
+@
+<<name='TestCountDown', echo=False>>=
+class TestCountDown(unittest.TestCase):
+    def setUp(self):
+        self.iterations = 4
+        self.counter = CountDown(iterations=self.iterations)
+        return
 
+    def test_next_iteration(self):
+        """
+        Does it increment the iteration
+        """
+        self.assertEqual(self.iterations, self.counter.iterations)
+        for value in xrange(self.iterations):
+            self.counter.next_iteration()
+            self.assertEqual(value+1, self.counter.iteration)
+        self.assertEqual(0, self.counter.time_remaining)
+        return
+@
+<%
+for case in (TestCountDown, ):
+    suite = unittest.TestLoader().loadTestsFromTestCase(case)    
+    unittest.TextTestRunner(verbosity=2).run(suite)
+%>

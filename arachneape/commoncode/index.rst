@@ -16,6 +16,8 @@ These are the documents created from the source files.
 
    BaseClass <baseclass.rst>
    Index Builder <index_builder.rst>
+   Sorted List <sortedlist.rst>
+   String Constants <strings.rst>
 
 .. toctree::
    :maxdepth: 1

@@ -34,7 +34,6 @@ To print the help-message the ArachneApe will use the help page, but since it is
 ::
 
     if output_documentation:
-        from arachneape.interface.arguments import ArgumentClinic
         arguments = ArgumentClinic()
         arguments.add_arguments()
         arguments.add_subparsers()
@@ -107,7 +106,7 @@ After taking a break I decided to just add the sub-commands to the ArgumentClini
     if output_documentation:
         subs = (arguments.runner, arguments.fetcher,
                 arguments.lister, arguments.checker, arguments.helper)
-        import re
+    
         program = 'arachneape[.\w]*'
         expression = re.compile(program)
         for sub in subs:
