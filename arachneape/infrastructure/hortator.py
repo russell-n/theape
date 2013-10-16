@@ -57,6 +57,10 @@ class TheHortator(BaseClass):
         self.logger.info("{b}*** Starting Operations ***{r}".format(b=BOLD, r=RESET))
         
         for count, operation in enumerate(self.operations):
+            if not self.countdown.time_remaining:
+                self.logger.info('Time Exceeded, quitting')
+                break
+
             self.logger.info(count_string.format(c=count+1,
                                                  t=total_count, o=str(operation)))
             self.logger.info(remaining_string.format(value=self.countdown.remaining))
@@ -71,5 +75,6 @@ class TheHortator(BaseClass):
             self.countdown.next_iteration()
         self.logger.info("{b}*** Ending Operations ***{r}".format(b=BOLD, r=RESET))
         self.logger.info(total_elapsed.format(value=self.countdown.elapsed))
+        
         return
 # end TheHortator

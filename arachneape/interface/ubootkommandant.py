@@ -80,17 +80,16 @@ class UbootKommandant(BaseClass):
         """
         Builds and runs the code
         """
-        if args.trace:
-            import sys
-            sys_modules = sys.modules
-
         plugin = self.quartermaster.get_plugin('ArachneApe')
         ape = plugin().product
         if args.trace:
             from trace import Trace
         
-            tracer = Trace(ignoremods= sys.modules.keys() + ['__init__', 'handlers'],
-                           outfile='arachneape.trace', timing=True)
+            tracer = Trace(trace=True,
+                           ignoremods= ['__init__', 'handlers',
+                                        'threading', 'genericpath',
+                                        'posixpath'],
+                           timing=True)
             tracer.runfunc(ape)
         else:
             ape()
