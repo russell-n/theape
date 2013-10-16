@@ -69,6 +69,10 @@ class ArgumentClinic(object):
                                 help='Enables the pdb debugger',
                                 action='store_true',
                                 default=False)
+        self.parser.add_argument('--trace',
+                                 help='Turn on code-tracing',
+                                 action='store_true',
+                                 default=False)
         return
     
     def add_subparsers(self):
@@ -151,7 +155,7 @@ from mock import MagicMock, patch
 
 class TestArgumentClinic(unittest.TestCase):
     def setUp(self):
-        self.keys = 'debug silent pudb pdb'.split()
+        self.keys = 'debug silent pudb pdb trace'.split()
         self.flags = ["--{0}".format(key) for key in self.keys]
 
         self.args = MagicMock(spec='sys')
