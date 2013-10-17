@@ -1,0 +1,14 @@
+Call Graphs
+===========
+<<name='imports', echo=False>>=
+# this package
+from arachneape.commoncode.index_builder import create_toctree
+@
+
+A place for exploring call-graphs and other code-related diagrams.
+
+<<name='toctree', echo=False, results='sphinx'>>=
+create_toctree(maxdepth=2)
+@
+
+

@@ -61,19 +61,8 @@ This is a holder of sub-commands for the :ref:`ArgumentClinic <argument-clinic>`
 
 .. uml::
 
-   UbootKommandant
    UbootKommandant o-- QuarterMaster
-
-.. autosummary::
-   :toctree: api
-
-   UbootKommandant
-   UbootKommandant.help
-   UbootKommandant.run
-   UbootKommandant.fetch
-   UbootKommandant.list
-   UbootKommandant.test
-
+  
 <<name='UbootKommandant', echo=False>>=
 class UbootKommandant(BaseClass):
     """
@@ -176,6 +165,17 @@ class UbootKommandant(BaseClass):
         return
 #
 @
+
+.. autosummary::
+   :toctree: api
+
+   UbootKommandant
+   UbootKommandant.handle_help
+   UbootKommandant.run
+   UbootKommandant.fetch
+   UbootKommandant.list_plugins
+   UbootKommandant.check
+
 <<name='test_imports', echo=False>>=
 # python standard library
 import unittest

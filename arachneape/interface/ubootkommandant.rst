@@ -20,18 +20,19 @@ This is a holder of sub-commands for the :ref:`ArgumentClinic <argument-clinic>`
 
 .. uml::
 
-   UbootKommandant
    UbootKommandant o-- QuarterMaster
+  
+
 
 .. autosummary::
    :toctree: api
 
    UbootKommandant
-   UbootKommandant.help
+   UbootKommandant.handle_help
    UbootKommandant.run
    UbootKommandant.fetch
-   UbootKommandant.list
-   UbootKommandant.test
+   UbootKommandant.list_plugins
+   UbootKommandant.check
 
 
 
