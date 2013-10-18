@@ -3,6 +3,12 @@ The UbootKommandant
 .. currentmodule:: arachneape.interface.ubootkommandant
 
 <<name='imports', echo=False>>=
+# third-party
+from pycallgraph import PyCallGraph
+from pycallgraph import GlobbingFilter
+from pycallgraph import Config
+from pycallgraph.output import GraphvizOutput
+
 # this package
 from arachneape.commoncode.baseclass import BaseClass
 from arachneape.commoncode.strings import RED, BOLD, RESET
@@ -103,6 +109,8 @@ class UbootKommandant(BaseClass):
         Builds and runs the code
         """
         plugin = self.quartermaster.get_plugin('ArachneApe')
+
+        # The arachneape needs the config-filenames
         ape = plugin().product
         if args.trace:
             from trace import Trace
@@ -113,6 +121,12 @@ class UbootKommandant(BaseClass):
                                         'posixpath'],
                            timing=True)
             tracer.runfunc(ape)
+        elif args.callgraph:
+            config = Config(max_depth=10)
+            graphviz = GraphvizOutput()
+            graphviz.output_file = 'arachneape_callgraph.png'
+            with PyCallGraph(output=graphviz, config=config):
+                ape()
         else:
             ape()
         return

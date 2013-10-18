@@ -16,7 +16,6 @@ These are the documents created from the source files.
 
    The QuarterMaster <quartermaster.rst>
    The Base Plugin <base_plugin.rst>
-   Plugin Constants <constants.rst>
    The Dummy Plugin <dummyplugin.rst>
    The ArachneApe Plugin <arachneapeplugin.rst>
 

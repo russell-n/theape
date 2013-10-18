@@ -21,7 +21,7 @@ subprocess.call(['pyreverse'] + args)
 
 import arachneape.infrastructure.hortator as hortator
 file_name = hortator.__file__.rstrip('c')
-command = 'pyreverse -o png -p hortator {0}'.format(file_name)
+command = 'pyreverse -o png -p hortatorplain {0}'.format(file_name)
 subprocess.call(shlex.split(command))
 
 

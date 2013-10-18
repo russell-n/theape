@@ -101,16 +101,17 @@ That was somewhat unexciting, what if we have a more complicated example?
 
     import arachneape.infrastructure.hortator as hortator
     file_name = hortator.__file__.rstrip('c')
-    command = 'pyreverse -o png -p hortator {0}'.format(file_name)
+    command = 'pyreverse -o png -p hortatorplain {0}'.format(file_name)
     subprocess.call(shlex.split(command))
     
 
 
 
-This produces a file called 'classes_hortator.png' (using ``-p`` makes it a module-level diagram, so it will pick up all the classes, thus the plural `classes`).
+This produces a file called 'classes_hortatorplain.png' (using ``-p`` makes it a module-level diagram, so it will pick up all the classes, thus the plural `classes`).
 
-.. image:: classes_hortator.png
+.. image:: classes_hortatorplain.png
 
+.. _exploring-pyreverse-module::
 General Vue of a Module
 -----------------------
 
@@ -132,6 +133,8 @@ That still is not a particularly exciting example, at least not visually. It is 
    -my, Add module to name (module? yes!)
    -k, Show only class names (no methods or attributes)
 
+.. image:: classes_hortator.png   
+   
 More Detail
 -----------
 

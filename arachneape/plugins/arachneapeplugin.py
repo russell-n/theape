@@ -1,6 +1,7 @@
 
 # python standard library
 import re
+import os
 from collections import OrderedDict
 # this package
 from arachneape.interface.arguments import ArgumentClinic
@@ -8,6 +9,10 @@ from arachneape.infrastructure.hortator import TheHortator
 from arachneape.components.dummy.dummy import DummyClass
 from arachneape.infrastructure.theoperator import OperatorError
 from base_plugin import BasePlugin
+from arachneape.commoncode.code_graphs import module_diagram, class_diagram
+
+
+in_pweave = __name__ == '__builtin__'
 
 
 CONFIGURATION = '''[ARACHNEAPE]
@@ -21,6 +26,19 @@ CONFIGURATION = '''[ARACHNEAPE]
 
 
 output_documentation = __name__ == '__builtin__'
+
+
+if in_pweave:
+    this_file = os.path.join(os.getcwd(), 'arachneapeplugin.py')
+    module_diagram_file = module_diagram(module=this_file, project='arachneapeplugin')
+    print ".. image:: {0}".format(module_diagram_file)
+
+
+if in_pweave:
+    class_diagram_file = class_diagram(class_name="ArachneApe",
+                                       filter='OTHER',
+                                       module=this_file)
+    print ".. image:: {0}".format(class_diagram_file)
 
 
 EXAMPLES = '''

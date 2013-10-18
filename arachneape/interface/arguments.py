@@ -6,6 +6,9 @@ import argparse
 from ubootkommandant import UbootKommandant
 
 
+document_this = __name__ == '__builtin__'
+
+
 class ArgumentClinic(object):
     """
     A command-line argument parser
@@ -71,6 +74,11 @@ class ArgumentClinic(object):
                                 default=False)
         self.parser.add_argument('--trace',
                                  help='Turn on code-tracing',
+                                 action='store_true',
+                                 default=False)
+
+        self.parser.add_argument('--callgraph',
+                                 help='Create call-graph',
                                  action='store_true',
                                  default=False)
         return
@@ -155,7 +163,7 @@ from mock import MagicMock, patch
 
 class TestArgumentClinic(unittest.TestCase):
     def setUp(self):
-        self.keys = 'debug silent pudb pdb trace'.split()
+        self.keys = 'debug silent pudb pdb trace callgraph'.split()
         self.flags = ["--{0}".format(key) for key in self.keys]
 
         self.args = MagicMock(spec='sys')

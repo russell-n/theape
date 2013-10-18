@@ -1,23 +1,69 @@
 The ArachneApe Plugin
 =====================
 
-This is a default plugin to provide the base-level of features. This allows the code to have a fall-back when the user does not specify a plugin. The use of the word `plugin` in the module name seems redundant, but I am trying to avoid namespace problems since the base package is named ``arachneape``.
+This is the plugin that creates and runs the composites. It will always be used when the `run` subcommand is used.
+
+The Run State Diagram
+---------------------
+
+The assumed flow for the ``run`` sub-command is something like this:
+
+.. digraph:: run_state_diagram
+
+   rankdir = LR
+   pa [label="Parse Args"]
+   bc [label="Build Map"]
+   bo [label="Build Composites"]
+   run [label="Run", shape=diamond]
+   data [label="Data", shape=rect]
+   start [label="Start", shape=diamond]
+   configurations [label="Configurations", shape=rect]
+   
+   start -> pa [label="args"]
+   pa -> bc [label="name"]
+   configurations -> bc [label="config"]
+   bc -> bo [label="map"]
+   bo -> run [label="Hortator"]
+   run -> data [label="datum"]
 
 
+
+Module Dependency Graph
+-----------------------
+
+This is an auto-generated graph of this module.
+
+.. image:: classes_arachneapeplugin.png
+
+
+
+Class Diagram
+-------------
+
+This is an auto-generated class diagram for the ArachneApe.
+
+.. image:: ArachneApe.png
+
+
+
+And this is a hand-drawn one which should be easier to read but may not guaranteed to be up-to-date.
 
 .. uml::
 
-   ArachneApe -|> BasePlugin
-   ArachneApe o- HelpPage
-   ArachneApe o- TheHortator
+   ArachneApe --|> BasePlugin
+   ArachneApe o-- HelpPage
+   ArachneApe o-- TheHortator
 
+.. currentmodule:: arachneape.plugins.arachneapeplugin   
 .. autosummary::
    :toctree: api
 
    ArachneApe
    ArachneApe.help
    ArachneApe.product
-   ArachneApe.config
+   ArachneApe.fetch_config
+   ArachneApe.arguments
+   ArachneApe.sections
 
 
 
@@ -44,6 +90,7 @@ To print the help-message the ArachneApe will use the help page, but since it is
 ::
 
     usage: arachneape.interface [-h] [--debug] [--silent] [--pudb] [--pdb]
+                                [--trace]
                                 {run,fetch,list,check,help} ...
     
     
@@ -61,7 +108,7 @@ Well, that might be kind of useful, although the program name is wrong and it do
 
 ::
 
-    usage: arachneape [-h] [--debug] [--silent] [--pudb] [--pdb]
+    usage: arachneape [-h] [--debug] [--silent] [--pudb] [--pdb] [--trace]
                       {run,fetch,list,check,help} ...
     
     optional arguments:
@@ -70,6 +117,7 @@ Well, that might be kind of useful, although the program name is wrong and it do
       --silent              Sets the logging level to off (for stdout)
       --pudb                Enables the pudb debugger
       --pdb                 Enables the pdb debugger
+      --trace               Turn on code-tracing
     
     Sub-Commands Help:
       Available Subcommands

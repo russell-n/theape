@@ -12,32 +12,42 @@ The `QuarterMaster <http://en.wikipedia.org/wiki/Quartermaster>`_ handles findin
    QuarterMaster -|> BaseClass
    
 
+Public Methods and Properties
+-----------------------------
+
+These are the public attributes of the `QuarterMaster`. Only `get_plugin` and `list_plugins` are meant for users, the others are building blocks.
+
 .. autosummary::
    :toctree: api
 
    QuarterMaster
    QuarterMaster.list_plugins
+   QuarterMaster.filenames
+   QuarterMaster.modules
+   QuarterMaster.plugins
+   QuarterMaster.get_plugin
 
-.. _quartermaster-list-plugins:
+Auto-Generated Diagrams
+-----------------------
 
+These are auto-generated so they will always be more up-to-date than the previous class-diagrams, but they tend to be harder to read as well (and are just not pretty) so I will leave both in.
+
+.. image:: classes_quartermaster.png
+
+.. image:: QuarterMaster.png
 
 
 
 Some Messy Business
 -------------------
 
-Since I am running code to create this documentation I am going to keep it from executing when it is not being compiled as documentation by setting up a flag. It is ugly, but I do not know how to exclude code from the tangling.
+Since I am running code to create this documentation I am going to keep it from executing when it is not being compiled as documentation by setting up a flag. It is ugly, but I do not know how to exclude code from the tangling::
 
-::
-
-    document_this = __name__ == "__builtin__"
-    
-    
+   document_this = __name__ == "__builtin__"
 
 
-
-The List Plugins Method
------------------------
+Background
+----------
 
 One of the purposes of the QuarterMaster is to find plugins for the rest of the code to use or to list them for the user. I had previously tried three methods to do something similar to this:
 
@@ -61,7 +71,7 @@ For the explicit imports I created a class and added properties that would impor
                 self._aoeu = Aoeu
             return self._aoeu
 
-The reason for the use of properties was so that if a specific class wasn't needed it wouldn't be imported. This worked okay as a quick hack, but as the classes piled up it quickly became too large (and it is just too inelegant). My attempt at using naming conventions (having all modules and classes have the same suffix) was still-born as I got randomly asked to work on something else, but even as I was implementing it it seemed too inflexible. Yapsy seems like it would work, but having to dig through the API and do experiments to figure out how to get it working was too much work for the limited use I want out of it. So, my solution here is to use the python standard library and a common base-class to create a primitive self-discovering plugin manager (the QuarterMaster). It will do file-discovery within the plugins directory to find candidate files, import their contents, then check to see which ones inherit from the :ref:`BasePlugin <base-plugin>`.
+The reason for the use of properties was so that if a specific class wasn't needed it wouldn't be imported. This worked okay as a quick hack, but as the classes piled up it quickly became too large (and it is just too inelegant). My attempt at using naming conventions (having all modules and classes have the same suffix) seemed too inflexible and clumsy. Yapsy seems like it would work, but having to dig through the API and do experiments to figure out how to get it working was proving to be too much work for the limited use I wanted out of it. So my solution here is to use the python standard library and a common base-class to create a primitive self-discovering plugin manager (the `QuarterMaster`). It will do file-discovery within the plugins directory to find candidate files, import their contents, then check to see which ones inherit from the :ref:`BasePlugin <base-plugin>`.
 
 Gathering Files
 ~~~~~~~~~~~~~~~
@@ -105,7 +115,6 @@ Looking at the output you can see that the ``__file__`` contains the path to the
     __init__.py
     arachneapeplugin.py
     base_plugin.py
-    constants.py
     dummyplugin.py
     index.py
     quartermaster.py
@@ -113,9 +122,9 @@ Looking at the output you can see that the ``__file__`` contains the path to the
 
 
 
-I should point out, since it might not be obvious, that the classes within a module get the ``__file__`` variable added to their namespace as a global variable so the QuarterMaster can just use the ``__file__`` variable directly without importing anything, so in the QuarterMaster you will see ``__file__``, not ``base_plugin.__file__``, but the code I run while documenting this module cannot get access to it without referring to an imported module. I think it has to do with the fact that the import statement is what creates the variable so if this module were imported it would be created, but to generate the document, I run it standalone. Just keep that in mind if you look at the code.
+I should point out, since it might not be obvious, that the classes within a module get the ``__file__`` variable added to their namespace as a global variable so the QuarterMaster can just use the ``__file__`` variable directly without importing anything (so in the QuarterMaster you will see ``__file__``, not ``base_plugin.__file__``) but the code I run while documenting this module cannot get access to it without referring to an imported module. I think it has to do with the fact that the import statement is what creates the variable so if this module were imported it would be created, but to generate the document, I run it through Pweave. Just keep that in mind if you look at the code.
 
-Anyway, did that work? Yes and no. Notice that it only printed out file-names, not the whole path. If we use this as the base for importing (after removing the extension) it will work for this documentation because I have to compile it while in the same directory, but the moment you run the code anywhere else python will raise an error (unless you happen to be in a directory with files of the same name, which would be even worse). So do we just add the paths? That was my first notion, but this will raise an error when you try to import it. It  looks like ``importlib`` is importing a file, but the name you are passing in is actually the name of the module, not the file. This can be confusing but it just means that instead of the file-path, you need to refer to the module the way you would when you import it, using dot-notation::
+Anyway, did that work? Yes and no. Notice that it only printed out file-names, not the whole path. If we use this as the base for importing (after removing the extension) it will work for this documentation because I have to compile it while in the same directory, but the moment you run the code anywhere else python will raise an error (unless you happen to be in a directory with files of the same name). So do we just add the paths? That was my first notion, but this will raise an error when you try to import it. It  looks like ``importlib`` is importing a file, but the name you are passing in is actually the name of the module, not the file. This can be confusing but it just means that instead of the file-path, you need to refer to the module the way you would when you import it, using dot-notation::
 
     import arachneape.plugins.arachneapeplugin
 
@@ -163,13 +172,13 @@ Besides filtering on the extension, I am also going to exclude some other files 
 
 
 
-That might seem anticlamactic, but there is nothing really interesting to print yet, we need to find the things in the modules that are plugins. To get the objects in the modules we can use the `inspect.getmembers <http://docs.python.org/2/library/inspect.html#inspect.getmembers>`_ function. Once we have them, we can check the ``__base__`` variable that each class has which holds the parent class. Only classes have the ``__base__`` attribute so we will also filter non-classes out using the `inspect.isclass <http://docs.python.org/2/library/inspect.html#inspect.getmembers>`_ function to prevent AttributeErrors.
+At this point there is nothing really interesting to print yet -- we need to find the things in the modules that are plugins. To get the objects in the modules we can use the `inspect.getmembers <http://docs.python.org/2/library/inspect.html#inspect.getmembers>`_ function. Once we have them, we can check the ``__base__`` variable that each class has which holds the parent class. Only classes have the ``__base__`` attribute so we will also filter non-classes out using the `inspect.isclass <http://docs.python.org/2/library/inspect.html#inspect.getmembers>`_ function to prevent AttributeErrors.
 
 The signature of the ``getmembers`` function is this::
 
     inspect.getmembers(object[, predicate])
 
-The `predicate` argument is an optional function that you pass in to filter what ``getmembers`` returns. It ``getmembers`` will only return objects that evaluate to True when passed to the predicate function, so if we pass in a function that checks if an object is the child of the BasePlugin, this should give us our plugins:
+The `predicate` argument is an optional function that you pass in to filter what ``getmembers`` returns. ``getmembers`` will only return objects that evaluate to True when passed to the predicate function, so if we pass in a function that checks if an object is the child of the BasePlugin, this should give us our plugins:
 
 .. currentmodule:: inspect
 
@@ -199,7 +208,7 @@ The `predicate` argument is an optional function that you pass in to filter what
 
 
 
-Oops. What happened there? Well, it turns out that now that we are using the full import path, we need to add the full path for ``BasePlugin`` when we do our check or it will fail.
+Oops. What happened there (the ``print`` statement should have created some output above this paragraph)? Well, it turns out that now that we are using the full import path, we need to add the full path for ``BasePlugin`` when we do our check or it will fail.
 
 .. currentmodule:: os
 
@@ -238,7 +247,7 @@ Oops. What happened there? Well, it turns out that now that we are using the ful
 
 
 
-The actual instantiation of the plugin was only done to show that it is a callable object (actually a Plugin class definition).
+The actual instantiation of the plugin (``plugin = definition(None)``) was done to show that it is a callable object (a Plugin class definition in this case).
 
 
 

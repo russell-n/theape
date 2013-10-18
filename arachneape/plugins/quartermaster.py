@@ -7,6 +7,23 @@ import inspect
 # this package
 from arachneape.commoncode.baseclass import BaseClass
 from base_plugin import BasePlugin
+from arachneape.commoncode.code_graphs import module_diagram, class_diagram
+
+
+document_this = __name__ == '__builtin__'
+
+
+if document_this:
+    this_file = os.path.join(os.getcwd(), 'quartermaster.py')
+    module_diagram_file = module_diagram(module=this_file, project='quartermaster')
+    print ".. image:: {0}".format(module_diagram_file)
+
+
+if document_this:
+    class_diagram_file = class_diagram(class_name="QuarterMaster",
+                                       filter='OTHER',
+                                       module=this_file)
+    print ".. image:: {0}".format(class_diagram_file)
 
 
 class QuarterMaster(BaseClass):
@@ -84,9 +101,7 @@ class QuarterMaster(BaseClass):
         except KeyError as error:
             self.logger.error(error)
         return
-
-
-document_this = __name__ == "__builtin__"
+# end class QuarterMaster    
 
 
 if document_this:
