@@ -17,6 +17,7 @@ A place for exploring code examples.
 
    Call Graphs <explore_graphs/index.rst>
    Exploring Trace <explore_trace/index.rst>
+   Exploring ConfigParser <explore_configparse/index.rst>
    Explore Inspect <explore_inspect/index.rst>
 
 

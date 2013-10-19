@@ -2,7 +2,68 @@ The Configuration Map
 =====================
 
 .. _configuration-map:
-The `Configuration Map` maps a configuration-file-name to data. It extends the `ConfigParser` to have more data-types (and allow missing values).
+The `Configuration Map` maps a configuration-file-name to data. It extends the `ConfigParser` to have more data-types (and allow missing values) and to add sub-configuration-files (see the :ref:`ConfigParser Explorations <exploring-configparser-whole-shebang>` to get some idea of what I am getting at).
+
+Background
+----------
+
+The `ConfigParser` module along with the `glob` module will be used to find and convert files to data. The ConfigParser has methods for the main singular data-types but I will also add collections and times. Additionally I will automatically add any sub-config files matching a `config_glob` found in the DEFAULT section of the main file given.
+
+
+
+.. uml::
+
+   ConfigurationMap -|> BaseClass
+
+The ConfigurationError
+----------------------
+
+The `ConfigurationMap` will raise a ConfigurationError to try and trickle up more useful information.
+
+
+
+.. currentmodule:: arachneape.interface.configurationmap
+.. autosummary::
+   :toctree: api
+
+   ConfigurationError
+
+
+
+.. currentmodule:: arachneape.interface.configurationmap
+.. autosummary::
+   :toctree: api
+
+   ConfigurationMap
+
+
+The ConfigurationMap.parser
+---------------------------
+
+This property is a SafeConfigParser instance. When it is created, the ConfigurationMap reads the filename passed in on instantiation and checks if the loaded configuration has a ``[DEFAULT] : config_glob`` option. If it does, it gets the `config_glob` value, traverses the expanded glob and loads all the files that match.
+   
+ConfigParser
+------------
+
+These are the `ConfigParser` methods that will be used.
+
+.. currentmodule:: ConfigParser
+.. autosummary::
+   :toctree: api
+
+   SafeConfigParser
+   SafeConfigParser.options
+   SafeConfigParser.sections
+   SafeConfigParser.items
+   SafeConfigParser.read
+   SafeConfigParser.write
+   SafeConfigParser.get
+   SafeConfigParser.getint
+   SafeConfigParser.getfloat
+   SafeConfigParser.getboolean
+   SafeConfigParser.has_option
+   SafeConfigParser.has_section
+
 
 ConfigParser Exceptions
 -----------------------
@@ -17,20 +78,10 @@ These are the `ConfigParser` Exceptions that I will handle in the `Configuration
    ConfigParser.NoSectionError
    ConfigParser.NoOptionError
 
-ConfigParser
-------------
 
-These are the `ConfigParser` methods that will be used.
 
-.. currentmodule:: ConfigParser
-.. autosummary::
-   :toctree: api
 
-   SafeConfigParser
-   SafeConfigParser.options
-   SafeConfigParser.read
-   SafeConfigParser.get
-   SafeConfigParser.getint
-   SafeConfigParser.getfloat
-   SafeConfigParser.getboolean
-   SafeConfigParser.items
+.. image:: classes_configurationmap.png
+
+.. image:: ConfigurationMap.png
+
