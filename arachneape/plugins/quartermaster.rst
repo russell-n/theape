@@ -95,7 +95,7 @@ The `os.listdir <http://docs.python.org/2/library/os.html#files-and-directories>
 
 ::
 
-    /home/moira/repositories/repository_code/hortators/arachneape/arachneape/plugins/base_plugin.pyc
+    /home/charon/repositories/repository_code/hortators/arachneape/arachneape/plugins/base_plugin.pyc
     
 
 

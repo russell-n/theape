@@ -17,9 +17,9 @@ node3 [splines=ortho shape = "rect" style = "rounded,filled" fillcolor = "coral"
 node4 [splines=ortho shape = "rect" style = "rounded,filled" fillcolor = "coral" label = "72: ArachneApe.sections" ];
 node5 [splines=ortho shape = "rect" style = "rounded,filled" fillcolor = "coral" label = "112: ArachneApe.product" ];
 node6 [splines=ortho shape = "rect" style = "rounded,filled" fillcolor = "coral" label = "134: ArachneApe.fetch_config" ];
-subgraph clusterhomemoirarepositoriesrepository_codehortatorsarachneapearachneapepluginsarachneapeplugin0{
+subgraph clusterhomecharonrepositoriesrepository_codehortatorsarachneapearachneapepluginsarachneapeplugin0{
 node2 node3 node4 node5 node6 ;
-label="/home/moira/repositories/repository_code/hortators/arachneape/arachneape/plugins/arachneapeplugin";
+label="/home/charon/repositories/repository_code/hortators/arachneape/arachneape/plugins/arachneapeplugin";
 style=filled;
 color=black;
 graph[style=dotted];

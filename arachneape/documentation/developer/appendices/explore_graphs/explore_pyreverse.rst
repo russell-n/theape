@@ -133,8 +133,9 @@ That still is not a particularly exciting example, at least not visually. It is 
    -my, Add module to name (module? yes!)
    -k, Show only class names (no methods or attributes)
 
-.. image:: classes_hortator.png   
-   
+.. image:: classes_hortator.png
+
+.. _exploring-pyreverse-class-diagram:
 More Detail
 -----------
 
