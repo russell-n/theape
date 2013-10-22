@@ -1,0 +1,14 @@
+The Command Line Interface
+==========================
+
+<<name='imports', echo=False>>=
+# this package
+from arachneape.commoncode.index_builder import create_toctree
+@
+
+This sub-folder holds the modules that create the command-line interface for the user.
+
+<<name='toctree', echo=False, results='sphinx'>>=
+create_toctree()
+@
+

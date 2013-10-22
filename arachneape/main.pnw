@@ -1,0 +1,42 @@
+The Main Entry Point
+====================
+
+This module bundles together the components needed to use the ArachneApe as a command-line command.
+
+.. uml::
+
+   main o- ArgumentClinic
+   main o- SubCommands
+   
+<<name='imports', echo=False>>=
+# this package
+import arachneape.interface.arguments
+from arachneape.log_setter import set_logger
+@
+<<name='enable_debugging', echo=False>>=
+def enable_debugging(args):
+    """
+    Enables interactive debugging
+
+    :param:
+
+     - `args`: A namespace with pudb and pdb attributes
+    """
+    if args.pudb:
+        import pudb
+        pudb.set_trace()
+        return
+    if args.pdb:
+        import pdb
+        pdb.set_trace()
+    return
+@
+<<name='ArachneMain', echo=False>>=
+def main():
+    argue = arachneape.interface.arguments.ArgumentClinic()
+    args = argue()
+    set_logger(args)
+    enable_debugging(args)
+    args.function(args)
+    return
+@

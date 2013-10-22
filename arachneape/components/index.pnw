@@ -1,0 +1,15 @@
+The Components
+==============
+
+.. _the-components::
+<<name='imports', echo=False>>=
+# this package
+from arachneape.commoncode.index_builder import create_toctree
+@
+
+The Components are the base-classes for code that will be called at run-time. They can be broken down into Composites -- which make up the infrastructure of the `arachneape` and `Leafs` which are the plugin-products that are called by the composites.
+
+<<name='toctree', echo=False, results='sphinx'>>=
+create_toctree()
+@
+

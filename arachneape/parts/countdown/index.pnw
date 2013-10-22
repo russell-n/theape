@@ -1,0 +1,18 @@
+Countdown
+=========
+
+<<name='imports', echo=False>>=
+# this package
+from arachneape.commoncode.index_builder import create_toctree
+@
+This package is for things meant to test the infrastructure.
+
+Auto-Generated Documentation
+----------------------------
+
+These are the documents created from the source files.
+
+<<name='toctree', echo=False, results='sphinx'>>=
+create_toctree()
+@
+

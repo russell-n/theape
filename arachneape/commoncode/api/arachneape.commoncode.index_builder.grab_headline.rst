@@ -1,0 +1,6 @@
+arachneape.commoncode.index_builder.grab_headline
+=================================================
+
+.. currentmodule:: arachneape.commoncode.index_builder
+
+.. autofunction:: grab_headline
