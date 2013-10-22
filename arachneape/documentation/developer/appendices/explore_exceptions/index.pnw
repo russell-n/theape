@@ -1,17 +1,12 @@
-The Appendices
-==============
+Exploring Exceptions
+====================
 <<name='imports', echo=False>>=
 # this package
 from arachneape.commoncode.index_builder import create_toctree
 @
 
-Code Explorations
------------------
-
-A place for exploring code examples.
-
 <<name='toctree', echo=False, results='sphinx'>>=
-create_toctree(maxdepth=1)
+create_toctree(maxdepth=2)
 @
 
 
