@@ -15,9 +15,9 @@ These are the documents created from the source files.
    :maxdepth: 1
 
    The QuarterMaster <quartermaster.rst>
+   The ArachneApe Plugin <arachneapeplugin.rst>
    The Base Plugin <base_plugin.rst>
    The Dummy Plugin <dummyplugin.rst>
-   The ArachneApe Plugin <arachneapeplugin.rst>
 
 .. toctree::
    :maxdepth: 1
