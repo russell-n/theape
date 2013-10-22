@@ -5,7 +5,7 @@ import os
 
 # this package 
 from arachneape.commoncode.baseclass import BaseClass
-from arachneape.components.helppage.helppage import HelpPage
+from arachneape.parts.helppage.helppage import HelpPage
 from arachneape.commoncode.code_graphs import module_diagram, class_diagram
 
 
@@ -77,14 +77,14 @@ class BasePlugin(BaseClass):
     @abstractproperty
     def product(self):
         """
-        The plugin (BaseProduct implementation)
+        Abstract Property: The plugin (Component implementation)
         """
         return
 
     @abstractmethod
     def fetch_config(self):
         """
-        Get sample config-file snippet required by this plugin
+        Abstract Method: Get sample config-file snippet required by this plugin
         """
         return   
 # end class BasePlugin                

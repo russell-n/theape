@@ -2,7 +2,7 @@ The Countdown
 =============
 <<name='imports', echo=False>>=
 # this package
-from arachneape.components.dummy.dummy import DummyClass
+from arachneape.parts.dummy.dummy import DummyClass
 @
 .. currentmodule:: arachneape.components.countdown.countdown
 .. _countdown-class:

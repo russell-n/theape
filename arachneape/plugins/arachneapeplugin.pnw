@@ -40,11 +40,11 @@ import os
 from collections import OrderedDict
 # this package
 from arachneape.interface.arguments import ArgumentClinic
-from arachneape.infrastructure.hortator import TheHortator
-from arachneape.components.dummy.dummy import DummyClass
-from arachneape.infrastructure.theoperator import OperatorError
+from arachneape.components.component import Composite
+from arachneape.parts.dummy.dummy import DummyClass
 from base_plugin import BasePlugin
 from arachneape.commoncode.code_graphs import module_diagram, class_diagram
+from arachneape.commoncode.errors import ApeError, DontCatchError
 @
 <<name='check_pweave', echo=False>>=
 in_pweave = __name__ == '__builtin__'
@@ -176,22 +176,61 @@ class ArachneApe(BasePlugin):
         """
         this is a product
         """
-        class Operator(DummyClass):
+        class Leaf(DummyClass):
             def __init__(self, *args, **kwargs):
-                super(Operator, self).__init__(*args, **kwargs)
+                super(Leaf, self).__init__(*args, **kwargs)
 
-        op_1 = Operator(name='op_1')
-        op_2 = Operator(name='op_2')
-
-        class BadOperator(Operator):
+        class BadLeaf(Leaf):
             def __init__(self, *args, **kwargs):
-                super(BadOperator, self).__init__(*args, **kwargs)
+                super(BadLeaf, self).__init__(*args, **kwargs)
                 
             def __call__(self):
-                raise OperatorError('this is an operator error')
-            
-        op_3 = BadOperator(name='op_3')
-        exhort = TheHortator([op_1, op_2, op_3])
+                raise ApeError('this is a component error')
+
+        # some component leaves
+        leaf_1 = Leaf(name='leaf_1')
+        leaf_2 = Leaf(name='leaf_2')            
+        leaf_3 = BadLeaf(name='leaf_3')
+
+        #  operator
+        operator = Composite(error=ApeError,
+                             error_message='Operation Crash',
+                             component_category='Operation')
+        operator_2 = Composite(error=ApeError,
+                               error_message='Operation Crash',
+                               component_category='Operation')
+
+
+        # first operation
+        operation_1 = Composite(error=DontCatchError,
+                                error_message='Component Crash',
+                                component_category='Component')
+        
+        operation_2 = Composite(error=DontCatchError,
+                                error_message='Component Crash',
+                                component_category='Component')
+
+        operation_3 = Composite(error=DontCatchError,
+                                error_message='Component Crash',
+                                component_category='Component')
+
+        operation_1.add(leaf_1)
+        operation_1.add(leaf_3)
+        operation_2.add(leaf_2)
+        
+        operator.add(operation_1)
+        operator.add(operation_2)
+
+        operation_3.add(leaf_3)
+        operation_3.add(leaf_1)
+        operator_2.add(operation_3)
+        # second 
+        exhort = Composite(error=Exception,
+                           error_message="Operator Crash",
+                           component_category='Operator',
+                           is_root=True)
+        exhort.add(operator)
+        exhort.add(operator_2)
         return exhort
 
     def fetch_config(self):

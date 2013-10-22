@@ -8,7 +8,7 @@ import os
 
 # this package 
 from arachneape.commoncode.baseclass import BaseClass
-from arachneape.components.helppage.helppage import HelpPage
+from arachneape.parts.helppage.helppage import HelpPage
 from arachneape.commoncode.code_graphs import module_diagram, class_diagram
 @
 <<name='check_pweave', echo=False>>=
@@ -51,6 +51,31 @@ Public Properties and Methods
 -----------------------------
 
 The following are the public propeties and methods. The ``help_page`` and ``help()`` are the only implemented attributes, the rest need to be implemented by the inheriting classes.
+
+.. _base-plugin-sections:
+Sections
+~~~~~~~~
+
+The `sections` are a dictionary used by the help-page to create the screen-output. By defining this dictionary you are defining what the user will see when they enter::
+
+    arachneape help <plugin-name>
+
+.. _base-plugin-product:
+The Product
+~~~~~~~~~~~
+
+This is the built object that client code will call. To make the interface uniform it is assumed that all parameters have been set and none will be passed to the __call__() method.
+
+.. _base-fetch-config::
+The Fetch Config
+~~~~~~~~~~~~~~~~
+
+The `fetch_config` method used to copy an example configuration file to the current working directory (thus its name). Since each plugin can provide its own sample, I decided that they should output them to standard out. Thus the user could do something like this::
+
+    arachneape fetch > arachneape.ini
+    arachneape fetch IperfSession >> arachneape.ini
+
+And so on to add to a configuration file without clobbering the old one. Additionally, the ConfigurationMap looks for a `config_glob` option in the ARACHNEAPE section so the other configuration files could be put in a seaparate file and shared by other ARACHNEAPE configurations.    
    
 .. autosummary:: 
    :toctree: api
@@ -159,14 +184,14 @@ class BasePlugin(BaseClass):
     @abstractproperty
     def product(self):
         """
-        The plugin (BaseProduct implementation)
+        Abstract Property: The plugin (Component implementation)
         """
         return
 
     @abstractmethod
     def fetch_config(self):
         """
-        Get sample config-file snippet required by this plugin
+        Abstract Method: Get sample config-file snippet required by this plugin
         """
         return   
 # end class BasePlugin                

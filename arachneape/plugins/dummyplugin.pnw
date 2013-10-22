@@ -10,7 +10,7 @@ from collections import OrderedDict
 
 # this package
 from base_plugin import BasePlugin
-from arachneape.components.helppage.helppage import HelpPage
+from arachneape.parts.helppage.helppage import HelpPage
 @
 <<name='constants', echo=False>>=
 DESCRIPTION = """{bold}DummyClass{reset} logs its calls and then returns. It is meant to be used as changes are made to the infrastructure so that the {blue}ArachneApe{reset} can be tested without using and other components."""

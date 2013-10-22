@@ -7,45 +7,9 @@ from pycallgraph.output import GraphvizOutput
 
 # this package
 from arachneape.commoncode.baseclass import BaseClass
+from arachneape.commoncode.crash_handler import try_except
 from arachneape.commoncode.strings import RED, BOLD, RESET
 from arachneape.plugins.quartermaster import QuarterMaster
-
-
-def try_except(method):
-    """
-    A decorator method to catch Exceptions
-
-    :param:
-
-     - `func`: A function to call
-    """
-    def wrapped(self, *args, **kwargs):
-        try:
-            return method(self, *args, **kwargs)
-        except Exception as error:
-            red_error = "{red}{bold}{{error}}{reset}".format(red=RED,
-                                                             bold=BOLD,
-                                                             reset=RESET)
-            crash_notice = "{bold}********** Oops, I Crapped My Pants **********{reset}".format(red=RED,
-                                                                             bold=BOLD,
-                                                                             reset=RESET)
-            self.logger.error(crash_notice)
-            
-            import traceback
-            import sys
-            import os
-            
-            exc_type, exc_value, exc_tb = sys.exc_info()
-            tb_info = traceback.extract_tb(exc_tb)
-            filename, linenum, funcname, source = tb_info[-1]
-            
-            self.logger.error(red_error.format(error=error))
-            self.logger.error(red_error.format(error="Failed Line: {0}".format(source)))
-            self.logger.error(red_error.format(error="In Function: {0}".format(funcname)))
-            self.logger.error(red_error.format(error="In File: {0}".format(os.path.basename(filename))))
-            self.logger.error(red_error.format(error="At Line: {0}".format(linenum)))
-            self.logger.debug(traceback.format_exc())
-    return wrapped
 
 
 class UbootKommandant(BaseClass):
@@ -58,6 +22,8 @@ class UbootKommandant(BaseClass):
         """
         super(UbootKommandant, self).__init__()
         self._quartermaster = None
+        self.error = Exception
+        self.error_message = "Oops, I Crapped My Pants"
         return
 
     @property
@@ -100,7 +66,7 @@ class UbootKommandant(BaseClass):
                            timing=True)
             tracer.runfunc(ape)
         elif args.callgraph:
-            config = Config(max_depth=2)
+            config = Config(max_depth=10)
             graphviz = GraphvizOutput()
             graphviz.output_file = 'arachneape_callgraph.png'
             with PyCallGraph(output=graphviz, config=config):

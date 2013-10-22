@@ -1,0 +1,64 @@
+Crash Handler
+=============
+
+This is a module to help with catching exceptions.
+
+<<name='imports', echo=False>>=
+# this package
+from arachneape.commoncode.strings import RED, BOLD, RESET
+@
+
+.. _try-except-decorator:
+The try-except Decorator
+------------------------
+
+This decorator allows exceptions to be caught and logged, rather than allowing the interpreter to dump the stack-trace (it still logs and displays the stack-trace).
+
+.. autosummary::
+   :toctree: api
+
+   try_except
+   
+
+This wraps methods, not functions (it uses `self`). `self` must have access to `self.error` (the exception to trap), `self.error_message` a string to put in the title of the error message` and `self.logger` a logging instance to send error messages to. Since it is catching exceptions, any method wrapped with this won't raise an error if the exception in self.error is raised by code it is running.
+
+<<name='try_except', echo=False>>=
+def try_except(method):
+    """
+    A decorator method to catch Exceptions
+
+    :param:
+
+     - `func`: A function to call
+    """
+    def wrapped(self, *args, **kwargs):
+        try:
+            return method(self, *args, **kwargs)
+        except self.error as error:
+            red_error = "{red}{bold}{{error}}{reset}".format(red=RED,
+                                                             bold=BOLD,
+                                                             reset=RESET)
+            crash_notice = "{bold}********** {msg} **********{reset}".format(red=RED,
+                                                                msg=self.error_message,
+                                                                             bold=BOLD,
+                                                                             reset=RESET)
+            self.logger.error(crash_notice)
+            
+            import traceback
+            import sys
+            import os
+            
+            exc_type, exc_value, exc_tb = sys.exc_info()
+            tb_info = traceback.extract_tb(exc_tb)
+            filename, linenum, funcname, source = tb_info[-1]
+            
+            self.logger.error(red_error.format(error=error))
+            self.logger.error(red_error.format(error="Failed Line: {0}".format(source)))
+            self.logger.error(red_error.format(error="In Function: {0}".format(funcname)))
+            self.logger.error(red_error.format(error="In File: {0}".format(os.path.basename(filename))))
+            self.logger.error(red_error.format(error="At Line: {0}".format(linenum)))
+            self.logger.debug(traceback.format_exc())
+    return wrapped
+@
+
+

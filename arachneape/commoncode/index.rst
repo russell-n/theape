@@ -15,6 +15,7 @@ These are the documents created from the source files.
    :maxdepth: 1
 
    BaseClass <baseclass.rst>
+   Errors <errors.rst>
    Index Builder <index_builder.rst>
    Sorted List <sortedlist.rst>
    Code Graphs <code_graphs.rst>

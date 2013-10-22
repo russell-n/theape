@@ -1,6 +1,6 @@
 
 # this package
-from arachneape.components.dummy.dummy import DummyClass
+from arachneape.parts.dummy.dummy import DummyClass
 
 
 # python standard library

@@ -1,7 +1,7 @@
 The ArachneApe Plugin
 =====================
 
-This is the plugin that creates and runs the composites. It will always be used when the `run` subcommand is used.
+This is the plugin that the Hortator to run Composites. It will always be used when the `run` subcommand is used.
 
 The Run State Diagram
 ---------------------
@@ -26,6 +26,13 @@ The assumed flow for the ``run`` sub-command is something like this:
    bo -> run [label="Hortator"]
    run -> data [label="datum"]
 
+
+ * The `Parse Args` state has been reached before this plugin is created.
+
+ * The `Build Map` uses a `ConfigurationMap <configuration-map>`
+
+ * the `Build Composites` happens in creating the ``product`` 
+   
 
 
 Module Dependency Graph
@@ -90,7 +97,7 @@ To print the help-message the ArachneApe will use the help page, but since it is
 ::
 
     usage: arachneape.interface [-h] [--debug] [--silent] [--pudb] [--pdb]
-                                [--trace]
+                                [--trace] [--callgraph]
                                 {run,fetch,list,check,help} ...
     
     
@@ -109,6 +116,7 @@ Well, that might be kind of useful, although the program name is wrong and it do
 ::
 
     usage: arachneape [-h] [--debug] [--silent] [--pudb] [--pdb] [--trace]
+                      [--callgraph]
                       {run,fetch,list,check,help} ...
     
     optional arguments:
@@ -118,6 +126,7 @@ Well, that might be kind of useful, although the program name is wrong and it do
       --pudb                Enables the pudb debugger
       --pdb                 Enables the pdb debugger
       --trace               Turn on code-tracing
+      --callgraph           Create call-graph
     
     Sub-Commands Help:
       Available Subcommands
