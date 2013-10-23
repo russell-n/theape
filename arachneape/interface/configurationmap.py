@@ -8,17 +8,12 @@ from collections import OrderedDict, namedtuple
 # this package
 from arachneape.commoncode.baseclass import BaseClass
 from arachneape.commoncode.code_graphs import module_diagram, class_diagram
+from arachneape.commoncode.errors import ConfigurationError
 
 
 DEFAULT = 'DEFAULT'
 CONFIG_GLOB = 'config_glob'
 IN_PWEAVE = __name__ == '__builtin__'
-
-
-class ConfigurationError(Exception):
-    """
-    An exception to raise if a ConfigParse exception is caught
-    """    
 
 
 class ConfigurationMap(BaseClass):
@@ -149,9 +144,13 @@ class ConfigurationMap(BaseClass):
                                                                     option,
                                                                     value)
             self.logger.error(output)                                                                    
-            raise ConfigurationError("cannot cast: {0} to {1}".format(value,
-                                                                      cast))
+            raise ConfigurationError("cannot cast: {0} to boolean".format(value))
 
+    # to make it look more like ConfigParser
+    getint = get_int
+    getfloat = get_float
+    getboolean = get_boolean
+    
     def get_list(self, section, option, optional=False, default=None, delimiter=','):
         """
         Gets the value and converts it to a list
@@ -227,7 +226,7 @@ class ConfigurationMap(BaseClass):
         """
         return self.parser.has_option(section, option)
 
-    def options(self, section):
+    def options(self, section, optional=False, default=None):
         """
         gets a list of option-names
 
@@ -237,7 +236,38 @@ class ConfigurationMap(BaseClass):
         
         :return: options in section
         """
-        return self.parser.options(section)
+        try:
+            return self.parser.options(section)
+        except ConfigParser.NoSectionError as error:
+            if optional:
+                self.logger.debug(error)
+                return DEFAULT
+            raise
+        return
+
+    def items(self, section, optional=False, default=None):
+        """
+        Gets tuples of (option, value) pairs for section
+
+        :return: tuples
+        """
+        try:
+            return self.parser.items(section)
+        except ConfigParser.NoSectionError as error:
+            if optional:
+                self.logger.debug(error)
+                return default
+            raise
+        return
+
+    @property
+    def defaults(self):
+        """
+        the [DEFAULT] section
+
+        :return: dict of default values        
+        """
+        return self.parser.defaults()
 # end class ConfigurationMap    
 
 
@@ -279,6 +309,7 @@ class TestConfigurationMap(unittest.TestCase):
     def setUp(self):
         self.filename = 'filename.ini'
         self.config = ConfigurationMap(self.filename)
+        self.config._logger = MagicMock()
         return 
         
     def test_constructor(self):

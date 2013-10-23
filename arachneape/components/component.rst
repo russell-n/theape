@@ -256,6 +256,6 @@ This is somewhat confusing so I will try to explain how the exception hierarchy 
 
 
 .. autosummary::
-   :toctree:
+   :toctree: api
 
    TestComponent.test_bad_component

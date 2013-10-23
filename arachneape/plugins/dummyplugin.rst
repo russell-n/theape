@@ -8,14 +8,32 @@ The :ref:`DummyClass <dummy-class>` does not do anything. It is meant to be used
 
 .. uml::
 
-   DummyPlugin -|> BasePlugin
-   DummyPlugin o- HelpPage
+   Dummy -|> BasePlugin
+   Dummy o- HelpPage
+
+.. currentmodule:: arachneape.plugins.dummyplugin
+.. autosummary::
+   :toctree: api
+
+   Dummy
+   Dummy.help
+   Dummy.sections
+   Dummy.product
+   Dummy.fetch_config   
+
+
+
+Crash-Test-Dummy
+----------------
+
+This is a dummy that crashes when called. The config-file should specify which error to raise::
+
+   [CRASHTESTDUMMY]   
+   error_module = arachneape.commoncode.errors
+   error = ApeError
 
 .. autosummary::
    :toctree: api
 
-   DummyPlugin
-   DummyPlugin.help
-   DummyPlugin.product
-   DummyPlugin.config
-
+   CrashTestDummy
+   

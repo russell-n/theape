@@ -14,15 +14,14 @@ The `ConfigParser` module along with the `glob` module will be used to find and 
 .. uml::
 
    ConfigurationMap -|> BaseClass
+   ConfigurationMap o- ConfigParser
 
 The ConfigurationError
 ----------------------
 
 The `ConfigurationMap` will raise a ConfigurationError to try and trickle up more useful information.
 
-
-
-.. currentmodule:: arachneape.interface.configurationmap
+.. currentmodule:: arachneape.commoncode.errors
 .. autosummary::
    :toctree: api
 
@@ -35,6 +34,21 @@ The `ConfigurationMap` will raise a ConfigurationError to try and trickle up mor
    :toctree: api
 
    ConfigurationMap
+   ConfigurationMap.get
+   ConfigurationMap.get_type
+   ConfigurationMap.get_int
+   ConfigurationMap.get_float
+   ConfigurationMap.get_boolean
+   ConfigurationMap.get_list
+   ConfigurationMap.get_dictionary
+   ConfigurationMap.get_ordered_dictionary
+   ConfigurationMap.get_named_tuple
+   ConfigurationMap.sections
+   ConfigurationMap.has_option
+   ConfigurationMap.options
+   ConfigurationMap.items
+   ConfigurationMap.defaults
+
 
 
 The ConfigurationMap.parser

@@ -33,6 +33,7 @@ class BasePlugin(BaseClass):
 
      - `configuration`: configuration-map for plugin configuration
     """
+    __metaclass__ = ABCMeta
     def __init__(self, configuration=None):
         super(BasePlugin, self).__init__()
         self._logger = None
@@ -41,6 +42,7 @@ class BasePlugin(BaseClass):
         self._product = None
         self._help_page = None        
         self._sections = None
+        self.configuration = configuration
         return
 
     @abstractproperty

@@ -8,7 +8,7 @@ This is a module to set the logging level.
 
  * By default this module uses the package name with `.log` appended to it as the name of the log-file name.
 
-.. note:: To make it portable this module uses introspection to get the name of the package. This means that it has to be at the top-level of the package so that modules in sub-folders can use it.
+.. note:: To make it portable this module uses introspection to get the name of the package. This means that it should be at the top-level of the package so that modules in sub-folders can use it.
 
 .. uml::
 

@@ -143,7 +143,8 @@ class Composite(Component):
     A Composite to hold and execute Components
     """
     def __init__(self, error=None, error_message=None,
-                 component_category=None, countdown=None,
+                 identifier=None,
+                 component_category=None,
                  is_root=False):
         """
         Composite Constructor
@@ -152,18 +153,18 @@ class Composite(Component):
 
          - `error`: Exception to catch when calling components
          - `error_message`: string for header of error messages
-         - `countdown`: A pre-built countdown timer
          - `component_category`: label for error messages when reporting component actions
+         - `identifier`: something to identify this when it starts the call
          - `is_root`: if True logs summation information
         """
         super(Composite, self).__init__()
         self.error = error
         self.error_message = error_message
+        self.identifier = identifier
         self.component_category = component_category
         self.is_root = is_root
         self._logger = None
         self._components = None
-        self._countdown = None
         return
 
     @property
@@ -223,15 +224,6 @@ class Composite(Component):
         """
         return self.components[index]
 
-    @property
-    def countdown(self):
-        """
-        A Countdown Timer
-        """
-        if self._countdown is None:
-            self._countdown = CountDown(iterations=len(self.components))
-        return self._countdown
-
     @try_except
     def one_call(self, component):
         """
@@ -245,33 +237,31 @@ class Composite(Component):
         The main interface -- starts components after doing a check_rep
 
         """
+        self.logger.debug("{b}** Checking the Composite Class Representation **{r}".format(b=BOLD,
+                                                                                          r=RESET))
         self.check_rep()
-        self.countdown.start()
         count_string = "{b}** {l} {{c}} of {{t}} ('{{o}}') **{r}".format(b=BOLD, r=RESET,
                                                                          l=self.component_category)
 
-        remaining_string = BOLD_THING.format(thing="Estimated Time Remaining:")
-        total_elapsed = BOLD_THING.format(thing='** Total Elapsed Time:')
+        # countdown is going to be a plugin too
+        #remaining_string = BOLD_THING.format(thing="Estimated Time Remaining:")
+        #total_elapsed = BOLD_THING.format(thing='** Total Elapsed Time:')
+
+        self.logger.info("{b}*** {c} Started ***{r}".format(b=BOLD, r=RESET,
+                                                             c=self.identifier))
         
         total_count = len(self.components)
+        
         self.logger.info("{b}*** Starting {c} ***{r}".format(b=BOLD, r=RESET,
                                                              c=self.component_category))
         
         for count, component in enumerate(self.components):
-            if not self.countdown.time_remaining:
-                self.logger.info('Time Exceeded, quitting')
-                break
-
             self.logger.info(count_string.format(c=count+1,
-                                                 t=total_count, o=str(component)))
-            self.logger.info(remaining_string.format(value=self.countdown.remaining))
-            
+                                                 t=total_count,
+                                                 o=str(component)))
             self.one_call(component)
-            self.countdown.next_iteration()
         self.logger.info("{b}*** Ending {c}s ***{r}".format(b=BOLD, r=RESET,
                                                             c=self.component_category))
-        if self.is_root:
-            self.logger.info(total_elapsed.format(value=self.countdown.elapsed))        
         return
 
     def check_rep(self):
@@ -290,9 +280,20 @@ class Composite(Component):
             assert self.component_category is not None, (
                 "self.component_category must not be None")
 
+            # check all your children
+            for component in self.components:
+                component.check_rep()
+
         except AssertionError as error:
             raise ConfigurationError(str(error))
         return
+
+    def __str__(self):
+        return ("{2} -- Traps Error: {0},"
+                "Component Category: {1}").format(self.error.__name__,
+                                                  self.component_category,
+                                                  self.__class__.__name__)
+        
 #end class Composite
 @
 
@@ -471,6 +472,6 @@ for case in (TestComponent, TestHortator,
 %>
 
 .. autosummary::
-   :toctree:
+   :toctree: api
 
    TestComponent.test_bad_component

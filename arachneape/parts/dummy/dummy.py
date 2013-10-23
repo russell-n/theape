@@ -24,6 +24,8 @@ class DummyClass(BaseClass):
         self.logger.info(CREATION.format(thing=self))
         self.logger.info(ARGS.format(value=args))
         self.logger.info(KWARGS.format(value=kwargs))
+        for name, value in kwargs.items():
+            setattr(self, name, value)
         return
 
     def __call__(self, *args, **kwargs):
@@ -49,6 +51,44 @@ class DummyClass(BaseClass):
                                           thing=self))
         return CallClass(NOT_IMPLEMENTED.format(thing=self))
 # end class Dummy    
+
+
+class CrashDummy(DummyClass):
+    """
+    A dummy that crashes
+    """
+    def __init__(self, error, error_message="CrashDummy is crashing.",
+                 *args, **kwargs):
+        super(CrashDummy, self).__init__(*args, **kwargs)
+        self.error = error
+        self.error_message = error_message
+        return
+
+    def __call__(self, *args, **kwargs):
+        super(CrashDummy, self).__call__(*args, **kwargs)
+        raise self.error(self.error_message)
+        return
+    
+
+
+# python standard library
+import unittest
+
+# third-party
+try:
+    from mock import MagicMock
+except ImportError:
+    pass    
+
+
+class TestCrashDummy(unittest.TestCase):
+    def setUp(self):
+        self.dummy = CrashDummy(error=RuntimeError, other='other')
+        self.dummy._logger = MagicMock()
+        return
+
+    def test_crash(self):
+        self.assertRaises(RuntimeError, self.dummy)
 
 
 if output_documentation:

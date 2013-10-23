@@ -59,7 +59,7 @@ And this is a hand-drawn one which should be easier to read but may not guarante
 
    ArachneApe --|> BasePlugin
    ArachneApe o-- HelpPage
-   ArachneApe o-- TheHortator
+   ArachneApe o-- Composite
 
 .. currentmodule:: arachneape.plugins.arachneapeplugin   
 .. autosummary::
@@ -72,6 +72,8 @@ And this is a hand-drawn one which should be easier to read but may not guarante
    ArachneApe.arguments
    ArachneApe.sections
 
+.. warning:: The ConfigParser adds all options in the DEFAULT section to the other sections. Although declaring the same option in other sections will override the DEFAULT, there is no clean way to tell if it was updated
+   
 
 
 The Help

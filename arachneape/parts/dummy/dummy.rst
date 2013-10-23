@@ -1,21 +1,36 @@
 The Dummy
 =========
 
+
+The Dummy Class
+---------------
+
 .. currentmodule:: arachneape.components.dummy.dummy
 .. _dummy-class:
-The Dummy module holds dummy classes that does nothing. It is primarily used to test implementations of infrastructure components.
+The Dummy module holds dummy classes that do nothing. They is primarily used to test implementations of infrastructure components.
 
 .. uml::
 
    DummyClass -|> BaseClass
    DummyClass o- CallClass
 
+.. currentmodule:: arachneape.parts.dummy.dummy   
 .. autosummary::
    :toctree: api
 
    DummyClass
 
 The Dummy Class logs (at the `info`) level when it is created and when it is called.
+
+
+
+A Crash Dummy
+-------------
+
+This is a Dummy that raises an error when called.
+
+
+
 
 
 
