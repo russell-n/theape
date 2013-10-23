@@ -55,7 +55,7 @@ class UbootKommandant(BaseClass):
         plugin = self.quartermaster.get_plugin('ArachneApe')
 
         # The arachneape needs the config-filenames
-        ape = plugin().product
+        ape = plugin(configfiles=args.configfiles).product
         if args.trace:
             from trace import Trace
         

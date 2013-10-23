@@ -33,6 +33,6 @@ These are the documents created from the source files.
    The Command Line Interface <interface/index.rst>
    Plugins <plugins/index.rst>
    Common Code <commoncode/index.rst>
-   Components <parts/index.rst>
+   Parts <parts/index.rst>
 
 

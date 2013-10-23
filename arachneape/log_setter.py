@@ -49,7 +49,7 @@ def set_logger(args):
 
      - `args`: args with debug and silent attributes
     """
-    cleanup()
+    #cleanup()
     stderr = logging.StreamHandler()
     if args.debug:
         screen_format = SCREEN_FORMAT

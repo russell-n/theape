@@ -5,11 +5,14 @@ import os
 from collections import OrderedDict
 # this package
 from arachneape.interface.arguments import ArgumentClinic
+from arachneape.interface.configurationmap import ConfigurationMap
 from arachneape.components.component import Composite
-from arachneape.parts.dummy.dummy import DummyClass
+
 from base_plugin import BasePlugin
 from arachneape.commoncode.code_graphs import module_diagram, class_diagram
 from arachneape.commoncode.errors import ApeError, DontCatchError
+from arachneape.commoncode.constants import APESECTION
+from quartermaster import QuarterMaster
 
 
 in_pweave = __name__ == '__builtin__'
@@ -51,10 +54,28 @@ class ArachneApe(BasePlugin):
     """
     The default plugin
     """
-    def __init__(self, *args, **kwargs):
+    def __init__(self, configfiles=None, *args, **kwargs):
+        """
+        ArachneApe plugin
+
+        :param:
+
+         - `configfiles`: list of config-files to build product (Composite)
+        """
         super(ArachneApe, self).__init__(*args, **kwargs)
+        self.configfiles = configfiles
         self._arguments = None
+        self._quartermaster = None
         return
+
+    @property
+    def quartermaster(self):
+        """
+        A QuarterMaster to get Component Plugins
+        """
+        if self._quartermaster is None:
+            self._quartermaster = QuarterMaster()
+        return self._quartermaster
 
     @property
     def arguments(self):
@@ -108,63 +129,55 @@ class ArachneApe(BasePlugin):
     def product(self):
         """
         this is a product
+
+        :precondition: self.configfiles has been set 
+        :return: hortator built from self.configfiles
         """
-        class Leaf(DummyClass):
-            def __init__(self, *args, **kwargs):
-                super(Leaf, self).__init__(*args, **kwargs)
-
-        class BadLeaf(Leaf):
-            def __init__(self, *args, **kwargs):
-                super(BadLeaf, self).__init__(*args, **kwargs)
-                
-            def __call__(self):
-                raise ApeError('this is a component error')
-
-        # some component leaves
-        leaf_1 = Leaf(name='leaf_1')
-        leaf_2 = Leaf(name='leaf_2')            
-        leaf_3 = BadLeaf(name='leaf_3')
-
-        #  operator
-        operator = Composite(error=ApeError,
-                             error_message='Operation Crash',
-                             component_category='Operation')
-        operator_2 = Composite(error=ApeError,
-                               error_message='Operation Crash',
-                               component_category='Operation')
-
-
-        # first operation
-        operation_1 = Composite(error=DontCatchError,
-                                error_message='Component Crash',
-                                component_category='Component')
-        
-        operation_2 = Composite(error=DontCatchError,
-                                error_message='Component Crash',
-                                component_category='Component')
-
-        operation_3 = Composite(error=DontCatchError,
-                                error_message='Component Crash',
-                                component_category='Component')
-
-        operation_1.add(leaf_1)
-        operation_1.add(leaf_3)
-        operation_2.add(leaf_2)
-        
-        operator.add(operation_1)
-        operator.add(operation_2)
-
-        operation_3.add(leaf_3)
-        operation_3.add(leaf_1)
-        operator_2.add(operation_3)
-        # second 
-        exhort = Composite(error=Exception,
+        #create a hortator
+        hortator = Composite(error=Exception,
+                             identifier='Hortator',
                            error_message="Operator Crash",
                            component_category='Operator',
                            is_root=True)
-        exhort.add(operator)
-        exhort.add(operator_2)
-        return exhort
+
+        # traverse the config-files to get Operators and configuration maps
+        for config in self.configfiles:
+            operator = Composite(identifier="Operator",
+                                 error=ApeError,
+                                 error_message='Operation Crash',
+                                 component_category='Operation')
+            configuration = ConfigurationMap(config)
+            defaults = configuration.defaults
+            
+            # traverse the APE Section's options to get Operations
+            #options(apesection) is a list of config file lines
+            for operation_name in configuration.options(APESECTION):
+                # The DEFAULT section will polute the APESECTION namespace -check for it
+                if (operation_name in defaults and
+                    defaults[operation_name] ==
+                    configuration.get(APESECTION, operation_name)):
+                        # this won't work if they are coincidentally the same.
+                        continue
+                # get_list is a list of comma-separated strings in the operation line
+                operation = Composite(identifier='Operation',
+                                      error=DontCatchError,
+                                      error_message='{0} Crash'.format(operation_name),
+                                      component_category=operation_name)
+
+                #traverse this line to get plugins
+                for plugin_name in configuration.get_list(APESECTION, operation_name):                    
+                    # the quartermaster returns a class-definition, not an instance                    
+                    plugin_def = self.quartermaster.get_plugin(plugin_name)
+                    try:
+                        plugin = plugin_def(configuration).product
+                    except TypeError:
+                        self.logger.error('Could not find "{0}" plugin'.format(plugin_name))
+                        raise
+                    operation.add(plugin)
+                operator.add(operation)
+            # ** Add saving the configuration here
+            hortator.add(operator)
+        return hortator
 
     def fetch_config(self):
         """

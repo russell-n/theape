@@ -15,7 +15,7 @@ def try_except(method):
         try:
             return method(self, *args, **kwargs)
         except self.error as error:
-            red_error = "{red}{bold}{{error}}{reset}".format(red=RED,
+            red_error = "{red}{bold}{{name}}: {reset}{red}{{msg}}{reset}".format(red=RED,
                                                              bold=BOLD,
                                                              reset=RESET)
             crash_notice = "{bold}********** {msg} **********{reset}".format(red=RED,
@@ -31,11 +31,18 @@ def try_except(method):
             exc_type, exc_value, exc_tb = sys.exc_info()
             tb_info = traceback.extract_tb(exc_tb)
             filename, linenum, funcname, source = tb_info[-1]
-            
-            self.logger.error(red_error.format(error=error))
-            self.logger.error(red_error.format(error="Failed Line: {0}".format(source)))
-            self.logger.error(red_error.format(error="In Function: {0}".format(funcname)))
-            self.logger.error(red_error.format(error="In File: {0}".format(os.path.basename(filename))))
-            self.logger.error(red_error.format(error="At Line: {0}".format(linenum)))
+
+            error_message = red_error.format(name=error.__class__.__name__,
+                                              msg=error)
+
+            self.logger.error(error_message)
+            self.logger.error(red_error.format(name="Failed Line",
+                                               msg = source))
+            self.logger.error(red_error.format(name="In Function",
+                                               msg=funcname))
+            self.logger.error(red_error.format(name="In File",
+                                               msg=os.path.basename(filename)))
+            self.logger.error(red_error.format(name="At Line",
+                                               msg=linenum))
             self.logger.debug(traceback.format_exc())
     return wrapped
