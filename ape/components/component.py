@@ -49,6 +49,13 @@ class Component(BaseClass):
         """
         return
 
+    @abstractmethod
+    def clean_up(self):
+        """
+        abstractmethod: called for Keyboard Interrupts to allow file-closing
+        """
+        return
+
 
 if DOCUMENT_THIS:
     class_diagram_file = class_diagram(class_name="Component",
@@ -208,6 +215,18 @@ class Composite(Component):
 
         except AssertionError as error:
             raise ConfigurationError(str(error))
+        return
+
+    def clean_up(self, error):
+        """
+        calls the `clean_up` method on each component
+        """
+        for component in self.components:
+            try:
+                component.clean_up(error)
+            except AttributeError as error:
+                self.logger.debug.error(error)
+                self.logger.warning("`clean_up` not implemented in {0}".format(component))
         return
 
     def __str__(self):

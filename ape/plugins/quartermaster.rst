@@ -244,6 +244,7 @@ Oops. What happened there (the ``print`` statement should have created some outp
     Ape
     CrashTestDummy
     Dummy
+    StuckDummy
     
 
 

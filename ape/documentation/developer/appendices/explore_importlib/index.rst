@@ -4,7 +4,7 @@ Exploring Importlib
 .. toctree::
    :maxdepth: 1
 
-   Exploring Importlib <exploring_importlib.rst>
+   Exploring External Imports <exploring_external_imports.rst>
 
 .. toctree::
    :maxdepth: 1

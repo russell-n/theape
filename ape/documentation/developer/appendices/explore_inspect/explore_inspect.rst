@@ -88,7 +88,7 @@ The ``inspect.getfile`` method takes an object and tells you the file where it c
 ::
 
     ./dummy.py
-    <dummy.DummyClass object at 0x353da10> is not a module, class, method, function, traceback, frame, or code object
+    <dummy.DummyClass object at 0x2651a50> is not a module, class, method, function, traceback, frame, or code object
     
 
 
@@ -166,8 +166,7 @@ Discovering Modules
 
 One of the things that maybe can be done is import modules on the fly. Here I will look for:
 
-.. currentmodule:: arachneape.documentation.developer.appendices.explore_inspect.dummy
-
+.. currentmodule:: ape.documentation.developer.appendices.explore_inspect.dummy
 .. autosummary::
    :toctree: api
 
@@ -206,7 +205,17 @@ One of the things that maybe can be done is import modules on the fly. Here I wi
 
 ::
 
-    No module named arachneape.commoncode.index_builder
+    
+    .. toctree::
+       :maxdepth: 2
+    
+       Python Inspect <explore_inspect.rst>
+       The Dummy Module <dummy.rst>
+    
+    .. toctree::
+       :maxdepth: 2
+    
+    
     ConcretePlugin
     Help:
     

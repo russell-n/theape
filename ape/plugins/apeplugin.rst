@@ -3,6 +3,24 @@ The Ape Plugin
 .. _ape-plugin:
 This is the plugin that creates the Hortator to run :ref:`Composites <composite-class>`. It will be used when the `run` subcommand is called by the user.
 
+Contents:
+
+    * :ref:`Introduction <apeplugin-introduction>`
+
+    * :ref:`Errors <apeplugin-errors>`
+
+    * :ref:`Run Sub-command State Diagram <apeplugin-run-state-diagram>`
+
+    * :ref:`Module Dependency-Graph <apeplugin-module-dependency-graph>`
+
+    * :ref:`Class Implementation Diagram <apeplugin-class-diagram>`
+
+    * :ref:`Figuring Out the Help <apeplugin-help>`
+
+    * :ref:`External Plugins <apeplugin-external-plugins>`
+
+.. _apeplugin-introduction:    
+    
 Introduction
 ------------
 
@@ -30,6 +48,8 @@ The reason for differentiating the three Composites is to allow different levels
 
 When translated to objects, this configuration would create one `Operation` composite for each line and both lines would be composed in an `Operator` (and if there are multiple config-files with ``[APE]`` sections, an `Operator` will be created for each and all `Operators` will be composed in the `Hortator`). If one of the `Leafs` in `op_1` (`WatchRSSI` or `IperfSession`) crashes in a predictable way (raising an `ApeError` or the equivalent) then the `op_2` Leaf (CleanUp) should still be executed. The reason for only catching ape-defined exceptions is so that if something is really wrong with the code or system and another exception is raised (either a python-built-in exception or from an external third-party package), it will be assumed that the configuration is un-runnable and the Hortator will move on to the next `Operator`.
 
+.. _apeplugin-errors:
+
 The Errors
 ----------
 
@@ -48,6 +68,8 @@ Since the two errors are siblings, catching the ``ApeError`` won't catch the `Do
 
  * The `Hortator` runs its `Operators` and traps all errors (except KeyboardInterrupts), preventing one `Operator` from stopping the others
 
+.. _apeplugin-run-state-diagram:
+ 
 The Run State Diagram
 ---------------------
 
@@ -82,6 +104,8 @@ This means:
    
 
 
+.. _apeplugin-module-dependency-graph:
+
 Module Dependency Graph
 -----------------------
 
@@ -90,6 +114,8 @@ This is an auto-generated graph of this module.
 .. image:: classes_apeplugin.png
 
 
+
+.. _apeplugin-class-diagram:
 
 Class Diagram
 -------------
@@ -122,6 +148,8 @@ And this is a hand-drawn one which should be easier to read but may not guarante
 .. warning:: The ConfigParser adds all options in the DEFAULT section to the other sections. I am assuming that anything in the DEFAULT section that is the same as something in the APE section should be ignored.
    
 
+
+.. _apeplugin-help:
 
 The Help
 --------
@@ -222,9 +250,10 @@ After taking a break I decided to just add the sub-commands to the ArgumentClini
 
     ape run [-h] [<config-file list> [<config-file list> ...]]
     
-    ape fetch [-h] [names [names ...]]
+    ape fetch [-h] [--modules [MODULES [MODULES ...]]]
+                               [names [names ...]]
     
-    ape list [-h]
+    ape list [-h] [--modules [MODULES [MODULES ...]]]
     
     ape check [-h] [<config-file list> [<config-file list> ...]]
     
@@ -235,3 +264,39 @@ After taking a break I decided to just add the sub-commands to the ArgumentClini
 
 
 The regular-expression substitution is to get rid of the extra package name while still keeping the sub-command, otherwise it says ``ape.interface``.
+
+.. _apeplugin-external-plugins:
+
+Using External Plugins
+----------------------
+
+In order to allow the execution of plugins that are not a part of the ``ape``, I am allowing the declaration of 
+modules in the configuration file::
+
+    [MODULES]
+    package.module
+
+Or something similar. The ape will search modules named in the MODULES section for children of the `ape.plugins.base_plugin.BasePlugin` class and load and call them if found. The idea is that rather than having to mix up the ape and other packages, a `sandbox` package can be setup with plugins that act as the interface between the `ape` and the other package(s).
+
+Using the `FakePlugin` created for the :ref:`Exploring External Imports <exploring-external-imports>` section, the config file for the ape could look something like this::
+
+    [APE]
+    operation_1 = FakePlugin
+
+    [MODULES]
+    fakepackage.fakeplugin
+
+    [FAKEPLUGIN]
+    option = value
+
+The FakePlugin returns a `DummyClass <dummy-class>` as its `product` so the FAKEPLUGIN section doesn't really do anything.
+
+
+
+
+
+
+
+
+
+

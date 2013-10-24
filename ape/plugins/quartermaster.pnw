@@ -66,12 +66,17 @@ class QuarterMaster(BaseClass):
     """
     A plugin manager
     """
-    def __init__(self):
+    def __init__(self, external_modules=None):
         """
         The Plugin Manager
+
+        :param:
+
+         - `external_modules`: iterable collection of module-names
         """
         super(QuarterMaster, self).__init__()
         self._plugins = None
+        self.external_modules = None
         return
 
     @property
@@ -98,12 +103,12 @@ class QuarterMaster(BaseClass):
         A dictionary of plugins (this is persistent, unlike the generators, in case it gets re-used)
         """
         if self._plugins is None:
-            import ape.plugins.base_plugin
+            from ape.plugins.base_plugin import BasePlugin
             self._plugins = {}
             
             def is_plugin(o):
                 return (inspect.isclass(o)
-                        and o.__base__ is ape.plugins.base_plugin.BasePlugin)
+                        and o.__base__ is BasePlugin)
             
             for module in self.modules:
                 members = inspect.getmembers(module,
@@ -111,6 +116,15 @@ class QuarterMaster(BaseClass):
                 for member in members:
                     name, definition = member
                     self._plugins[name] = definition
+            # check if external modules were given
+            if self.external_modules is not None:
+                for candidate in self.external_modules:
+                    module = importlib.import_module(candidate)
+                    members = inspect.getmembers(module,
+                                             predicate=is_plugin)
+                    for member in members:
+                        name, definition = member
+                        self._plugins[name] = definition                    
         return self._plugins        
     
     def list_plugins(self):

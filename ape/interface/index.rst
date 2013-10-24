@@ -13,6 +13,7 @@ This sub-folder holds the modules that create the interface for the user.
    Testing the ArgumentClinic <test_arguments.rst>
    The Configuration Map <configurationmap.rst>
    The UbootKommandant <ubootkommandant.rst>
+   Testing the ConfigurationMap <test_configurationmap.rst>
    Testing The UbootKommandant <test_ubootkommandant.rst>
 
 .. toctree::

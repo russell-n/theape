@@ -2,19 +2,53 @@ The Configuration Map
 =====================
 
 .. _configuration-map:
+
 The `Configuration Map` maps a configuration-file-name to data. It extends the `ConfigParser` to have more data-types (and allow missing values) and to add sub-configuration-files (see the :ref:`ConfigParser Explorations <exploring-configparser-whole-shebang>` to get some idea of what I am getting at).
 
+Contents:
+
+    * :ref:`Background <configurationmap-background>`
+
+    * :ref:`UML Class Diagram <configurationmap-uml>`
+
+    * :ref:`ConfigurationError <configurationmap-configurationerror>`
+
+    * :ref:`The API <configurationmap-api>`
+
+    * :ref:`The ConfigurationMap Parser <configurationmap-parser>`
+
+    * :ref:`The ConfigParser <configurationmap-configparser>`
+
+    * :ref:`ConfigParser Exceptions <configurationmap-exceptions>`
+
+    * :ref:`Module Diagram <configurationmap-module-diagram>`
+
+    * :ref:`Class Implementation Diagram <configurationmay-class-implementation-diagram>`
+
+.. _configurationmap-background:    
+    
 Background
 ----------
 
-The `ConfigParser` module along with the `glob` module will be used to find and convert files to data. The ConfigParser has methods for the main singular data-types but I will also add collections and times. Additionally I will automatically add any sub-config files matching a `config_glob` found in the DEFAULT section of the main file given.
+The `ConfigParser` module along with the `glob` module will be used to find and convert files to data. The ConfigParser has methods for the main singular data-types but I will also add collections and times. Additionally I will automatically add any sub-config files matching a `config_glob` found in the DEFAULT section of the main file given. I am also setting the `allow_no_value` option to True so that you can use options without values::
+
+    [SECTION]
+    option = value
+    valueless_option
 
 
+
+.. _configurationmap-uml:
+
+UML Model
+---------
 
 .. uml::
 
    ConfigurationMap -|> BaseClass
    ConfigurationMap o- ConfigParser
+
+.. _configurationmap-configurationerror:   
 
 The ConfigurationError
 ----------------------
@@ -28,6 +62,11 @@ The `ConfigurationMap` will raise a ConfigurationError to try and trickle up mor
    ConfigurationError
 
 
+
+.. _configurationmap-api:
+
+The API
+-------
 
 .. currentmodule:: ape.interface.configurationmap
 .. autosummary::
@@ -50,12 +89,15 @@ The `ConfigurationMap` will raise a ConfigurationError to try and trickle up mor
    ConfigurationMap.defaults
 
 
+.. _configurationmap-parser:   
 
 The ConfigurationMap.parser
 ---------------------------
 
 This property is a SafeConfigParser instance. When it is created, the ConfigurationMap reads the filename passed in on instantiation and checks if the loaded configuration has a ``[DEFAULT] : config_glob`` option. If it does, it gets the `config_glob` value, traverses the expanded glob and loads all the files that match.
-   
+
+.. _configurationmap-configparser:
+
 ConfigParser
 ------------
 
@@ -78,7 +120,8 @@ These are the `ConfigParser` methods that will be used.
    SafeConfigParser.has_option
    SafeConfigParser.has_section
 
-
+.. _configurationmap-exceptions:
+   
 ConfigParser Exceptions
 -----------------------
 
@@ -92,10 +135,19 @@ These are the `ConfigParser` Exceptions that I will handle in the `Configuration
    ConfigParser.NoSectionError
    ConfigParser.NoOptionError
 
-
-
+.. _configurationmap-module-diagram:
+   
+Module Diagram
+--------------
 
 .. image:: classes_configurationmap.png
+
+
+
+.. _configurationmap-class-implementation-diagram:
+
+Class Implementation Diagram
+----------------------------
 
 .. image:: ConfigurationMap.png
 
