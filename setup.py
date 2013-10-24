@@ -9,7 +9,7 @@ except ImportError:
 
 from datetime import datetime
 
-setup(name='arachneape',
+setup(name='ape',
       version= datetime.today().strftime("%Y.%m.%d"),
       description="A program to run tests",
       author="russell",
@@ -21,10 +21,10 @@ setup(name='arachneape',
                           'sphinx', 'sphinxcontrib-plantuml'],
       packages = find_packages(),
       include_package_data = True,
-      package_data = {"arachne":["*.txt", "*.rst", "*.ini"]},
+      package_data = {"ape":["*.txt", "*.rst", "*.ini"]},
       entry_points = """
 	  [console_scripts]
-          arachneape=arachneape.main:main
+          ape=ape.main:main
 	  """
       )
 
