@@ -2,8 +2,15 @@
 # python standard library
 import logging
 
+# this package
+from ape.commoncode.strings import RED, BOLD, RESET
+
 
 DOT_JOIN = "{0}.{1}"
+RED_ERROR = "{red}{bold}{{error}}{reset}{red}{{message}}{reset}".format(red=RED,
+                                                            bold=BOLD,
+                                                            reset=RESET)
+
 
 
 class BaseClass(object):
@@ -23,6 +30,20 @@ class BaseClass(object):
             self._logger = logging.getLogger(DOT_JOIN.format(self.__module__,
                                   self.__class__.__name__))
         return self._logger
+
+    def log_error(self, error, message=''):
+        """
+        Logs the error in bold red
+
+        :param:
+
+         - `error`: error type (prefix in red and bold)
+         - `message`: descriptive message (red but not bold)
+        """
+        self.logger.error(RED_ERROR.format(error=error,
+                                           message=message))
+        return
+        
 # end BaseClass
 
 

@@ -24,7 +24,7 @@ def try_except(method):
 
 def log_error(error, logger, error_message):
     """
-    Logs the error
+    Logs the error.
     """
     red_error = "{red}{bold}{{name}}: {reset}{red}{{msg}}{reset}".format(red=RED,
                                                                          bold=BOLD,

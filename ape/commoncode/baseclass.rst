@@ -12,6 +12,8 @@ API
    :toctree: api
 
    BaseClass
+   BaseClass.logger
+   BaseClass.log_error
    BaseThreadClass
 
 

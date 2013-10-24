@@ -11,7 +11,7 @@ from ape.components.component import Composite
 from base_plugin import BasePlugin
 from ape.commoncode.code_graphs import module_diagram, class_diagram
 from ape.commoncode.errors import ApeError, DontCatchError, ConfigurationError
-from ape import APESECTION
+from ape import APESECTION, MODULES_SECTION
 from quartermaster import QuarterMaster
 
 
@@ -25,6 +25,11 @@ CONFIGURATION = '''[{0}]
 <section_name_2> = <comma-separated-list of plugins>
 ...
 <section_name_n> = <comma-separated-list of plugins>
+
+[MODULES]
+# If you are getting a plugin from a non-ape package put the module here
+# it should use the import's dot-notation. e.g. :
+# packagename.modulename
 
 #[DEFAULT]
 # if you add a configuration-file-glob to the default, all matching files will be added to the configuration
@@ -148,22 +153,30 @@ class Ape(BasePlugin):
 
         # traverse the config-files to get Operators and configuration maps
         for config in self.configfiles:
+            # this is being created each time because I am now allowing the addition
+            # of external packages, and I don't want namespace clashes
+            quartermaster = QuarterMaster()
             operator = Composite(identifier="Operator",
                                  error=ApeError,
                                  error_message='Operation Crash',
                                  component_category='Operation')
             configuration = ConfigurationMap(config)
             defaults = configuration.defaults
+
+            # check for external package declarations
+            if MODULES_SECTION in configuration.sections:
+                external_modules = [option for option in configuration.options(MODULES_SECTION)
+                                    if option not in defaults]
+                quartermaster.external_modules = external_modules                        
             
             # traverse the APE Section's options to get Operations
             #options(APESECTION) is a list of config-file options
-            for operation_name in configuration.options(APESECTION):
-                # The DEFAULT section pollutes
-                if (operation_name in defaults and
-                    defaults[operation_name] ==
-                    configuration.get(APESECTION, operation_name)):
-                        continue
-
+            names = (name for name in configuration.options(APESECTION) if not
+                     (name in defaults and
+                      defaults[name] ==
+                      configuration.get(APESECTION, name)))
+            
+            for operation_name in names:
                 operation = Composite(identifier='Operation',
                                       error=DontCatchError,
                                       error_message='{0} Crash'.format(operation_name),
@@ -174,7 +187,7 @@ class Ape(BasePlugin):
                 for plugin_name in configuration.get_list(APESECTION, operation_name):                    
                     # the quartermaster returns a class-definition, not an instance
                     # so we can pass in the configuration and build it to get the `product`
-                    plugin_def = self.quartermaster.get_plugin(plugin_name)
+                    plugin_def = quartermaster.get_plugin(plugin_name)
                     try:
                         plugin = plugin_def(configuration).product
                     except TypeError:

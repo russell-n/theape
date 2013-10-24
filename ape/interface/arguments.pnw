@@ -127,10 +127,16 @@ class ArgumentClinic(object):
                                   help="List of plugin-names (default=%(default)s)",
                                   default=["Ape"],
                                   nargs="*")
+        self.fetcher.add_argument('--modules',
+                                help='Non-ape modules',
+                                nargs='*')
         self.fetcher.set_defaults(function=self.subcommand.fetch)
 
         self.lister = self.subparsers.add_parser("list",
                                                  help="List available plugins.")
+        self.lister.add_argument('--modules',
+                                 help='Space-separated list of non-ape modules with plugins',
+                                 nargs='*')
         self.lister.set_defaults(function=self.subcommand.list_plugins)
 
         self.checker = self.subparsers.add_parser('check',
@@ -151,6 +157,9 @@ class ArgumentClinic(object):
         self.helper.add_argument('-w', '--width',
                                  help="Number of characters to wide to format the page.",
                                  type=int, default=70)
+        self.helper.add_argument('--modules',
+                                 help='Space-separated list of non-ape modules with plugins',
+                                 nargs='*')
 
         self.helper.set_defaults(function=self.subcommand.handle_help)
         return

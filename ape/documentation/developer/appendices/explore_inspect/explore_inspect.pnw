@@ -95,8 +95,7 @@ Discovering Modules
 
 One of the things that maybe can be done is import modules on the fly. Here I will look for:
 
-.. currentmodule:: arachneape.documentation.developer.appendices.explore_inspect.dummy
-
+.. currentmodule:: ape.documentation.developer.appendices.explore_inspect.dummy
 .. autosummary::
    :toctree: api
 

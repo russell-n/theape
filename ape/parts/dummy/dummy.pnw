@@ -19,6 +19,8 @@ from callclass import CallClass
 output_documentation = __name__ == '__builtin__'
 @
 
+.. _dummy-class::
+
 The Dummy Class
 ---------------
 

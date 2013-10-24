@@ -3,6 +3,24 @@ The Ape Plugin
 .. _ape-plugin:
 This is the plugin that creates the Hortator to run :ref:`Composites <composite-class>`. It will be used when the `run` subcommand is called by the user.
 
+Contents:
+
+    * :ref:`Introduction <apeplugin-introduction>`
+
+    * :ref:`Errors <apeplugin-errors>`
+
+    * :ref:`Run Sub-command State Diagram <apeplugin-run-state-diagram>`
+
+    * :ref:`Module Dependency-Graph <apeplugin-module-dependency-graph>`
+
+    * :ref:`Class Implementation Diagram <apeplugin-class-diagram>`
+
+    * :ref:`Figuring Out the Help <apeplugin-help>`
+
+    * :ref:`External Plugins <apeplugin-external-plugins>`
+
+.. _apeplugin-introduction:    
+    
 Introduction
 ------------
 
@@ -30,6 +48,8 @@ The reason for differentiating the three Composites is to allow different levels
 
 When translated to objects, this configuration would create one `Operation` composite for each line and both lines would be composed in an `Operator` (and if there are multiple config-files with ``[APE]`` sections, an `Operator` will be created for each and all `Operators` will be composed in the `Hortator`). If one of the `Leafs` in `op_1` (`WatchRSSI` or `IperfSession`) crashes in a predictable way (raising an `ApeError` or the equivalent) then the `op_2` Leaf (CleanUp) should still be executed. The reason for only catching ape-defined exceptions is so that if something is really wrong with the code or system and another exception is raised (either a python-built-in exception or from an external third-party package), it will be assumed that the configuration is un-runnable and the Hortator will move on to the next `Operator`.
 
+.. _apeplugin-errors:
+
 The Errors
 ----------
 
@@ -48,6 +68,8 @@ Since the two errors are siblings, catching the ``ApeError`` won't catch the `Do
 
  * The `Hortator` runs its `Operators` and traps all errors (except KeyboardInterrupts), preventing one `Operator` from stopping the others
 
+.. _apeplugin-run-state-diagram:
+ 
 The Run State Diagram
 ---------------------
 
@@ -93,7 +115,7 @@ from ape.components.component import Composite
 from base_plugin import BasePlugin
 from ape.commoncode.code_graphs import module_diagram, class_diagram
 from ape.commoncode.errors import ApeError, DontCatchError, ConfigurationError
-from ape import APESECTION
+from ape import APESECTION, MODULES_SECTION
 from quartermaster import QuarterMaster
 @
 <<name='check_pweave', echo=False>>=
@@ -108,6 +130,11 @@ CONFIGURATION = '''[{0}]
 ...
 <section_name_n> = <comma-separated-list of plugins>
 
+[MODULES]
+# If you are getting a plugin from a non-ape package put the module here
+# it should use the import's dot-notation. e.g. :
+# packagename.modulename
+
 #[DEFAULT]
 # if you add a configuration-file-glob to the default, all matching files will be added to the configuration
 # even though these need to be in the ini format I like to use a different file-extension
@@ -118,6 +145,8 @@ CONFIGURATION = '''[{0}]
 <<name='check_weave', echo=False>>=
 output_documentation = __name__ == '__builtin__'
 @
+
+.. _apeplugin-module-dependency-graph:
 
 Module Dependency Graph
 -----------------------
@@ -130,6 +159,8 @@ if in_pweave:
     module_diagram_file = module_diagram(module=this_file, project='apeplugin')
     print ".. image:: {0}".format(module_diagram_file)
 @
+
+.. _apeplugin-class-diagram:
 
 Class Diagram
 -------------
@@ -264,22 +295,30 @@ class Ape(BasePlugin):
 
         # traverse the config-files to get Operators and configuration maps
         for config in self.configfiles:
+            # this is being created each time because I am now allowing the addition
+            # of external packages, and I don't want namespace clashes
+            quartermaster = QuarterMaster()
             operator = Composite(identifier="Operator",
                                  error=ApeError,
                                  error_message='Operation Crash',
                                  component_category='Operation')
             configuration = ConfigurationMap(config)
             defaults = configuration.defaults
+
+            # check for external package declarations
+            if MODULES_SECTION in configuration.sections:
+                external_modules = [option for option in configuration.options(MODULES_SECTION)
+                                    if option not in defaults]
+                quartermaster.external_modules = external_modules                        
             
             # traverse the APE Section's options to get Operations
             #options(APESECTION) is a list of config-file options
-            for operation_name in configuration.options(APESECTION):
-                # The DEFAULT section pollutes
-                if (operation_name in defaults and
-                    defaults[operation_name] ==
-                    configuration.get(APESECTION, operation_name)):
-                        continue
-
+            names = (name for name in configuration.options(APESECTION) if not
+                     (name in defaults and
+                      defaults[name] ==
+                      configuration.get(APESECTION, name)))
+            
+            for operation_name in names:
                 operation = Composite(identifier='Operation',
                                       error=DontCatchError,
                                       error_message='{0} Crash'.format(operation_name),
@@ -290,7 +329,7 @@ class Ape(BasePlugin):
                 for plugin_name in configuration.get_list(APESECTION, operation_name):                    
                     # the quartermaster returns a class-definition, not an instance
                     # so we can pass in the configuration and build it to get the `product`
-                    plugin_def = self.quartermaster.get_plugin(plugin_name)
+                    plugin_def = quartermaster.get_plugin(plugin_name)
                     try:
                         plugin = plugin_def(configuration).product
                     except TypeError:
@@ -308,6 +347,8 @@ class Ape(BasePlugin):
         print CONFIGURATION
 # end class Ape        
 @
+
+.. _apeplugin-help:
 
 The Help
 --------
@@ -363,3 +404,39 @@ if output_documentation:
 @
 
 The regular-expression substitution is to get rid of the extra package name while still keeping the sub-command, otherwise it says ``ape.interface``.
+
+.. _apeplugin-external-plugins:
+
+Using External Plugins
+----------------------
+
+In order to allow the execution of plugins that are not a part of the ``ape``, I am allowing the declaration of 
+modules in the configuration file::
+
+    [MODULES]
+    package.module
+
+Or something similar. The ape will search modules named in the MODULES section for children of the `ape.plugins.base_plugin.BasePlugin` class and load and call them if found. The idea is that rather than having to mix up the ape and other packages, a `sandbox` package can be setup with plugins that act as the interface between the `ape` and the other package(s).
+
+Using the `FakePlugin` created for the :ref:`Exploring External Imports <exploring-external-imports>` section, the config file for the ape could look something like this::
+
+    [APE]
+    operation_1 = FakePlugin
+
+    [MODULES]
+    fakepackage.fakeplugin
+
+    [FAKEPLUGIN]
+    option = value
+
+The FakePlugin returns a `DummyClass <dummy-class>` as its `product` so the FAKEPLUGIN section doesn't really do anything.
+
+
+
+
+
+
+
+
+
+
