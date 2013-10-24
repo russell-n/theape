@@ -1,7 +1,7 @@
 # Makefile for Sphinx documentation
 #
-THIS_NAME = arachneape
-RSYNC_NAME = arachne_ape
+THIS_NAME = ape
+RSYNC_NAME = ape
 RSYNC_CATEGORY = hortators
 # You can set these variables from the command line.
 SPHINXOPTS    =

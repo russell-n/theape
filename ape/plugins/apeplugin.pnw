@@ -1,0 +1,365 @@
+The Ape Plugin
+==============
+.. _ape-plugin:
+This is the plugin that creates the Hortator to run :ref:`Composites <composite-class>`. It will be used when the `run` subcommand is called by the user.
+
+Introduction
+------------
+
+Rather than implementing separate classes for the different levels of Composites used in executing the `run` sub-command of the APE, a single composite is defined which accepts error and message specifications (and composes :ref:`Components <component-class>`) to define the particular instance of the Composite.
+
+.. uml::
+
+   Component --|> BaseClass
+   Composite --|> Component
+   Leaf --|> Component
+   Hortator --|> Composite
+   Operator --|> Composite
+   Operation --|> Composite
+   Hortator "1" o- "1..*" Operator
+   Operator "1" o- "1..*" Operation
+   Operation "1" o- "1..*" Leaf
+
+The `Hortator`, `Operator` and `Operation` aren't functionally different but they catch different levels of exceptions so that there can be a certain level of self-recovery and error handling. Each execution of the `ape` will have one `Hortator` composed of `Operators` (one `Operator` per configuration file with an `APE` section). Each line in the APE will correspond to an `Operation` composed of `Leafs` (one `Leaf` per item on the comma-separated line). Each Leaf is a plugin's product. Thus when a plugin is created, the product should inherit from the `Component` class in order to make sure it has the same interface.
+
+The reason for differentiating the three Composites is to allow different levels of error handling.  For instance, differentiating `Operation` vs  `Operator`  allows the user to decide on a set of plugins that will be called even if the first set crashes. e.g.::
+
+    [APE]
+    op_1 = WatchRSSI,IperfSession
+    op_2 = CleanUp
+
+When translated to objects, this configuration would create one `Operation` composite for each line and both lines would be composed in an `Operator` (and if there are multiple config-files with ``[APE]`` sections, an `Operator` will be created for each and all `Operators` will be composed in the `Hortator`). If one of the `Leafs` in `op_1` (`WatchRSSI` or `IperfSession`) crashes in a predictable way (raising an `ApeError` or the equivalent) then the `op_2` Leaf (CleanUp) should still be executed. The reason for only catching ape-defined exceptions is so that if something is really wrong with the code or system and another exception is raised (either a python-built-in exception or from an external third-party package), it will be assumed that the configuration is un-runnable and the Hortator will move on to the next `Operator`.
+
+The Errors
+----------
+
+.. uml::
+
+   ApeError --|> Exception
+   DontCatchError --|> Exception
+
+Since the two errors are siblings, catching the ``ApeError`` won't catch the `DontCatchError`.
+
+.. superfluous '   
+
+ * The `Operation` composite runs its `Leafs` and lets the errors propagate (so any errors will stop it)
+
+ * The `Operator` runs its `Operations` and traps `ApeErrors` so that it can try all its `Operations`, allowing any clean-up `Leafs` to be run
+
+ * The `Hortator` runs its `Operators` and traps all errors (except KeyboardInterrupts), preventing one `Operator` from stopping the others
+
+The Run State Diagram
+---------------------
+
+The assumed flow for the ``run`` sub-command is something like this:
+
+.. digraph:: run_state_diagram
+
+   rankdir = LR
+   pa [label="Parse Args"]
+   bc [label="Build Map"]
+   bo [label="Build Composites"]
+   run [label="Run", shape=diamond]
+   data [label="Data", shape=rect]
+   start [label="Start", shape=diamond]
+   configurations [label="Configurations", shape=rect]
+   
+   start -> pa [label="args"]
+   pa -> bc [label="name"]
+   configurations -> bc [label="config"]
+   bc -> bo [label="map"]
+   bo -> run [label="Hortator"]
+   run -> data [label="datum"]
+
+
+This means:
+   
+ * The `Parse Args` state has been reached before this plugin is created.
+
+ * The `Build Map` uses a `ConfigurationMap <configuration-map>`
+
+ * the `Build Composites` happens in creating the ``product`` 
+   
+<<name='imports', echo=False>>=
+# python standard library
+import re
+import os
+from collections import OrderedDict
+# this package
+from ape.interface.arguments import ArgumentClinic
+from ape.interface.configurationmap import ConfigurationMap
+from ape.components.component import Composite
+
+from base_plugin import BasePlugin
+from ape.commoncode.code_graphs import module_diagram, class_diagram
+from ape.commoncode.errors import ApeError, DontCatchError, ConfigurationError
+from ape import APESECTION
+from quartermaster import QuarterMaster
+@
+<<name='check_pweave', echo=False>>=
+in_pweave = __name__ == '__builtin__'
+@
+<<name='constants', echo=False>>=
+CONFIGURATION = '''[{0}]
+# the section names are just identifiers
+# they will be executed in the order given.
+<section_name_1> = <comma-separated-list of plugins>
+<section_name_2> = <comma-separated-list of plugins>
+...
+<section_name_n> = <comma-separated-list of plugins>
+
+#[DEFAULT]
+# if you add a configuration-file-glob to the default, all matching files will be added to the configuration
+# even though these need to be in the ini format I like to use a different file-extension
+# so they won't accidentally get picked up if you use a glob to point to the main config files
+#config_glob = settings*.config
+'''.format(APESECTION)
+@
+<<name='check_weave', echo=False>>=
+output_documentation = __name__ == '__builtin__'
+@
+
+Module Dependency Graph
+-----------------------
+
+This is an auto-generated graph of this module.
+
+<<name='module_graph', echo=False, results='sphinx'>>=
+if in_pweave:
+    this_file = os.path.join(os.getcwd(), 'apeplugin.py')
+    module_diagram_file = module_diagram(module=this_file, project='apeplugin')
+    print ".. image:: {0}".format(module_diagram_file)
+@
+
+Class Diagram
+-------------
+
+This is an auto-generated class diagram for the Ape.
+
+<<name='class_diagram', echo=False, results='sphinx'>>=
+if in_pweave:
+    class_diagram_file = class_diagram(class_name="Ape",
+                                       filter='OTHER',
+                                       module=this_file)
+    print ".. image:: {0}".format(class_diagram_file)
+@
+
+And this is a hand-drawn one which should be easier to read but may not guaranteed to be up-to-date.
+
+.. uml::
+
+   Ape --|> BasePlugin
+   Ape o-- HelpPage
+   Ape o-- Composite
+
+.. currentmodule:: ape.plugins.apeplugin   
+.. autosummary::
+   :toctree: api
+
+   Ape
+   Ape.help
+   Ape.product
+   Ape.fetch_config
+   Ape.arguments
+   Ape.sections
+
+.. warning:: The ConfigParser adds all options in the DEFAULT section to the other sections. I am assuming that anything in the DEFAULT section that is the same as something in the APE section should be ignored.
+   
+<<name='Ape', echo=False>>=
+EXAMPLES = '''
+ape run ape.ini
+ape help
+ape fetch
+ape list'''
+
+class Ape(BasePlugin):
+    """
+    The default plugin (provides the front-end for the APE)
+    """
+    def __init__(self, configfiles=None, *args, **kwargs):
+        """
+        Ape plugin Constructor
+
+        :param:
+
+         - `configfiles`: list of config-files to build product (Hortator Composite)
+        """
+        super(Ape, self).__init__(*args, **kwargs)
+        self.configfiles = configfiles
+        self._arguments = None
+        self._quartermaster = None
+        return
+
+    @property
+    def quartermaster(self):
+        """
+        A QuarterMaster to get Component Plugins
+        """
+        if self._quartermaster is None:
+            self._quartermaster = QuarterMaster()
+        return self._quartermaster
+
+    @property
+    def arguments(self):
+        """
+        The ArgumentClinic (used to set up the help-string)
+        """
+        if self._arguments is None:
+            self._arguments = ArgumentClinic()
+            self._arguments.add_arguments()
+            self._arguments.add_subparsers()
+        return self._arguments
+
+    @property
+    def sections(self):
+        """
+        An ordered dictionary for the HelpPage
+        """
+        if self._sections is None:
+            bold = '{bold}'
+            reset = '{reset}'
+            
+            name = __package__.split('.')[0]
+            bold_name = bold + name + reset
+            program = name + '[.\w]*'
+            expression = re.compile(program)
+            
+            arg_string = expression.sub(name,
+                                        self.arguments.parser.format_usage().replace('usage: ', ''))
+            
+            # the sub-parsers are listed in curly braces, breaking the text-formatting
+            arg_string = arg_string.replace('{', '{{')
+            arg_string = arg_string.replace('}', '}}')
+            arg_string = arg_string.replace(name, bold_name)
+            subs = (self.arguments.runner, self.arguments.fetcher, self.arguments.lister,
+                    self.arguments.checker, self.arguments.helper)
+            for sub in subs:
+                arg_string +=  expression.sub(bold_name,
+                                              sub.format_usage().replace('usage: ', ''))
+            
+            self._sections = OrderedDict()
+            self._sections['Name'] = '{blue}' + name + reset + ' -- a plugin-based code runner'
+            self._sections['Synopsis'] = arg_string
+            self._sections['Description'] = bold_name + ' is a code-runner. When it is run it looks for a configuration file or list of configuration files. Within each file it looks for an [{0}] section. Each entry in that section is interpreted to be a list of plugins to execute in top-down, left-right ordering.'.format(APESECTION)
+            self._sections["Configuration"] = CONFIGURATION
+            self._sections['Examples'] = 'ape run *.ini\nape help\nape fetch\nape list\nape check *ini'
+            self._sections['Errors'] = '{bold}Oops, I crapped my pants:{reset} unexpected error (probably indicates implementation error)'
+            self._sections['Files'] = __file__
+        return self._sections
+    
+    @property
+    def product(self):
+        """
+        This is the Hortator Composite product
+
+        :precondition: self.configfiles has been set 
+        :return: hortator built from self.configfiles
+        """
+        #create a hortator
+        hortator = Composite(error=Exception,
+                             identifier='Hortator',
+                             error_message="Operator Crash",
+                             component_category='Operator',
+                             is_root=True)
+
+        # traverse the config-files to get Operators and configuration maps
+        for config in self.configfiles:
+            operator = Composite(identifier="Operator",
+                                 error=ApeError,
+                                 error_message='Operation Crash',
+                                 component_category='Operation')
+            configuration = ConfigurationMap(config)
+            defaults = configuration.defaults
+            
+            # traverse the APE Section's options to get Operations
+            #options(APESECTION) is a list of config-file options
+            for operation_name in configuration.options(APESECTION):
+                # The DEFAULT section pollutes
+                if (operation_name in defaults and
+                    defaults[operation_name] ==
+                    configuration.get(APESECTION, operation_name)):
+                        continue
+
+                operation = Composite(identifier='Operation',
+                                      error=DontCatchError,
+                                      error_message='{0} Crash'.format(operation_name),
+                                      component_category=operation_name)
+                                
+                #traverse this line to get plugins
+                # get_list is a list of comma-separated strings in the operation line
+                for plugin_name in configuration.get_list(APESECTION, operation_name):                    
+                    # the quartermaster returns a class-definition, not an instance
+                    # so we can pass in the configuration and build it to get the `product`
+                    plugin_def = self.quartermaster.get_plugin(plugin_name)
+                    try:
+                        plugin = plugin_def(configuration).product
+                    except TypeError:
+                        raise ConfigurationError('Could not find "{0}" plugin'.format(plugin_name))
+                    operation.add(plugin)
+                operator.add(operation)
+            # ** Add saving the configuration here
+            hortator.add(operator)
+        return hortator
+
+    def fetch_config(self):
+        """
+        Prints example configuration to stdout
+        """
+        print CONFIGURATION
+# end class Ape        
+@
+
+The Help
+--------
+
+To print the help-message the Ape will use the help page, but since it is the default plugin it needs to construct things like the arguments and such. To keep it dynamic I am going to try and use the ArgumentParser instance. Here are the experiments.
+
+.. currentmodule:: argparse
+.. autosummary::
+   
+   argparse.ArgumentParser.format_usage
+
+<<name='format_usage', wrap=False>>=
+if output_documentation:
+    arguments = ArgumentClinic()
+    arguments.add_arguments()
+    arguments.add_subparsers()
+    parser = arguments.parser
+    print parser.format_usage()
+@
+
+Well, that might be kind of useful, although the program name is wrong and it does not show the sub-parser arguments.
+
+<<name='format_help', wrap=False>>=
+if output_documentation:
+    parser.prog = 'ape'
+    print parser.format_help()
+@
+
+Not really... most of the arguments actually go to the sub-commands but they are not shown.
+
+After stepping through the code it looks like this is going to be more effort than it is worth, the sub-parsers are themselves instances of ArgumentParser and that simple help message being printed is going through quite a bit of code to get built up. I think I will just write it out for now.
+
+Another Way
+~~~~~~~~~~~
+
+After taking a break I decided to just add the sub-commands to the ArgumentClinic as properties, that way I can try to query them directly.
+
+.. currentmodule:: ape.interface.arguments
+.. autosummary::
+   :toctree: api
+
+   ArgumentClinic
+
+<<name='sub_parser_queries', wrap=False>>=
+if output_documentation:
+    subs = (arguments.runner, arguments.fetcher,
+            arguments.lister, arguments.checker, arguments.helper)
+
+    program = 'ape[.\w]*'
+    expression = re.compile(program)
+    for sub in subs:
+        print expression.sub('ape', sub.format_usage().replace('usage: ', ''))
+@
+
+The regular-expression substitution is to get rid of the extra package name while still keeping the sub-command, otherwise it says ``ape.interface``.
