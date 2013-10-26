@@ -86,7 +86,7 @@ The `BrokenPlugin` defines the attributes but doesn't return any objects.
             """
             :return: None
             """
-            return []
+            return {'something':1}
         
     
 
