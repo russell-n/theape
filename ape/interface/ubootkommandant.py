@@ -2,10 +2,13 @@
 # python standard library
 from ConfigParser import NoSectionError
 # third-party
-from pycallgraph import PyCallGraph
-from pycallgraph import GlobbingFilter
-from pycallgraph import Config
-from pycallgraph.output import GraphvizOutput
+try:
+    from pycallgraph import PyCallGraph
+    from pycallgraph import GlobbingFilter
+    from pycallgraph import Config
+    from pycallgraph.output import GraphvizOutput
+except ImportError as error:
+    pass    
 
 # this package
 from ape.commoncode.baseclass import BaseClass
@@ -140,7 +143,7 @@ class UbootKommandant(BaseClass):
             plugin = self.quartermaster.get_plugin(name)
             # the quartermaster returns definitions, not instances
             try:
-                plugin().fetch_config()
+                config = plugin().fetch_config()
             except TypeError as error:
                 self.logger.debug(error)
                 self.log_error(error="Unknown Plugin: ",
@@ -181,6 +184,9 @@ class UbootKommandant(BaseClass):
             print "'{0}' is not a known plugin.\n".format(args.name)
             print "These are the known (built-in) plugins:\n"
             self.quartermaster.list_plugins()
+        except AttributeError as error:
+            self.log_error("{0} has implemented its help incorrectly -- '{1}'".format(args.name,
+                                                                                      error))            
         return
 
     def clean_up(self, error):

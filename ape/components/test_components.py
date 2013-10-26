@@ -24,6 +24,9 @@ class BetterComponent(Component):
     def check_rep(self):
         return
 
+    def clean_up(self):
+        return
+
 class TestComponent(unittest.TestCase):
     def setUp(self):
         self.composite = Composite()

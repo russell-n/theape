@@ -55,3 +55,38 @@ This is a fake-plugin to see how importing from external packages works.
         
     
 
+
+
+The `BrokenPlugin` defines the attributes but doesn't return any objects.
+
+.. superfluous '
+
+::
+
+    class BrokenPlugin(BasePlugin):
+        """
+        A broken (fake) plugin
+        """
+        def __init__(self, *args, **kwargs):
+            super(BrokenPlugin, self).__init__(*args, **kwargs)
+            return
+    
+        def fetch_config(self):
+            return
+    
+        @property
+        def product(self):
+            """
+            :return: None
+            """
+            return
+    
+        @property
+        def sections(self):
+            """
+            :return: None
+            """
+            return []
+        
+    
+

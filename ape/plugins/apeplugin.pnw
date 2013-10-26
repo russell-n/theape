@@ -332,6 +332,8 @@ class Ape(BasePlugin):
                     plugin_def = quartermaster.get_plugin(plugin_name)
                     try:
                         plugin = plugin_def(configuration).product
+                        if plugin is None:
+                            raise ApeError("{0} is missing a `product` (returned None)".format(plugin_name))
                     except TypeError:
                         raise ConfigurationError('Could not find "{0}" plugin'.format(plugin_name))
                     operation.add(plugin)
