@@ -66,7 +66,7 @@ class BrokenPlugin(BasePlugin):
         """
         :return: None
         """
-        return []
+        return {'something':1}
     
 
 
