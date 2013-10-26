@@ -91,7 +91,7 @@ class TestArgumentClinic(unittest.TestCase):
                              run_mock)
         argv = 'command run'.split()
         self.subparser_check(argv, 'configfiles',
-                             ['ape*.ini'],
+                             ['ape.ini'],
                              run_mock)
         
         return
@@ -123,7 +123,7 @@ class TestArgumentClinic(unittest.TestCase):
         argv = 'command check'.split()
         self.subparser_check(argv,
                              'configfiles',
-                             ['ape*.ini'],
+                             ['ape.ini'],
                              check_mock)
 
         return

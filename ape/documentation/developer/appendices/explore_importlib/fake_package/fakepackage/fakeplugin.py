@@ -43,5 +43,32 @@ class FakePlugin(BasePlugin):
     
 
 
+class BrokenPlugin(BasePlugin):
+    """
+    A broken (fake) plugin
+    """
+    def __init__(self, *args, **kwargs):
+        super(BrokenPlugin, self).__init__(*args, **kwargs)
+        return
+
+    def fetch_config(self):
+        return
+
+    @property
+    def product(self):
+        """
+        :return: None
+        """
+        return
+
+    @property
+    def sections(self):
+        """
+        :return: None
+        """
+        return []
+    
+
+
 if __name__ == '__main__':
     fp = FakePlugin()

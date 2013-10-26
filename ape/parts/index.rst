@@ -1,6 +1,8 @@
 Parts
 =====
 
+.. _ape-parts:
+
 
 This package contains parts that can be re-used by other code. Since the :ref:`plugins <plugins-folder>` are meant to be for users, the components need to be bundled into plugins if the user is meant to know about them.
 
@@ -28,7 +30,7 @@ These are the documents created from the source files.
    :maxdepth: 1
 
    Dummy Components <dummy/index.rst>
-   Countdown <countdown/index.rst>
    Help Page <helppage/index.rst>
+   Countdown <countdown/index.rst>
 
 

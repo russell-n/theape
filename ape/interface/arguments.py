@@ -94,7 +94,7 @@ class ArgumentClinic(object):
         self.runner.add_argument("configfiles",
                                  help="A list of config file name (default='%(default)s').",
                                  metavar="<config-file list>",
-                                 default=["ape*.ini"],
+                                 default=["ape.ini"],
                                  nargs="*")
         self.runner.set_defaults(function=self.subcommand.run)
 
@@ -121,7 +121,7 @@ class ArgumentClinic(object):
         self.checker.add_argument("configfiles",
                                   help="List of config files (e.g. *.ini - default='%(default)s').",
                                   metavar="<config-file list>",
-                                  default=["ape*.ini"],
+                                  default=["ape.ini"],
                                   nargs="*")
 
         self.checker.set_defaults(function=self.subcommand.check)

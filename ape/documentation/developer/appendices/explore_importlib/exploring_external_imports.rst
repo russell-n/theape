@@ -51,6 +51,7 @@ Since there's no ``__init__.py`` in the `fake_package` folder, it should not be 
 
 ::
 
+    BrokenPlugin
     FakePlugin
     
     [FAKEPLUGIN]
