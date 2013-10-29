@@ -9,7 +9,7 @@ Contents:
     * :ref:`Extras <file-storage-extras>`
     * :ref:`Sub-Folders <file-storage-sub-folders>`
     * :ref:`Redundant Files <file-storage-redundant-files>`
-    * :ref:`FileStorage API <file-storage-apy>`
+    * :ref:`FileStorage API <file-storage-api>`
 
 
 
@@ -67,15 +67,16 @@ In order to help tame the explosion of files that can often happen from the repe
     example_path = 'aoeu/snth'
     example_file = 'umma.gumma'
     
-    # this will be run multiple times, remove the example so it gets started fresh
-    if os.path.isdir(example_path):
-        shutil.rmtree(example_path)
     
     # this is the part that should be part of the path property
     if not os.path.isdir(example_path):
         os.makedirs(example_path)
     for name in os.listdir('aoeu'):
         print name
+    
+    # this will be run multiple times, remove the example so it gets started fresh
+    if os.path.isdir(example_path):
+        shutil.rmtree(example_path)    
     
 
 ::
@@ -97,6 +98,74 @@ It often happens that data-collecting code will be run multiple times. The two w
 
 The first scheme is more easily generalizable, while the second adds more useful information. It will therefore be assumed that both will be implemented and the increment scheme will only come into effect in the cases where the two files of the same name have been requested in too short a time-interval for the timestamps to differentiate them.
 
+Adding Timestamps
+~~~~~~~~~~~~~~~~~
+
+The timestamp will be added using string formatting -- it will look for a `timestamp` keyword:
+
+::
+
+    name = "test_{timestamp}.csv"
+    print name.format(timestamp=datetime.datetime.now().strftime(FILE_TIMESTAMP))
+    
+
+::
+
+    test_2013_10_28_06:01:29_PM.csv
+    
+
+
+
+Appending Increments
+~~~~~~~~~~~~~~~~~~~~
+
+In the event that no `timestamp` formatting was added or the files were created less than a second apart, the `FileStorage` will add a count to the end of the base file-name prefix.
+
+Side Effects
+~~~~~~~~~~~~
+
+Because the name is being made to never match an existing file, the FileStorage can only write files, not read them. A separate file-reader needs to be built if that's something needed.
+
+.. superfluous '
+
+::
+
+    # what's here?
+    for name in (name for name in os.listdir(os.getcwd()) if name.endswith('txt')):
+        print name
+    
+    name = "innagaddadavida.txt"
+    path = os.getcwd()
+    full_name = os.path.join(path, name)
+    if os.path.exists(full_name):
+        base, extension = os.path.splitext(name)
+    
+        digit = r'\d'
+        one_or_more = '+'
+        underscore = '_'
+    
+        suffix = underscore + digit + one_or_more
+        expression = r"{b}{s}{e}".format(b=base,
+                                          s=suffix,
+                                            e=extension)
+        regex = re.compile(expression)
+        count = sum(1 for name in os.listdir(path) if regex.match(name))
+        count = str(count + 1).zfill(4)
+        name = "{b}_{c}{e}".format(b=base, c=count, e=extension)
+    
+    print name    
+        
+    
+
+::
+
+    innagaddadavida.txt
+    innagaddadavida_0001.txt
+    innagaddadavida_0002.txt
+    
+
+
+
 .. _file-storage-api:
 
 FileStorage API
@@ -106,5 +175,12 @@ FileStorage API
 .. autosummary::
    :toctree: api
 
-   FileStorage   
+   FileStorage
+   FileStorage.path
+   FileStorage.safe_name
+   FileStorage.open
+   FileStorage.close
+   FileStorage.write
+   FileStorage.writeline
+   FileStorage.writelines
 
