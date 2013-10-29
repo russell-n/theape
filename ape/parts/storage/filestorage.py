@@ -2,17 +2,25 @@
 # python standard library
 import os
 import shutil
+import datetime
+import re
+import copy
 
 # this package
 from ape import BaseClass
+from ape import FILE_TIMESTAMP
+from ape import ApeError
+
+
+DIGIT = r'\d'
+ONE_OR_MORE = '+'
+UNDERSCORE = '_'
+FILENAME_SUFFIX = UNDERSCORE + DIGIT + ONE_OR_MORE
 
 
 example_path = 'aoeu/snth'
 example_file = 'umma.gumma'
 
-# this will be run multiple times, remove the example so it gets started fresh
-if os.path.isdir(example_path):
-    shutil.rmtree(example_path)
 
 # this is the part that should be part of the path property
 if not os.path.isdir(example_path):
@@ -20,29 +28,70 @@ if not os.path.isdir(example_path):
 for name in os.listdir('aoeu'):
     print name
 
+# this will be run multiple times, remove the example so it gets started fresh
+if os.path.isdir(example_path):
+    shutil.rmtree(example_path)    
+
+
+name = "test_{timestamp}.csv"
+print name.format(timestamp=datetime.datetime.now().strftime(FILE_TIMESTAMP))
+
+
+# what's here?
+for name in (name for name in os.listdir(os.getcwd()) if name.endswith('txt')):
+    print name
+
+name = "innagaddadavida.txt"
+path = os.getcwd()
+full_name = os.path.join(path, name)
+if os.path.exists(full_name):
+    base, extension = os.path.splitext(name)
+
+    digit = r'\d'
+    one_or_more = '+'
+    underscore = '_'
+
+    suffix = underscore + digit + one_or_more
+    expression = r"{b}{s}{e}".format(b=base,
+                                      s=suffix,
+                                        e=extension)
+    regex = re.compile(expression)
+    count = sum(1 for name in os.listdir(path) if regex.match(name))
+    count = str(count + 1).zfill(4)
+    name = "{b}_{c}{e}".format(b=base, c=count, e=extension)
+
+print name    
+    
+
 
 class FileStorage(BaseClass):
     """
     A class to store data to a file
     """
-    def __init__(self, path=''):
+    def __init__(self, path=None, timestamp=FILE_TIMESTAMP):
         """
         FileStorage constructor
 
         :param:
 
-         - `path`: path to prepend to all files
+         - `path`: path to prepend to all files (default is current directory)
+         - `timestamp`: strftime format to timestamp file-names
         """
         super(FileStorage, self).__init__()
         self._path = None
         self.path = path
+        self.timestamp = timestamp
+        self.file = None
+        self.closed = True
         return
 
     @property
     def path(self):
         """
-        The path to prepend to files
+        The path to prepend to files (cwd if not set by client)
         """
+        if self._path is None:
+            self._path = os.getcwd()
         return self._path
 
     @path.setter
@@ -54,3 +103,93 @@ class FileStorage(BaseClass):
             os.makedirs(path)
         self._path = path
         return
+
+    def safe_name(self, name):
+        """
+        Adds a timestamp if formatted for it, increments if already exists
+
+        :param:
+
+         - `name`: name for file (without path added)
+
+        :return: unique name with full path
+        """
+        name = name.format(timestamp=datetime.datetime.now().strftime(self.timestamp))
+        full_name = os.path.join(self.path, name)
+        if os.path.exists(full_name):
+            base, extension = os.path.splitext(name)
+
+
+            expression = r"{b}{s}{e}".format(b=base,
+                                             s=FILENAME_SUFFIX,
+                                             e=extension)
+            regex = re.compile(expression)
+            count = sum(1 for name in os.listdir(self.path) if regex.match(name))
+            count = str(count + 1).zfill(4)
+            name = "{b}_{c}{e}".format(b=base, c=count, e=extension)
+            full_name = os.path.join(self.path, name)
+        return full_name
+
+    def open(self, name):
+        """
+        Opens a file for writing
+
+        :param:
+
+         - `name`: a basename (no path) for the file
+
+        :return: copy of self with file as open file and closed set to False
+        """
+        name = self.safe_name(name)
+        self.logger.debug("Opening {0} for writing".format(name))
+        opened = copy.copy(self)
+        opened.name = name
+        opened.file = open(name, 'w')
+        opened.closed = False
+        return opened
+
+    def close(self):
+        """
+        Closes self.file if it exists, sets self.closed to True
+        """
+        if self.file is not None:
+            self.file.close()
+            self.closed = True
+        return
+
+    def write(self, text):
+        """
+        Writes the text to the file        
+        """
+        try:
+            self.file.write(text)
+        except (AttributeError, ValueError) as error:
+            self.logger.debug(error)
+            error = "{red}{bold}`write` called of unopened file{reset}"
+            raise ApeError(error)
+        return
+
+    def writeline(self, text):
+        """
+        Adds newline to end of text and writes it to the file
+        """
+        self.write("{0}\n".format(text))
+        return
+
+    def writelines(self, texts):
+        """
+        Writes the lines to the file
+
+        :param:
+
+         - `texts`: collection of strings
+        """
+        try:
+            self.file.writelines(texts)
+        except (AttributeError, ValueError) as error:
+            self.logger.debug(error)
+            error = "{red}{bold}`write` called of unopened file{reset}"
+            raise ApeError(error)
+        return
+        
+            

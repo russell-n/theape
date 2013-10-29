@@ -123,6 +123,9 @@ class ArgumentClinic(object):
                                   metavar="<config-file list>",
                                   default=["ape.ini"],
                                   nargs="*")
+        self.checker.add_argument("--modules",
+                                  help='Space-separated list of non-ape modules with plugins',
+                                 nargs='*')
 
         self.checker.set_defaults(function=self.subcommand.check)
 
