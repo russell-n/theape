@@ -10,6 +10,8 @@ Contents:
     * :ref:`Sub-Folders <file-storage-sub-folders>`
     * :ref:`Redundant Files <file-storage-redundant-files>`
     * :ref:`FileStorage API <file-storage-api>`
+    * :ref:`FileStorage Module Diagram <file-storage-module-diagram>`
+    * :ref:`FileStorage Class Diagram <file-storage-class-diagram>`
 
 
 
@@ -64,19 +66,20 @@ In order to help tame the explosion of files that can often happen from the repe
 
 ::
 
-    example_path = 'aoeu/snth'
-    example_file = 'umma.gumma'
-    
-    
-    # this is the part that should be part of the path property
-    if not os.path.isdir(example_path):
-        os.makedirs(example_path)
-    for name in os.listdir('aoeu'):
-        print name
-    
-    # this will be run multiple times, remove the example so it gets started fresh
-    if os.path.isdir(example_path):
-        shutil.rmtree(example_path)    
+    if IN_PWEAVE:
+        example_path = 'aoeu/snth'
+        example_file = 'umma.gumma'
+        
+        
+        # this is the part that should be part of the path property
+        if not os.path.isdir(example_path):
+            os.makedirs(example_path)
+        for name in os.listdir('aoeu'):
+            print name
+        
+        # this will be run multiple times, remove the example so it gets started fresh
+        if os.path.isdir(example_path):
+            shutil.rmtree(example_path)    
     
 
 ::
@@ -111,7 +114,7 @@ The timestamp will be added using string formatting -- it will look for a `times
 
 ::
 
-    test_2013_10_28_06:01:29_PM.csv
+    test_2013_10_29_02:11:13_PM.csv
     
 
 
@@ -130,31 +133,32 @@ Because the name is being made to never match an existing file, the FileStorage 
 
 ::
 
-    # what's here?
-    for name in (name for name in os.listdir(os.getcwd()) if name.endswith('txt')):
-        print name
-    
-    name = "innagaddadavida.txt"
-    path = os.getcwd()
-    full_name = os.path.join(path, name)
-    if os.path.exists(full_name):
-        base, extension = os.path.splitext(name)
-    
-        digit = r'\d'
-        one_or_more = '+'
-        underscore = '_'
-    
-        suffix = underscore + digit + one_or_more
-        expression = r"{b}{s}{e}".format(b=base,
-                                          s=suffix,
-                                            e=extension)
-        regex = re.compile(expression)
-        count = sum(1 for name in os.listdir(path) if regex.match(name))
-        count = str(count + 1).zfill(4)
-        name = "{b}_{c}{e}".format(b=base, c=count, e=extension)
-    
-    print name    
+    if IN_PWEAVE:
+        # what's here?
+        for name in (name for name in os.listdir(os.getcwd()) if name.endswith('txt')):
+            print name
         
+        name = "innagaddadavida.txt"
+        path = os.getcwd()
+        full_name = os.path.join(path, name)
+        if os.path.exists(full_name):
+            base, extension = os.path.splitext(name)
+        
+            digit = r'\d'
+            one_or_more = '+'
+            underscore = '_'
+        
+            suffix = underscore + digit + one_or_more
+            expression = r"{b}{s}{e}".format(b=base,
+                                              s=suffix,
+                                                e=extension)
+            regex = re.compile(expression)
+            count = sum(1 for name in os.listdir(path) if regex.match(name))
+            count = str(count + 1).zfill(4)
+            name = "{b}_{c}{e}".format(b=base, c=count, e=extension)
+        
+        print name    
+            
     
 
 ::
@@ -183,4 +187,21 @@ FileStorage API
    FileStorage.write
    FileStorage.writeline
    FileStorage.writelines
+
+
+
+.. _file-storage-module-diagram:
+
+Module Diagram
+--------------
+
+.. image:: classes_filestorage.png
+
+
+.. _file-storage-class-diagram:
+
+Class Diagram
+-------------
+
+.. image:: FileStorage.png
 

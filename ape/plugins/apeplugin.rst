@@ -255,7 +255,8 @@ After taking a break I decided to just add the sub-commands to the ArgumentClini
     
     ape list [-h] [--modules [MODULES [MODULES ...]]]
     
-    ape check [-h] [<config-file list> [<config-file list> ...]]
+    ape check [-h] [--modules [MODULES [MODULES ...]]]
+                               [<config-file list> [<config-file list> ...]]
     
     ape help [-h] [-w WIDTH] [--modules [MODULES [MODULES ...]]]
                               [name]

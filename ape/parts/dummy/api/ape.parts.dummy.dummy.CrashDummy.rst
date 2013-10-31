@@ -14,6 +14,7 @@ ape.parts.dummy.dummy.CrashDummy
    .. autosummary::
    
       ~CrashDummy.__init__
+      ~CrashDummy.log_error
    
    
 

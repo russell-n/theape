@@ -29,6 +29,7 @@ ape.interface.configurationmap.ConfigurationMap
       ~ConfigurationMap.getint
       ~ConfigurationMap.has_option
       ~ConfigurationMap.items
+      ~ConfigurationMap.log_error
       ~ConfigurationMap.options
    
    

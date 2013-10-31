@@ -14,6 +14,7 @@ ape.parts.dummy.dummy.HangingDummy
    .. autosummary::
    
       ~HangingDummy.__init__
+      ~HangingDummy.log_error
    
    
 

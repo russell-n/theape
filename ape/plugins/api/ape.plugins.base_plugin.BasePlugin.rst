@@ -16,6 +16,7 @@ ape.plugins.base_plugin.BasePlugin
       ~BasePlugin.__init__
       ~BasePlugin.fetch_config
       ~BasePlugin.help
+      ~BasePlugin.log_error
    
    
 

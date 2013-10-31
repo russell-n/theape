@@ -16,6 +16,7 @@ ape.plugins.quartermaster.QuarterMaster
       ~QuarterMaster.__init__
       ~QuarterMaster.get_plugin
       ~QuarterMaster.list_plugins
+      ~QuarterMaster.log_error
    
    
 

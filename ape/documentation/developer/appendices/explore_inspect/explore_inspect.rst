@@ -88,7 +88,7 @@ The ``inspect.getfile`` method takes an object and tells you the file where it c
 ::
 
     ./dummy.py
-    <dummy.DummyClass object at 0x2651a50> is not a module, class, method, function, traceback, frame, or code object
+    <dummy.DummyClass object at 0x3d2ed50> is not a module, class, method, function, traceback, frame, or code object
     
 
 

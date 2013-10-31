@@ -1,0 +1,63 @@
+The Automated RVR Gather
+========================
+
+This is the code that build's arens RVR runner.
+
+.. superfluous '
+
+Contents:
+
+    * :ref:`API <automatedrvrgather-api>`
+    
+    * :ref:`Module Diagram <automatedrvrgather-module-diagram>`
+
+    * :ref:`Class Diagram <automatedrvrgather-class-diagram>`
+
+<<name='imports', echo=False>>=
+# arenscode
+import AutomationSuite.AutomatedRVRgather
+
+# the ape
+from ape.commoncode.code_graphs import module_diagram, class_diagram
+@
+
+.. _automatedrvrgather-api:
+
+The API
+-------
+
+.. currentmodule:: AutomationSuite.AutomatedRVRgather
+.. autosummary::
+   :toctree: api
+
+   GatherTest
+   GatherTest.init
+   GatherTest.RunTest
+   GatherTest._RunTest
+   GatherTest._RunTPOT
+   GatherTest.configOptions
+   GatherTest.configDefaults
+   
+.. _automatedrvrgather-module-diagram:
+
+Module Diagram
+--------------
+
+<<name='module_diagram', echo=False, results='sphinx'>>=
+module = str(AutomationSuite.AutomatedRVRgather.__file__).rstrip('c')
+#name = module_diagram(module=module, project='automatedrvrgather')
+#print ".. image:: {0}".format(name)
+@
+
+`pyreverse` crashes trying to build a module diagram for this module for some reason. 
+
+.. _automatedrvrgather-class-diagram:
+
+Class Diagram
+-------------
+
+<<name='class_diagram', echo=False, results='sphinx'>>=
+name = class_diagram('GatherTest', module)
+print ".. image:: " + name
+@
+

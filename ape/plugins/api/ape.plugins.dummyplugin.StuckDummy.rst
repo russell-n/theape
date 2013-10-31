@@ -16,6 +16,7 @@ ape.plugins.dummyplugin.StuckDummy
       ~StuckDummy.__init__
       ~StuckDummy.fetch_config
       ~StuckDummy.help
+      ~StuckDummy.log_error
    
    
 

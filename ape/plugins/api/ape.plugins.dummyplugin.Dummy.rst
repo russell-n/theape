@@ -16,6 +16,7 @@ ape.plugins.dummyplugin.Dummy
       ~Dummy.__init__
       ~Dummy.fetch_config
       ~Dummy.help
+      ~Dummy.log_error
    
    
 

@@ -16,9 +16,11 @@ ape.interface.ubootkommandant.UbootKommandant
       ~UbootKommandant.__init__
       ~UbootKommandant.build_ape
       ~UbootKommandant.check
+      ~UbootKommandant.clean_up
       ~UbootKommandant.fetch
       ~UbootKommandant.handle_help
       ~UbootKommandant.list_plugins
+      ~UbootKommandant.log_error
       ~UbootKommandant.run
    
    

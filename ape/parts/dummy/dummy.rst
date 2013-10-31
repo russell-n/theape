@@ -5,6 +5,8 @@ This module holds classes to help test the running of the infrastructure.
 
 
 
+.. _dummy-class::
+
 The Dummy Class
 ---------------
 

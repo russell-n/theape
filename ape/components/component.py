@@ -195,7 +195,7 @@ class Composite(Component):
 
     def check_rep(self):
         """
-        Checks the representation invariant
+        Checks the representation invariant     
 
         :raise: ConfigurationError
         """

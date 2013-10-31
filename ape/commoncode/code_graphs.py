@@ -19,7 +19,11 @@ def module_diagram(module, project, output_format='png'):
     command = 'pyreverse -o {0} -ASmy -k -p {1} {2}'.format(output_format,
                                                    project,
                                                    module)
-    subprocess.call(shlex.split(command))
+    try:                                               
+        subprocess.call(shlex.split(command))
+    except OSError as error:
+        print error
+        print "Is pylint installed?"
     return "classes_{0}.{1}".format(project, output_format)    
 
 
