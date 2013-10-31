@@ -7,64 +7,69 @@ import re
 import copy
 
 # this package
-from ape import BaseClass
+from base_storage import BaseStorage
+#from ape import BaseClass
 from ape import FILE_TIMESTAMP
 from ape import ApeError
+from ape.commoncode.code_graphs import module_diagram, class_diagram
 
 
 DIGIT = r'\d'
 ONE_OR_MORE = '+'
 UNDERSCORE = '_'
 FILENAME_SUFFIX = UNDERSCORE + DIGIT + ONE_OR_MORE
+IN_PWEAVE = __name__ == '__builtin__'
 
 
-example_path = 'aoeu/snth'
-example_file = 'umma.gumma'
-
-
-# this is the part that should be part of the path property
-if not os.path.isdir(example_path):
-    os.makedirs(example_path)
-for name in os.listdir('aoeu'):
-    print name
-
-# this will be run multiple times, remove the example so it gets started fresh
-if os.path.isdir(example_path):
-    shutil.rmtree(example_path)    
+if IN_PWEAVE:
+    example_path = 'aoeu/snth'
+    example_file = 'umma.gumma'
+    
+    
+    # this is the part that should be part of the path property
+    if not os.path.isdir(example_path):
+        os.makedirs(example_path)
+    for name in os.listdir('aoeu'):
+        print name
+    
+    # this will be run multiple times, remove the example so it gets started fresh
+    if os.path.isdir(example_path):
+        shutil.rmtree(example_path)    
 
 
 name = "test_{timestamp}.csv"
 print name.format(timestamp=datetime.datetime.now().strftime(FILE_TIMESTAMP))
 
 
-# what's here?
-for name in (name for name in os.listdir(os.getcwd()) if name.endswith('txt')):
-    print name
-
-name = "innagaddadavida.txt"
-path = os.getcwd()
-full_name = os.path.join(path, name)
-if os.path.exists(full_name):
-    base, extension = os.path.splitext(name)
-
-    digit = r'\d'
-    one_or_more = '+'
-    underscore = '_'
-
-    suffix = underscore + digit + one_or_more
-    expression = r"{b}{s}{e}".format(b=base,
-                                      s=suffix,
-                                        e=extension)
-    regex = re.compile(expression)
-    count = sum(1 for name in os.listdir(path) if regex.match(name))
-    count = str(count + 1).zfill(4)
-    name = "{b}_{c}{e}".format(b=base, c=count, e=extension)
-
-print name    
+if IN_PWEAVE:
+    # what's here?
+    for name in (name for name in os.listdir(os.getcwd()) if name.endswith('txt')):
+        print name
     
+    name = "innagaddadavida.txt"
+    path = os.getcwd()
+    full_name = os.path.join(path, name)
+    if os.path.exists(full_name):
+        base, extension = os.path.splitext(name)
+    
+        digit = r'\d'
+        one_or_more = '+'
+        underscore = '_'
+    
+        suffix = underscore + digit + one_or_more
+        expression = r"{b}{s}{e}".format(b=base,
+                                          s=suffix,
+                                            e=extension)
+        regex = re.compile(expression)
+        count = sum(1 for name in os.listdir(path) if regex.match(name))
+        count = str(count + 1).zfill(4)
+        name = "{b}_{c}{e}".format(b=base, c=count, e=extension)
+    
+    print name    
+        
 
 
-class FileStorage(BaseClass):
+class FileStorage(BaseStorage):
     """
     A class to store data to a file
     """
@@ -81,10 +86,13 @@ class FileStorage(BaseClass):
         self._path = None
         self.path = path
         self.timestamp = timestamp
-        self.file = None
         self.closed = True
         return
 
+    @property
+    def file(self):
+        return self._file
+    
     @property
     def path(self):
         """
@@ -144,7 +152,7 @@ class FileStorage(BaseClass):
         self.logger.debug("Opening {0} for writing".format(name))
         opened = copy.copy(self)
         opened.name = name
-        opened.file = open(name, 'w')
+        opened._file = open(name, 'w')
         opened.closed = False
         return opened
 
@@ -155,41 +163,18 @@ class FileStorage(BaseClass):
         if self.file is not None:
             self.file.close()
             self.closed = True
-        return
+        return                    
 
-    def write(self, text):
-        """
-        Writes the text to the file        
-        """
-        try:
-            self.file.write(text)
-        except (AttributeError, ValueError) as error:
-            self.logger.debug(error)
-            error = "{red}{bold}`write` called of unopened file{reset}"
-            raise ApeError(error)
-        return
 
-    def writeline(self, text):
-        """
-        Adds newline to end of text and writes it to the file
-        """
-        self.write("{0}\n".format(text))
-        return
+if IN_PWEAVE:
+    this_file = os.path.join(os.getcwd(), 'filestorage.py')
+    module_diagram_file = module_diagram(module=this_file, project='filestorage')
+    print ".. image:: {0}".format(module_diagram_file)
 
-    def writelines(self, texts):
-        """
-        Writes the lines to the file
 
-        :param:
 
-         - `texts`: collection of strings
-        """
-        try:
-            self.file.writelines(texts)
-        except (AttributeError, ValueError) as error:
-            self.logger.debug(error)
-            error = "{red}{bold}`write` called of unopened file{reset}"
-            raise ApeError(error)
-        return
-        
-            
+if IN_PWEAVE:
+    class_diagram_file = class_diagram(class_name="FileStorage",
+                                       filter='OTHER',
+                                       module=this_file)
+    print ".. image:: {0}".format(class_diagram_file)

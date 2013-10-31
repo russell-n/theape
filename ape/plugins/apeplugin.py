@@ -36,6 +36,9 @@ CONFIGURATION = '''[{0}]
 # even though these need to be in the ini format I like to use a different file-extension
 # so they won't accidentally get picked up if you use a glob to point to the main config files
 #config_glob = settings*.config
+
+# if you want to store files in a sub-folder
+# subfolder = <name>
 '''.format(APESECTION)
 
 
@@ -191,7 +194,7 @@ class Ape(BasePlugin):
                     try:
                         plugin = plugin_def(configuration).product
                         if plugin is None:
-                            raise ApeError("{0} is missing a `product`  (returned None)".format(plugin_name))
+                            raise ApeError("{0} is missing a `product` (returned None)".format(plugin_name))
                     except TypeError:
                         raise ConfigurationError('Could not find "{0}" plugin'.format(plugin_name))
                     operation.add(plugin)

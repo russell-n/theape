@@ -14,6 +14,7 @@ ape.parts.dummy.dummy.DummyClass
    .. autosummary::
    
       ~DummyClass.__init__
+      ~DummyClass.log_error
    
    
 

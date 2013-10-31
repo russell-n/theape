@@ -20,7 +20,7 @@ This will create class diagram for classes found in a module (see the :ref:`Expl
 
    module_diagram
 
-<<name='module_diagram', echo=False>>=
+<<name='module_diagram', echo=False, wrap=False>>=
 def module_diagram(module, project, output_format='png'):
     """
     Creates a dependency diagram for the module given.
@@ -28,7 +28,7 @@ def module_diagram(module, project, output_format='png'):
     :param:
 
      - `module`: path to the module
-     - `project`: name to use for to distinguish the output file
+     - `project`: name to use to distinguish the output file
      - `output_format`: format for graph-image file
 
     :return: name of image file
@@ -36,7 +36,11 @@ def module_diagram(module, project, output_format='png'):
     command = 'pyreverse -o {0} -ASmy -k -p {1} {2}'.format(output_format,
                                                    project,
                                                    module)
-    subprocess.call(shlex.split(command))
+    try:                                               
+        subprocess.call(shlex.split(command))
+    except OSError as error:
+        print error
+        print "Is pylint installed?"
     return "classes_{0}.{1}".format(project, output_format)    
 @
 

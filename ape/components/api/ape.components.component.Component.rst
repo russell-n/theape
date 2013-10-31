@@ -15,6 +15,8 @@ ape.components.component.Component
    
       ~Component.__init__
       ~Component.check_rep
+      ~Component.clean_up
+      ~Component.log_error
    
    
 

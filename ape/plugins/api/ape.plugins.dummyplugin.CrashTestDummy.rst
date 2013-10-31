@@ -16,6 +16,7 @@ ape.plugins.dummyplugin.CrashTestDummy
       ~CrashTestDummy.__init__
       ~CrashTestDummy.fetch_config
       ~CrashTestDummy.help
+      ~CrashTestDummy.log_error
    
    
 

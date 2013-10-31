@@ -16,6 +16,7 @@ ape.plugins.apeplugin.Ape
       ~Ape.__init__
       ~Ape.fetch_config
       ~Ape.help
+      ~Ape.log_error
    
    
 

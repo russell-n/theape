@@ -31,7 +31,7 @@ These are the documents created from the source files.
 
    Storage <storage/index.rst>
    Dummy Components <dummy/index.rst>
-   Help Page <helppage/index.rst>
    Countdown <countdown/index.rst>
+   Help Page <helppage/index.rst>
 
 

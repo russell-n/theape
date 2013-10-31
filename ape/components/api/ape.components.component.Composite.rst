@@ -16,6 +16,8 @@ ape.components.component.Composite
       ~Composite.__init__
       ~Composite.add
       ~Composite.check_rep
+      ~Composite.clean_up
+      ~Composite.log_error
       ~Composite.one_call
       ~Composite.remove
    

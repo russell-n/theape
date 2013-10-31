@@ -2,7 +2,7 @@ The Dummy Module
 ================
 
 .. _inspect-dummy-module::
-.. currentmodule:: arachneape.documentation.appendices.inspect.dummy
+.. currentmodule:: ape.documentation.appendices.inspect.dummy
 This is a module created for the inspect exploration.
 <<name='imports', echo=False>>=
 # python standard library

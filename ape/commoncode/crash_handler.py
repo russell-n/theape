@@ -57,3 +57,21 @@ def log_error(error, logger, error_message):
                                                msg=linenum))
     logger.debug(traceback.format_exc())
     return
+
+
+import traceback
+import sys
+import os
+
+def print_traceback(error):
+    exc_type, exc_value, exc_tb = sys.exc_info()
+    tb_info = traceback.extract_tb(exc_tb)
+    filename, linenum, funcname, source = tb_info[-1]
+
+    error_message = "{0}: {1}".format(error.__class__.__name__,
+                                                    error)
+
+    print "Failed Line: '{0}'".format( source)
+    print "In Function: {0}".format(funcname)
+    print "In File: {0}".format(os.path.basename(filename))
+    print "At Line: {0}".format(linenum)
