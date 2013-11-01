@@ -268,6 +268,14 @@ class ConfigurationMap(BaseClass):
         :return: dict of default values        
         """
         return self.parser.defaults()
+
+    def write(self, path):
+        """
+        Writes the current configuration to the path (filename)
+        """
+        with open(path, 'w') as f:
+            self.parser.write(f)
+        return
 # end class ConfigurationMap    
 
 

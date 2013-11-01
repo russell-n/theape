@@ -1,8 +1,84 @@
 Time Maps
 =========
 
+.. _relative-time-map:
+
 Relative Time Map
 -----------------
 
-The `RelativeTimeMap` maps strings of relative times to seconds. It tries to be as liberal as possible so there has to be a fair amount of certainty that the string is in fact a time and not something similar but different. '5 yolks' will match '5' years, for instance, and if that is not the desired behavior than something else has to do a check first to filter out bad strings.
+The `RelativeTimeMap` maps strings of relative times to seconds. It tries to be as liberal as possible so there has to be a fair amount of certainty that the string is in fact a time and not something similar but different. '5 yolks' will match '5' years, for instance, and if that is not the desired behavior then something else has to do a check first to filter out bad strings.
 
+It uses `dateutil <http://labix.org/python-dateutil>`_ to calculate everything but the seconds because dateutil will handle the ambiguous values like years (which have leap-years) and months which have 28, 29, 30, or 31 days.
+
+Contents:
+
+   * :ref:`The UML Class Model <relative-time-map-model>`
+
+   * :ref:`Relative Time Map Group Names <relative-time-map-groups>`
+
+.. _relative-time-map-model:
+
+The UML Model
+-------------
+
+.. uml::
+
+   RelativeTimeMap --|> BaseClass
+   RelativeTimeMap o- dateutil.relativedelta.relativedelta
+
+.. currentmodule:: ape.interface.timemap
+.. autosummary::
+   :toctree: api
+
+   RelativeTimeMap
+<<name='imports', echo=False>>=
+# python standard library
+import re
+
+# this package
+from ape import BaseClass
+from ape.commoncode.oatbran import CharacterClass, Numbers, Group
+from ape.commoncode.oatbran import CommonPatterns
+@
+
+.. _relative-time-map-groups:
+
+Relative Time Map Groups
+------------------------
+
+<<name='RelativeTimeMapGroups', echo=False>>=
+class RelativeTimeMapGroups(object):
+    __slots__ = ()
+    years = 'years'
+@
+
+<<name='RelativeTimeMap', echo=False>>=
+class RelativeTimeMap(BaseClass):
+    """
+    A converter from strings with relative times to seconds
+    """
+    def __init__(self):
+        super(RelativeTimeMap, self).__init__()
+        self._year_expression = None
+        self._month_expression = None
+        return
+
+    @property
+    def year_expression(self):
+        """
+        A compiled regex to match a year (only checks for y)
+        """
+        if self._year_expression is None:
+            self._year_expression = re.compile(Group.named(name=RelativeTimeMapGroups.years,
+                                                           expression=(Numbers.real)) +
+                                                            CommonPatterns.optional_spaces +
+                                                            CharacterClass.character_class('Yy')
+                                                            )
+        return self._year_expression
+
+    @property
+    def month_expression(self):
+        """
+        A compiled regex to match a month (check for 'mo' only)
+        """
+@

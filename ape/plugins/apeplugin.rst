@@ -1,5 +1,9 @@
 The Ape Plugin
 ==============
+
+.. image:: ../figures/robot_monster_babe.jpg
+   :align: center
+
 .. _ape-plugin:
 This is the plugin that creates the Hortator to run :ref:`Composites <composite-class>`. It will be used when the `run` subcommand is called by the user.
 
@@ -15,9 +19,12 @@ Contents:
 
     * :ref:`Class Implementation Diagram <apeplugin-class-diagram>`
 
-    * :ref:`Figuring Out the Help <apeplugin-help>`
+    * :ref:`API <apeplugin-api>`
 
     * :ref:`External Plugins <apeplugin-external-plugins>`
+
+    * :ref:`Figuring Out the Help <apeplugin-help>`
+
 
 .. _apeplugin-introduction:    
     
@@ -102,6 +109,12 @@ This means:
 
  * the `Build Composites` happens in creating the ``product`` 
    
+::
+
+    test_2013_10_31_12:33:41_PM.csv
+    
+    
+
 
 
 .. _apeplugin-module-dependency-graph:
@@ -133,6 +146,14 @@ And this is a hand-drawn one which should be easier to read but may not guarante
    Ape --|> BasePlugin
    Ape o-- HelpPage
    Ape o-- Composite
+   Ape o-- QuarterMaster
+   Ape o-- ConfigurationMap
+   Ape o-- FileStorage
+
+.. _apeplugin-api:
+
+The API
+-------
 
 .. currentmodule:: ape.plugins.apeplugin   
 .. autosummary::
@@ -291,7 +312,7 @@ Using the `FakePlugin` created for the :ref:`Exploring External Imports <explori
     [FAKEPLUGIN]
     option = value
 
-The FakePlugin returns a `DummyClass <dummy-class>` as its `product` so the FAKEPLUGIN section doesn't really do anything.
+The FakePlugin returns a :ref:`DummyClass <dummy-class>` as its `product` so the FAKEPLUGIN section doesn't really do anything.
 
 
 

@@ -4,7 +4,9 @@ The Argument Clinic
 
 .. _argument-clinic:
 
-This is the module that builds the command-line interface for the Ape. It uses the python `argparse <http://docs.python.org/2/library/argparse.html>`_ module.
+This is the module that builds the command-line interface for the Ape. It uses the python `argparse <http://docs.python.org/2/library/argparse.html>`_ module. In particular it uses the :ref:`UbootKommandant <uboot-kommandant>` to provide methods for the ArgParser's `sub-command <http://docs.python.org/2.7/library/argparse.html#sub-commands>`_ interface.
+
+.. superfluous '
 
 .. uml::
 

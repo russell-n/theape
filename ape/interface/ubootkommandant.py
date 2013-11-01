@@ -68,7 +68,7 @@ class UbootKommandant(BaseClass):
     @try_except
     def list_plugins(self, args):
         """
-        Calls the QuarterMaster and lists plugins
+        Calls on  QuarterMaster to list found plugins
 
         :param:
 
@@ -81,7 +81,7 @@ class UbootKommandant(BaseClass):
     def build_ape(self, args):
         """
         Tries to build the Ape plugin
-        (has a side-effect of setting self.ape so that crashes can get to it)
+        (has a side-effect of setting self.ape so that crashe-handling can get to it)
 
         :return: ape or None
         :postcondition: self.ape set to ape (or None on failure)
@@ -97,6 +97,7 @@ class UbootKommandant(BaseClass):
         except NoSectionError as error:
             self.logger.error(error)
             self.logger.error(RED_ERROR.format(error='[APE] section not found in {0}'.format(args.configfiles)))
+            self.logger.error(RED_ERROR.format(error='check the name of the config file'))
             self.logger.info("Try `ape help` and `ape fetch`")
             return 
         return self.ape
