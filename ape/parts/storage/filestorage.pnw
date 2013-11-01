@@ -223,7 +223,8 @@ class FileStorage(BaseStorage):
         """
         Sets the path and creates the directory if needed
         """
-        if not os.path.isdir(path):
+        
+        if path is not None and not os.path.isdir(path):
             os.makedirs(path)
         self._path = path
         return

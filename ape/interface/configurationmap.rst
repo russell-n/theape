@@ -23,7 +23,7 @@ Contents:
 
     * :ref:`Module Diagram <configurationmap-module-diagram>`
 
-    * :ref:`Class Implementation Diagram <configurationmay-class-implementation-diagram>`
+    * :ref:`Class Implementation Diagram <configurationmap-class-implementation-diagram>`
 
 .. _configurationmap-background:    
     
@@ -87,6 +87,7 @@ The API
    ConfigurationMap.options
    ConfigurationMap.items
    ConfigurationMap.defaults
+   ConfigurationMap.write
 
 
 .. _configurationmap-parser:   

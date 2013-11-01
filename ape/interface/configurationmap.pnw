@@ -23,7 +23,7 @@ Contents:
 
     * :ref:`Module Diagram <configurationmap-module-diagram>`
 
-    * :ref:`Class Implementation Diagram <configurationmay-class-implementation-diagram>`
+    * :ref:`Class Implementation Diagram <configurationmap-class-implementation-diagram>`
 
 .. _configurationmap-background:    
     
@@ -330,6 +330,14 @@ class ConfigurationMap(BaseClass):
         :return: dict of default values        
         """
         return self.parser.defaults()
+
+    def write(self, path):
+        """
+        Writes the current configuration to the path (filename)
+        """
+        with open(path, 'w') as f:
+            self.parser.write(f)
+        return
 # end class ConfigurationMap    
 @
 
@@ -357,6 +365,7 @@ The API
    ConfigurationMap.options
    ConfigurationMap.items
    ConfigurationMap.defaults
+   ConfigurationMap.write
 
 
 .. _configurationmap-parser:   

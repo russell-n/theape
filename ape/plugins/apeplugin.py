@@ -3,10 +3,12 @@
 import re
 import os
 from collections import OrderedDict
+
 # this package
 from ape.interface.arguments import ArgumentClinic
 from ape.interface.configurationmap import ConfigurationMap
 from ape.components.component import Composite
+from ape.parts.storage.filestorage import FileStorage
 
 from base_plugin import BasePlugin
 from ape.commoncode.code_graphs import module_diagram, class_diagram
@@ -18,13 +20,16 @@ from quartermaster import QuarterMaster
 in_pweave = __name__ == '__builtin__'
 
 
+SUBFOLDER  = 'subfolder'
+COMPILED_EXTENSION = '.compiled'
+
 CONFIGURATION = '''[{0}]
-# the section names are just identifiers
+# the option names are just identifiers
 # they will be executed in the order given.
-<section_name_1> = <comma-separated-list of plugins>
-<section_name_2> = <comma-separated-list of plugins>
+<option_name_1> = <comma-separated-list of plugins>
+<option_name_2> = <comma-separated-list of plugins>
 ...
-<section_name_n> = <comma-separated-list of plugins>
+<option_name_n> = <comma-separated-list of plugins>
 
 [MODULES]
 # If you are getting a plugin from a non-ape package put the module here
@@ -38,8 +43,9 @@ CONFIGURATION = '''[{0}]
 #config_glob = settings*.config
 
 # if you want to store files in a sub-folder
-# subfolder = <name>
-'''.format(APESECTION)
+# {1} = <name>
+'''.format(APESECTION, SUBFOLDER)
+
 
 
 output_documentation = __name__ == '__builtin__'
@@ -80,8 +86,18 @@ class Ape(BasePlugin):
         self.configfiles = configfiles
         self._arguments = None
         self._quartermaster = None
+        self._file_storage = None
         return
 
+    @property
+    def file_storage(self):
+        """
+        A FileStorage to get the path to save the configuration
+        """
+        if self._file_storage is None:
+            self._file_storage = FileStorage()
+        return self._file_storage
+            
     @property
     def quartermaster(self):
         """
@@ -115,7 +131,8 @@ class Ape(BasePlugin):
             bold_name = bold + name + reset
             program = name + '[.\w]*'
             expression = re.compile(program)
-            
+
+            # use the ArgParser to get sample usage text
             arg_string = expression.sub(name,
                                         self.arguments.parser.format_usage().replace('usage: ', ''))
             
@@ -123,9 +140,10 @@ class Ape(BasePlugin):
             arg_string = arg_string.replace('{', '{{')
             arg_string = arg_string.replace('}', '}}')
             arg_string = arg_string.replace(name, bold_name)
-            subs = (self.arguments.runner, self.arguments.fetcher, self.arguments.lister,
-                    self.arguments.checker, self.arguments.helper)
-            for sub in subs:
+
+            # the main parser doesn't show help for the sub-commands (just --debug, --pudb, etc.)
+            # so they are pulled separately
+            for sub in self.arguments.subparser_list:
                 arg_string +=  expression.sub(bold_name,
                                               sub.format_usage().replace('usage: ', ''))
             
@@ -136,6 +154,7 @@ class Ape(BasePlugin):
             self._sections["Configuration"] = CONFIGURATION
             self._sections['Examples'] = 'ape run *.ini\nape help\nape fetch\nape list\nape check *ini'
             self._sections['Errors'] = '{bold}Oops, I crapped my pants:{reset} unexpected error (probably indicates implementation error)'
+            self._sections['subcommands'] = "help (this help), fetch (sample configuration), run <configuration-file(s)>"
             self._sections['Files'] = __file__
         return self._sections
     
@@ -155,15 +174,18 @@ class Ape(BasePlugin):
                              is_root=True)
 
         # traverse the config-files to get Operators and configuration maps
-        for config in self.configfiles:
-            # this is being created each time because I am now allowing the addition
+        for config_file in self.configfiles:
+            # the QuarterMaster is being created each time because I am now allowing the addition
             # of external packages, and I don't want namespace clashes
             quartermaster = QuarterMaster()
+
+            # each APE config gets its own Operator
             operator = Composite(identifier="Operator",
                                  error=ApeError,
                                  error_message='Operation Crash',
                                  component_category='Operation')
-            configuration = ConfigurationMap(config)
+            
+            configuration = ConfigurationMap(config_file)
             defaults = configuration.defaults
 
             # check for external package declarations
@@ -173,13 +195,15 @@ class Ape(BasePlugin):
                 quartermaster.external_modules = external_modules                        
             
             # traverse the APE Section's options to get Operations
-            #options(APESECTION) is a list of config-file options
+            # configuration.options(APESECTION) is a list of config-file options in the [APE] section
+            # names is filtered to get rid of the DEFAULT options
             names = (name for name in configuration.options(APESECTION) if not
                      (name in defaults and
                       defaults[name] ==
                       configuration.get(APESECTION, name)))
             
             for operation_name in names:
+                # every option in the APE section gets an operation
                 operation = Composite(identifier='Operation',
                                       error=DontCatchError,
                                       error_message='{0} Crash'.format(operation_name),
@@ -199,10 +223,36 @@ class Ape(BasePlugin):
                         raise ConfigurationError('Could not find "{0}" plugin'.format(plugin_name))
                     operation.add(plugin)
                 operator.add(operation)
-            # ** Add saving the configuration here
+
             hortator.add(operator)
+            self.save_configuration(configuration)
         return hortator
 
+    def save_configuration(self, configuration):
+        """
+        saves the configuration map to disk
+
+        :param:
+
+         - `configuration`: A ConfigurationMap to save to disk
+        """
+        # get the sub-folder (if given) and let the FileStorage mangle the name as needed
+        # to prevent clobbering files
+        path = None
+        if SUBFOLDER in configuration.defaults:
+            path = configuration.defaults[SUBFOLDER]
+        self.file_storage.path = path
+
+        filename, extension = os.path.splitext(configuration.filename)
+
+        # the extension is changed so if the user is using a glob
+        # and didn't provide a sub-folder the compiled file won't
+        # get picked up if the code is re-run
+        filename += COMPILED_EXTENSION
+        name = self.file_storage.safe_name(filename)
+        configuration.write(name)
+        return
+        
     def fetch_config(self):
         """
         Prints example configuration to stdout

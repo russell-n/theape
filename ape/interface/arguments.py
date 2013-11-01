@@ -21,7 +21,19 @@ class ArgumentClinic(object):
         self._parser = None        
         self._subparsers = None
         self._args = None
+        self._subparser_list = None
         return
+
+    @property
+    def subparser_list(self):
+        """
+        This is here so that the Ape Plugin could have access to the sub-parser help
+
+        :return: list of sub-parsers added to the main ArgumentParser
+        """
+        if self._subparser_list is None:
+            self._subparser_list = []
+        return self._subparser_list
 
     @property
     def subcommand(self):
@@ -88,9 +100,13 @@ class ArgumentClinic(object):
         Adds subparsers to the parser
 
         I am now adding these to self so that the sub-parsers are public
+
+        :postcondition: self.subparser_list is a list of the added sub-parsers
         """
+        # run sub-command
         self.runner = self.subparsers.add_parser("run",
                                                  help="Run the Ape")
+        self.subparser_list.append(self.runner)
         self.runner.add_argument("configfiles",
                                  help="A list of config file name (default='%(default)s').",
                                  metavar="<config-file list>",
@@ -98,8 +114,11 @@ class ArgumentClinic(object):
                                  nargs="*")
         self.runner.set_defaults(function=self.subcommand.run)
 
+        # fetch sub-command
         self.fetcher = self.subparsers.add_parser("fetch",
                                                   help="Fetch a sample config file.")
+
+        self.subparser_list.append(self.fetcher)
         self.fetcher.add_argument('names',
                                   help="List of plugin-names (default=%(default)s)",
                                   default=["Ape"],
@@ -109,15 +128,20 @@ class ArgumentClinic(object):
                                 nargs='*')
         self.fetcher.set_defaults(function=self.subcommand.fetch)
 
+        # list sub-command
         self.lister = self.subparsers.add_parser("list",
                                                  help="List available plugins.")
+        self.subparser_list.append(self.lister)
         self.lister.add_argument('--modules',
                                  help='Space-separated list of non-ape modules with plugins',
                                  nargs='*')
         self.lister.set_defaults(function=self.subcommand.list_plugins)
 
+        # check sub-command
         self.checker = self.subparsers.add_parser('check',
                                                   help='Check your setup.')
+
+        self.subparser_list.append(self.checker)
         self.checker.add_argument("configfiles",
                                   help="List of config files (e.g. *.ini - default='%(default)s').",
                                   metavar="<config-file list>",
@@ -129,8 +153,11 @@ class ArgumentClinic(object):
 
         self.checker.set_defaults(function=self.subcommand.check)
 
+        # help sub-command
         self.helper = self.subparsers.add_parser("help",
                                                  help="Show more help")
+
+        self.subparser_list.append(self.helper)
         self.helper.add_argument('name',
                                  help="A specific plugin to inquire about.",
                                  nargs="?", default='Ape')
