@@ -11,6 +11,7 @@ This sub-folder holds the modules that create the interface for the user.
 
    The Argument Clinic <arguments.rst>
    Testing the ArgumentClinic <test_arguments.rst>
+   Testing the Time Map <testtimemap.rst>
    The Configuration Map <configurationmap.rst>
    The UbootKommandant <ubootkommandant.rst>
    Time Maps <timemap.rst>
