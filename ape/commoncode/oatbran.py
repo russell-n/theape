@@ -272,12 +272,12 @@ class Numbers(object):
                         SPACE_PREFIX + z_plus + END_SUFFIX +FormalDefinition.OR +
                         SPACE_PREFIX + z_plus + SPACE_SUFFIX )
 
-    nonnegative_integer = (Group.not_preceded_by(decimal_point +FormalDefinition.OR + '0') +
+    nonnegative_integer = (Group.not_preceded_by(decimal_point + FormalDefinition.OR + '-') +
                                CharacterClass.non_zero_digit + optional_digits +
                                r'\b' +FormalDefinition.OR + 
                                Boundaries.word('0'))
-    
-    integer = (Group.not_preceded_by(decimal_point +FormalDefinition.OR + '0') +
+    # this disqualifies leading decimal points but not zeros
+    integer = (Group.not_preceded_by(decimal_point) +
                                Quantifier.zero_or_one('-') + 
                                CharacterClass.non_zero_digit + optional_digits +
                                FormalDefinition.OR + 
