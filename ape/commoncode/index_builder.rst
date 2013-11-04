@@ -1,7 +1,7 @@
 Index Builder
 =============
 
-.. currentmodule:: arachneape.commoncode.index_builder
+.. currentmodule:: ape.commoncode.index_builder
 
 .. _index-builder-introduction:
 Introduction

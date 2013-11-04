@@ -11,7 +11,7 @@ def module_diagram(module, project, output_format='png'):
     :param:
 
      - `module`: path to the module
-     - `project`: name to use for to distinguish the output file
+     - `project`: name to use to distinguish the output file
      - `output_format`: format for graph-image file
 
     :return: name of image file

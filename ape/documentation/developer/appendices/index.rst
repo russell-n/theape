@@ -21,6 +21,7 @@ A place for exploring code examples.
    Exploring Exceptions <explore_exceptions/index.rst>
    Exploring Importlib <explore_importlib/index.rst>
    Exploring ConfigParser <explore_configparse/index.rst>
+   Exploring Paramiko <explore_paramiko/index.rst>
    Exploring Time <explore_time/index.rst>
    Explore Inspect <explore_inspect/index.rst>
 
