@@ -17,7 +17,7 @@ This is a Data Collection that extends the List ADT to have an `insort` method t
 
 
 
-.. currentmodule:: arachneape.commoncode.sortedlist
+.. currentmodule:: ape.commoncode.sortedlist
 .. autosummary::
    :toctree: api
 

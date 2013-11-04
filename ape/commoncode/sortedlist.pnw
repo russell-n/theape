@@ -58,7 +58,7 @@ for case in (TestSortedList, ):
     suite = unittest.TestLoader().loadTestsFromTestCase(case)    
     unittest.TextTestRunner(verbosity=2).run(suite)
 %>
-.. currentmodule:: arachneape.commoncode.sortedlist
+.. currentmodule:: ape.commoncode.sortedlist
 .. autosummary::
    :toctree: api
 

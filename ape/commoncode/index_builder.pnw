@@ -14,7 +14,7 @@ MAXDEPTH = '   :maxdepth: {0}' + NEWLINE
 HEADER = TOCTREE + NEWLINE + MAXDEPTH
 CONTENTS = '   {0} <{1}>'
 @
-.. currentmodule:: arachneape.commoncode.index_builder
+.. currentmodule:: ape.commoncode.index_builder
 
 .. _index-builder-introduction:
 Introduction

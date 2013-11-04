@@ -17,7 +17,7 @@ The ApeError
 
    ApeError -|> Exception
 
-.. currentmodule:: arachneape.commoncode.errors
+.. currentmodule:: ape.commoncode.errors
 .. autosummary::
    :toctree: api
 

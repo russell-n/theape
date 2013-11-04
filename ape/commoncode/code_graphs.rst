@@ -10,7 +10,7 @@ Module Diagram
 
 This will create class diagram for classes found in a module (see the :ref:`Exploring Pyreverse <exploring-pyreverse-module>` section). Since it is using `pyreverse` it has to be installed and available on the execution path.
 
-.. currentmodule:: arachneape.commoncode.code_graphs
+.. currentmodule:: ape.commoncode.code_graphs
 .. autosummary::
    :toctree: api
 
