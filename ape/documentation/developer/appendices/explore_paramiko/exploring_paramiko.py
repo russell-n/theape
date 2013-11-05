@@ -50,14 +50,3 @@ try:
 
 except (IOError, paramiko.SSHException) as error:
     print error
-
-
-client = SSHClient()
-client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-client.connect('localhost', username='fakeuser')
-stdin, stdout, stderr = client.exec_command("nmap -sP '127.0.0.*'")
-for line in stdout:
-    print line
-
-
-pass

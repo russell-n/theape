@@ -1,0 +1,172 @@
+Socket Storage
+==============
+
+This is a module for classes that implement a file-like interface to a socket. Its main purpose is to catch socket timeout errors.
+
+Contents:
+
+    * :ref:`SocketStorage Model <socket-storage-model>`
+
+    * :ref:`SocketStorage API <socket-storage-api>`
+
+<<name='imports', echo=False>>=
+# python standard library
+import os
+import socket
+
+# this package
+from base_storage import BaseStorage
+
+#from ape import BaseClass
+from ape import ApeError
+from ape.commoncode.code_graphs import module_diagram, class_diagram
+@
+
+<<name='constants', echo=False>>=
+NEWLINE = '\n'
+SPACE = ' '
+EOF = ''
+IN_PWEAVE = __name__ == '__builtin__'
+@
+
+.. _socket-storage-model:
+
+SocketStorage Model
+-------------------
+
+Not all of the methods make sense (like open) so only a sub-set will be implemented. The assumption will be that a file-like object was created elsewhere and passed in to the constructor.
+
+.. uml::
+
+   SocketStorage :  __init__(file)
+   SocketStorage : close()
+   SocketStorage : String read()
+   SocketStorage : String readline()
+   SocketStorage : List readlines()
+   SocketStorage : write(text)
+   SocketStorage : writeline(text)
+   SocketStorage : writelines(list)
+   SocketStorage : closed
+   SocketStorage : name
+
+.. _socket-storage-api:
+
+SocketStorage API
+-----------------
+
+.. currentmodule:: ape.parts.storage.socketstorage
+.. autosummary::
+   :toctree: api
+
+   SocketStorage
+   SocketStorage.close
+   SocketStorage.write
+   SocketStorage.writeline
+   SocketStorage.writelines
+   SocketStorage.readline
+   SocketStorage.readlines
+   SocketStorage.read
+
+Although the main reason for this Class is to trap socket timeouts when reading lines, it will raise an ApeError when an attempt is made to read the entire buffer (i.e. read readlines) so that if it is really an error to have a timeout, these methods can be used instead. Generally, the main interface is assumed to be the __iter__ method, though, which will catch the timeouts forever.
+
+<<name='SocketStorage', echo=False>>=
+class SocketStorage(BaseStorage):
+    """
+    A class to store data to a file
+    """
+    def __init__(self, file):
+        """
+        SocketStorage constructor
+
+        :param:
+
+         - `socket_file`: opened file-like socket-based object
+        """
+        super(SocketStorage, self).__init__()
+        self._file = file
+        self.closed = False
+        return
+
+    @property
+    def file(self):
+        """
+        :return: opened file-like object
+        """
+        return self._file
+
+    def readline(self):
+        """
+        Calls a single read-line returns a space (' ') if socket.timeout
+        """
+        try:
+            return self.file.readline()
+        except socket.timeout:
+            self.logger.debug('socket timedout')
+            return SPACE
+        
+    
+    def read(self):
+        """
+        reads all the output and returns as a single string
+        """
+        try:        
+            return "".join((line for line in self.file))
+        except socket.timeout as error:
+            self.logger.debug('socket timeout')
+            raise ApeError('Socket Timed out')
+        return
+
+    def __iter__(self):
+        """
+        Traverses the file
+
+        :yield: next line in the file (or ' ' (a space) if it times-out)
+        """
+        line = None
+        while line != EOF:
+            try:
+                yield self.file.readline()
+            except socket.timeout:
+                self.logger.debug('socket timed out')
+                yield SPACE
+        return
+    
+    def close(self):
+        """
+        Closes self.file if it exists, sets self.closed to True
+        """
+        if self.file is not None:
+            self.file.close()
+            self.closed = True
+        return                    
+@
+
+
+.. _socket-storage-module-diagram:
+
+Module Diagram
+--------------
+
+<<name='module_diagram', echo=False, wrap=False, results='sphinx'>>=
+if IN_PWEAVE:
+    this_file = os.path.join(os.getcwd(), 'filestorage.py')
+    module_diagram_file = module_diagram(module=this_file, project='filestorage')
+    print ".. image:: {0}".format(module_diagram_file)
+
+@
+
+.. _file-storage-class-diagram:
+
+Class Diagram
+-------------
+
+<<name='class_diagram', echo=False, results='sphinx'>>=
+if IN_PWEAVE:
+    class_diagram_file = class_diagram(class_name="FileStorage",
+                                       filter='OTHER',
+                                       module=this_file)
+    print ".. image:: {0}".format(class_diagram_file)
+@
+
+
+

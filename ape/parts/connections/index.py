@@ -3,4 +3,4 @@
 from ape.commoncode.index_builder import create_toctree
 
 
-create_toctree(maxdepth=2)
+create_toctree()
