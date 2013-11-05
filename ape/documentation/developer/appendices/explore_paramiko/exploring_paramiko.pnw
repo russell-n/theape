@@ -16,8 +16,9 @@ Contents:
     * :ref:`Paramiko SSHClient Class Diagram <paramiko-sshclient-class-diagram>`
     * :ref:`A Localhost Experiment <paramiko-localhost-experiment>`
     * :ref:`Paramiko's SSHClient.connect Method <paramiko-sshclient-connect>`
-    * :ref:`Paramiko's SSHClient.exec_command Method <paramiko-sshclient-exec_command>`
 
+.. '
+    
 .. _paramiko-readme-what:
 
 Paramiko What?
@@ -174,7 +175,7 @@ Which seems to have fixed it (the output has the files my `fakeuser` has in  the
 
 .. '
 
-The key seems to have been setting the `MissingHostKeyPolicy` to use the `AutoAddPolicy` which seems to mean that it searches a series of default locations to see if the `hostname` is one of the known-hosts. Alternatively, according to the API, you should be able to set a file-name directly.
+The key seems to have been setting the `MissingHostKeyPolicy` to use the `AutoAddPolicy` which seems to mean that it adds the hostname to the known-hosts automatically if it doesn't find the name in the known-hosts. Alternatively, according to the API, you should be able to set a file-name directly for your 'known_hosts' file. I'm guessing that Paramiko failed earlier because it doesn't know about the ``~/.ssh/known_hosts`` file (or at least doesn't check it by default.
 
 The Related API
 ~~~~~~~~~~~~~~~
@@ -228,45 +229,6 @@ And the start of the docstring:
 
 So looking at that and the `MissingHostKeyPolicy` and `AutoAddPolicy` links above, it looks like the system did not have `localhost` in the list of known hosts and by setting `AutoAddPolicy` I told it to add any unknown hosts I give it to the list of known hosts, fixing it. It seems like there would be no point to having a known hosts file and requiring confirmation for new hosts if you are going to add them automatically, so this is probably some kind of securrity risk. But given that my main use for this will be to talk to my machines on the LAN, this seems to be okay. Luckily I'm not a security expert so I don't know how bad this really might be (ignorance is bliss, though not as much fun as mushrooms, unfortunately).
 
-.. _paramiko-sshclient-exec_command:
+The other part of the setup ('load_system_host_keys') loads the private keys from your agent. I think. In testing this doesn't seem to do anything useful. I the agent isn't running and the key not added it will return an error. If it is running and the key added, then it works even without this call.
 
-The SSHClient exec_command
---------------------------
 
-Now that I've managed to get a connection going it's time to turn my attenttion to actually doing things on the machine. Paramiko has two ways to work with the shell -- interactively using ``invoke_shell`` and non-interactively using ``exec_command``. Since my intention is to use this within code I will focus on the ``exec_command`` method.
-
-.. currentmodule:: paramiko.client
-.. autosummary::
-   :toctree: api
-   
-   SSHClient.exec_command
-   SSHClient.invoke_shell
-
-There's a few things of interest to note. One is that they've added a timeout so there's no need to sub-class it and add your own to get a timeout (assuming that what it's there for). The second thing to note is that it raises a `paramiko.SSHException` if the server fails to execute the command. Does this mean all errors? What if it's a connectivity problem, does it raise this instead of a `socket.error`? The third (and probably most immediately useful) thing to note is that what you get back is a tuple of (`stdin`, `stdout`, `stderr`). It's important to note the ordering of the returned tuples, as mixing them up will produce unpredictable results (I had standard out and standard in switched in one of the earlier examples and got an `IOError` when I tried to read from standard in -- the error said that the file was closed, which might make sense if you know that I was trying to read from standard in, but it took me a little while to figure it out).
-
-nmap
-----
-
-I want to see if paramiko will allow me to run commands as sudo. Since `nmap` will change its behavior (adding MAC addresses) if you run the ping-scan using `sudo` I can run it with and without root privileges and see if I get the expected output.
-
-<<name='nmap_sp', wrap=False>>=
-client = SSHClient()
-client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-client.connect('localhost', username='fakeuser')
-stdin, stdout, stderr = client.exec_command("nmap -sP '192.168.0.*'")
-for line in stdout:
-    print line
-@
-
-And now with sudo.
-
-<<name='nmap_sudo', wrap=False>>=
-stdin, stdout, stderr = client.exec_command('sudo nmap -sP "192.168.0.*"', get_pty=True)
-stdin.write('fakepassword\n')
-for line in stdout:
-    print line    
-@
-
-Two thing to note -- one is that I didn't need to call the load_system_host_keys. It seems that the AutoAddPolicy takes care of that. The other thing to note is that I needed to set `get_pty` to True. If I didn't it would close the channel with this error (on my machine)::
-
-    sudo: no tty present and no askpass program specified
