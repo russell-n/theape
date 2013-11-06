@@ -43,7 +43,6 @@ class TestFileStorage(unittest.TestCase):
             self.assertFalse(opened.closed)
         return
         
-
     def test_write(self):
         self.storage._file = self.mock_file
         self.storage.write('alpha')

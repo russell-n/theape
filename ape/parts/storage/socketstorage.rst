@@ -20,6 +20,7 @@ Not all of the methods make sense (like open) so only a sub-set will be implemen
 
 .. uml::
 
+   SocketStorage -|> BaseStorage
    SocketStorage :  __init__(file)
    SocketStorage : close()
    SocketStorage : String read()
@@ -48,8 +49,11 @@ SocketStorage API
    SocketStorage.readline
    SocketStorage.readlines
    SocketStorage.read
+   SocketStorage.__iter__
 
-Although the main reason for this Class is to trap socket timeouts when reading lines, it will raise an ApeError when an attempt is made to read the entire buffer (i.e. read readlines) so that if it is really an error to have a timeout, these methods can be used instead. Generally, the main interface is assumed to be the __iter__ method, though, which will catch the timeouts forever.
+Although the main reason for this class is to trap socket timeouts when reading lines, it will raise an ApeError when an attempt is made to read the entire buffer (i.e. read readlines) so that if it is really an error to have a timeout, these methods can be used instead. Generally, the main interface is assumed to be the __iter__ method, though, which will catch the timeouts forever, returning the socketstorage.TIMED_OUT string (copying python's socket.timeout message-string).
+
+.. '
 
 
 

@@ -23,6 +23,7 @@ source: `Online Etymology Dictionary <http://etymonline.com/?term=connection>`_
 .. toctree::
    :maxdepth: 1
 
+   The SSH Connection <sshconnection.rst>
 
 .. toctree::
    :maxdepth: 1

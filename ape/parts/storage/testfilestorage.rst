@@ -3,7 +3,7 @@ Testing The File Storage
 
 ::
 
-    test_2013_10_29_12:29:58_PM.csv
+    test_2013_11_05_02:00:48_PM.csv
     
     
 
@@ -37,9 +37,8 @@ Testing The File Storage
                 self.assertFalse(opened.closed)
             return
             
-    
         def test_write(self):
-            self.storage.file = self.mock_file
+            self.storage._file = self.mock_file
             self.storage.write('alpha')
             self.mock_file.write.assert_called_with('alpha')
             
@@ -49,21 +48,21 @@ Testing The File Storage
             return
     
         def test_writeline(self):
-            self.storage.file = self.mock_file
+            self.storage._file = self.mock_file
             self.storage.writeline('beta')
             self.mock_file.write.assert_called_with('beta\n')
             return
     
         def test_writelines(self):
             text = 'gamma delta sigma rho'.split()
-            self.storage.file = self.mock_file
+            self.storage._file = self.mock_file
             self.storage.writelines(text)
             self.mock_file.writelines.assert_called_with(text)
         
         def test_close(self):
             mock_file = MagicMock()
-            self.storage.file = mock_file
-            self.storage.closed = True
+            self.storage._file = mock_file
+            self.storage.closed = False
             self.storage.close()
             mock_file.close.assert_called_with()
             self.assertTrue(self.storage.closed)
