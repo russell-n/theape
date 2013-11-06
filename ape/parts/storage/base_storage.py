@@ -52,20 +52,29 @@ class BaseStorage(BaseClass):
         """
         return 
 
-    @abstractmethod
     def close(self):
         """
         Closes self.file if it exists, sets self.closed to True
         """
+        if self.file is not None:
+            self.file.close()
+            self.closed = True
         return
 
-    def write(self, text):
+    def write(self, text, exceptions=(AttributeError, ValueError)):
         """
-        Writes the text to the file        
+        Writes the text to the file
+
+        :param:
+
+         - `text`: text to write to the file
+         - `exceptions`: exceptions to catch if the file is closed
+
+        :raise: ApeError if one of the exceptions is raised
         """
         try:
             self.file.write(text)
-        except (AttributeError, ValueError) as error:
+        except exceptions as error:
             self.logger.debug(error)
             error = "{red}{bold}`write` called on unopened file{reset}"
             raise ApeError(error)
@@ -78,17 +87,18 @@ class BaseStorage(BaseClass):
         self.write("{0}\n".format(text))
         return
 
-    def writelines(self, texts):
+    def writelines(self, texts, exceptions=(AttributeError, ValueError)):
         """
         Writes the lines to the file
 
         :param:
 
          - `texts`: collection of strings
+         - `exceptions`: exceptions to catch if the file is closed
         """
         try:
             self.file.writelines(texts)
-        except (AttributeError, ValueError) as error:
+        except exceptions as error:
             self.logger.debug(error)
             error = "{red}{bold}`write` called of unopened file{reset}"
             raise ApeError(error)

@@ -1,4 +1,9 @@
+Testing the SSHConnection
+=========================
 
+Some basic unittesting for the sshconnection.
+
+<<name='imports', echo=False>>=
 # python standard library
 import unittest
 
@@ -8,8 +13,21 @@ from mock import MagicMock, patch
 # this package
 from ape.parts.connections.sshconnection import SSHConnection
 from ape.parts.connections.sshconnection import InOutError
+@
 
+.. currentmodule:: ape.parts.connections.testsshconnection
+.. autosummary::
+   :toctree: api
 
+   TestSSHConnection
+   TestSSHConnection.test_constructor
+   TestSSHConnection.test_client
+   TestSSHConnection.test_sudo
+   TestSSHConnection.test_call
+   TestSSHConnection.test_exec_command
+   TestSSHConnection.test_getattr
+
+<<name='TestSSHConnection', echo=False>>=
 class TestSSHConnection(unittest.TestCase):
     """
     Tests the SSHConnection
@@ -140,3 +158,4 @@ class TestSSHConnection(unittest.TestCase):
         
     
 # end TestSSHConnection
+@

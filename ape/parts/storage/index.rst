@@ -27,6 +27,7 @@ source : `Online Etymology Dictionary <http://www.etymonline.com/index.php?term=
    The Storage Composite <storagecomposite.rst>
    File Storage <filestorage.rst>
    The Base Storage <base_storage.rst>
+   Socket Storage <socketstorage.rst>
    Screen Storage <screenstorage.rst>
 
 .. toctree::

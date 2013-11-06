@@ -1,13 +1,23 @@
 
+# python standard library
+from collections import namedtuple
+
 # third party
 import paramiko
 
 # this package
 from ape import BaseClass
+from ape.parts.storage.socketstorage import SocketStorage
+
+
+SEMICOLON_JOIN = "{0};{1}"
+SUDO = "sudo {0}"
+ADD_NEWLINE = "{0}\n"
+SPACE_JOIN = "{0} {1}"
 
 
 class SSHConnection(BaseClass):
-    def __init__(self, hostname, username, password=None, port=22,
+    def __init__(self, hostname, username, prefix=None, password=None, port=22,
                  compress=False, key_filename=None, timeout=None):
         """
         SSHConnection constructor
@@ -17,6 +27,7 @@ class SSHConnection(BaseClass):
          - `hostname`: the IP address or resolvable host-name
          - `username`: the login username
          - `password`: the password for the device (optional if public-keys set)
+         - `prefix`: string to add as a prefix to the commands
          - `port`: the port for the service
          - `compress`: if True, gzip the connection
          - `key_filename`: file-name or list of file-names for public-keys
@@ -26,6 +37,7 @@ class SSHConnection(BaseClass):
         self.hostname = hostname
         self.username = username
         self.password = password
+        self.prefix = prefix
         self.port = port
         self.compress = compress
         self.key_filename = key_filename
@@ -61,7 +73,51 @@ class SSHConnection(BaseClass):
          - `command`: command to run (without the 'sudo' keyword)
          - `password`: the sudoer's password
          - `timeout`: Amount of time to wait for the connection to respond
+
+        :return: InOutError named tuple
         """
-        stdin, stdout, stderr = self.client.exec_command("sudo {0}".format(command),
-                                                         get_pty=True)
-        stdin.write("{0}\n".format(password))
+        in_out_error = self(SUDO.format(command),
+                            get_pty=True)
+        in_out_error.input.write(ADD_NEWLINE.format(password))
+        return in_out_error
+
+
+    def __call__(self, command, bufsize=-1, timeout=None, get_pty=False):
+        """
+        a secondary interface to allow more arbitrary input
+
+        :param:
+
+         - `command`: string with command to send over the ssh-connection
+         - `bufsize`: bytes to set for the buffer
+         - `timeout`: seconds for channel timeout
+         - `get_pty`: needed for interactive things (like sending the sudo password)
+        """
+        if self.prefix is not None:
+            command = SEMICOLON_JOIN.format(self.prefix, command)
+        stdin, stdout, stderr = self.client.exec_command(command, bufsize=bufsize,
+                                                         timeout=timeout,
+                                                         get_pty=get_pty)
+        return InOutError(input=SocketStorage(stdin), output=SocketStorage(stdout), error=SocketStorage(stderr))
+
+    exec_command = __call__
+
+    def __getattr__(self, command):
+        """
+        Calls the exec-command
+
+        :param:
+
+         - `command`: command to execute
+         - `arguments`: string of arguments to add to the command
+         - `bufsize`: buffer size
+         - `timeout`: channel timeout
+         - `get_pty`: If true sets up the pseudo-terminal
+        """
+        def procedure_call(arguments='', bufsize=-1, timeout=None, get_pty=False):
+            return self(SPACE_JOIN.format(command, arguments), bufsize=bufsize, timeout=timeout, get_pty=get_pty)
+        return procedure_call
+        
+
+
+InOutError = namedtuple('InOutError', 'input output error'.split())
