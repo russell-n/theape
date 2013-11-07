@@ -1,6 +1,7 @@
 
 # python standard library
 from collections import namedtuple
+import threading
 
 # third party
 import paramiko
@@ -117,7 +118,24 @@ class SSHConnection(BaseClass):
         def procedure_call(arguments='', bufsize=-1, timeout=None, get_pty=False):
             return self(SPACE_JOIN.format(command, arguments), bufsize=bufsize, timeout=timeout, get_pty=get_pty)
         return procedure_call
-        
+
+    @property
+    def lock(self):
+        """
+        A re-entrant lock that threaded users of the connection can use
+        """
+        if self._lock is None:
+            self._lock = threading.RLock()
+        return self._lock
+
+    def close(self):
+        """
+        Closes the connection and sets SSHClient to None
+        """
+        self.client.close()
+        self._client = None
+        return
+# end class SSHConnection    
 
 
 InOutError = namedtuple('InOutError', 'input output error'.split())

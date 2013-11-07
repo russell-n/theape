@@ -9,6 +9,7 @@ from ape.commoncode.oatbran import CommonPatterns
 
 
 ZERO = '0'
+MICRO = 10**6
 
 
 class RelativeTimeMapGroups(object):
@@ -124,40 +125,82 @@ class RelativeTimeMap(BaseClass):
                                                              CommonPatterns.optional_spaces +
                                                              CharacterClass.character_class('Ss'))
         return self._second_expression
-
-    def get_number(self, source, expression, groupname):
-        """
-        Gets the number-value from the source
-
-        :param:
-
-         - `source`: string with the time
-         - `expression`: regex to search the string
-         - `groupname`: named-group name to get from the match object
-
-        :rtype: float        
-        :return: number from source or '0'
-        """
-        try:
-            return float(expression.search(source).groupdict(default=ZERO)[groupname])
-        except AttributeError as error:
-            self.logger.debug(error)
-            self.logger.debug('Source: {0}'.format(source))
-            self.logger.debug('Group: {0}'.format(groupname))
-            return 0
-    
-    def __call__(self, source):
-        """
-        Converts the source string to seconds
-
-        :param:
-
-         - `source`: string with '<float> <unit>' pairs (e.g. '1 Hour 3 Min')
-
-        :rtype: float
-        :return: total seconds found in the source
-        """
-        seconds = self.get_number(source, self.second_expression, RelativeTimeMapGroups.seconds)
-        minutes = self.get_number(source, self.minute_expression, RelativeTimeMapGroups.minutes)
-        return seconds + minutes
 #end class RelativeTimeMap
+
+
+class RelativeTime(BaseClass):
+    """
+    A timedeltas extension
+    """
+    def __init__(self, source):
+        """
+        RelativeTime constructor
+
+        :param:
+
+         - `source`: A string with relative time in it (e.g. '1week 2 days 4.2 seconds')
+        """
+        super(RelativeTime, self).__init__()
+        self.microseconds = 0
+        self._time_map = None
+        self._source = None
+        self.source = source
+        return
+
+    @property
+    def source(self):
+        """
+        :return: the source string
+        """
+        return self._source
+
+    @source.setter
+    def source(self, source):
+        """
+        sets the source and all the time values
+        """
+        self._source = source
+        self.populate_fields()
+        return
+    
+    @property
+    def time_map(self):
+        """
+        A relative time map instance to parse the source.
+        """
+        if self._time_map is None:
+            self._time_map = RelativeTimeMap()
+        return self._time_map
+
+    def integer_fraction(self, expression, group_name):
+        """
+        Gets the token from self._source using expression, converts to integer and fraction (mantissa)
+
+        :return: quotient, remainder or 0,0 if expression doesn't match
+        """
+        match = expression.search(self._source)
+        if match is not None:
+            number = match.group(group_name)
+            if '.' in number:
+                integer, fraction = number.split('.')
+                quotient = int(integer)
+                if len(fraction):
+                    remainder = int(fraction)
+                else:
+                    remainder = 0
+            else:
+                quotient, remainder = int(number), 0
+            self.logger.debug('q,r = {0},{1} (source={2})'.format(quotient, remainder, number))
+            return quotient, remainder
+        self.logger.debug("{0} not found in {1}".format(expression, self._source))
+        return 0,0 
+        
+    def populate_fields(self):
+        """
+        populates the time fields with values (e.g. self.minutes)
+        """
+        self.seconds, fraction = self.integer_fraction(self.time_map.second_expression, RelativeTimeMapGroups.seconds)
+        self.microseconds = int(fraction * MICRO)
+        return
+
+# end class RelativeTime    

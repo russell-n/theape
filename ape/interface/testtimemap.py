@@ -5,12 +5,11 @@ import random
 import string
 from collections import defaultdict
 
-# third party
-
-
 # this package
+from ape import BaseClass
 from timemap import RelativeTimeMap
 from timemap import RelativeTimeMapGroups
+from timemap import RelativeTime
 
 
 EMPTY_STRING = ''
@@ -249,7 +248,7 @@ class TestRelativeTimeMapExpressions(unittest.TestCase):
         random_keys = random.sample(time_source.keys(), key_count)
         random.shuffle(random_keys)
         DEFAULT = '0'
-        expected = defaultdict(lambda : '0')
+        expected = defaultdict(lambda : DEFAULT)
         sources = []
 
         for key in random_keys:
@@ -262,21 +261,72 @@ class TestRelativeTimeMapExpressions(unittest.TestCase):
             self.assertEqual(expected[key], value)
         return
 
-    def test_seconds_conversion(self):
-        """
-        Does the __call__ return a float matching the seconds?
-        """
-        self.try_assert_almost_equal(self.get_seconds,
-                                     float)
+
+
+class TestRelativeTime(unittest.TestCase):
+    """
+    Tests the Relative Time class
+    """
+    def setUp(self):
+        self.source = '5 Sec'
+        self.relative = RelativeTime(self.source)
+        self.time_map = RelativeTimeMap()
         return
 
-    def test_minutes_conversion(self):
+    def test_constructor(self):
         """
-        Does the __call__ return a float converting the minutes to seconds?
+        Does the RelativeTime class' constructor match the expectation? 
         """
-        self.try_assert_almost_equal(self.get_minutes,
-                                     lambda x: float(x) * 60)
-        return        
+        # is it setting the parameters?
+        self.assertEqual(self.relative.source, self.source)
+
+        # is it a child of BaseClass (so it has a logger)?
+        self.assertIs(self.relative.__class__.__base__, BaseClass)
+
+        # does it require the source parameter?
+        with self.assertRaises(TypeError):
+            RelativeTime()
+        return
+
+    def test_seconds(self):
+        """
+        Does it convert a source with only seconds to integers?
+        """
+        source = '3.5 sec'
+        seconds = 3
+        microseconds = 5000000
+        relative = RelativeTime(source)
+        self.assertEqual(relative.microseconds, microseconds)
+        self.assertEqual(relative.seconds, seconds)
+        return
+
+    def test_integer_fraction(self):
+        """
+        Does it convert the time to q,r?
+        """
+        seconds = 3
+        milliseconds = 5
+        source = '3.5 seconds'
+        relative = RelativeTime(source)
+        q,r = relative.integer_fraction(self.time_map.second_expression, RelativeTimeMapGroups.seconds)
+        self.assertEqual(seconds, q)
+        self.assertEqual(milliseconds, r)
+
+        q, r = relative.integer_fraction(self.time_map.hour_expression, RelativeTimeMapGroups.hours)
+        self.assertEqual(0, q)
+        self.assertEqual(0, r)
+
+        relative._source = '3 days'
+        q, r = relative.integer_fraction(self.time_map.day_expression, RelativeTimeMapGroups.days)
+        self.assertEqual(q, 3)
+        self.assertEqual(r, 0)
+
+        relative._source = '4. minutes'
+        q, r = relative.integer_fraction(self.time_map.minute_expression, RelativeTimeMapGroups.minutes)
+        self.assertEqual(q, 4)
+        self.assertEqual(r, 0)
+
+        return    
 
 
 if __name__ == '__main__':

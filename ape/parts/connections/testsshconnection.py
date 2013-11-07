@@ -138,5 +138,21 @@ class TestSSHConnection(unittest.TestCase):
         self.connection.client.exec_command.assert_called_with('nietzsche ' + command, bufsize=-1,
                                                                timeout=None, get_pty=False)
         
-    
+
+    def test_lock(self):
+        """
+        Does the connection return the same lock to all users?
+        """
+        lock_1 = self.connection.lock
+        lock_2 = self.connection.lock
+        self.assertIs(lock_1, lock_2)
+        return
+
+    def test_close(self):
+        """
+        Does it close the connection and re-set it to None?
+        """
+        self.connection.close()
+        self.client.close.assert_called_with()
+        self.assertIsNone(self.connection._client)
 # end TestSSHConnection

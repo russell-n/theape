@@ -22,16 +22,16 @@ class SocketStorage(BaseStorage):
     """
     A class to store data to a file
     """
-    def __init__(self, file):
+    def __init__(self, file_object):
         """
         SocketStorage constructor
 
         :param:
 
-         - `socket_file`: opened file-like socket-based object
+         - `file_object`: opened file-like socket-based object
         """
         super(SocketStorage, self).__init__()
-        self._file = file
+        self._file = file_object
         self.closed = False
         return
 
