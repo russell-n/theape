@@ -1,6 +1,8 @@
 Socket Storage
 ==============
 
+.. _ape-socket-storage:
+
 This is a module for classes that implement a file-like interface to a socket. Its main purpose is to catch socket timeout errors.
 
 Contents:

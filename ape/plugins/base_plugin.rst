@@ -19,7 +19,9 @@ The `BasePlugin` class and the ``plugins`` package also provides the foundation 
 
 To summarize, the `BasePlugin` is the main way to add code that will be exposed to the end user.
 
-.. warning:: I have had a lot of problems troubleshooting when I accidentally name plugin-class the same thing as (one of) the class(es) it's building -- the re-definition of the name will wipe out your imported name. Don't do it.
+.. warning:: I have had a lot of problems troubleshooting when I accidentally name plugin-class the same thing as (one of) the class(es) it's building -- the re-definition of the name will wipe out your imported name. Don't do it. (e.g. don't create a plugin named Sample that builds a class named Sample as its product.)
+
+.. '
 
 Class Diagram
 -------------
@@ -88,7 +90,7 @@ These are the classes that the BasePlugin uses.
 
    BaseClass.logger
 
-.. currentmodule:: ape.components.helppage.helppage
+.. currentmodule:: ape.parts.helppage.helppage
 .. autosummary::
    :toctree: api
 

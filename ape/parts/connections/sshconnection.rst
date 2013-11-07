@@ -3,10 +3,61 @@ The SSH Connection
 
 .. _ape-ssh-connection:
 
-This is the workhorse connection built around the `paramiko` SSHClient. Updates in paramiko's interface as well as a better understanding of how it works has lead me to re-start it as the basis for the other connection types.
+This is the workhorse connection built around the `paramiko` SSHClient. Updates in paramiko's interface as well as a better understanding of how it works has lead me to re-start it as the basis for the other connection types. The main way to use it is meant to be with dot-notation. To do ``ls -a`` for instance, you would do something like::
+
+
+   connection = SSHConnection(hostname='someip', username='tester')
+   opened_files = connection.ls('-a')
+   for line in opened_files.output:
+       print line
+
+.. '
+          
+This assumes you have your public keys set up, otherwise you would need to pass in the password to the constructor.
+
+Sometimes people create commands as files with extensions (e.g. ``wifi.sh``) which will mess up the dot-notation, in that case you can pass in the whole thing as a string by calling the connection::
+
+   opened_files = connection('wifi.sh -h')
+   for line in opened_files.output:
+       print line
+
+   for line in opened_files.error:
+       print line
+
+I have also aliased the call with ``exec_command`` so that code that is expecting a paramiko SSHClient can still use it::
+
+    stdin, stdout, stderr = connection.exec_command('iperf -s')
+
+.. note:: What's being returned in all cases is an :ref:`InOutError <ape-sshconnection-inouterror>` named-tuple so you can use either tuple unpacking or the dot-notation to get at the file-like objects. I prefer the dot-notation because I tend to forget in what order the objects are returned.
+
+.. warning:: I am `not` returning Channel-files, I am returning :ref:`SocketStorage <ape-socket-storage>` objects. Assuming I did it right the only real difference is that it will raise an ApeErrror instead of socket errors so that the Composites will try and exit gracefully.
 
 .. '
 
+There is also a ``sudo`` method to let you run something as root::
+
+   in_out_error = connection.sudo('nmap -sS "192.168.10.*"', password='testlabs')
+   for line in in_out_error.output:
+       print line
+
+This is the equivalent of::
+
+   in_out_error = connection('sudo nmap -sS "192.168.10.*"', get_pty=True)
+   in_out_error.input.write('testlabs')
+   for line in in_out_error.output:
+       print line
+
+But I figured it's such a rare thing that I wouldn't be able to remember how to do it when I needed it.
+
+There's also a lock so that if multiple pieces of code are using the same connection they can be thread-safe::
+
+    with connection.lock:
+        in_out_error = connection.cat('/proc/cpuinfo')
+
+.. '
+        
+I'm not sure if this is better or it's better to just close the connection when you're not using it, but it's there.
+       
 
 
 
@@ -19,6 +70,7 @@ This is the workhorse connection built around the `paramiko` SSHClient. Updates 
    SSHConnection.client
    SSHConnection.sudo
    SSHConnection.__call__
+   SSHConnection.lock
 
 .. uml::
 
@@ -29,6 +81,7 @@ This is the workhorse connection built around the `paramiko` SSHClient. Updates 
    SSHConnection : __call__(command, [timeout=None, [get_pty=False]])
    SSHConnection : exec_command(command, [timeout=None, [get_pty=False]])
    SSHConnection : __getattr__(command, [timeout, [get_pty=False]])
+   SSHConnection o-- threading.RLock
 
 .. _ape-sshconnection-client:
 

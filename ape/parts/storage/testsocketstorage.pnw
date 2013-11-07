@@ -50,7 +50,8 @@ class TestSocketStorage(unittest.TestCase):
         Makes sure the signature is as expected (requires a file to be passed in)
         """
         self.assertEqual(self.storage.file, self.socket)
-        self.assertRaises(TypeError, SocketStorage, ())
+        with self.assertRaises(TypeError):
+            SocketStorage()
         return
 
     def test_close(self):
