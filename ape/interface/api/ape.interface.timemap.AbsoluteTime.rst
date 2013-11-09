@@ -1,0 +1,29 @@
+ape.interface.timemap.AbsoluteTime
+==================================
+
+.. currentmodule:: ape.interface.timemap
+
+.. autoclass:: AbsoluteTime
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~AbsoluteTime.__init__
+      ~AbsoluteTime.log_error
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~AbsoluteTime.logger
+   
+   

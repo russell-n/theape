@@ -19,6 +19,10 @@ Contents:
 
    * :ref:`The RelativeTime class <ape-relative-time>`
 
+   * :ref:`The AbsoluteTime Class <ape-absolute-time>`
+
+   * :ref:`AbsoluteTime Class Diagram <absolutetime-class-diagram>`
+
 .. _relative-time-map-model:
 
 The UML Model
@@ -40,19 +44,35 @@ The UML Model
    :toctree: api
 
    RelativeTimeMap
-   
+
+<<name='pweave_check', echo=False>>=
+IN_PWEAVE = __name__ == '__builtin__'
+@
 <<name='imports', echo=False>>=
 # python standard library
 import re
+import math
+from datetime import timedelta
+from datetime import datetime
+if IN_PWEAVE:
+    import os
+
+# third-party
+from dateutil.relativedelta import relativedelta
+import dateutil.parser 
 
 # this package
 from ape import BaseClass
+from ape import ApeError
 from ape.commoncode.oatbran import CharacterClass, Numbers, Group
 from ape.commoncode.oatbran import CommonPatterns
+from ape.commoncode.code_graphs import module_diagram, class_diagram
 @
 
 <<name='constants', echo=False>>=
 ZERO = '0'
+INT_ZERO = 0
+ONE = 1
 MICRO = 10**6
 @
 
@@ -193,10 +213,7 @@ This is an attempt to extend the `timedelta` with weeks, hours, and minutes. The
    RelativeTime -|> BaseClass
    RelativeTime o-- RelativeTimeMap
    RelativeTime : __init__(source)
-   RelativeTime : int weeks
    RelativeTime : int days
-   RelativeTime : int hours
-   RelativeTime : int minutes
    RelativeTime : int seconds
    RelativeTime : int microseconds
    RelativeTime : datetime.timedelta
@@ -209,13 +226,120 @@ By and large the intention is to use this like a time-delta object but with extr
 
    RelativeTime
    RelativeTime.time_map
+   RelativeTime.days
+   RelativeTime.seconds
+   RelativeTime.microseconds
+   RelativeTime.reset
+   RelativeTime.total_seconds
+   source_required
+
+   
+I've run into a circular call problem -- my intention was to defer the calculations of the properties until someone called them, but since the larger properties cascade into the smaller ones (e.g. 1.5 minutes would add 30 to seconds to get rid of the fraction) I have to have a single point where the calculations are done so that all of them are done. To do this without requiring anyone to do an explicit method call I'm doing the calculations on the setting of the source. Since I am averse to forcing calculations on construction of an object, the `source` parameter has been changed to optional and setting it to None should reset the fields.
+
+To make it more obvious that the fields have not been populated they will have the default of None. This way if the source has not been set and a calculation is attempted using the fields it will raise an error.
+
+Reading the timedelta information more closely, it appears that it actually accepts anything I want to give it (up to weeks), it just converts them to days, seconds, and microseconds to store them. So the cascading that I was trying to do (separating out the fraction and propagating it to another unit) is actually unnecessary unless there's a need to preserve the separate units. To make it easier I won't.
+
+Well... now that I think about it, I've changed things so much that it has brought me back around to where using the relativedelta might make sense. Unfortunately I still need the hack, but this should allow it to accept months and years.
+
+.. '
+
+.. csv-table:: relativetimedelta Attributes
+   :header: Constructor, Attribute
+
+   years,
+   months,
+   weeks,
+   days, days
+   hours,
+   minutes
+   seconds, seconds
+   microseconds, microseconds
+
+The timedelta only stores three attributes -- days, seconds, and microseconds, athough it takes the other attributes on construction of the object and then converts them to the three permanent attributes.
+
+.. warning:: ``timedelta`` takes floats (like 3.2) but the extra attributes for relativedelta (months and years) have to be integers.
+
+ApeError Translators
+--------------------
+
+Since the operations are expected to raise ApeErrors whenever possible, these decorators will translate standard exceptions to ApeErrors.
+
+<<name='decorators', echo=False>>=
+def source_required(method):
+    """
+    Catches AttributeErrors and TypeErrors and raises ApeErrors in their place so the operators can recover
+
+    :param:
+
+      - `method`: the method to decorate
+    """
+    def wrapped(self, *args, **kwargs):
+        try:
+            return method(self, *args, **kwargs)
+        except (AttributeError, TypeError) as error:
+            self.log_error(error)
+            raise ApeError("self.source not set ('{0}')".format(self.source))
+    return wrapped
+
+def operation_error(method):
+    """
+    Catches AttributeErrors and TypeErrors and raises ApeErrors in their place so the operators can recover
+
+    :param:
+
+      - `method`: the method to decorate
+      - `message`: for ApeError
+    """
+    def wrapped(self, other):
+        try:
+            return method(self, other)
+        except TypeError as error:
+            self.log_error(error)
+            raise ApeError("operand must be timedelta object, not '{0}".format(other))
+    return wrapped
+
+def number_error(method):
+    """
+    Catches AttributeErrors and TypeErrors and raises ApeErrors in their place so the operators can recover
+
+    :param:
+
+      - `method`: the method to decorate
+    """
+    def wrapped(self, other):
+        try:
+            return method(self, other)
+        except TypeError as error:
+            self.log_error(error)
+            raise ApeError("operand must be numeric object, not '{0}".format(other))
+    return wrapped
+
+def unary_error(method):
+    """
+    Catches AttributeErrors and TypeErrors and raises ApeErrors in their place so the operators can recover
+
+    :param:
+
+      - `method`: the method to decorate
+    """
+    def wrapped(self):
+        try:
+            return method(self)
+        except TypeError as error:
+            self.log_error(error)
+            raise ApeError("timedelta must be object, not '{0}".format(self.timedelta))
+    return wrapped
+
+
+@
 
 <<name='RelativeTime', echo=False>>=
 class RelativeTime(BaseClass):
     """
     A timedeltas extension
     """
-    def __init__(self, source):
+    def __init__(self, source=None):
         """
         RelativeTime constructor
 
@@ -224,10 +348,10 @@ class RelativeTime(BaseClass):
          - `source`: A string with relative time in it (e.g. '1week 2 days 4.2 seconds')
         """
         super(RelativeTime, self).__init__()
-        self.microseconds = 0
+        self.timedelta = None
         self._time_map = None
         self._source = None
-        self.source = source
+        self.source = source    
         return
 
     @property
@@ -240,10 +364,13 @@ class RelativeTime(BaseClass):
     @source.setter
     def source(self, source):
         """
-        sets the source and all the time values
+        sets the source and all the time values (if source is None, resets the values)
         """
         self._source = source
-        self.populate_fields()
+        if source is not None:            
+            self.populate_fields()
+        else:
+            self.reset()
         return
     
     @property
@@ -255,36 +382,456 @@ class RelativeTime(BaseClass):
             self._time_map = RelativeTimeMap()
         return self._time_map
 
-    def integer_fraction(self, expression, group_name):
+    @property
+    @source_required
+    def days(self):
         """
-        Gets the token from self._source using expression, converts to integer and fraction (mantissa)
+        gets the timedelta days
 
-        :return: quotient, remainder or 0,0 if expression doesn't match
+        :return: number of days as an integer
+        :raise: ApeError if the timedelta hasn't been built
         """
-        match = expression.search(self._source)
-        if match is not None:
-            number = match.group(group_name)
-            if '.' in number:
-                integer, fraction = number.split('.')
-                quotient = int(integer)
-                if len(fraction):
-                    remainder = int(fraction)
-                else:
-                    remainder = 0
-            else:
-                quotient, remainder = int(number), 0
-            self.logger.debug('q,r = {0},{1} (source={2})'.format(quotient, remainder, number))
-            return quotient, remainder
-        self.logger.debug("{0} not found in {1}".format(expression, self._source))
-        return 0,0 
-        
+        return self.timedelta.days
+    
+    @property
+    @source_required
+    def seconds(self):
+        """
+        Gets the seconds from the time-delta
+
+        :return: seconds (not total-seconds) as integer
+        :raise: ApeError if the timedelta hasn't been built
+        """
+        return self.timedelta.seconds
+
+    @property
+    @source_required
+    def microseconds(self):
+        """
+        Gets the microseconds from the timedelta
+
+        :return: seconds (not total-seconds) as an integer
+        :raise: ApeError if the timedelta not built not set
+        """
+        return self.timedelta.microseconds
+
+    @source_required
+    def get_number(self, expression, group_name):
+        """
+        gets the number from self.source that matches the expression
+
+        :return: string with number or '0' if not found
+        :raise: ApeError if self._source has not been set or group is missing
+        :raise: IndexError if the group_name is not found (this is likely an implementation error, we want to crash)
+        """
+        match = expression.search(self.source)
+        if match is None:
+            return '0'
+        return match.group(group_name)
+   
     def populate_fields(self):
         """
         populates the time fields with values (e.g. self.minutes)
+
         """
-        self.seconds, fraction = self.integer_fraction(self.time_map.second_expression, RelativeTimeMapGroups.seconds)
-        self.microseconds = int(fraction * MICRO)
+        years = self.get_number(self.time_map.year_expression, RelativeTimeMapGroups.years)
+        months = self.get_number(self.time_map.month_expression, RelativeTimeMapGroups.months)
+        weeks = self.get_number(self.time_map.week_expression, RelativeTimeMapGroups.weeks)
+        days = self.get_number(self.time_map.day_expression, RelativeTimeMapGroups.days)
+        hours = self.get_number(self.time_map.hour_expression, RelativeTimeMapGroups.hours)
+        minutes = self.get_number(self.time_map.minute_expression, RelativeTimeMapGroups.minutes)
+        seconds = self.get_number(self.time_map.second_expression, RelativeTimeMapGroups.seconds)
+
+        now = datetime.now()
+
+        # HACK
+        # timedelta doesn't handle varying-units (e.g. 28 vs 30 vs 31 day in a month)
+        # relativedelta does -- but it returns a datetime object, not a timedelta
+        # so the adding and subtracting is to convert it to a timedelta
+        self.timedelta = now + relativedelta(years=int(years),
+                                             months=int(months),
+                                             weeks=float(weeks),
+                                             days=float(days),
+                                             hours=float(hours),
+                                             minutes=float(minutes),
+                                             seconds=float(seconds)) - now
+        
         return
 
+    @source_required
+    def total_seconds(self):
+        """
+        gets the timedelta total_seconds
+
+        :return: all the times summed to seconds (as a float)
+        :raise: ApeError if the source has not been set
+        """
+        return self.timedelta.total_seconds()
+
+    def reset(self):
+        """
+        Resets the attributes (undoes populate_fields)
+        """
+        self.timedelta = None
+        return
+
+    # the operator overloading
+    def __eq__(self, other):
+        """
+        Checks if the timedelta is the same as the other.
+
+        :param:
+
+         - `other`: timedelta
+
+        :return: True if self.timedelta is equal to other
+        """
+        return self.timedelta == other
+
+    def __ne__(self, other):
+        """
+        Checks to see if the timedelta isn't equal to the other
+
+        :return: True if they aren't equal
+        """
+        return self.timedelta != other
+    
+    def __cmp__(self, other):
+        """
+        Compares timestamp with other timestamp
+
+        :param:
+
+         - `other`: a timedelta
+
+        :return: -1 if less, 0 if equal, 1 if greater
+        """
+        if self.timedelta == other:
+            return 0
+        if self.timedelta < other:
+            return -1
+        if self.timedelta > other:
+            return 1
+        return
+    
+    @operation_error
+    def __add__(self, other):
+        """
+        adds the timedelta to other
+
+        :param:
+
+         - `other`: a timedelta object
+
+        :return: self.timedelta + other
+        """
+        return self.timedelta + other
+
+    @operation_error
+    def __radd__(self, other):
+        """
+        adds the timedelta to other
+
+        :param:
+
+         - `other`: a timedelta object
+
+        :return: self.timedelta + other
+        """
+        return self.timedelta + other
+
+    @operation_error
+    def __sub__(self, other):
+        """
+        subtracts the other from the timedelta
+
+        :param:
+
+         - `other`: a timedelta object
+
+        :return: self.timedelta - other
+        """
+        return self.timedelta - other
+
+    @operation_error
+    def __rsub__(self, other):
+        """
+        subtracts the timedelta from the other
+
+        :param:
+
+         - `other`: a timedelta object
+
+        :return: other - self.timedelta
+        """
+        return other - self.timedelta
+
+    @number_error
+    def __mul__(self, multiplier):
+        """
+        mulitplies the timedelta
+
+        :return: timedelta * multiplier        
+        """
+        return self.timedelta * multiplier
+
+    @number_error
+    def __rmul__(self, multiplier):
+        """
+        mulitplies the timedelta
+
+        :return: multiplier * timedelta        
+        """
+        return multiplier * self.timedelta
+
+    def __str__(self):
+        """
+        Pass-through to the time-delta
+        """
+        return str(self.timedelta)
+
+    def __repr__(self):
+        """
+        Pass-through to the timedelta
+        """
+        return self.timedelta.__repr__()
+
+    @unary_error
+    def __neg__(self):
+        """
+        Negates the timedelta
+
+        :return: -self.timedelta
+        """
+        return -self.timedelta
+
+    @unary_error
+    def __pos__(self):
+        """
+        Makes the timedelta positive
+
+        :return: +self.timedelta
+        """
+        return +self.timedelta
+
+    @unary_error
+    def __abs__(self):
+        """
+        Calls the absolute function on the timedelta
+
+        :return: abs(self.timedelta)
+        """
+        return abs(self.timedelta)
+
+    @number_error
+    def __floordiv__(self, integer):
+        """
+        Computes the floor and throws away the remainder
+
+        :return: self.timedelta // integer        
+        """
+        return self.timedelta // integer
 # end class RelativeTime    
 @
+
+The Timedelta
+-------------
+
+.. currentmodule:: datetime
+.. autosummary::
+   :toctree: api
+
+   timedelta
+   timedelta.days
+   timedelta.seconds
+   timedelta.microseconds
+   timedelta.total_seconds
+
+Since the timedelta supports operations, the RelativeTime has overloaded the following operations so that it behaves like a timedelta object.   
+
+.. csv-table:: Timedelta Operations
+   :header: Operation, Description
+
+   t1 + t2, Sums two timedeltas
+   t1 - t2, Subtracts one timedelta from another
+   t1 * int, Mulitplies a timedelta by an integer
+   t1 // int, Calculates the floor of a timedelta, throws away the remainder
+   +t1, Makes the timedelta positive
+   -t1, Negates the timedelta
+   abs(t1), Depends on number of days
+   str(t), string 
+   repr(t), representation string
+
+Equality and inequality have also been implemented but there are two warnings:
+
+    * If you have too many decimal places for parameters fed to a timedelta they might not equate with the RelativeTime, even if given the same parameters
+
+    * This only works if the RelativeTime is on the left-hand-side (RelativeTime == timedelta)
+
+.. _relativetime-class-diagram:
+
+RelativeTime Class Diagram
+--------------------------
+
+This is an auto-generated diagram of the :ref:`RelativeTime Class <relative-time>`.
+
+<<name='relativetime_class_diagram', echo=False, wrap=False, results='sphinx'>>=
+if IN_PWEAVE:
+    this_file = os.path.join(os.getcwd(), 'timemap.py')
+    class_diagram_file = class_diagram(class_name="RelativeTime",
+                                       filter='OTHER',
+                                       module=this_file)
+    print ".. image:: {0}".format(class_diagram_file)
+
+@
+
+.. _ape-absolute-time:
+
+AbsoluteTime
+------------
+
+This is a class to get ``datetime`` objects based on a string input. It really is just a pass-through to ``dateutil.parser.parse`` but holds persistent values so they don't have to be passed in for every function call by the user.
+
+.. '
+
+.. currentmodule:: dateutil.parser
+.. autosummary::
+   :toctree: api
+
+   parse
+
+.. currentmodule:: datetime
+.. autosummary::
+   :toctree: api
+
+   datetime
+
+.. uml::
+
+   AbsoluteTime -|> BaseClass
+   AbsoluteTime o-- dateutil.parse
+   AbsoluteTime : datetime default
+   AbsoluteTime : boolean ignoretz
+   AbsoluteTime : (function or dict) tzinfos
+   AbsoluteTime : boolean dayfirst
+   AbsoluteTime : boolean yearfirst
+   AbsoluteTime : boolean fuzzy
+   AbsoluteTime : parserinfo parserinfo
+   AbsoluteTime : datetime __call__(string)
+
+.. currentmodule:: ape.interface.timemap
+.. autosummary::
+   :toctree: api
+
+   AbsoluteTime
+   AbsoluteTime.__call__
+
+<<name='AbsoluteTime', echo=False>>=
+class AbsoluteTime(BaseClass):
+    """
+    A container for the dateutil.parser.parse
+    """
+    def __init__(self, default=None, ignoretz=False, tzinfos=None, dayfirst=False,
+                 yearfirst=False, fuzzy=True, parserinfo=None):
+        """
+        AbsoluteTime constructor
+
+        :param:
+
+         - `default`: datetime object to use to supply missing fields
+         - `ignoretz`: if true, ignore timezone information in string
+         - `tzinfos`: dict or function that provides custom timezone information
+         - `dayfirst`: if true, ambiguous dates assume DD-MM-YY first
+         - `yearfirst`: if true, ambiguous dates assume YY-MM-DD
+         - `fuzzy`: if true, ignore unrecognizable tokens
+         - `parserinfo`: parserinfo class that changes the behavior of the parser
+        """
+        super(AbsoluteTime, self).__init__()
+        self.default = default
+        self.ignoretz = ignoretz
+        self.tzinfos = tzinfos        
+        self.dayfirst = dayfirst
+        self.yearfirst = yearfirst
+        self.fuzzy = fuzzy
+        self.parserinfo = parserinfo
+        return
+
+    def __call__(self, source):
+        """
+        The main interface -- calls dateutil.parser.parse(source)
+
+        :param:
+
+         - `source`: string with time and date information to create datetime
+
+        :return: datetime object created from `source`
+        :raise: ApeError if the string is unrecognizable
+        """
+        try:
+            return dateutil.parser.parse(source,
+                                         default=self.default,
+                                         ignoretz=self.ignoretz,
+                                         tzinfos=self.tzinfos,
+                                         dayfirst=self.dayfirst,
+                                         yearfirst=self.yearfirst,
+                                         fuzzy=self.fuzzy,
+                                         parserinfo=self.parserinfo)
+        except ValueError as error:
+            self.log_error(error)
+            raise ApeError("dateutil.parser.parse unable to parse '{0}'".format(source))
+        return
+# end class AbsoluteTime            
+@
+
+.. _absolutetime-class-diagram:
+
+AbsoluteTime Class Diagram
+--------------------------
+
+This is an auto-generated diagram of the :ref:`AbsoluteTime Class <ape-absolute-time>`.
+
+<<name='absolutetime_class_diagram', echo=False, wrap=False, results='sphinx'>>=
+if IN_PWEAVE:
+    this_file = os.path.join(os.getcwd(), 'timemap.py')
+    class_diagram_file = class_diagram(class_name="AbsoluteTime",
+                                       filter='OTHER',
+                                       module=this_file)
+    print ".. image:: {0}".format(class_diagram_file)
+
+@
+
+The AbsoluteTime Attributes
+---------------------------
+
+These are the same as the ``parse`` function's arguments. I think in most cases the defaults are all that you'll need, but I'll at least document how the `dayfirst` and `yearfirst` arguments affect the format precedence. If the timestamp is unambiguous, they won't matter, but for the cases where the fields *are* ambiguous (e.g. '11-11-23') the two parameters decide what to assume about the timestamp.
+
+.. csv-table:: Format Precedence
+   :header: ``dayfirst``, ``yearfirst``, Order of Precedence (Left to Right)
+   :delim: ;
+
+   False; False; MM-DD-YY, DD-MM-YY, YY-MM-DD (default)
+   False; True; YY-MM-DD, MM-DD-YY, DD-MM-YY
+   True; False; DD-MM-YY, MM-DD-YY, YY-MM-DD
+   True; True; YY-MM-DD, DD-MM-YY, MM-DD-yy
+
+
+.. _timemap-module-diagram:
+   
+Module Diagram
+--------------
+
+This is a diagram of dependencies for this module.
+
+<<name='module_diagram', echo=False, wrap=False, results='sphinx'>>=
+if IN_PWEAVE:
+    module_diagram_file = module_diagram(module=this_file, project='timemap')
+    print ".. image:: {0}".format(module_diagram_file)
+@
+
+<<name='debug', echo=False>>=
+if __name__ == '__main__':
+    import pudb; pudb.set_trace()
+    r = RelativeTime('3 seconds')
+    t = timedelta(seconds=3)
+    r.seconds
+    check = r != t

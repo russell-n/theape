@@ -9,6 +9,7 @@ from collections import OrderedDict, namedtuple
 from ape.commoncode.baseclass import BaseClass
 from ape.commoncode.code_graphs import module_diagram, class_diagram
 from ape.commoncode.errors import ConfigurationError
+from ape.interface.timemap import RelativeTime, AbsoluteTime
 
 
 DEFAULT = 'DEFAULT'
@@ -212,6 +213,25 @@ class ConfigurationMap(BaseClass):
         
         definition = namedtuple(section, fields)
         return definition(*values)
+
+    def get_relativetime(self, section, option, optional=False, default=None):
+        """
+        Gets a relativetime object based on the option (assumes value is timestamp) (see timemap.RelativeTime)
+
+        :return: RelativeTime object
+        """
+        source = self.get(section, option, optional, default)
+        return RelativeTime(source=source)
+
+    def get_datetime(self, section, option, optional=False, default=None):
+        """
+        Gets a datetime object based on the option (value is timestamp) (see timemap.AbsoluteTime)
+
+        :return: datetime object
+        """
+        source = self.get(section, option, optional, default)
+        abtime = AbsoluteTime()
+        return abtime(source)
 
     @property
     def sections(self):

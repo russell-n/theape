@@ -17,11 +17,28 @@ except ImportError:
 from ape.commoncode.errors import ApeError, ConfigurationError
 from ape.components.component import Component, Composite
 @
-<<name='TestComponent', wrap=False>>=
+
+Testing the Component
+---------------------
+
+.. currentmodule:: ape.components.test_components
+.. autosummary::
+   :toctree: api
+
+   TestComponent.test_bad_component
+
+<<name='TestComponent', echo=False>>=
 class BadComponent(Component):
     def __init__(self):
         return
 
+class StillBadComponent(Component):
+    def __init__(self):
+        return
+
+    def __call__(self):
+        return
+    
 class BetterComponent(Component):
     def __call__(self):
         return
@@ -40,14 +57,26 @@ class TestComponent(unittest.TestCase):
     
     def test_bad_component(self):
         """
-        Does it raise a TypeError if you do not implement the __call__?
+        Does it raise a TypeError if you do not implement the __call__ or check_rep?
         """
         self.assertRaises(TypeError, BadComponent)
+        self.assertRaises(TypeError, StillBadComponent)
         BetterComponent()
         return
 @
 
-<<name='TestComposite', wrap=False>>=
+Testing the Composite
+---------------------
+
+.. autosummary::
+   :toctree: api
+
+   TestComposite.test_add_component
+   TestComposite.test_remove_component
+   TestComposite.test_slice
+   TestComposite.test_check_rep
+
+<<name='TestComposite', echo=False>>=
 class TestComposite(unittest.TestCase):
     def setUp(self):
         self.composite = Composite()
@@ -55,6 +84,9 @@ class TestComposite(unittest.TestCase):
         return
     
     def test_add_component(self):
+        """
+        Can you add a component once and only once?
+        """
         self.composite.add(self.component)
         self.composite.add(self.component)
         self.assertEqual(1, len(self.composite))
@@ -62,11 +94,18 @@ class TestComposite(unittest.TestCase):
         return
 
     def test_remove_component(self):
+        """
+        Can you remove a component you added?
+        """
         self.composite.add(self.component)
+        self.composite.remove(self.component)
         self.composite.remove(self.component)
         return
 
     def test_slice(self):
+        """
+        Can you use the siice syntax to get a subset ofe the components?
+        """
         self.composite.add(self.component)
         # indexing
         self.assertEqual(self.component, self.composite[-1])
@@ -77,6 +116,9 @@ class TestComposite(unittest.TestCase):
         return
 
     def test_check_rep(self):
+        """
+        Does check_rep check the Composite and all its components?
+        """
         self.composite.error = ApeError
         self.composite.error_message = "Die antwoort ist nicht in die aufreissen."
         self.composite.component_category = "Piltdown Mann"
@@ -101,7 +143,18 @@ class TestComposite(unittest.TestCase):
         return
 
 @
-<<name='TestHortator', wrap=False>>=
+
+Testing the Hortator
+--------------------
+
+The Hortator is just an instance of the Composite. This is a check that my idea of how to implement it will work.
+
+.. autosummary::
+   :toctree: api
+
+   TestHortator.test_exception
+
+<<name='TestHortator', echo=False>>=
 class TestHortator(unittest.TestCase):
     def setUp(self):
         self.hortator = Composite(error=Exception,
@@ -110,15 +163,30 @@ class TestHortator(unittest.TestCase):
         return
 
     def test_exception(self):
-        bad_operator = MagicMock(side_effect =Exception('bad operator1'))        
+        """
+        Does the hortator's call catch Exceptions so the Ape doesn't crash and move to the next operator?
+        """
+        bad_operator = MagicMock(side_effect = Exception('bad operator1'))        
         next_operator = MagicMock()
         self.hortator._logger = MagicMock()
         self.hortator.add(bad_operator)
         self.hortator.add(next_operator)
         self.hortator()
+        next_operator.assert_called_with()
         return
 @
-<<name='TestOperator', wrap=False>>=
+
+Testing the Operator
+--------------------
+
+Like the Hortator, the Operator is just an instance of the Composite, but it should only catch ApeErrors.
+
+.. autosummary::
+   :toctree: api
+
+   TestOperator.test_exception
+
+<<name='TestOperator', echo=False>>=
 class TestOperator(unittest.TestCase):
     def setUp(self):
         self.operator = Composite(error=ApeError,
@@ -128,6 +196,9 @@ class TestOperator(unittest.TestCase):
         return
 
     def test_exception(self):
+        """
+        Does the operator catch ApeErrors but not Exceptions?
+        """        
         component = MagicMock(side_effect=ApeError)
         component_2 = MagicMock()
         self.operator.add(component)
@@ -149,17 +220,3 @@ class TestOperator(unittest.TestCase):
         self.assertRaises(Exception, self.operator)
         return
 @
-<%
-for case in (TestComponent, TestHortator,
-             TestOperator,
-             TestComposite):
-    suite = unittest.TestLoader().loadTestsFromTestCase(case)    
-    unittest.TextTestRunner(verbosity=2).run(suite)
-%>
-
-.. autosummary::
-   :toctree: api
-
-   TestComponent.test_bad_component
-
-
