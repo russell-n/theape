@@ -260,3 +260,15 @@ class StuckDummy(BasePlugin):
         return
 # end class HangingDummy
 @
+
+The Dummy Products
+------------------
+
+.. currentmodule:: ape.parts.dummy.dummy
+.. autosummary::
+   :toctree: api
+
+   DummyClass
+   CrashDummy
+   HangingDummy
+

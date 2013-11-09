@@ -49,3 +49,16 @@ This is a dummy that hangs when called.
 
    StuckDummy
 
+
+
+The Dummy Products
+------------------
+
+.. currentmodule:: ape.parts.dummy.dummy
+.. autosummary::
+   :toctree: api
+
+   DummyClass
+   CrashDummy
+   HangingDummy
+

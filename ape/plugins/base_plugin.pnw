@@ -74,7 +74,7 @@ This is the built object that client code will call. To make the interface unifo
 The Fetch Config
 ~~~~~~~~~~~~~~~~
 
-The `fetch_config` method used to copy an example configuration file to the current working directory (thus its name). Since each plugin can provide its own sample, I decided that they should output them to standard out. Thus the user could do something like this::
+The `fetch_config` method used to copy an example configuration file to the current working directory (thus its name). Since each plugin can provide its own sample, I decided that they should instead output them to standard out. Thus the user could do something like this::
 
     ape fetch > ape.ini
     ape fetch IperfSession >> ape.ini
