@@ -9,9 +9,12 @@ import unittest
 import random
 import string
 from collections import defaultdict
+from types import IntType, FloatType
+from datetime import timedelta
 
 # this package
 from ape import BaseClass
+from ape import ApeError
 from timemap import RelativeTimeMap
 from timemap import RelativeTimeMapGroups
 from timemap import RelativeTime
@@ -29,10 +32,14 @@ from timemap import RelativeTime
    TestRelativeTimeMapExpressions.test_minutes
    TestRelativeTimeMapExpressions.test_seconds
    TestRelativeTimeMapExpressions.test_the_whole_shebang
+   
 
 <<name='constants', echo=False>>=
 EMPTY_STRING = ''
 SPACE = ' '
+MICRO = 10**6
+RANDOM_MIN = random.randrange(-100, 0)
+RANDOM_MAX = random.randrange(0, 100)
 @
 <<name='TestRelativeTimeMapExpressions', wrap=False>>=
 class TestRelativeTimeMapExpressions(unittest.TestCase):
@@ -286,6 +293,14 @@ class TestRelativeTimeMapExpressions(unittest.TestCase):
    :toctree: api
 
    TestRelativeTime.test_constructor
+   TestRelativeTime.test_get_number
+   TestRelativeTime.test_populate_fields
+   TestRelativeTime.test_populate_fields_extended
+   TestRelativeTime.test_reset
+   TestRelativeTime.test_attribute_errors
+   TestRelativeTime.test_total_seconds
+   TestRelativeTime.test_addition
+   TestRelativeTime.test_equality
 
 <<name='TestRelativeTime', echo=False>>=
 class TestRelativeTime(unittest.TestCase):
@@ -308,50 +323,245 @@ class TestRelativeTime(unittest.TestCase):
         # is it a child of BaseClass (so it has a logger)?
         self.assertIs(self.relative.__class__.__base__, BaseClass)
 
-        # does it require the source parameter?
-        with self.assertRaises(TypeError):
-            RelativeTime()
+        # does it not require the source parameter?
+        RelativeTime()
         return
 
-    def test_seconds(self):
+    def test_get_number(self):
         """
-        Does it convert a source with only seconds to integers?
+        Does it get the number from a string?
         """
-        source = '3.5 sec'
-        seconds = 3
-        microseconds = 5000000
-        relative = RelativeTime(source)
-        self.assertEqual(relative.microseconds, microseconds)
-        self.assertEqual(relative.seconds, seconds)
+        self.relative.source = None
+        with self.assertRaises(ApeError):
+            self.relative.get_number(self.time_map.second_expression,
+                                     RelativeTimeMapGroups.seconds)
+        number = '3.2'
+        source = number + ' sec'
+        self.relative.source = source
+        self.assertEqual(self.relative.get_number(self.time_map.second_expression,
+                                                  RelativeTimeMapGroups.seconds),
+                                                  number)
+        with self.assertRaises(IndexError):
+            self.relative.get_number(self.time_map.second_expression,
+                                     'apeape')
         return
 
-    def test_integer_fraction(self):
+    def test_populate_fields(self):
         """
-        Does it convert the time to q,r?
+        Do the field get the right numbers?
         """
-        seconds = 3
-        milliseconds = 5
-        source = '3.5 seconds'
-        relative = RelativeTime(source)
-        q,r = relative.integer_fraction(self.time_map.second_expression, RelativeTimeMapGroups.seconds)
-        self.assertEqual(seconds, q)
-        self.assertEqual(milliseconds, r)
+        weeks = 2
+        days_int = 2
+        days_frac = .4
+        days = days_int + days_frac
+        
+        hours = 3.4
 
-        q, r = relative.integer_fraction(self.time_map.hour_expression, RelativeTimeMapGroups.hours)
-        self.assertEqual(0, q)
-        self.assertEqual(0, r)
+        minutes = 2.9
 
-        relative._source = '3 days'
-        q, r = relative.integer_fraction(self.time_map.day_expression, RelativeTimeMapGroups.days)
-        self.assertEqual(q, 3)
-        self.assertEqual(r, 0)
+        seconds_int = 3
+        seconds_frac = 0.2
+        seconds = seconds_int + seconds_frac
+        source = '{w} weeks {d} d {h} Hrs {m} Minutes {s} seconds'.format(h=hours,
+                                                          m=minutes,
+                                                          s=seconds,
+                                                          d=days,
+                                                          w=weeks)
+        seconds = int(seconds_int + minutes * 60 + hours * 3600 + days_frac * 24 * 3600)
+        microseconds = seconds_frac  * MICRO
+        expected_days = weeks * 7 + days_int
+        message = 'Source: {0}, Expected: {{0}}, Actual: {{1}}'.format(source)
+        self.relative.source = source
+        self.assertEqual(self.relative.days, expected_days, msg=message.format(expected_days,
+                                                                          self.relative.days))
+        self.assertEqual(self.relative.seconds, seconds, msg=message.format(seconds,
+                                                                            self.relative.seconds))
+        self.assertEqual(self.relative.microseconds, microseconds)
+        return
 
-        relative._source = '4. minutes'
-        q, r = relative.integer_fraction(self.time_map.minute_expression, RelativeTimeMapGroups.minutes)
-        self.assertEqual(q, 4)
-        self.assertEqual(r, 0)
+    def test_populate_fields_extended(self):
+        """
+        Does it use the dateutil.relativedelta extensions to timedelta?
+        """
+        months = 1
+        source = "{0} months".format(months)
+        self.relative.source = source
+        self.assertIn(self.relative.days, ( 28, 29, 30, 31))
 
-        return    
+        years = 2
+        source = "{0} yrs".format(years)
+        self.relative.source = source
+        self.assertIn(self.relative.days, (365 * years, 366 * years))
+        return
+
+    def test_reset(self):
+        """
+        Does it reset the timedelta  to None?
+        """
+        self.relative.source = '4 d 3.2s'
+        self.assertEqual(4, self.relative.days)
+        self.assertEqual(3, self.relative.seconds)
+        self.assertEqual(0.2 * MICRO, self.relative.microseconds)
+        self.relative.reset()
+        self.assertIsNone(self.relative.timedelta)
+        return
+
+    def test_attribute_errors(self):
+        """
+        Do the attributes raise ApeErrors if the timedelta hasn't been created?
+        """
+        self.relative.source = None
+        with self.assertRaises(ApeError):
+            self.relative.microseconds
+
+        with self.assertRaises(ApeError):
+            self.relative.seconds
+
+        with self.assertRaises(ApeError):
+            self.relative.days
+        return
+
+    def test_total_seconds(self):
+        """
+        Is total seconds the sum of the time values?
+        """
+        MINUTE = 60
+        HOUR = 60 * MINUTE
+        DAY = 24 * HOUR
+        WEEK = 7 * DAY
+
+        seconds = round(random.uniform(RANDOM_MIN,RANDOM_MAX), 1)
+        minutes = round(random.uniform(RANDOM_MIN, RANDOM_MAX), 1)
+        hours = round(random.uniform(RANDOM_MIN, RANDOM_MAX), 1)
+        days = round(random.uniform(RANDOM_MIN, RANDOM_MAX), 1)
+        weeks = round(random.uniform(RANDOM_MIN, RANDOM_MAX), 1)
+        
+        YEAR = 365 * DAY + minutes * MINUTE + hours * HOUR + days * DAY + weeks * WEEK + seconds
+        LEAP_YEAR = YEAR + DAY
+        
+        self.relative.source = '1 year, {m} Min {h} H {s} SEc {d} days {w}wks'.format(m=minutes,
+                                                                                      d=days,
+                                                                                      w=weeks,
+                                                                                      h=hours,
+                                                                                      s=seconds)
+        self.assertIn(self.relative.total_seconds(), (YEAR, LEAP_YEAR))
+        self.relative.source = None
+        
+        with self.assertRaises(ApeError):
+            self.relative.total_seconds()
+        return
+
+    def test_addition(self):
+        """
+        Does it add with other timedeltas?
+        """
+        seconds_0 = random.randrange(RANDOM_MIN, RANDOM_MAX)
+        seconds_1 = random.randrange(RANDOM_MIN, RANDOM_MAX)
+        self.relative.source = '{0}s'.format(seconds_0)
+        other = timedelta(seconds=seconds_1)
+        total = self.relative + other
+        self.assertAlmostEqual(seconds_0 + seconds_1,
+                               total.total_seconds())
+
+        with self.assertRaises(ApeError):
+            self.relative + seconds_1
+
+        with self.assertRaises(ApeError):
+            self.relative.source = None
+            total = self.relative + other
+        return
+
+    def test_commutative_add(self):
+        """
+        Will it add if it's on the RHS?
+        """
+        seconds_0 = random.randrange(RANDOM_MIN, RANDOM_MAX)
+        seconds_1 = random.randrange(RANDOM_MIN, RANDOM_MAX)
+        self.relative.source = '{0}s'.format(seconds_0)
+        other = timedelta(seconds=seconds_1)
+        total = other + self.relative 
+        self.assertAlmostEqual(seconds_0 + seconds_1,
+                               total.total_seconds())
+
+        return
+
+    def test_subtraction(self):
+        """
+        Does it subtract other timedeltas?
+        """
+        seconds_0 = random.randrange(RANDOM_MIN, RANDOM_MAX)
+        seconds_1 = random.randrange(RANDOM_MIN, RANDOM_MAX)
+        self.relative.source = '{0}s'.format(seconds_0)
+        other = timedelta(seconds=seconds_1)
+        total = self.relative - other
+        self.assertAlmostEqual(seconds_0 - seconds_1,
+                               total.total_seconds())
+
+        total = other - self.relative 
+        self.assertAlmostEqual(seconds_1 - seconds_0,
+                               total.total_seconds())
+
+        with self.assertRaises(ApeError):
+            self.relative - 1
+        return
+
+    def test_mulitplication(self):
+        """
+        Does it supoort multiplication by integers?
+        """
+        seconds_0 = random.randrange(RANDOM_MIN, RANDOM_MAX)
+        multiplier = random.randrange(RANDOM_MIN, RANDOM_MAX)
+        self.relative.source = '{0}s'.format(seconds_0)
+
+        total = self.relative * multiplier
+        self.assertAlmostEqual(seconds_0 * multiplier,
+                               total.total_seconds())
+
+        total = multiplier * self.relative 
+        self.assertAlmostEqual(multiplier * seconds_0,
+                               total.total_seconds())
+
+        with self.assertRaises(ApeError):
+            self.relative * None
+        return
+
+    def test_negation(self):
+        """
+        Does it negate the timedelta?
+        """
+        seconds_0 = random.randrange(RANDOM_MIN, RANDOM_MAX)
+        self.relative.source = '{0}s'.format(seconds_0)
+
+        total = -self.relative
+        self.assertAlmostEqual(seconds_0 * -1,
+                               total.total_seconds())
+
+        total = +self.relative
+        self.assertAlmostEqual(seconds_0,
+                               total.total_seconds())
+
+        return
+
+    def test_abs(self):
+        """
+        Does the absolute value method work?
+        """
+        seconds_0 = random.randrange(RANDOM_MIN, RANDOM_MAX)
+        self.relative.source = '{0}s'.format(seconds_0)
+
+        total = abs(self.relative)
+        # I don't really get what it's doing, no test here
+        return
+
+    def test_equality(self):
+        """
+        Does it return true if a timedelta with the same time is tested against it?
+        """
+        seconds_0 = random.randrange(RANDOM_MIN, RANDOM_MAX)
+        self.relative.source = '{0}s'.format(seconds_0)
+        other = timedelta(seconds=seconds_0)
+        self.assertEqual(self.relative, other)
+        return
 @
 
 <<name='debug', echo=False>>=

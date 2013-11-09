@@ -10,16 +10,13 @@ This sub-folder holds the modules that create the interface for the user.
    :maxdepth: 1
 
    The Argument Clinic <arguments.rst>
-   Testing the ArgumentClinic <test_arguments.rst>
-   Testing the Time Map <testtimemap.rst>
    The Configuration Map <configurationmap.rst>
    The UbootKommandant <ubootkommandant.rst>
    Time Maps <timemap.rst>
-   Testing the ConfigurationMap <test_configurationmap.rst>
-   Testing The UbootKommandant <test_ubootkommandant.rst>
 
 .. toctree::
    :maxdepth: 1
 
+   User Interface Tests <tests/index.rst>
 
 

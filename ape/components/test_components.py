@@ -17,6 +17,13 @@ class BadComponent(Component):
     def __init__(self):
         return
 
+class StillBadComponent(Component):
+    def __init__(self):
+        return
+
+    def __call__(self):
+        return
+    
 class BetterComponent(Component):
     def __call__(self):
         return
@@ -35,9 +42,10 @@ class TestComponent(unittest.TestCase):
     
     def test_bad_component(self):
         """
-        Does it raise a TypeError if you do not implement the __call__?
+        Does it raise a TypeError if you do not implement the __call__ or check_rep?
         """
         self.assertRaises(TypeError, BadComponent)
+        self.assertRaises(TypeError, StillBadComponent)
         BetterComponent()
         return
 
@@ -49,6 +57,9 @@ class TestComposite(unittest.TestCase):
         return
     
     def test_add_component(self):
+        """
+        Can you add a component once and only once?
+        """
         self.composite.add(self.component)
         self.composite.add(self.component)
         self.assertEqual(1, len(self.composite))
@@ -56,11 +67,18 @@ class TestComposite(unittest.TestCase):
         return
 
     def test_remove_component(self):
+        """
+        Can you remove a component you added?
+        """
         self.composite.add(self.component)
+        self.composite.remove(self.component)
         self.composite.remove(self.component)
         return
 
     def test_slice(self):
+        """
+        Can you use the siice syntax to get a subset ofe the components?
+        """
         self.composite.add(self.component)
         # indexing
         self.assertEqual(self.component, self.composite[-1])
@@ -71,6 +89,9 @@ class TestComposite(unittest.TestCase):
         return
 
     def test_check_rep(self):
+        """
+        Does check_rep check the Composite and all its components?
+        """
         self.composite.error = ApeError
         self.composite.error_message = "Die antwoort ist nicht in die aufreissen."
         self.composite.component_category = "Piltdown Mann"
@@ -104,12 +125,16 @@ class TestHortator(unittest.TestCase):
         return
 
     def test_exception(self):
-        bad_operator = MagicMock(side_effect =Exception('bad operator1'))        
+        """
+        Does the hortator's call catch Exceptions so the Ape doesn't crash and move to the next operator?
+        """
+        bad_operator = MagicMock(side_effect = Exception('bad operator1'))        
         next_operator = MagicMock()
         self.hortator._logger = MagicMock()
         self.hortator.add(bad_operator)
         self.hortator.add(next_operator)
         self.hortator()
+        next_operator.assert_called_with()
         return
 
 
@@ -122,6 +147,9 @@ class TestOperator(unittest.TestCase):
         return
 
     def test_exception(self):
+        """
+        Does the operator catch ApeErrors but not Exceptions?
+        """        
         component = MagicMock(side_effect=ApeError)
         component_2 = MagicMock()
         self.operator.add(component)

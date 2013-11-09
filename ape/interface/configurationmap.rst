@@ -78,6 +78,8 @@ The API
    ConfigurationMap.get_int
    ConfigurationMap.get_float
    ConfigurationMap.get_boolean
+   ConfigurationMap.get_relativetime
+   ConfigurationMap.get_datetime
    ConfigurationMap.get_list
    ConfigurationMap.get_dictionary
    ConfigurationMap.get_ordered_dictionary
@@ -89,7 +91,8 @@ The API
    ConfigurationMap.defaults
    ConfigurationMap.write
 
-
+.. note:: get_relativetime and get_absolutetime are currently using the defaults. If more control is needed, you will need to grab the option and build them yourself.
+   
 .. _configurationmap-parser:   
 
 The ConfigurationMap.parser

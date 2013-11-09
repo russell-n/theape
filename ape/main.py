@@ -23,6 +23,14 @@ def enable_debugging(args):
 
 
 def main():
+    """
+    The 'site-entry' point.
+
+       1. Gets command-line arguments
+       2. Sets the logger
+       3. Enables debugging (if asked for)
+       4. Calls the function set by the argparse subcommand
+    """
     argue = ape.interface.arguments.ArgumentClinic()
     args = argue()
     set_logger(args)
