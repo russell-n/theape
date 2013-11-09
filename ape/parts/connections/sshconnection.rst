@@ -70,6 +70,8 @@ I'm not sure if this is better or it's better to just close the connection when 
    SSHConnection.client
    SSHConnection.sudo
    SSHConnection.__call__
+   SSHConnection.close
+   SSHConnection.__getattr__
    SSHConnection.lock
 
 .. uml::

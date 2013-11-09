@@ -54,11 +54,31 @@ This is a dummy that hangs when called.
 The Dummy Products
 ------------------
 
+DummyClass
+~~~~~~~~~~
+
 .. currentmodule:: ape.parts.dummy.dummy
 .. autosummary::
    :toctree: api
-
+   
    DummyClass
+   DummyClass.__call__
+
+CrashDummy
+~~~~~~~~~~
+
+.. autosummary::
+   :toctree: api
+
    CrashDummy
+   CrashDummy.__call__
+
+HangingDummy
+~~~~~~~~~~~~
+
+.. autosummary::
+   :toctree: api
+
    HangingDummy
+   HangingDummy.__call__
 

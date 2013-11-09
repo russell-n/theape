@@ -208,6 +208,8 @@ class SSHConnection(BaseClass):
    SSHConnection.client
    SSHConnection.sudo
    SSHConnection.__call__
+   SSHConnection.close
+   SSHConnection.__getattr__
    SSHConnection.lock
 
 .. uml::
