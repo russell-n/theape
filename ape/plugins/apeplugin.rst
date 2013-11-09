@@ -111,7 +111,7 @@ This means:
    
 ::
 
-    test_2013_10_31_12:33:41_PM.csv
+    test_2013_11_08_07:04:52_PM.csv
     
     
 
@@ -139,7 +139,7 @@ This is an auto-generated class diagram for the Ape.
 
 
 
-And this is a hand-drawn one which should be easier to read but may not guaranteed to be up-to-date.
+And this is a hand-drawn one which should be easier to read but is not guaranteed to be up-to-date.
 
 .. uml::
 
@@ -166,7 +166,7 @@ The API
    Ape.arguments
    Ape.sections
 
-.. warning:: The ConfigParser adds all options in the DEFAULT section to the other sections. I am assuming that anything in the DEFAULT section that is the same as something in the APE section should be ignored.
+.. warning:: The ConfigParser adds all options in the DEFAULT section to the other sections. I am assuming that anything in the DEFAULT section that is the same as something in the APE section (same option:value) should be ignored.
    
 
 

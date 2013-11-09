@@ -191,7 +191,7 @@ if in_pweave:
     print ".. image:: {0}".format(class_diagram_file)
 @
 
-And this is a hand-drawn one which should be easier to read but may not guaranteed to be up-to-date.
+And this is a hand-drawn one which should be easier to read but is not guaranteed to be up-to-date.
 
 .. uml::
 
@@ -218,7 +218,7 @@ The API
    Ape.arguments
    Ape.sections
 
-.. warning:: The ConfigParser adds all options in the DEFAULT section to the other sections. I am assuming that anything in the DEFAULT section that is the same as something in the APE section should be ignored.
+.. warning:: The ConfigParser adds all options in the DEFAULT section to the other sections. I am assuming that anything in the DEFAULT section that is the same as something in the APE section (same option:value) should be ignored.
    
 <<name='Ape', echo=False>>=
 EXAMPLES = '''
