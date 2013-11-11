@@ -8,7 +8,10 @@ Some basic unittesting for the sshconnection.
 import unittest
 
 # third-party
-from mock import MagicMock, patch
+try:
+    from mock import MagicMock, patch
+except ImportError:
+    pass
 
 # this package
 from ape.parts.connections.sshconnection import SSHConnection
