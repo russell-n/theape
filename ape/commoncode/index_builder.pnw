@@ -155,7 +155,10 @@ import unittest
 from StringIO import StringIO
 
 # third-party
-from mock import mock_open, patch, call, MagicMock
+try:
+    from mock import mock_open, patch, call, MagicMock
+except ImportError:
+    pass
 @
 <<name='TestIndexBuilder', echo=False>>=
 class TestIndexBuilder(unittest.TestCase):

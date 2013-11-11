@@ -23,7 +23,10 @@ import unittest
 import socket
 
 # third-party
-from mock import patch, MagicMock
+try:
+    from mock import patch, MagicMock
+except ImportError:
+    pass
 
 # this package
 from ape.parts.storage.socketstorage import SocketStorage

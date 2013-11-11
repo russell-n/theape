@@ -10,7 +10,10 @@ import random
 import argparse
 
 # third-party
-from mock import MagicMock, patch
+try:
+    from mock import MagicMock, patch
+except ImportError:
+    pass
 
 # this package
 from ape.interface.arguments import ArgumentClinic
