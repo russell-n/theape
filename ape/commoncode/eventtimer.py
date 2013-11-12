@@ -77,7 +77,16 @@ class EventTimer(BaseClass):
         if timeout is None:
             timeout = self.seconds
         self.event.wait(timeout)
-        return            
+        return
+
+    def close(self):
+        """
+        Cancels the timer and sets the event.
+        """
+        self.timer.cancel()
+        self.event.set()
+        return
+
 # end class EventTimer        
 
 

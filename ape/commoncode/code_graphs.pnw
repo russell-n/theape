@@ -77,6 +77,7 @@ def class_diagram(class_name, module, output_format='png',
                                                                             f=filter,
                                                                             o=output_format,
                                                                             n=module)
+
     subprocess.call(shlex.split(command))    
     return "{0}.{1}".format(class_name, output_format)
 @

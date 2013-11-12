@@ -16,7 +16,7 @@ The Event Timer
 
 An EventTimer will block if you try to make a new request too soon (too soon being something that needs to be empirically determined by the user). It was originally created to prevent calls to a (slow) AP's http server from trying `GET` requests too frequently, as that caused the server to timeout. I think that it will be more useful here as a way to provide even intervals to things that have to make calls at certain times (e.g. code that watches a proc-file).
 
-I've confused myself a bit while trying to remember what this does, so I think I'll elaborate a little more. The `EventTimer` is a thin adapter for threading.event. By itself it will block until the time expires. The :ref:`wait decorator <ape-wait-decorator>` calls this event before executing the method it decorates. If you want to use them to maintain intervals, then, the wait decorator has to decorate a method that will be called once, then that method should be called repeatedly.
+I've confused myself a bit while trying to remember what this does, so I think I'll elaborate a little more. The `EventTimer` bundles threading.event and threading.Timer. By itself it will block until the time expires. The :ref:`wait decorator <ape-wait-decorator>` calls this event before executing the method it decorates. If you want to use them to maintain intervals, then, the wait decorator has to decorate a method that will be called once, then that method should be called repeatedly.
 
 .. '
 
@@ -28,13 +28,15 @@ I've confused myself a bit while trying to remember what this does, so I think I
    Event.set
    Event.clear
    Event.wait
+   Timer
 
 .. uml::
 
    EventTimer o- threading.Event
    EventTimer o- threading.Timer
    EventTimer -|> BaseClass
-   EventTimer : __init__(event, seconds)   
+   EventTimer : __init__(event, seconds)
+   EventTimer : close()
 
 .. currentmodule:: ape.commoncode.eventtimer
 .. autosummary::
@@ -47,6 +49,7 @@ I've confused myself a bit while trying to remember what this does, so I think I
    EventTimer.start
    EventTimer.clear
    EventTimer.wait
+   EventTimer.close
 
 The Constructor Parameters
 --------------------------
@@ -133,4 +136,14 @@ And this would print the palindrome with 1 second pauses in between::
 
     speak = Napolean()
     speak()
+
+
+The previous example does'n actually work as advertised. By default the event won't block on the first call. This makes sense if you are trying to protect something that can't becalled too frequently::
+
+.. '
+
+    @wait
+    def hit_server(self):
+        self.server.get()
+
 

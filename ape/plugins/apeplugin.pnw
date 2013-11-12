@@ -142,7 +142,7 @@ CONFIGURATION = '''[{0}]
 ...
 <option_name_n> = <comma-separated-list of plugins>
 
-[MODULES]
+#[MODULES]
 # If you are getting a plugin from a non-ape package put the module here
 # it should use the import's dot-notation. e.g. :
 # packagename.modulename
@@ -155,6 +155,10 @@ CONFIGURATION = '''[{0}]
 
 # if you want to store files in a sub-folder
 # {1} = <name>
+
+# If you get a ParserError check:
+# is everything flush-left?
+# no inline comments? (this won't raise a Parser error but it will create an error later)
 '''.format(APESECTION, SUBFOLDER)
 
 @

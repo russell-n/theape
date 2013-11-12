@@ -105,5 +105,17 @@ class TestTheBigSleep(unittest.TestCase):
         Does it build an event timer with the interval set correclty?
         """
         self.assertEqual(self.interval, self.sleep.timer.seconds)
+        return
+
+    def test_close(self):
+        """
+        Does it set self.then to zero so it stops and call the timer.close?
+        """
+        timer = MagicMock()
+        self.sleep._timer = timer
+        self.sleep.close()
+        timer.close.assert_called_with()
+        self.assertEqual(self.sleep.then, self.sleep.zero)
+        return
         
 # end class TestTheBigSleep        

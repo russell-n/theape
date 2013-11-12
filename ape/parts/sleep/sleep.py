@@ -6,13 +6,14 @@ from types import FloatType, IntType
 # this package
 from ape import BaseClass
 from ape import ApeError
+from ape import Component
 from ape.commoncode.eventtimer import EventTimer, wait
 
 
 IN_PWEAVE = __name__ == '__builtin__'
 
 
-class TheBigSleep(BaseClass):
+class TheBigSleep(Component):
     """
     A sleeper
     """
@@ -157,6 +158,7 @@ class TheBigSleep(BaseClass):
             # there is a 1-second wait the  emit method blocks before emitting
             # so we have to let it calculate remaining or it will be 1-second behind
             remaining = self.emit()
+        self.logger.info("Exiting Sleep")
         return
 
     @wait
@@ -183,6 +185,14 @@ class TheBigSleep(BaseClass):
             raise ApeError("self.interval must be float or int, not ({0}) {1}".format(type(self.interval),
                                                                                       self.interval))
 
+    def close(self):
+        """
+        Closes the timer, sets self.then to 0.
+        """
+        self._then = self.zero
+        self.timer.close()
+        return
+        
     def __str__(self):
         """
         a string representation
