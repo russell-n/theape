@@ -126,7 +126,8 @@ class UbootKommandant(BaseClass):
             with PyCallGraph(output=graphviz, config=config):
                 ape()
         else:
-            ape()            
+            ape()
+        ape.close()
         return
 
     @try_except

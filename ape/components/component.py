@@ -5,7 +5,8 @@ import inspect
 import os
 
 # this package
-from ape.commoncode.baseclass import BaseClass
+from ape import BaseClass
+from ape import ApeError
 from ape.parts.countdown.countdown import CountDown
 from ape.commoncode.strings import RESET, BLUE
 from ape.commoncode.strings import BOLD, BOLD_THING, RED
@@ -50,7 +51,7 @@ class Component(BaseClass):
         return
 
     @abstractmethod
-    def clean_up(self):
+    def close(self):
         """
         abstractmethod: called for Keyboard Interrupts to allow file-closing
         """
@@ -154,7 +155,14 @@ class Composite(Component):
     def one_call(self, component):
         """
         Calls the  component (pulled out into a method to catch the exceptions)
+
+        :raise:
+
+         - `ApeError` if component is not callable
         """
+        if not hasattr(component, '__call__'):
+            raise ApeError(("'{0}' has not implemented the __call__ interface. " 
+                            "What a way to run a railroad.").format(component.__class__.__name__))
         component()
         return
 
@@ -165,13 +173,10 @@ class Composite(Component):
         """
         self.logger.debug("{b}** Checking the Composite Class Representation **{r}".format(b=BOLD,
                                                                                           r=RESET))
+                                                                                          
         self.check_rep()
         count_string = "{b}** {l} {{c}} of {{t}} ('{{o}}') **{r}".format(b=BOLD, r=RESET,
                                                                          l=self.component_category)
-
-        # countdown is going to be a plugin too
-        #remaining_string = BOLD_THING.format(thing="Estimated Time Remaining:")
-        #total_elapsed = BOLD_THING.format(thing='** Total Elapsed Time:')
 
         self.logger.info("{b}*** {c} Started ***{r}".format(b=BOLD, r=RESET,
                                                              c=self.identifier))
@@ -184,11 +189,9 @@ class Composite(Component):
         for count, component in enumerate(self.components):
             self.logger.info(count_string.format(c=count+1,
                                                  t=total_count,
-                                                 o=str(component)))
+                                                 o=str(component)))                                                 
             self.one_call(component)
-        #self.logger.info("{b}*** Ending {c}s ***{r}".format(b=BOLD, r=RESET,
-        #                                                    c=self.component_category))
-
+            
         self.logger.info("{b}*** {c} Ended ***{r}".format(b=BOLD, r=RESET,
                                                              c=self.identifier))        
         return
@@ -211,29 +214,35 @@ class Composite(Component):
 
             # check all your children
             for component in self.components:
-                component.check_rep()
+                try:
+                    component.check_rep()
+                except AttributeError as error:
+                    self.log_error(error="'{0}' hasn't implemented the 'check_rep' method.".format(component.__class__.__name__),
+                                    message="Thanks for the sour persimmons, cousin.")
 
         except AssertionError as error:
             raise ConfigurationError(str(error))
         return
 
-    def clean_up(self, error):
+    def close(self):
         """
-        calls the `clean_up` method on each component
+        calls the `close` method on each component
+
         """
         for component in self.components:
             try:
-                component.clean_up(error)
+                component.close()
             except AttributeError as error:
                 self.logger.debug(error)
-                self.logger.warning("`clean_up` not implemented in {0}".format(component))
+                self.logger.warning("'{0}' hasn't implemented the 'close' method. We hate him.".format(component.__class__.__name__))
         return
 
     def __str__(self):
         return ("{2} -- Traps: {0}, "
-                "Component: {1}").format(self.error.__name__,
+                "{3} Components: {1}").format(self.error.__name__,
                                          self.component_category,
-                                         self.__class__.__name__)
+                                         self.__class__.__name__,
+                                         len(self.components))
         
 #end class Composite
 

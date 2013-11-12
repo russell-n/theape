@@ -11,6 +11,7 @@ except ImportError:
 # this package
 from ape.commoncode.errors import ApeError, ConfigurationError
 from ape.components.component import Component, Composite
+from ape.commoncode.baseclass import RED_ERROR
 
 
 class BadComponent(Component):
@@ -31,7 +32,11 @@ class BetterComponent(Component):
     def check_rep(self):
         return
 
-    def clean_up(self):
+    def close(self):
+        return
+
+class EvilComponent(object):
+    def __init__(self):
         return
 
 class TestComponent(unittest.TestCase):
@@ -113,6 +118,31 @@ class TestComposite(unittest.TestCase):
         self.composite.error_message = 'Ausgezeichnet.'
         self.composite.component_category = None
         self.assertRaises(ConfigurationError, self.composite.check_rep)
+        return
+
+    def test_evil_component(self):
+        """
+        Does a mis-implemented component raise an ApeError on call and a warning for others?
+        """
+        evil = EvilComponent()
+        self.composite.add(evil)
+        self.composite.error = ApeError
+        self.composite.error_message = 'this is an error'
+        self.composite.component_category = 'memyselfandi'
+
+        # if check_rep is not implemented, just warn
+        mock_logger = MagicMock()
+        self.composite._logger = mock_logger
+        self.composite.check_rep()
+        message = RED_ERROR.format(error="'EvilComponent' hasn't implemented the 'check_rep' method.",
+                                   message="Thanks for the sour persimmons, cousin.")
+        mock_logger.error.assert_called_with(message)
+        
+        # if close not implemented just emit message
+        self.composite.close()
+        mock_logger.warning.assert_called_with("'EvilComponent' hasn't implemented the 'close' method. We hate him.")
+        # if the call is not implemented, raise an ApeError to kill the operation
+        self.assertRaises(ApeError, self.composite())
         return
 
 

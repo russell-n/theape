@@ -48,12 +48,14 @@ The Class Model
 
 .. uml::
 
-   TheBigSleep -|> BaseClass
+   TheBigSleep -|> Component
    TheBigSleep: datedtime.datetime end
    TheBigSleep: datetime.timedelta total
    TheBigSleep: float interval
    TheBigSleep o-- EventTimer
    TheBigSleep: __call__()
+   TheBigSleep : check_rep()
+   TheBigSleep : close()
 
 
 .. currentmodule:: ape.parts.sleep.sleep
@@ -67,6 +69,8 @@ The Class Model
    TheBigSleep.timer
    TheBigSleep.then
    TheBigSleep.emit
+   TheBigSleep.check_rep
+   TheBigSleep.close
    TheBigSleep.__call__
 
 .. note:: This might only have come about because I started using the EventTimer to prevent over-eager access to a server, rather than trying to use it to space intervals, but it didn't occur to me originally that the times have to be calculated in the method that is wrapped by the `wait` decorator, because the wait comes before the method call, leaving it 1-second or so behind the time it was called. 

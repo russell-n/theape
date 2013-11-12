@@ -40,8 +40,8 @@ def try_except(method):
         try:
             return method(self, *args, **kwargs)
         except self.error as error:
-            if hasattr(self, 'clean_up'):
-                self.clean_up(error)
+            if hasattr(self, 'close'):
+                self.close(error)
             else:
                 log_error(error, self.logger, self.error_message)
     return wrapped

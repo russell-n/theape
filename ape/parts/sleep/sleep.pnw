@@ -23,6 +23,7 @@ from types import FloatType, IntType
 # this package
 from ape import BaseClass
 from ape import ApeError
+from ape import Component
 from ape.commoncode.eventtimer import EventTimer, wait
 @
 
@@ -61,12 +62,14 @@ The Class Model
 
 .. uml::
 
-   TheBigSleep -|> BaseClass
+   TheBigSleep -|> Component
    TheBigSleep: datedtime.datetime end
    TheBigSleep: datetime.timedelta total
    TheBigSleep: float interval
    TheBigSleep o-- EventTimer
    TheBigSleep: __call__()
+   TheBigSleep : check_rep()
+   TheBigSleep : close()
 
 
 .. currentmodule:: ape.parts.sleep.sleep
@@ -80,6 +83,8 @@ The Class Model
    TheBigSleep.timer
    TheBigSleep.then
    TheBigSleep.emit
+   TheBigSleep.check_rep
+   TheBigSleep.close
    TheBigSleep.__call__
 
 .. note:: This might only have come about because I started using the EventTimer to prevent over-eager access to a server, rather than trying to use it to space intervals, but it didn't occur to me originally that the times have to be calculated in the method that is wrapped by the `wait` decorator, because the wait comes before the method call, leaving it 1-second or so behind the time it was called. 
@@ -87,7 +92,7 @@ The Class Model
 .. '
 
 <<name='TheBigSleep', echo=False>>=
-class TheBigSleep(BaseClass):
+class TheBigSleep(Component):
     """
     A sleeper
     """
@@ -232,6 +237,7 @@ class TheBigSleep(BaseClass):
             # there is a 1-second wait the  emit method blocks before emitting
             # so we have to let it calculate remaining or it will be 1-second behind
             remaining = self.emit()
+        self.logger.info("Exiting Sleep")
         return
 
     @wait
@@ -258,6 +264,14 @@ class TheBigSleep(BaseClass):
             raise ApeError("self.interval must be float or int, not ({0}) {1}".format(type(self.interval),
                                                                                       self.interval))
 
+    def close(self):
+        """
+        Closes the timer, sets self.then to 0.
+        """
+        self._then = self.zero
+        self.timer.close()
+        return
+        
     def __str__(self):
         """
         a string representation
