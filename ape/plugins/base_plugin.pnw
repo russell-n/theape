@@ -42,7 +42,7 @@ This is an (idealized) class diagram (see below for an auto-generated one).
     
 .. uml::
 
-   BasePlugin -|> BaseClass
+   BaseClass <|-- BasePlugin
    BaseClass : logger
    BasePlugin : configuration
    BasePlugin o- HelpPage
@@ -108,33 +108,7 @@ These are the classes that the BasePlugin uses.
 
    HelpPage
    HelpPage.__call__
-   
-
-Module Graph
-------------
-
-This is an auto-generated diagram of classes in this module (and related classes).
-
-<<name='module_graph', echo=False, results='sphinx'>>=
-if in_pweave:
-    this_file = os.path.join(os.getcwd(), 'base_plugin.py')
-    module_diagram_file = module_diagram(module=this_file, project='baseplugin')
-    print ".. image:: {0}".format(module_diagram_file)
-@
-
-Class Diagram
--------------
-
-This is an auto-generated diagram of the BasePlugin class.
-    
-<<name='class_diagram', echo=False, results='sphinx'>>=
-if in_pweave:
-    class_diagram_file = class_diagram(class_name="BasePlugin",
-                                       filter='OTHER',
-                                       module=this_file)
-    print ".. image:: {0}".format(class_diagram_file)
-@
-  
+     
 <<name='BasePlugin', echo=False>>=
 class BasePlugin(BaseClass):
     """
@@ -208,4 +182,30 @@ class BasePlugin(BaseClass):
         """
         return   
 # end class BasePlugin                
+@
+
+Module Graph
+------------
+
+<<name='module_graph', echo=False, results='sphinx'>>=
+if in_pweave:
+    from ape.plugins.base_plugin import BasePlugin
+    print "This is a module diagram for **{0}**.\n".format(BasePlugin.__module__)
+    this_file = os.path.join(os.getcwd(), 'base_plugin.py')
+    module_diagram_file = module_diagram(module=this_file, project='baseplugin')
+    print ".. image:: {0}".format(module_diagram_file)
+
+@
+
+Class Diagram
+-------------
+
+This is an auto-generated diagram of the BasePlugin class.
+    
+<<name='class_diagram', echo=False, results='sphinx'>>=
+if in_pweave:
+    class_diagram_file = class_diagram(class_name="BasePlugin",
+                                       filter='OTHER',
+                                       module=this_file)
+    print ".. image:: {0}".format(class_diagram_file)
 @

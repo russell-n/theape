@@ -283,17 +283,22 @@ class ConfigurationMap(BaseClass):
         :return: RelativeTime object
         """
         source = self.get(section, option, optional, default)
-        return RelativeTime(source=source)
+        if source is not default:
+            return RelativeTime(source=source)
+        return default
 
     def get_datetime(self, section, option, optional=False, default=None):
         """
         Gets a datetime object based on the option (value is timestamp) (see timemap.AbsoluteTime)
 
-        :return: datetime object
+        :return: datetime object or default
         """
         source = self.get(section, option, optional, default)
-        abtime = AbsoluteTime()
-        return abtime(source)
+        if source is not default:
+            abtime = AbsoluteTime()
+            return abtime(source)
+        return default
+    
 
     @property
     def sections(self):

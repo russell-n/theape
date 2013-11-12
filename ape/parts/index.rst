@@ -30,6 +30,7 @@ These are the documents created from the source files.
    :maxdepth: 1
 
    Connections <connections/index.rst>
+   Sleep <sleep/index.rst>
    Storage <storage/index.rst>
    Dummy Components <dummy/index.rst>
    Countdown <countdown/index.rst>

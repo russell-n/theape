@@ -30,7 +30,7 @@ This is an (idealized) class diagram (see below for an auto-generated one).
     
 .. uml::
 
-   BasePlugin -|> BaseClass
+   BaseClass <|-- BasePlugin
    BaseClass : logger
    BasePlugin : configuration
    BasePlugin o- HelpPage
@@ -96,12 +96,13 @@ These are the classes that the BasePlugin uses.
 
    HelpPage
    HelpPage.__call__
-   
+     
+
 
 Module Graph
 ------------
 
-This is an auto-generated diagram of classes in this module (and related classes).
+This is a module diagram for **ape.plugins.base_plugin**.
 
 .. image:: classes_baseplugin.png
 

@@ -3,10 +3,7 @@ Sleep
 
 .. _ape-sleep:
 
-<<name='imports', echo=False>>=
-# this package
-from ape.commoncode.index_builder import create_toctree
-@
+
 
 This is a package for modules that help with sleeping. The initial use case is for a sleep to delay the start of execution for an operation. There should also be a secondary case for introducing delays between plugins or between operations, but I haven't worked out how to set-up the configuration file for that yet (as of November 11, 2013).
 
@@ -23,7 +20,15 @@ Personified in English from late 14c., on model of Latin Somnus), Greek Hypnos. 
 
 Source: `Online Etymological Dictonary <http://www.etymonline.com/index.php?term=sleep>`_
 
-<<Name='toctree', echo=False, results='sphinx'>>=
-create_toctree()
-@
+
+.. toctree::
+   :maxdepth: 1
+
+   The Big Sleep <sleep.rst>
+
+.. toctree::
+   :maxdepth: 1
+
+   Testing the Sleep <tests/index.rst>
+
 

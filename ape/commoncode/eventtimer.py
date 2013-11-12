@@ -2,6 +2,9 @@
 IN_PWEAVE = __name__ == "__builtin__"
 
 
+# python standard library
+import threading
+
 # this package
 from ape import BaseClass
 from ape.commoncode.code_graphs import  module_diagram, class_diagram

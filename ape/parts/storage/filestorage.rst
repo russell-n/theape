@@ -108,13 +108,14 @@ The timestamp will be added using string formatting -- it will look for a `times
 
 ::
 
-    name = "test_{timestamp}.csv"
-    print name.format(timestamp=datetime.datetime.now().strftime(FILE_TIMESTAMP))
+    if IN_PWEAVE:
+        name = "test_{timestamp}.csv"
+        print name.format(timestamp=datetime.datetime.now().strftime(FILE_TIMESTAMP))
     
 
 ::
 
-    test_2013_11_05_02:00:43_PM.csv
+    test_2013_11_11_05:58:00_PM.csv
     
 
 
