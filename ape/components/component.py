@@ -225,7 +225,7 @@ class Composite(Component):
             try:
                 component.clean_up(error)
             except AttributeError as error:
-                self.logger.debug.error(error)
+                self.logger.debug(error)
                 self.logger.warning("`clean_up` not implemented in {0}".format(component))
         return
 

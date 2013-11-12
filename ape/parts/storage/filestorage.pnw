@@ -121,8 +121,9 @@ Adding Timestamps
 The timestamp will be added using string formatting -- it will look for a `timestamp` keyword:
 
 <<name='timestamp_example', wrap=False>>=
-name = "test_{timestamp}.csv"
-print name.format(timestamp=datetime.datetime.now().strftime(FILE_TIMESTAMP))
+if IN_PWEAVE:
+    name = "test_{timestamp}.csv"
+    print name.format(timestamp=datetime.datetime.now().strftime(FILE_TIMESTAMP))
 @
 
 Appending Increments

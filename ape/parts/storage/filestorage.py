@@ -37,8 +37,9 @@ if IN_PWEAVE:
         shutil.rmtree(example_path)    
 
 
-name = "test_{timestamp}.csv"
-print name.format(timestamp=datetime.datetime.now().strftime(FILE_TIMESTAMP))
+if IN_PWEAVE:
+    name = "test_{timestamp}.csv"
+    print name.format(timestamp=datetime.datetime.now().strftime(FILE_TIMESTAMP))
 
 
 if IN_PWEAVE:
