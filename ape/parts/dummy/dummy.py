@@ -60,19 +60,56 @@ class CrashDummy(DummyClass):
     """
     A dummy that crashes
     """
+    INIT = '__init__'
+    CALL = '__call__'
+    CHECK_REP = 'check_rep'
+    CLOSE = 'close'
     def __init__(self, error, error_message="CrashDummy is crashing.",
+                 function=CALL,
                  *args, **kwargs):
+        """
+        CrashTestDummy Constructor
+
+        :param:
+
+         - `error`: an exception (object) to raise
+         - `error_message`: string to pass to error on raising
+         - `function`: which function to raise error (__call__, check_rep, close, __init__)
+        """
         super(CrashDummy, self).__init__(*args, **kwargs)
         self.error = error
         self.error_message = error_message
+        self.function = function
+        if function == self.INIT:
+            raise error(error_message)
         return
+
+    def check_rep(self, *args, **kwargs):
+        """
+        Raises error if this is self.function
+        """
+        super(CrashDummy, self).__call__(*args, **kwargs)
+        if self.function == self.CHECK_REP:
+            raise self.error(self.error_message)
+        return
+
+    def close(self, *args, **kwargs):
+        """
+        Raises error if this is self.function
+        """
+        super(CrashDummy, self).__call__(*args, **kwargs)
+        if self.function == self.CLOSE:
+            raise self.error(self.error_message)
+        return
+
 
     def __call__(self, *args, **kwargs):
         """
         Raises the error passed in to the constructor with the error-message.
         """
         super(CrashDummy, self).__call__(*args, **kwargs)
-        raise self.error(self.error_message)
+        if self.function == self.CALL:
+            raise self.error(self.error_message)
         return
 # end class CrashDummy        
 
