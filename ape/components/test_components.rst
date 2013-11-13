@@ -26,6 +26,8 @@ Testing the Composite
    TestComposite.test_remove_component
    TestComposite.test_slice
    TestComposite.test_check_rep
+   TestComposite.test_evil_component
+   TestComponent.test_broken_component
 
 
 

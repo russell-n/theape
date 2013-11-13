@@ -58,5 +58,3 @@ For sub-folders there are different cases. I think most of the time it is easies
 
    subfolder_toctree
 
-
-

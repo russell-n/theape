@@ -105,6 +105,7 @@ class CrashTestDummy(BasePlugin):
         builds and returns a CrashTestDummy
 
         :precondition: self.configuration map has been set
+        :return: CrashTestDummy
         """
         if self._product is None:
             # get the random inputs and create a keyword-argument- dictionary
@@ -130,9 +131,15 @@ class CrashTestDummy(BasePlugin):
             kwargs['error'] = err
             message = self.configuration.get(section='CRASHTESTDUMMY',
                                              option='error_message',
-                optional=True,
-                default="Die! Die! My Darling!")
+                                             optional=True,
+                                             default="Die! Die! My Darling!")
             kwargs['error_message'] = message
+
+            # this is the method that raises the error
+            function = self.configuration.get(section='CRASHTESTDUMMY',
+                                              option='function',
+                                              optional=True,
+                                              default=CrashDummy.CALL)
             self._product = CrashDummy(**kwargs)
         return self._product
 
@@ -150,7 +157,11 @@ class CrashTestDummy(BasePlugin):
         # if these are missing will default to Exception
         error_message = AUUUUUUUGGGGGHHHHHHH
         error_module = exceptions
-        error = RuntimeError""")
+        error = RuntimeError
+
+        # to have it crash somewhere specific in the component interface
+        # can be one of __init__, __call__, close, check_rep
+        function = __call__""")
         return
 # end class CrashTestDummy
 

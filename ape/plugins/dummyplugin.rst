@@ -31,6 +31,7 @@ This is a dummy that crashes when called. The config-file should specify which e
    [CRASHTESTDUMMY]   
    error_module = ape.commoncode.errors
    error = ApeError
+   function = __call__
 
 .. autosummary::
    :toctree: api

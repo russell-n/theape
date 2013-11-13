@@ -39,6 +39,22 @@ class EvilComponent(object):
     def __init__(self):
         return
 
+class BrokenComponent(object):
+    def __init__(self):
+        return
+
+    def check_rep(self):
+        raise AttributeError("check_rep is broken")
+        return
+
+    def close(self):
+        raise AttributeError('close is broken')
+        return
+
+    def __call__(self):
+        raise AttributeError('call is broken')
+        return
+
 class TestComponent(unittest.TestCase):
     def setUp(self):
         self.composite = Composite()
@@ -143,6 +159,29 @@ class TestComposite(unittest.TestCase):
         mock_logger.warning.assert_called_with("'EvilComponent' hasn't implemented the 'close' method. We hate him.")
         # if the call is not implemented, raise an ApeError to kill the operation
         self.assertRaises(ApeError, self.composite())
+        return
+
+    def test_broken_component(self):
+        """
+        If the component has the required attributes by they raise AttributeErrors, will it crash the operation?
+        """
+        broken = BrokenComponent()
+        self.composite.add(broken)
+        self.composite.error = ApeError
+        self.composite.error_message = 'this should never be shown'
+        self.composite.component_category = 'broken'
+
+        # call is implemented but raises AttributeError, should not be caught
+        with self.assertRaises(AttributeError):
+            self.composite()
+
+        # same with check_rep
+        with self.assertRaises(AttributeError):
+            self.composite.check_rep()
+
+        # and again with close
+        with self.assertRaises(AttributeError):
+            self.composite.close()        
         return
 
 

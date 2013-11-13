@@ -297,9 +297,9 @@ class Composite(Component):
 
             # check all your children
             for component in self.components:
-                try:
+                if hasattr(component, 'check_rep'):
                     component.check_rep()
-                except AttributeError as error:
+                else:
                     self.log_error(error="'{0}' hasn't implemented the 'check_rep' method.".format(component.__class__.__name__),
                                     message="Thanks for the sour persimmons, cousin.")
 
@@ -313,10 +313,9 @@ class Composite(Component):
 
         """
         for component in self.components:
-            try:
+            if hasattr(component, 'close'):
                 component.close()
-            except AttributeError as error:
-                self.logger.debug(error)
+            else:
                 self.logger.warning("'{0}' hasn't implemented the 'close' method. We hate him.".format(component.__class__.__name__))
         return
 
