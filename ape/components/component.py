@@ -55,7 +55,7 @@ class Component(BaseClass):
         """
         abstractmethod: called for Keyboard Interrupts to allow file-closing
         """
-        return
+        return        
 
 
 if DOCUMENT_THIS:
@@ -233,7 +233,7 @@ class Composite(Component):
             if hasattr(component, 'close'):
                 component.close()
             else:
-                self.logger.warning("'{0}' hasn't implemented the 'close' method. We hate him.".format(component.__class__.__name__))
+                self.logger.warning("'{0}' hasn't implemented the 'close' method. We hate him.".format(component))
         return
 
     def __str__(self):

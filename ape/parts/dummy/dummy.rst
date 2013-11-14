@@ -45,7 +45,13 @@ This is a Dummy that raises an error when called.
    :toctree: api
 
    CrashDummy
-   Crash.__call__
+   CrashDummy.check_rep
+   CrashDummy.close
+   CrashDummy.__getattr__
+
+.. note:: check_rep and close don't need to be implemented to crash, but the Composite is checking if it has the attributes before calling them so they have to be implemented to crash them
+
+.. '   
 
 
 

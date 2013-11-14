@@ -39,6 +39,9 @@ class EvilComponent(object):
     def __init__(self):
         return
 
+    def __str__(self):
+        return self.__class__.__name__
+
 class BrokenComponent(object):
     def __init__(self):
         return

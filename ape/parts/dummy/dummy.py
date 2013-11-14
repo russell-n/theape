@@ -84,33 +84,46 @@ class CrashDummy(DummyClass):
             raise error(error_message)
         return
 
-    def check_rep(self, *args, **kwargs):
+    def check_rep(self):
         """
-        Raises error if this is self.function
+        crashes on check_rep() if that's the function
         """
-        super(CrashDummy, self).__call__(*args, **kwargs)
         if self.function == self.CHECK_REP:
             raise self.error(self.error_message)
         return
 
-    def close(self, *args, **kwargs):
+    def close(self):
         """
-        Raises error if this is self.function
+        Crashes if close is the function
         """
-        super(CrashDummy, self).__call__(*args, **kwargs)
         if self.function == self.CLOSE:
             raise self.error(self.error_message)
         return
 
-
-    def __call__(self, *args, **kwargs):
+    def __call__(self):
         """
-        Raises the error passed in to the constructor with the error-message.
+        Raises error if self.function is __call__ (this needs to be defined to work)
         """
-        super(CrashDummy, self).__call__(*args, **kwargs)
         if self.function == self.CALL:
             raise self.error(self.error_message)
-        return
+        return 
+
+    def __getattr__(self, attribute):
+        """
+        To catch unimplemented parts of the class and log them
+
+        :param:
+
+         - `attribute`: string for attribute not defined elsewhere in the class
+
+        :raise: self.error if attribute == self.function
+        """
+        self.logger.info(CALLED_ON.format(attribute=attribute,
+                                          thing=self))        
+        if attribute == self.function:
+            raise self.error(self.error_message)
+        return CallClass(NOT_IMPLEMENTED.format(thing=self))
+
 # end class CrashDummy        
 
 

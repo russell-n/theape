@@ -1,6 +1,8 @@
 The Ape Developer Documentation
 ===============================
 
+.. _ape-developer-documentation:
+
 This is documentation meant for those trying to understand or extend the code.
 
 
