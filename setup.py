@@ -11,7 +11,7 @@ from datetime import datetime
 
 setup(name='ape',
       version= datetime.today().strftime("%Y.%m.%d"),
-      description="A program to run tests",
+      description="A program to run code.",
       author="russell",
       platforms=['linux'],
       url = '',

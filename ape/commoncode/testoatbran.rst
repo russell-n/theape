@@ -539,7 +539,14 @@ Testing the Oatbran
     
         def assert_match(self, regex, text, name, expected):
             match = regex.search(text)
-            self.assertEqual(match.group(name), expected)
+            actual = match.group(name)
+            message = "Source: '{t}', Expected: {e}, Actual: {a}".format(t=text
+    ,
+                                                                         e=expe
+    cted,
+                                                                         a=actu
+    al)
+            self.assertEqual(actual, expected, msg=message)
             return
     
         def test_real(self):
@@ -571,10 +578,12 @@ Testing the Oatbran
             self.assert_match(regex, text, name, number)
     
             # what happens if it comes at the end of a sentence?
-            number = (random.choice(('', '-')) + str(nrandom.randint(100)) +
-                      random.choice(('', '.')) + str(nrandom.randint(100)))
-            text = number + '.'
-            self.assert_match(regex, text, name, number)
+            #number = (random.choice(('', '-')) + str(nrandom.randint(100)) +
+            #          random.choice(('', '.')) + str(nrandom.randint(100)))
+            #text = number + '.'
+            #self.assert_match(regex, text, name, number)
+    
+            # I decided to let it be more lenient and match 2. as a decimal
             return
     
         def test_hexadecimal(self):

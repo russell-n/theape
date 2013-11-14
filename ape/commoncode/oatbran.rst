@@ -10,10 +10,27 @@ Oat Bran helps with regular expressions. Names are uppercased to avoid keyword c
     RIGHT_BRACKET = ']'
     
     
+
+
+
+Contents:
+
+    * :ref:`Formal Definition <ape-oatbran-formar-definition>`
+
+    * :ref:`Groups <ape-oatbran-groups>`
+
+    * :ref:`Quantifiers <ape-oatbran-quantifiers>`
+
+    * :ref:`Character Classes <ape-oatbran-character-classes>`
+
+    * :ref:`Boundaries <ape-oatbran-boundaries>`
+
+    * :ref:`Common Patterns <ape-oatbran-common-patterns>`
+
+    * :ref:`Numbers <ape-oatbran-numbers>`
+
+.. _ape-oatbran-formal-definition:    
     
-
-
-
 Formal Definition
 -----------------
 
@@ -36,6 +53,7 @@ These are the basic building blocks of regular expressions.
 
 
 
+.. _ape-oatbran-groups:
 
 Groups
 ------
@@ -55,6 +73,8 @@ Besides the basic use of grouping with parentheses (to explicitly apply operatio
 
 
 
+.. _ape-oatbran-quantifiers:
+
 Quantifiers
 -----------
 
@@ -71,6 +91,8 @@ Quantifiers are used to describe repetitions of patterns. The `zero_or_more` qua
    Quantifier.m_to_n
 
 
+
+.. _ape-oatbran-character-classes:
 
 Character Classes
 -----------------
@@ -92,6 +114,7 @@ A helper with character classes (stuff put in square-brackets ('[]')). There are
    
 
 
+.. _ape-oatbran-boundaries:
 
 Boundaries
 ----------
@@ -106,6 +129,8 @@ Boundaries
    Boundaries.string
    
 
+
+.. _ape-oatbran-common-patterns:
 
 Common Patterns
 ---------------
@@ -128,7 +153,7 @@ These are pattens that I use a lot but I could not think of where to put them.
    
 
 
-
+.. _ape-oatbran-numbers:
 
 Numbers
 -------

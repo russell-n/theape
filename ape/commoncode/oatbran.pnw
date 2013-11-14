@@ -10,9 +10,26 @@ import string
 # but sometimes they're just too clunky
 LEFT_BRACKET = '['
 RIGHT_BRACKET = ']'
-
 @
 
+Contents:
+
+    * :ref:`Formal Definition <ape-oatbran-formar-definition>`
+
+    * :ref:`Groups <ape-oatbran-groups>`
+
+    * :ref:`Quantifiers <ape-oatbran-quantifiers>`
+
+    * :ref:`Character Classes <ape-oatbran-character-classes>`
+
+    * :ref:`Boundaries <ape-oatbran-boundaries>`
+
+    * :ref:`Common Patterns <ape-oatbran-common-patterns>`
+
+    * :ref:`Numbers <ape-oatbran-numbers>`
+
+.. _ape-oatbran-formal-definition:    
+    
 Formal Definition
 -----------------
 
@@ -44,6 +61,7 @@ class FormalDefinition(object):
     kleene_star = "*"
 @
 
+.. _ape-oatbran-groups:
 
 Groups
 ------
@@ -136,6 +154,8 @@ class Group(object):
         return "(?<!{e})".format(e=prefix)
 @
 
+.. _ape-oatbran-quantifiers:
+
 Quantifiers
 -----------
 
@@ -203,8 +223,9 @@ class Quantifier(object):
         - `n`: the maximum number of  matches
         """
         return "{{{m},{n}}}".format(m=m, n=n)
-
 @
+
+.. _ape-oatbran-character-classes:
 
 Character Classes
 -----------------
@@ -224,7 +245,6 @@ A helper with character classes (stuff put in square-brackets ('[]')). There are
    CharacterClass.character_class
    CharacterClass.not_in
    
-
 <<name='CharacterClass', echo=False>>=
 class CharacterClass(object):
     """
@@ -264,6 +284,8 @@ class CharacterClass(object):
         """
         return "[^{e}]".format(e=characters)
 @
+
+.. _ape-oatbran-boundaries:
 
 Boundaries
 ----------
@@ -314,6 +336,8 @@ class Boundaries(object):
         return r"^{e}$".format(e=string)
 @
 
+.. _ape-oatbran-common-patterns:
+
 Common Patterns
 ---------------
 
@@ -352,7 +376,7 @@ class CommonPatterns(object):
     not_spaces = Quantifier.one_or_more(not_space)
 @
 
-
+.. _ape-oatbran-numbers:
 
 Numbers
 -------
@@ -423,10 +447,9 @@ class Numbers(object):
                         SPACE_PREFIX + z_plus + END_SUFFIX +FormalDefinition.OR +
                         SPACE_PREFIX + z_plus + SPACE_SUFFIX )
 
-    nonnegative_integer = (Group.not_preceded_by(decimal_point + FormalDefinition.OR + '-') +
-                               CharacterClass.non_zero_digit + optional_digits +
-                               r'\b' +FormalDefinition.OR + 
-                               Boundaries.word('0'))
+    nonnegative_integer = (CharacterClass.non_zero_digit + optional_digits +
+                           r'\b' +FormalDefinition.OR + 
+                            Boundaries.word('0'))
     # this disqualifies leading decimal points but not zeros
     integer = (Group.not_preceded_by(decimal_point) +
                                Quantifier.zero_or_one('-') + 
