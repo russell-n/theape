@@ -8,7 +8,6 @@ LEFT_BRACKET = '['
 RIGHT_BRACKET = ']'
 
 
-
 class FormalDefinition(object):
     """
     The basic operators and elements of a regular expression
@@ -146,7 +145,6 @@ class Quantifier(object):
         return "{{{m},{n}}}".format(m=m, n=n)
 
 
-
 class CharacterClass(object):
     """
     A class to help with character classes
@@ -272,10 +270,9 @@ class Numbers(object):
                         SPACE_PREFIX + z_plus + END_SUFFIX +FormalDefinition.OR +
                         SPACE_PREFIX + z_plus + SPACE_SUFFIX )
 
-    nonnegative_integer = (Group.not_preceded_by(decimal_point + FormalDefinition.OR + '-') +
-                               CharacterClass.non_zero_digit + optional_digits +
-                               r'\b' +FormalDefinition.OR + 
-                               Boundaries.word('0'))
+    nonnegative_integer = (CharacterClass.non_zero_digit + optional_digits +
+                           r'\b' +FormalDefinition.OR + 
+                            Boundaries.word('0'))
     # this disqualifies leading decimal points but not zeros
     integer = (Group.not_preceded_by(decimal_point) +
                                Quantifier.zero_or_one('-') + 
