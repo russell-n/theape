@@ -198,7 +198,8 @@ class CrashTestDummy(BasePlugin):
         error = RuntimeError
 
         # to have it crash somewhere specific in the component interface
-        # can be one of __init__, __call__, close, check_rep
+        # can be any attribute you want to call
+        # e.g. function = umma will crash if dummy.umma() is called or dummy.umma
         function = __call__""")
         return
 # end class CrashTestDummy
