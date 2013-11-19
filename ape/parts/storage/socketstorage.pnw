@@ -52,6 +52,7 @@ Not all of the methods make sense (like open) so only a sub-set will be implemen
    SocketStorage : writelines(list)
    SocketStorage : closed
    SocketStorage : name
+   SocketStorage : __iter__()
 
 .. _socket-storage-api:
 
@@ -172,7 +173,8 @@ class SocketStorage(BaseStorage):
         line = None
         while line != EOF:
             try:
-                yield self.file.readline()
+                line =  self.file.readline()
+                yield line
             except socket.timeout:
                 self.logger.debug('socket timed out')
                 yield TIMED_OUT

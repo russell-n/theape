@@ -1,13 +1,19 @@
 
 # python standard library
 import unittest
+import socket
 
 # third-party
-from mock import MagicMock, patch
+import paramiko
+try:
+    from mock import MagicMock, patch    
+except ImportError:
+    pass
 
 # this package
 from ape.parts.connections.sshconnection import SSHConnection
 from ape.parts.connections.sshconnection import InOutError
+from ape import ApeError
 
 
 class TestSSHConnection(unittest.TestCase):
@@ -16,7 +22,8 @@ class TestSSHConnection(unittest.TestCase):
     """
     def setUp(self):
         paramiko_patcher = patch('paramiko.SSHClient')
-        self.definition = paramiko_patcher.start()        
+        self.definition = paramiko_patcher.start()
+        self.client = MagicMock()
         self.stdin = MagicMock()
         self.stdout = MagicMock()
         self.stderr = MagicMock()
@@ -26,12 +33,14 @@ class TestSSHConnection(unittest.TestCase):
         self.timeout = 10
         
         self.client = MagicMock()
+        self.logger = MagicMock()
         self.definition.return_value = self.client
         
         self.connection = SSHConnection(hostname=self.hostname,
                                         username=self.username,
                                         password=self.password,
                                         timeout=self.timeout)
+        self.connection._logger = self.logger
         self.client.exec_command.return_value = (self.stdin, self.stdout, self.stderr)
         return
 
@@ -68,7 +77,8 @@ class TestSSHConnection(unittest.TestCase):
         """
         #with patch('paramiko.SSHClient', self.definition):
         sshclient = self.connection.client
-        self.definition.assert_called_with(hostname=self.hostname,
+        self.definition.assert_called_with()
+        self.client.connect.assert_called_with(hostname=self.hostname,
                                            username=self.username,
                                            password=self.password,
                                            port=22,
@@ -76,6 +86,53 @@ class TestSSHConnection(unittest.TestCase):
                                            compress=False,
                                            timeout=self.timeout)
         self.assertEqual(self.client, sshclient)
+        return
+
+    def test_bad_public_keys(self):
+        """
+        Does it catch the PasswordRequiredException?
+        """
+        self.client.connect.side_effect = paramiko.PasswordRequiredException
+        self.connection._client = None
+        with self.assertRaises(ApeError):
+            client = self.connection.client
+        return
+
+    def test_bad_password(self):
+        """
+        Does it catch an incorrect password (or username)?
+        """
+        self.client.connect.side_effect = paramiko.AuthenticationException
+        self.connection._client = None
+        with self.assertRaises(ApeError):
+            self.connection.client
+        return
+
+    def socket_errors(self, message):
+        self.client.connect.side_effect = socket.error(message)
+        self.connection._client = None
+        with self.assertRaises(ApeError):
+            self.connection.client
+        
+    def test_ip_problems(self):
+        """
+        Does it catch socket errors?
+        """
+        self.socket_errors('[Errno 113] No route to host')
+        self.socket_errors('[Errno 101] Network is unreachable')
+        self.socket_errors('[Errno 111] Connection refused')
+        self.socket_errors('timed out')
+        self.socket_errors('unknown error')
+        return
+
+    def test_sshexception(self):
+        """
+        Does it raise an ApeError for all paramiko-exceptions?
+        """
+        self.client.connect.side_effect = paramiko.SSHException
+        self.connection._client = None
+        with self.assertRaises(ApeError):
+            self.connection.client
         return
 
     def test_sudo(self):

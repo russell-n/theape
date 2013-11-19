@@ -2,9 +2,13 @@
 # python standard library
 import unittest
 import socket
+import textwrap
 
 # third-party
-from mock import patch, MagicMock
+try:
+    from mock import patch, MagicMock
+except ImportError:
+    pass
 
 # this package
 from ape.parts.storage.socketstorage import SocketStorage
@@ -151,4 +155,25 @@ class TestSocketStorage(unittest.TestCase):
         self.socket.writelines.side_effect = socket.error
         self.assertRaises(ApeError, self.storage.writelines, '')
         return
+
+    def test_iter(self):
+        """
+        Does it traverse the socket output?
+        """
+        lines = textwrap.dedent('''Now is the winter of our discontent,
+        Made glorious Summer by this Son of Yorke,
+        And all the clouds that lour'd upon our house,
+        In the deep bosom of the ocean buried.
+        ''').split('\n')
+        output = lines[:]
+        def readline():
+            if len(output):
+                return output.pop(0)
+            return ''
+        
+        self.socket.readline.side_effect = readline
+        for index, line in enumerate(self.storage):
+            print index, line
+            self.assertEqual(line, lines[index])
+            
 # end class TestSocket    

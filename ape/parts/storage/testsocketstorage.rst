@@ -16,4 +16,9 @@ Testing the SocketStorage
    TestSocketStorage.test_readline
    TestSocketStorage.test_readline_timeout
    TestSocketStorage.test_write
+   TestSocketStorage.test_write_closed
+   TestSocketStorage.test_writeline
+   TestSocketStorage.test_writelines
+   TestSocketStorage.test_writelines_error
+   TestSocketStorage.test_iter
 
