@@ -33,6 +33,7 @@ Not all of the methods make sense (like open) so only a sub-set will be implemen
    SocketStorage : writelines(list)
    SocketStorage : closed
    SocketStorage : name
+   SocketStorage : __iter__()
 
 .. _socket-storage-api:
 
@@ -65,13 +66,13 @@ Although the main reason for this class is to trap socket timeouts when reading 
 Module Diagram
 --------------
 
-.. image:: classes_filestorage.png
+.. image:: classes_socketstorage.png
 
 
-.. _file-storage-class-diagram:
+.. _socket-storage-class-diagram:
 
 Class Diagram
 -------------
 
-.. image:: FileStorage.png
+.. image:: SocketStorage.png
 

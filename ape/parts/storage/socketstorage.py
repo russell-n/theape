@@ -113,7 +113,8 @@ class SocketStorage(BaseStorage):
         line = None
         while line != EOF:
             try:
-                yield self.file.readline()
+                line =  self.file.readline()
+                yield line
             except socket.timeout:
                 self.logger.debug('socket timed out')
                 yield TIMED_OUT
@@ -122,14 +123,14 @@ class SocketStorage(BaseStorage):
 
 
 if IN_PWEAVE:
-    this_file = os.path.join(os.getcwd(), 'filestorage.py')
-    module_diagram_file = module_diagram(module=this_file, project='filestorage')
+    this_file = os.path.join(os.getcwd(), 'socketstorage.py')
+    module_diagram_file = module_diagram(module=this_file, project='socketstorage')
     print ".. image:: {0}".format(module_diagram_file)
 
 
 
 if IN_PWEAVE:
-    class_diagram_file = class_diagram(class_name="FileStorage",
+    class_diagram_file = class_diagram(class_name="SocketStorage",
                                        filter='OTHER',
                                        module=this_file)
     print ".. image:: {0}".format(class_diagram_file)

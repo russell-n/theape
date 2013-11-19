@@ -7,7 +7,7 @@ import threading
 import paramiko
 
 # this package
-from ape import BaseClass
+from ape import BaseClass, ApeError
 from ape.parts.storage.socketstorage import SocketStorage
 
 
@@ -52,17 +52,51 @@ class SSHConnection(BaseClass):
         """
         an SSHClient instance
 
+        :raise: ApeError for paramiko and socket exceptions
         :rtype: SSHClient
         :return: SSH Client with the constructor's parameters
         """
         if self._client is None:
-            self._client = paramiko.SSHClient(hostname=self.hostname,
-                                              username=self.username,
-                                              port=self.port,
-                                              password=self.password,
-                                              key_filename=self.key_filename,
-                                              compress=self.compress,
-                                              timeout=self.timeout)
+            self._client = paramiko.SSHClient()
+            self._client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+            try:
+                self._client.connect(hostname=self.hostname,
+                                 username=self.username,
+                                 port=self.port,
+                                 password=self.password,
+                                 key_filename=self.key_filename,
+                                 compress=self.compress,
+                                 timeout=self.timeout)
+            except paramiko.PasswordRequiredException as error:
+                self.log_error(error)
+                raise ApeError("{u}@{h} Public keys not working".format(u=self.username,
+                                                                        h=self.hostname))
+            except paramiko.AuthenticationException as error:
+                self.log_error(error)
+                raise ApeError("Password: {p} for {u}@{h} not accepted".format(p=self.password,
+                                                                               u=self.username,
+                                                                               h=self.hostname))
+            except paramiko.SSHException as error:
+                self.log_error(error)
+                raise ApeError('{u}@{h} with password {p} raised "{e}"'.format(u=self.username,
+                                                                               h=self.hostname,
+                                                                               p=self.password,
+                                                                               e=error))
+            except IOError as error:
+                self.log_error(error)
+                if 'No route to host' in str(error) or 'Network is unreachable' in str(error):
+                    raise ApeError("{h} unreachable from this machine.".format(h=self.hostname))
+                if 'Connection refused' in str(error):
+                    raise ApeError("{u}@{h} refused connection (is the ssh-server running?)".format(u=self.username,
+                                                                                                     h=self.hostname))
+                if 'timed out' in str(error):                    
+                    raise ApeError("Unable to connect to {u}:{h} within {t} seconds (timed out)".format(u=self.username,
+                                                                                                        h=self.hostname,
+                                                                                                        t=self.timeout))
+                raise ApeError('({e}) connecting to {u}@{h}'.format(e=error,
+                                                                     u=self.username,
+                                                                     h=self.hostname))
+
         return self._client
 
     def sudo(self, command, password, timeout=None):

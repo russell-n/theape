@@ -3,12 +3,6 @@ Testing The File Storage
 
 ::
 
-    test_2013_11_05_02:00:48_PM.csv
-    
-    
-
-::
-
     PATH = 'ape/call'
     class TestFileStorage(unittest.TestCase):
         def setUp(self):
