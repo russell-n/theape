@@ -1,15 +1,15 @@
 
 # python standard library
-from abc import abstractmethod, ABCMeta, abstractproperty
+from abc import abstractmethod, ABCMeta
 import inspect
 import os
 
 # this package
 from ape import BaseClass
 from ape import ApeError
-from ape.parts.countdown.countdown import CountDown
-from ape.commoncode.strings import RESET, BLUE
-from ape.commoncode.strings import BOLD, BOLD_THING, RED
+
+from ape.commoncode.strings import RESET
+from ape.commoncode.strings import BOLD
 from ape.commoncode.crash_handler import try_except
 from ape.commoncode.errors import ConfigurationError
 from ape.commoncode.code_graphs import module_diagram, class_diagram
@@ -71,8 +71,7 @@ class Composite(Component):
     """
     def __init__(self, error=None, error_message=None,
                  identifier=None,
-                 component_category=None,
-                 is_root=False):
+                 component_category=None):
         """
         Composite Constructor
 
@@ -82,14 +81,12 @@ class Composite(Component):
          - `error_message`: string for header of error messages
          - `component_category`: label for error messages when reporting component actions
          - `identifier`: something to identify this when it starts the call
-         - `is_root`: if True logs summation information
         """
         super(Composite, self).__init__()
         self.error = error
         self.error_message = error_message
         self.identifier = identifier
         self.component_category = component_category
-        self.is_root = is_root
         self._logger = None
         self._components = None
         return

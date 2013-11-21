@@ -132,8 +132,8 @@ class CrashTestDummy(BasePlugin):
             self._sections['Description'] = (DESCRIPTION.replace('DummyClass',
                                                                 'CrashTestDummy') +
                 "\It takes an error to raise as an argument and raises it when called.")
-            self._sections['Example'] = EXAMPLES.replace.replace('dummy',
-                                                                 'crashtestdummy')
+            self._sections['Example'] = EXAMPLES.replace('dummy',
+                                                         'crashtestdummy')
             self._sections['Note'] = NOTE
         return self._sections
 

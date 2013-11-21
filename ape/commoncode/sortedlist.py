@@ -2,6 +2,9 @@
 # python standard library
 from bisect import insort
 
+# third party
+import numpy
+
 
 class SortedList(list):
     """
@@ -14,6 +17,7 @@ class SortedList(list):
         super(SortedList, self).__init__(*args, **kwargs)
         return
 
+    
     def insort(self, item):
         """
         Inserts item into list in sorted order
@@ -21,18 +25,14 @@ class SortedList(list):
         insort(self, item)
         return
 
+    def percentile(self, percentile):
+        """
+        Calculates the percentile for the current list.
 
-import unittest
-import random
+        :param:
 
+         - `percentile`: number in range [0,100] (e.g. 50 gets median)
 
-class TestSortedList(unittest.TestCase):
-    def setUp(self):
-        self.collection = SortedList()
-        return
-
-    def test_insort(self):
-        test = [random.randrange(0, 100) for item in xrange(100)]
-        for item in test:
-            self.collection.insort(item)
-        self.assertEqual(sorted(test), self.collection)
+        :return: value for percentile
+        """
+        return numpy.percentile(self, percentile)

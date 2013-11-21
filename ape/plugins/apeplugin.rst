@@ -109,12 +109,6 @@ This means:
 
  * the `Build Composites` happens in creating the ``product`` 
    
-::
-
-    test_2013_11_08_07:04:52_PM.csv
-    
-    
-
 
 
 .. _apeplugin-module-dependency-graph:

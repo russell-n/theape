@@ -31,7 +31,7 @@ CONFIGURATION = '''[{0}]
 ...
 <option_name_n> = <comma-separated-list of plugins>
 
-[MODULES]
+#[MODULES]
 # If you are getting a plugin from a non-ape package put the module here
 # it should use the import's dot-notation. e.g. :
 # packagename.modulename
@@ -42,8 +42,15 @@ CONFIGURATION = '''[{0}]
 # so they won't accidentally get picked up if you use a glob to point to the main config files
 #config_glob = settings*.config
 
+# if you want to repeat the operation defined in this config, give it repetitions
+# repetitions = 1000000
+
 # if you want to store files in a sub-folder
 # {1} = <name>
+
+# If you get a ParserError check:
+#   - is everything flush-left?
+#   - no inline comments? (this won't raise a Parser error but it will create an error later)
 '''.format(APESECTION, SUBFOLDER)
 
 
@@ -154,7 +161,7 @@ class Ape(BasePlugin):
             self._sections["Configuration"] = CONFIGURATION
             self._sections['Examples'] = 'ape run *.ini\nape help\nape fetch\nape list\nape check *ini'
             self._sections['Errors'] = '{bold}Oops, I crapped my pants:{reset} unexpected error (probably indicates implementation error)'
-            self._sections['subcommands'] = "help (this help), fetch (sample configuration), run <configuration-file(s)>"
+            self._sections['subcommands'] = "help (this help), fetch (sample configuration), run <configuration-file(s)>, list (known plugins), check (configuration)"
             self._sections['Files'] = __file__
         return self._sections
     
@@ -170,8 +177,7 @@ class Ape(BasePlugin):
         hortator = Composite(error=Exception,
                              identifier='Hortator',
                              error_message="Operator Crash",
-                             component_category='Operator',
-                             is_root=True)
+                             component_category='Operator')
 
         # traverse the config-files to get Operators and configuration maps
         for config_file in self.configfiles:
