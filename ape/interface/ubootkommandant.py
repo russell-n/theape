@@ -1,6 +1,8 @@
 
 # python standard library
 from ConfigParser import NoSectionError
+import datetime
+
 # third-party
 try:
     from pycallgraph import PyCallGraph
@@ -21,6 +23,7 @@ from ape.plugins.quartermaster import QuarterMaster
 RED_ERROR = "{red}{bold}{{error}}{reset}".format(red=RED,
                                                  bold=BOLD,
                                                  reset=RESET)
+INFO_STRING = '{b}**** {{0}} ****{r}'.format(b=BOLD, r=RESET)
 
 
 DOCUMENT_THIS = __name__ == '__builtin__'
@@ -107,6 +110,9 @@ class UbootKommandant(BaseClass):
         """
         Builds and runs the code
         """
+        self.logger.info(INFO_STRING.format("Starting The APE"))
+        start = datetime.datetime.now()
+        
         ape = self.build_ape(args)
         if ape is None:
             return
@@ -126,8 +132,12 @@ class UbootKommandant(BaseClass):
             with PyCallGraph(output=graphviz, config=config):
                 ape()
         else:
+            # the main run (the others are for debugging)
             ape()
+        
         ape.close()
+        end = datetime.datetime.now()
+        self.logger.info(INFO_STRING.format("Total Elapsed Time: {0}".format(end-start)))
         return
 
     @try_except

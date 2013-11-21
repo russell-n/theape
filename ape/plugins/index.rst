@@ -30,6 +30,7 @@ These are the documents created from the source files.
    The Base Plugin <base_plugin.rst>
    The Ape Plugin <apeplugin.rst>
    The Dummy Plugin <dummyplugin.rst>
+   Sleep Plugin <sleep_plugin.rst>
 
 .. toctree::
    :maxdepth: 1

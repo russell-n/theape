@@ -15,7 +15,7 @@ output_documentation = __name__ == '__builtin__'
 
 if output_documentation:
     indent = ' ' * 5
-    tw = textwrap.TextWrapper(width=40, subsequent_indent=indent,
+    tw = textwrap.TextWrapper(width=80, subsequent_indent=indent,
                               drop_whitespace=False)
     text = """
 A Little Text:

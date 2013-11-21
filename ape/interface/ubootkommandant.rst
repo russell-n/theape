@@ -65,7 +65,7 @@ There are two kinds of exceptions caught which produce two error-messages:
 
    Exception; Oops, I Crapped My Pants; Something unexpected happened -- this indicates a problem with the code
    KeyboardInterrupt; Oh, I am slain; User killed the runtime for some reason -- clean-up and then close
-   
+
 
 
 .. _ubootkommandant-api:

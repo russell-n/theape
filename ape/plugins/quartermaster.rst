@@ -118,6 +118,7 @@ Looking at the output you can see that the ``__file__`` contains the path to the
     dummyplugin.py
     index.py
     quartermaster.py
+    sleep_plugin.py
     
 
 
@@ -245,6 +246,7 @@ Oops. What happened there (the ``print`` statement should have created some outp
     CrashTestDummy
     Dummy
     StuckDummy
+    Sleep
     
 
 

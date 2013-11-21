@@ -10,8 +10,8 @@ try:
 except ImportError:
     pass
 # this package
-from randomizer import Randomizer
-from oatbran import *
+from ape.commoncode.randomizer import Randomizer
+from ape.commoncode.oatbran import *
 
 
 L_GROUP = '('

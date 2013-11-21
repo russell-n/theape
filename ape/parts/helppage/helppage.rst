@@ -38,7 +38,7 @@ Python TextWrapper
 
     if output_documentation:
         indent = ' ' * 5
-        tw = textwrap.TextWrapper(width=40, subsequent_indent=indent,
+        tw = textwrap.TextWrapper(width=80, subsequent_indent=indent,
                                   drop_whitespace=False)
         text = """
     A Little Text:
@@ -54,12 +54,9 @@ Python TextWrapper
 
 ::
 
-     A Little Text:  Now is the winter of 
-         our discontent; Made glorious 
-         summer by this Son of York; And all
-          the clouds that lour'd upon our 
-         house; In the deep bosom of the 
-         ocean buried. 
+     A Little Text:  Now is the winter of our discontent; Made glorious summer by 
+         this Son of York; And all the clouds that lour'd upon our house; In the 
+         deep bosom of the ocean buried. 
     
 
 
@@ -90,12 +87,9 @@ That was not really what I wanted -- I thought that the empty line before the pa
 
     A Little Text:
     
-          Now is the winter of our 
-         discontent; Made glorious summer by
-          this Son of York; And all the 
-         clouds that lour'd upon our house; 
-         In the deep bosom of the ocean 
-         buried. 
+          Now is the winter of our discontent; Made glorious summer by this Son of 
+         York; And all the clouds that lour'd upon our house; In the deep bosom of 
+         the ocean buried. 
     
 
 
@@ -115,12 +109,9 @@ Okay, but now the output is all blocky. Try again with the `drop_whitespace` set
 
     A Little Text:
     
-          Now is the winter of our
-         discontent; Made glorious summer by
-         this Son of York; And all the
-         clouds that lour'd upon our house;
-         In the deep bosom of the ocean
-         buried.
+          Now is the winter of our discontent; Made glorious summer by this Son of
+         York; And all the clouds that lour'd upon our house; In the deep bosom of
+         the ocean buried.
     
 
 
@@ -140,12 +131,9 @@ Well, it *is* closer, but that first line in the body is still mysteriously off.
 
     A Little Text:
     
-         Now is the winter of our
-         discontent; Made glorious summer by
-         this Son of York; And all the
-         clouds that lour'd upon our house;
-         In the deep bosom of the ocean
-         buried.
+         Now is the winter of our discontent; Made glorious summer by this Son of
+         York; And all the clouds that lour'd upon our house; In the deep bosom of
+         the ocean buried.
     
 
 
@@ -185,12 +173,9 @@ This will break if the computer does not have `less`, which seems unlikely since
 
 ::
 
-     A Little Text:  Now is the winter of 
-         our discontent; Made glorious 
-         summer by this Son of York; And all
-          the clouds that lour'd upon our 
-         house; In the deep bosom of the 
-         ocean buried. 
+     A Little Text:  Now is the winter of our discontent; Made glorious summer by 
+         this Son of York; And all the clouds that lour'd upon our house; In the 
+         deep bosom of the ocean buried. 
     
 
 
