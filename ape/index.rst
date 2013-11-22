@@ -39,16 +39,16 @@ These are the documents created from the source files.
 .. toctree::
    :maxdepth: 1
 
-   The Main Entry Point <main.rst>
    Log Setter <log_setter.rst>
+   The Main Entry Point <main.rst>
 
 .. toctree::
    :maxdepth: 1
 
    The Components <components/index.rst>
-   User Interface <interface/index.rst>
+   Parts <parts/index.rst>
    Plugins <plugins/index.rst>
    Common Code <commoncode/index.rst>
-   Parts <parts/index.rst>
+   User Interface <interface/index.rst>
 
 
