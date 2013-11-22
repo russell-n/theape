@@ -122,8 +122,8 @@ class TestingTimeTracker(unittest.TestCase):
                                    max=timedelta(seconds=20.0),
                                    mean=timedelta(seconds=12.0),
                                    std=timedelta(seconds=8.0)))]
-        #self.assertEqual(self.logger.info.mock_calls,
-        #                 calls)
+        self.assertEqual(self.logger.info.mock_calls,
+                         calls)
         # this doesn't work, there's a loss of precision with the timedelta conversions
         # the calculations need to be moved out and tested separately
         # or we can just say -- close enough

@@ -10,9 +10,12 @@ Testing the CountdownTimer
 <<name='imports', echo=False>>=
 # python standard library
 import unittest
+import random
+from datetime import timedelta
 
 # third-party
 from mock import MagicMock, patch
+import numpy
 
 # this package
 from ape.parts.countdown.countdown import CountdownTimer, INFO
@@ -27,8 +30,8 @@ class TestCountdownTimer(unittest.TestCase):
         self.log_level = INFO
         self.logger = MagicMock()        
 
-        self.repetitions = 2
-        self.timer = CountdownTimer(repetitions=2, log_level=INFO)
+        self.repetitions = random.randrange(100)
+        self.timer = CountdownTimer(repetitions=self.repetitions, log_level=INFO)
         return
 
     def tearDown(self):
@@ -54,8 +57,36 @@ class TestCountdownTimer(unittest.TestCase):
         """
         Does it keep track of time for the right number of repetitions?
         """
+        # first repetition
+        now = first_now = timedelta(seconds=10)
+        self.datetime.now.return_value = first_now
 
+        self.assertTrue(self.timer())
+        
+        self.datetime.now.assert_called_with()              
+        self.assertEqual(self.timer.start, first_now)
+        self.assertEqual(self.timer.last_time, first_now)
+        self.assertEqual(self.timer.repetitions, self.repetitions)
 
+        for repetition in xrange(1, self.repetitions):
+            now +=  first_now
+            self.datetime.now.return_value = now
+            self.assertTrue(self.timer())
+            self.assertEqual((first_now).total_seconds(), self.timer.times[repetition-1])
+            self.assertEqual(self.timer.last_time, now)
+            self.assertEqual(self.timer.repetitions, self.repetitions - repetition)
+            self.assertTrue(all(numpy.array([10.] * repetition) == self.timer.times))
+
+        # last repetition
+        now += first_now
+        self.datetime.now.return_value = now
+        self.assertFalse(self.timer())
+
+        self.assertEqual(self.timer.last_time, now)
+        self.assertEqual(0, self.timer.repetitions)
+
+        self.assertIsNone(self.timer.start)
+        self.assertIsNone(self.timer._times)
         return
 @
 

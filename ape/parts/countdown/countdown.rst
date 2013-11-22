@@ -73,6 +73,8 @@ The CountdownTimer
 
 The CountdownTimer is an extension of the TimeTracker that takes a `repetitions` value and decrements it on each call, returning True until it is less than or equal to 0.
 
+.. note:: Because I decrement after the start-time is set, this will always return True on the first call (it assumes you want at least one repetition).
+
 .. uml::
 
    TimeTracker <|-- CountdownTimer
