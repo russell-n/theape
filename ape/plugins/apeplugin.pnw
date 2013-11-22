@@ -126,6 +126,7 @@ from ape.commoncode.code_graphs import module_diagram, class_diagram
 from ape.commoncode.errors import ApeError, DontCatchError, ConfigurationError
 from ape import APESECTION, MODULES_SECTION
 from quartermaster import QuarterMaster
+from ape.parts.countdown.countdown import INFO
 @
 <<name='check_pweave', echo=False>>=
 in_pweave = __name__ == '__builtin__'
@@ -335,7 +336,8 @@ class Ape(BasePlugin):
                              identifier='Hortator',
                              error_message="Operator Crash",
                              component_category='Operator')
-
+        # Set the TimeTracker level to info so it outputs to the screen
+        hortator.time_remains.log_level = INFO
         # traverse the config-files to get Operators and configuration maps
         for config_file in self.configfiles:
             # the QuarterMaster is being created each time because I am now allowing the addition
@@ -347,6 +349,9 @@ class Ape(BasePlugin):
                                  error=ApeError,
                                  error_message='Operation Crash',
                                  component_category='Operation')
+
+            # **** THIS IS TEMPORARY UNTIL A COUNTDOWNTIMER GETS ADDED ****
+            operator.time_remains.log_level = INFO
             
             configuration = ConfigurationMap(config_file)
             defaults = configuration.defaults

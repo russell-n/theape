@@ -13,6 +13,7 @@ from ape.commoncode.strings import BOLD
 from ape.commoncode.crash_handler import try_except
 from ape.commoncode.errors import ConfigurationError
 from ape.commoncode.code_graphs import module_diagram, class_diagram
+from ape.parts.countdown.countdown import TimeTracker
 
 
 DOCUMENT_THIS = __name__ == '__builtin__'
@@ -30,6 +31,9 @@ class Component(BaseClass):
     """
     __metaclass__ = ABCMeta
     def __init__(self):
+        """
+        Component Constructor
+        """
         super(Component, self).__init__()
         self._logger = None
         return
@@ -71,7 +75,8 @@ class Composite(Component):
     """
     def __init__(self, error=None, error_message=None,
                  identifier=None,
-                 component_category=None):
+                 component_category=None,
+                 time_remains=None):
         """
         Composite Constructor
 
@@ -81,6 +86,7 @@ class Composite(Component):
          - `error_message`: string for header of error messages
          - `component_category`: label for error messages when reporting component actions
          - `identifier`: something to identify this when it starts the call
+         - ``time_remains`` - a TimeTracker or CountdownTimer
         """
         super(Composite, self).__init__()
         self.error = error
@@ -89,6 +95,7 @@ class Composite(Component):
         self.component_category = component_category
         self._logger = None
         self._components = None
+        self._time_remains = time_remains
         return
 
     @property
@@ -99,6 +106,15 @@ class Composite(Component):
         if self._components is None:
             self._components = []
         return self._components
+
+    @property
+    def time_remains(self):
+        """
+        :return: TimeTracker (default) or CountdownTimer object
+        """
+        if self._time_remains is None:
+            self._time_remains = TimeTracker()
+        return self._time_remains
 
     def add(self, component):
         """
@@ -182,12 +198,14 @@ class Composite(Component):
         
         self.logger.info("{b}*** Starting {c} ***{r}".format(b=BOLD, r=RESET,
                                                              c=self.component_category))
-        
-        for count, component in enumerate(self.components):
-            self.logger.info(count_string.format(c=count+1,
-                                                 t=total_count,
-                                                 o=str(component)))                                                 
-            self.one_call(component)
+
+        # the use of time-remains is meant to facilitate repeated re-use of the same component calls
+        while self.time_remains():
+            for count, component in enumerate(self.components):
+                self.logger.info(count_string.format(c=count+1,
+                                                     t=total_count,
+                                                     o=str(component)))                                                 
+                self.one_call(component)
             
         self.logger.info("{b}*** {c} Ended ***{r}".format(b=BOLD, r=RESET,
                                                              c=self.identifier))        
@@ -200,6 +218,9 @@ class Composite(Component):
         :raise: ConfigurationError
         """
         try:
+            # these checks only make sense when used in the infrastructure
+            # at some point this should be generalized somehow so it can act like a
+            # composite proper
             assert inspect.isclass(self.error),(
                 "self.error must be an exception, not {0}".format(self.error))
             assert issubclass(self.error, Exception),(
@@ -225,12 +246,14 @@ class Composite(Component):
         """
         calls the `close` method on each component
 
+        :postcondition: comuponents closed and self.components is None
         """
         for component in self.components:
             if hasattr(component, 'close'):
                 component.close()
             else:
                 self.logger.warning("'{0}' hasn't implemented the 'close' method. We hate him.".format(component))
+        self._components = None
         return
 
     def __str__(self):

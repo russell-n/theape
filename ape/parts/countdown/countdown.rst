@@ -45,7 +45,11 @@ The Model
 .. autosummary::
    :toctree: api
 
-   TimeTracker
+   TimeTracker.__init__
+   TimeTracker.log
+   TimeTracker.append
+   TimeTracker.percentile
+   TimeTracker.__call__
 
    
 
@@ -61,26 +65,22 @@ The expected way to use the TimeTracker is as a sentinal in a while loop::
 
 This would append a timedelta of about 1 second to the TimeTracker's times array everytime ``run`` is called, and log the current elapsed time and the basic running statistics (which in this case shouldn't show any variance)
 
-The Countdown
--------------
 
-The CountDown keeps track of elapsed time and estimates remaining time either by repetitions or total allowed time.
+.. _ape-parts-countdown-countdowntimer:
+
+The CountdownTimer
+------------------
+
+The CountdownTimer is an extension of the TimeTracker that takes a `repetitions` value and decrements it on each call, returning True until it is less than or equal to 0.
 
 .. uml::
 
-   CountDown -|> BaseClass
+   TimeTracker <|-- CountdownTimer
+   CountdownTimer : __call__()
 
+.. currentmodule:: ape.parts.countdown.countdown
 .. autosummary::
    :toctree: api
 
-   CountDown
-   CountDown.start_timer
-   CountDown.next_iteration
-   CountDown.remaining_time
-   CountDown.remaining_iterations
-   CountDown.elapsed_time
-
-To start off it will only take expected iterations and estimate time-remaining based on time elapsed. 
-   
-
+   CountdownTimer
 

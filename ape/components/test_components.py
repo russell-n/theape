@@ -4,7 +4,7 @@ import unittest
 
 # third-party
 try:
-    from mock import MagicMock
+    from mock import MagicMock, call
 except ImportError:
     pass
 
@@ -76,7 +76,10 @@ class TestComponent(unittest.TestCase):
 
 class TestComposite(unittest.TestCase):
     def setUp(self):
-        self.composite = Composite()
+        self.composite = Composite(error=RuntimeError,
+                                   error_message='nunya',
+                                   component_category='mocks',
+                                   identifier='test component')
         self.component = BetterComponent()
         return
     
@@ -186,6 +189,43 @@ class TestComposite(unittest.TestCase):
         with self.assertRaises(AttributeError):
             self.composite.close()        
         return
+
+    def test_call(self):
+        """
+        Does it call the time-tracker and components?
+        """
+        component_1 = MagicMock()
+        component_2 = MagicMock()
+        tracker = MagicMock()
+
+        returns = [True, False]
+        def side_effect():
+            return returns.pop(0)
+        
+        # make it alteranate True and False for start and stop calls
+        tracker.side_effect = side_effect
+
+        self.composite._components = [component_1, component_2]
+        self.composite._time_remains = tracker
+        self.composite()
+        component_1.check_rep.assert_called_with()
+        component_2.check_rep.assert_called_with()
+        expected_calls = [call(), call()]
+        self.assertEqual(tracker.mock_calls, expected_calls)
+        return
+
+    def test_close(self):
+        """
+        Does it close all the components and set the collection to None?
+        """
+        component_1 = MagicMock()
+        component_2 = MagicMock()
+        self.composite.add(component_1)
+        self.composite.add(component_2)
+        self.composite.close()
+        component_1.close.assert_called_with()
+        component_2.close.assert_called_with()
+        self.assertIsNone(self.composite._components)
 
 
 
