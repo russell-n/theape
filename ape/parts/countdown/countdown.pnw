@@ -39,6 +39,7 @@ MAX_PERCENTILE = 100
 CONTINUE = True
 STOP = False
 NOT_SET = None
+UNSET = None
 DECREMENT = -1
 FINISHED = 0
 ANNIHILATE = None
@@ -217,14 +218,30 @@ class CountdownTimer(TimeTracker):
     """
     A time-tracker that counts down
     """
-    def __init__(self, repetitions=1, *args, **kwargs):
+    def __init__(self, repetitions=1, end_time=None, total_time=None,
+                 *args, **kwargs):
         """
-        :param: ``repetitions``: number of calls to accept before stopping
+        :param:
+
+         - ``repetitions``: number of calls to accept before stopping
+         - ``end_time``: datetime to stop
+         - ``total_time``: timedelta for amount of time to run
         """
         super(CountdownTimer, self).__init__(*args, **kwargs)
         self.repetitions = repetitions
+        self.end_time = end_time
+        self.total_time = total_time
         self.last_time = None
         return
+
+    def time_remains(self):
+        """
+        Evaluates if there is still time (or repetitions) remaining
+
+        :return: True if reps or time remains, False otherwise
+        """
+        if self.end_time is not UNSET:
+            return datetime.datetime.now() < self.end_time
 
     def __call__(self):
         """
@@ -272,13 +289,21 @@ class CountdownTimer(TimeTracker):
                                     std=timedelta(seconds=numpy.std(self.times))))
         return
 
+    def close(self):
+        """
+        Resets the attributes (makes __call__ always evaluate to false, not once like default)
+
+        :postcondition:
+
+         - ``self.end_time`` is None
+         - ``self.total_time`` is None
+         - ``self.repetitions`` is 0
+         - ``self.start`` is None
+        """
+        self.start = UNSET
+        self.end_time = UNSET
+        self.total_time = UNSET
+        self.repetitions = 0
+        return
+# end class CountdownTimer
 @
-
-
-
-
-
-
-
-
-

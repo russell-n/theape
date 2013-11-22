@@ -51,6 +51,47 @@ class TestCountdownTimer(unittest.TestCase):
         self.assertIsNone(self.timer.start)
         self.assertIsNone(self.timer.last_time)
         self.assertIsNone(self.timer._times)
+
+        timer = CountdownTimer(end_time=2)
+        self.assertEqual(2, timer.end_time)
+
+        timer = CountdownTimer(total_time=4)
+        self.assertEqual(4, timer.total_time)
+        return
+
+    def test_time_remains(self):
+        """
+        Does it correctly determine if it should continue?
+        """
+        end_time = random.randint(5,100)
+        timer = CountdownTimer(end_time = end_time)
+        # now is greater than end time
+        self.datetime.now.return_value = end_time + 1
+        self.assertFalse(timer.time_remains())
+
+        # now is not yet end time
+        self.datetime.now.return_value = end_time - 1       
+        self.assertTrue(timer.time_remains())
+
+        # now test total_time
+        timer.close()
+        total_time = random.randint(5,100)
+        timer.total_time = total_time
+        self.datetime.now.return_value = total_time + 1
+        self.assertFalse(timer.time_rem)
+        return
+
+    def test_close(self):
+        """
+        Does it reset the attributes?
+        """        
+        timer = CountdownTimer(repetitions=10, end_time=40, total_time=100)
+        timer.start = 300
+        timer.close()
+        self.assertIsNone(timer.start)
+        self.assertIsNone(timer.end_time)
+        self.assertIsNone(timer.total_time)
+        self.assertEqual(0, timer.repetitions)
         return
 
     def test_call(self):
