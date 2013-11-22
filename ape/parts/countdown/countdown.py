@@ -12,8 +12,15 @@ from ape import BaseClass, ApeError
 
 DEBUG = 'debug'
 INFO = 'info'
-STAT_STRING = 'Min: {min}, Q1: {q1}, Med: {med}, Q3: {q3}, Max: {max}, Mean: {mean}, StD: {std}'
-ELAPSED_STRING = 'Elapsed: {0}'
+STAT_STRING = 'Time Stats -- Min: {min}, Q1: {q1}, Med: {med}, Q3: {q3}, Max: {max}, Mean: {mean}, StD: {std}'
+ELAPSED_STRING = 'Elapsed Time: {0}'
+
+CONTINUE = True
+STOP = False
+NOT_SET = None
+DECREMENT = -1
+FINISHED = 0
+ANNIHILATE = None
 
 
 class TimeTracker(BaseClass):
@@ -22,17 +29,32 @@ class TimeTracker(BaseClass):
     """
     def __init__(self, log_level=DEBUG):
         """
-        TimeTracker constructor
-
-        :param:
-
-         -  `log_level`: level at which to report elapsed times
+        :param: `log_level`: level at which to report elapsed times (default='debug')
         """
         super(TimeTracker, self).__init__()
+        self._logger = None
         self.log_level = log_level
         self.start = None
-        self.times = []
+        self._times = None
         self._log = None
+        return
+
+    @property
+    def times(self):
+        """
+        collection of elapsed times
+        """
+        if self._times is None:
+            self._times = []
+        return self._times
+
+    @times.setter
+    def times(self, times):
+        """
+        :param: ``times`` - collection
+        :postcondition: self._times set to times
+        """
+        self._times = times
         return
 
     @property
@@ -98,64 +120,15 @@ class TimeTracker(BaseClass):
         return False
 
 
-class CountDown(BaseClass):
+class CountdownTimer(TimeTracker):
     """
-    A countdown timer
+    A time-tracker that counts down
     """
-    def __init__(self, iterations, *args, **kwargs):
+    def __init__(self, repetitions=1, *args, **kwargs):
         """
-        CountDown Constructor
-
-        :param:
-
-         - `iterations`: Number of expected iterations.
+        :param: ``repetitions``: number of calls to accept before stopping
         """
-        super(CountDown, self).__init__(*args, **kwargs)
-        self.iterations = iterations
-        self.iteration = 0
-        return
-
-    @property
-    def time_remaining(self):
-        """
-        An estimate of the time remaining
-        """
-        return self.iterations - self.iteration
-
-    def start_timer(self):
-        """
-        Sets the start_time and lap_start_time to now
-        """
-        self.start_time = datetime.datetime.now()
-        self.lap_start_time = self.start_time
-        return
-
-    def next_iteration(self):
-        """
-        Increments the iterations and saves the lap-time
-        """
-        self.iteration += 1
-        return
-# end class CountDown
-
-
-# python standard library
-import unittest
-
-
-class TestCountDown(unittest.TestCase):
-    def setUp(self):
-        self.iterations = 4
-        self.counter = CountDown(iterations=self.iterations)
-        return
-
-    def test_next_iteration(self):
-        """
-        Does it increment the iteration
-        """
-        self.assertEqual(self.iterations, self.counter.iterations)
-        for value in xrange(self.iterations):
-            self.counter.next_iteration()
-            self.assertEqual(value+1, self.counter.iteration)
-        self.assertEqual(0, self.counter.time_remaining)
+        super(CountdownTimer, self).__init__(*args, **kwargs)
+        self.repetitions = repetitions
+        self.last_time = None
         return
