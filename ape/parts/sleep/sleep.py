@@ -159,6 +159,8 @@ class TheBigSleep(Component):
             # so we have to let it calculate remaining or it will be 1-second behind
             remaining = self.emit()
         self.logger.info("Exiting Sleep")
+        # this is to reset the end-time so it can be used more than once
+        self._then = None
         return
 
     @wait

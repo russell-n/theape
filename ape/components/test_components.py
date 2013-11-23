@@ -226,6 +226,7 @@ class TestComposite(unittest.TestCase):
         component_1.close.assert_called_with()
         component_2.close.assert_called_with()
         self.assertIsNone(self.composite._components)
+        return
 
 
 

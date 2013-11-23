@@ -73,6 +73,22 @@ The CountdownTimer
 
 The CountdownTimer is an extension of the TimeTracker that takes a `repetitions` value and decrements it on each call, returning True until it is less than or equal to 0.
 
+I am also supporting time-outs (setting a total time or an end-time). The ``total_time`` should be a timedelta while the ``end_time`` should be a datetime (or something that acts like it). This adds a bit of complication so I've chosen a hierarchy where the end-time takes first precedence (if you reach the time quit even if there's more repetitions or time), and the total-time take precedence over the repetitions.
+
+To decide on the behavior of the CountdownTimer you set a combination of the three parameters. In the following table 0 means the attribute is None and 1 means it was set to an appropriate value.
+
+.. csv-table:: CountdownTimer Parameters
+   :header: ``end_time``,``total_time``,``repetitions``,Interpretation
+
+   0,0,0, time_remains always False (check-rep should fail)
+   0,0,1, Only repetitions are used
+   0,1,0, Run for the amount of time given
+   0,1,1, Use repetitions but quit if out of time
+   1,0,0, Run until the end-time is reached
+   1,0,1, Use repetitions but quit if end-time is reached
+   1,1,0, Use total-time but quit if end-time is reached
+   1,1,1, Use repetitions but quit if total-time or end-time run out
+
 .. note:: Because I decrement after the start-time is set, this will always return True on the first call (it assumes you want at least one repetition).
 
 .. uml::

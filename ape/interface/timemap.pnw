@@ -488,6 +488,30 @@ class RelativeTime(BaseClass):
         """
         return self.timedelta == other
 
+    def __lt__(self, other):
+        """
+        Checks if the timedelta is less than the other
+        """
+        return self.timedelta < other
+
+    def __gt__(self, other):
+        """
+        Checks if the timedelta is > other        
+        """
+        return self.timedelta > other
+    
+    def __le__(self, other):
+        """
+        Checks if the timedelta is <= other
+        """
+        return self.timedelta <= other
+
+    def __ge__(self, other):
+        """
+        Checks if the timedelta is >= other
+        """
+        return self.timedelta >= other
+
     def __ne__(self, other):
         """
         Checks to see if the timedelta isn't equal to the other

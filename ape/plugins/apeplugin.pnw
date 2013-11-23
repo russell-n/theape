@@ -127,11 +127,13 @@ from ape.commoncode.errors import ApeError, DontCatchError, ConfigurationError
 from ape import APESECTION, MODULES_SECTION
 from quartermaster import QuarterMaster
 from ape.parts.countdown.countdown import INFO
+from ape.parts.countdown.countdown import CountdownTimer
 @
 <<name='check_pweave', echo=False>>=
 in_pweave = __name__ == '__builtin__'
 @
 <<name='constants', echo=False>>=
+DEFAULT = 'DEFAULT'
 SUBFOLDER  = 'subfolder'
 COMPILED_EXTENSION = '.compiled'
 
@@ -156,6 +158,12 @@ CONFIGURATION = '''[{0}]
 
 # if you want to repeat the operation defined in this config, give it repetitions
 # repetitions = 1000000
+
+# If you want to put a time limit after which to quit (this overrides repetitions)
+# total_time = 1 day 3 hours
+
+# if you want to put an end time (this will override repetitions and total time):
+# end_time = November 23, 2013 8:00 am
 
 # if you want to store files in a sub-folder
 # {1} = <name>
@@ -350,12 +358,26 @@ class Ape(BasePlugin):
                                  error_message='Operation Crash',
                                  component_category='Operation')
 
-            # **** THIS IS TEMPORARY UNTIL A COUNTDOWNTIMER GETS ADDED ****
-            operator.time_remains.log_level = INFO
-            
             configuration = ConfigurationMap(config_file)
             defaults = configuration.defaults
 
+            # build the countdown timer
+            repetitions = configuration.get_int(section=DEFAULT,
+                                                option='repetitions',
+                                                optional = True,
+                                                default=1)
+            total_time = configuration.get_relativetime(section=DEFAULT,
+                                                        option='total_time',
+                                                        optional=True,
+                                                        default=None)
+            end_time = configuration.get_datetime(section=DEFAULT,
+                                                      option='end_time',
+                                                      optional=True,
+                                                      default=None)
+            operator.time_remains = CountdownTimer(repetitions=repetitions,
+                                                   total_time=total_time,
+                                                   end_time=end_time,
+                                                   log_level=INFO)
             # check for external package declarations
             if MODULES_SECTION in configuration.sections:
                 external_modules = [option for option in configuration.options(MODULES_SECTION)
@@ -369,14 +391,20 @@ class Ape(BasePlugin):
                      (name in defaults and
                       defaults[name] ==
                       configuration.get(APESECTION, name)))
-            
+
+            # the operations won't know repetitions or how long the operation has been running
+            # but since end_time is an absolute time, they can check for that between operations
+            countdown = None
+            if end_time is not None:
+                countdown = CountdownTimer(end_time=end_time)
             for operation_name in names:
                 # every option in the APE section gets an operation
                 operation = Composite(identifier='Operation',
                                       error=DontCatchError,
                                       error_message='{0} Crash'.format(operation_name),
-                                      component_category=operation_name)
-                                
+                                      component_category=operation_name,
+                                      time_remains=countdown)
+
                 #traverse this line to get plugins
                 # get_list is a list of comma-separated strings in the operation line
                 for plugin_name in configuration.get_list(APESECTION, operation_name):                    

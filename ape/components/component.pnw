@@ -202,6 +202,19 @@ class Composite(Component):
             self._time_remains = TimeTracker()
         return self._time_remains
 
+    @time_remains.setter
+    def time_remains(self, countdown):
+        """
+        Sets the time_remains attribute
+
+        :param:
+
+         - ``countdown``: a CountdownTimer to call
+        """
+        self._time_remains = countdown
+        return
+    
+
     def add(self, component):
         """
         appends the component to self.components
