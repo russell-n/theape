@@ -1,0 +1,23 @@
+CountCallers
+============
+
+<<name='imports', echo=False>>=
+from trace import Trace
+from test_class import TestExec
+@
+
+This is a test of the ``countcallers`` option.
+
+<<name='countcallers', wrap=False>>=
+t = TestExec()
+trace = Trace(countcallers=1)
+try:
+    trace.run('t.run_this_and_that()')
+    print "COUNTCALLERS"
+except NameError:
+    print NameError
+@
+
+.. literalinclude:: countcallers.txt
+
+Once again it seems to disable the tracing.

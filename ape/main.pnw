@@ -1,0 +1,66 @@
+The Main Entry Point
+====================
+
+This module bundles together the components needed to use the The Ape as a command-line command.
+
+.. uml::
+
+   main o- ArgumentClinic
+   main o- SubCommands
+
+.. figure:: main.png
+   :align: center
+
+   Etymology from google
+
+`main (adj.) <http://www.etymonline.com/index.php?term=main>`_
+    early 13c., "large, bulky, strong," from Old English *maegen* - "power, strength, force," used in compounds (e.g. *maegensibb* "great love", *maegensbyrden* "heavy burden"). Probably also from or influenced by Old Norse *megenn* (adj.)  "strong, powerful." Sense of "chief" is c.1400. Main course in the meal sense attested from 1829. Main man "favorite male friend; hero" is from 1967, U.S. black slang.
+
+.. currentmodule:: ape.main
+.. autosummary::
+   :toctree: api
+
+   enable_debugging
+   main
+    
+<<Name='imports', echo=False>>=
+# this package
+import ape.interface.arguments
+from ape.log_setter import set_logger
+@
+<<name='enable_debugging', echo=False>>=
+def enable_debugging(args):
+    """
+    Enables interactive debugging
+
+    :param:
+
+     - `args`: A namespace with pudb and pdb attributes
+    """
+    if args.pudb:
+        import pudb
+        pudb.set_trace()
+        return
+    if args.pdb:
+        import pdb
+        pdb.set_trace()
+    return
+@
+<<name='Main', echo=False>>=
+def main():
+    """
+    The 'site-entry' point.
+
+       1. Gets command-line arguments
+       2. Sets the logger
+       3. Enables debugging (if asked for)
+       4. Calls the function set by the argparse subcommand
+    """
+    argue = ape.interface.arguments.ArgumentClinic()
+    args = argue()
+    set_logger(args)
+    enable_debugging(args)
+    args.function(args)
+    return
+@
+

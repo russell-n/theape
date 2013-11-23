@@ -1,0 +1,19 @@
+Tangled code from explore_trace.pnw to explore_trace.py
+ --- modulename: explore_trace, funcname: <module>
+<string>(1):   --- modulename: explore_trace, funcname: run_this_and_that
+explore_trace.py(22):         self.run_this()
+ --- modulename: explore_trace, funcname: run_this
+explore_trace.py(11):         x = 1
+explore_trace.py(12):         y = 2
+explore_trace.py(13):         self.z = x + y
+explore_trace.py(14):         return
+explore_trace.py(23):         self.run_that()
+ --- modulename: explore_trace, funcname: run_that
+explore_trace.py(17):         self.x = 1
+explore_trace.py(18):         self.y = 2
+explore_trace.py(19):         return
+explore_trace.py(24):         return
+ --- modulename: trace, funcname: _unsettrace
+trace.py(80):         sys.settrace(None)
+END_DEFAULT
+COUNTFUNCS
