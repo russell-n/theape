@@ -18,7 +18,8 @@ This is a Data Collection that extends the List ADT to have an `insort` method t
    
 I added the `percentile` method to get some statistics from this but it seems like this is going down a bad path so I'm stopping at that.
 
-.. '
+.. note:: it looks like numpy has added an append. I think I'll use that instead.
+
    
 
 .. currentmodule:: ape.commoncode.sortedlist
