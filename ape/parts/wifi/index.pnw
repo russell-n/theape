@@ -1,0 +1,15 @@
+Wifi
+====
+
+.. _ape-parts:
+
+<<name='imports', echo=False>>=
+# this package
+from ape.commoncode.index_builder import create_toctree
+@
+This package contains wifi-specific helpers.
+
+<<name='toctree', echo=False, results='sphinx'>>=
+create_toctree()
+@
+

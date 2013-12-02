@@ -14,20 +14,20 @@ These are the documents created from the source files.
 .. toctree::
    :maxdepth: 1
 
-   Errors <errors.rst>
-   EventTimer <eventtimer.rst>
-   The Randomizer <randomizer.rst>
-   The OatBran <oatbran.rst>
-   String Constants <strings.rst>
-   Index Builder <index_builder.rst>
-   Testing the Oatbran <testoatbran.rst>
-   Sorted List <sortedlist.rst>
    Crash Handler <crash_handler.rst>
    BaseClass <baseclass.rst>
+   The OatBran <oatbran.rst>
+   Sorted List <sortedlist.rst>
+   Errors <errors.rst>
+   The Randomizer <randomizer.rst>
+   EventTimer <eventtimer.rst>
+   Index Builder <index_builder.rst>
+   String Constants <strings.rst>
    Code Graphs <code_graphs.rst>
 
 .. toctree::
    :maxdepth: 1
 
+   Testing the Common Code <tests/index.rst>
 
 

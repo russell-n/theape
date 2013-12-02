@@ -87,6 +87,11 @@ class EventTimer(BaseClass):
         self.event.set()
         return
 
+    def is_set(self):
+        """
+        :return: True if self.event is set
+        """
+        return self.event.is_set()
 # end class EventTimer        
 
 
