@@ -19,18 +19,32 @@ IwconfigExpressions
 
 The ``IwconfigExpressions`` holds the compiled regular expressions to tokenize the output of the ``iwconfig`` command.
 
-.. currentmodule:: ape.parts.wifi.Iwconfig
+.. currentmodule:: ape.parts.wifi.iwconfig
 .. autosummary::
    :toctree: api
 
    IwconfigExpressions.essid
    IwconfigExpressions.mac_protocol
+   IwconfigExpressions.mode
+   IwconfigExpressions.frequency
+   IwconfigExpressions.access_point
+   IwconfigExpressions.bit_rate
+   IwconfigExpressions.tx_power
+   IwconfigExpressions.link_quality
+   IwconfigExpressions.signal_level
+   IwconfigExpressions.rx_invalid_nwid
+   IwconfigExpressions.rx_invalid_crypt
+   IwconfigExpressions.rx_invalid_frag
+   IwconfigExpressions.tx_excessive_retries
+   IwconfigExpressions.invalid_misc
+   IwconfigExpressions.missed_beacons
 
 
 
 .. uml::
 
-   BaseClass <|-- IwconfigQuery 
+   BaseClass <|-- IwconfigQuery
+   IwconfigQuery o- IwconfigExpressions
 
 .. currentmodule:: ape.parts.wifi.iwconfig
 .. autosummary::
