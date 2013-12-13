@@ -13,8 +13,12 @@ from ape.parts.wifi.iwconfig import IwconfigEnum
 from ape import ApeError
 
 
-source = open('iwconfig.txt').read()
-source2 = source.replace('simio_claustro', 'great_ape_ape')
+try:
+    source = open('iwconfig.txt').read()
+    source2 = source.replace('simio_claustro', 'great_ape_ape')
+except IOError:
+    # sphinx will crash on trying to import this module
+    pass
 
 
 class TestIwconfig(unittest.TestCase):

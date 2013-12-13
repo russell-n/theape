@@ -77,12 +77,25 @@ IwconfigExpressions
 
 The ``IwconfigExpressions`` holds the compiled regular expressions to tokenize the output of the ``iwconfig`` command.
 
-.. currentmodule:: ape.parts.wifi.Iwconfig
+.. currentmodule:: ape.parts.wifi.iwconfig
 .. autosummary::
    :toctree: api
 
    IwconfigExpressions.essid
    IwconfigExpressions.mac_protocol
+   IwconfigExpressions.mode
+   IwconfigExpressions.frequency
+   IwconfigExpressions.access_point
+   IwconfigExpressions.bit_rate
+   IwconfigExpressions.tx_power
+   IwconfigExpressions.link_quality
+   IwconfigExpressions.signal_level
+   IwconfigExpressions.rx_invalid_nwid
+   IwconfigExpressions.rx_invalid_crypt
+   IwconfigExpressions.rx_invalid_frag
+   IwconfigExpressions.tx_excessive_retries
+   IwconfigExpressions.invalid_misc
+   IwconfigExpressions.missed_beacons
 
 <<name='IwconfigExpressions', echo=False>>=
 class IwconfigExpressions(object):
@@ -158,10 +171,9 @@ class IwconfigExpressions(object):
     @property
     def frequency(self):
         """
-        According to the man-page it might use channel instead of frequency
-        but I have no examples of that right now
-        
         :return: compiled regex to get the frequency
+        According to the man-page it might use channel instead of frequency
+        but I have no examples of that right now        
         """
         if self._frequency is None:
             self._frequency = re.compile('Frequency:' +
@@ -175,8 +187,8 @@ class IwconfigExpressions(object):
     @property
     def access_point(self):
         """
+        :return: compiled regex to get the access point        
         the pattern matches anything not a space because ad-hoc mode won't return MAC
-        :return: compiled regex to get the access point
         """
         if self._access_point is None:
             self._access_point = re.compile('Access Point:' +
@@ -189,10 +201,9 @@ class IwconfigExpressions(object):
     @property
     def bit_rate(self):
         """
+        :return: expression to get the bit rate        
         According to the man-page 'Bit Rate=<value>' means it is fixed,
-        'Bit Rate:<value>' means it can change
-        
-        :return: expression to get the bit rate
+        'Bit Rate:<value>' means it can change        
         """
         if self._bit_rate is None:
             self._bit_rate = re.compile("Bit Rate" +
@@ -245,9 +256,8 @@ class IwconfigExpressions(object):
     @property
     def rx_invalid_nwid(self):
         """
-        Man Page: used to detect configuration problems or adjacent network existence
-        
         :return: compiled regex to get count of invalid nwid
+        Man Page: used to detect configuration problems or adjacent network existence        
         """
         if self._rx_invalid_nwid is None:
             self._rx_invalid_nwid = re.compile("Rx invalid nwid:" +
@@ -258,9 +268,8 @@ class IwconfigExpressions(object):
     @property
     def rx_invalid_crypt(self):
         """
-        Man page: used to detect invalid encryption settings
-
         :return: compiled regex to get count of un-decryptable packets
+        Man page: used to detect invalid encryption settings
         """
         if self._rx_invalid_crypt is None:
             self._rx_invalid_crypt = re.compile("Rx invalid crypt:" +
@@ -271,9 +280,8 @@ class IwconfigExpressions(object):
     @property
     def rx_invalid_frag(self):
         """
-        man page: count of packets that hardware couldn't properly re-assemble link-layer fragments
-
         :return: compiled regex to get count of invalid packet fragments
+        man page: count of packets that hardware couldn't properly re-assemble link-layer fragments
         """
         if self._rx_invalid_frag is None:
             self._rx_invalid_frag = re.compile("Rx invalid frag:" +
@@ -306,9 +314,8 @@ class IwconfigExpressions(object):
     @property
     def missed_beacons(self):
         """
-        man page: missed beacons usually means the card is out of range
-        
         :return: compiled regex to get count of beacons from Cell or AP missed
+        man page: missed beacons usually means the card is out of range        
         """
         if self._missed_beacons is None:
             self._missed_beacons = re.compile('Missed beacon:' +
@@ -320,7 +327,8 @@ class IwconfigExpressions(object):
 
 .. uml::
 
-   BaseClass <|-- IwconfigQuery 
+   BaseClass <|-- IwconfigQuery
+   IwconfigQuery o- IwconfigExpressions
 
 .. currentmodule:: ape.parts.wifi.iwconfig
 .. autosummary::
