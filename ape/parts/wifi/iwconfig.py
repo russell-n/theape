@@ -22,9 +22,275 @@
 # THE SOFTWARE.
 
 
+# python standard library
+import re
+
 # this package
 from ape import BaseClass, ApeError
 from ape.commoncode.eventtimer import EventTimer
+from ape.commoncode import oatbran
+
+
+DECIBEL_MILLIWATTS = 'dBm'
+KILO_MEGA_GIGA = 'kMG'
+HERZ = 'Hz'
+BITS_PER_SECOND = 'b/s'
+
+
+class IwconfigEnum(object):
+    """
+    names for the regular expressions
+    """
+    __slots__ = ()
+    essid = 'essid'
+    mac_protocol = 'mac_protocol'
+    mode = 'mode'
+    frequency = 'frequency'
+    access_point = 'access_point'
+    bit_rate = 'bit_rate'
+    tx_power = 'tx_power'
+    link_quality = 'link_quality'
+    signal_level = 'signal_level'
+    rx_invalid_nwid = 'rx_invalid_nwid'
+    rx_invalid_crypt = 'rx_invalid_crypt'
+    rx_invalid_frag = 'rx_invalid_frag'
+    tx_excessive_retries = 'tx_excessive_retries'
+    invalid_misc = 'invalid_misc'
+    missed_beacons = 'missed_beacons'
+# end IwconfigEnum
+
+
+class IwconfigExpressions(object):
+    """
+    Holds regular expressions to tokenize the output
+    """
+    def __init__(self, interface='wlan0'):
+        """
+        IwconfigExpressions constructor
+
+        :param:
+
+         - `interface`: the name of the interface to check (only used for MAC protocol)
+        """
+        self.interface = interface
+        self._essid = None
+        self._mac_protocol = None
+        self._mode = None
+        self._frequency = None
+        self._access_point = None
+        self._bit_rate = None
+        self._tx_power = None
+        self._link_quality = None
+        self._signal_level = None
+        self._rx_invalid_nwid = None
+        self._rx_invalid_crypt = None
+        self._rx_invalid_frag = None
+        self._tx_excessive_retries = None
+        self._invalid_misc = None
+        self._missed_beacons = None
+        return
+
+    @property
+    def essid(self):
+        """
+        :return: compiled regular expression to match the essid
+        """
+        if self._essid is None:
+            self._essid = re.compile('ESSID:"' +
+                           oatbran.Group.named(name=IwconfigEnum.essid,
+                                               expression=oatbran.CharacterClass.alpha_nums)
+                                               + '"')
+        return self._essid
+
+    @property
+    def mac_protocol(self):
+        """        
+        :return: regex to match protocol (requires self.interface to be set)
+
+        Because the protocol can contain spaces might catch a trailing space
+        This could be fixed if you assume that it will always be 802.11
+        """
+        if self._mac_protocol is None:
+            self._mac_protocol = re.compile(self.interface +
+                                            oatbran.CommonPatterns.spaces +
+                                            oatbran.Group.named(name=IwconfigEnum.mac_protocol,
+                                                                expression=oatbran.CommonPatterns.everything) +
+                                                                oatbran.CommonPatterns.spaces + 'ESSID:')
+        return self._mac_protocol
+
+    @property
+    def mode(self):
+        """
+        :return: compiled regex to match the mode (e.g. Managed)
+        """
+        if self._mode is None:
+            self._mode = re.compile("Mode:" +
+                                    oatbran.Group.named(IwconfigEnum.mode,
+                                                        oatbran.CommonPatterns.not_spaces) +
+                                                        oatbran.CommonPatterns.spaces)
+        return self._mode
+
+    @property
+    def frequency(self):
+        """
+        According to the man-page it might use channel instead of frequency
+        but I have no examples of that right now
+        
+        :return: compiled regex to get the frequency
+        """
+        if self._frequency is None:
+            self._frequency = re.compile('Frequency:' +
+                                         oatbran.Group.named(IwconfigEnum.frequency,
+                                                             (oatbran.Group.group(oatbran.Numbers.real) +
+                                                              oatbran.CommonPatterns.spaces +
+                                                              oatbran.Quantifier.zero_or_more(oatbran.CharacterClass.character_class(KILO_MEGA_GIGA)) + 
+                                                              HERZ)))
+        return self._frequency
+
+    @property
+    def access_point(self):
+        """
+        the pattern matches anything not a space because ad-hoc mode won't return MAC
+        :return: compiled regex to get the access point
+        """
+        if self._access_point is None:
+            self._access_point = re.compile('Access Point:' +
+                                            oatbran.CommonPatterns.spaces +
+                oatbran.Group.named(IwconfigEnum.access_point,
+                                    oatbran.CommonPatterns.not_spaces) +
+                oatbran.CommonPatterns.spaces)
+        return self._access_point
+
+    @property
+    def bit_rate(self):
+        """
+        According to the man-page 'Bit Rate=<value>' means it is fixed,
+        'Bit Rate:<value>' means it can change
+        
+        :return: expression to get the bit rate
+        """
+        if self._bit_rate is None:
+            self._bit_rate = re.compile("Bit Rate" +
+                                        oatbran.CharacterClass.character_class("=:") +
+                                        oatbran.Group.named(IwconfigEnum.bit_rate,
+                                                            (oatbran.Group.group(oatbran.Numbers.real)) +
+                                                             oatbran.CommonPatterns.spaces +
+                                                             oatbran.Quantifier.zero_or_more(oatbran.CharacterClass.character_class(KILO_MEGA_GIGA)) +
+                                                             BITS_PER_SECOND))
+        return self._bit_rate
+
+    @property
+    def tx_power(self):
+        """
+        :return: compiled regex to match the tx-power
+        """
+        if self._tx_power is None:
+            # I don't know if this can be Tx-Power: or not
+            self._tx_power = re.compile("Tx-Power=" +
+                                        oatbran.Group.named(IwconfigEnum.tx_power,
+                                                            (oatbran.Numbers.digits +
+                                                             oatbran.CommonPatterns.spaces +
+                                                             'dBm')))
+        return self._tx_power
+
+    @property
+    def link_quality(self):
+        """
+        :return: compiled regular expression to get the link quality
+        """
+        if self._link_quality is None:
+            self._link_quality = re.compile("Link Quality=" + 
+                                            oatbran.Group.named(IwconfigEnum.link_quality,
+                                                                (oatbran.Numbers.digits +
+                                                                 '/' + oatbran.Numbers.digits)))
+        return self._link_quality
+
+    @property
+    def signal_level(self):
+        """
+        :return: compiled regex to get the signal level
+        """
+        if self._signal_level is None:
+            self._signal_level = re.compile('Signal level=' +
+                                            oatbran.Group.named(IwconfigEnum.signal_level,
+                                                                '-' + oatbran.Numbers.digits +
+                                                                oatbran.CommonPatterns.spaces + DECIBEL_MILLIWATTS))
+        return self._signal_level
+
+    @property
+    def rx_invalid_nwid(self):
+        """
+        Man Page: used to detect configuration problems or adjacent network existence
+        
+        :return: compiled regex to get count of invalid nwid
+        """
+        if self._rx_invalid_nwid is None:
+            self._rx_invalid_nwid = re.compile("Rx invalid nwid:" +
+                                               oatbran.Group.named(IwconfigEnum.rx_invalid_nwid,
+                                                                   oatbran.Numbers.digits))
+        return self._rx_invalid_nwid
+
+    @property
+    def rx_invalid_crypt(self):
+        """
+        Man page: used to detect invalid encryption settings
+
+        :return: compiled regex to get count of un-decryptable packets
+        """
+        if self._rx_invalid_crypt is None:
+            self._rx_invalid_crypt = re.compile("Rx invalid crypt:" +
+                                               oatbran.Group.named(IwconfigEnum.rx_invalid_crypt,
+                                                                   oatbran.Numbers.digits))
+        return self._rx_invalid_crypt
+
+    @property
+    def rx_invalid_frag(self):
+        """
+        man page: count of packets that hardware couldn't properly re-assemble link-layer fragments
+
+        :return: compiled regex to get count of invalid packet fragments
+        """
+        if self._rx_invalid_frag is None:
+            self._rx_invalid_frag = re.compile("Rx invalid frag:" +
+                                               oatbran.Group.named(IwconfigEnum.rx_invalid_frag,
+                                                                   oatbran.Numbers.digits))
+        return self._rx_invalid_frag
+
+    @property
+    def tx_excessive_retries(self):
+        """
+        :return: compiled regex to get count of packets hardware failed to deliver
+        """
+        if self._tx_excessive_retries is None:
+            self._tx_excessive_retries = re.compile("Tx excessive retries:" +
+                                                    oatbran.Group.named(IwconfigEnum.tx_excessive_retries,
+                                                                        oatbran.Numbers.digits))
+        return self._tx_excessive_retries
+
+    @property
+    def invalid_misc(self):
+        """
+        :return: compiled regex to get count of packets lost for misc reasons
+        """
+        if self._invalid_misc is None:
+            self._invalid_misc = re.compile('Invalid misc:' +
+                                            oatbran.Group.named(IwconfigEnum.invalid_misc,
+                                                                oatbran.Numbers.digits))
+        return self._invalid_misc
+
+    @property
+    def missed_beacons(self):
+        """
+        man page: missed beacons usually means the card is out of range
+        
+        :return: compiled regex to get count of beacons from Cell or AP missed
+        """
+        if self._missed_beacons is None:
+            self._missed_beacons = re.compile('Missed beacon:' +
+                                              oatbran.Group.named(IwconfigEnum.missed_beacons,
+                                                                  oatbran.Numbers.digits))
+        return self._missed_beacons
+# end class IwconfigExpressions            
 
 
 class IwconfigQuery(BaseClass):
@@ -61,7 +327,7 @@ class IwconfigQuery(BaseClass):
     @property
     def output(self):
         """
-        Output of the iwconfig command, refreshed at self.interval second intervals
+        Output of the iwconfig command, refreshed after self.interval second intervals
         """
         if self.event_timer.is_set():
             self._output = self()
@@ -83,6 +349,8 @@ class IwconfigQuery(BaseClass):
         """
         stdin, stdout, stderr = self.connection.iwconfig(self.interface)
         self.check_errors(stderr)
+        # the stdout is re-used if the calls are made more frequently than self.interval
+        # so the iterator can't be used
         return stdout.readlines()
 
     def check_errors(self, stderr):
@@ -113,3 +381,10 @@ class IwconfigQuery(BaseClass):
         self.event_timer.close()
         return
 # end class IwconfigQuery    
+
+
+if __name__ == '__main__':
+    expressions = IwconfigExpressions()
+    import pudb; pudb.set_trace()
+    test = 'Rx invalid nwid:0  Rx invalid crypt:0  Rx invalid frag:0'
+    match = expressions.rx_invalid_crypt.search(test)
