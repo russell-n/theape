@@ -8,7 +8,8 @@ import time
 from mock import MagicMock
 
 # this package
-from ape.parts.wifi.iwconfig import IwconfigQuery
+from ape.parts.wifi.iwconfig import IwconfigQuery, IwconfigExpressions
+from ape.parts.wifi.iwconfig import IwconfigEnum
 from ape import ApeError
 
 
@@ -22,6 +23,10 @@ class TestIwconfig(unittest.TestCase):
         self.connection = MagicMock()
         self.iwconfig = IwconfigQuery(interface=self.interface,
                                       connection=self.connection)
+        self.connection.iwconfig.return_value = (None,
+                                                 StringIO(source),
+                                                 '')
+
         return
 
     def test_constructor(self):
@@ -43,9 +48,6 @@ class TestIwconfig(unittest.TestCase):
         """
         Does it send the command and return the output?
         """
-        self.connection.iwconfig.return_value = (None,
-                                                 StringIO(source),
-                                                 '')
         output = self.iwconfig()
         self.assertEqual(output, StringIO(source).readlines())
         return
@@ -100,4 +102,149 @@ class TestIwconfig(unittest.TestCase):
         self.assertEqual(self.iwconfig.output,
                          StringIO(source2).readlines())
 
+        return
+
+    def test_essid(self):
+        """
+        Does it get the name of the ap?
+        """
+        expected = "simio_claustro"
+        #actual = self.iwconfig.essid
+        #self.assertEqual(expected, actual)
+        return
+
+
+class TestIwconfigExpressions(unittest.TestCase):
+    def setUp(self):
+        self.expressions = IwconfigExpressions(interface='wlan2')
+        return
+
+    def test_constructor(self):
+        """
+        Will it build?
+        """
+        self.assertEqual('wlan2', self.expressions.interface)
+        return
+
+    def test_essid(self):
+        """
+        Does it match the essid?
+        """
+        match = self.expressions.essid.search(source)
+        self.assertEqual('simio_claustro', match.group(IwconfigEnum.essid))
+        return
+
+    def test_mac_protocol(self):
+        """
+        Does it get the protocol?
+        """
+        match = self.expressions.mac_protocol.search(source)
+        self.assertEqual('IEEE 802.11abgn ', match.group(IwconfigEnum.mac_protocol))
+        return
+
+    def test_mode(self):
+        """
+        Does in get the mode?
+        """
+        match = self.expressions.mode.search(source)
+        self.assertEqual('Managed', match.group(IwconfigEnum.mode))
+        return
+
+    def test_frequency(self):
+        """
+        Does it match the frequency?
+        """
+        match = self.expressions.frequency.search(source)
+        self.assertEqual('2.462 GHz', match.group(IwconfigEnum.frequency))
+        return
+
+    def test_access_point(self):
+        """
+        Does it get the access points mac?
+        """
+        match = self.expressions.access_point.search(source)
+        self.assertEqual("00:30:44:07:B2:92",
+                         match.group(IwconfigEnum.access_point))
+        return
+
+    def test_bit_rate(self):
+        """
+        Does it get the bit rate?
+        """
+        match = self.expressions.bit_rate.search(source)
+        self.assertEqual(match.group(IwconfigEnum.bit_rate),
+                         "36 Mb/s")
+        return
+
+    def test_tx_power(self):
+        """
+        Does it get the tx-power?
+        """
+        match = self.expressions.tx_power.search(source)
+        self.assertEqual('15 dBm', match.group(IwconfigEnum.tx_power))
+        return
+
+    def test_link_quality(self):
+        """
+        Does it get the link quality?
+        """
+        match = self.expressions.link_quality.search(source)
+        self.assertEqual('40/70', match.group(IwconfigEnum.link_quality))
+        return
+
+    def test_signal_level(self):
+        """
+        Does it get the signal level?
+        """
+        match = self.expressions.signal_level.search(source)
+        self.assertEqual('-70 dBm', match.group(IwconfigEnum.signal_level))
+        return
+
+    def test_rx_invalid_nwid(self):
+        """
+        Does it get the count of invalid network ids?
+        """
+        match = self.expressions.rx_invalid_nwid.search(source)
+        self.assertEqual(match.group(IwconfigEnum.rx_invalid_nwid), '0')
+        return
+
+    def test_rx_invalid_crypt(self):
+        """
+        Does it get count of packets not decryptable?
+        """
+        match = self.expressions.rx_invalid_crypt.search(source)
+        self.assertEqual(match.group(IwconfigEnum.rx_invalid_crypt),
+                         '0')
+        return
+
+    def test_rx_invalid_frag(self):
+        """
+        Does it get count of packets that couldn't be reassembled?
+        """
+        match = self.expressions.rx_invalid_frag.search(source)
+        return
+
+    def test_tx_excessive_retries(self):
+        """
+        Does it get number of packets which hardware failed to deliver?
+        """
+        match = self.expressions.tx_excessive_retries.search(source)
+        self.assertEqual(match.group(IwconfigEnum.tx_excessive_retries),
+                         '65239')
+        return
+
+    def test_invalid_misc(self):
+        """
+        Does it get count of other packets lost because of wireless stuff?
+        """
+        match = self.expressions.invalid_misc.search(source)
+        self.assertEqual(match.group(IwconfigEnum.invalid_misc),
+                         '855')
+        return
+
+    def test_missed_beacons(self):
+        """
+        Does it get the count of missed beacons?
+        """
+        match = self.expressions.missed_beacons.search(source)
         return
