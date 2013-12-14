@@ -38,6 +38,7 @@ extensions = ['sphinx.ext.autosummary',
               'sphinx.ext.coverage',
               'sphinx.ext.pngmath',
               'sphinx.ext.viewcode',
+              'sphinx.ext.inheritance_diagram',
               'sphinxcontrib.plantuml',
               'sphinx.ext.graphviz']
 

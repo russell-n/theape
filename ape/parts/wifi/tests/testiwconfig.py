@@ -16,6 +16,7 @@ from ape import ApeError
 try:
     source = open('iwconfig.txt').read()
     source2 = source.replace('simio_claustro', 'great_ape_ape')
+    source_not_associated = open('iwconfig_not_associated.txt').read()
 except IOError:
     # sphinx will crash on trying to import this module
     pass
@@ -25,12 +26,19 @@ class TestIwconfig(unittest.TestCase):
     def setUp(self):
         self.interface = 'wlan2'
         self.connection = MagicMock()
-        self.iwconfig = IwconfigQuery(interface=self.interface,
-                                      connection=self.connection)
         self.connection.iwconfig.return_value = (None,
                                                  StringIO(source),
                                                  '')
 
+        self.disconnected = (None,
+                             StringIO(source_not_associated),
+                             '')
+        self.connection2 = MagicMock()
+        self.connection2.iwconfig.return_value = self.disconnected
+        self.iwconfig_disconnected = IwconfigQuery(interface=self.interface,
+                                      connection=self.connection2)
+        self.iwconfig = IwconfigQuery(interface=self.interface,
+                                      connection=self.connection)
         return
 
     def test_constructor(self):
@@ -60,7 +68,7 @@ class TestIwconfig(unittest.TestCase):
         """
         Does it raise the ApeError if appropriate?
         """
-        # non-existent intergface
+        # non-existent interface
         self.connection.iwconfig.return_value = (None, StringIO(source),
                                                  StringIO('wlan0      No such device'))
         self.assertRaises(ApeError, self.iwconfig)
@@ -112,10 +120,112 @@ class TestIwconfig(unittest.TestCase):
         """
         Does it get the name of the ap?
         """
-        expected = "simio_claustro"
-        #actual = self.iwconfig.essid
-        #self.assertEqual(expected, actual)
+        self.assert_equal('"simio_claustro"', self.iwconfig.essid)
+
+        # disconnected case
+        self.assert_equal("off/any", self.iwconfig_disconnected.essid)
         return
+
+    def test_mac_protocol(self):
+        """
+        Does it get the MAC-protocol?
+        """
+        self.assert_equal('IEEE 802.11abgn', self.iwconfig.mac_protocol)
+        return
+
+    def test_mode(self):
+        """
+        Does it get the mode?
+        """
+        self.assert_equal('Managed', self.iwconfig.mode)
+        return
+
+    def test_frequency(self):
+        """
+        Does it get the frequency or NA if not connected?
+        """
+        self.assert_equal('2.462 GHz', self.iwconfig.frequency)
+
+        # field disappears if not connected
+        self.assert_equal(self.iwconfig.missing_data,
+                          self.iwconfig_disconnected.frequency)        
+        return
+
+    def test_access_point(self):
+        """
+        Does it get the MAC address (or 'Not-Associated')
+        """
+        self.assert_equal('00:30:44:07:B2:92', self.iwconfig.access_point)
+        # check Not-associated
+        self.assert_equal('Not-Associated', self.iwconfig_disconnected.access_point)
+        return
+
+    def test_bit_rate(self):
+        """
+        Does it get the bit-rate or NA?
+        """
+        self.assert_equal('36 Mb/s', self.iwconfig.bit_rate)
+        return
+
+    def test_tx_power(self):
+        """
+        Does it get the tx-power?
+        """
+        self.assert_equal('15 dBm', self.iwconfig.tx_power)
+        return
+
+    def test_link_quality(self):
+        """
+        Does it get the link-quality?
+        """
+        self.assertEqual('40/70', self.iwconfig.link_quality)
+        return
+
+    def test_signal_level(self):
+        """
+        Does it get the RSSI?
+        """
+        self.assert_equal('-70 dBm', self.iwconfig.signal_level)
+        return
+
+    def test_rx_invalid_nwid(self):
+        """
+        Does it get the count of invalid SSID's?
+        """
+        self.assert_equal('0', self.iwconfig.rx_invalid_nwid)
+        return
+
+    def test_rx_invalid_crypt(self):
+        self.assertEqual('0', self.iwconfig.rx_invalid_crypt)
+        return
+
+    def test_rx_invalid_frag(self):
+        self.assertEqual('0', self.iwconfig.rx_invalid_frag)
+        return
+
+    def test_tx_excessive_retries(self):
+        self.assertEqual('65239', self.iwconfig.tx_excessive_retries)
+        return
+
+    def test_invalid_misc(self):
+        self.assertEqual('855', self.iwconfig.invalid_misc)
+        return
+
+    def test_missed_beacons(self):
+        self.assertEqual('0', self.iwconfig.missed_beacons)
+        return
+
+    def test_missing_data(self):
+        """
+        Does it use the 'missing_data' property if the field is missing?
+        """
+        self.assertEqual(self.iwconfig.missing_data,
+                         self.iwconfig_disconnected.signal_level)
+        return
+
+    def assert_equal(self, expected, actual):
+        self.assertEqual(expected, actual,
+                         msg="Expected: {0}, Actual: {1}".format(expected, actual))
 
 
 class TestIwconfigExpressions(unittest.TestCase):
@@ -135,7 +245,11 @@ class TestIwconfigExpressions(unittest.TestCase):
         Does it match the essid?
         """
         match = self.expressions.essid.search(source)
-        self.assertEqual('simio_claustro', match.group(IwconfigEnum.essid))
+        self.assertEqual('"simio_claustro"', match.group(IwconfigEnum.essid).strip())
+
+        # disconnected
+        match = self.expressions.essid.search(source_not_associated)
+        self.assertEqual('off/any', match.group(IwconfigEnum.essid).strip())
         return
 
     def test_mac_protocol(self):
