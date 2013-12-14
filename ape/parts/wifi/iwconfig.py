@@ -92,14 +92,15 @@ class IwconfigExpressions(object):
 
     @property
     def essid(self):
-        """
+        """        
         :return: compiled regular expression to match the essid
+
+        SSID's can have just about anything, even spaces, slashes, etc.
         """
         if self._essid is None:
-            self._essid = re.compile('ESSID:"' +
-                           oatbran.Group.named(name=IwconfigEnum.essid,
-                                               expression=oatbran.CharacterClass.alpha_nums)
-                                               + '"')
+            self._essid = re.compile('ESSID:' +
+                                     oatbran.Group.named(name=IwconfigEnum.essid,
+                                                         expression=oatbran.CommonPatterns.everything))
         return self._essid
 
     @property
@@ -291,7 +292,8 @@ class IwconfigQuery(BaseClass):
     """
     Queries ``iwconfig`` for information
     """
-    def __init__(self, connection, interface='wlan0', interval=1):
+    def __init__(self, connection, interface='wlan0', interval=0.5,
+                 missing_data='NA'):
         """
         IwconfigQuery constructor
 
@@ -300,14 +302,26 @@ class IwconfigQuery(BaseClass):
          - `interface`: name of the interface to query
          - `connection`: connection to the device to query
          - `interval`: seconds to wait before refreshing output
+         - `missing_data`: symbol to use if the expression fails to match
         """
         super(IwconfigQuery, self).__init__()
         self.interface = interface
         self.connection = connection
         self.interval = interval
+        self.missing_data = missing_data
+        self._expressions = None
         self._command = None
         self._event_timer = None
         return
+
+    @property
+    def expressions(self):
+        """
+        :return: IwconfigExpressions to parse output
+        """
+        if self._expressions is None:
+            self._expressions = IwconfigExpressions(interface=self.interface)
+        return self._expressions
 
     @property
     def event_timer(self):
@@ -336,6 +350,143 @@ class IwconfigQuery(BaseClass):
         if self._command is None:
             self._command = 'iwconfig {0}'.format(self.interface)
         return self._command
+
+    @property
+    def essid(self):
+        """
+        :return: the essid from the iwconfig command
+        """
+        return self._check_output(expression=self.expressions.essid,
+                                    name=IwconfigEnum.essid)
+    
+    @property
+    def mac_protocol(self):
+        """
+        :return: the MAC protocol
+        """
+        return self._check_output(expression=self.expressions.mac_protocol,
+                                  name=IwconfigEnum.mac_protocol)
+
+    @property
+    def mode(self):
+        """
+        :return: the mode
+        """
+        return self._check_output(expression=self.expressions.mode,
+                                  name=IwconfigEnum.mode)
+
+    @property
+    def frequency(self):
+        """
+        :return: current frequency
+        """
+        return self._check_output(expression=self.expressions.frequency,
+                                  name=IwconfigEnum.frequency)
+
+    @property
+    def access_point(self):
+        """
+        :return: MAC address of associated AP
+        """
+        return self._check_output(expression=self.expressions.access_point,
+                                  name=IwconfigEnum.access_point)
+
+    @property
+    def bit_rate(self):
+        """
+        :return: bit-rate
+        """
+        return self._check_output(expression=self.expressions.bit_rate,
+                                  name=IwconfigEnum.bit_rate)
+
+    @property
+    def tx_power(self):
+        """
+        :return: the TX-power for the node
+        """
+        return self._check_output(expression=self.expressions.tx_power,
+                                  name=IwconfigEnum.tx_power)
+
+    @property
+    def link_quality(self):
+        """
+        :return: link-quality perceived by driver
+        """
+        return self._check_output(expression=self.expressions.link_quality,
+                                  name=IwconfigEnum.link_quality)
+
+    @property
+    def signal_level(self):
+        """
+        :return: signal level (RSSI)
+        """
+        return self._check_output(expression=self.expressions.signal_level,
+                                  name=IwconfigEnum.signal_level)
+
+    @property
+    def rx_invalid_nwid(self):
+        """
+        :return: count of packets with SSID's not matching current cell
+        """
+        return self._check_output(self.expressions.rx_invalid_nwid,
+                                  IwconfigEnum.rx_invalid_nwid)
+
+    @property
+    def rx_invalid_crypt(self):
+        """
+        :return: count of packets not unencryptable
+        """
+        return self._check_output(self.expressions.rx_invalid_crypt,
+                                  IwconfigEnum.rx_invalid_crypt)
+
+    @property
+    def rx_invalid_frag(self):
+        """
+        :return: count of packets whose fragments couldn't be re-assembled
+        """
+        return self._check_output(self.expressions.rx_invalid_frag,
+                                  IwconfigEnum.rx_invalid_frag)
+
+    @property
+    def tx_excessive_retries(self):
+        """
+        :return: count of packets not successfully transmitted
+        """
+        return self._check_output(self.expressions.tx_excessive_retries,
+                                  IwconfigEnum.tx_excessive_retries)
+
+    @property
+    def invalid_misc(self):
+        """
+        :return: count of invalid packets (received only?)
+        """
+        return self._check_output(self.expressions.invalid_misc,
+                                  IwconfigEnum.invalid_misc)
+
+    @property
+    def missed_beacons(self):
+        """
+        :return: count of beacons not received
+        """
+        return self._check_output(self.expressions.missed_beacons,
+                                  IwconfigEnum.missed_beacons)
+
+    def _check_output(self, expression, name):
+        """
+        Helper method to traverse output
+
+        :param:
+
+         - `expression`: regular expression to match the tokne
+         - `name`: group-name for matching cases
+
+        :return: matched text or self.missing_data if not found
+        """
+        for line in self.output:
+            match = expression.search(line)
+            if match is not None:
+                return match.group(name).rstrip()
+        return self.missing_data
 
     def __call__(self):
         """

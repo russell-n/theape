@@ -11,6 +11,7 @@ Testing Iwconfig
    TestIwconfig.test_check_errors
    TestIwconfig.test_output
    TestIwconfig.test_essid
+   TestIwconfig.test_mac_protocol
 
 
 
