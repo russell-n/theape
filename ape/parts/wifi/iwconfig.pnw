@@ -344,6 +344,8 @@ class IwconfigExpressions(object):
 # end class IwconfigExpressions            
 @
 
+.. _ape-iwconfigquery:
+
 IwconfigQuery
 -------------
 
@@ -403,6 +405,7 @@ The Model and API
    IwconfigQuery.invalid_misc
    IwconfigQuery.missed_beacons
    IwconfigQuery.__call__
+   IwconfigQuery.__str__
    IwconfigQuery.check_errors
    IwconfigQuery.close
 
@@ -644,6 +647,12 @@ class IwconfigQuery(BaseClass):
         """
         self.event_timer.close()
         return
+
+    def __str__(self):
+        """
+        :return: output of iwconfig command un-parsed
+        """
+        return "".join(self.output)
 # end class IwconfigQuery    
 @
 

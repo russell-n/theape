@@ -1,0 +1,15 @@
+Watcher Tests
+=============
+
+.. _ape-watcher-tests:
+
+<<name='imports', echo=False>>=
+# this package
+from ape.commoncode.index_builder import create_toctree
+@
+
+
+<<Name='toctree', echo=False, results='sphinx'>>=
+create_toctree()
+@
+

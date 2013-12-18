@@ -16,7 +16,7 @@ def try_except(method):
             return method(self, *args, **kwargs)
         except self.error as error:
             if hasattr(self, 'close'):
-                self.close(error)
+                self.close()
             else:
                 log_error(error, self.logger, self.error_message)
     return wrapped

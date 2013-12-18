@@ -525,6 +525,12 @@ class IwconfigQuery(BaseClass):
         """
         self.event_timer.close()
         return
+
+    def __str__(self):
+        """
+        :return: output of iwconfig command un-parsed
+        """
+        return "".join(self.output)
 # end class IwconfigQuery    
 
 

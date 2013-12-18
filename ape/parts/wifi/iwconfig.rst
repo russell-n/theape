@@ -106,6 +106,17 @@ The Model and API
    IwconfigQuery.mac_protocol
    IwconfigQuery.mode
    IwconfigQuery.frequency
+   IwconfigQuery.access_point
+   IwconfigQuery.bit_rate
+   IwconfigQuery.tx_power
+   IwconfigQuery.link_quality
+   IwconfigQuery.signal_level
+   IwconfigQuery.rx_invalid_nwid
+   IwconfigQuery.rx_invalid_crypt
+   IwconfigQuery.rx_invalid_frag
+   IwconfigQuery.tx_excessive_retries
+   IwconfigQuery.invalid_misc
+   IwconfigQuery.missed_beacons
    IwconfigQuery.__call__
    IwconfigQuery.check_errors
    IwconfigQuery.close

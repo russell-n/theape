@@ -12,6 +12,7 @@ Testing Iwconfig
    TestIwconfig.test_output
    TestIwconfig.test_essid
    TestIwconfig.test_mac_protocol
+   TestIwconfig.test_str
 
 <<name='imports', echo=False>>=
 # python standard library
@@ -237,6 +238,12 @@ class TestIwconfig(unittest.TestCase):
         self.assertEqual(self.iwconfig.missing_data,
                          self.iwconfig_disconnected.signal_level)
         return
+
+    def test_str(self):
+        """
+        Does the __str__ just return all the lines?
+        """
+        self.assert_equal(source, str(self.iwconfig))
 
     def assert_equal(self, expected, actual):
         self.assertEqual(expected, actual,
