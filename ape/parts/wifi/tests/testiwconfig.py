@@ -223,6 +223,12 @@ class TestIwconfig(unittest.TestCase):
                          self.iwconfig_disconnected.signal_level)
         return
 
+    def test_str(self):
+        """
+        Does the __str__ just return all the lines?
+        """
+        self.assert_equal(source, str(self.iwconfig))
+
     def assert_equal(self, expected, actual):
         self.assertEqual(expected, actual,
                          msg="Expected: {0}, Actual: {1}".format(expected, actual))

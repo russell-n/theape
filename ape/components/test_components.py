@@ -278,8 +278,6 @@ class TestOperator(unittest.TestCase):
         # countdown isn't meant to re-run (bug?)
         self.operator._countdown = None
 
-        self.assertEqual(3, len(self.operator))
-        
         # but it should not catch an Exception
         self.assertRaises(Exception, self.operator)
         return

@@ -32,6 +32,7 @@ These are the documents created from the source files.
    Connections <connections/index.rst>
    Sleep <sleep/index.rst>
    Storage <storage/index.rst>
+   Watchers <watchers/index.rst>
    Dummy Components <dummy/index.rst>
    Countdown <countdown/index.rst>
    Wifi <wifi/index.rst>

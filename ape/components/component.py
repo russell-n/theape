@@ -127,7 +127,6 @@ class Composite(Component):
         """
         self._time_remains = countdown
         return
-    
 
     def add(self, component):
         """
@@ -199,7 +198,7 @@ class Composite(Component):
         """
         self.logger.debug("{b}** Checking the Composite Class Representation **{r}".format(b=BOLD,
                                                                                           r=RESET))
-                                                                                          
+
         self.check_rep()
         count_string = "{b}** {l} {{c}} of {{t}} ('{{o}}') **{r}".format(b=BOLD, r=RESET,
                                                                          l=self.component_category)

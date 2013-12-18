@@ -443,7 +443,7 @@ class Ape(BasePlugin):
 
         # the extension is changed so if the user is using a glob
         # and didn't provide a sub-folder the compiled file won't
-        # get picked up if the code is re-run
+        # get picked up on re-running the code
         filename += COMPILED_EXTENSION
         name = self.file_storage.safe_name(filename)
         configuration.write(name)

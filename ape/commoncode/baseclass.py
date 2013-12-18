@@ -1,6 +1,7 @@
 
 # python standard library
 import logging
+import threading
 
 # this package
 from ape.commoncode.strings import RED, BOLD, RESET
@@ -56,7 +57,20 @@ class BaseThreadClass(BaseClass):
     def __init__(self):
         super(BaseThreadClass, self).__init__()
         self._logger = None
+        self._thread = None
         return
+
+    @property
+    def thread(self):
+        """
+        This passes no arguments to run_thread -- override if needed
+        
+        :return: threading.Thread with self.run_thread as target and daemon True
+        """
+        if self._thread is None:
+            self._thread = threading.Thread(target=self.run_thread)
+            self._thread.daemon = True
+        return self._thread
 
     def run_thread(self, *args, **kwargs):
         """

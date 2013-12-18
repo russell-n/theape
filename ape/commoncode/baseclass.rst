@@ -33,7 +33,7 @@ This is the primary base-class. Sub-classes inherit a `logger` attribute so that
 BaseThreadClass
 ---------------
 
-This is an extension to the `BaseClass` that adds a `run_thread` method that logs tracebacks in the event that an exception is raised. Classes that sub-class it need to implement a `run` method for the `run_thread` method to call and a method to put run_thread into a thread.
+This is an extension to the `BaseClass` that adds a `run_thread` method that logs tracebacks in the event that an exception is raised. Classes that sub-class it need to implement a `run` method for the `run_thread` method to call and a method to put run_thread into a thread. Has a default ``thread`` attribute that contains a ``threading.Thread`` instance with ``run_thread`` as the target and ``daemon`` set to True.
 
 .. uml::
 
@@ -41,6 +41,8 @@ This is an extension to the `BaseClass` that adds a `run_thread` method that log
    BaseThreadClass : run_thread()
    BaseThreadClass : run()
    BaseThreadClass o-- traceback
-
+   BaseThreadClass o-- threading.Thread
+   BaseThreadClass : thread
+   
 * `run` is an abstract method that will raise a NotImplementedError exception if called
    
