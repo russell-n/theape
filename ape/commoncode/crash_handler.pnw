@@ -25,7 +25,7 @@ This wraps methods, not functions (it uses `self`). `self` must have access to `
 
 .. superfluous '
 
-I have now added a call to a  `self.clean_up` method after an exception is caught so users of this decorator should have that implemented as well.
+I have now added a call to a  `self.close` method after an exception is caught so users of this decorator should have that implemented as well (but it checks to see if the method exists so it won't try and call it if it wasn't implemented).
 
 <<name='try_except', echo=False>>=
 def try_except(method):
