@@ -15,6 +15,7 @@ A place for exploring code examples.
 .. toctree::
    :maxdepth: 1
 
+   Exploring Singletons <explore_singletons/index.rst>
    Exploring Files <explore_files/index.rst>
    Call Graphs <explore_graphs/index.rst>
    Exploring Time <explore_time/index.rst>

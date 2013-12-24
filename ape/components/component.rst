@@ -88,9 +88,11 @@ The Composite
    Composite.close
    Composite.time_remains
 
-The `Composite` is a generalization of the `Hortator`, `Operator` and `Operations`. By specifying the error that it will catch, the error message it will display if there is one, its components, and the component-category of its components, you specify what type of composite it is.
+The `Composite` was created to be a generalization of the `Hortator`, `Operator` and `Operations`. By specifying the error that it will catch, the error message it will display if there is one, its components, and the component-category of its components, you specify what type of composite it is. It can also act as a regular composite to contain other parts, but this was the original use-case -- to create the infrastructure for the APE.
 
  * Each component call is wrapped by the :ref:`try_except decorator <try-except-decorator>` which catches the Exception in self.error
-   
+
+ * The default for ``self.time_remains`` is a :ref:`TimeTracker <ape-parts-countdown-timetracker>` but can also be a :ref:`CountdownTimer <ape-parts-countdown-countdowntimer>`
+
 .. image:: Composite.png
 
