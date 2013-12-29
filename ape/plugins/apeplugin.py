@@ -17,6 +17,7 @@ from ape import APESECTION, MODULES_SECTION
 from quartermaster import QuarterMaster
 from ape.parts.countdown.countdown import INFO
 from ape.parts.countdown.countdown import CountdownTimer
+import ape.commoncode.singletons as singletons
 
 
 in_pweave = __name__ == '__builtin__'
@@ -25,6 +26,8 @@ in_pweave = __name__ == '__builtin__'
 DEFAULT = 'DEFAULT'
 SUBFOLDER  = 'subfolder'
 COMPILED_EXTENSION = '.compiled'
+FILE_STORAGE_NAME = 'infrastructure'
+TIMESTAMP = 'timestamp'
 
 CONFIGURATION = '''[{0}]
 # the option names are just identifiers
@@ -102,18 +105,8 @@ class Ape(BasePlugin):
         self.configfiles = configfiles
         self._arguments = None
         self._quartermaster = None
-        self._file_storage = None
         return
 
-    @property
-    def file_storage(self):
-        """
-        A FileStorage to get the path to save the configuration
-        """
-        if self._file_storage is None:
-            self._file_storage = FileStorage()
-        return self._file_storage
-            
     @property
     def quartermaster(self):
         """
@@ -191,6 +184,9 @@ class Ape(BasePlugin):
         hortator.time_remains.log_level = INFO
         # traverse the config-files to get Operators and configuration maps
         for config_file in self.configfiles:
+            # each operation gets new singletons
+            singletons.refresh()
+            
             # the QuarterMaster is being created each time because I am now allowing the addition
             # of external packages, and I don't want namespace clashes
             quartermaster = QuarterMaster()
@@ -202,6 +198,7 @@ class Ape(BasePlugin):
                                  component_category='Operation')
 
             configuration = ConfigurationMap(config_file)
+            # the file-storage is a singleton, 
             defaults = configuration.defaults
 
             # build the countdown timer
@@ -240,6 +237,10 @@ class Ape(BasePlugin):
             countdown = None
             if end_time is not None:
                 countdown = CountdownTimer(end_time=end_time)
+
+            # the next loop is going to start building plugins, so we need to set the FileStorage now
+            self.initialize_file_storage(configuration)
+            
             for operation_name in names:
                 # every option in the APE section gets an operation
                 operation = Composite(identifier='Operation',
@@ -264,8 +265,26 @@ class Ape(BasePlugin):
                 operator.add(operation)
 
             hortator.add(operator)
+            # save the configuration as a copy so there will be a record
             self.save_configuration(configuration)
         return hortator
+
+    def initialize_file_storage(self, configuration):
+        """
+        This has to be called before the plugins are built so the path will be set
+
+        :param:
+
+         - `configuration`: the Configuration (a ConfigParser like object)
+
+        :postcondition: file-storage singleton with sub-folder from default section added as path
+        """
+        file_storage = singletons.get_filestorage(name=FILE_STORAGE_NAME)
+        if SUBFOLDER in configuration.defaults:
+            file_storage.path = configuration.defaults[SUBFOLDER]
+        if TIMESTAMP in configuration.defaults:
+            file_storage.timestamp = configuration.defaults[TIMESTAMP]
+        return
 
     def save_configuration(self, configuration):
         """
@@ -275,20 +294,17 @@ class Ape(BasePlugin):
 
          - `configuration`: A ConfigurationMap to save to disk
         """
+        file_storage = singletons.get_filestorage(name=FILE_STORAGE_NAME)
         # get the sub-folder (if given) and let the FileStorage mangle the name as needed
         # to prevent clobbering files
-        path = None
-        if SUBFOLDER in configuration.defaults:
-            path = configuration.defaults[SUBFOLDER]
-        self.file_storage.path = path
 
         filename, extension = os.path.splitext(configuration.filename)
 
         # the extension is changed so if the user is using a glob
         # and didn't provide a sub-folder the compiled file won't
-        # get picked up if the code is re-run
+        # get picked up on re-running the code
         filename += COMPILED_EXTENSION
-        name = self.file_storage.safe_name(filename)
+        name = file_storage.safe_name(filename)
         configuration.write(name)
         return
         

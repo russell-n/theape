@@ -10,4 +10,5 @@ Test The Singletons
    TestSingletons.test_composite_singleton_import
    TestSingletons.test_refresh
    TestSingletons.test_default_error
+   TestFileSingleton.test_file_singleton
 

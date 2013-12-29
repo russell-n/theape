@@ -34,6 +34,8 @@ The first thing to create is the `singletons` dictionary. I originally thought t
 # this package
 from ape import DontCatchError
 from ape.components.component import Composite
+from ape.parts.storage.filestorage import FileStorage
+from ape import FILE_TIMESTAMP
 @
 <<name='singletons', echo=False>>=
 # the singletons will be kept in this dictionary
@@ -46,13 +48,14 @@ class SingletonEnum(object):
     """
     __slots__ = ()
     composite = 'composite'
+    filestorage = 'filestorage'
 @
 
 .. currentmodule:: ape.commoncode.singletons
 .. autosummary::
    :toctree: api
 
-   SingletonEnum
+   SingletonEnum   
 
 Get Composite
 -------------
@@ -96,6 +99,40 @@ def get_composite(name, error=DontCatchError, error_message=None,
                                                               identifier=identifier,
                                                               component_category=component_category)
     return singletons[SingletonEnum.composite][name]
+@
+
+Get FileStorage
+---------------
+
+The ``get_filestorage`` function gets a :ref:`FileStorage <file-storage-module>` object. The intention is for each Operator Composite to set the path of the File Storage before creating its components, then each of the plugins can just open a file using the singleton. This creates a little bit of a different case from the composites in that if sub-groups are used they are going to need to copy the original file-storage and change its path (assuming the path will be different, which is the only case that I can think of where sub-groups might be useful).
+
+.. currentmodule:: ape.commoncode.singletons
+.. autosummary::
+   :toctree: api
+
+   get_filestorage
+   
+<<name='get_filestorage', echo=False>>=
+def get_filestorage(name, path=None, 
+                    timestamp=FILE_TIMESTAMP):
+    """
+    Gets a FileStorage Singleton
+
+    :param:
+
+     - `name`: name to register singleton (clients that want same singleton, use same name)
+
+     - `path`: path to prepend to all files (default is current directory)
+     - `timestamp`: strftime format to timestamp file-names
+
+    :return: Composite singleton
+    """
+    if SingletonEnum.filestorage not in singletons:
+        singletons[SingletonEnum.filestorage]  = {}
+    if name not in singletons[SingletonEnum.filestorage]:
+        singletons[SingletonEnum.filestorage][name] = FileStorage(path=path,
+                                                                  timestamp=timestamp)
+    return singletons[SingletonEnum.filestorage][name]
 @
 
 Refresh

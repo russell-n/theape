@@ -10,6 +10,7 @@ import ape.commoncode.singletons as singletons
 from ape.components.component import Composite
 from singletonimporter import test_singleton_1
 from ape import DontCatchError
+from ape.parts.storage.filestorage import FileStorage
 
 
 class TestSingletons(unittest.TestCase):
@@ -81,3 +82,21 @@ class TestSingletons(unittest.TestCase):
         # this crashes with the IndexError
         with self.assertRaises(IndexError):
             self.singleton()
+# end TestSingletons
+
+
+class TestFileSingleton(unittest.TestCase):
+    def setUp(self):
+        self.name = 'tester'
+        self.singleton = singletons.get_filestorage(self.name)
+        return
+
+    def test_file_singleton(self):
+        """
+        Does it get the same FileStorage
+        """
+        self.assertIsInstance(self.singleton, FileStorage)
+        singleton2 = singletons.get_filestorage(self.name)
+        self.assertIs(singleton2, self.singleton)
+        return
+# end TestFileSingleton
