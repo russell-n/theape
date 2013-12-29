@@ -14,7 +14,7 @@ The first thing to create is the `singletons` dictionary. I originally thought t
 .. autosummary::
    :toctree: api
 
-   SingletonEnum
+   SingletonEnum   
 
 Get Composite
 -------------
@@ -28,6 +28,19 @@ The Composite Singleton can be retrieved via the ``get_composite`` method. It ta
    :toctree: api
 
    get_composite
+   
+
+
+Get FileStorage
+---------------
+
+The ``get_filestorage`` function gets a :ref:`FileStorage <file-storage-module>` object. The intention is for each Operator Composite to set the path of the File Storage before creating its components, then each of the plugins can just open a file using the singleton. This creates a little bit of a different case from the composites in that if sub-groups are used they are going to need to copy the original file-storage and change its path (assuming the path will be different, which is the only case that I can think of where sub-groups might be useful).
+
+.. currentmodule:: ape.commoncode.singletons
+.. autosummary::
+   :toctree: api
+
+   get_filestorage
    
 
 

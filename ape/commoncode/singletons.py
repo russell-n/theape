@@ -25,6 +25,8 @@
 # this package
 from ape import DontCatchError
 from ape.components.component import Composite
+from ape.parts.storage.filestorage import FileStorage
+from ape import FILE_TIMESTAMP
 
 
 # the singletons will be kept in this dictionary
@@ -37,6 +39,7 @@ class SingletonEnum(object):
     """
     __slots__ = ()
     composite = 'composite'
+    filestorage = 'filestorage'
 
 
 def get_composite(name, error=DontCatchError, error_message=None,
@@ -67,6 +70,28 @@ def get_composite(name, error=DontCatchError, error_message=None,
                                                               identifier=identifier,
                                                               component_category=component_category)
     return singletons[SingletonEnum.composite][name]
+
+
+def get_filestorage(name, path=None, component_category='infrastructure',
+                    timestamp=FILE_TIMESTAMP):
+    """
+    Gets a FileStorage Singleton
+
+    :param:
+
+     - `name`: name to register singleton (clients that want same singleton, use same name)
+
+     - `path`: path to prepend to all files (default is current directory)
+     - `timestamp`: strftime format to timestamp file-names
+
+    :return: Composite singleton
+    """
+    if SingletonEnum.filestorage not in singletons:
+        singletons[SingletonEnum.filestorage]  = {}
+    if name not in singletons[SingletonEnum.filestorage]:
+        singletons[SingletonEnum.filestorage][name] = FileStorage(path=path,
+                                                                  timestamp=timestamp)
+    return singletons[SingletonEnum.filestorage][name]
 
 
 def refresh():
