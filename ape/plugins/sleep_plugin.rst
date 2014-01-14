@@ -24,6 +24,7 @@ The Configuration
     # total should be a timestamp for the run-time (1 hr 23 minutes)
     # interval should be <amount> <units>
     # if verbose is False, sceen output will be off except at startup
+    # only one of absolute or relative time is required, although both can be used
     {1} = <absolute time>
     {2} = <relative time>
     {3} = 1 second

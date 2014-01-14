@@ -7,10 +7,10 @@ Watchers
 
 This is a place for things that like to watch.
 
-watch (v.) Look up watch at Dictionary.com
+watch (v.) 
 Old English *waeccan* "keep watch, be awake," from Proto-Germanic *wakojan*; essentially the same word as Old English *wacian* "be or remain awake" (see wake (v.)); perhaps a Northumbrian form. Meaning "be vigilant" is from c.1200. That of "to guard (someone or some place), stand guard" is late 14c. Sense of "to observe, keep under observance" is mid-15c. 
 
-`source <http://www.etymonline.com/index.php?term=watch>`_
+`Etymology source <http://www.etymonline.com/index.php?term=watch>`_
 
 
 .. toctree::
