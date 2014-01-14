@@ -38,6 +38,7 @@ This is an (idealized) class diagram (see below for an auto-generated one).
    BasePlugin : product
    BasePlugin : help(width)
    BasePlugin : fetch_config()
+   BasePlugin : section_header
 
 Public Properties and Methods
 -----------------------------

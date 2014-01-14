@@ -54,9 +54,8 @@ There's also a lock so that if multiple pieces of code are using the same connec
     with connection.lock:
         in_out_error = connection.cat('/proc/cpuinfo')
 
-.. '
-        
-I'm not sure if this is better or it's better to just close the connection when you're not using it, but it's there.
+
+.. note:: I've integrated a lock into the calls to ``exec_command`` so that it will always be thread-safe (although I think it's better to use multiple clients when possible instead of sharing one instance). This means that you shouldn't need to use the lock as shown above. Using the lock can introduce waiting time for users of the shared client and will make them more brittle (one dead client will kill all the threads using it) so it is only meant to test cases where the device seems to be having trouble with multiple ssh-sessions.
        
 
 

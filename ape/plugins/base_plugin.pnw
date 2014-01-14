@@ -14,7 +14,9 @@ from ape.commoncode.code_graphs import module_diagram, class_diagram
 <<name='check_pweave', echo=False>>=
 in_pweave = __name__ == '__builtin__'
 @
+
 .. _base-plugin:
+
 Background
 ----------
 
@@ -50,6 +52,7 @@ This is an (idealized) class diagram (see below for an auto-generated one).
    BasePlugin : product
    BasePlugin : help(width)
    BasePlugin : fetch_config()
+   BasePlugin : section_header
 
 Public Properties and Methods
 -----------------------------
@@ -119,13 +122,14 @@ class BasePlugin(BaseClass):
      - `configuration`: configuration-map for plugin configuration
     """
     __metaclass__ = ABCMeta
-    def __init__(self, configuration=None):
+    def __init__(self, configuration=None, section_header=None):
         """
         BasePlugin constructor
 
         :param:
 
          - `configuration`: a ConfigurationMap for the product
+         - `section_header`: header in the configuration for this plugin's info
         """
         super(BasePlugin, self).__init__()
         self._logger = None
@@ -135,6 +139,7 @@ class BasePlugin(BaseClass):
         self._help_page = None        
         self._sections = None
         self.configuration = configuration
+        self.section_header = section_header
         return
 
     @abstractproperty

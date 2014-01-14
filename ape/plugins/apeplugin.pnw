@@ -45,7 +45,7 @@ Rather than implementing separate classes for the different levels of Composites
    Operator "1" o- "1..*" Operation
    Operation "1" o- "1..*" Leaf
 
-The `Hortator`, `Operator` and `Operation` aren't functionally different but they catch different levels of exceptions so that there can be a certain level of self-recovery and error handling. Each execution of the `ape` will have one `Hortator` composed of `Operators` (one `Operator` per configuration file with an `APE` section). Each line in the APE will correspond to an `Operation` composed of `Leafs` (one `Leaf` per item on the comma-separated line). Each Leaf is a plugin's product. Thus when a plugin is created, the product should inherit from the `Component` class in order to make sure it has the same interface.
+The `Hortator`, `Operator` and `Operation` are instances of the Composite and so aren't functionally different but they catch different levels of exceptions so that there can be a certain level of self-recovery and error handling. Each execution of the `ape` will have one `Hortator` composed of `Operators` (one `Operator` per configuration file with an `APE` section). Each line in the APE will correspond to an `Operation` composed of `Leafs` (one `Leaf` per item on the comma-separated line). Each Leaf is a plugin's product. Thus when a plugin is created, the product should inherit from the `Component` class in order to make sure it has the same interface.
 
 The reason for differentiating the three Composites is to allow different levels of error handling.  For instance, differentiating `Operation` vs  `Operator`  allows the user to decide on a set of plugins that will be called even if the first set crashes. e.g.::
 
@@ -147,6 +147,12 @@ CONFIGURATION = '''[{0}]
 <option_name_2> = <comma-separated-list of plugins>
 ...
 <option_name_n> = <comma-separated-list of plugins>
+
+# !!!! to use an option in a commented section you need to
+# uncomment both the section header and the option
+# if you only uncomment the option it will be assigned
+# to the first un-commented section header above it, not
+# necessarily the one you want
 
 #[MODULES]
 # If you are getting a plugin from a non-ape package put the module here
@@ -355,7 +361,7 @@ class Ape(BasePlugin):
                                  component_category='Operation')
 
             configuration = ConfigurationMap(config_file)
-            # the file-storage is a singleton, 
+            
             defaults = configuration.defaults
 
             # build the countdown timer
@@ -408,12 +414,20 @@ class Ape(BasePlugin):
 
                 #traverse this line to get plugins
                 # get_list is a list of comma-separated strings in the operation line
-                for plugin_name in configuration.get_list(APESECTION, operation_name):                    
+                for plugin_section_name in configuration.get_list(APESECTION, operation_name):                    
                     # the quartermaster returns a class-definition, not an instance
                     # so we can pass in the configuration and build it to get the `product`
+
+                    # in order to allow multiple configurations for the same plugin
+                    # I'm detaching the section name from the plugin name
+                    # this means there is a requirement that a 'plugin' field be in each
+                    # plugin definition
+                    plugin_name = configuration.get(plugin_section_name, 'plugin')
                     plugin_def = quartermaster.get_plugin(plugin_name)
                     try:
-                        plugin = plugin_def(configuration).product
+                        # since there are now arbitrary names for the sections
+                        # either the specific section or the section name has to be passed in
+                        plugin = plugin_def(configuration=configuration, section_header=plugin_section_name).product
                         if plugin is None:
                             raise ApeError("{0} is missing a `product` (returned None)".format(plugin_name))
                     except TypeError:

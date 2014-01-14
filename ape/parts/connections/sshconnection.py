@@ -130,9 +130,10 @@ class SSHConnection(BaseClass):
         """
         if self.prefix is not None:
             command = SEMICOLON_JOIN.format(self.prefix, command)
-        stdin, stdout, stderr = self.client.exec_command(command, bufsize=bufsize,
-                                                         timeout=timeout,
-                                                         get_pty=get_pty)
+        with self.lock:
+            stdin, stdout, stderr = self.client.exec_command(command, bufsize=bufsize,
+                                                             timeout=timeout,
+                                                             get_pty=get_pty)
         return InOutError(input=SocketStorage(stdin), output=SocketStorage(stdout), error=SocketStorage(stderr))
 
     exec_command = __call__

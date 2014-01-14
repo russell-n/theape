@@ -101,6 +101,7 @@ Although the built-in ``file`` is the model for the ``FileStorage``, it wouldn't
    * Sub-folders 
    * Existing files with redundant names (and how to handle them)
    * Time-stamps
+   * Locks
 
 .. superfluous '   
 
@@ -188,9 +189,9 @@ if IN_PWEAVE:
         count = str(count + 1).zfill(4)
         name = "{b}_{c}{e}".format(b=base, c=count, e=extension)
     
-    print name    
-        
+    print name            
 @
+
 
 .. _file-storage-api:
 

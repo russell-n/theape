@@ -21,13 +21,14 @@ class BasePlugin(BaseClass):
      - `configuration`: configuration-map for plugin configuration
     """
     __metaclass__ = ABCMeta
-    def __init__(self, configuration=None):
+    def __init__(self, configuration=None, section_header=None):
         """
         BasePlugin constructor
 
         :param:
 
          - `configuration`: a ConfigurationMap for the product
+         - `section_header`: header in the configuration for this plugin's info
         """
         super(BasePlugin, self).__init__()
         self._logger = None
@@ -37,6 +38,7 @@ class BasePlugin(BaseClass):
         self._help_page = None        
         self._sections = None
         self.configuration = configuration
+        self.section_header = section_header
         return
 
     @abstractproperty

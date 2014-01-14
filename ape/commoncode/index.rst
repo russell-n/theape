@@ -15,6 +15,7 @@ These are the documents created from the source files.
    :maxdepth: 1
 
    Crash Handler <crash_handler.rst>
+   The Singletons <singletons.rst>
    BaseClass <baseclass.rst>
    The OatBran <oatbran.rst>
    Sorted List <sortedlist.rst>
