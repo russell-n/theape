@@ -52,7 +52,7 @@ class Dummy(BasePlugin):
         :precondition: self.configuration map has been set
         """
         if self._product is None:
-            kwargs = dict(self.configuration.items(section='DUMMY',
+            kwargs = dict(self.configuration.items(section=self.section_header,
                                                    optional=True,
                                                    default={}))
             self._product = DummyClass(**kwargs)
