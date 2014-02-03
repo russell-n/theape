@@ -1,7 +1,13 @@
-Watcher Plugin
-==============
+Composite Plugin
+================
 
-This is a plugin for :ref:`TheWatcher <ape-thewatcher>`. This plugin acts primarily as a builder of parts, rather than one that does things itself.
+This is a plugin for :ref:`Composites <ape-thewatcher>`. The plugin creates as its product a singleton composite into which components are added. To specify the components the configuration-file will need a cascade of sections. 
+
+    * In the APE section, the name of the section with information for this plugin needs to be listed (as is the case for all plugins).
+
+    * In the section for the plugin the sections with information for the components needs to be added
+
+    * The section also needs an identifier for the singleton so it can be re-used later in the operation if needed
 
 <<name='imports', echo=False>>=
 # python standard library
