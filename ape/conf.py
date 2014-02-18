@@ -40,7 +40,8 @@ extensions = ['sphinx.ext.autosummary',
               'sphinx.ext.viewcode',
               'sphinx.ext.inheritance_diagram',
               'sphinxcontrib.plantuml',
-              'sphinx.ext.graphviz']
+              'sphinx.ext.graphviz',
+              'sphinx.ext.todo']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -311,3 +312,5 @@ autosummary_generate = True
 autodoc_default_flags = ['members', 'inherited-members', 'show_inheritance']
 autoclass_content = 'both'
 autodoc_member_order = 'groupwise'
+
+todo_include_todos = True
