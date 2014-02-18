@@ -1,0 +1,16 @@
+About Plugins
+=============
+
+.. _ape-plugin-documentation:
+
+This documentation will try to help developers create and use plugins for the ape.
+
+<<name='imports', echo=False>>=
+# this package
+from ape.commoncode.index_builder import create_toctree
+@
+
+<<name='toctree', echo=False, results='sphinx'>>=
+create_toctree()
+@
+

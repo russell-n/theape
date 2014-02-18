@@ -1,13 +1,21 @@
 Sleep Plugin
 ============
 
+.. _sleep-plugin:
+
 This is a plugin for :ref:`The Big Sleep <ape-big-sleep>`, code that does nothing but countdown. I guess it could be called count-down... Anyway.
 
 .. uml::
 
-   BaseClass <|-- TheBigSleep
+   Component <|-- TheBigSleep
    TheBigSleep : __init__(end, total, interval, verbose)
    TheBigSleep : __call__()
+
+.. currentmodule:: ape.parts.sleep.sleep
+.. autosummary::
+   :toctree: api
+
+   TheBigSleep
 
 <<name='imports', echo=False>>=
 # python standard library
@@ -34,9 +42,9 @@ The Configuration
 <<name='configuration', wrap=False>>=
 configuration = """
 [{0}]
-# end should be a timestamp for the end-time (11-12-2013 8:45 pm)
-# total should be a timestamp for the run-time (1 hr 23 minutes)
-# interval should be <amount> <units>
+# 'end' should be a timestamp for the end-time (11-12-2013 8:45 pm)
+# 'total' should be a timestamp for the run-time (1 hr 23 minutes)
+# 'interval' should be <amount> <units> (1 minute)
 # if verbose is False, sceen output will be off except at startup
 # only one of absolute or relative time is required, although both can be used
 {1} = <absolute time>

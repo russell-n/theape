@@ -16,9 +16,9 @@ VERBOSE_OPTION = 'verbose'
 
 configuration = """
 [{0}]
-# end should be a timestamp for the end-time (11-12-2013 8:45 pm)
-# total should be a timestamp for the run-time (1 hr 23 minutes)
-# interval should be <amount> <units>
+# 'end' should be a timestamp for the end-time (11-12-2013 8:45 pm)
+# 'total' should be a timestamp for the run-time (1 hr 23 minutes)
+# 'interval' should be <amount> <units> (1 minute)
 # if verbose is False, sceen output will be off except at startup
 # only one of absolute or relative time is required, although both can be used
 {1} = <absolute time>

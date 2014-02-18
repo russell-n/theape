@@ -15,8 +15,8 @@ from collections import OrderedDict
 
 # this package
 from ape import BasePlugin
-from ape.parts.watchers import TheWatcher
-from ape.parts.storage.filestorage import filestorage
+#from ape.parts.watchers import TheWatcher
+from ape.parts.storage.filestorage import FileStorage
 @
 
 .. uml::
