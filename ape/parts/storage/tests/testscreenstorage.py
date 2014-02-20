@@ -1,7 +1,4 @@
-Testing the Screen Storage
-==========================
 
-<<name='imports', wrap=False>>=
 # python standard library
 import unittest
 
@@ -12,10 +9,9 @@ except ImportError:
     pass    
 
 # this package
-from screenstorage import ScreenStorage
-@
+from ape.parts.storage.screenstorage import ScreenStorage
 
-<<name='TestScreenStorage', wrap=False>>=
+
 class TestScreenStorage(unittest.TestCase):
     def setUp(self):
         self.sys_patch = patch('sys.stdout')
@@ -56,4 +52,3 @@ class TestScreenStorage(unittest.TestCase):
         self.storage.writeline(line)
         self.stdout.write.assert_called_with(line + '\n')
 
-@

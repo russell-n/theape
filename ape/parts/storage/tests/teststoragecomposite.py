@@ -1,9 +1,4 @@
-Testing the Storage Composite
-=============================
 
-I'm getting kind of worn out. I don't know how much testing I'll do, but at least I'll see if it will build and object.
-
-<<name='imports', echo=False>>=
 # python standard library
 import unittest
 
@@ -14,11 +9,10 @@ except ImportError:
     pass
 
 # this package
-from storagecomposite import StorageComposite
+from ape.parts.storage.storagecomposite import StorageComposite
 from ape import ApeError
-@
 
-<<name='TestStorageComposite', wrap=False>>=
+
 class TestStorageComposite(unittest.TestCase):
     def setUp(self):
         self.composite = StorageComposite()
@@ -76,9 +70,3 @@ class TestStorageComposite(unittest.TestCase):
         self.assertIsNone(self.composite.open_storages)
         self.composite.close()
         return                       
-@
-
-
-
-
-
