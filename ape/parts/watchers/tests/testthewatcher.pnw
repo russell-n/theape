@@ -10,6 +10,10 @@ Testing the Watcher
    TestThewatcher.test_call
    TestThewatcher.test_header
    TestThewatcher.test_run
+   TestThewatcher.test_check_rep
+   TestThewatcher.test_stop
+   TestThewatcher.test_timer
+   TestThewatcher.test_close
 
 <<name='imports', echo=False>>=
 # python standard library
@@ -56,7 +60,7 @@ class TestThewatcher(unittest.TestCase):
 
     def test_thread(self):
         """
-        Does it treate a thread with run_thread as the target?
+        Does it create a thread with run_thread as the target?
         """
         self.assertIsInstance(self.watcher.thread, threading.Thread)
         self.assertTrue(self.watcher.thread.daemon)
@@ -89,7 +93,7 @@ class TestThewatcher(unittest.TestCase):
 
     def test_check_rep(self):
         """
-        Does it check the fields
+        Does it check the fields?
         """
         self.watcher.check_rep()
         self.watcher.fields.append('cow')
