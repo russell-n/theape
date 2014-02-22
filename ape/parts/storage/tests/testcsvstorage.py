@@ -4,7 +4,7 @@ import unittest
 
 # third-party
 try:
-    from mock import MagicMock, mock_open, patch
+    from mock import MagicMock, mock_open, patch, call
 except ImportError:
     pass    
 
@@ -42,6 +42,40 @@ class TestCsvStorage(unittest.TestCase):
         self.assertEqual(self.file_storage, storage.storage)
         return
 
+    def test_path_only(self):
+        """
+        Does it create the storage if only the path is given?
+        """
+        file_storage = MagicMock()
+        file_mock = MagicMock()
+        file_storage.return_value = file_mock
+
+        storage = CsvDictStorage(path=self.path, headers=self.headers)
+        with patch('ape.parts.storage.filestorage.FileStorage', file_storage):
+            opened_storage = storage.storage
+            self.assertEqual(opened_storage, file_mock)
+            file_storage.assert_called_with(path=self.path)
+        return
+
+    def test_writer(self):
+        """
+        Does it create a new DictWriter if the file-storage allows it?
+        """
+        # should crash if no file was opened
+        with self.assertRaises(ApeError):
+            writer = self.storage.writer
+        dict_writer = MagicMock()
+        dict_writer_instance = MagicMock()
+        dict_writer.return_value = dict_writer_instance
+
+        # should work once the file is opened
+        with patch('csv.DictWriter', dict_writer):
+            self.storage.storage = self.storage.storage.open('test.csv')
+            writer = self.storage.writer
+            self.assertEqual(writer, dict_writer_instance)
+            writer.writeheader.assert_called_with()
+        return
+
     def test_bad_constructor(self):
         """
         Does it raise an error if neither path nor storage are given?
@@ -60,12 +94,41 @@ class TestCsvStorage(unittest.TestCase):
             CsvDictStorage()
         return
 
-    def test_storage_writerow(self):
+    def test_writerow(self):
         """
-        Does it not write a header and then the row?
+        Does it write the row?
         """
-        data = zip(self.headers, ('1', '2', '3'))
-        self.storage.writerow(data)        
+        data = dict(zip(self.headers, ('1', '2', '3')))
+        writer = MagicMock()
+        self.storage._writer = writer
+        self.storage.writerow(rowdict=data)
+        writer.writerow.assert_called_with(rowdict=data)
+
+        # keys don't match header, should raise ValueError
+        writer.writerow.side_effect = ValueError("argh")
+        with self.assertRaises(ApeError):
+            self.storage.writerow(data)
+
+        # keys don't match header, data wasn't strings
+        writer.writerow.side_effect = TypeError("double bad")
+        with self.assertRaises(ApeError):
+            self.storage.writerow(data)
+
+        # something other than a dict was given to the method
+        with self.assertRaises(ApeError):
+            self.storage.writerow(1)
+        return
+
+    def test_writerows(self):
+        """
+        Does it pass the list on to the DictWriter?
+        """
+        writer = MagicMock()
+        data = 'fake'
+        self.storage._writer = writer
+        self.storage.writerows(data)
+        calls = [call(rowdict=letter) for letter in data]
+        self.assertEqual(calls, writer.writerow.mock_calls)
         return
 
     def test_open(self):
@@ -82,6 +145,7 @@ class TestCsvStorage(unittest.TestCase):
         self.file_storage.open.return_value = opened
         
         with patch('csv.DictWriter', dict_writer):
+            # the call to `open`
             writer = self.storage.open(name)
 
             # did it open a file using the filename?
@@ -94,6 +158,10 @@ class TestCsvStorage(unittest.TestCase):
             dict_writer.assert_called_with(opened,
                                            self.headers)
 
+            # Did it write the header to the file?
+            dict_writer_instance.writeheader.assert_called_with()
+
             # did it return a copy of itself?
             self.assertIsInstance(writer, CsvDictStorage)
+            self.assertNotEqual(writer, self.storage)
         return        

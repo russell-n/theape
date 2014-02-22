@@ -29,6 +29,7 @@ Testing The File Storage
                 self.assertEqual(full_name, opened.name)
                 mocked.assert_called_with(full_name, 'w')
                 self.assertFalse(opened.closed)
+                self.assertEqual(opened.mode, 'w')
             return
             
         def test_write(self):
@@ -52,6 +53,20 @@ Testing The File Storage
             self.storage._file = self.mock_file
             self.storage.writelines(text)
             self.mock_file.writelines.assert_called_with(text)
+            return
+    
+        def test_writeable(self):
+            mocked = mock_open()
+            name = 'ummagumma.txt'
+            full_name = 'test/' + name
+            storage = FileStorage('test/')
+            with patch('__builtin__.open', mocked):
+                self.assertFalse(storage.writeable)
+                opened = storage.open(name)
+                self.assertTrue(opened.writeable)
+                opened.close()
+                self.assertFalse(opened.writeable)
+            return
         
         def test_close(self):
             mock_file = MagicMock()

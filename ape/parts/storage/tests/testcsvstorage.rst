@@ -10,9 +10,12 @@ This tests the csv-storage. It's assumed that the ``DictWriter`` will be the mai
    :toctree: api
 
    TestCsvStorage.test_constructor
+   TestCsvStorage.test_path_only
    TestCsvStorage.test_bad_constructor
-   TestCsvStorage.test_storage_writerow
+   TestCsvStorage.test_writerow
    TestCsvStorage.test_open
+   TestCsvStorage.test_writerows
+   TestCsvStorage.test_writer
 
 .. csv-table:: Parameter Tests
    :header: Path, Header, Storage, Expected Outcome

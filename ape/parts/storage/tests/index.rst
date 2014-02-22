@@ -6,6 +6,7 @@ Testing the Storage
    :maxdepth: 1
 
    Testing The File Storage <testfilestorage.rst>
+   Testing The CSV Storage <testcsvstorage.rst>
 
 .. toctree::
    :maxdepth: 1

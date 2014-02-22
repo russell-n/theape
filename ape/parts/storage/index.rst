@@ -21,17 +21,16 @@ source : `Online Etymology Dictionary <http://www.etymonline.com/index.php?term=
 .. toctree::
    :maxdepth: 1
 
-   Testing the SocketStorage <testsocketstorage.rst>
-   Testing the Screen Storage <testscreenstorage.rst>
-   Testing the Storage Composite <teststoragecomposite.rst>
    The Storage Composite <storagecomposite.rst>
    File Storage <filestorage.rst>
    The Base Storage <base_storage.rst>
-   Screen Storage <screenstorage.rst>
    Socket Storage <socketstorage.rst>
+   Screen Storage <screenstorage.rst>
+   The CSV Storage <csvstorage.rst>
 
 .. toctree::
    :maxdepth: 1
 
+   Testing the Storage <tests/index.rst>
 
 

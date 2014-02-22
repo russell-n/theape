@@ -1,6 +1,9 @@
 File Storage
 ============
 
+
+.. _file-storage-module::
+
 This is a module for classes that implement a file-like interface to disk-files but also add some extra features meant to make them easier to use within the APE.
 
 Contents:
@@ -54,6 +57,7 @@ Although the built-in ``file`` is the model for the ``FileStorage``, it wouldn't
    * Sub-folders 
    * Existing files with redundant names (and how to handle them)
    * Time-stamps
+   * Locks
 
 .. superfluous '   
 
@@ -115,7 +119,7 @@ The timestamp will be added using string formatting -- it will look for a `times
 
 ::
 
-    test_2013_11_19_03:45:06_PM.csv
+    test_2014_02_20_02:06:19_PM.csv
     
 
 
@@ -158,16 +162,14 @@ Because the name is being made to never match an existing file, the FileStorage 
             count = str(count + 1).zfill(4)
             name = "{b}_{c}{e}".format(b=base, c=count, e=extension)
         
-        print name    
-            
+        print name            
     
 
 ::
 
     innagaddadavida.txt
-    innagaddadavida_0001.txt
-    innagaddadavida_0002.txt
     
+
 
 
 
