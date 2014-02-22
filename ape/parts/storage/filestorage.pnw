@@ -233,6 +233,14 @@ class FileStorage(BaseStorage):
         return
 
     @property
+    def writeable(self):
+        """
+        checks if the file is open for writing
+        """
+        return not self.closed and self.mode.startswith('w')
+        
+
+    @property
     def file(self):
         return self._file
     
@@ -297,6 +305,7 @@ class FileStorage(BaseStorage):
         opened = copy.copy(self)
         opened.name = name
         opened._file = open(name, 'w')
+        opened.mode = 'w'
         opened.closed = False
         return opened
 
