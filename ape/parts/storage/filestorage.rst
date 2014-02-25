@@ -119,7 +119,7 @@ The timestamp will be added using string formatting -- it will look for a `times
 
 ::
 
-    test_2014_02_20_02:06:19_PM.csv
+    test_2014_02_24_05:31:56_PM.csv
     
 
 
@@ -190,6 +190,34 @@ FileStorage API
    FileStorage.write
    FileStorage.writeline
    FileStorage.writelines
+
+FileStorage Definition
+----------------------
+
+Constructor
+~~~~~~~~~~~
+
+The constructor takes two parameters:
+
+   * path
+   * timestamp
+
+The ``path`` is the main reason for using the ``FileStorage`` -- by keeping it persistent it frees the users of the ``FileStorage`` from having to know about sub-folders. The ``timestamp`` is a `strftime` string-format. The default is stored in the global-space of this module as a constant called ``FILE_TIMESTAMP``.
+
+The ``open`` Method
+~~~~~~~~~~~~~~~~~~~
+
+The ``open`` method is where things get kind of different from a regular file (and may not be a good idea if examined too closely). In order to preserve the path a copy of the ``FileStorage`` is created and a new opened-file is added to it before returning the copy.
+
+Path:
+
+   #. Append an integer if needed (or asked for) to requested filename to prevent over-writing an existing file with the same name
+   #. Create a copy of the FileStorage
+   #. Open a writeable file-object using the (possibly fixed) filename
+   #. Set the FileStorage copy's ``file`` attribute to the opened file
+   #. Set the mode for the FileStorage copy 
+   #. Set the `closed` attribute of the copy to False
+   #. Return the new FileStorage copy  
 
 
 

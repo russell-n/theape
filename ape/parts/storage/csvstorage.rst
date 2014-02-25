@@ -96,8 +96,7 @@ This is a pass-through to the DictWriter's writerow method.
             :param:
     
              - `path`: path to folder to store output-file in 
-             - `storage`: file-like object to use instead of creating one from 
-    'path'
+             - `storage`: file-like object to use instead of creating one from 'path'
              - `headers`: list of column headers in order required
             :raises: ApeError if neither `path` nor `storage` given
             """
@@ -114,14 +113,12 @@ This is a pass-through to the DictWriter's writerow method.
         @property
         def storage(self):
             """
-            A file-storage created from the path (unless passed into constructo
-    r)
+            A file-storage created from the path (unless passed into constructor)
     
             :return: FileStorage        
             """
             if self._storage is None:
-                self._storage = ape.parts.storage.filestorage.FileStorage(path=
-    self.path)
+                self._storage = ape.parts.storage.filestorage.FileStorage(path=self.path)
             return self._storage
     
         @storage.setter
@@ -145,7 +142,7 @@ This is a pass-through to the DictWriter's writerow method.
             :raise: ApeError if not set and storage not writeable
             """
             if self._writer is None:
-                if not self.storage.writeable:
+                if self.storage.closed or not self.storage.mode.startswith('w'):
                     raise ApeError("FileStorage not open")
                 self._writer = csv.DictWriter(self.storage,
                                               self.headers)
@@ -181,8 +178,7 @@ This is a pass-through to the DictWriter's writerow method.
     
              - `rowdict`: dict whose keys match the headers
     
-            :raise: ApeError if keys don't match header or invalid data was pas
-    sed in.
+            :raise: ApeError if keys don't match header or invalid data was passed in.
             """
             try:
                 self.writer.writerow(rowdict=rowdict)
@@ -191,16 +187,12 @@ This is a pass-through to the DictWriter's writerow method.
                 raise ApeError("rowdict keys invalid")
             except TypeError as error:
                 if type(rowdict) is not DictType:
-                    raise ApeError("rowdict not `header:data` dict  ({0})".form
-    at(rowdict))
+                    raise ApeError("rowdict not `header:data` dict  ({0})".format(rowdict))
                 self.logger.debug(error)
                 self.logger.error(("key in ({0}) not in header ({1}) "
-                                  "and non-string in data ({2})").format(rowdic
-    t.keys(),
-                                                                        self.he
-    aders,
-                                                                        rowdict
-    .values()))
+                                  "and non-string in data ({2})").format(rowdict.keys(),
+                                                                        self.headers,
+                                                                        rowdict.values()))
                 raise ApeError("rowdict keys and values invalid")
             return
         
@@ -217,7 +209,6 @@ This is a pass-through to the DictWriter's writerow method.
             for rowdict in rowdicts:
                 self.writerow(rowdict)
             return
-    
     
 
 
