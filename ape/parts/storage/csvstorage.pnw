@@ -78,7 +78,7 @@ This is a pass-through to the DictWriter's writerow method.
 
    csv.DictWriter.writerow
 
-<<name='CsvDictSstorage'>>=
+<<name='CsvDictSstorage', wrap=False>>=
 class CsvDictStorage(BaseClass):
     """
     A storage that writes to csv files
@@ -137,7 +137,7 @@ class CsvDictStorage(BaseClass):
         :raise: ApeError if not set and storage not writeable
         """
         if self._writer is None:
-            if not self.storage.writeable:
+            if self.storage.closed or not self.storage.mode.startswith('w'):
                 raise ApeError("FileStorage not open")
             self._writer = csv.DictWriter(self.storage,
                                           self.headers)
@@ -240,14 +240,17 @@ if __name__ == "__main__":
 7 8 9
 10 11 12"""
     raw_rows = raw_data.split('\n')
-    rows = (dict(zip(headers, row.split())) for row in raw_rows)
-    storage = ape.parts.storage.filestorage.FileStorage(path='tests')
-    with storage.open('test.csv') as testfile:
-        pass
-    #with open('tests/test.csv', 'wb') as testfile:
-    #    #writer = csv.DictWriter(testfile, headers)
-    #    writer = CsvDictStorage(headers=headers,
-    #                            storage=testfile)
-    #    writer.writerows(rows)
+    rows = list(dict(zip(headers, row.split())) for row in raw_rows)
+    with ape.parts.storage.filestorage.FileStorage(path='tests', name='test.csv', overwrite=True) as testfile:
+        writer = CsvDictStorage(headers=headers,
+                                storage=testfile)
+        writer.writerows(rows)
+
+    with open('tests/test.csv') as csvfile:
+        reader = csv.DictReader(csvfile)
+        assert reader.fieldnames == headers
+        for index, row in enumerate(reader):
+            for column in headers:
+                assert rows[index][column] == row[column]
 @
 

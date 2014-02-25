@@ -37,11 +37,14 @@ from ape import ApeError
 from ape.commoncode.code_graphs import module_diagram, class_diagram
 
 
+WRITEABLE = 'w'
+APPENDABLE = 'a'
 DIGIT = r'\d'
 ONE_OR_MORE = '+'
 UNDERSCORE = '_'
 FILENAME_SUFFIX = UNDERSCORE + DIGIT + ONE_OR_MORE
 IN_PWEAVE = __name__ == '__builtin__'
+AMBIGUOUS = "Ambiguous call: 'overwrite' True and mode 'a'"
 
 
 if IN_PWEAVE:
@@ -96,7 +99,8 @@ class FileStorage(BaseStorage):
     """
     A class to store data to a file
     """
-    def __init__(self, path=None, timestamp=FILE_TIMESTAMP):
+    def __init__(self, path=None, timestamp=FILE_TIMESTAMP,
+                 name=None, overwrite=False, mode=WRITEABLE):
         """
         FileStorage constructor
 
@@ -104,11 +108,19 @@ class FileStorage(BaseStorage):
 
          - `path`: path to prepend to all files (default is current directory)
          - `timestamp`: strftime format to timestamp file-names
+         - `name`: Filename to use
+         - `overwrite`: If true, clobber existing file with same name
+         - `mode`: file mode (e.g. 'a' for append)
         """
         super(FileStorage, self).__init__()
         self._path = None
         self.path = path
         self.timestamp = timestamp
+
+        # these are to support the `with` statement
+        self.name = name
+        self.overwrite = overwrite
+        self.mode = mode
         self.closed = True
         return
 
@@ -117,8 +129,7 @@ class FileStorage(BaseStorage):
         """
         checks if the file is open for writing
         """
-        return not self.closed and self.mode.startswith('w')
-        
+        return not self.closed and self.mode.startswith('w')        
 
     @property
     def file(self):
@@ -144,18 +155,23 @@ class FileStorage(BaseStorage):
         self._path = path
         return
 
-    def safe_name(self, name):
+    def safe_name(self, name, overwrite=False):
         """
         Adds a timestamp if formatted for it, increments if already exists
 
         :param:
 
          - `name`: name for file (without path added)
+         - `overwrite`: if True, don't mangle the name
 
         :return: unique name with full path
         """
         name = name.format(timestamp=datetime.datetime.now().strftime(self.timestamp))
         full_name = os.path.join(self.path, name)
+        
+        if overwrite:
+            return full_name
+        
         if os.path.exists(full_name):
             base, extension = os.path.splitext(name)
 
@@ -170,21 +186,29 @@ class FileStorage(BaseStorage):
             full_name = os.path.join(self.path, name)
         return full_name
 
-    def open(self, name):
+    def open(self, name, overwrite=False, mode=WRITEABLE, return_copy=True):
         """
         Opens a file for writing
 
         :param:
 
          - `name`: a basename (no path) for the file
+         - `overwrite`: If True, clobber existing files with the same name
+         - `mode`: file-mode (e.g. 'w' or 'a')
+         - `return_copy`: If True, return a copy of self, otherwise return self
 
         :return: copy of self with file as open file and closed set to False
         """
-        name = self.safe_name(name)
+        if overwrite and mode == APPENDABLE:
+            self.logger.warning(AMBIGUOUS)
+        name = self.safe_name(name, overwrite=overwrite or mode==APPENDABLE)
         self.logger.debug("Opening {0} for writing".format(name))
-        opened = copy.copy(self)
+        if return_copy:
+            opened = copy.copy(self)
+        else:
+            opened = self
         opened.name = name
-        opened._file = open(name, 'w')
+        opened._file = open(name, mode)
         opened.mode = 'w'
         opened.closed = False
         return opened
@@ -193,10 +217,35 @@ class FileStorage(BaseStorage):
         """
         Closes self.file if it exists, sets self.closed to True
         """
+        self.logger.debug( "File: {0}".format(self.file))
         if self.file is not None:
+            self.logger.debug("Closing the File")
             self.file.close()
             self.closed = True
-        return                    
+        else:
+            self.logger.debug("File is None")
+        return
+
+    def __enter__(self):
+        """
+        Support for the 'with' statement
+
+        :raise: ApeError if self.name not set
+        """
+        if self.name is None:
+            raise ApeError("self.name not set, can't open file")
+        return self.open(name=self.name,
+                         overwrite=self.overwrite,
+                         mode=self.mode,
+                         return_copy=False)
+
+    def __exit__(self, type, value, traceback):        
+        """
+        Closes the object
+        """
+        self.logger.debug("Closing the file")
+        self.close()
+        return        
 
 
 if IN_PWEAVE:

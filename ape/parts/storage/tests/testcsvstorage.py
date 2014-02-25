@@ -121,12 +121,15 @@ class TestCsvStorage(unittest.TestCase):
 
     def test_writerows(self):
         """
-        Does it pass the list on to the DictWriter?
+        Does it write each dict in the list?
         """
         writer = MagicMock()
         data = 'fake'
         self.storage._writer = writer
         self.storage.writerows(data)
+
+        # CsvDictStorage uses its writerow method instead of writerows
+        # so the errors are tested in test_writerow
         calls = [call(rowdict=letter) for letter in data]
         self.assertEqual(calls, writer.writerow.mock_calls)
         return
