@@ -1,0 +1,52 @@
+The List Sub-Command
+--------------------
+
+This lists the plugins, so it should be even simpler, I think.
+
+<<name='imports', echo=False>>=
+# python standard library
+import subprocess
+
+# third-party
+import docopt
+
+# this documentation
+from commons import catch_exit, usage
+@
+
+<<name='list_help'>>=
+print subprocess.check_output('ape list -h'.split())
+@
+
+<<name='list_usage'>>=
+list_usage = """list subcommand
+
+usage: ape list -h
+       ape list [<module> ...]
+
+Positional Arguments:
+  <module> ...  Space-separated list of importable module with plugins
+
+optional arguments:
+
+  -h, --help                 Show this help message and exit
+
+"""
+catch_exit(list_usage, ['-h'])
+@
+
+.. note:: The ``--help`` overrides everything, so even though that last call was missing ``list`` as the first argv element, it still works.
+
+<<name="default_list">>=
+print docopt.docopt(list_usage, argv=['list'])
+@
+
+<<name='test_list_modules'>>=
+arguments = 'list man.dog bill.ted'.split()
+base_output = docopt.docopt(doc=usage, argv=arguments, options_first=True)
+
+arguments = [base_output['<command>']] + base_output['<argument>'] 
+print docopt.docopt(list_usage, argv=arguments)
+@
+
+The inability to pass in a list to an option seems like a flaw. Either I can be consistent and require the '-m' option when adding modules or use a positional argument. Maybe '-m' would be better, since it would probably be a rare thing to use, and it would be better to be consistent, but I think since there's no other options I'll just leave it like this.

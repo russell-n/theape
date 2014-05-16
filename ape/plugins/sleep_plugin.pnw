@@ -42,6 +42,9 @@ The Configuration
 <<name='configuration', wrap=False>>=
 configuration = """
 [{0}]
+# to allow the section names to be arbitrary
+# the plugin names are required
+plugin = Sleep
 # 'end' should be a timestamp for the end-time (11-12-2013 8:45 pm)
 # 'total' should be a timestamp for the run-time (1 hr 23 minutes)
 # 'interval' should be <amount> <units> (1 minute)

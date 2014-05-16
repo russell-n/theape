@@ -1,0 +1,50 @@
+The Check Sub-Command
+---------------------
+
+<<name='imports', echo=False>>=
+# python standard library
+import subprocess
+
+# third-party
+import docopt
+
+# this documentation
+from commons import catch_exit, usage
+@
+
+<<name='check_help', wrap=False>>=
+print subprocess.check_output('ape check -h'.split())
+@
+
+<<name='check_usage', wrap=False>>=
+check_usage = """`check` sub-command
+
+usage: ape check -h
+       ape check  [<config-file-name> ...] [--module <module> ...]
+
+Positional Arguments:
+
+    <config-file-name> ...    List of config files (e.g. *.ini - default='['ape.ini']')
+
+optional arguments:
+
+    -h, --help                  Show this help message and exit
+    -m, --module <module>       Non-ape module with plugins
+
+"""
+
+catch_exit(check_usage, argv=['-h'])
+@
+
+<<name='test_check'>>=
+arguments = "check --module cow.dog.man ape.ini -m pip.ini".split()
+output = docopt.docopt(doc=usage, argv=arguments, options_first=True)
+
+arguments = [output['<command>']] + output['<argument>']
+
+print docopt.docopt(doc=check_usage, argv=arguments)
+@
+
+.. warning:: I originally used `<config-file name>` for the config files, but `docopt` couldn't properly parse it. It might be safer to leave whitespace out of the names, especially when mixing positional arguments and options.
+
+.. '

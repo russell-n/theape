@@ -188,7 +188,7 @@ To print the help-message the Ape will use the help page, but since it is the de
 
 ::
 
-    usage: ape.interface [-h] [--debug] [--silent] [--pudb] [--pdb] [--trace]
+    usage: ape.interface [-h] [--debug] [-v] [--silent] [--pudb] [--pdb] [--trace]
                          [--callgraph]
                          {run,fetch,list,check,help} ...
     
@@ -207,12 +207,14 @@ Well, that might be kind of useful, although the program name is wrong and it do
 
 ::
 
-    usage: ape [-h] [--debug] [--silent] [--pudb] [--pdb] [--trace] [--callgraph]
+    usage: ape [-h] [--debug] [-v] [--silent] [--pudb] [--pdb] [--trace]
+               [--callgraph]
                {run,fetch,list,check,help} ...
     
     optional arguments:
       -h, --help            show this help message and exit
       --debug               Sets the logging level to debug
+      -v, --version         Display the version number and quit
       --silent              Sets the logging level to off (for stdout)
       --pudb                Enables the pudb debugger
       --pdb                 Enables the pdb debugger

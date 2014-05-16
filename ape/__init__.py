@@ -1,6 +1,7 @@
 APESECTION = "APE"
 MODULES_SECTION = 'MODULES'
 FILE_TIMESTAMP = "%Y_%m_%d_%I:%M:%S_%p"
+VERSION = "2014.05.15"
 
 
 from commoncode.baseclass import BaseClass
