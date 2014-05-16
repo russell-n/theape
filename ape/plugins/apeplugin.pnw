@@ -143,6 +143,10 @@ TIMESTAMP = 'timestamp'
 CONFIGURATION = '''[{0}]
 # the option names are just identifiers
 # they will be executed in the order given.
+# Each option has to have a corresponding section below
+# e.g. if there is a Sleep1 plugin listed
+# Then there needs to be a [Sleep1] section below
+# to configure it
 <option_name_1> = <comma-separated-list of plugins>
 <option_name_2> = <comma-separated-list of plugins>
 ...

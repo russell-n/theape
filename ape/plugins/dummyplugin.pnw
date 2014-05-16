@@ -86,6 +86,9 @@ class Dummy(BasePlugin):
         """
         print textwrap.dedent("""
         [DUMMY]
+        # the section name is arbitrary but must match the name in the [APE] section
+        # so the 'plugin' option is what actually specifies the plugin 
+        plugin = Dummy
         # the dummy will take anything you set here and log it
         any_arbitrary_option = any_arbitrary_value
         another_option = another_value""")

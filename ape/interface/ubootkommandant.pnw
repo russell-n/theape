@@ -144,7 +144,7 @@ class UbootKommandant(BaseClass):
     def build_ape(self, args):
         """
         Tries to build the Ape plugin
-        (has a side-effect of setting self.ape so that crashe-handling can get to it)
+        (has a side-effect of setting self.ape so that crash-handling can get to it)
 
         :return: ape or None
         :postcondition: self.ape set to ape (or None on failure)

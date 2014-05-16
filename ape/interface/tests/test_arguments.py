@@ -5,7 +5,10 @@ import random
 import argparse
 
 # third-party
-from mock import MagicMock, patch
+try:
+    from mock import MagicMock, patch
+except ImportError:
+    pass
 
 # this package
 from ape.interface.arguments import ArgumentClinic
@@ -159,3 +162,213 @@ class TestArgumentClinic(unittest.TestCase):
         command = ['command']
         option = random.choice(self.flags)
 
+
+
+#third-party
+import docopt
+
+# this package
+import ape.interface.arguments
+from ape import BaseClass
+from ape import VERSION
+
+usage = ape.interface.arguments.__doc__
+
+class TestBaseArguments(unittest.TestCase):
+    def setUp(self):
+        self.args = ['cow']
+        self.arguments = ape.interface.arguments.BaseArguments(args=self.args)
+        return
+    
+    def test_constructor(self):
+        """
+        Does it build?
+        """
+        arguments = ape.interface.arguments.BaseArguments()
+        self.assertIsInstance(arguments, BaseClass)
+        self.assertEqual(arguments.usage, usage)
+        self.assertIsNone(arguments.args)
+        return
+
+    def test_debug(self):
+        """
+        Does it correctly set the debug value?
+        """
+        self.assertFalse(self.arguments.debug)
+        self.arguments.reset()
+
+        self.arguments.args = '--debug cow'.split()
+        self.assertTrue(self.arguments.debug)
+
+        # mutual exclusivity
+        self.arguments.reset()
+        self.arguments.args = '--debug --silent cow'.split()
+        with self.assertRaises(docopt.DocoptExit):
+            self.arguments.debug
+        return
+
+    def test_silent(self):
+        """
+        Does it set the silent option?
+        """
+        self.assertFalse(self.arguments.silent)
+
+        self.arguments.reset()
+        self.arguments.args = '--silent cow'.split()
+        self.assertTrue(self.arguments.silent)
+
+        # test mutual-exclusivity
+        self.arguments.reset()
+        with self.assertRaises(docopt.DocoptExit):
+            self.arguments.args = '--silent --debug cow'.split()
+            self.arguments.silent
+        return
+
+    def test_pudb(self):
+        """
+        Does it set the pudb option?
+        """
+        self.assertFalse(self.arguments.pudb)
+
+        self.arguments.reset()
+        self.arguments.args = '--pudb cow'.split()
+        self.assertTrue(self.arguments.pudb)
+
+        self.arguments.reset()
+        self.arguments.args = "--pudb --pdb cow".split()
+        with self.assertRaises(docopt.DocoptExit):
+            self.arguments.pudb
+        return
+
+    def test_pdb(self):
+        """
+        Does it set the `pdb` option?
+        """
+        self.assertFalse(self.arguments.pdb)
+
+        self.arguments.reset()
+        self.arguments.args = '--pdb cow'.split()
+        self.assertTrue(self.arguments.pdb)
+
+        # mutually exclusive
+        self.arguments.reset()
+        self.arguments.args = '--pdb --pudb cow'.split()
+        with self.assertRaises(docopt.DocoptExit):
+            self.arguments.pdb           
+        return
+
+    def test_trace(self):
+        """
+        Does it set the trace flag?
+        """
+        self.assertFalse(self.arguments.trace)
+
+        self.arguments.reset()
+        self.arguments.args = '--trace  cow'.split()
+        self.assertTrue(self.arguments.trace)
+
+        self.arguments.reset()
+        self.arguments.args = '--trace --callgraph cow'.split()
+        with self.assertRaises(docopt.DocoptExit):
+            self.arguments.trace
+        return
+
+    def test_callgraph(self):
+        """
+        Does it set the callgraph option?
+        """
+        self.assertFalse(self.arguments.callgraph)
+        
+        self.arguments.reset()
+        self.arguments.args = "--callgraph cow".split()
+        self.assertTrue(self.arguments.callgraph)
+
+        self.arguments.reset()
+        self.arguments.args = "--callgraph --trace cow".split()
+        with self.assertRaises(docopt.DocoptExit):
+            self.arguments.callgraph
+        return
+
+    def test_version(self):
+        """
+        Does it set the version?
+        """
+        mock_docopt = MagicMock()
+        for option_first in (True, False):
+            arguments = ape.interface.arguments.BaseArguments(options_first=option_first)    
+
+            with patch('docopt.docopt', mock_docopt):
+                arguments.debug
+            mock_docopt.assert_called_with(doc=usage,
+                                           argv=None,
+                                           options_first=option_first,
+                                           version=VERSION)
+        
+        
+            mock_docopt.reset()
+        return
+
+    def test_options_first(self):
+        """
+        Is the default for options first True?
+        """
+        self.assertTrue(self.arguments.options_first)
+        arguments = ape.interface.arguments.BaseArguments(options_first=False)
+        self.assertFalse(arguments.options_first)
+        return
+# end class TestBaseArguments    
+
+
+from ape.interface.checkarguments import CheckArguments
+
+class TestCheckArguments(unittest.TestCase):
+    def setUp(self):
+        self.args = ['check']
+        self.arguments = CheckArguments(args=self.args)
+        return
+    
+    def test_constructor(self):
+        """
+        Does it build?
+        """
+        arguments = CheckArguments()
+        self.assertIsInstance(arguments, ape.interface.arguments.BaseArguments)
+
+        # check that the parent is being instantiated
+        arguments.args = '--debug check'.split()
+        self.assertTrue(arguments.debug)
+        return
+
+    def test_configfilenames(self):
+        """
+        Does it get the list of config-files?
+        """
+        default = ['ape.ini']
+        self.assertEqual(self.arguments.configfilenames, default)
+
+        self.arguments.reset()
+        filenames = "umma gumma".split()
+        self.arguments.args = self.args + filenames
+        self.assertEqual(self.arguments.configfilenames, filenames)
+        return
+
+    def test_modules(self):
+        """
+        Does it get a list of optional module names?
+        """
+        self.assertEqual([], self.arguments.modules)
+
+        self.arguments.reset()
+        self.arguments.args = self.args + '--module cow -m man'.split()
+        self.assertEqual(self.arguments.modules, 'cow man'.split())
+        return
+
+    def test_both(self):
+        """
+        Does it work if you combine modules and config file names?
+        """
+        self.arguments.args = "check -m big.pig dog war".split()
+        self.assertEqual('dog war'.split(), self.arguments.configfilenames)
+        self.assertEqual(["big.pig"], self.arguments.modules)
+        return
+# end TestCheckArguments    

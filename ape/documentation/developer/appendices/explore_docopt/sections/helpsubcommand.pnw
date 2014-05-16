@@ -1,0 +1,42 @@
+The Help Sub-Command
+--------------------
+
+<<name='imports', echo=False>>=
+# python standard library
+import subprocess
+
+# third-party
+import docopt
+
+# this documentation
+from commons import catch_exit, usage
+@
+
+<<name='help_help', wrap=False>>=
+print subprocess.check_output('ape help -h'.split())
+@
+
+<<name='help_usage', wrap=False>>=
+help_usage = """`help` sub-command
+
+usage: ape help -h
+       ape help [-w WIDTH] [--module <module>...] [<name>]
+
+positional arguments:
+    <name>                  A specific plugin to inquire about [default: ape].
+
+optional arguments:
+    -h, --help            show this help message and exit
+    -w , --width <width>  Number of characters to wide to format the page.
+    -m, --module <module>     non-ape module with plugins
+    
+"""
+
+catch_exit(help_usage, ["--help"])
+@
+
+<<name='test_help'>>=
+output = docopt.docopt(usage, argv="help bob -w 30 -m cow.pipe".split(), options_first=True)
+arguments = [output['<command>']] + output['<argument>']
+print docopt.docopt(help_usage, arguments)
+@
