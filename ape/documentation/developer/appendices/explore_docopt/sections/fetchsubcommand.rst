@@ -24,8 +24,9 @@ The `fetch` sub-command should be similar to the `run` sub-command.
 
 ::
 
-    usage: ape.interface fetch [-h] [--modules [MODULES [MODULES ...]]]
-                               [names [names ...]]
+    usage: ape.interface.arguments fetch [-h] [--modules [MODULES [MODULES ...]
+    ]]
+                                         [names [names ...]]
     
     positional arguments:
       names                 List of plugin-names (default=['Ape'])
@@ -40,18 +41,7 @@ The `fetch` sub-command should be similar to the `run` sub-command.
 
 ::
 
-    fetch_usage = """fetch subcommand
-        
-    usage: ape fetch -h
-           ape fetch [<name>...]  [--module <module> ...] 
-    
-    positional arguments:
-        <name>                                List of plugin-names (default=['Ape'])
-    
-    optional arguments:
-        -h, --help                           Show this help message and exit
-        -m, --module <module> ...      Non-ape modules
-    """
+    from commons import fetch_usage
     catch_exit(fetch_usage, ['--help'])
     
 

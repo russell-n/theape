@@ -56,20 +56,7 @@ The kind of disappointing part of `docopt` is that we don't have a way to automa
 .. '
 
 <<name='run_usage'>>=
-run_usage = """`run` sub-command
-
-Usage: ape run -h
-       ape run [<configuration>...]
-
-Positional Arguments:
-
-    <configuration>   0 or more configuration-file names [default: ape.ini]
-
-Options;
-
-    -h, --help  This help message.
-
-"""
+from commons import run_usage
 print catch_exit(run_usage, argv=['-h'])
 @
 

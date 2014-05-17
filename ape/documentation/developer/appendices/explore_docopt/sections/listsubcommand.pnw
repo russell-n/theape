@@ -19,19 +19,7 @@ print subprocess.check_output('ape list -h'.split())
 @
 
 <<name='list_usage'>>=
-list_usage = """list subcommand
-
-usage: ape list -h
-       ape list [<module> ...]
-
-Positional Arguments:
-  <module> ...  Space-separated list of importable module with plugins
-
-optional arguments:
-
-  -h, --help                 Show this help message and exit
-
-"""
+from commons import list_usage
 catch_exit(list_usage, ['-h'])
 @
 

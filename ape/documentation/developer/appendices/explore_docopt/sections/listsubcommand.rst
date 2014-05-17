@@ -11,7 +11,8 @@ This lists the plugins, so it should be even simpler, I think.
 
 ::
 
-    usage: ape.interface list [-h] [--modules [MODULES [MODULES ...]]]
+    usage: ape.interface.arguments list [-h] [--modules [MODULES [MODULES ...]]
+    ]
     
     optional arguments:
       -h, --help            show this help message and exit
@@ -24,19 +25,7 @@ This lists the plugins, so it should be even simpler, I think.
 
 ::
 
-    list_usage = """list subcommand
-    
-    usage: ape list -h
-           ape list [<module> ...]
-    
-    Positional Arguments:
-      <module> ...  Space-separated list of importable module with plugins
-    
-    optional arguments:
-    
-      -h, --help                 Show this help message and exit
-    
-    """
+    from commons import list_usage
     catch_exit(list_usage, ['-h'])
     
     

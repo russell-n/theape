@@ -14,6 +14,7 @@ Contents:
     * :ref:`List Sub-Command <docopt-reproducingape-list-sub-command>`
     * :ref:`Check Sub-Command <docopt-reproducingape-check-sub-command>`
     * :ref:`Help Sub-Command <docopt-reproducingape-help-sub-command>`
+    * :ref:`All the Usage Pages <docopt-reproducingape-usage-pages>`
 
 .. '
 
@@ -30,6 +31,11 @@ from ape.main import main
 # this documentation
 from sections.commons import catch_exit
 from sections.commons import usage
+from sections.commons import run_usage
+from sections.commons import fetch_usage
+from sections.commons import list_usage
+from sections.commons import check_usage
+from sections.commons import help_usage
 @
 
 .. _docopt-reproducingape-ape-usage-string:
@@ -72,3 +78,56 @@ print subprocess.check_output('ape -h'.split())
 .. _docopt-reproducingape-help-sub-command:
 
 .. include:: sections/helpsubcommand.rst
+
+.. _docopt-reproducingape-usage-pages:
+
+All Usage Pages
+---------------
+
+Since I refer to these while coding I thought I'd put them in one place.
+
+.. '
+
+APE Usage
+~~~~~~~~~
+
+<<name='ape_usage', echo=False>>=
+catch_exit(usage, argv=['-h'])
+@
+
+Run Usage
+~~~~~~~~~
+
+<<name='run_usage', echo=False>>=
+catch_exit(run_usage, argv=['run', '-h'])
+@
+
+Fetch Usage
+~~~~~~~~~~~
+
+<<name='fetch_usage', echo=False>>=
+catch_exit(fetch_usage, argv='fetch -h'.split())
+@
+
+List Usage
+~~~~~~~~~~
+
+<<name='list_usage', echo=False>>=
+catch_exit(list_usage, argv='list -h'.split())
+@
+
+Check Usage
+~~~~~~~~~~
+
+<<name='check_usage', echo=False>>=
+catch_exit(check_usage, argv='check -h'.split())
+@
+
+Help Usage
+~~~~~~~~~~
+
+<<name='help_usage', echo=False>>=
+catch_exit(help_usage, argv='help -h'.split())
+@
+
+

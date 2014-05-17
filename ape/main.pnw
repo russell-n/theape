@@ -5,8 +5,7 @@ This module bundles together the components needed to use the The Ape as a comma
 
 .. uml::
 
-   main o- ArgumentClinic
-   main o- SubCommands
+   main o- ArgumentBuilder
 
 .. figure:: main.png
    :align: center
@@ -25,7 +24,7 @@ This module bundles together the components needed to use the The Ape as a comma
     
 <<Name='imports', echo=False>>=
 # this package
-import ape.interface.arguments
+from ape.interface.arguments.argumentbuilder import ArgumentBuilder
 from ape.log_setter import set_logger
 @
 <<name='enable_debugging', echo=False>>=
@@ -56,7 +55,7 @@ def main():
        3. Enables debugging (if asked for)
        4. Calls the function set by the argparse subcommand
     """
-    argue = ape.interface.arguments.ArgumentClinic()
+    argue = ArgumentBuilder()
     args = argue()
     set_logger(args)
     enable_debugging(args)

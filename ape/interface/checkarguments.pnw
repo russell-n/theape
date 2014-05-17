@@ -18,12 +18,14 @@ optional arguments:
 """
 @
 
+See the :ref:`developer documentation <docopt-reproducingape-check-sub-command>` for more information about this.
+
 <<name='imports', echo=False>>=
 # third-party
 import docopt
 
 # this package
-from ape.interface.arguments import BaseArguments, ArgumentsConstants
+from ape.interface.arguments.arguments import BaseArguments, ArgumentsConstants
 @
 
 The CheckArgumentsConstants

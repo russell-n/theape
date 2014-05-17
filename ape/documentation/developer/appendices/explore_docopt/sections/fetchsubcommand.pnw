@@ -19,18 +19,7 @@ print subprocess.check_output('ape fetch -h'.split())
 @
 
 <<name='fetch_usage', wrap=False>>=
-fetch_usage = """fetch subcommand
-    
-usage: ape fetch -h
-       ape fetch [<name>...]  [--module <module> ...] 
-
-positional arguments:
-    <name>                                List of plugin-names (default=['Ape'])
-
-optional arguments:
-    -h, --help                           Show this help message and exit
-    -m, --module <module> ...      Non-ape modules
-"""
+from commons import fetch_usage
 catch_exit(fetch_usage, ['--help'])
 @
 

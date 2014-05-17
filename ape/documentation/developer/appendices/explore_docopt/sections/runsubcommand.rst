@@ -13,8 +13,9 @@ Setting the options above by themselves doesn't really seem useful because the A
 
 ::
 
-    usage: ape.interface run [-h] [<config-file list> [<config-file list> ...]]
-    
+    usage: ape.interface.arguments run [-h]
+                                       [<config-file list> [<config-file list> 
+    ...]]
     
     positional arguments:
       <config-file list>  A list of config file name (default='['ape.ini']').
@@ -33,8 +34,9 @@ This looks easy enough, but first we have to add a `<command>` argument to the b
 
     APE
     Usage: ape -h | -v
-           ape [--debug | --silent] [--pudb | --pdb] <command> [<argument>...]
-           ape [--trace | --callgraph]
+           ape [--debug|--silent] [--pudb|--pdb] <command> [<argument>...]
+           ape [--debug|--silent] [--trace|--callgraph] <command> [<argument>..
+    .]
     
     Help Options:
     
@@ -58,7 +60,6 @@ This looks easy enough, but first we have to add a `<command>` argument to the b
         <command>      The name of a sub-command (see below)
         <argument>...  One or more options or arguments for the sub-command
         
-    
     Available Sub-Commands:
     
         run    Run a plugin
@@ -120,21 +121,7 @@ The kind of disappointing part of `docopt` is that we don't have a way to automa
 
 ::
 
-    run_usage = """`run` sub-command
-    
-    Usage: ape run -h
-           ape run [<configuration>...]
-    
-    Positional Arguments:
-    
-        <configuration>   0 or more configuration-file names [default: ape.ini]
-    
-    
-    Options;
-    
-        -h, --help  This help message.
-    
-    """
+    from commons import run_usage
     print catch_exit(run_usage, argv=['-h'])
     
     
@@ -206,8 +193,9 @@ Okay, but the idea for using this is that the `run` help would be reached from t
 
     APE
     Usage: ape -h | -v
-           ape [--debug | --silent] [--pudb | --pdb] <command> [<argument>...]
-           ape [--trace | --callgraph]
+           ape [--debug|--silent] [--pudb|--pdb] <command> [<argument>...]
+           ape [--debug|--silent] [--trace|--callgraph] <command> [<argument>..
+    .]
     
     Help Options:
     
@@ -231,7 +219,6 @@ Okay, but the idea for using this is that the `run` help would be reached from t
         <command>      The name of a sub-command (see below)
         <argument>...  One or more options or arguments for the sub-command
         
-    
     Available Sub-Commands:
     
         run    Run a plugin

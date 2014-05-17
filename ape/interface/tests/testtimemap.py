@@ -5,18 +5,14 @@ import random
 import string
 from collections import defaultdict
 from types import IntType, FloatType
-from datetime import timedelta, datetime
-
-# third-party
-from mock import MagicMock, patch
+from datetime import timedelta
 
 # this package
 from ape import BaseClass
 from ape import ApeError
-from ape.interface.timemap import RelativeTimeMap
-from ape.interface.timemap import RelativeTimeMapGroups
-from ape.interface.timemap import RelativeTime
-from ape.interface.timemap import AbsoluteTime
+from timemap import RelativeTimeMap
+from timemap import RelativeTimeMapGroups
+from timemap import RelativeTime
 
 
 EMPTY_STRING = ''
@@ -24,7 +20,6 @@ SPACE = ' '
 MICRO = 10**6
 RANDOM_MIN = random.randrange(-100, 0)
 RANDOM_MAX = random.randrange(0, 100)
-SECONDS_PER_MINUTE = 60
 
 
 class TestRelativeTimeMapExpressions(unittest.TestCase):
@@ -271,7 +266,7 @@ class TestRelativeTimeMapExpressions(unittest.TestCase):
             value = expressions[key].search(single_source).groupdict(default=DEFAULT)[key]
             self.assertEqual(expected[key], value)
         return
-# end class TestTimeMapExpressions
+
 
 
 class TestRelativeTime(unittest.TestCase):
@@ -442,26 +437,6 @@ class TestRelativeTime(unittest.TestCase):
             total = self.relative + other
         return
 
-    def test_datetime_add(self):
-        """
-        Does it add to datetime objects?
-        """
-        seconds_0 = random.randrange(0, SECONDS_PER_MINUTE)
-
-        self.relative.source = '{0}s'.format(seconds_0)
-        message = 'Source: {0}, Expected: {{0}}, Actual: {{1}}'.format(self.relative.source)
-        
-        now = datetime.now()
-        then = now + self.relative
-
-        expected = (now.second + seconds_0) % SECONDS_PER_MINUTE
-        actual = then.second
-        message = message.format(expected, actual)
-        self.assertEqual(expected, actual,
-                         msg=message)
-        return
-
-
     def test_commutative_add(self):
         """
         Will it add if it's on the RHS?
@@ -496,7 +471,7 @@ class TestRelativeTime(unittest.TestCase):
             self.relative - 1
         return
 
-    def test_multiplication(self):
+    def test_mulitplication(self):
         """
         Does it supoort multiplication by integers?
         """
@@ -546,95 +521,13 @@ class TestRelativeTime(unittest.TestCase):
 
     def test_equality(self):
         """
-        Does it compare correctly with timedeltas?
+        Does it return true if a timedelta with the same time is tested against it?
         """
-        seconds_0 = random.randrange(RANDOM_MIN, RANDOM_MAX)        
+        seconds_0 = random.randrange(RANDOM_MIN, RANDOM_MAX)
         self.relative.source = '{0}s'.format(seconds_0)
         other = timedelta(seconds=seconds_0)
-        not_equal = timedelta(seconds=seconds_0 + 1)
         self.assertEqual(self.relative, other)
-        self.assertFalse(self.relative != other)
-        self.assertNotEqual(self.relative, not_equal)
         return
-
-    
-        
-
-
-class TestAbsoluteTime(unittest.TestCase):
-    def setUp(self):
-        now = datetime.now()        
-        self.default = now
-        self.ignoretz = True
-        self.tzinfos = 0
-        self.dayfirst = True
-        self.yearfirst = True
-        self.fuzzy = False
-        self.parserinfo = 0
-        
-        self.absolute = AbsoluteTime(default=self.default,
-                                     ignoretz=self.ignoretz,
-                                     tzinfos=self.tzinfos,
-                                     dayfirst=self.dayfirst,
-                                     yearfirst=self.yearfirst,
-                                     fuzzy=self.fuzzy,
-                                     parserinfo=self.parserinfo)
-        return
-
-    def test_constructor(self):
-        """
-        Is the signature what's expected?
-        """        
-        self.assertIs(self.default, self.absolute.default)
-        self.assertTrue(self.absolute.ignoretz)
-        self.assertEqual(self.absolute.tzinfos, self.tzinfos)
-        self.assertTrue(self.absolute.dayfirst)
-        self.assertTrue(self.absolute.yearfirst)
-        self.assertFalse(self.absolute.fuzzy)
-        self.assertEqual(self.absolute.parserinfo, self.parserinfo)
-        return
-
-    def test_defaults(self):
-        """
-        Do the defaults match the `parse` function?
-        """
-        absolute = AbsoluteTime()
-        self.assertIsNone(absolute.default)
-        self.assertFalse(absolute.ignoretz)
-        self.assertIsNone(absolute.tzinfos)
-        self.assertFalse(absolute.dayfirst)
-        self.assertFalse(absolute.yearfirst)
-        self.assertTrue(absolute.fuzzy)
-        self.assertIsNone(absolute.parserinfo)
-        return
-
-    def test_call(self):
-        """
-        Does the call use dateutil.parser.parse with the attributes set in the class?
-        """
-        parse_mock = MagicMock()
-        source = 'aoeusnth'
-        with patch('dateutil.parser', parse_mock):
-            self.absolute(source)
-        parse_mock.parse.assert_called_with(source,
-                                            default=self.default,
-                                            ignoretz=self.ignoretz,
-                                            tzinfos=self.tzinfos,
-                                            dayfirst=self.dayfirst,
-                                            yearfirst=self.yearfirst,
-                                            fuzzy=self.fuzzy,
-                                            parserinfo=self.parserinfo)
-        return
-
-    def test_error(self):
-        """
-        Does it raise an ApeError if the string is un-recognizable?
-        """
-        with self.assertRaises(ApeError):
-            self.absolute('aoeu')
-        
-        
-        
 
 
 if __name__ == '__main__':

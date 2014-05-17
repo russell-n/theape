@@ -116,7 +116,7 @@ import os
 from collections import OrderedDict
 
 # this package
-from ape.interface.arguments import ArgumentClinic
+from ape.interface.arguments.arguments import ArgumentClinic
 from ape.interface.configurationmap import ConfigurationMap
 from ape.components.component import Composite
 from ape.parts.storage.filestorage import FileStorage

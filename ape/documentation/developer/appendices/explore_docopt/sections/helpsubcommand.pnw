@@ -17,21 +17,7 @@ print subprocess.check_output('ape help -h'.split())
 @
 
 <<name='help_usage', wrap=False>>=
-help_usage = """`help` sub-command
-
-usage: ape help -h
-       ape help [-w WIDTH] [--module <module>...] [<name>]
-
-positional arguments:
-    <name>                  A specific plugin to inquire about [default: ape].
-
-optional arguments:
-    -h, --help            show this help message and exit
-    -w , --width <width>  Number of characters to wide to format the page.
-    -m, --module <module>     non-ape module with plugins
-    
-"""
-
+from commons import help_usage
 catch_exit(help_usage, ["--help"])
 @
 
