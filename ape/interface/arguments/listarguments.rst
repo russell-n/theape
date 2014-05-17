@@ -1,0 +1,58 @@
+The List Arguments
+==================
+::
+
+    """list subcommand
+    
+    usage: ape list -h
+           ape list [<module> ...]
+    
+    Positional Arguments:
+      <module> ...  Space-separated list of importable module with plugins
+    
+    optional arguments:
+    
+      -h, --help                 Show this help message and exit
+    
+    """
+    
+
+
+
+See the :ref:`developer documentation <docopt-reproducingape-list-sub-command>` for more information.
+
+
+
+The ListArguments Constants
+---------------------------
+
+::
+
+    class ListArgumentsConstants(object):
+        """
+        Constants for the list sub-command arguments
+        """
+        __slots__ = ()
+        # arguments
+        modules = "<module>"
+    
+    
+
+
+
+The ListArguments Class
+-----------------------
+
+.. uml::
+
+   BaseArguments <|-- ListArguments
+
+.. currentmodule:: ape.interface.arguments.listarguments
+.. autosummary::
+   :toctree: api
+
+   ListArguments
+   ListArguments.modules
+   ListArguments.reset
+   ListArguments.function
+

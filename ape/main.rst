@@ -5,8 +5,7 @@ This module bundles together the components needed to use the The Ape as a comma
 
 .. uml::
 
-   main o- ArgumentClinic
-   main o- SubCommands
+   main o- ArgumentBuilder
 
 .. figure:: main.png
    :align: center

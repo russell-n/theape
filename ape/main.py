@@ -1,6 +1,6 @@
 
 # this package
-import ape.interface.arguments
+from ape.interface.arguments.argumentbuilder import ArgumentBuilder
 from ape.log_setter import set_logger
 
 
@@ -31,7 +31,7 @@ def main():
        3. Enables debugging (if asked for)
        4. Calls the function set by the argparse subcommand
     """
-    argue = ape.interface.arguments.ArgumentClinic()
+    argue = ArgumentBuilder()
     args = argue()
     set_logger(args)
     enable_debugging(args)

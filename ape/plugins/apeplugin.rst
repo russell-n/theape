@@ -188,9 +188,9 @@ To print the help-message the Ape will use the help page, but since it is the de
 
 ::
 
-    usage: ape.interface [-h] [--debug] [-v] [--silent] [--pudb] [--pdb] [--trace]
-                         [--callgraph]
-                         {run,fetch,list,check,help} ...
+    usage: ape.interface.arguments [-h] [--debug] [-v] [--silent] [--pudb] [--pdb]
+                                   [--trace] [--callgraph]
+                                   {run,fetch,list,check,help} ...
     
     
 
@@ -265,18 +265,20 @@ After taking a break I decided to just add the sub-commands to the ArgumentClini
 
 ::
 
-    ape run [-h] [<config-file list> [<config-file list> ...]]
+    ape run [-h]
+                                       [<config-file list> [<config-file list> ...]]
     
     ape fetch [-h] [--modules [MODULES [MODULES ...]]]
-                               [names [names ...]]
+                                         [names [names ...]]
     
     ape list [-h] [--modules [MODULES [MODULES ...]]]
     
     ape check [-h] [--modules [MODULES [MODULES ...]]]
-                               [<config-file list> [<config-file list> ...]]
+                                         [<config-file list> [<config-file list> ...]]
     
-    ape help [-h] [-w WIDTH] [--modules [MODULES [MODULES ...]]]
-                              [name]
+    ape help [-h] [-w WIDTH]
+                                        [--modules [MODULES [MODULES ...]]]
+                                        [name]
     
     
 

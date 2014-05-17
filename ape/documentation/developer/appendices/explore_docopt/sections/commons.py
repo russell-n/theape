@@ -44,3 +44,75 @@ Available Sub-Commands:
 
 """
     
+run_usage = """`run` sub-command
+
+Usage: ape run -h
+       ape run [<configuration>...]
+
+Positional Arguments:
+
+    <configuration>   0 or more configuration-file names [default: ape.ini]
+
+Options;
+
+    -h, --help  This help message.
+
+"""
+
+fetch_usage = """fetch subcommand
+    
+usage: ape fetch -h
+       ape fetch [<name>...]  [--module <module> ...] 
+
+positional arguments:
+    <name>                                List of plugin-names (default=['Ape'])
+
+optional arguments:
+    -h, --help                           Show this help message and exit
+    -m, --module <module> ...      Non-ape modules
+"""
+
+list_usage = """list subcommand
+
+usage: ape list -h
+       ape list [<module> ...]
+
+Positional Arguments:
+  <module> ...  Space-separated list of importable module with plugins
+
+optional arguments:
+
+  -h, --help                 Show this help message and exit
+
+"""
+
+check_usage = """`check` sub-command
+
+usage: ape check -h
+       ape check  [<config-file-name> ...] [--module <module> ...]
+
+Positional Arguments:
+
+    <config-file-name> ...    List of config files (e.g. *.ini - default='['ape.ini']')
+
+optional arguments:
+
+    -h, --help                  Show this help message and exit
+    -m, --module <module>       Non-ape module with plugins
+
+"""
+
+help_usage = """`help` sub-command
+
+usage: ape help -h
+       ape help [-w WIDTH] [--module <module>...] [<name>]
+
+positional arguments:
+    <name>                  A specific plugin to inquire about [default: ape].
+
+optional arguments:
+    -h, --help            show this help message and exit
+    -w , --width <width>  Number of characters to wide to format the page.
+    -m, --module <module>     non-ape module with plugins
+    
+"""

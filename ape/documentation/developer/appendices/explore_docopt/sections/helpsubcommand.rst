@@ -8,8 +8,9 @@ The Help Sub-Command
 
 ::
 
-    usage: ape.interface help [-h] [-w WIDTH] [--modules [MODULES [MODULES ...]]]
-                              [name]
+    usage: ape.interface.arguments help [-h] [-w WIDTH]
+                                        [--modules [MODULES [MODULES ...]]]
+                                        [name]
     
     positional arguments:
       name                  A specific plugin to inquire about.
@@ -25,21 +26,7 @@ The Help Sub-Command
 
 ::
 
-    help_usage = """`help` sub-command
-    
-    usage: ape help -h
-           ape help [-w WIDTH] [--module <module>...] [<name>]
-    
-    positional arguments:
-        <name>                  A specific plugin to inquire about [default: ape].
-    
-    optional arguments:
-        -h, --help            show this help message and exit
-        -w , --width <width>  Number of characters to wide to format the page.
-        -m, --module <module>     non-ape module with plugins
-        
-    """
-    
+    from commons import help_usage
     catch_exit(help_usage, ["--help"])
     
 
