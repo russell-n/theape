@@ -1,5 +1,5 @@
-The List Arguments
-==================
+The List Sub-Command Arguments
+==============================
 ::
 
     """list subcommand
@@ -21,7 +21,15 @@ The List Arguments
 
 See the :ref:`developer documentation <docopt-reproducingape-list-sub-command>` for more information.
 
+Contents:
 
+    * :ref:`The List Arguments Constants <ape-interface-arguments-list-arguments-constants>`
+    * :ref:`The List Arguments Class <ape-interface-arguments-list-arguments-class>`
+    * :ref:`The List Strategy <ape-interface-arguments-list-strategy>`
+
+
+
+.. _ape-interface-arguments-list-arguments-constants:
 
 The ListArguments Constants
 ---------------------------
@@ -40,6 +48,8 @@ The ListArguments Constants
 
 
 
+.. _ape-interface-arguments-list-arguments-class:
+
 The ListArguments Class
 -----------------------
 
@@ -55,4 +65,23 @@ The ListArguments Class
    ListArguments.modules
    ListArguments.reset
    ListArguments.function
+
+
+
+
+.. _ape-interface-arguments-list-strategy:
+
+The List Strategy
+-----------------
+
+.. uml::
+
+   BaseStrategy <|-- ListStrategy
+
+.. currentmodule:: ape.interface.arguments.listarguments
+.. autosummary::
+   :toctree: api
+
+   ListStrategy
+   ListStrategy.function
 

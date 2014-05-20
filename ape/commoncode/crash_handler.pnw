@@ -8,7 +8,7 @@ This is a module to help with catching exceptions.
 from ape.commoncode.strings import RED, BOLD, RESET
 @
 
-.. _try-except-decorator:
+.. _ape-commoncode-try-except-decorator:
 
 The try-except Decorator
 ------------------------
@@ -46,6 +46,11 @@ def try_except(method):
                 log_error(error, self.logger, self.error_message)
     return wrapped
 @
+
+.. _ape-commoncode-crash-handler-log-error:
+
+The log_error Function
+----------------------
 
 .. currentmodule:: ape.commoncode.crash_handler
 .. autosummary::

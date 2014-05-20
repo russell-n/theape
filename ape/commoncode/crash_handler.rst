@@ -5,7 +5,7 @@ This is a module to help with catching exceptions.
 
 
 
-.. _try-except-decorator:
+.. _ape-commoncode-try-except-decorator:
 
 The try-except Decorator
 ------------------------
@@ -25,6 +25,11 @@ This wraps methods, not functions (it uses `self`). `self` must have access to `
 I have now added a call to a  `self.close` method after an exception is caught so users of this decorator should have that implemented as well (but it checks to see if the method exists so it won't try and call it if it wasn't implemented).
 
 
+
+.. _ape-commoncode-crash-handler-log-error:
+
+The log_error Function
+----------------------
 
 .. currentmodule:: ape.commoncode.crash_handler
 .. autosummary::

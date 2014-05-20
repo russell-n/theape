@@ -2,8 +2,12 @@
 #python standard library
 import unittest
 
+# third party
+from mock import MagicMock, patch
+
 # the ape
-from ape.interface.arguments.listarguments import ListArguments
+from ape.interface.arguments.listarguments import ListArguments, ListStrategy
+from ape.interface.arguments.basestrategy import BaseStrategy
 
 
 class TestListArguments(unittest.TestCase):
@@ -35,3 +39,43 @@ class TestListArguments(unittest.TestCase):
         self.arguments.args = self.args + modules
         self.assertEqual(modules, self.arguments.modules)
         return        
+
+
+class TestListStrategy(unittest.TestCase):
+    def setUp(self):
+        self.quartermaster = MagicMock()
+        ListStrategy.quartermaster = self.quartermaster
+        self.strategy = ListStrategy()
+        return
+    
+    def test_constructor(self):
+        """
+        Does it build?
+        """
+        strategy = ListStrategy()
+        
+        self.assertIsInstance(strategy, BaseStrategy)
+        
+        # the mock insertion in SetUp breaks this
+        #self.assertIs(strategy.quartermaster, BaseStrategy.quartermaster)
+        return
+
+    def test_function(self):
+        """
+        Does it list the plugins?
+        """
+        args = MagicMock()
+
+        args.modules = 'a b c'.split()
+        self.strategy.function(args)
+        self.assertEqual(args.modules, self.quartermaster.external_modules)
+        self.quartermaster.list_plugins.assert_called_with()
+        return
+
+    def test_try_except(self):
+        """
+        Does the decorator catch exceptions?
+        """
+        self.quartermaster.list_plugins.side_effect = Exception("Something Bad")
+        self.strategy.function()
+        return

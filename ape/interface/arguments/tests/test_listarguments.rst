@@ -6,8 +6,13 @@ Testing the List Arguments
     #python standard library
     import unittest
     
+    # third party
+    from mock import MagicMock, patch
+    
     # the ape
-    from ape.interface.arguments.listarguments import ListArguments
+    from ape.interface.arguments.listarguments import ListArguments, ListStrate
+    gy
+    from ape.interface.arguments.basestrategy import BaseStrategy
     
     
 
@@ -53,4 +58,16 @@ Testing the List Arguments
             return        
     
     
+
+
+
+Testing the List Strategy
+-------------------------
+
+.. autosummary::
+   :toctree: api
+
+   TestListStrategy.test_constructor
+   TestListStrategy.test_function
+   TestListStrategy.test_try_except
 

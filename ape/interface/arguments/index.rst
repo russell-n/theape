@@ -9,12 +9,13 @@ This sub-folder holds the modules that create the command-line interface for the
 .. toctree::
    :maxdepth: 1
 
-   The Argument Clinic <arguments.rst>
-   The List Arguments <listarguments.rst>
+   The ArgumentBuilder <argumentbuilder.rst>
+   The Arguments <arguments.rst>
    The Check Sub-Command Arguments <checkarguments.rst>
+   The Fetch Sub-Command Arguments <fetcharguments.rst>
    The Help Sub-Command Arguments <helparguments.rst>
-   The Run Arguments <runarguments.rst>
-   The Fetch Arguments <fetcharguments.rst>
+   The List Sub-Command Arguments <listarguments.rst>
+   The Run Sub-Command Arguments <runarguments.rst>
 
 .. toctree::
    :maxdepth: 1

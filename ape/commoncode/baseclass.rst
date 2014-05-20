@@ -18,6 +18,8 @@ API
 
 
 
+.. _ape-baseclass-baseclass:
+
 Class BaseClass
 ---------------
 

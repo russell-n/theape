@@ -1,5 +1,5 @@
-The Run Arguments
-=================
+The Run Sub-Command Arguments
+=============================
 <<name='docstring'>>=
 """`run` sub-command
 

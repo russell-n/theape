@@ -48,3 +48,18 @@ The HelpArguments Class
    HelpArguments.name
    HelpArguments.function
 
+
+
+The Help Strategy
+-----------------
+
+.. uml::
+
+   BaseStrategy <|-- HelpStrategy
+
+.. autosummary::
+   :toctree: api
+
+   HelpStrategy
+   HelpStrategy.function
+

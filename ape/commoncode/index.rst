@@ -14,17 +14,17 @@ These are the documents created from the source files.
 .. toctree::
    :maxdepth: 1
 
-   Crash Handler <crash_handler.rst>
-   The Singletons <singletons.rst>
    BaseClass <baseclass.rst>
-   The OatBran <oatbran.rst>
-   Sorted List <sortedlist.rst>
+   Code Graphs <code_graphs.rst>
+   Crash Handler <crash_handler.rst>
    Errors <errors.rst>
-   The Randomizer <randomizer.rst>
    EventTimer <eventtimer.rst>
    Index Builder <index_builder.rst>
+   The OatBran <oatbran.rst>
+   The Randomizer <randomizer.rst>
+   The Singletons <singletons.rst>
+   Sorted List <sortedlist.rst>
    String Constants <strings.rst>
-   Code Graphs <code_graphs.rst>
 
 .. toctree::
    :maxdepth: 1

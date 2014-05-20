@@ -1,14 +1,13 @@
-The UbootKommandant
-===================
-.. currentmodule:: ape.interface.ubootkommandant
+The BaseStrategy
+================
+
+.. currentmodule:: ape.interface.arguments.basestrategy
 
 Contents:
 
-    * :ref:`Introduction <uboot-kommandant>`
-    * :ref:`UML Class Model <ubootkommandant-class-model>`
-    * :ref:`Module Diagram <ubootkommandant-module-diagram>`
-    * :ref:`Class Implementation Diagram <ubootkommandant-class-diagram>`
-    * :ref:`Error Explanations <ubootkommandant-errors>`
+    * :ref:`Introduction <ape-interface-arguments-base-strategy>`
+    * :ref:`Class Model <ape-interface-arguments-basestrategy-class-model>`
+    * :ref:`Error Explanations <ape-interface-arguments-basestrategy-errors>`
     * :ref:`UbootKommandant API <ubootkommandant-api>`
 
 <<name='imports', echo=False>>=
@@ -39,57 +38,29 @@ RED_ERROR = "{red}{bold}{{error}}{reset}".format(red=RED,
 INFO_STRING = '{b}**** {{0}} ****{r}'.format(b=BOLD, r=RESET)
 @
 
-.. image:: U-boot_by_Ferrer-Dalmau.jpg
-   :align: center
+.. _ape-interface-arguments-base-strategy:
 
-.. _uboot-kommandant:
+The BaseStrategy
+----------------
 
-This is a holder of sub-commands for the :ref:`ArgumentClinic <argument-clinic>`. The name was chosen because in re-starting the APE I found myself accidentally editing the wrong emacs buffer (the old file vs the new file) and wanted something distinct. Once the APE goes back to being the lone package maybe I'll find something less idiosyncratic. Or maybe not.
+This is a holder of sub-commands for the arguments. Its main purpose is to  provide the QuarterMaster and Ape-plugin, since one or both is being used by various sub-commands.
 
-.. superfluous '
-
-.. _ubootkommandant-class-model:
+.. _ape-interface-arguments-basestrategy-class-model:
 
 Class Model
 -----------
 
 .. uml::
 
-   UbootKommandant o- QuarterMaster
-   UbootKommandant --|> BaseClass
+   BaseStrategy o- QuarterMaster
+   BaseStrategy o- TheApe
+   BaseStrategy --|> BaseClass
 
 <<name='constants', echo=False>>=
 DOCUMENT_THIS = __name__ == '__builtin__'
 @
 
-.. _ubootkommandant-module-diagram:
-
-Module Diagram
---------------
-
-<<name='module_graph', echo=False, results='sphinx'>>=
-if DOCUMENT_THIS:
-    import os
-    from ape.commoncode.code_graphs import module_diagram, class_diagram
-    this_file = os.path.join(os.getcwd(), 'ubootkommandant.py')
-    module_diagram_file = module_diagram(module=this_file, project='ubootkommandant')
-    print ".. image:: {0}".format(module_diagram_file)
-@
-
-.. _ubootkommandant-class-diagram:
-
-Class Diagram
--------------
-
-<<name='class_diagram', echo=False, results='sphinx'>>=
-if DOCUMENT_THIS:
-    class_diagram_file = class_diagram(class_name="UbootKommandant",
-                                       filter='OTHER',
-                                       module=this_file)
-    print ".. image:: {0}".format(class_diagram_file)
-@
-
-.. _ubootkommandant-errors:
+.. _ape-interface-arguments-basestrategy-errors:
 
 The Errors
 ----------
@@ -103,43 +74,23 @@ There are two kinds of exceptions caught which produce two error-messages:
    Exception; Oops, I Crapped My Pants; Something unexpected happened -- this indicates a problem with the code
    KeyboardInterrupt; Oh, I am slain; User killed the runtime for some reason -- clean-up and then close
 
-<<name='UbootKommandant', echo=False>>=
-class UbootKommandant(BaseClass):
+<<name='BaseStrategy', echo=False>>=
+class BaseStrategy(BaseClass):
     """
-    a subcommand holder
+    A base for the sub-commands
     """
     def __init__(self):
         """
-        UbootKommandant Constructor
+        BaseStrategy Constructor
         """
-        super(UbootKommandant, self).__init__()
-        self._quartermaster = None
+        super(BaseStrategy, self).__init__()
+        self._logger = None
         self.error = (Exception, KeyboardInterrupt)
         self.error_message = "Oops, I Crapped My Pants"
         self.ape = None
         return
 
-    @property
-    def quartermaster(self):
-        """
-        A quartermaster for the plugins
-        """
-        if self._quartermaster is None:
-            self._quartermaster = QuarterMaster()
-        return self._quartermaster
-
-    @try_except
-    def list_plugins(self, args):
-        """
-        Calls on  QuarterMaster to list found plugins
-
-        :param:
-
-         - `args`: namespace with 'modules' attribute
-        """
-        self.quartermaster.external_modules = args.modules
-        self.quartermaster.list_plugins()
-        return
+    quartermaster = QuarterMaster()
 
     def build_ape(self, args):
         """
@@ -201,28 +152,6 @@ class UbootKommandant(BaseClass):
         return
 
     @try_except
-    def fetch(self, args):
-        """
-        'fetch' a sample plugin config-file
-
-        :param:
-
-         - `args`: namespace with 'names' and 'modules' list attributes
-        """
-        for name in args.names:
-            self.logger.debug("Getting Plugin: {0}".format(name))
-            self.quartermaster.external_modules = args.modules
-            plugin = self.quartermaster.get_plugin(name)
-            # the quartermaster returns definitions, not instances
-            try:
-                config = plugin().fetch_config()
-            except TypeError as error:
-                self.logger.debug(error)
-                self.log_error(error="Unknown Plugin: ",
-                               message='{0}'.format(name))
-        return
-
-    @try_except
     def check(self, args):
         """
         Builds and checks the configuration
@@ -236,29 +165,6 @@ class UbootKommandant(BaseClass):
             return
 
         ape.check_rep()
-        return
-
-    @try_except
-    def handle_help(self, args):
-        """
-        Sends a help message to stdout
-
-        :param:
-
-         - `args`: namespace with 'name', 'width', and 'modules attributes
-        """
-        self.quartermaster.external_modules = args.modules
-        plugin = self.quartermaster.get_plugin(args.name)
-        try:
-            plugin().help(args.width)
-        except TypeError as error:
-            self.logger.debug(error)
-            print "'{0}' is not a known plugin.\n".format(args.name)
-            print "These are the known (built-in) plugins:\n"
-            self.quartermaster.list_plugins()
-        except AttributeError as error:
-            self.log_error("{0} has implemented its help incorrectly -- '{1}'".format(args.name,
-                                                                                      error))            
         return
 
     def clean_up(self, error):
@@ -294,3 +200,13 @@ The decorator (:ref:`try_except <try-except-decorator>`) around most of these me
    UbootKommandant.check
    UbootKommandant.clean_up
 
+Supporting Code
+---------------
+
+These are used within the UbootKommandant.
+
+    * :ref:`The Base Class <ape-baseclass-baseclass>`
+    * :ref:`The try-except Decorator <ape-commoncode-try-except-decorator>`
+    * :ref:`The crash_handler log_error function <ape-commoncode-crash-handler-log-error>`
+    * :ref:`The QuarterMaster <ape-plugins-quartemaster>`
+    * :ref:`The Ape Plugin <apeplugin-introduction>`
