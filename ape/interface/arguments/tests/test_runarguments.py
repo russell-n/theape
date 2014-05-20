@@ -7,7 +7,6 @@ from ape.interface.arguments.runarguments import RunArguments
 from ape.interface.arguments.arguments import BaseArguments
 from ape.interface.arguments.runarguments import RunArgumentsConstants
 
-from ape.interface.ubootkommandant import UbootKommandant
 
 
 class TestRunArguments(unittest.TestCase):
@@ -38,11 +37,4 @@ class TestRunArguments(unittest.TestCase):
         configfiles =  'ape.ini cow.txt pie.bla'.split()
         self.arguments.args = self.args + configfiles
         self.assertEqual(self.arguments.configfiles, configfiles)
-        return
-
-    def test_function(self):
-        """
-        Does the arguments have the `run` strategy?
-        """
-        self.assertEqual(self.arguments.function, UbootKommandant.run)
         return

@@ -2,7 +2,7 @@ The QuarterMaster
 =================
 
 .. currentmodule:: ape.plugins.quartermaster
-.. _quarter-master:
+
 The `QuarterMaster <http://en.wikipedia.org/wiki/Quartermaster>`_ handles finding and interacting with the plugins.
 
 
@@ -10,7 +10,8 @@ The `QuarterMaster <http://en.wikipedia.org/wiki/Quartermaster>`_ handles findin
 .. uml::
 
    QuarterMaster -|> BaseClass
-   
+
+.. _ape-plugins-quartermaster:   
 
 Public Methods and Properties
 -----------------------------

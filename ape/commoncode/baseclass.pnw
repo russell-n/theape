@@ -33,6 +33,8 @@ RED_ERROR = "{red}{bold}{{error}}{reset}{red}{{message}}{reset}".format(red=RED,
 
 @
 
+.. _ape-baseclass-baseclass:
+
 Class BaseClass
 ---------------
 

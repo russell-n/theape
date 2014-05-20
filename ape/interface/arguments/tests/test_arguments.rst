@@ -1,7 +1,5 @@
-Testing the ArgumentClinic
-==========================
-
-This proved to require more work than I wanted to spend so it is largely incomplete.
+Testing the Arguments
+=====================
 
 ::
 
@@ -15,9 +13,6 @@ This proved to require more work than I wanted to spend so it is largely incompl
         from mock import MagicMock, patch
     except ImportError:
         pass
-    
-    # this package
-    from ape.interface.arguments.arguments import ArgumentClinic
     
 
 

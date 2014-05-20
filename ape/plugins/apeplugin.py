@@ -5,7 +5,8 @@ import os
 from collections import OrderedDict
 
 # this package
-from ape.interface.arguments.arguments import ArgumentClinic
+import ape.interface.arguments.arguments as basearguments
+from ape.interface.arguments.argumentbuilder import argument_definitions
 from ape.interface.configurationmap import ConfigurationMap
 from ape.components.component import Composite
 from ape.parts.storage.filestorage import FileStorage
@@ -132,9 +133,7 @@ class Ape(BasePlugin):
         The ArgumentClinic (used to set up the help-string)
         """
         if self._arguments is None:
-            self._arguments = ArgumentClinic()
-            self._arguments.add_arguments()
-            self._arguments.add_subparsers()
+            self._arguments = ArgumentBuilder()
         return self._arguments
 
     @property
@@ -151,25 +150,21 @@ class Ape(BasePlugin):
             program = name + '[.\w]*'
             expression = re.compile(program)
 
-            # use the ArgParser to get sample usage text
-            arg_string = expression.sub(name,
-                                        self.arguments.parser.format_usage().replace('usage: ', ''))
+            # get sample usage text
+            arg_string = basearguments.__doc__.replace('Usage: ', '')
             
-            # the sub-parsers are listed in curly braces, breaking the text-formatting
-            arg_string = arg_string.replace('{', '{{')
-            arg_string = arg_string.replace('}', '}}')
-            arg_string = arg_string.replace(name, bold_name)
 
             # the main parser doesn't show help for the sub-commands (just --debug, --pudb, etc.)
             # so they are pulled separately
-            for sub in self.arguments.subparser_list:
+            for definition in argument_definitions.itervalues():
+                arg_string += '-' * 40 + '\n'
                 arg_string +=  expression.sub(bold_name,
-                                              sub.format_usage().replace('usage: ', ''))
+                                              definition().sub_usage.replace('Usage: ', ''))
             
             self._sections = OrderedDict()
             self._sections['Name'] = '{blue}' + name + reset + ' -- a plugin-based code runner'
             self._sections['Synopsis'] = arg_string
-            self._sections['Description'] = bold_name + ' is a code-runner. When it is run it looks for a configuration file or list of configuration files. Within each file it looks for an [{0}] section. Each entry in that section is interpreted to be a list of plugins to execute in top-down, left-right ordering.'.format(APESECTION)
+            self._sections['Description'] = bold_name + ' is the main code-runner. When it is run it looks for a configuration file or list of configuration files. Within each file it looks for an [{0}] section. Each entry in that section is interpreted to be a list of plugins to execute in top-down, left-right ordering.'.format(APESECTION)
             self._sections["Configuration"] = CONFIGURATION
             self._sections['Examples'] = 'ape run *.ini\nape help\nape fetch\nape list\nape check *ini'
             self._sections['Errors'] = '{bold}Oops, I crapped my pants:{reset} unexpected error (probably indicates implementation error)'
@@ -332,26 +327,3 @@ class Ape(BasePlugin):
         """
         print CONFIGURATION
 # end class Ape        
-
-
-if output_documentation:
-    arguments = ArgumentClinic()
-    arguments.add_arguments()
-    arguments.add_subparsers()
-    parser = arguments.parser
-    print parser.format_usage()
-
-
-if output_documentation:
-    parser.prog = 'ape'
-    print parser.format_help()
-
-
-if output_documentation:
-    subs = (arguments.runner, arguments.fetcher,
-            arguments.lister, arguments.checker, arguments.helper)
-
-    program = 'ape[.\w]*'
-    expression = re.compile(program)
-    for sub in subs:
-        print expression.sub('ape', sub.format_usage().replace('usage: ', ''))

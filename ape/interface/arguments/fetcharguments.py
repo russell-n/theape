@@ -15,6 +15,8 @@ optional arguments:
 
 # the APE
 from ape.interface.arguments.arguments import BaseArguments
+from ape.interface.arguments.basestrategy import BaseStrategy
+from ape.commoncode.crash_handler import try_except
 
 
 class FetchArgumentsConstants(object):
@@ -48,8 +50,8 @@ class FetchArguments(BaseArguments):
         fetch sub-command
         """
         if self._function is None:
-            self._function = self.subcommands.fetch
-        return
+            self._function = FetchStrategy().function
+        return self._function
 
     @property
     def names(self):
@@ -80,3 +82,30 @@ class FetchArguments(BaseArguments):
         self._names = None
         return
 # end FetchArguments    
+
+
+class FetchStrategy(BaseStrategy):
+    """
+    A strategy for the `fetch` sub-command
+    """
+    @try_except
+    def function(self, args):
+        """
+        'fetch' a sample plugin config-file
+
+        :param:
+
+         - `args`: namespace with 'names' and 'modules' list attributes
+        """
+        for name in args.names:
+            self.logger.debug("Getting Plugin: {0}".format(name))
+            self.quartermaster.external_modules = args.modules
+            plugin = self.quartermaster.get_plugin(name)
+            # the quartermaster returns definitions, not instances
+            try:
+                config = plugin().fetch_config()
+            except TypeError as error:
+                self.logger.debug(error)
+                self.log_error(error="Unknown Plugin: ",
+                               message='{0}'.format(name))
+        return

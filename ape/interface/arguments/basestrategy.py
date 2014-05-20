@@ -29,62 +29,27 @@ INFO_STRING = '{b}**** {{0}} ****{r}'.format(b=BOLD, r=RESET)
 DOCUMENT_THIS = __name__ == '__builtin__'
 
 
-if DOCUMENT_THIS:
-    import os
-    from ape.commoncode.code_graphs import module_diagram, class_diagram
-    this_file = os.path.join(os.getcwd(), 'ubootkommandant.py')
-    module_diagram_file = module_diagram(module=this_file, project='ubootkommandant')
-    print ".. image:: {0}".format(module_diagram_file)
-
-
-if DOCUMENT_THIS:
-    class_diagram_file = class_diagram(class_name="UbootKommandant",
-                                       filter='OTHER',
-                                       module=this_file)
-    print ".. image:: {0}".format(class_diagram_file)
-
-
-class UbootKommandant(BaseClass):
+class BaseStrategy(BaseClass):
     """
-    a subcommand holder
+    A base for the sub-commands
     """
     def __init__(self):
         """
-        UbootKommandant Constructor
+        BaseStrategy Constructor
         """
-        super(UbootKommandant, self).__init__()
-        self._quartermaster = None
+        super(BaseStrategy, self).__init__()
+        self._logger = None
         self.error = (Exception, KeyboardInterrupt)
         self.error_message = "Oops, I Crapped My Pants"
         self.ape = None
         return
 
-    @property
-    def quartermaster(self):
-        """
-        A quartermaster for the plugins
-        """
-        if self._quartermaster is None:
-            self._quartermaster = QuarterMaster()
-        return self._quartermaster
-
-    @try_except
-    def list_plugins(self, args):
-        """
-        Calls on  QuarterMaster to list found plugins
-
-        :param:
-
-         - `args`: namespace with 'modules' attribute
-        """
-        self.quartermaster.external_modules = args.modules
-        self.quartermaster.list_plugins()
-        return
+    quartermaster = QuarterMaster()
 
     def build_ape(self, args):
         """
         Tries to build the Ape plugin
-        (has a side-effect of setting self.ape so that crashe-handling can get to it)
+        (has a side-effect of setting self.ape so that crash-handling can get to it)
 
         :return: ape or None
         :postcondition: self.ape set to ape (or None on failure)
@@ -141,28 +106,6 @@ class UbootKommandant(BaseClass):
         return
 
     @try_except
-    def fetch(self, args):
-        """
-        'fetch' a sample plugin config-file
-
-        :param:
-
-         - `args`: namespace with 'names' and 'modules' list attributes
-        """
-        for name in args.names:
-            self.logger.debug("Getting Plugin: {0}".format(name))
-            self.quartermaster.external_modules = args.modules
-            plugin = self.quartermaster.get_plugin(name)
-            # the quartermaster returns definitions, not instances
-            try:
-                config = plugin().fetch_config()
-            except TypeError as error:
-                self.logger.debug(error)
-                self.log_error(error="Unknown Plugin: ",
-                               message='{0}'.format(name))
-        return
-
-    @try_except
     def check(self, args):
         """
         Builds and checks the configuration
@@ -176,29 +119,6 @@ class UbootKommandant(BaseClass):
             return
 
         ape.check_rep()
-        return
-
-    @try_except
-    def handle_help(self, args):
-        """
-        Sends a help message to stdout
-
-        :param:
-
-         - `args`: namespace with 'name', 'width', and 'modules attributes
-        """
-        self.quartermaster.external_modules = args.modules
-        plugin = self.quartermaster.get_plugin(args.name)
-        try:
-            plugin().help(args.width)
-        except TypeError as error:
-            self.logger.debug(error)
-            print "'{0}' is not a known plugin.\n".format(args.name)
-            print "These are the known (built-in) plugins:\n"
-            self.quartermaster.list_plugins()
-        except AttributeError as error:
-            self.log_error("{0} has implemented its help incorrectly -- '{1}'".format(args.name,
-                                                                                      error))            
         return
 
     def clean_up(self, error):

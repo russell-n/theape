@@ -15,7 +15,9 @@ optional arguments:
 
 
 # the ape
+from ape.commoncode.crash_handler import try_except
 from ape.interface.arguments.arguments import BaseArguments
+from ape.interface.arguments.basestrategy import BaseStrategy
 
 
 class ListArgumentsConstants(object):
@@ -44,7 +46,7 @@ class ListArguments(BaseArguments):
         The `list` sub-command
         """
         if self._function is None:
-            self._function = self.subcommands.list_plugins
+            self._function = ListStrategy().function
         return self._function
 
     @property
@@ -64,3 +66,22 @@ class ListArguments(BaseArguments):
         self._modules = None
         return
 # end ListArguments
+
+
+class ListStrategy(BaseStrategy):
+    """
+    The strategy for the 'list' sub-command
+    """    
+    @try_except
+    def function(self, args):
+        """
+        The function to run for this strategy (instead of the ArgParse sub-command function).
+        Uses the QuarteMaster to list the plugins
+
+        :param:
+
+         - `args`: object with `modules` attribute
+        """
+        self.quartermaster.external_modules = args.modules
+        self.quartermaster.list_plugins()
+        return

@@ -16,7 +16,9 @@ optional arguments:
 
 
 # the ape
+from ape.commoncode.crash_handler import try_except
 from ape.interface.arguments.arguments import BaseArguments
+from ape.interface.arguments.basestrategy import BaseStrategy
 
 
 class HelpArgumentsConstants(object):
@@ -50,7 +52,7 @@ class HelpArguments(BaseArguments):
         `help` sub-command
         """
         if self._function is None:
-            self._function = self.subcommands.handle_help
+            self._function = HelpStrategy().function
         return self._function
             
     @property
@@ -92,3 +94,34 @@ class HelpArguments(BaseArguments):
         self._name = None
         return
 # end HelpArguments    
+
+
+class HelpStrategy(BaseStrategy):
+    """
+    A strategy for the `help` sub-command
+    """
+    @try_except
+    def function(self, args):
+        """
+        The function to give to the arguments
+        Sends a help message to stdout
+
+        :param:
+
+         - `args`: namespace with 'name', 'width', and 'modules attributes
+
+        """
+        self.quartermaster.external_modules = args.modules
+
+        try:
+            plugin = self.quartermaster.get_plugin(args.name)
+            plugin().help(args.width)
+        except TypeError as error:
+            self.logger.debug(error)
+            print "'{0}' is not a known plugin.\n".format(args.name)
+            print "These are the known (built-in) plugins:\n"
+            self.quartermaster.list_plugins()
+        except AttributeError as error:
+            self.log_error("{0} has implemented its help incorrectly -- '{1}'".format(args.name,
+                                                                                      error))
+        return

@@ -1,5 +1,5 @@
-The Fetch Arguments
-===================
+The Fetch Sub-Command Arguments
+===============================
 ::
 
     """fetch subcommand
@@ -60,3 +60,17 @@ The FetchArguments
    FetchArguments.modules
    FetchArguments.reset
 
+
+
+The FetchStrategy
+-----------------
+
+.. autosummary::
+   :toctree: api
+
+   FetchStrategy
+   FetchStrategy.function
+
+
+
+The `function` method is wrapped by the :ref:`try_except decorator <ape-commoncode-try-except-decorator>` so it should never crash.

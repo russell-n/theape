@@ -1,5 +1,5 @@
-The Argument Clinic
-===================
+The Arguments
+=============
 ::
 
     """APE (the all-purpose-evaluator)
@@ -51,43 +51,8 @@ The Argument Clinic
 
 Contents:
 
-   * :ref:`The Argument Clinic <ape-interface-arguments-argument-clinic>`
    * :ref:`The Argument Constants <ape-interface-arguments-argumentconstants>`
    * :ref:`The BaseArguments <ape-interface-arguments-basearguments>`
-
-.. _ape-interface-arguments-argument-clinic:
-
-The Argument Clinic
--------------------
-
-.. _argument-clinic:
-
-This is the module that builds the command-line interface for the Ape. It uses the python `argparse <http://docs.python.org/2/library/argparse.html>`_ module. In particular it uses the :ref:`UbootKommandant <uboot-kommandant>` to provide methods for the ArgParser's `sub-command <http://docs.python.org/2.7/library/argparse.html#sub-commands>`_ interface.
-
-.. superfluous '
-
-.. uml::
-
-   ArgumentClinic o- argparse.ArgumentParser
-   ArgumentClinic o- UbootKommandant
-
-.. autosummary::
-   :toctree: api
-
-   ArgumentClinic
-   ArgumentClinic.args
-   ArgumentClinic.__call__
-   ArgumentClinic.add_arguments
-   ArgumentClinic.add_subparsers
-
-The ArgumentClinic uses sub-parsers to enable the use of :ref:`sub-commands <untersee-boot>`.
-
-
-
-
-This is what the ``--help`` flag gives as of October 17, 2013 (Pweave hijacks the ArgumentParser so an example has to be generated separately):
-
-.. literalinclude:: sample_help.txt
 
 .. _ape-interface-arguments-argumentconstants:
 
@@ -120,7 +85,9 @@ The ArgumentConstants
 The BaseArguments
 -----------------
 
-This is the base-class for the newer docopt-based arguments. See the :ref:`developer documentation <docopt-reproducingape-ape-usage-string>` for a more detailed explanation of what's going on.
+This is the base-class for the newer docopt-based arguments. See the :ref:`developer documentation <docopt-reproducingape-ape-usage-string>` for a more detailed explanation of what's going on. As a transitional feature, the BaseArgument class definition holds an instance of the UbootKommandant so that its children can access it.
+
+.. '
 
 .. currentmodule:: docopt
 .. autosummary::
@@ -128,8 +95,6 @@ This is the base-class for the newer docopt-based arguments. See the :ref:`devel
 
    docopt
    DocoptExit
-
-.. '
 
 .. uml::
 

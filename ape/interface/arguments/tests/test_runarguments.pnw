@@ -9,7 +9,6 @@ This tests the arguments for the `run` sub-command.
 
    TestRunArguments.test_constructor
    TestRunArguments.test_configfiles
-   TestRunArguments.test_function
 
 <<name='imports', echo=False>>=
 # python standard library

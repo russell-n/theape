@@ -43,7 +43,7 @@ def create_toctree(maxdepth=1, subfolders=None, add_headers=False):
     join = os.path.join
     
     contents = os.listdir(os.getcwd())
-    filenames = (name for name in contents if name.endswith(RST_EXTENSION)
+    filenames = sorted(name for name in contents if name.endswith(RST_EXTENSION)
                  and name != INDEX)
 
     print HEADER.format(maxdepth)

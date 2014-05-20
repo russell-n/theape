@@ -72,7 +72,7 @@ def get_composite(name, error=DontCatchError, error_message=None,
     return singletons[SingletonEnum.composite][name]
 
 
-def get_filestorage(name, path=None, component_category='infrastructure',
+def get_filestorage(name, path=None, 
                     timestamp=FILE_TIMESTAMP):
     """
     Gets a FileStorage Singleton
