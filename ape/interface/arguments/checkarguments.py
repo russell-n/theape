@@ -21,6 +21,8 @@ import docopt
 
 # this package
 from ape.interface.arguments.arguments import BaseArguments, ArgumentsConstants
+from ape.interface.arguments.basestrategy import BaseStrategy
+from ape.commoncode.crash_handler import try_except
 
 
 class CheckArgumentsConstants(object):
@@ -36,12 +38,12 @@ class CheckArgumentsConstants(object):
     default_configfilenames = ['ape.ini']
 
 
-class CheckArguments(BaseArguments):
+class Check(BaseArguments):
     """
-    Arguments for the check sub-command
+    Check a configuration
     """
     def __init__(self, *args, **kwargs):
-        super(CheckArguments, self).__init__(*args, **kwargs)
+        super(Check, self).__init__(*args, **kwargs)
         self._configfiles = None
         self._modules = None
         self.sub_usage = __doc__
@@ -54,7 +56,7 @@ class CheckArguments(BaseArguments):
         The `check` sub-command 
         """
         if self._function is None:
-            self._function = self.subcommands.check
+            self._function = CheckStrategy().function
         return self._function
 
     @property
@@ -81,9 +83,30 @@ class CheckArguments(BaseArguments):
         """
         Resets the properties to None
         """
-        super(CheckArguments, self).reset()
+        super(Check, self).reset()
         self._sub_arguments = None
         self._configfiles = None
         self._modules = None
         return
-#end CheckArguments    
+#end Check    
+
+
+class CheckStrategy(BaseStrategy):
+    """
+    The `check` sub-command strategy
+    """
+    @try_except
+    def function(self, args):
+        """
+        Builds the ape and checks the configuration(s)
+
+        :param:
+
+         - `args`: object with configfiles for to build the ape
+        """
+        ape = self.build_ape(args.configfiles)
+        if ape is None:
+            return
+        ape.check_rep()
+        return
+# end CheckStrategy    

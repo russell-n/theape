@@ -6,21 +6,21 @@ import unittest
 from mock import MagicMock, patch
 
 # the ape
-from ape.interface.arguments.listarguments import ListArguments, ListStrategy
+from ape.interface.arguments.listarguments import List, ListStrategy
 from ape.interface.arguments.basestrategy import BaseStrategy
 
 
-class TestListArguments(unittest.TestCase):
+class TestList(unittest.TestCase):
     def setUp(self):
         self.args = ['list']
-        self.arguments = ListArguments(args=self.args)
+        self.arguments = List(args=self.args)
         return
     
     def test_constructor(self):
         """
         Does it build correctly?
         """
-        arguments = ListArguments(args=['list'])
+        arguments = List(args=['list'])
 
         # inderited default
         self.assertFalse(arguments.pudb)

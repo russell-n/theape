@@ -17,12 +17,20 @@ optional arguments:
 """
 @
 
+Contents:
+
+   * :ref:`Help Constants <ape-interface-arguments-help-constants>`
+   * :ref:`Help Arguments Class <ape-interface-help-arguments-class>`
+   * :ref:`Help Strategy <ape-interface-arguments-help-strategy>`
+
 <<name='imports', echo=False>>=
 # the ape
 from ape.commoncode.crash_handler import try_except
 from ape.interface.arguments.arguments import BaseArguments
 from ape.interface.arguments.basestrategy import BaseStrategy
 @
+
+.. _ape-interface-arguments-help-constants:
 
 The Help Arguments Constants
 ----------------------------
@@ -46,30 +54,32 @@ class HelpArgumentsConstants(object):
     default_name = 'Ape'
 @
 
-The HelpArguments Class
------------------------
+.. _ape-interface-help-arguments-class:
+
+The Help Class
+--------------
 
 .. uml::
 
-   BaseArguments <|-- HelpArguments
+   BaseArguments <|-- Help
 
 .. autosummary::
    :toctree: api
 
-   HelpArguments
-   HelpArguments.width
-   HelpArguments.modules
-   HelpArguments.reset
-   HelpArguments.name
-   HelpArguments.function
+   Help
+   Help.width
+   Help.modules
+   Help.reset
+   Help.name
+   Help.function
 
-<<name='HelpArguments', echo=False>>=
-class HelpArguments(BaseArguments):
+<<name='Help', echo=False>>=
+class Help(BaseArguments):
     """
-    Arguments for the `help` sub-command
+    display more help
     """
     def __init__(self, *args, **kwargs):
-        super(HelpArguments, self).__init__(*args, **kwargs)
+        super(Help, self).__init__(*args, **kwargs)
         self._width = None
         self._modules = None
         self._name = None
@@ -119,13 +129,15 @@ class HelpArguments(BaseArguments):
         """
         Resets the properties to None
         """
-        super(HelpArguments, self).reset()
+        super(Help, self).reset()
         self._width = None
         self._modules = None
         self._name = None
         return
-# end HelpArguments    
+# end Help    
 @
+
+.. _ape-interface-arguments-help-strategy:
 
 The Help Strategy
 -----------------

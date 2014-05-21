@@ -48,29 +48,29 @@ class ListArgumentsConstants(object):
 
 .. _ape-interface-arguments-list-arguments-class:
 
-The ListArguments Class
------------------------
+The List Class
+--------------
 
 .. uml::
 
-   BaseArguments <|-- ListArguments
+   BaseArguments <|-- List
 
 .. currentmodule:: ape.interface.arguments.listarguments
 .. autosummary::
    :toctree: api
 
-   ListArguments
-   ListArguments.modules
-   ListArguments.reset
-   ListArguments.function
+   List
+   List.modules
+   List.reset
+   List.function
 
-<<name='ListArguments', echo=False>>=
-class ListArguments(BaseArguments):
+<<name='List', echo=False>>=
+class List(BaseArguments):
     """
-    Arguments and options for the `list` sub-command.
+    list known plugins
     """
     def __init__(self, *args, **kwargs):
-        super(ListArguments, self).__init__(*args, **kwargs)
+        super(List, self).__init__(*args, **kwargs)
         self._modules = None
         self.sub_usage = __doc__
         self._function = None
@@ -98,10 +98,10 @@ class ListArguments(BaseArguments):
         """
         Resets the attributes to None
         """
-        super(ListArguments, self).reset()
+        super(List, self).reset()
         self._modules = None
         return
-# end ListArguments
+# end List
 @
 
 

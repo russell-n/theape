@@ -53,6 +53,7 @@ import docopt
 
 # this package
 from ape import BaseClass, VERSION
+from ape.commoncode.ryemother import RyeMother
 @
 <<name='check_pweave', echo=False>>=
 document_this = __name__ == '__builtin__'
@@ -63,6 +64,7 @@ Contents:
    * :ref:`The Argument Constants <ape-interface-arguments-argumentconstants>`
    * :ref:`The BaseArguments <ape-interface-arguments-basearguments>`
 
+   
 .. _ape-interface-arguments-argumentconstants:
 
 The ArgumentConstants

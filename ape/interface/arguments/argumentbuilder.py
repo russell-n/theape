@@ -1,18 +1,8 @@
 
 # the ape
+from ape.commoncode.ryemother import RyeMother
 from ape import BaseClass
 from ape.interface.arguments import BaseArguments
-from ape.interface.arguments import FetchArguments
-from ape.interface.arguments import RunArguments
-from ape.interface.arguments import ListArguments
-from ape.interface.arguments import CheckArguments
-from ape.interface.arguments import HelpArguments
-
-
-names = 'fetch run list check help'.split()
-definitions = (FetchArguments, RunArguments, ListArguments,
-               CheckArguments, HelpArguments)
-argument_definitions = dict(zip(names, definitions))
 
 
 class ArgumentBuilder(BaseClass):
@@ -29,7 +19,29 @@ class ArgumentBuilder(BaseClass):
         """
         super(ArgumentBuilder, self).__init__()
         self.args = args
+        self._rye_mother = None
+        self._argument_definitions = None
         return
+
+    @property
+    def rye_mother(self):
+        """
+        A gatherer of children
+        """
+        if self._rye_mother is None:
+            self._rye_mother = RyeMother(dirname=__file__,
+                                         package=__package__,
+                                         keyfunction=lambda k: getattr(k, 'lower')())
+        return self._rye_mother
+
+    @property
+    def argument_definitions(self):
+        """
+        A dict of name:class definition for BaseArgument children
+        """
+        if self._argument_definitions is None:
+            self._argument_definitions = self.rye_mother(BaseArguments)
+        return self._argument_definitions
 
     def __call__(self):
         """
@@ -39,7 +51,7 @@ class ArgumentBuilder(BaseClass):
         """
         args = BaseArguments(args=self.args)
         try:
-            return argument_definitions[args.command](args=self.args)
+            return self.argument_definitions[args.command](args=self.args)
         except KeyError as error:
             self.logger.debug(error)
             self.logger.error("Unknown sub-command '{0}'".format(args.command))

@@ -25,7 +25,15 @@ The Check Sub-Command Arguments
 
 See the :ref:`developer documentation <docopt-reproducingape-check-sub-command>` for more information about this.
 
+Contents:
 
+   * :ref:`Check Arguments Constants <ape-interface-arguments-check-arguments-constants>`
+   * :ref:`Check Arguments Class <ape-interface-arguments-check-arguments-class>`
+   * :ref:`Check Strategy <ape-interface-arguments-check-strategy>`
+
+
+
+.. _ape-interface-arguments-check-arguments-constants:
 
 The CheckArgumentsConstants
 ---------------------------
@@ -48,20 +56,41 @@ The CheckArgumentsConstants
 
 
 
-The CheckArguments Class
-------------------------
+.. _ape-interface-arguments-check-arguments-class:
+
+The Check Class
+---------------
 
 .. uml::
 
-   BaseArguments <|-- CheckArguments
+   BaseArguments <|-- Check
 
 .. currentmodule:: ape.interface.arguments.checkarguments
 .. autosummary::
    :toctree: api
 
-   CheckArguments
-   CheckArguments.configfiles
-   CheckArguments.modules
-   CheckArguments.reset
-   CheckArguments.function
+   Check
+   Check.configfiles
+   Check.modules
+   Check.reset
+   Check.function
+
+
+
+.. _ape-interface-arguments-check-strategy:
+
+The Check Strategy
+------------------
+
+The Check strategy calls `check_rep` on the plugins.
+
+.. uml::
+
+   BaseStrategy <|-- CheckStrategy
+
+.. autosummary::
+   :toctree: api
+
+   CheckStrategy
+   CheckStrategy.function
 

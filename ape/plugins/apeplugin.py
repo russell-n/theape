@@ -6,7 +6,7 @@ from collections import OrderedDict
 
 # this package
 import ape.interface.arguments.arguments as basearguments
-from ape.interface.arguments.argumentbuilder import argument_definitions
+from ape.interface.arguments.argumentbuilder import ArgumentBuilder
 from ape.interface.configurationmap import ConfigurationMap
 from ape.components.component import Composite
 from ape.parts.storage.filestorage import FileStorage
@@ -156,6 +156,7 @@ class Ape(BasePlugin):
 
             # the main parser doesn't show help for the sub-commands (just --debug, --pudb, etc.)
             # so they are pulled separately
+            argument_definitions = ArgumentBuilder().argument_definitions
             for definition in argument_definitions.itervalues():
                 arg_string += '-' * 40 + '\n'
                 arg_string +=  expression.sub(bold_name,

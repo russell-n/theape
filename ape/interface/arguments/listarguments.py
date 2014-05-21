@@ -29,12 +29,12 @@ class ListArgumentsConstants(object):
     modules = "<module>"
 
 
-class ListArguments(BaseArguments):
+class List(BaseArguments):
     """
-    Arguments and options for the `list` sub-command.
+    list known plugins
     """
     def __init__(self, *args, **kwargs):
-        super(ListArguments, self).__init__(*args, **kwargs)
+        super(List, self).__init__(*args, **kwargs)
         self._modules = None
         self.sub_usage = __doc__
         self._function = None
@@ -62,10 +62,10 @@ class ListArguments(BaseArguments):
         """
         Resets the attributes to None
         """
-        super(ListArguments, self).reset()
+        super(List, self).reset()
         self._modules = None
         return
-# end ListArguments
+# end List
 
 
 class ListStrategy(BaseStrategy):

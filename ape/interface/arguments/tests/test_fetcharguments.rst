@@ -10,8 +10,7 @@ Testing The Fetch Arguments
     from mock import MagicMock
     
     # the ape
-    from ape.interface.arguments.fetcharguments import FetchArguments, FetchStr
-    ategy
+    from ape.interface.arguments.fetcharguments import Fetch, FetchStrategy
     from ape.interface.arguments.basestrategy import BaseStrategy
     import ape.interface.arguments.fetcharguments
     
@@ -34,14 +33,14 @@ Testing The Fetch Arguments
     class TestFetchArguments(unittest.TestCase):
         def setUp(self):
             self.args = ['fetch']
-            self.arguments = FetchArguments(args=self.args)
+            self.arguments = Fetch(args=self.args)
             return
         
         def test_constructor(self):
             """
             Does it build?
             """
-            arguments = FetchArguments(args=['fetch'])
+            arguments = Fetch(args=['fetch'])
     
             # test inheritance
             self.assertFalse(arguments.debug)

@@ -33,12 +33,12 @@ class HelpArgumentsConstants(object):
     default_name = 'Ape'
 
 
-class HelpArguments(BaseArguments):
+class Help(BaseArguments):
     """
-    Arguments for the `help` sub-command
+    display more help
     """
     def __init__(self, *args, **kwargs):
-        super(HelpArguments, self).__init__(*args, **kwargs)
+        super(Help, self).__init__(*args, **kwargs)
         self._width = None
         self._modules = None
         self._name = None
@@ -88,12 +88,12 @@ class HelpArguments(BaseArguments):
         """
         Resets the properties to None
         """
-        super(HelpArguments, self).reset()
+        super(Help, self).reset()
         self._width = None
         self._modules = None
         self._name = None
         return
-# end HelpArguments    
+# end Help    
 
 
 class HelpStrategy(BaseStrategy):

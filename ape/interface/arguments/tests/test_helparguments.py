@@ -8,22 +8,22 @@ import string
 from mock import MagicMock
 
 # the ape
-from ape.interface.arguments.helparguments import HelpArguments
+from ape.interface.arguments.helparguments import Help
 from ape.interface.arguments.helparguments import HelpStrategy
 from ape.interface.arguments.basestrategy import BaseStrategy
 
 
-class TestHelpArguments(unittest.TestCase):
+class TestHelp(unittest.TestCase):
     def setUp(self):
         self.args = ['help']
-        self.arguments = HelpArguments(args=self.args)
+        self.arguments = Help(args=self.args)
         return
     
     def test_constructor(self):
         """
         Does it build correctly?
         """
-        arguments = HelpArguments(args=['help'])
+        arguments = Help(args=['help'])
         self.assertFalse(arguments.trace)
         return
 
