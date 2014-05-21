@@ -50,21 +50,21 @@ The ListArguments Constants
 
 .. _ape-interface-arguments-list-arguments-class:
 
-The ListArguments Class
------------------------
+The List Class
+--------------
 
 .. uml::
 
-   BaseArguments <|-- ListArguments
+   BaseArguments <|-- List
 
 .. currentmodule:: ape.interface.arguments.listarguments
 .. autosummary::
    :toctree: api
 
-   ListArguments
-   ListArguments.modules
-   ListArguments.reset
-   ListArguments.function
+   List
+   List.modules
+   List.reset
+   List.function
 
 
 

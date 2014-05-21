@@ -20,6 +20,16 @@ The Help Sub-Command Arguments
 
 
 
+Contents:
+
+   * :ref:`Help Constants <ape-interface-arguments-help-constants>`
+   * :ref:`Help Arguments Class <ape-interface-help-arguments-class>`
+   * :ref:`Help Strategy <ape-interface-arguments-help-strategy>`
+
+
+
+.. _ape-interface-arguments-help-constants:
+
 The Help Arguments Constants
 ----------------------------
 
@@ -31,24 +41,28 @@ The Help Arguments Constants
 
 
 
-The HelpArguments Class
------------------------
+.. _ape-interface-help-arguments-class:
+
+The Help Class
+--------------
 
 .. uml::
 
-   BaseArguments <|-- HelpArguments
+   BaseArguments <|-- Help
 
 .. autosummary::
    :toctree: api
 
-   HelpArguments
-   HelpArguments.width
-   HelpArguments.modules
-   HelpArguments.reset
-   HelpArguments.name
-   HelpArguments.function
+   Help
+   Help.width
+   Help.modules
+   Help.reset
+   Help.name
+   Help.function
 
 
+
+.. _ape-interface-arguments-help-strategy:
 
 The Help Strategy
 -----------------

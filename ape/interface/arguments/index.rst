@@ -11,6 +11,7 @@ This sub-folder holds the modules that create the command-line interface for the
 
    The ArgumentBuilder <argumentbuilder.rst>
    The Arguments <arguments.rst>
+   The BaseStrategy <basestrategy.rst>
    The Check Sub-Command Arguments <checkarguments.rst>
    The Fetch Sub-Command Arguments <fetcharguments.rst>
    The Help Sub-Command Arguments <helparguments.rst>

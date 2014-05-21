@@ -3,15 +3,6 @@
 from ConfigParser import NoSectionError
 import datetime
 
-# third-party
-try:
-    from pycallgraph import PyCallGraph
-    from pycallgraph import GlobbingFilter
-    from pycallgraph import Config
-    from pycallgraph.output import GraphvizOutput
-except ImportError as error:
-    pass    
-
 # this package
 from ape.commoncode.baseclass import BaseClass
 from ape.commoncode.errors import ConfigurationError
@@ -46,81 +37,32 @@ class BaseStrategy(BaseClass):
 
     quartermaster = QuarterMaster()
 
-    def build_ape(self, args):
+    def build_ape(self, configfiles):
         """
         Tries to build the Ape plugin
         (has a side-effect of setting self.ape so that crash-handling can get to it)
 
         :return: ape or None
         :postcondition: self.ape set to ape (or None on failure)
+
+        :param: `configfiles`: a list of configuration files for the ape        
         """
         plugin = self.quartermaster.get_plugin('Ape')
         
         # The ape needs the config-filenames
         try:
-            self.ape = plugin(configfiles=args.configfiles).product
+            self.ape = plugin(configfiles=configfiles).product
         except ConfigurationError as error:
             self.logger.error(RED_ERROR.format(error=error))
             return
         except NoSectionError as error:
             self.logger.error(error)
-            self.logger.error(RED_ERROR.format(error='[APE] section not found in {0}'.format(args.configfiles)))
+            self.logger.error(RED_ERROR.format(error='missing section in {0}'.format(configfiles)))
             self.logger.error(RED_ERROR.format(error='check the name of the config file'))
             self.logger.info("Try `ape help` and `ape fetch`")
             return 
         return self.ape
     
-    @try_except
-    def run(self, args):
-        """
-        Builds and runs the code
-        """
-        self.logger.info(INFO_STRING.format("Starting The APE"))
-        start = datetime.datetime.now()
-        
-        ape = self.build_ape(args)
-        if ape is None:
-            return
-        if args.trace:
-            from trace import Trace
-        
-            tracer = Trace(trace=True,
-                           ignoremods= ['__init__', 'handlers',
-                                        'threading', 'genericpath',
-                                        'posixpath'],
-                           timing=True)
-            tracer.runfunc(ape)
-        elif args.callgraph:
-            config = Config(max_depth=10)
-            graphviz = GraphvizOutput()
-            graphviz.output_file = 'ape_callgraph.png'
-            with PyCallGraph(output=graphviz, config=config):
-                ape()
-        else:
-            # the main run (the others are for debugging)
-            ape()
-        
-        ape.close()
-        end = datetime.datetime.now()
-        self.logger.info(INFO_STRING.format("Total Elapsed Time: {0}".format(end-start)))
-        return
-
-    @try_except
-    def check(self, args):
-        """
-        Builds and checks the configuration
-
-        :param:
-
-         - `args`: namespace with `configfiles` list
-        """
-        ape = self.build_ape(args)
-        if ape is None:
-            return
-
-        ape.check_rep()
-        return
-
     def clean_up(self, error):
         """
         To be called by the try-except if an exception is caught

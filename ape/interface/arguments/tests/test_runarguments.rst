@@ -9,21 +9,20 @@ This tests the arguments for the `run` sub-command.
 
    TestRunArguments.test_constructor
    TestRunArguments.test_configfiles
-   TestRunArguments.test_function
 
 ::
 
     class TestRunArguments(unittest.TestCase):
         def setUp(self):
             self.args = ['run']
-            self.arguments = RunArguments(args=self.args)
+            self.arguments = Run(args=self.args)
             return
         
         def test_constructor(self):
             """
             Does it build properly?
             """
-            arguments = RunArguments(args='run')
+            arguments = Run(args='run')
             self.assertIsInstance(arguments, BaseArguments)
             # test the inheritance
             self.assertFalse(arguments.debug)
@@ -34,8 +33,8 @@ This tests the arguments for the `run` sub-command.
             Does it get the configfiles list?
             """
             # test default
-            self.assertEqual(self.arguments.configfiles, RunArgumentsConstants.
-    default_configfiles)
+            self.assertEqual(self.arguments.configfiles,
+                             RunArgumentsConstants.default_configfiles)
     
             #test arguments
             self.arguments.reset()
@@ -44,11 +43,88 @@ This tests the arguments for the `run` sub-command.
             self.assertEqual(self.arguments.configfiles, configfiles)
             return
     
+    
+
+
+
+Testing the Run Strategy
+------------------------
+
+.. autosummary::
+   :toctree: api
+
+   TestRunStrategy.test_constructor
+   TestRunStrategy.test_function
+   TestRunStrategy.test_trace
+   TestRunStrategy.test_callgraph
+   TestRunStrategy.test_errors
+
+::
+
+    class TestRunStrategy(unittest.TestCase):
+        def setUp(self):
+            self.build_ape = MagicMock()
+            self.strategy = RunStrategy()
+            self.args = MagicMock()
+            self.args.trace = False
+            self.args.callgraph = False
+            self.ape = MagicMock()
+    
+            # monkey-patch
+            self.strategy.build_ape = self.build_ape
+            return
+        
+        def test_constructor(self):
+            """
+            Does it build?
+            """
+            strategy = RunStrategy()
+            self.assertIsInstance(strategy, BaseStrategy)
+            return
+    
         def test_function(self):
             """
-            Does the arguments have the `run` strategy?
+            Does it implement the strategy correctly?
             """
-            self.assertEqual(self.arguments.function, UbootKommandant.run)
+            configfiles = 'how now brown cow'.split()
+            self.args.configfiles = configfiles
+            # unsuccessful build
+            self.build_ape.return_value = None
+            self.strategy.function(self.args)
+            self.build_ape.assert_called_with(configfiles)
+    
+            # succellful build
+            self.build_ape.return_value = self.ape
+            self.strategy.function(self.args)
+            self.ape.assert_called_with()
+            self.ape.close.assert_called_with()
+            return
+    
+        def test_trace(self):
+            """
+            Does it trace the calls?
+            """
+            self.args.trace = True
+            self.build_ape.return_value = self.ape
+    
+            # trace mocks the module import
+            trace = MagicMock()
+            # tracer mocks the Trace object
+            tracer = MagicMock()
+            trace.return_value = tracer
+            with patch('trace.Trace', trace):
+                self.strategy.function(self.args)
+                print tracer.mock_calls
+                tracer.runfunc.assert_called_with(self.ape)            
+            return
+    
+        def test_errors(self):
+            """
+            Does it trap errors?
+            """
+            self.build_ape.return_value = self.ape
+            self.ape.side_effect = RuntimeError("oop")
+            self.strategy.function(self.args)
             return
     
     

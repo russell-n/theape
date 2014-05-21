@@ -40,10 +40,9 @@ def try_except(method):
         try:
             return method(self, *args, **kwargs)
         except self.error as error:
+            log_error(error, self.logger, self.error_message)
             if hasattr(self, 'close'):
-                self.close()
-            else:
-                log_error(error, self.logger, self.error_message)
+                self.close()            
     return wrapped
 @
 
@@ -72,6 +71,11 @@ def log_error(error, logger, error_message):
                                                                      msg=error_message,
                                                                      bold=BOLD,
                                                                      reset=RESET)
+    bottom_line = "{bold}***********{msg}***********{reset}".format(red=RED,
+                                                                     msg='*'* len(error_message),
+                                                                     bold=BOLD,
+                                                                     reset=RESET)
+
     logger.error(crash_notice)
             
     import traceback
@@ -94,6 +98,7 @@ def log_error(error, logger, error_message):
                                                msg=os.path.basename(filename)))
     logger.error(red_error.format(name="At Line",
                                                msg=linenum))
+    logger.error(bottom_line)
     logger.debug(traceback.format_exc())
     return
 @

@@ -2,21 +2,25 @@
 # python standard library
 import unittest
 
+# third-party
+from mock import MagicMock
+
 # the APE
 from ape.interface.arguments.arguments import BaseArguments
-from ape.interface.arguments.checkarguments import CheckArguments
+from ape.interface.arguments.checkarguments import Check, CheckStrategy
+from ape.interface.arguments.basestrategy import BaseStrategy
 
-class TestCheckArguments(unittest.TestCase):
+class TestCheck(unittest.TestCase):
     def setUp(self):
         self.args = ['check']
-        self.arguments = CheckArguments(args=self.args)
+        self.arguments = Check(args=self.args)
         return
     
     def test_constructor(self):
         """
         Does it build?
         """
-        arguments = CheckArguments()
+        arguments = Check()
         self.assertIsInstance(arguments, BaseArguments)
 
         # check that the parent is being instantiated
@@ -56,4 +60,52 @@ class TestCheckArguments(unittest.TestCase):
         self.assertEqual('dog war'.split(), self.arguments.configfiles)
         self.assertEqual(["big.pig"], self.arguments.modules)
         return
-# end TestCheckArguments    
+# end TestCheck    
+
+
+class TestCheckStrategy(unittest.TestCase):
+    def setUp(self):
+        self.build_ape = MagicMock()
+        self.strategy = CheckStrategy()
+        
+        # monkey patch!
+        self.strategy.build_ape = self.build_ape
+        return
+    
+    def test_constructor(self):
+        """
+        Does it build?
+        """
+        strategy = CheckStrategy()
+        self.assertIsInstance(strategy, BaseStrategy)
+        return
+
+    def test_function(self):
+        """
+        Does it execute the strategy correctly?
+        """
+        configfiles = 'alpha beta gamma'.split()
+        ape = MagicMock()
+        self.build_ape.return_value = None
+        args = MagicMock()
+        args.configfiles = configfiles
+
+        # ape not buildable (build_ape returned None)
+        self.strategy.function(args)
+        self.build_ape.assert_called_with(configfiles)
+        self.assertEqual(ape.mock_calls, [])
+
+        # ape was built
+        self.build_ape.return_value = ape
+        self.strategy.function(args)
+        ape.check_rep.assert_called_with()
+        return
+
+    def test_error_handling(self):
+        """
+        Does it catch exceptions?
+        """
+        self.build_ape.side_effect = Exception("arrrrrgh")
+        args = MagicMock()
+        self.strategy.function(args)
+        return

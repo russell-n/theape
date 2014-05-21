@@ -24,7 +24,15 @@ The Run Sub-Command Arguments
 
 See the :ref:`developer documentation <docopt-reproducingape-run-sub-command>` for more information about this section.
 
+Contents:
 
+    * :ref:`Run Arguments Constants <ape-interface-run-arguments-constants>`
+    * :ref:`Run Arguments Class <ape-interface-run-arguments-class>`
+    * :ref:`Run Strategy <ape-interface-run-strategy>`
+
+
+
+.. _ape-interface-run-arguments-constants:
 
 The RunArguments Constants
 --------------------------
@@ -46,6 +54,7 @@ The RunArguments Constants
 
 
 
+.. _ape-interface-run-arguments-class:
 
 The RunArguments Class
 ----------------------
@@ -61,4 +70,22 @@ The RunArguments Class
    RunArguments
    RunArguments.configfiles
    RunArguments.reset
+
+
+
+.. _ape-interface-run-strategy:
+
+The Run Strategy
+----------------
+
+This is the strategy for the `run` sub-command than runs the APE.
+
+.. uml::
+
+   BaseStrategy <|-- RunStrategy
+
+.. autosummary::
+   :toctree: api
+
+   RunStrategy
 

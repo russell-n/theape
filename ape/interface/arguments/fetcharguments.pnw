@@ -17,12 +17,20 @@ optional arguments:
 
 These are arguments for the `fetch` sub-command (see the :ref:`developer documentation <docopt-reproducingape-fetch-sub-command>` for more information).
 
+Contents:
+
+   * :ref:`Fetch Arguments Constants <ape-interface-arguments-fetch-constants>`
+   * :ref:`Fetch Arguments Class <ape-interface-arguments-fetch-arguments>`
+   * :ref:`Fetch Strategy <ape-interface-arguments-fetch-strategy>`
+
 <<name='imports', echo=False>>=
 # the APE
 from ape.interface.arguments.arguments import BaseArguments
 from ape.interface.arguments.basestrategy import BaseStrategy
 from ape.commoncode.crash_handler import try_except
 @
+
+.. _ape-interface-arguments-fetch-constants:
 
 The Fetch Arguments Constants
 -----------------------------
@@ -41,6 +49,8 @@ class FetchArgumentsConstants(object):
     default_names = ['Ape']
 @
 
+.. _ape-interface-arguments-fetch-arguments:
+
 The FetchArguments
 ------------------
 
@@ -58,12 +68,12 @@ The FetchArguments
    FetchArguments.reset
 
 <<name='FetchArguments', echo=False>>=
-class FetchArguments(BaseArguments):
+class Fetch(BaseArguments):
     """
-    Arguments for the `fetch` sub-command
+    fetch a sample configuration
     """
     def __init__(self, *args, **kwargs):
-        super(FetchArguments, self).__init__(*args, **kwargs)
+        super(Fetch, self).__init__(*args, **kwargs)
         self.sub_usage = __doc__
         self._names = None
         self._modules = None
@@ -103,12 +113,14 @@ class FetchArguments(BaseArguments):
         """
         Resets the attributes to None
         """
-        super(FetchArguments, self).reset()
+        super(Fetch, self).reset()
         self._modules = None
         self._names = None
         return
 # end FetchArguments    
 @
+
+.. _ape-interface-arguments-fetch-strategy:
 
 The FetchStrategy
 -----------------

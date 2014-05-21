@@ -32,12 +32,12 @@ class FetchArgumentsConstants(object):
     default_names = ['Ape']
 
 
-class FetchArguments(BaseArguments):
+class Fetch(BaseArguments):
     """
-    Arguments for the `fetch` sub-command
+    fetch a sample configuration
     """
     def __init__(self, *args, **kwargs):
-        super(FetchArguments, self).__init__(*args, **kwargs)
+        super(Fetch, self).__init__(*args, **kwargs)
         self.sub_usage = __doc__
         self._names = None
         self._modules = None
@@ -77,7 +77,7 @@ class FetchArguments(BaseArguments):
         """
         Resets the attributes to None
         """
-        super(FetchArguments, self).reset()
+        super(Fetch, self).reset()
         self._modules = None
         self._names = None
         return
