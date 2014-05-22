@@ -11,4 +11,3 @@ The `Rye Mother <http://www.pitt.edu/~dash/gerchange.html#GrimmRyeMother>`_ gath
 
    RyeMother
 
-

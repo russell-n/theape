@@ -50,6 +50,7 @@ import docopt
 
 # this package
 from ape import BaseClass, VERSION
+from ape.commoncode.ryemother import RyeMother
 
 
 document_this = __name__ == '__builtin__'
