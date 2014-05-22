@@ -1,30 +1,30 @@
-#!/usr/bin/env python
-
 try:
     from setuptools import setup, find_packages
 except ImportError:
-    import distribute_setup
-    distribute_setup.use_setuptools()
+    from ez_setup import use_setuptools
+    use_setuptools
+
     from setuptools import setup, find_packages
 
-from datetime import datetime
-
 setup(name='ape',
-      version= datetime.today().strftime("%Y.%m.%d"),
+      version= '2014.05.21',
       description="A program to run code.",
       author="russell",
       platforms=['linux'],
       url = '',
       author_email="russellnakamura@us.allion.com",
       license = "",
-      install_requires = ['pudb', 'paramiko', 'numpy'],
+      install_requires = ['pudb', 'paramiko', 'numpy', 'docopt'],
       packages = find_packages(),
       include_package_data = True,
       package_data = {"ape":["*.txt", "*.rst", "*.ini"]},
       entry_points = """
 	  [console_scripts]
-          ape=ape.main:main
-	  """
+      ape=ape.main:main
+
+      [ape.subcommands]
+      ape_subcommands=ape.interface.arguments
+      """
       )
 
 # an example last line would be cpm= cpm.main: main

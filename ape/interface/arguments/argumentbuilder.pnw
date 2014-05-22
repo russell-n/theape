@@ -46,8 +46,8 @@ class ArgumentBuilder(BaseClass):
         A gatherer of children
         """
         if self._rye_mother is None:
-            self._rye_mother = RyeMother(dirname=__file__,
-                                         package=__package__,
+            self._rye_mother = RyeMother(group='ape.subcommands',
+                                         name='ape_subcommands',
                                          keyfunction=lambda k: getattr(k, 'lower')())
         return self._rye_mother
 
