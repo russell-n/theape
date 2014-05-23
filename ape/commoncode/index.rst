@@ -22,6 +22,7 @@ These are the documents created from the source files.
    Index Builder <index_builder.rst>
    The OatBran <oatbran.rst>
    The Randomizer <randomizer.rst>
+   The Rye Mother <ryemother.rst>
    The Singletons <singletons.rst>
    Sorted List <sortedlist.rst>
    String Constants <strings.rst>

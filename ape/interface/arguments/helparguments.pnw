@@ -175,9 +175,14 @@ class HelpStrategy(BaseStrategy):
             plugin().help(args.width)
         except TypeError as error:
             self.logger.debug(error)
-            print "'{0}' is not a known plugin.\n".format(args.name)
-            print "These are the known (built-in) plugins:\n"
-            self.quartermaster.list_plugins()
+            if "Can't instantiate" in error[0]:
+                self.log_error(error="Plugin Implementation Error: ",
+                               message="{0}".format(error))
+
+            else:
+                print "'{0}' is not a known plugin.\n".format(args.name)
+                print "These are the known (built-in) plugins:\n"
+                self.quartermaster.list_plugins()
         except AttributeError as error:
             self.log_error("{0} has implemented its help incorrectly -- '{1}'".format(args.name,
                                                                                       error))

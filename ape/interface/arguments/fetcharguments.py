@@ -106,6 +106,10 @@ class FetchStrategy(BaseStrategy):
                 config = plugin().fetch_config()
             except TypeError as error:
                 self.logger.debug(error)
-                self.log_error(error="Unknown Plugin: ",
-                               message='{0}'.format(name))
+                if "Can't instantiate" in error[0]:
+                    self.log_error(error="Plugin Implementation Error: ",
+                                   message="{0}".format(error))
+                else:
+                    self.log_error(error="Unknown Plugin: ",
+                                   message='{0}'.format(name))
         return

@@ -112,12 +112,12 @@ class CrashTestDummy(BasePlugin):
         """
         if self._product is None:
             # get the random inputs and create a keyword-argument- dictionary
-            kwargs = dict(self.configuration.items(section='CRASHTESTDUMMY',
+            kwargs = dict(self.configuration.items(section=self.section_header,
                                                    optional=True,
                                                    default={}))
 
             # see if the user specified an error-module
-            error_module = self.configuration.get(section='CRASHTESTDUMMY',
+            error_module = self.configuration.get(section=self.section_header,
                                                   option='error_module',
                                                   optional=True,
                                                   default=None)
@@ -126,20 +126,20 @@ class CrashTestDummy(BasePlugin):
                 error_module = 'exceptions'
                 error = 'Exception'
             else:
-                error = self.configuration.get(section='CRASHTESTDUMMY',
+                error = self.configuration.get(section=self.section_header,
                                                option='error',
                                                optional=False)
             module = importlib.import_module(error_module)
             err = getattr(module, error)
             kwargs['error'] = err
-            message = self.configuration.get(section='CRASHTESTDUMMY',
+            message = self.configuration.get(section=self.section_header,
                                              option='error_message',
                                              optional=True,
                                              default="Die! Die! My Darling!")
             kwargs['error_message'] = message
 
             # this is the method that raises the error
-            function = self.configuration.get(section='CRASHTESTDUMMY',
+            function = self.configuration.get(section=self.section_header,
                                               option='function',
                                               optional=True,
                                               default=CrashDummy.CALL)
@@ -207,7 +207,7 @@ class StuckDummy(BasePlugin):
         """
         if self._product is None:
             # get the random inputs and create a keyword-argument- dictionary
-            kwargs = dict(self.configuration.items(section='STUCKDUMMY',
+            kwargs = dict(self.configuration.items(section=self.section_header,
                                                    optional=True,
                                                    default={}))
 

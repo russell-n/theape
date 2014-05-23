@@ -2,7 +2,9 @@ The Base Plugin
 ===============
 .. currentmodule:: ape.plugins.base_plugin
 
+
 .. _base-plugin:
+
 Background
 ----------
 
@@ -100,19 +102,28 @@ These are the classes that the BasePlugin uses.
      
 
 
-Module Graph
-------------
+.. Module Graph
+.. ------------
+.. 
+.. <<name='module_graph', echo=False, results='sphinx'>>=
+.. if in_pweave:
+..     from ape.plugins.base_plugin import BasePlugin
+..     print "This is a module diagram for **{0}**.\n".format(BasePlugin.__module__)
+..     this_file = os.path.join(os.getcwd(), 'base_plugin.py')
+..     module_diagram_file = module_diagram(module=this_file, project='baseplugin')
+..     print ".. image:: {0}".format(module_diagram_file)
+.. 
+.. 
 
-This is a module diagram for **ape.plugins.base_plugin**.
-
-.. image:: classes_baseplugin.png
-
-
-
-Class Diagram
--------------
-
-This is an auto-generated diagram of the BasePlugin class.
-    
-.. image:: BasePlugin.png
-
+.. Class Diagram
+.. -------------
+.. 
+.. This is an auto-generated diagram of the BasePlugin class.
+..     
+.. <<name='class_diagram', echo=False, results='sphinx'>>=
+.. if in_pweave:
+..     class_diagram_file = class_diagram(class_name="BasePlugin",
+..                                        filter='OTHER',
+..                                        module=this_file)
+..     print ".. image:: {0}".format(class_diagram_file)
+.. 

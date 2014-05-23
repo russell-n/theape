@@ -1,4 +1,6 @@
 
+# python standard library
+import sys
 # the ape
 from ape.commoncode.ryemother import RyeMother
 from ape import BaseClass
@@ -30,7 +32,7 @@ class ArgumentBuilder(BaseClass):
         """
         if self._rye_mother is None:
             self._rye_mother = RyeMother(group='ape.subcommands',
-                                         name='ape_subcommands',
+                                         name='subcommands',
                                          keyfunction=lambda k: getattr(k, 'lower')())
         return self._rye_mother
 
