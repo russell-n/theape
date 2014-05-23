@@ -23,7 +23,10 @@ setup(name='ape',
       ape=ape.main:main
 
       [ape.subcommands]
-      ape_subcommands=ape.interface.arguments
+      subcommands=ape.interface.arguments
+
+      [ape.plugins]
+      plugins = ape.plugins
       """
       )
 

@@ -33,11 +33,21 @@ Auto-Generated Diagrams
 
 These are auto-generated so they will always be more up-to-date than the previous class-diagrams, but they tend to be harder to read as well (and are just not pretty) so I will leave both in.
 
-.. image:: classes_quartermaster.png
 
-.. image:: QuarterMaster.png
-
-
+.. <<name='module_graph', echo=False, results='sphinx'>>=
+.. if document_this:
+..     this_file = os.path.join(os.getcwd(), 'quartermaster.py')
+..     module_diagram_file = module_diagram(module=this_file, project='quartermaster')
+..     print ".. image:: {0}".format(module_diagram_file)
+.. 
+.. 
+.. <<name='class_diagram', echo=False, results='sphinx'>>=
+.. if document_this:
+..     class_diagram_file = class_diagram(class_name="QuarterMaster",
+..                                        filter='OTHER',
+..                                        module=this_file)
+..     print ".. image:: {0}".format(class_diagram_file)
+.. 
 
 Some Messy Business
 -------------------

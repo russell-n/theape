@@ -8,7 +8,7 @@ How to Write Plugins
 .. Relevance: Need to understand how plugin creation works to maintain current code and create new plugins.
 .. Thesis: By following the basic set of steps a plugin for the ape can be created.
 
-One of the key features that sets this version of the APE apart from prior ones is the use of `plugins` to extend its operation. Actually creating one is relatively simple, but it can be confusing when looking at the existing plugins as they have a lot of extra text meant to help the end-user. This document shows that by following a 5-step procedure you can create a plugin which can then be auto-discovered by the APE to use. Although creating the plugin itself is relatively simple, the interaction of multiple parts can get complicated once you start doing more complicated things like connecting a client and server so for this example I'll use the Sleep plugin as an example since it is self-contained.
+One of the key features that sets this version of the APE apart from prior ones is the use of `plugins` to extend its operation. Actually creating a plugin is relatively simple, but it can be confusing to look at the existing plugins as they have a lot of extra text meant to help the end-user. This document shows that by following a 5-step procedure you can create a plugin which can then be auto-discovered by the APE for it to use. Although creating the plugin itself is relatively simple, once you start doing more complicated things like connecting a client and server it can get harder to explain so I'll use the Sleep plugin as an example since it is self-contained.
 
 .. '
 
@@ -17,7 +17,7 @@ Procedure
 
 There are 5 steps needed to create a plugin:
 
-   1. :ref:`Import the *BasePlugin* and whatever is needed to build the parts of the plugin <ht-write-plugin-import>`
+   1. :ref:`Import the BasePlugin and whatever is needed to build the parts of your plugin <ht-write-plugin-import>`
 
    2. :ref:`Create an example configuration string that the user can base a configuration file on <ht-write-plugin-configuration>`
 
@@ -27,7 +27,7 @@ There are 5 steps needed to create a plugin:
 
    5. :ref:`Put the plugin somewhere it can be imported <ht-write-plugin-install>`
 
-There are other steps like planning and testing, but since the plugins don't do anything other than build and bundle other code, any other steps will be specific to the plugin created. I'll work through the steps, using the :ref:`SleepPlugin <sleep-plugin>` which is one of the plugins that comes with the ape (it's in the `plugin` folder -- ``ape.plugins.sleep_plugin``) as a concrete example. The `SleepPlugin` is a plugin for :ref:`TheBigSleep <ape-big-sleep>`, a stand alone part that takes a time-string and sleeps when called.
+There are probably other steps like planning and testing, but since the plugins themselves don't do anything other than build and bundle other code, any other steps will be specific to the plugin created. I'll work through these five steps using the :ref:`SleepPlugin <sleep-plugin>` which is one of the plugins that comes with the ape as a concrete example (it's in the `plugin` folder -- ``ape.plugins.sleep_plugin``). The `SleepPlugin` is a plugin for :ref:`TheBigSleep <ape-big-sleep>`, a stand alone part that takes a time-string and sleeps when called.
 
 .. '
 
@@ -85,7 +85,7 @@ The expected way for a user to get a sample configuration file is to use the ``f
 
     ape fetch <plugin name>
 
-Where ``<plugin name>`` is the name of sume plugin. When this sub-command is issued, the ape will build the plugin and call its ``fetch_config`` method, which should return a string with the sample configuration to the APE. As an example, if the user entered ``ape fetch Sleep``, the following should be returned:
+Where ``<plugin name>`` is the name of some plugin. When this sub-command is issued, the ape will build the plugin and call its ``fetch_config`` method, which should return a string with the sample configuration to the APE. As an example, if the user entered ``ape fetch Sleep``, the following should be returned:
 
 .. code-block:: ini
 
@@ -196,7 +196,7 @@ There are four parts to implementing the plugin:
 4.1 Sub-class the ``BasePlugin``
 ++++++++++++++++++++++++++++++++
 
-The way the plugin discovery works is that the :ref:`QuarterMaster <quarter-master>` looks in the `plugins` folder (or other modules passed in at run-time) for classes that are sub-classed from the ``ape.BasePlugin`` so anything that needs to be auto-discovered has to be a ``BasePlugin`` child::
+The way the plugin discovery works is that the :ref:`QuarterMaster <quarter-master>` looks in the `plugins` folder (or other modules passed in at run-time) for classes that are sub-classed from the ``ape.BasePlugin`` so anything that needs to be auto-discovered has to be a :ref:`BasePlugin <base-plugin>` child::
 
     class Sleep(BasePlugin):
         """
@@ -225,6 +225,10 @@ When a user types ``ape fetch <plugin>`` the APE calls the plugin's ``fetch_conf
         print configuration
 
 This might seem excessive but the original APE saved the configuration to a file rather than sending to stdout which made it likely that a user would accidentally destroy a prior configuration so this method was created to allow the way the `fetch` sub-command is handled to be changed.
+
+.. warning:: Plugin configurations need to have the line ``plugin = <plugin class name>`` for the APE to be able to find them.
+
+.. warning:: If the plugin is for an external module the ``[MODULES]`` section in the ini file needs to have the module name.
 
 .. '
 
@@ -315,14 +319,14 @@ Let's suppose that instead of the default `Sleep` plugin you made a better one c
 
 To see what plugins the APE recognizes in the module::
 
-    ape list --modules bettersleep
+    ape list bettersleep
 
 To fetch the configuration snippet::
 
-    ape fetch --modules bettersleep BetterSleep
+    ape fetch --module bettersleep BetterSleep
 
 To run::
 
-    ape run --modules bettersleep
+    ape run 
 
-This requires that the user know what modules contain plugins so it isn't an automatic system, but I'm assuming that these cases will be rare enough that this will work. For non-APE maintainers it would make sense just to put the plugin in the APE's pluging folder, the external module solution is so that I can build and use plugins for code that won't be added to the APE itself.
+This requires that the user know what modules contain plugins so it isn't an automatic system, but I'm assuming that these cases will be rare enough that this will work. For non-APE maintainers it would make sense just to put the plugin in the APE's plugin folder, the external module solution is so that I can build and use plugins for code that won't be added to the APE itself.
