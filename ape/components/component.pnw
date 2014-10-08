@@ -58,7 +58,7 @@ The Component Class
 
 This is the base-class which the other classes will inherit from. All :ref:`Plugin products <base-plugin-product>` should look like this (it doesn't do much but every method is called at some point by the Composites so all plugin products should implement it).
 
-.. superfluous '
+.. '
 
 .. uml::
 
