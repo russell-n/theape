@@ -7,7 +7,8 @@ from datetime import timedelta
 import numpy
 
 # this package
-from ape import BaseClass, ApeError, BOLD, RESET
+from ape import BaseClass, ApeError
+from ape.infrastructure.strings import BOLD, RESET
 
 
 DEBUG = 'debug'
