@@ -6,8 +6,8 @@ import shlex
 from itertools import izip
 
 # this package
-from ape.commoncode.baseclass import BaseClass
-from ape.commoncode.strings import NEWLINE, BLUE, BOLD, RED, RESET
+from ape.infrastructure.baseclass import BaseClass
+from ape.infrastructure.strings import NEWLINE, BLUE, BOLD, RED, RESET
 
 
 output_documentation = __name__ == '__builtin__'

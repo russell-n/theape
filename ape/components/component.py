@@ -8,21 +8,15 @@ import os
 from ape import BaseClass
 from ape import ApeError
 
-from ape.commoncode.strings import RESET
-from ape.commoncode.strings import BOLD
-from ape.commoncode.crash_handler import try_except
-from ape.commoncode.errors import ConfigurationError
-from ape.commoncode.code_graphs import module_diagram, class_diagram
+from ape.infrastructure.strings import RESET
+from ape.infrastructure.strings import BOLD
+from ape.infrastructure.crash_handler import try_except
+from ape.infrastructure.errors import ConfigurationError
+from ape.infrastructure.code_graphs import module_diagram, class_diagram
 from ape.parts.countdown.countdown import TimeTracker
 
 
 DOCUMENT_THIS = __name__ == '__builtin__'
-
-
-if DOCUMENT_THIS:
-    this_file = os.path.join(os.getcwd(), 'component.py')
-    module_diagram_file = module_diagram(module=this_file, project='composite')
-    print ".. image:: {0}".format(module_diagram_file)
 
 
 class Component(BaseClass):
@@ -60,13 +54,6 @@ class Component(BaseClass):
         abstractmethod: called for Keyboard Interrupts to allow file-closing
         """
         return        
-
-
-if DOCUMENT_THIS:
-    class_diagram_file = class_diagram(class_name="Component",
-                                       filter='OTHER',
-                                       module=this_file)
-    print ".. image:: {0}".format(class_diagram_file)
 
 
 class Composite(Component):
@@ -276,10 +263,3 @@ class Composite(Component):
                                          len(self.components))
         
 #end class Composite
-
-
-if DOCUMENT_THIS:
-    class_diagram_file = class_diagram(class_name="Composite",
-                                       filter='OTHER',
-                                       module=this_file)
-    print ".. image:: {0}".format(class_diagram_file)

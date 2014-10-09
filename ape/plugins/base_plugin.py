@@ -4,9 +4,9 @@ from abc import ABCMeta, abstractmethod, abstractproperty
 import os
 
 # this package 
-from ape.commoncode.baseclass import BaseClass
+from ape.infrastructure.baseclass import BaseClass
 from ape.parts.helppage.helppage import HelpPage
-from ape.commoncode.code_graphs import module_diagram, class_diagram
+from ape.infrastructure.code_graphs import module_diagram, class_diagram
 
 
 in_pweave = __name__ == '__builtin__'

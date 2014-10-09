@@ -1,5 +1,5 @@
-The Appendices
-==============
+Exploring ConfigObj
+===================
 <<name='imports', echo=False>>=
 # this package
 from ape import create_toctree

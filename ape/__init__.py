@@ -6,6 +6,7 @@ VERSION = "2014.05.15"
 
 from infrastructure.baseclass import BaseClass
 from infrastructure.errors import ApeError, DontCatchError
+from infrastructure.index_builder import create_toctree
 from components.component import Component
 from plugins.base_plugin import BasePlugin
 
