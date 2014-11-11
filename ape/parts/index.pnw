@@ -5,7 +5,7 @@ Parts
 
 <<name='imports', echo=False>>=
 # this package
-from ape.commoncode.index_builder import create_toctree
+from ape.infrastructure.index_builder import create_toctree
 @
 This package contains parts that can be re-used by other code. Since the :ref:`plugins <plugins-folder>` are meant to be for users, the parts need to be bundled into plugins if the user is meant to know about them.
 

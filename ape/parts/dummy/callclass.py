@@ -1,7 +1,7 @@
 
 # this package
-from ape.commoncode.baseclass import BaseClass
-from ape.commoncode.strings import ARGS, KWARGS
+from ape import BaseClass
+from ape import ARGS, KWARGS
 
 
 class CallClass(BaseClass):

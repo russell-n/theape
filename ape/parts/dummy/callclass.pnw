@@ -5,8 +5,8 @@ The call class is a primitive class for dummies to use in ``__getattr__`` to log
 
 <<name='imports', echo=False>>=
 # this package
-from ape.commoncode.baseclass import BaseClass
-from ape.commoncode.strings import ARGS, KWARGS
+from ape import BaseClass
+from ape import ARGS, KWARGS
 @
 CallClass
 ---------

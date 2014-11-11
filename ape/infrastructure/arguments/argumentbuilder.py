@@ -1,10 +1,11 @@
 
 # python standard library
 import sys
-# the ape
-from ape.commoncode.ryemother import RyeMother
+# this package
+from ape import SUBCOMMAND_GROUP
+from ape.infrastructure.ryemother import RyeMother
 from ape import BaseClass
-from ape.interface.arguments import BaseArguments
+from ape.infrastructure.arguments import BaseArguments
 
 
 class ArgumentBuilder(BaseClass):
@@ -31,7 +32,7 @@ class ArgumentBuilder(BaseClass):
         A gatherer of children
         """
         if self._rye_mother is None:
-            self._rye_mother = RyeMother(group='ape.subcommands',
+            self._rye_mother = RyeMother(group=SUBCOMMAND_GROUP,
                                          name='subcommands',
                                          keyfunction=lambda k: getattr(k, 'lower')())
         return self._rye_mother

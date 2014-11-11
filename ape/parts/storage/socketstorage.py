@@ -8,7 +8,7 @@ from base_storage import BaseStorage
 
 #from ape import BaseClass
 from ape import ApeError
-from ape.commoncode.code_graphs import module_diagram, class_diagram
+from ape.infrastructure.code_graphs import module_diagram, class_diagram
 
 
 NEWLINE = '\n'
@@ -127,10 +127,3 @@ if IN_PWEAVE:
     module_diagram_file = module_diagram(module=this_file, project='socketstorage')
     print ".. image:: {0}".format(module_diagram_file)
 
-
-
-if IN_PWEAVE:
-    class_diagram_file = class_diagram(class_name="SocketStorage",
-                                       filter='OTHER',
-                                       module=this_file)
-    print ".. image:: {0}".format(class_diagram_file)

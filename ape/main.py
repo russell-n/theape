@@ -1,6 +1,6 @@
 
 # this package
-from ape.interface.arguments.argumentbuilder import ArgumentBuilder
+from ape.infrastructure.arguments.argumentbuilder import ArgumentBuilder
 from ape.log_setter import set_logger
 
 

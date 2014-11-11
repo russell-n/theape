@@ -23,10 +23,10 @@
 
 
 # this package
-from ape.commoncode.baseclass import BaseThreadClass
+from ape import BaseThreadClass
 from ape import ApeError
-from ape.commoncode.eventtimer import wait
-from ape.commoncode.eventtimer import EventTimer
+from ape.parts.eventtimer import wait
+from ape.parts.eventtimer import EventTimer
 
 
 class TheWatcher(BaseThreadClass):

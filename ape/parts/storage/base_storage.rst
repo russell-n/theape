@@ -12,7 +12,14 @@ The BaseStorage
 
 
 
+.. currentmodule:: ape.parts.storage.base_storage
 .. autosummary::
    :toctree: api
 
    BaseStorage
+   BaseStorage.file
+   BaseStorage.close
+   BaseStorage.open
+   BaseStorage.write
+   BaseStorage.writeline
+   BaseStorage.writelines

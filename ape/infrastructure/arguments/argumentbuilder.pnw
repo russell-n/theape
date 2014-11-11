@@ -18,9 +18,10 @@ This is an adapter to make the `docopt` based argument-parsers look like argpars
 # python standard library
 import sys
 # this package
-from optimization.infrastructure.ryemother import RyeMother
-from optimization import BaseClass
-from optimization.infrastructure.arguments import BaseArguments
+from ape import SUBCOMMAND_GROUP
+from ape.infrastructure.ryemother import RyeMother
+from ape import BaseClass
+from ape.infrastructure.arguments import BaseArguments
 @
    
 <<name='ArgumentBuilder', echo=False>>=
@@ -48,7 +49,7 @@ class ArgumentBuilder(BaseClass):
         A gatherer of children
         """
         if self._rye_mother is None:
-            self._rye_mother = RyeMother(group='optimization.subcommands',
+            self._rye_mother = RyeMother(group=SUBCOMMAND_GROUP,
                                          name='subcommands',
                                          keyfunction=lambda k: getattr(k, 'lower')())
         return self._rye_mother

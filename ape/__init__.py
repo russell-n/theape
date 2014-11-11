@@ -3,8 +3,10 @@ MODULES_SECTION = 'MODULES'
 FILE_TIMESTAMP = "%Y_%m_%d_%I:%M:%S_%p"
 VERSION = "2014.05.15"
 
+SUBCOMMAND_GROUP = 'ape.subcommands'
 
-from infrastructure.baseclass import BaseClass
+
+from infrastructure.baseclass import BaseClass, BaseThreadClass
 from infrastructure.errors import ApeError, DontCatchError
 from infrastructure.index_builder import create_toctree
 from components.component import Component

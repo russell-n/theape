@@ -11,18 +11,6 @@ The `RelativeTimeMap` maps strings of relative times to seconds. It tries to be 
 
 It uses `dateutil <http://labix.org/python-dateutil>`_ to calculate everything but the seconds because dateutil will handle the ambiguous values like years (which have leap-years) and months which have 28, 29, 30, or 31 days.
 
-Contents:
-
-   * :ref:`The UML Class Model <relative-time-map-model>`
-
-   * :ref:`Relative Time Map Group Names <relative-time-map-groups>`
-
-   * :ref:`The RelativeTime class <ape-relative-time>`
-
-   * :ref:`The AbsoluteTime Class <ape-absolute-time>`
-
-   * :ref:`AbsoluteTime Class Diagram <absolutetime-class-diagram>`
-
 .. _relative-time-map-model:
 
 The UML Model
@@ -39,7 +27,7 @@ The UML Model
    RelativeTimeMap : re.RegexObject minute_expression
    RelativeTimeMap : re.RegexObject second_expression      
    
-.. currentmodule:: ape.interface.timemap
+.. currentmodule:: ape.infrastructure.timemap
 .. autosummary::
    :toctree: api
 
@@ -64,9 +52,9 @@ import dateutil.parser
 # this package
 from ape import BaseClass
 from ape import ApeError
-from ape.commoncode.oatbran import CharacterClass, Numbers, Group
-from ape.commoncode.oatbran import CommonPatterns
-from ape.commoncode.code_graphs import module_diagram, class_diagram
+from ape.parts.oatbran import CharacterClass, Numbers, Group
+from ape.parts.oatbran import CommonPatterns
+from ape.infrastructure.code_graphs import module_diagram, class_diagram
 @
 
 <<name='constants', echo=False>>=
@@ -692,22 +680,22 @@ Equality and inequality have also been implemented but there are two warnings:
 
     * This only works if the RelativeTime is on the left-hand-side (RelativeTime == timedelta)
 
-.. _relativetime-class-diagram:
-
-RelativeTime Class Diagram
---------------------------
-
-This is an auto-generated diagram of the :ref:`RelativeTime Class <relative-time>`.
-
-<<name='relativetime_class_diagram', echo=False, wrap=False, results='sphinx'>>=
-if IN_PWEAVE:
-    this_file = os.path.join(os.getcwd(), 'timemap.py')
-    class_diagram_file = class_diagram(class_name="RelativeTime",
-                                       filter='OTHER',
-                                       module=this_file)
-    print ".. image:: {0}".format(class_diagram_file)
-
-@
+.. .. _relativetime-class-diagram:
+.. 
+.. RelativeTime Class Diagram
+.. --------------------------
+.. 
+.. This is an auto-generated diagram of the :ref:`RelativeTime Class <relative-time>`.
+.. 
+.. <<name='relativetime_class_diagram', echo=False, wrap=False, results='sphinx'>>=
+.. if IN_PWEAVE:
+..     this_file = os.path.join(os.getcwd(), 'timemap.py')
+..     class_diagram_file = class_diagram(class_name="RelativeTime",
+..                                        filter='OTHER',
+..                                        module=this_file)
+..     print ".. image:: {0}".format(class_diagram_file)
+.. 
+.. @
 
 .. _ape-absolute-time:
 
@@ -807,22 +795,22 @@ class AbsoluteTime(BaseClass):
 # end class AbsoluteTime            
 @
 
-.. _absolutetime-class-diagram:
-
-AbsoluteTime Class Diagram
---------------------------
-
-This is an auto-generated diagram of the :ref:`AbsoluteTime Class <ape-absolute-time>`.
-
-<<name='absolutetime_class_diagram', echo=False, wrap=False, results='sphinx'>>=
-if IN_PWEAVE:
-    this_file = os.path.join(os.getcwd(), 'timemap.py')
-    class_diagram_file = class_diagram(class_name="AbsoluteTime",
-                                       filter='OTHER',
-                                       module=this_file)
-    print ".. image:: {0}".format(class_diagram_file)
-
-@
+.. .. _absolutetime-class-diagram:
+.. 
+.. AbsoluteTime Class Diagram
+.. --------------------------
+.. 
+.. This is an auto-generated diagram of the :ref:`AbsoluteTime Class <ape-absolute-time>`.
+.. 
+.. <<name='absolutetime_class_diagram', echo=False, wrap=False, results='sphinx'>>=
+.. if IN_PWEAVE:
+..     this_file = os.path.join(os.getcwd(), 'timemap.py')
+..     class_diagram_file = class_diagram(class_name="AbsoluteTime",
+..                                        filter='OTHER',
+..                                        module=this_file)
+..     print ".. image:: {0}".format(class_diagram_file)
+.. 
+.. @
 
 The AbsoluteTime Attributes
 ---------------------------
@@ -839,18 +827,18 @@ These are the same as the ``parse`` function's arguments. I think in most cases 
    True; True; YY-MM-DD, DD-MM-YY, MM-DD-yy
 
 
-.. _timemap-module-diagram:
-   
-Module Diagram
---------------
-
-This is a diagram of dependencies for this module.
-
-<<name='module_diagram', echo=False, wrap=False, results='sphinx'>>=
-if IN_PWEAVE:
-    module_diagram_file = module_diagram(module=this_file, project='timemap')
-    print ".. image:: {0}".format(module_diagram_file)
-@
+.. .. _timemap-module-diagram:
+..    
+.. Module Diagram
+.. --------------
+.. 
+.. This is a diagram of dependencies for this module.
+.. 
+.. <<name='module_diagram', echo=False, wrap=False, results='sphinx'>>=
+.. if IN_PWEAVE:
+..     module_diagram_file = module_diagram(module=this_file, project='timemap')
+..     print ".. image:: {0}".format(module_diagram_file)
+.. @
 
 <<name='debug', echo=False>>=
 if __name__ == '__main__':

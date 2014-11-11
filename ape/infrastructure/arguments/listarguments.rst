@@ -21,12 +21,6 @@ The List Sub-Command Arguments
 
 See the :ref:`developer documentation <docopt-reproducingape-list-sub-command>` for more information.
 
-Contents:
-
-    * :ref:`The List Arguments Constants <ape-interface-arguments-list-arguments-constants>`
-    * :ref:`The List Arguments Class <ape-interface-arguments-list-arguments-class>`
-    * :ref:`The List Strategy <ape-interface-arguments-list-strategy>`
-
 
 
 .. _ape-interface-arguments-list-arguments-constants:

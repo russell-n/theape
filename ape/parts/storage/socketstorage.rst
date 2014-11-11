@@ -5,12 +5,6 @@ Socket Storage
 
 This is a module for classes that implement a file-like interface to a socket. Its main purpose is to catch socket timeout errors.
 
-Contents:
-
-    * :ref:`SocketStorage Model <socket-storage-model>`
-
-    * :ref:`SocketStorage API <socket-storage-api>`
-
 
 
 .. _socket-storage-model:
@@ -66,13 +60,20 @@ Although the main reason for this class is to trap socket timeouts when reading 
 Module Diagram
 --------------
 
+[Errno 2] No such file or directory
+Is pylint installed?
 .. image:: classes_socketstorage.png
 
 
-.. _socket-storage-class-diagram:
-
-Class Diagram
--------------
-
-.. image:: SocketStorage.png
-
+.. .. _socket-storage-class-diagram:
+.. 
+.. Class Diagram
+.. -------------
+.. 
+.. <<name='class_diagram', echo=False, results='sphinx'>>=
+.. if IN_PWEAVE:
+..     class_diagram_file = class_diagram(class_name="SocketStorage",
+..                                        filter='OTHER',
+..                                        module=this_file)
+..     print ".. image:: {0}".format(class_diagram_file)
+.. 

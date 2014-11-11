@@ -17,13 +17,6 @@ The `Rye Mother <http://www.pitt.edu/~dash/gerchange.html#GrimmRyeMother>`_ gath
 
    Source: `Wikipedia <http://en.wikipedia.org/wiki/File:En_kv%C3%A4ll_vid_midsommartid_gingo_de_med_Bianca_Maria_djupt_in_i_skogen2.jpg>`_
 
-Contents:
-
-   * :ref:`The Entry Points <ape-commoncode-rye-mother-entry-points>`
-   * :ref:`The RyeMother Class <ape-commoncode-rye-mother-class>`
-   * :ref:`Dependencies <ape-commoncode-rye-mother-dependecies>`
-   * :ref:`What it does <ape-commoncode-rye-mother-algorithm>`
-
 .. _ape-commoncode-rye-mother-entry-points:
    
 The Entry Points
@@ -38,7 +31,7 @@ In this case, the RyeMother wants to search the folder for class-definitions so 
 
       entry_points = """
         [ape.subcommands]
-        ape_subcommands = ape.interface.arguments
+        ape_subcommands = ape.infrastructure.arguments
         """
 
 .. note:: The actual `setup.py` has other entries, this is just the sub-commands entry.
@@ -150,7 +143,7 @@ This is the main path for the ``__call__``:
 The RyeMother Class
 -------------------
 
-.. currentmodule:: ape.commoncode.ryemother 
+.. currentmodule:: ape.infrastructure.ryemother 
 .. autosummary::
    :toctree: api
 

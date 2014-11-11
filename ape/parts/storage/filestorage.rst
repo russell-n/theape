@@ -1,20 +1,9 @@
 File Storage
 ============
 
-
 .. _file-storage-module::
 
 This is a module for classes that implement a file-like interface to disk-files but also add some extra features meant to make them easier to use within the APE.
-
-Contents:
-
-    * :ref:`FileStorage Model <file-storage-model>`
-    * :ref:`Extras <file-storage-extras>`
-    * :ref:`Sub-Folders <file-storage-sub-folders>`
-    * :ref:`Redundant Files <file-storage-redundant-files>`
-    * :ref:`FileStorage API <file-storage-api>`
-    * :ref:`FileStorage Module Diagram <file-storage-module-diagram>`
-    * :ref:`FileStorage Class Diagram <file-storage-class-diagram>`
 
 
 
@@ -119,7 +108,7 @@ The timestamp will be added using string formatting -- it will look for a `times
 
 ::
 
-    test_2014_02_24_05:31:56_PM.csv
+    test_2014_11_10_04:38:58_PM.csv
     
 
 
@@ -226,13 +215,20 @@ Path:
 Module Diagram
 --------------
 
+[Errno 2] No such file or directory
+Is pylint installed?
 .. image:: classes_filestorage.png
 
 
-.. _file-storage-class-diagram:
-
-Class Diagram
--------------
-
-.. image:: FileStorage.png
-
+.. .. _file-storage-class-diagram:
+.. 
+.. Class Diagram
+.. -------------
+.. 
+.. <<name='class_diagram', echo=False, results='sphinx'>>=
+.. if IN_PWEAVE:
+..     class_diagram_file = class_diagram(class_name="FileStorage",
+..                                        filter='OTHER',
+..                                        module=this_file)
+..     print ".. image:: {0}".format(class_diagram_file)
+.. 

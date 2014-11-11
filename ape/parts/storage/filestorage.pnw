@@ -1,42 +1,9 @@
 File Storage
 ============
-<<name='license', echo=False>>=
-# The MIT License (MIT)
-# 
-# Copyright (c) 2013 Russell Nakamura
-# 
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-# 
-# The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-# 
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-# THE SOFTWARE.
-@
 
 .. _file-storage-module::
 
 This is a module for classes that implement a file-like interface to disk-files but also add some extra features meant to make them easier to use within the APE.
-
-Contents:
-
-    * :ref:`FileStorage Model <file-storage-model>`
-    * :ref:`Extras <file-storage-extras>`
-    * :ref:`Sub-Folders <file-storage-sub-folders>`
-    * :ref:`Redundant Files <file-storage-redundant-files>`
-    * :ref:`FileStorage API <file-storage-api>`
-    * :ref:`FileStorage Module Diagram <file-storage-module-diagram>`
-    * :ref:`FileStorage Class Diagram <file-storage-class-diagram>`
 
 <<name='imports', echo=False>>=
 # python standard library
@@ -51,7 +18,7 @@ from base_storage import BaseStorage
 #from ape import BaseClass
 from ape import FILE_TIMESTAMP
 from ape import ApeError
-from ape.commoncode.code_graphs import module_diagram, class_diagram
+from ape.infrastructure.code_graphs import module_diagram, class_diagram
 @
 
 <<name='constants', echo=False>>=
@@ -408,18 +375,18 @@ if IN_PWEAVE:
 
 @
 
-.. _file-storage-class-diagram:
-
-Class Diagram
--------------
-
-<<name='class_diagram', echo=False, results='sphinx'>>=
-if IN_PWEAVE:
-    class_diagram_file = class_diagram(class_name="FileStorage",
-                                       filter='OTHER',
-                                       module=this_file)
-    print ".. image:: {0}".format(class_diagram_file)
-@
+.. .. _file-storage-class-diagram:
+.. 
+.. Class Diagram
+.. -------------
+.. 
+.. <<name='class_diagram', echo=False, results='sphinx'>>=
+.. if IN_PWEAVE:
+..     class_diagram_file = class_diagram(class_name="FileStorage",
+..                                        filter='OTHER',
+..                                        module=this_file)
+..     print ".. image:: {0}".format(class_diagram_file)
+.. @
 
 
 

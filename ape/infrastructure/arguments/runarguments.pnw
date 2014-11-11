@@ -19,21 +19,15 @@ Options;
 
 See the :ref:`developer documentation <docopt-reproducingape-run-sub-command>` for more information about this section.
 
-Contents:
-
-    * :ref:`Run Arguments Constants <ape-interface-run-arguments-constants>`
-    * :ref:`Run Arguments Class <ape-interface-run-arguments-class>`
-    * :ref:`Run Strategy <ape-interface-run-strategy>`
-
 <<name='imports', echo=False>>=
 # python standard library
 import datetime
 
 # the APE
-from ape.commoncode.strings import RED, BOLD, RESET
-from ape.interface.arguments.arguments import BaseArguments
-from ape.interface.arguments.basestrategy import BaseStrategy
-from ape.commoncode.crash_handler import try_except
+from ape.infrastructure.strings import RED, BOLD, RESET
+from ape.infrastructure.arguments.arguments import BaseArguments
+from ape.infrastructure.arguments.basestrategy import BaseStrategy
+from ape.infrastructure.crash_handler import try_except
 @
 
 .. _ape-interface-run-arguments-constants:

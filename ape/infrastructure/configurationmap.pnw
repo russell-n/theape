@@ -5,26 +5,6 @@ The Configuration Map
 
 The `Configuration Map` maps a configuration-file-name to data. It extends the `ConfigParser` to have more data-types (and allow missing values) and to add sub-configuration-files (see the :ref:`ConfigParser Explorations <exploring-configparser-whole-shebang>` to get some idea of what I am getting at).
 
-Contents:
-
-    * :ref:`Background <configurationmap-background>`
-
-    * :ref:`UML Class Diagram <configurationmap-uml>`
-
-    * :ref:`ConfigurationError <configurationmap-configurationerror>`
-
-    * :ref:`The API <configurationmap-api>`
-
-    * :ref:`The ConfigurationMap Parser <configurationmap-parser>`
-
-    * :ref:`The ConfigParser <configurationmap-configparser>`
-
-    * :ref:`ConfigParser Exceptions <configurationmap-exceptions>`
-
-    * :ref:`Module Diagram <configurationmap-module-diagram>`
-
-    * :ref:`Class Implementation Diagram <configurationmap-class-implementation-diagram>`
-
 .. _configurationmap-background:    
     
 Background
@@ -44,10 +24,10 @@ import os
 from collections import OrderedDict, namedtuple
 
 # this package
-from ape.commoncode.baseclass import BaseClass
-from ape.commoncode.code_graphs import module_diagram, class_diagram
-from ape.commoncode.errors import ConfigurationError
-from ape.interface.timemap import RelativeTime, AbsoluteTime
+from ape import BaseClass
+from ape.infrastructure.code_graphs import module_diagram, class_diagram
+from ape.infrastructure.errors import ConfigurationError
+from ape.infrastructure.timemap import RelativeTime, AbsoluteTime
 @
 <<name='constants', echo=False>>=
 DEFAULT = 'DEFAULT'
@@ -454,15 +434,15 @@ if IN_PWEAVE:
     print ".. image:: {0}".format(module_diagram_file)
 @
 
-.. _configurationmap-class-implementation-diagram:
-
-Class Implementation Diagram
-----------------------------
-
-<<name='class_diagram', echo=False, results='sphinx'>>=
-if IN_PWEAVE:
-    class_diagram_file = class_diagram(class_name="ConfigurationMap",
-                                       filter='OTHER',
-                                       module=this_file)
-    print ".. image:: {0}".format(class_diagram_file)
-@
+.. .. _configurationmap-class-implementation-diagram:
+.. 
+.. Class Implementation Diagram
+.. ----------------------------
+.. 
+.. <<name='class_diagram', echo=False, results='sphinx'>>=
+.. if IN_PWEAVE:
+..     class_diagram_file = class_diagram(class_name="ConfigurationMap",
+..                                        filter='OTHER',
+..                                        module=this_file)
+..     print ".. image:: {0}".format(class_diagram_file)
+.. @

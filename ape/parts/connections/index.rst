@@ -1,5 +1,5 @@
 Connections
-=====
+===========
 
 .. _ape-connections:
 
@@ -24,6 +24,7 @@ source: `Online Etymology Dictionary <http://etymonline.com/?term=connection>`_
    :maxdepth: 1
 
    The SSH Connection <sshconnection.rst>
+   Testing the SSHConnection <testsshconnection.rst>
 
 .. toctree::
    :maxdepth: 1

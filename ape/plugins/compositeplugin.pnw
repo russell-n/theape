@@ -26,6 +26,8 @@ from ape.parts.storage.filestorage import FileStorage
 <<name='constants', echo=False>>=
 SECTION = 'WATCHER'
 INTERVAL_OPTION = 'interval'
+TOTAL_OPTION = 'total'
+VERBOSE_OPTION = 'verbose'
 @
 
 The Configuration

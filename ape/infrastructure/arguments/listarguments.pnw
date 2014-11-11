@@ -18,17 +18,11 @@ optional arguments:
 
 See the :ref:`developer documentation <docopt-reproducingape-list-sub-command>` for more information.
 
-Contents:
-
-    * :ref:`The List Arguments Constants <ape-interface-arguments-list-arguments-constants>`
-    * :ref:`The List Arguments Class <ape-interface-arguments-list-arguments-class>`
-    * :ref:`The List Strategy <ape-interface-arguments-list-strategy>`
-
 <<name='imports', echo=False>>=
 # the ape
-from ape.commoncode.crash_handler import try_except
-from ape.interface.arguments.arguments import BaseArguments
-from ape.interface.arguments.basestrategy import BaseStrategy
+from ape.infrastructure.crash_handler import try_except
+from ape.infrastructure.arguments.arguments import BaseArguments
+from ape.infrastructure.arguments.basestrategy import BaseStrategy
 @
 
 .. _ape-interface-arguments-list-arguments-constants:

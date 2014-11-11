@@ -7,7 +7,7 @@ from types import FloatType, IntType
 from ape import BaseClass
 from ape import ApeError
 from ape import Component
-from ape.commoncode.eventtimer import EventTimer, wait
+from ape.parts.eventtimer import EventTimer, wait
 
 
 IN_PWEAVE = __name__ == '__builtin__'
@@ -210,18 +210,10 @@ if IN_PWEAVE:
     print "A Module Diagram for **{0}**.\n".format(TheBigSleep.__module__)
     
     import os
-    from ape.commoncode.code_graphs import module_diagram, class_diagram
+    from ape.infrastructure.code_graphs import module_diagram, class_diagram
     this_file = os.path.join(os.getcwd(), 'sleep.py')
     module_diagram_file = module_diagram(module=this_file, project='thebigsleep')
     print ".. image:: {0}".format(module_diagram_file)
-
-
-
-if IN_PWEAVE:
-    class_diagram_file = class_diagram(class_name="TheBigSleep",
-                                       filter='OTHER',
-                                       module=this_file)
-    print ".. image:: {0}".format(class_diagram_file)
 
 
 

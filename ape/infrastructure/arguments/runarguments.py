@@ -19,10 +19,10 @@ Options;
 import datetime
 
 # the APE
-from ape.commoncode.strings import RED, BOLD, RESET
-from ape.interface.arguments.arguments import BaseArguments
-from ape.interface.arguments.basestrategy import BaseStrategy
-from ape.commoncode.crash_handler import try_except
+from ape.infrastructure.strings import RED, BOLD, RESET
+from ape.infrastructure.arguments.arguments import BaseArguments
+from ape.infrastructure.arguments.basestrategy import BaseStrategy
+from ape.infrastructure.crash_handler import try_except
 
 
 class RunArgumentsConstants(object):

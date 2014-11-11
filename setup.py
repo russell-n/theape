@@ -6,7 +6,7 @@ except ImportError:
     from setuptools import setup, find_packages
 
 setup(name='ape',
-      version= '2014.05.21',
+      version= '2014.11.10',
       description="A program to run code.",
       author="russell",
       platforms=['linux'],
@@ -22,7 +22,7 @@ setup(name='ape',
       ape=ape.main:main
 
       [ape.subcommands]
-      subcommands=ape.interface.arguments
+      subcommands=ape.infrastructure.arguments
 
       [ape.plugins]
       plugins = ape.plugins

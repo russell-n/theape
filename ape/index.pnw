@@ -6,7 +6,7 @@ TheApe
 
 <<name='imports', echo=False>>=
 # this package
-from ape.commoncode.index_builder import create_toctree
+from ape.infrastructure.index_builder import create_toctree
 @
 This is an attempt to re-start the `Project Arachne` revision of the `APE` (the All-in-one Program Executor). It is being re-designed as a code runner as well as a repository of code components for building programs.
 

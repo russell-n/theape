@@ -20,9 +20,9 @@ optional arguments:
 import docopt
 
 # this package
-from ape.interface.arguments.arguments import BaseArguments, ArgumentsConstants
-from ape.interface.arguments.basestrategy import BaseStrategy
-from ape.commoncode.crash_handler import try_except
+from ape.infrastructure.arguments.arguments import BaseArguments, ArgumentsConstants
+from ape.infrastructure.arguments.basestrategy import BaseStrategy
+from ape.infrastructure.crash_handler import try_except
 
 
 class CheckArgumentsConstants(object):

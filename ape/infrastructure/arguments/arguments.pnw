@@ -53,7 +53,7 @@ import docopt
 
 # this package
 from ape import BaseClass, VERSION
-from ape.commoncode.ryemother import RyeMother
+from ape.infrastructure.ryemother import RyeMother
 @
 <<name='check_pweave', echo=False>>=
 document_this = __name__ == '__builtin__'

@@ -15,9 +15,9 @@ optional arguments:
 
 
 # the ape
-from ape.commoncode.crash_handler import try_except
-from ape.interface.arguments.arguments import BaseArguments
-from ape.interface.arguments.basestrategy import BaseStrategy
+from ape.infrastructure.crash_handler import try_except
+from ape.infrastructure.arguments.arguments import BaseArguments
+from ape.infrastructure.arguments.basestrategy import BaseStrategy
 
 
 class ListArgumentsConstants(object):

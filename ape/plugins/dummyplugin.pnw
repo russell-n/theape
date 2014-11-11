@@ -102,7 +102,7 @@ Crash-Test-Dummy
 This is a dummy that crashes when called. The config-file should specify which error to raise::
 
    [CRASHTESTDUMMY]   
-   error_module = ape.commoncode.errors
+   error_module = ape.infrastructure.errors
    error = ApeError
    function = __call__
 

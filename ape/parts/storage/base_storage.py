@@ -26,18 +26,9 @@ class BaseStorage(BaseClass):
         The open file object
         """
     
-    def close(self):
-        """
-        Closes self.file
-        """
-        self.file.close()
-        self.closed = True
-        return
-    
     def __str__(self):
         return "{0}: {1}".format(self.__class__.__name__,
                                  self.name)
-
 
     @abstractmethod
     def open(self, name):

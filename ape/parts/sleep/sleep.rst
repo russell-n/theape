@@ -9,12 +9,6 @@ This is a module to integrate pauses with human-readable feedback into the ape.
 .. figure:: big_sleep.JPG
    :align: center
 
-Contents:
-
-    * :ref:`Parameters <ape-thebigsleep-parameters>`
-
-    * :ref:`UML Model <ape-thebigsleep-model>`
-
 
 
 .. _ape-thebigsleep-parameters:
@@ -86,13 +80,21 @@ Module Diagram
 
 A Module Diagram for **ape.parts.sleep.sleep**.
 
+[Errno 2] No such file or directory
+Is pylint installed?
 .. image:: classes_thebigsleep.png
 
 
-.. _thebigsleep-class-diagram:
-
-Class Diagram
--------------
-
-.. image:: TheBigSleep.png
-
+.. .. _thebigsleep-class-diagram:
+.. 
+.. Class Diagram
+.. -------------
+.. 
+.. <<name='class_diagram', echo=False, results='sphinx'>>=
+.. if IN_PWEAVE:
+..     class_diagram_file = class_diagram(class_name="TheBigSleep",
+..                                        filter='OTHER',
+..                                        module=this_file)
+..     print ".. image:: {0}".format(class_diagram_file)
+.. 
+.. 

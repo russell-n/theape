@@ -154,7 +154,6 @@ if __name__ == "__main__":
     raw_rows = raw_data.split('\n')
     rows = list(dict(zip(headers, row.split())) for row in raw_rows)
     with ape.parts.storage.filestorage.FileStorage(path='tests', name='test.csv', overwrite=True) as testfile:
-        #writer = csv.DictWriter(testfile, headers)
         writer = CsvDictStorage(headers=headers,
                                 storage=testfile)
         writer.writerows(rows)

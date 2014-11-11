@@ -7,25 +7,6 @@ The Ape Plugin
 .. _ape-plugin:
 This is the plugin that creates the Hortator to run :ref:`Composites <composite-class>`. It will be used when the `run` subcommand is called by the user.
 
-Contents:
-
-    * :ref:`Introduction <apeplugin-introduction>`
-
-    * :ref:`Errors <apeplugin-errors>`
-
-    * :ref:`Run Sub-command State Diagram <apeplugin-run-state-diagram>`
-
-    * :ref:`Module Dependency-Graph <apeplugin-module-dependency-graph>`
-
-    * :ref:`Class Implementation Diagram <apeplugin-class-diagram>`
-
-    * :ref:`API <apeplugin-api>`
-
-    * :ref:`External Plugins <apeplugin-external-plugins>`
-
-    * :ref:`Figuring Out the Help <apeplugin-help>`
-
-
 .. _apeplugin-introduction:    
     
 Introduction
@@ -118,22 +99,28 @@ Module Dependency Graph
 
 This is an auto-generated graph of this module.
 
+[Errno 2] No such file or directory
+Is pylint installed?
 .. image:: classes_apeplugin.png
 
 
 
-.. _apeplugin-class-diagram:
-
+.. .. _apeplugin-class-diagram:
+.. 
 Class Diagram
 -------------
+.. 
+.. This is an auto-generated class diagram for the Ape.
+.. 
+.. <<name='class_diagram', echo=False, results='sphinx'>>=
+.. if in_pweave:
+..     class_diagram_file = class_diagram(class_name="Ape",
+..                                        filter='OTHER',
+..                                        module=this_file)
+..     print ".. image:: {0}".format(class_diagram_file)
+.. 
+.. 
 
-This is an auto-generated class diagram for the Ape.
-
-.. image:: Ape.png
-
-
-
-And this is a hand-drawn one which should be easier to read but is not guaranteed to be up-to-date.
 
 .. uml::
 
@@ -186,17 +173,30 @@ Using the `FakePlugin` created for the :ref:`Exploring External Imports <explori
     [MODULES]
     fakepackage.fakeplugin
 
-    [FAKEPLUGIN]
+    [FakePlugin]
+    plugin = FakePlugin
     option = value
 
 The FakePlugin returns a :ref:`DummyClass <dummy-class>` as its `product` so the FAKEPLUGIN section doesn't really do anything.
 
+.. '
 
+.. note:: In order to allow more than one instance of a plugin to be created, the ``plugin=<plugin class name>`` line was added. Each section that configures a plugin needs it. The header for the section is arbitrary but must match the value defined in the APE section.
 
+If we wanted to configure a second FakePlugin, for instance, we could do something like this::
 
+    [APE]
+    operation_1 = apple, banana
 
+    [MODULES]
+    fakepackage.fakeplugin
 
+    [apple]
+    plugin = FakePlugin
+    option = value
 
-
-
-
+    [banana]
+    plugin = FakePlugin
+    options = other_value
+ 
+This is the intended way for it to work, anyway. If the plugin wasn't built to use the ``section_header`` attribute when retrieving section information it won't work.

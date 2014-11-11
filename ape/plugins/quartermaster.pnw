@@ -12,10 +12,10 @@ import importlib
 import inspect
 
 # this package
-from ape.commoncode.baseclass import BaseClass
-from ape.commoncode.ryemother import RyeMother
+from ape import BaseClass
+from ape.infrastructure.ryemother import RyeMother
 from base_plugin import BasePlugin
-from ape.commoncode.code_graphs import module_diagram, class_diagram
+from ape.infrastructure.code_graphs import module_diagram, class_diagram
 @
 
 .. uml::
@@ -89,7 +89,7 @@ class QuarterMaster(BaseClass):
         """
         if self._import_plugins is None:
             # the group and name values are created in setup.py entry_points
-            self._rye_mother = RyeMother(group='ape.plugins', name='plugins',
+            self._import_plugins = RyeMother(group='ape.plugins', name='plugins',
                                          parent=BasePlugin)
         return self._import_plugins
 
