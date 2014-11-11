@@ -7,7 +7,7 @@ import threading
 
 # this package
 from ape import BaseClass
-from ape.commoncode.code_graphs import  module_diagram, class_diagram
+from ape.infrastructure.code_graphs import  module_diagram, class_diagram
 
 
 class EventTimer(BaseClass):

@@ -3,9 +3,9 @@
 import time
 
 # this package
-from ape.commoncode.baseclass import BaseClass
-from ape.commoncode.strings import CREATION, ARGS, KWARGS
-from ape.commoncode.strings import CALLED_ON, CALLED, NOT_IMPLEMENTED
+from ape import BaseClass
+from ape import CREATION, ARGS, KWARGS
+from ape import CALLED_ON, CALLED, NOT_IMPLEMENTED
 
 # this module
 from callclass import CallClass

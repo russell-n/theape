@@ -9,7 +9,9 @@ The `QuarterMaster <http://en.wikipedia.org/wiki/Quartermaster>`_ handles findin
 
 .. uml::
 
-   QuarterMaster -|> BaseClass
+   BaseClass <|-- QuarterMaster
+   QuarterMaster o- RyeMother
+   
 
 .. _ape-plugins-quartermaster:   
 
@@ -23,8 +25,6 @@ These are the public attributes of the `QuarterMaster`. Only `get_plugin` and `l
 
    QuarterMaster
    QuarterMaster.list_plugins
-   QuarterMaster.filenames
-   QuarterMaster.modules
    QuarterMaster.plugins
    QuarterMaster.get_plugin
 
@@ -106,7 +106,7 @@ The `os.listdir <http://docs.python.org/2/library/os.html#files-and-directories>
 
 ::
 
-    /home/moira/repositories/repository_code/hortators/ape/ape/plugins/base_plugin.pyc
+    /home/charon/repositories/code/hortators/theape/ape/plugins/base_plugin.pyc
     
 
 
@@ -126,8 +126,8 @@ Looking at the output you can see that the ``__file__`` contains the path to the
     __init__.py
     apeplugin.py
     base_plugin.py
+    compositeplugin.py
     dummyplugin.py
-    index.py
     quartermaster.py
     sleep_plugin.py
     
@@ -254,6 +254,7 @@ Oops. What happened there (the ``print`` statement should have created some outp
 ::
 
     Ape
+    Sleep
     CrashTestDummy
     Dummy
     StuckDummy

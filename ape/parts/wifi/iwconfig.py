@@ -27,8 +27,8 @@ import re
 
 # this package
 from ape import BaseClass, ApeError
-from ape.commoncode.eventtimer import EventTimer
-from ape.commoncode import oatbran
+from ape.parts.eventtimer import EventTimer
+from ape.parts import oatbran
 
 
 DECIBEL_MILLIWATTS = 'dBm'

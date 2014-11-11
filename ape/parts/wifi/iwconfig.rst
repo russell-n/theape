@@ -59,13 +59,15 @@ The ``IwconfigExpressions`` holds the compiled regular expressions to tokenize t
 
 
 
+.. _ape-iwconfigquery:
+
 IwconfigQuery
 -------------
 
 Notes
 ~~~~~
 
-According to the current (December 13, 2013) Ubunt 13.10 man-page:
+According to the current (December 13, 2013) Ubuntu 13.10 man-page:
 
    * *ESSID* identifies cells that are part of the same virtual network (all APs with the same ESSID)
    * *Access Point* is the specific AP within the virtual network that the node is associated with
@@ -118,6 +120,7 @@ The Model and API
    IwconfigQuery.invalid_misc
    IwconfigQuery.missed_beacons
    IwconfigQuery.__call__
+   IwconfigQuery.__str__
    IwconfigQuery.check_errors
    IwconfigQuery.close
 

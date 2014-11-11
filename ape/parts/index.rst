@@ -25,17 +25,20 @@ These are the documents created from the source files.
 .. toctree::
    :maxdepth: 1
 
+   The OatBran <oatbran.rst>
+   The Randomizer <randomizer.rst>
+   Sorted List <sortedlist.rst>
 
 .. toctree::
    :maxdepth: 1
 
-   Connections <connections/index.rst>
+   Wifi <wifi/index.rst>
    Sleep <sleep/index.rst>
+   Help Page <helppage/index.rst>
+   Dummy Components <dummy/index.rst>
+   Connections <connections/index.rst>
    Storage <storage/index.rst>
    Watchers <watchers/index.rst>
-   Dummy Components <dummy/index.rst>
    Countdown <countdown/index.rst>
-   Wifi <wifi/index.rst>
-   Help Page <helppage/index.rst>
 
 

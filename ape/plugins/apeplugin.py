@@ -5,20 +5,20 @@ import os
 from collections import OrderedDict
 
 # this package
-import ape.interface.arguments.arguments as basearguments
-from ape.interface.arguments.argumentbuilder import ArgumentBuilder
-from ape.interface.configurationmap import ConfigurationMap
+import ape.infrastructure.arguments.arguments as basearguments
+from ape.infrastructure.arguments.argumentbuilder import ArgumentBuilder
+from ape.infrastructure.configurationmap import ConfigurationMap
 from ape.components.component import Composite
 from ape.parts.storage.filestorage import FileStorage
 
 from base_plugin import BasePlugin
-from ape.commoncode.code_graphs import module_diagram, class_diagram
-from ape.commoncode.errors import ApeError, DontCatchError, ConfigurationError
+from ape.infrastructure.code_graphs import module_diagram, class_diagram
+from ape.infrastructure.errors import ApeError, DontCatchError, ConfigurationError
 from ape import APESECTION, MODULES_SECTION
 from quartermaster import QuarterMaster
 from ape.parts.countdown.countdown import INFO
 from ape.parts.countdown.countdown import CountdownTimer
-import ape.commoncode.singletons as singletons
+import ape.infrastructure.singletons as singletons
 
 
 in_pweave = __name__ == '__builtin__'
@@ -87,13 +87,6 @@ if in_pweave:
     print ".. image:: {0}".format(module_diagram_file)
 
 
-if in_pweave:
-    class_diagram_file = class_diagram(class_name="Ape",
-                                       filter='OTHER',
-                                       module=this_file)
-    print ".. image:: {0}".format(class_diagram_file)
-
-
 EXAMPLES = '''
 ape run ape.ini
 ape help
@@ -115,22 +108,12 @@ class Ape(BasePlugin):
         super(Ape, self).__init__(*args, **kwargs)
         self.configfiles = configfiles
         self._arguments = None
-        self._quartermaster = None
         return
-
-    @property
-    def quartermaster(self):
-        """
-        A QuarterMaster to get Component Plugins
-        """
-        if self._quartermaster is None:
-            self._quartermaster = QuarterMaster()
-        return self._quartermaster
 
     @property
     def arguments(self):
         """
-        The ArgumentClinic (used to set up the help-string)
+        The ArgumentBuilder (used to set up the help-string)
         """
         if self._arguments is None:
             self._arguments = ArgumentBuilder()

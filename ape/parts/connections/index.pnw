@@ -1,11 +1,11 @@
 Connections
-=====
+===========
 
 .. _ape-connections:
 
 <<name='imports', echo=False>>=
 # this package
-from ape.commoncode.index_builder import create_toctree
+from ape.infrastructure.index_builder import create_toctree
 @
 
 .. figure:: figures/connection.png

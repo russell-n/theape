@@ -7,7 +7,7 @@ This is an adapter to make the `docopt` based argument-parsers look like argpars
 
    ArgumentBuilder o- BaseArguments
 
-.. currentmodule:: ape.interface.arguments.argumentbuilder
+.. currentmodule:: optimization.infrastructure.arguments.argumentbuilder
 .. autosummary::
    :toctree: api
 

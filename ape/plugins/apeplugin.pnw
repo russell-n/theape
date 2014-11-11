@@ -7,25 +7,6 @@ The Ape Plugin
 .. _ape-plugin:
 This is the plugin that creates the Hortator to run :ref:`Composites <composite-class>`. It will be used when the `run` subcommand is called by the user.
 
-Contents:
-
-    * :ref:`Introduction <apeplugin-introduction>`
-
-    * :ref:`Errors <apeplugin-errors>`
-
-    * :ref:`Run Sub-command State Diagram <apeplugin-run-state-diagram>`
-
-    * :ref:`Module Dependency-Graph <apeplugin-module-dependency-graph>`
-
-    * :ref:`Class Implementation Diagram <apeplugin-class-diagram>`
-
-    * :ref:`API <apeplugin-api>`
-
-    * :ref:`External Plugins <apeplugin-external-plugins>`
-
-    * :ref:`Figuring Out the Help <apeplugin-help>`
-
-
 .. _apeplugin-introduction:    
     
 Introduction
@@ -116,20 +97,20 @@ import os
 from collections import OrderedDict
 
 # this package
-import ape.interface.arguments.arguments as basearguments
-from ape.interface.arguments.argumentbuilder import ArgumentBuilder
-from ape.interface.configurationmap import ConfigurationMap
+import ape.infrastructure.arguments.arguments as basearguments
+from ape.infrastructure.arguments.argumentbuilder import ArgumentBuilder
+from ape.infrastructure.configurationmap import ConfigurationMap
 from ape.components.component import Composite
 from ape.parts.storage.filestorage import FileStorage
 
 from base_plugin import BasePlugin
-from ape.commoncode.code_graphs import module_diagram, class_diagram
-from ape.commoncode.errors import ApeError, DontCatchError, ConfigurationError
+from ape.infrastructure.code_graphs import module_diagram, class_diagram
+from ape.infrastructure.errors import ApeError, DontCatchError, ConfigurationError
 from ape import APESECTION, MODULES_SECTION
 from quartermaster import QuarterMaster
 from ape.parts.countdown.countdown import INFO
 from ape.parts.countdown.countdown import CountdownTimer
-import ape.commoncode.singletons as singletons
+import ape.infrastructure.singletons as singletons
 @
 <<name='check_pweave', echo=False>>=
 in_pweave = __name__ == '__builtin__'
@@ -206,22 +187,22 @@ if in_pweave:
     print ".. image:: {0}".format(module_diagram_file)
 @
 
-.. _apeplugin-class-diagram:
-
+.. .. _apeplugin-class-diagram:
+.. 
 Class Diagram
 -------------
+.. 
+.. This is an auto-generated class diagram for the Ape.
+.. 
+.. <<name='class_diagram', echo=False, results='sphinx'>>=
+.. if in_pweave:
+..     class_diagram_file = class_diagram(class_name="Ape",
+..                                        filter='OTHER',
+..                                        module=this_file)
+..     print ".. image:: {0}".format(class_diagram_file)
+.. @
+.. 
 
-This is an auto-generated class diagram for the Ape.
-
-<<name='class_diagram', echo=False, results='sphinx'>>=
-if in_pweave:
-    class_diagram_file = class_diagram(class_name="Ape",
-                                       filter='OTHER',
-                                       module=this_file)
-    print ".. image:: {0}".format(class_diagram_file)
-@
-
-And this is a hand-drawn one which should be easier to read but is not guaranteed to be up-to-date.
 
 .. uml::
 

@@ -25,12 +25,6 @@ The Check Sub-Command Arguments
 
 See the :ref:`developer documentation <docopt-reproducingape-check-sub-command>` for more information about this.
 
-Contents:
-
-   * :ref:`Check Arguments Constants <ape-interface-arguments-check-arguments-constants>`
-   * :ref:`Check Arguments Class <ape-interface-arguments-check-arguments-class>`
-   * :ref:`Check Strategy <ape-interface-arguments-check-strategy>`
-
 
 
 .. _ape-interface-arguments-check-arguments-constants:

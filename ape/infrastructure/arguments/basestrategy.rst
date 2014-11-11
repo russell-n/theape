@@ -1,7 +1,7 @@
 The BaseStrategy
 ================
 
-.. currentmodule:: ape.interface.arguments.basestrategy
+.. currentmodule:: ape.infrastructure.arguments.basestrategy
 
 Contents:
 

@@ -24,7 +24,7 @@ This module bundles together the components needed to use the The Ape as a comma
     
 <<Name='imports', echo=False>>=
 # this package
-from ape.interface.arguments.argumentbuilder import ArgumentBuilder
+from ape.infrastructure.arguments.argumentbuilder import ArgumentBuilder
 from ape.log_setter import set_logger
 @
 <<name='enable_debugging', echo=False>>=

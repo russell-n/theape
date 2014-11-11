@@ -17,17 +17,11 @@ optional arguments:
 
 These are arguments for the `fetch` sub-command (see the :ref:`developer documentation <docopt-reproducingape-fetch-sub-command>` for more information).
 
-Contents:
-
-   * :ref:`Fetch Arguments Constants <ape-interface-arguments-fetch-constants>`
-   * :ref:`Fetch Arguments Class <ape-interface-arguments-fetch-arguments>`
-   * :ref:`Fetch Strategy <ape-interface-arguments-fetch-strategy>`
-
 <<name='imports', echo=False>>=
 # the APE
-from ape.interface.arguments.arguments import BaseArguments
-from ape.interface.arguments.basestrategy import BaseStrategy
-from ape.commoncode.crash_handler import try_except
+from ape.infrastructure.arguments.arguments import BaseArguments
+from ape.infrastructure.arguments.basestrategy import BaseStrategy
+from ape.infrastructure.crash_handler import try_except
 @
 
 .. _ape-interface-arguments-fetch-constants:

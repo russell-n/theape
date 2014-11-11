@@ -5,10 +5,10 @@ import importlib
 import inspect
 
 # this package
-from ape.commoncode.baseclass import BaseClass
-from ape.commoncode.ryemother import RyeMother
+from ape import BaseClass
+from ape.infrastructure.ryemother import RyeMother
 from base_plugin import BasePlugin
-from ape.commoncode.code_graphs import module_diagram, class_diagram
+from ape.infrastructure.code_graphs import module_diagram, class_diagram
 
 
 document_this = __name__ == '__builtin__'
@@ -28,19 +28,20 @@ class QuarterMaster(BaseClass):
         """
         super(QuarterMaster, self).__init__()
         self._plugins = None
-        self._rye_mother = None
+        self._import_plugins = None
         self.external_modules = None
         return
 
     @property
-    def rye_mother(self):
+    def import_plugins(self):
         """
         A RyeMother instance
         """
-        if self._rye_mother is None:
-            self._rye_mother = RyeMother(group='ape.plugins', name='plugins',
+        if self._import_plugins is None:
+            # the group and name values are created in setup.py entry_points
+            self._import_plugins = RyeMother(group='ape.plugins', name='plugins',
                                          parent=BasePlugin)
-        return self._rye_mother
+        return self._import_plugins
 
     @property
     def plugins(self):
@@ -48,12 +49,11 @@ class QuarterMaster(BaseClass):
         A dictionary of plugins (this is persistent, unlike the generators, in case it gets re-used)
         """
         if self._plugins is None:
-            from ape.plugins.base_plugin import BasePlugin
-            self._plugins = self.rye_mother()
+            self._plugins = self.import_plugins()
             # check if external modules were given
             if self.external_modules is not None:
                 for module_name in self.external_modules:
-                    self._plugins.update(self.rye_mother(modulename=module_name))
+                    self._plugins.update(self.import_plugins(modulename=module_name))
         return self._plugins        
     
     def list_plugins(self):

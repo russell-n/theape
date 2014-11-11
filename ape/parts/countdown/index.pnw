@@ -3,7 +3,7 @@ Countdown
 
 <<name='imports', echo=False>>=
 # this package
-from ape.commoncode.index_builder import create_toctree
+from ape.infrastructure.index_builder import create_toctree
 @
 This package is for things meant to test the infrastructure.
 

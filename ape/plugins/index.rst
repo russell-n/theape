@@ -26,10 +26,11 @@ These are the documents created from the source files.
 .. toctree::
    :maxdepth: 1
 
-   The QuarterMaster <quartermaster.rst>
-   The Base Plugin <base_plugin.rst>
    The Ape Plugin <apeplugin.rst>
+   The Base Plugin <base_plugin.rst>
+   Composite Plugin <compositeplugin.rst>
    The Dummy Plugin <dummyplugin.rst>
+   The QuarterMaster <quartermaster.rst>
    Sleep Plugin <sleep_plugin.rst>
 
 .. toctree::

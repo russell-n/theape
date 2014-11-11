@@ -5,12 +5,6 @@ Socket Storage
 
 This is a module for classes that implement a file-like interface to a socket. Its main purpose is to catch socket timeout errors.
 
-Contents:
-
-    * :ref:`SocketStorage Model <socket-storage-model>`
-
-    * :ref:`SocketStorage API <socket-storage-api>`
-
 <<name='imports', echo=False>>=
 # python standard library
 import os
@@ -21,7 +15,7 @@ from base_storage import BaseStorage
 
 #from ape import BaseClass
 from ape import ApeError
-from ape.commoncode.code_graphs import module_diagram, class_diagram
+from ape.infrastructure.code_graphs import module_diagram, class_diagram
 @
 
 <<name='constants', echo=False>>=
@@ -196,18 +190,18 @@ if IN_PWEAVE:
 
 @
 
-.. _socket-storage-class-diagram:
-
-Class Diagram
--------------
-
-<<name='class_diagram', echo=False, results='sphinx'>>=
-if IN_PWEAVE:
-    class_diagram_file = class_diagram(class_name="SocketStorage",
-                                       filter='OTHER',
-                                       module=this_file)
-    print ".. image:: {0}".format(class_diagram_file)
-@
+.. .. _socket-storage-class-diagram:
+.. 
+.. Class Diagram
+.. -------------
+.. 
+.. <<name='class_diagram', echo=False, results='sphinx'>>=
+.. if IN_PWEAVE:
+..     class_diagram_file = class_diagram(class_name="SocketStorage",
+..                                        filter='OTHER',
+..                                        module=this_file)
+..     print ".. image:: {0}".format(class_diagram_file)
+.. @
 
 
 
