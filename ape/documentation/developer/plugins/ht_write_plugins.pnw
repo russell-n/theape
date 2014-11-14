@@ -292,7 +292,7 @@ As you can see, it uses the ``self.section_header`` attribute that it inherits f
 
 The ``product`` builder, by and large, just calls the ConfigurationMap (`self.configuration`) and passes in the parameters to the object it's building. Hopefully the calls being made are obvious enough but if not the API might help explain what's being passed into the ``TheBigSleep`` constructor.
 
-.. currentmodule:: ape.interface.configurationmap
+.. currentmodule:: ape.infrastructure.configurationmap
 .. autosummary::
    :toctree: api
 

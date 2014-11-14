@@ -39,7 +39,7 @@ These are the documents created from the source files.
 .. toctree::
    :maxdepth: 1
 
-   The APE <README.rst>
+   Read Me <README.rst>
    Log Setter <log_setter.rst>
    The Main Entry Point <main.rst>
 
@@ -47,6 +47,7 @@ These are the documents created from the source files.
    :maxdepth: 1
 
    The Components <components/index.rst>
+   The Ape's Infrastructure <infrastructure/index.rst>
    Parts <parts/index.rst>
    Plugins <plugins/index.rst>
 

@@ -1,5 +1,8 @@
-The Appendices
-==============
+The Explorations
+================
+
+Because everything has a learning curve.
+
 <<name='imports', echo=False>>=
 # this package
 from ape import create_toctree
