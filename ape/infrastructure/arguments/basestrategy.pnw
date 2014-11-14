@@ -1,0 +1,154 @@
+The BaseStrategy
+================
+
+.. currentmodule:: ape.infrastructure.arguments.basestrategy
+
+Contents:
+
+    * :ref:`Introduction <ape-interface-arguments-base-strategy>`
+    * :ref:`Class Model <ape-interface-arguments-basestrategy-class-model>`
+    * :ref:`Error Explanations <ape-interface-arguments-basestrategy-errors>`
+    * :ref:`UbootKommandant API <ubootkommandant-api>`
+
+<<name='imports', echo=False>>=
+# python standard library
+from ConfigParser import NoSectionError
+import datetime
+
+# this package
+from ape import BaseClass
+from ape.infrastructure.errors import ConfigurationError
+from ape.infrastructure.crash_handler import try_except, log_error
+from ape.infrastructure.strings import RED, BOLD, RESET
+from ape.plugins.quartermaster import QuarterMaster
+@
+<<name='constants', echo=False>>=
+RED_ERROR = "{red}{bold}{{error}}{reset}".format(red=RED,
+                                                 bold=BOLD,
+                                                 reset=RESET)
+INFO_STRING = '{b}**** {{0}} ****{r}'.format(b=BOLD, r=RESET)
+@
+
+.. _ape-interface-arguments-base-strategy:
+
+The BaseStrategy
+----------------
+
+This is a holder of sub-commands for the arguments. Its main purpose is to  provide the QuarterMaster and Ape-plugin, since one or both is being used by various sub-commands.
+
+.. _ape-interface-arguments-basestrategy-class-model:
+
+Class Model
+-----------
+
+.. uml::
+
+   BaseStrategy o- QuarterMaster
+   BaseStrategy o- TheApe
+   BaseStrategy --|> BaseClass
+
+<<name='constants', echo=False>>=
+DOCUMENT_THIS = __name__ == '__builtin__'
+@
+
+.. _ape-interface-arguments-basestrategy-errors:
+
+The Errors
+----------
+
+There are two kinds of exceptions caught which produce two error-messages:
+
+.. csv-table:: Error Messages
+   :header: Exception, Message, Meaning
+   :delim: ;
+
+   Exception; Oops, I Crapped My Pants; Something unexpected happened -- this indicates a problem with the code
+   KeyboardInterrupt; Oh, I am slain; User killed the runtime for some reason -- clean-up and then close
+
+<<name='BaseStrategy', echo=False>>=
+class BaseStrategy(BaseClass):
+    """
+    A base for the sub-commands
+    """
+    def __init__(self):
+        """
+        BaseStrategy Constructor
+        """
+        super(BaseStrategy, self).__init__()
+        self._logger = None
+        self.error = (Exception, KeyboardInterrupt)
+        self.error_message = "Oops, I Crapped My Pants"
+        self.ape = None
+        return
+
+    quartermaster = QuarterMaster()
+
+    def build_ape(self, configfiles):
+        """
+        Tries to build the Ape plugin
+        (has a side-effect of setting self.ape so that crash-handling can get to it)
+
+        :return: ape or None
+        :postcondition: self.ape set to ape (or None on failure)
+
+        :param: `configfiles`: a list of configuration files for the ape        
+        """
+        plugin = self.quartermaster.get_plugin('Ape')
+        
+        # The ape needs the config-filenames
+        try:
+            self.ape = plugin(configfiles=configfiles).product
+        except ConfigurationError as error:
+            self.logger.error(RED_ERROR.format(error=error))
+            return
+        except NoSectionError as error:
+            self.logger.error(error)
+            self.logger.error(RED_ERROR.format(error='missing section in {0}'.format(configfiles)))
+            self.logger.error(RED_ERROR.format(error='check the name of the config file'))
+            self.logger.info("Try `ape help` and `ape fetch`")
+            return 
+        return self.ape
+    
+    def clean_up(self, error):
+        """
+        To be called by the try-except if an exception is caught
+        """
+        if type(error) is KeyboardInterrupt:
+            log_error(error, self.logger, 'Oh, I am slain!')
+            if self.ape is not None:                
+                self.ape.clean_up(error)
+        else:
+            log_error(error, self.logger, self.error_message)
+        return
+        
+#
+@
+
+.. _ubootkommandant-api:
+
+The API
+-------
+
+The decorator (:ref:`try_except <try-except-decorator>`) around most of these methods is blocking the docstrings. Follow the links to the source code to see what they do.
+
+.. autosummary::
+   :toctree: api
+
+   UbootKommandant
+   UbootKommandant.handle_help
+   UbootKommandant.run
+   UbootKommandant.fetch
+   UbootKommandant.list_plugins
+   UbootKommandant.check
+   UbootKommandant.clean_up
+
+Supporting Code
+---------------
+
+These are used within the UbootKommandant.
+
+    * :ref:`The Base Class <ape-baseclass-baseclass>`
+    * :ref:`The try-except Decorator <ape-commoncode-try-except-decorator>`
+    * :ref:`The crash_handler log_error function <ape-commoncode-crash-handler-log-error>`
+    * :ref:`The QuarterMaster <ape-plugins-quartemaster>`
+    * :ref:`The Ape Plugin <apeplugin-introduction>`

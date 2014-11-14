@@ -1,0 +1,35 @@
+Runfunc
+=======
+
+<<name='imports', wrap=False>>=
+# python standard library
+from trace import Trace
+
+from test_class import TestExec
+@
+
+It looks like I had to pass in strings because I used the ``run`` method. To use an object you use ``runfunc``.
+
+<<name='default_trace', wrap=False>>=
+trace = Trace()
+t = TestExec()
+try:
+    trace.runfunc(t.run_this_and_that)
+except NameError:
+    print NameError  
+@
+
+Now, pweave doesn't raise an error, so it looks like this is what I should have used in the first place. But now you aren't actually making a call, what about arguments? 
+
+<<name='args_func', wrap=False>>=
+def args_func(a, b, c=3):
+    print 'a',a
+    print 'b',b
+    print 'c',c
+
+trace.runfunc(args_func, 1, b=2)
+@
+
+So, it looks like there's some kind of ``*args`` ``**kwargs`` thing going on inside there. If you look at the second output you might notice that it seems more sparse than the first. I think it might be because I define the function in this file, if you run it at the command line the output for both calls looks like this:
+
+.. literalinclude:: runfunc.txt

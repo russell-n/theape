@@ -1,0 +1,133 @@
+Reproducing the APE's Interface
+===============================
+
+.. '
+
+Since one of the reason's for exploring `docopt` is to find a way to simplify the argument parsing in the Ape, I'll see if I can reproduce it here.
+
+Contents:
+
+    * :ref:`The Ape's Usage String <docopt-reproducingape-ape-usage-string>`
+    * :ref:`The Base Usage String <docopt-reproducingape-base-usage-string>`
+    * :ref:`Run Sub-Command <docopt-reproducingape-run-sub-command>`
+    * :ref:`Fetch Sub-Command <docopt-reproducingape-fetch-sub-command>`
+    * :ref:`List Sub-Command <docopt-reproducingape-list-sub-command>`
+    * :ref:`Check Sub-Command <docopt-reproducingape-check-sub-command>`
+    * :ref:`Help Sub-Command <docopt-reproducingape-help-sub-command>`
+    * :ref:`All the Usage Pages <docopt-reproducingape-usage-pages>`
+
+.. '
+
+<<name='imports', echo=False>>=
+# python standard library
+import subprocess
+
+# third party
+import docopt
+
+# the ape
+from ape.main import main
+
+# this documentation
+from sections.commons import catch_exit
+from sections.commons import usage
+from sections.commons import run_usage
+from sections.commons import fetch_usage
+from sections.commons import list_usage
+from sections.commons import check_usage
+from sections.commons import help_usage
+@
+
+.. _docopt-reproducingape-ape-usage-string:
+
+The Ape's Usage String
+----------------------
+
+.. '
+
+.. currentmodule:: ape
+.. autosummary::
+   :toctree: api
+
+   ape.main
+
+<<name='ape_arguments', wrap=False>>=
+print subprocess.check_output('ape -h'.split())
+
+@
+.. _docopt-reproducingape-base-usage-string:
+
+.. include:: sections/baseusagestring.rst
+
+.. _docopt-reproducingape-run-sub-command:
+    
+.. include:: sections/runsubcommand.rst
+    
+.. _docopt-reproducingape-fetch-sub-command:
+
+.. include:: sections/fetchsubcommand.rst
+
+.. _docopt-reproducingape-list-sub-command:
+
+.. include:: sections/listsubcommand.rst
+
+.. _docopt-reproducingape-check-sub-command:
+
+.. include:: sections/checksubcommand.rst
+
+.. _docopt-reproducingape-help-sub-command:
+
+.. include:: sections/helpsubcommand.rst
+
+.. _docopt-reproducingape-usage-pages:
+
+All Usage Pages
+---------------
+
+Since I refer to these while coding I thought I'd put them in one place.
+
+.. '
+
+APE Usage
+~~~~~~~~~
+
+<<name='ape_usage', echo=False>>=
+catch_exit(usage, argv=['-h'])
+@
+
+Run Usage
+~~~~~~~~~
+
+<<name='run_usage', echo=False>>=
+catch_exit(run_usage, argv=['run', '-h'])
+@
+
+Fetch Usage
+~~~~~~~~~~~
+
+<<name='fetch_usage', echo=False>>=
+catch_exit(fetch_usage, argv='fetch -h'.split())
+@
+
+List Usage
+~~~~~~~~~~
+
+<<name='list_usage', echo=False>>=
+catch_exit(list_usage, argv='list -h'.split())
+@
+
+Check Usage
+~~~~~~~~~~
+
+<<name='check_usage', echo=False>>=
+catch_exit(check_usage, argv='check -h'.split())
+@
+
+Help Usage
+~~~~~~~~~~
+
+<<name='help_usage', echo=False>>=
+catch_exit(help_usage, argv='help -h'.split())
+@
+
+
