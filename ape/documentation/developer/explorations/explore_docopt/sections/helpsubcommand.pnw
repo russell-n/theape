@@ -1,0 +1,28 @@
+The Help Sub-Command
+--------------------
+
+<<name='imports', echo=False>>=
+# python standard library
+import subprocess
+
+# third-party
+import docopt
+
+# this documentation
+from commons import catch_exit, usage
+@
+
+<<name='help_help', wrap=False>>=
+print subprocess.check_output('ape help -h'.split())
+@
+
+<<name='help_usage', wrap=False>>=
+from commons import help_usage
+catch_exit(help_usage, ["--help"])
+@
+
+<<name='test_help'>>=
+output = docopt.docopt(usage, argv="help bob -w 30 -m cow.pipe".split(), options_first=True)
+arguments = [output['<command>']] + output['<argument>']
+print docopt.docopt(help_usage, arguments)
+@

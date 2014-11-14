@@ -1,0 +1,20 @@
+ --- modulename: test_class, funcname: run_this_and_that
+test_class.py(17):         self.run_this()
+ --- modulename: test_class, funcname: run_this
+test_class.py(6):         x = 1
+test_class.py(7):         y = 2
+test_class.py(8):         self.z = x + y
+test_class.py(9):         return
+test_class.py(18):         self.run_that()
+ --- modulename: test_class, funcname: run_that
+test_class.py(12):         self.x = 1
+test_class.py(13):         self.y = 2
+test_class.py(14):         return
+test_class.py(19):         return
+ --- modulename: runfunc, funcname: args_func
+runfunc.py(17):     print 'a',a
+a 1
+runfunc.py(18):     print 'b',b
+b 2
+runfunc.py(19):     print 'c',c
+c 3

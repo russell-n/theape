@@ -1,0 +1,18 @@
+The Ape's Infrastructure
+========================
+
+.. image:: figures/gorilla_skeleton.png
+   :align: center
+
+   Original image `source <http://commons.wikimedia.org/wiki/File:Primatenskelett-drawing.jpg>`_
+
+<<name='imports', echo=False>>=
+# this package
+from ape.infrastructure.index_builder import create_toctree
+@
+
+
+<<name='toctree', echo=False, results='sphinx'>>=
+create_toctree()
+@
+

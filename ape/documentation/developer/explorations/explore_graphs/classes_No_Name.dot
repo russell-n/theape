@@ -1,0 +1,5 @@
+digraph "classes_No_Name" {
+charset="utf-8"
+rankdir=BT
+"2" [shape="record", label="{SampleCase|\l|}"];
+}
