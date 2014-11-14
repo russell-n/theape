@@ -3,18 +3,14 @@ The Configuration Map
 
 .. _configuration-map:
 
-The `Configuration Map` maps a configuration-file-name to data. It extends the `ConfigParser` to have more data-types (and allow missing values) and to add sub-configuration-files (see the :ref:`ConfigParser Explorations <exploring-configparser-whole-shebang>` to get some idea of what I am getting at).
+The `Configuration Map` maps a configuration-file-name to data. It extends `ConfigObj` to have more data-types.
 
 .. _configurationmap-background:    
     
 Background
 ----------
 
-The `ConfigParser` module along with the `glob` module will be used to find and convert files to data. The ConfigParser has methods for the main singular data-types but I will also add collections and times. Additionally I will automatically add any sub-config files matching a `config_glob` found in the DEFAULT section of the main file given. I am also setting the `allow_no_value` option to True so that you can use options without values::
-
-    [SECTION]
-    option = value
-    valueless_option
+The `ConfigObj` module will be used to find and convert files to data. ConfigObj has methods for the main singular data-types but I will also add collections and times. 
 
 <<name='imports', echo=False>>=
 # python standard library
@@ -52,7 +48,7 @@ The ConfigurationError
 
 The `ConfigurationMap` will raise a ConfigurationError to try and trickle up more useful information.
 
-.. currentmodule:: ape.commoncode.errors
+.. currentmodule:: ape.infrastructure.errors
 .. autosummary::
    :toctree: api
 
@@ -205,9 +201,9 @@ class ConfigurationMap(BaseClass):
 
     def get_tuple(self, section, option, optional=False, default=None, delimiter=','):
         """
-        Gets the value and converts it to a list
+        Gets the value and converts it to a tuple
 
-        :return: value list with whitespace trimmed
+        :return: value tuple with whitespace trimmed
         """
         return tuple(self.get_list(section, option, optional=False, default=None,
                                    delimiter=delimiter))
@@ -351,7 +347,7 @@ class ConfigurationMap(BaseClass):
 The API
 -------
 
-.. currentmodule:: ape.interface.configurationmap
+.. currentmodule:: ape.infrastructure.configurationmap
 .. autosummary::
    :toctree: api
 
