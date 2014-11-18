@@ -27,7 +27,7 @@ class BasePlugin(BaseClass):
 
         :param:
 
-         - `configuration`: a ConfigurationMap for the product
+         - `configuration`: a ConfigObj for the product
          - `section_header`: header in the configuration for this plugin's info
         """
         super(BasePlugin, self).__init__()

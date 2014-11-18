@@ -532,6 +532,9 @@ class RelativeTime(BaseClass):
         :return: self.timedelta // integer        
         """
         return self.timedelta // integer
+
+    def __str__(self):
+        return self.source
 # end class RelativeTime    
 
 

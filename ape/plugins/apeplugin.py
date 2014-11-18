@@ -1,4 +1,28 @@
 
+class OperatorArgumentsConstants(object):
+    """
+    constants for the OperatorArguments
+    """
+    __slots__ = ()
+    # defaults
+    default_repetitions = 1
+
+
+class OperatorArguments(object):
+    """
+    extracts arguments for operators from the configuration
+    """
+    def __init__(self, configuration):
+        return
+
+    @property
+    def repetitions(self):
+        """
+        Number of times to repeat operations
+        """
+        return
+
+
 # python standard library
 import re
 import os

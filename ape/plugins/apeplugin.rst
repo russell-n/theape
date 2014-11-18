@@ -56,6 +56,39 @@ Since the two errors are siblings, catching the ``ApeError`` won't catch the `Do
 
  * The `Hortator` runs its `Operators` and traps all errors (except KeyboardInterrupts), preventing one `Operator` from stopping the others
 
+Constants
+---------
+
+These are constants put into classes to make it easier for the tests to find them.
+
+::
+
+    class OperatorArgumentsConstants(object):
+        """
+        constants for the OperatorArguments
+        """
+        __slots__ = ()
+        # defaults
+        default_repetitions = 1
+    
+    
+
+
+
+OperatorArguments
+-----------------
+
+The OperatorArguments validates the configuration arguments for the Operators.
+
+.. module:: ape.plugins.apeplugin
+.. autosummary::
+   :toctree: api
+
+   OperatorArguments
+   OperatorArguments.repetitions
+
+
+
 .. _apeplugin-run-state-diagram:
  
 The Run State Diagram

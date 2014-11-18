@@ -13,6 +13,7 @@ A place for exploring code examples.
 
    Basic ConfigObj <basics.rst>
    Sections <sections.rst>
+   Validation <validation.rst>
 
 .. toctree::
    :maxdepth: 1
