@@ -88,20 +88,12 @@ Now we try and validate the configuration.
 
 Now the output.
 
-::
+.. csv-header:: Settings
+   :header: Option, Value, Type
 
-    for option, value in config['SETTINGS'].iteritems():
-        print "Option: '{0}', Value: '{1}', Type: '{2}'".format(option, value,
-                                                                type(value))
-    
-
-::
-
-    Option: 'repetitions', Value: '11', Type: '<type 'int'>'
-    Option: 'total_time', Value: '3 days 2 Hours 12 minutes', Type: '<class 'ape.infrastructure.timemap.RelativeTime'>'
-    Option: 'end_time', Value: '2014-11-17 20:00:00', Type: '<type 'datetime.datetime'>'
-    Option: 'external_modules', Value: 'tuna.annealing', Type: '<type 'str'>'
-    Option: 'subfolder', Value: 'output', Type: '<type 'str'>'
-    Option: 'timestamp', Value: 'HH:MM', Type: '<type 'str'>'
-    
-
+   repetitions,11,<type 'int'>
+   total_time,3 days 2 Hours 12 minutes,<class 'ape.infrastructure.timemap.RelativeTime'>
+   end_time,2014-11-17 20:00:00,<type 'datetime.datetime'>
+   external_modules,tuna.annealing,<type 'str'>
+   subfolder,output,<type 'str'>
+   timestamp,HH:MM,<type 'str'>

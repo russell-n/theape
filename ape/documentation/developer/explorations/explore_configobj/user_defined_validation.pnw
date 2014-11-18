@@ -83,9 +83,12 @@ config.validate(validator)
 
 Now the output.
 
-<<name='settings_check', wrap=False>>=
+.. csv-header:: Settings
+   :header: Option, Value, Type
+
+<<name='settings_check', echo=False, results='sphinx', wrap=False>>=
 for option, value in config['SETTINGS'].iteritems():
-    print "Option: '{0}', Value: '{1}', Type: '{2}'".format(option, value,
-                                                            type(value))
+    print "   {0},{1},{2}".format(option, value,
+                                    type(value))
 @
 
