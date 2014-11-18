@@ -1,0 +1,79 @@
+Exploring Time
+==============
+
+Background
+----------
+
+The motivating question -- *how do you translate strings to times?* There are two cases that I am going to look at:
+
+   * Relative Time: a specification of hours, minutes, seconds, etc.
+   * Absolute Time: a unique moment (e.g. '10-24-2013 9:14 pm')
+
+The reason for looking at this is to find a way or ways to translate a configuration file to time-specifications for running code. Some possible uses:
+
+   * Finding an execution-time for a command such as `iperf`
+   * Finding a stopping time when the code shouldn't go past
+   * Finding a starting time when code should be run
+
+<<name='imports', echo=False>>=
+# python standard library
+import re
+@
+
+.. exploring-time-relative:
+Relative Time
+-------------
+
+This seems to be the easier case. Say we have a specification of the form::
+
+   run_time = 1 hour 20 minutes
+
+For certain cases it would make sense to convert it to an integer or float so you could pass it to a command (like `time.sleep`) in other cases it might make sense to convert it to a timedelta so you can compare it to a specific time (like `datetime.now`). In any case, the first step would seem to be to tokenize the string to get the times. Since the configuration for this package largely passes through ConfigParse, I am going to assume that only strings with only the time information will be handled (i.e. 'run_time =' won't be in the string gotten from the example specification given above).
+
+First, I'll set up some regular expressions to tokenize the strings.
+
+<<name='expressions', wrap=False>>=
+DIGIT = r'\d'
+ONE_OR_MORE = r"+"
+ZERO_OR_MORE = r'*'
+DECIMAL = r'\.'
+SPACE = r'\s'
+SPACES = SPACE + ONE_OR_MORE
+OPTIONAL_SPACES = SPACE + ZERO_OR_MORE
+OR = r'|'
+
+# groups
+NAMED = "(?P<{n}>{e})"
+GROUPED = "({0})"
+
+# numbers
+INTEGER = DIGIT + ONE_OR_MORE
+FLOAT = INTEGER + DECIMAL + INTEGER
+
+REAL = INTEGER + OR + FLOAT
+
+WEEKS = NAMED.format(n='weeks', e=REAL) + OPTIONAL_SPACES + '[wW]'
+DAYS = NAMED.format(n='days', e=REAL) + OPTIONAL_SPACES + '[dD]'
+
+# compiled_expressions
+DAY_EXPRESSION = re.compile(DAYS)
+WEEK_EXPRESSION = re.compile(WEEKS)
+@
+
+<<name='tokenizing_days', wrap=False>>=
+example_1 = '2 days 3 hours 10 Weeks'
+example_2 =  '1.2Weeks 6.2 days'
+
+match = DAY_EXPRESSION.search(example_1)
+print "Days: " + match.group('days')
+
+match = DAY_EXPRESSION.search(example_2)
+print 'Days: ' + match.group('days')
+@
+
+<<name='tokenizing_weeks', wrap=False>>=
+match = WEEK_EXPRESSION.search(example_1)
+print 'weeks: ' + match.group('weeks')
+match = WEEK_EXPRESSION.search(example_2)
+print 'Weeks: ' + match.group('weeks')
+@

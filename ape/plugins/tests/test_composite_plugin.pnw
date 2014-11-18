@@ -1,0 +1,62 @@
+Testing the Watcher Plugin
+========================
+
+The `Watcher` plugin inherits from the :ref:`BasePlugin <base-plugin>` and so takes two parameters on instantiation:
+
+   * configuration (a configuration map to get config-file values from)
+
+   * section_header (the section name that has values for the plugin)
+
+The section parameter `section_header` was added so that more than one configuration of each plugin can be used. Since the operator is passing this in to all  the plugins it can be assumed that it will always exist (in the current implementation of the ape).
+
+.. autosummary::
+   :toctree: api
+
+   TestingWatcherPlugin.test_constructor
+   TestingWatcherPlugin.test_product
+
+<<name='imports', echo=False>>=
+# python standard library
+import unittest
+
+# third-party
+from mock import MagicMock, call
+
+# the ape
+from ape.plugins.watcherplugin import Watcher
+@
+   
+<<name='TestingWatcherPlugin', echo=False>>=
+class TestingWatcherPlugin(unittest.TestCase):
+    def setUp(self):
+        self.config_map = MagicMock()
+        self.section_header = 'iliketowatch'
+        self.plugin = Watcher(configuration=self.config_map,
+                              section_header=self.section_header)
+        return
+
+    def test_constructor(self):
+        """
+        Does it take the two expected parameters?
+        """
+        self.assertIs(self.config_map, self.plugin.configuration)
+        self.assertIs(self.section_header, self.plugin.section_header)
+        return
+
+    def test_product(self):
+        """
+        Does it build the product in the way you expect?
+        """
+        product = self.plugin.product
+        self.config_map.items.assert_called_with(section=self.section_header,
+                                                        optional=True,
+                                                        default={})
+        return    
+@
+
+
+
+
+
+
+

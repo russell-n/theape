@@ -1,0 +1,17 @@
+Exploring ConfigObj
+===================
+<<name='imports', echo=False>>=
+# this package
+from ape import create_toctree
+@
+
+Code Explorations
+-----------------
+
+A place for exploring code examples.
+
+<<name='toctree', echo=False, results='sphinx'>>=
+create_toctree(maxdepth=1)
+@
+
+

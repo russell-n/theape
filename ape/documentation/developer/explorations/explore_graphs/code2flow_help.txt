@@ -1,0 +1,20 @@
+usage: code2flow [-h] [-o OUTFILE] [--language LANGUAGE] [--hidelegend] [-d]
+                 [--version]
+                 files [files ...]
+
+See flow charts of your source code. This EXPERIMENTAL script is useful for
+documentation and code refactoring in simple projects
+
+positional arguments:
+  files                 The source file you are trying to graph. Currently,
+                        only handles python and javascript
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -o OUTFILE, --outfile OUTFILE
+                        Filetype can be dot, gv, png, ps, svg, etc. Default is
+                        `out.png`
+  --language LANGUAGE
+  --hidelegend
+  -d, --debug
+  --version             show program's version number and exit
