@@ -13,6 +13,7 @@ A place for exploring code examples.
 
    Basic ConfigObj <basics.rst>
    Sections <sections.rst>
+   User Defined Validation <user_defined_validation.rst>
    Validation <validation.rst>
 
 .. toctree::
