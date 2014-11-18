@@ -1,0 +1,14 @@
+digraph "TheHortator" {
+charset="utf-8"
+rankdir=BT
+"2" [shape="record", label="{TheHortator|operations\l_countdown : NoneType\l|countdown()\l__call__()\l__init__()\l}"];
+"3" [shape="record", label="{BaseClass|_logger : NoneType\l|logger()\l__init__()\l}"];
+"4" [shape="record", label="{RootLogger|\l|__init__()\l}"];
+"5" [shape="record", label="{CountDown|lap_start_time\lstart_time\literation : int\literations\l|time_remaining()\lstart_timer()\lnext_iteration()\l__init__()\l}"];
+"6" [shape="record", label="{DummyClass|_logger : NoneType\l|__call__()\l__str__()\l__getattr__()\l__init__()\l}"];
+"2" -> "3" [arrowtail="none", arrowhead="empty"];
+"5" -> "6" [arrowtail="none", arrowhead="empty"];
+"6" -> "3" [arrowtail="none", arrowhead="empty"];
+"5" -> "2" [arrowhead="diamond", style="solid", arrowtail="none", fontcolor="green", label="_countdown"];
+"4" -> "3" [arrowhead="diamond", style="solid", arrowtail="none", fontcolor="green", label="_logger"];
+}
