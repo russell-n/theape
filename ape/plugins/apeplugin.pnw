@@ -7,6 +7,35 @@ The Ape Plugin
 .. _ape-plugin:
 This is the plugin that creates the Hortator to run :ref:`Composites <composite-class>`. It will be used when the `run` subcommand is called by the user.
 
+<<name='imports', echo=False>>=
+# python standard library
+import re
+import os
+from collections import OrderedDict
+
+# third party
+from configobj import ConfigObj
+from validate import Validator
+
+# this package
+import ape.infrastructure.arguments.arguments as basearguments
+from ape.infrastructure.arguments.argumentbuilder import ArgumentBuilder
+from ape.infrastructure.configurationmap import ConfigurationMap
+from ape.components.component import Composite
+from ape.parts.storage.filestorage import FileStorage
+
+from base_plugin import BasePlugin
+from ape.infrastructure.code_graphs import module_diagram, class_diagram
+from ape.infrastructure.errors import ApeError, DontCatchError, ConfigurationError
+from ape import APESECTION, MODULES_SECTION
+from quartermaster import QuarterMaster
+from ape.parts.countdown.countdown import INFO
+from ape.parts.countdown.countdown import CountdownTimer
+import ape.infrastructure.singletons as singletons
+from ape.infrastructure.timemap import RelativeTime, AbsoluteTime
+@
+
+
 .. _apeplugin-introduction:    
     
 Introduction
@@ -61,14 +90,94 @@ Constants
 
 These are constants put into classes to make it easier for the tests to find them.
 
-<<name='OperatorArgumentsConstants'>>=
-class OperatorArgumentsConstants(object):
+<<name='OperatorConfiguratioConstants'>>=
+class OperatorConfigurationConstants(object):
     """
-    constants for the OperatorArguments
+    constants for the OperatorConfiguration
     """
     __slots__ = ()
+    # sections
+    settings_section = 'SETTINGS'
+
+    # options
+    repetitions_option = 'repetitions'
+    config_glob_option = 'config_glob'
+    total_time_option = 'total_time'
+    end_time_option = 'end_time'
+    subfolder_option = 'subfolder'
+    modules_option = 'external_modules'
+    
     # defaults
     default_repetitions = 1
+    default_config_glob = None
+    default_total_time = None
+    default_end_time = None
+    default_subfolder = None
+    default_modules = None
+@
+
+OperatorConfigspec
+------------------
+
+The Configuration Specification for the Operator Configuration.
+
+<<name='config_spec_string', wrap=False>>=
+operator_config_spec = """
+[SETTINGS]
+config_glob = string(default=None)
+repetitions = integer(default=1)
+total_time = relative_time(default=None)
+end_time = absolute_time(default=None)
+subfolder = string(default=None)
+external_modules = string_list(default=None)
+""".splitlines()
+@
+
+.. uml::
+
+   OperatorConfigspec o- ConfigObj
+
+.. module:: ape.plugins.apeplugin
+.. autosummary::
+   :toctree: api
+
+   OperatorConfigspec
+   OperatorConfigspec.configspec
+   OperatorConfigspec.subconfigspec
+   OperatorConfigspec.validator
+   
+<<name='OperatorConfigspec', echo=False>>=
+class OperatorConfigspec(object):
+    """
+    A configuration specification for the OperatorConfiguration
+    """
+    def __init__(self):
+        self._configspec = None
+        self._validator = None
+        return
+
+    @property
+    def configspec(self):
+        """
+        A configspec that  matches the Operator's Configuration
+        """
+        if self._configspec is None:
+            self._configspec = ConfigObj(operator_config_spec,
+                                         list_values=False,
+                                         _inspec=True)
+        return self._configspec
+
+    @property
+    def validator(self):
+        """
+        A validator with user-defined classes
+        """
+        if self._validator is None:
+            ab_time = AbsoluteTime()
+            extras = {'relative_time': RelativeTime,
+                      'absolute_time': ab_time}
+            self._validator = Validator(extras)
+        return self._validator
 @
 
 OperatorArguments
@@ -96,9 +205,6 @@ class OperatorArguments(object):
         """
         Number of times to repeat operations
         """
-        if self._repetions is None:
-            schema = operator_arguments_schema[OperatorArgumentsConstants.repetitions]
-            self._repetions = schema.validate(self.configuration[self.settings_section][])
         return
 @
 
@@ -136,28 +242,6 @@ This means:
 
  * the `Build Composites` happens in creating the ``product`` 
    
-<<name='imports', echo=False>>=
-# python standard library
-import re
-import os
-from collections import OrderedDict
-
-# this package
-import ape.infrastructure.arguments.arguments as basearguments
-from ape.infrastructure.arguments.argumentbuilder import ArgumentBuilder
-from ape.infrastructure.configurationmap import ConfigurationMap
-from ape.components.component import Composite
-from ape.parts.storage.filestorage import FileStorage
-
-from base_plugin import BasePlugin
-from ape.infrastructure.code_graphs import module_diagram, class_diagram
-from ape.infrastructure.errors import ApeError, DontCatchError, ConfigurationError
-from ape import APESECTION, MODULES_SECTION
-from quartermaster import QuarterMaster
-from ape.parts.countdown.countdown import INFO
-from ape.parts.countdown.countdown import CountdownTimer
-import ape.infrastructure.singletons as singletons
-@
 <<name='check_pweave', echo=False>>=
 in_pweave = __name__ == '__builtin__'
 @

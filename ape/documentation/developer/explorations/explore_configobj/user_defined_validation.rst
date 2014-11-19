@@ -88,12 +88,12 @@ Now we try and validate the configuration.
 
 Now the output.
 
-.. csv-header:: Settings
+.. csv-table:: Settings
    :header: Option, Value, Type
 
    repetitions,11,<type 'int'>
    total_time,3 days 2 Hours 12 minutes,<class 'ape.infrastructure.timemap.RelativeTime'>
-   end_time,2014-11-17 20:00:00,<type 'datetime.datetime'>
+   end_time,2014-11-18 20:00:00,<type 'datetime.datetime'>
    external_modules,tuna.annealing,<type 'str'>
    subfolder,output,<type 'str'>
    timestamp,HH:MM,<type 'str'>
