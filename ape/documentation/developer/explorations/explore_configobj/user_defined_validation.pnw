@@ -83,7 +83,7 @@ config.validate(validator)
 
 Now the output.
 
-.. csv-header:: Settings
+.. csv-table:: Settings
    :header: Option, Value, Type
 
 <<name='settings_check', echo=False, results='sphinx', wrap=False>>=

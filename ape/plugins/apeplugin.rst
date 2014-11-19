@@ -7,6 +7,9 @@ The Ape Plugin
 .. _ape-plugin:
 This is the plugin that creates the Hortator to run :ref:`Composites <composite-class>`. It will be used when the `run` subcommand is called by the user.
 
+
+
+
 .. _apeplugin-introduction:    
     
 Introduction
@@ -63,16 +66,67 @@ These are constants put into classes to make it easier for the tests to find the
 
 ::
 
-    class OperatorArgumentsConstants(object):
+    class OperatorConfigurationConstants(object):
         """
-        constants for the OperatorArguments
+        constants for the OperatorConfiguration
         """
         __slots__ = ()
+        # sections
+        settings_section = 'SETTINGS'
+    
+        # options
+        repetitions_option = 'repetitions'
+        config_glob_option = 'config_glob'
+        total_time_option = 'total_time'
+        end_time_option = 'end_time'
+        subfolder_option = 'subfolder'
+        modules_option = 'external_modules'
+        
         # defaults
         default_repetitions = 1
+        default_config_glob = None
+        default_total_time = None
+        default_end_time = None
+        default_subfolder = None
+        default_modules = None
     
     
 
+
+
+OperatorConfigspec
+------------------
+
+The Configuration Specification for the Operator Configuration.
+
+::
+
+    operator_config_spec = """
+    [SETTINGS]
+    config_glob = string(default=None)
+    repetitions = integer(default=1)
+    total_time = relative_time(default=None)
+    end_time = absolute_time(default=None)
+    subfolder = string(default=None)
+    external_modules = string_list(default=None)
+    """.splitlines()
+    
+
+
+
+.. uml::
+
+   OperatorConfigspec o- ConfigObj
+
+.. module:: ape.plugins.apeplugin
+.. autosummary::
+   :toctree: api
+
+   OperatorConfigspec
+   OperatorConfigspec.configspec
+   OperatorConfigspec.subconfigspec
+   OperatorConfigspec.validator
+   
 
 
 OperatorArguments

@@ -32,12 +32,13 @@ rst_prolog = """
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
+
+#               'sphinx.ext.viewcode',
 extensions = ['sphinx.ext.autosummary',
               'sphinx.ext.autodoc',
               'sphinx.ext.intersphinx',
               'sphinx.ext.coverage',
               'sphinx.ext.pngmath',
-              'sphinx.ext.viewcode',
               'sphinx.ext.inheritance_diagram',
               'sphinxcontrib.plantuml',
               'sphinx.ext.graphviz',
@@ -323,3 +324,4 @@ autoclass_content = 'both'
 autodoc_member_order = 'groupwise'
 
 todo_include_todos = True
+viewcode_import = False

@@ -1,32 +1,12 @@
 
-class OperatorArgumentsConstants(object):
-    """
-    constants for the OperatorArguments
-    """
-    __slots__ = ()
-    # defaults
-    default_repetitions = 1
-
-
-class OperatorArguments(object):
-    """
-    extracts arguments for operators from the configuration
-    """
-    def __init__(self, configuration):
-        return
-
-    @property
-    def repetitions(self):
-        """
-        Number of times to repeat operations
-        """
-        return
-
-
 # python standard library
 import re
 import os
 from collections import OrderedDict
+
+# third party
+from configobj import ConfigObj
+from validate import Validator
 
 # this package
 import ape.infrastructure.arguments.arguments as basearguments
@@ -43,6 +23,91 @@ from quartermaster import QuarterMaster
 from ape.parts.countdown.countdown import INFO
 from ape.parts.countdown.countdown import CountdownTimer
 import ape.infrastructure.singletons as singletons
+from ape.infrastructure.timemap import RelativeTime, AbsoluteTime
+
+
+class OperatorConfigurationConstants(object):
+    """
+    constants for the OperatorConfiguration
+    """
+    __slots__ = ()
+    # sections
+    settings_section = 'SETTINGS'
+
+    # options
+    repetitions_option = 'repetitions'
+    config_glob_option = 'config_glob'
+    total_time_option = 'total_time'
+    end_time_option = 'end_time'
+    subfolder_option = 'subfolder'
+    modules_option = 'external_modules'
+    
+    # defaults
+    default_repetitions = 1
+    default_config_glob = None
+    default_total_time = None
+    default_end_time = None
+    default_subfolder = None
+    default_modules = None
+
+
+operator_config_spec = """
+[SETTINGS]
+config_glob = string(default=None)
+repetitions = integer(default=1)
+total_time = relative_time(default=None)
+end_time = absolute_time(default=None)
+subfolder = string(default=None)
+external_modules = string_list(default=None)
+""".splitlines()
+
+
+class OperatorConfigspec(object):
+    """
+    A configuration specification for the OperatorConfiguration
+    """
+    def __init__(self):
+        self._configspec = None
+        self._validator = None
+        return
+
+    @property
+    def configspec(self):
+        """
+        A configspec that  matches the Operator's Configuration
+        """
+        if self._configspec is None:
+            self._configspec = ConfigObj(operator_config_spec,
+                                         list_values=False,
+                                         _inspec=True)
+        return self._configspec
+
+    @property
+    def validator(self):
+        """
+        A validator with user-defined classes
+        """
+        if self._validator is None:
+            ab_time = AbsoluteTime()
+            extras = {'relative_time': RelativeTime,
+                      'absolute_time': ab_time}
+            self._validator = Validator(extras)
+        return self._validator
+
+
+class OperatorArguments(object):
+    """
+    extracts arguments for operators from the configuration
+    """
+    def __init__(self, configuration):
+        return
+
+    @property
+    def repetitions(self):
+        """
+        Number of times to repeat operations
+        """
+        return
 
 
 in_pweave = __name__ == '__builtin__'
