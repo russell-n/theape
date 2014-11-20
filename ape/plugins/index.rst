@@ -36,5 +36,6 @@ These are the documents created from the source files.
 .. toctree::
    :maxdepth: 1
 
+   Testing the Plugins <tests/index.rst>
 
 

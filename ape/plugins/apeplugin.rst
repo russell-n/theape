@@ -62,7 +62,7 @@ Since the two errors are siblings, catching the ``ApeError`` won't catch the `Do
 Constants
 ---------
 
-These are constants put into classes to make it easier for the tests to find them.
+These are constants put into classes to make it easier for the tests to find them and to make the configuration-file settings more implicit.
 
 ::
 
@@ -73,6 +73,8 @@ These are constants put into classes to make it easier for the tests to find the
         __slots__ = ()
         # sections
         settings_section = 'SETTINGS'
+        operations_section = 'OPERATIONS'
+        plugins_section = "PLUGINS"
     
         # options
         repetitions_option = 'repetitions'
@@ -81,6 +83,7 @@ These are constants put into classes to make it easier for the tests to find the
         end_time_option = 'end_time'
         subfolder_option = 'subfolder'
         modules_option = 'external_modules'
+        timestamp_option = 'timestamp'
         
         # defaults
         default_repetitions = 1
@@ -89,6 +92,10 @@ These are constants put into classes to make it easier for the tests to find the
         default_end_time = None
         default_subfolder = None
         default_modules = None
+        default_timestamp = None
+    
+        #extra
+        file_storage_name = 'infrastructure'   
     
     
 
@@ -97,7 +104,9 @@ These are constants put into classes to make it easier for the tests to find the
 OperatorConfigspec
 ------------------
 
-The Configuration Specification for the Operator Configuration.
+The Configuration Specification for the Operator Configuration. It's used by configobj to validate a configuration, convert strings to types, and set defaults.
+
+.. '
 
 ::
 
@@ -109,10 +118,22 @@ The Configuration Specification for the Operator Configuration.
     end_time = absolute_time(default=None)
     subfolder = string(default=None)
     external_modules = string_list(default=None)
+    timestamp = string(default=None)
+    
+    [OPERATIONS]
+    __many__ = force_list
+    
+    [PLUGINS]
+     [[__many__]]
+     plugin = string
     """.splitlines()
     
 
 
+
+It looks like the way configobj works there isn't a way to force the plugins section with the configspec, it just shows up...
+
+.. '
 
 .. uml::
 
@@ -129,17 +150,48 @@ The Configuration Specification for the Operator Configuration.
    
 
 
-OperatorArguments
------------------
+OperatorConfiguration
+---------------------
 
-The OperatorArguments validates the configuration arguments for the Operators.
+The OperatorConfiguration builds the dependencies for the Operators.
+
+.. uml::
+
+   OperatorConfiguration o- CountdownTimer
+   OperatorConfiguration o- OperationConfiguration
+   OperatorConfiguration o- QuarterMaster
 
 .. module:: ape.plugins.apeplugin
 .. autosummary::
    :toctree: api
 
-   OperatorArguments
-   OperatorArguments.repetitions
+   OperatorConfiguration
+   OperatorConfiguration.configuration
+   OperatorConfiguration.configspec
+   OperatorConfiguration.countdown_timer
+   OperatorConfiguration.initialize_file_storage
+   OperatorConfiguration.operation_configurations
+   OperatorConfiguration.quartermaster
+   OperatorConfiguration.operation_timer
+
+
+
+
+OperationConfiguration
+----------------------
+
+A dependency builder for operations.
+
+.. uml::
+
+   OperationConfiguration o- QuarterMaster
+   
+
+.. autosummary::
+   :toctree: api
+
+   OperationConfiguration
+   OperationConfiguration.plugin_sections
 
 
 

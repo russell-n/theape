@@ -6,7 +6,7 @@ import random
 from configobj import ConfigObj
 from validate import Validator
 from behave import given, when, then
-from hamcrest import assert_that, is_, equal_to
+from hamcrest import assert_that, is_, equal_to, contains_inanyorder, contains
 
 # this package
 from ape.plugins.apeplugin import OperatorConfigspec, OperatorConfigurationConstants
@@ -45,6 +45,8 @@ def assert_default_settings(context):
                 is_(equal_to(constants.default_subfolder)))
     assert_that(settings[constants.modules_option],
                 is_(equal_to(constants.default_modules)))
+    assert_that(settings[constants.timestamp_option],
+                is_(equal_to(constants.default_timestamp)))
     return
 
 
@@ -56,6 +58,7 @@ total_time = {total}
 end_time = {abtime}
 subfolder = {sub}
 external_modules = {mods}
+timestamp = {stamp}
 """
 
 @given("a configuration file with settings")
@@ -67,6 +70,7 @@ def configuration_settings(context):
     relative_time = '1 day 3 hours'
     absolute_time = '8:00 pm'
     modules = 'external.module.a,ex.mod.b,emc'
+    context.timestamp = '%a_%b_%d'
     context.modules = modules.split(',')
     context.total_time = RelativeTime(relative_time)
     ab_time = AbsoluteTime()
@@ -76,6 +80,7 @@ def configuration_settings(context):
                                                            total=relative_time,
                                                            abtime=absolute_time,
                                                            sub=context.subfolder,
+                                                           stamp=context.timestamp,
                                                            mods=modules).splitlines(),
                                       configspec=context.configspec.configspec)
 
@@ -101,5 +106,79 @@ def assert_user_settings(context):
 
     assert_that(settings[constants.modules_option],
                 is_(equal_to(context.modules)))
+
+    assert_that(settings[constants.timestamp_option],
+                is_(equal_to(context.timestamp)))
+    return
+
+
+operations_configuration = """
+[OPERATIONS]
+op1 = p1, p2
+op2 = p3, p2, p4
+""".splitlines()
+
+@given("a configuration with operations")
+def configuration_operations(context):
+    context.configspec = OperatorConfigspec()
+    context.operations = 'op1 op2'.split()
+    context.op_dict = {'op1': 'p1 p2'.split(),
+                       'op2': 'p3 p2 p4'.split()}
+    context.configuration = ConfigObj(operations_configuration,
+                                      configspec=context.configspec.configspec)
+    return
+
+
+@then("it has the operations dictionary")
+def operations_dictionary(context):
+    constants = OperatorConfigurationConstants
+    operations =  context.configuration[constants.operations_section]
+    assert_that(operations.keys(),
+                contains(*context.operations))
+    
+    for operation in context.operations:
+        assert_that(operations[operation],
+                    contains(*context.op_dict[operation]))
+    return
+
+
+plugins_configuration = """
+[SETTINGS]
+repetitions = 1000
+
+[OPERATIONS]
+op = p1, p2
+
+[PLUGINS]
+ [[p1]]
+ plugin = fake1
+
+ option1 = value1
+
+ [[p2]]
+""".splitlines()
+
+@given("a configuration with plugins")
+def plugins_config(context):
+    context.configspec = OperatorConfigspec()
+    context.configuration = ConfigObj(plugins_configuration,
+                                      configspec=context.configspec.configspec)
+    context.subsections = 'p1 p2'.split()
+    return
+
+
+@then("it has the plugins dictionary")
+def assert_plugins(context):
+    section = context.configuration[OperatorConfigurationConstants.plugins_section]
+    assert_that(section.keys(),
+                contains(*context.subsections))
+    assert_that(section['p1']['plugin'],
+                is_(equal_to('fake1')))
+
+    assert_that(section['p1']['option1'],
+                is_(equal_to('value1')))
+
+    assert_that(context.configuration['SETTINGS']['repetitions'],
+                is_(equal_to(1000)))
 
     return
