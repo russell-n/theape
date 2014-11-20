@@ -19,9 +19,10 @@ from base_plugin import BasePlugin
 from ape.infrastructure.code_graphs import module_diagram, class_diagram
 from ape.infrastructure.errors import ApeError, DontCatchError, ConfigurationError
 from ape import APESECTION, MODULES_SECTION
-from quartermaster import QuarterMaster
+import  ape.plugins.quartermaster
 from ape.parts.countdown.countdown import INFO
-from ape.parts.countdown.countdown import CountdownTimer
+#from ape.parts.countdown.countdown import CountdownTimer
+import ape.parts.countdown.countdown
 import ape.infrastructure.singletons as singletons
 from ape.infrastructure.timemap import RelativeTime, AbsoluteTime
 
@@ -33,6 +34,8 @@ class OperatorConfigurationConstants(object):
     __slots__ = ()
     # sections
     settings_section = 'SETTINGS'
+    operations_section = 'OPERATIONS'
+    plugins_section = "PLUGINS"
 
     # options
     repetitions_option = 'repetitions'
@@ -41,6 +44,7 @@ class OperatorConfigurationConstants(object):
     end_time_option = 'end_time'
     subfolder_option = 'subfolder'
     modules_option = 'external_modules'
+    timestamp_option = 'timestamp'
     
     # defaults
     default_repetitions = 1
@@ -49,6 +53,10 @@ class OperatorConfigurationConstants(object):
     default_end_time = None
     default_subfolder = None
     default_modules = None
+    default_timestamp = None
+
+    #extra
+    file_storage_name = 'infrastructure'   
 
 
 operator_config_spec = """
@@ -59,6 +67,14 @@ total_time = relative_time(default=None)
 end_time = absolute_time(default=None)
 subfolder = string(default=None)
 external_modules = string_list(default=None)
+timestamp = string(default=None)
+
+[OPERATIONS]
+__many__ = force_list
+
+[PLUGINS]
+ [[__many__]]
+ plugin = string
 """.splitlines()
 
 
@@ -95,19 +111,156 @@ class OperatorConfigspec(object):
         return self._validator
 
 
-class OperatorArguments(object):
+constants = OperatorConfigurationConstants
+
+class OperatorConfiguration(object):
     """
-    extracts arguments for operators from the configuration
+    Extracts arguments for operators from the configuration
     """
-    def __init__(self, configuration):
+    def __init__(self, source):
+        """
+        Operator Configuration constructor
+
+        :param:
+
+         - `source`: name of configuration file
+        """
+        self.source = source
+        self._configuration = None
+        self._configspec = None
+        self._countdown_timer = None
+        self._settings = None
+        self._operation_names = None
+        self._quartermaster = None
+        self._operation_configurations = None
+        self._operation_timer = None
         return
 
     @property
-    def repetitions(self):
+    def operation_timer(self):
         """
-        Number of times to repeat operations
+        A countdown timer for operations to share (None if end_time not set)
         """
+        if (self._operation_timer is None and
+            self.settings[constants.end_time_option] is not None):
+            self._operation_timer = CountdownTimer(end_time=self.settings[constants.end_time_option])
+        return self._operation_timer
+
+    @property
+    def operation_configurations(self):
+        """
+        Generator of Operation Configurations
+        """
+            
+        return []
+
+    @property
+    def quartermaster(self):
+        """
+        QuarteMaster built with external_modules
+        """
+        if self._quartermaster is None:
+            modules = self.settings[constants.modules_option]
+            self._quartermaster = ape.plugins.quartermaster.QuarterMaster(external_modules=modules)
+        return self._quartermaster
+
+    @property
+    def settings(self):
+        """
+        SETTINGS section from the configuration
+        """
+        if self._settings is None:
+            self._settings = self.configuration[constants.settings_section]
+        return self._settings    
+
+    @property
+    def countdown_timer(self):
+        """
+        CountdownTimer built from the configuration for the operator
+        """
+        if self._countdown_timer is None:
+            definition = ape.parts.countdown.countdown.CountdownTimer
+
+            repetitions = self.settings[constants.repetitions_option]
+            end_time = self.settings[constants.end_time_option]
+            total_time = self.settings[constants.total_time_option]
+            
+            self._countdown_timer = definition(repetitions=repetitions,
+                                               end_time=end_time,
+                                               total_time=total_time,
+                                               log_level=INFO)
+        return self._countdown_timer
+
+    @property
+    def configspec(self):
+        """
+        OperatorConfigspec
+        """
+        if self._configspec is None:
+            self._configspec = OperatorConfigspec()
+        return self._configspec
+
+    @property
+    def configuration(self):
+        """
+        ConfigObj built from `source`
+        """
+        if self._configuration is None:
+            self._configuration = ConfigObj(self.source,
+                                            configspec=self.configspec.configspec,
+                                            file_error=True)
+            self._configuration.validate(self.configspec.validator)
+        return self._configuration
+
+    def initialize_file_storage(self):
+        """
+        This has to be called before the plugins are built so the path will be set
+
+        :postcondition: file-storage singleton with sub-folder from default section added as path
+        """
+        file_storage = ape.infrastructure.singletons.get_filestorage(name=constants.file_storage_name)
+        subfolder = self.settings[constants.subfolder_option]
+        timestamp = self.settings[constants.timestamp_option]
+        
+        if subfolder is not None:
+            file_storage.path = subfolder
+        if timestamp is not None:
+            file_storage.timestamp = timestamp
         return
+
+
+# end class OperatorConfiguration
+
+
+class OperationConfiguration(object):
+    """
+    a builder of plugins for operations
+    """
+    def __init__(self, section, operation_name, quartermaster):
+        """
+        OperationConfiguration builder
+
+        :param:
+
+         - `section`: dict with configuration
+         - `operation_name`: option in the OPERATIONS section
+         - `quartermaster`: QuarterMaster to retrieve plugins
+        """
+        self.section = section
+        self.operation_name = operation_name
+        self._plugin_sections = None
+        return
+
+    @property
+    def plugin_sections(self):
+        """
+        list of plugin-section names
+        """
+        if self._plugin_sections is None:
+            self._plugin_sections = self.section[self.operation_name]
+        return self._plugin_sections
+        
+# end class OperationConfiguration        
 
 
 in_pweave = __name__ == '__builtin__'
@@ -354,23 +507,6 @@ class Ape(BasePlugin):
             # save the configuration as a copy so there will be a record
             self.save_configuration(configuration)
         return hortator
-
-    def initialize_file_storage(self, configuration):
-        """
-        This has to be called before the plugins are built so the path will be set
-
-        :param:
-
-         - `configuration`: the Configuration (a ConfigParser like object)
-
-        :postcondition: file-storage singleton with sub-folder from default section added as path
-        """
-        file_storage = singletons.get_filestorage(name=FILE_STORAGE_NAME)
-        if SUBFOLDER in configuration.defaults:
-            file_storage.path = configuration.defaults[SUBFOLDER]
-        if TIMESTAMP in configuration.defaults:
-            file_storage.timestamp = configuration.defaults[TIMESTAMP]
-        return
 
     def save_configuration(self, configuration):
         """
