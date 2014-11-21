@@ -2,9 +2,13 @@
 # python standard library
 from collections import OrderedDict
 
+# third party
+from configobj import ConfigObj
+
 # this package
 from ape import BasePlugin
 from ape.parts.sleep.sleep import TheBigSleep
+from ape.infrastructure.timemap import time_validator
 
 
 SLEEP_SECTION = 'SLEEP'
@@ -15,23 +19,28 @@ VERBOSE_OPTION = 'verbose'
 
 
 configuration = """
-[{0}]
-# to allow the section names to be arbitrary
-# the plugin names are required
-plugin = Sleep
-# 'end' should be a timestamp for the end-time (11-12-2013 8:45 pm)
-# 'total' should be a timestamp for the run-time (1 hr 23 minutes)
-# 'interval' should be <amount> <units> (1 minute)
-# if verbose is False, sceen output will be off except at startup
-# only one of absolute or relative time is required, although both can be used
-{1} = <absolute time>
-{2} = <relative time>
-{3} = 1 second
-{4} = True
-""".format(SLEEP_SECTION, END_OPTION,
-           TOTAL_OPTION,
-           INTERVAL_OPTION,
-           VERBOSE_OPTION)
+  [[SLEEP]]
+  # to allow the section names to be arbitrary
+  # the plugin names are required
+  plugin = Sleep
+  # 'end' should be a timestamp for the end-time (11-12-2013 8:45 pm)
+  # 'total' should be a timestamp for the run-time (1 hr 23 minutes)
+  # 'interval' should be <amount> <units> (1 minute)
+  # if verbose is False, sceen output will be off except at startup
+  # only one of absolute or relative time is required, although both can be used
+  end = <absolute time>
+  total = <relative time>
+  interval = 1 second
+  verbose = True
+"""
+
+
+sleep_configspec = """
+end = absolute_time(default=None)
+total = relative_time(default=None)
+interval = relative_time(default=1)
+verbose = boolean(default=True)
+"""
 
 
 sections = OrderedDict()
@@ -64,7 +73,24 @@ class Sleep(BasePlugin):
         Constructor for Sleep
         """
         super(Sleep, self).__init__(*args, **kwargs)
+        self._subsection = None
         return
+
+    @property
+    def subsection(self):
+        """
+        the plugin sub-section
+        """
+        if self._subsection is None:
+            configspec = ConfigObj(sleep_configspec.splitlines(),
+                                   list_values=False,
+                                   _inspec=True)
+            section = ConfigObj(self.configuration[self.section_header],
+                                configspec=configspec)
+            section.validate(time_validator)
+            self._subsection = section
+        return self._subsection
+            
 
     def fetch_config(self):
         """
@@ -89,22 +115,13 @@ class Sleep(BasePlugin):
         :return: TheBigSleep
         """
         if self._product is None:
-            end = self.configuration.get_datetime(section=self.section_header,
-                                                  option=END_OPTION,
-                                                  optional=True)
-            total = self.configuration.get_relativetime(section=self.section_header,
-                                                    option=TOTAL_OPTION,
-                                                    optional=True)
-            interval = self.configuration.get_relativetime(section=self.section_header,
-                                                           option=INTERVAL_OPTION,
-                                                           optional=True,
-                                                           default=1)
+            end = self.subsection[END_OPTION]
+            total = self.subsection[TOTAL_OPTION]
+            interval = self.subsection[INTERVAL_OPTION]
+
             if interval != 1:
                 interval = interval.total_seconds()
-            verbose = self.configuration.get_boolean(section=self.section_header,
-                                                     option=VERBOSE_OPTION,
-                                                     optional=True,
-                                                     default=True)
+            verbose = self.subsection[VERBOSE_OPTION]
             self._product = TheBigSleep(end=end,
                                         total=total,
                                         interval=interval,

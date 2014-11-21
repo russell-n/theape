@@ -84,6 +84,7 @@ These are constants put into classes to make it easier for the tests to find the
         subfolder_option = 'subfolder'
         modules_option = 'external_modules'
         timestamp_option = 'timestamp'
+        plugin_option = 'plugin'
         
         # defaults
         default_repetitions = 1
@@ -110,7 +111,7 @@ The Configuration Specification for the Operator Configuration. It's used by con
 
 ::
 
-    operator_config_spec = """
+    config_spec = """
     [SETTINGS]
     config_glob = string(default=None)
     repetitions = integer(default=1)
@@ -126,7 +127,7 @@ The Configuration Specification for the Operator Configuration. It's used by con
     [PLUGINS]
      [[__many__]]
      plugin = string
-    """.splitlines()
+    """
     
 
 
@@ -147,6 +148,7 @@ It looks like the way configobj works there isn't a way to force the plugins sec
    OperatorConfigspec.configspec
    OperatorConfigspec.subconfigspec
    OperatorConfigspec.validator
+
    
 
 
@@ -155,11 +157,14 @@ OperatorConfiguration
 
 The OperatorConfiguration builds the dependencies for the Operators.
 
+   * **Responsibility**: Build the Operator from the configuration.
+
 .. uml::
 
    OperatorConfiguration o- CountdownTimer
    OperatorConfiguration o- OperationConfiguration
    OperatorConfiguration o- QuarterMaster
+   OperatorConfiguration o- Composite
 
 .. module:: ape.plugins.apeplugin
 .. autosummary::
@@ -173,6 +178,8 @@ The OperatorConfiguration builds the dependencies for the Operators.
    OperatorConfiguration.operation_configurations
    OperatorConfiguration.quartermaster
    OperatorConfiguration.operation_timer
+   OperatorConfiguration.operator
+   OperatorConfiguration.save_configuration
 
 
 
@@ -182,16 +189,21 @@ OperationConfiguration
 
 A dependency builder for operations.
 
+   * **Responsibility**: builds composite of plugins from PLUGINS section
+
 .. uml::
 
+   BaseClass <|-- OperationConfiguration
    OperationConfiguration o- QuarterMaster
+   OperationConfiguration o- CountdownTimer
+   OperationConfiguration o- Composite
    
-
 .. autosummary::
    :toctree: api
 
    OperationConfiguration
-   OperationConfiguration.plugin_sections
+   OperationConfiguration.plugin_sections_names
+   OperationConfiguration.operation
 
 
 
@@ -229,6 +241,71 @@ This means:
 
  * the `Build Composites` happens in creating the ``product`` 
    
+::
+
+    CONFIGURATION = '''[OPERATIONS]
+    # the option names are just identifiers
+    # they will be executed in the order given.
+    # Each plugin has to have a corresponding section below
+    # e.g. if there is a `Sleep1` plugin listed as a right-hand-side value
+    # Then there needs to be a [[Sleep1]] section in the [PLUGINS] section
+    # to configure it
+    <option_name_1> = <comma-separated-list of plugins>
+    <option_name_2> = <comma-separated-list of plugins>
+    ...
+    <option_name_n> = <comma-separated-list of plugins>
+    
+    #[SETTINGS]
+    # these are settings for the overall operation
+    
+    # if you add a configuration-file-glob (config_glob),
+    # all matching files will be added to the configuration
+    # (the default is None)
+    #config_glob = settings*.config
+    
+    # if you want to repeat the operation defined in this config, give it repetitions
+    # (default is 1)
+    # repetitions = 1000000
+    
+    # If you want to put a time limit after which to quit (this overrides repetitions)
+    # (default is None)
+    # total_time = 1 day 3 hours
+    
+    # if you want to put an end time (this will override repetitions and total time):
+    # (default is None)
+    # end_time = November 23, 2013 8:00 am
+    
+    # if you want to store files in a sub-folder
+    # (default is None)
+    # subfolder = <name>
+    
+    # if one or more plugins is coming from the ape
+    # tell me which module to import it from
+    # comma-separated list
+    # (default is None)
+    # external_modules = package.module, package2.module2
+    
+    # if you want to override the file timestamp format
+    # (default is None)
+    # timestamp = <strftime-formatted timestamp>
+    
+    #[PLUGINS]
+    # for each plugin listed in the [OPERATIONS] there has to be a matching
+    # subsection below this section
+    # sub-sections are denoted by double-brackets (you can indent them too)
+    # the actual class name for the plugin is set with the 'plugin' option
+    # the rest of each plugin sub-section has to be whatever configures the plugin
+    
+    #  [[plugin1]]
+    #  plugin = Sleep
+    #  <sleep configuration>
+    
+    #  [[plugin2]]
+    #  plugin = Iperf
+    #  <Iperf configuration>
+    '''
+    
+
 
 
 .. _apeplugin-module-dependency-graph:
@@ -285,8 +362,6 @@ The API
    Ape.fetch_config
    Ape.arguments
    Ape.sections
-
-.. warning:: The ConfigParser adds all options in the DEFAULT section to the other sections. I am assuming that anything in the DEFAULT section that is the same as something in the APE section (same option:value) should be ignored.
    
 
 

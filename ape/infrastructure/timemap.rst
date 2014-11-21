@@ -235,6 +235,19 @@ These are the same as the ``parse`` function's arguments. I think in most cases 
    True; False; DD-MM-YY, MM-DD-YY, YY-MM-DD
    True; True; YY-MM-DD, DD-MM-YY, MM-DD-yy
 
+Time Validator
+--------------
+
+Since I'm switching from the ConfigurationMap to ConfigObj, I need a validator that knows about time conversions.
+..'
+
+::
+
+    time_validator = Validator({'relative_time':RelativeTime,
+                           'absolute_time':AbsoluteTime()})
+    
+
+
 
 .. .. _timemap-module-diagram:
 ..    

@@ -12,7 +12,8 @@ if IN_PWEAVE:
 
 # third-party
 from dateutil.relativedelta import relativedelta
-import dateutil.parser 
+import dateutil.parser
+from validate import Validator
 
 # this package
 from ape import BaseClass
@@ -592,6 +593,10 @@ class AbsoluteTime(BaseClass):
             raise ApeError("dateutil.parser.parse unable to parse '{0}'".format(source))
         return
 # end class AbsoluteTime            
+
+
+time_validator = Validator({'relative_time':RelativeTime,
+                       'absolute_time':AbsoluteTime()})
 
 
 if __name__ == '__main__':
