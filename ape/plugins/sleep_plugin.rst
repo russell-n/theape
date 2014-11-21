@@ -22,28 +22,42 @@ This is a plugin for :ref:`The Big Sleep <ape-big-sleep>`, code that does nothin
 The Configuration
 -----------------
 
-`TheBigSleep` has four parameters in its arguments so the configuration text will mirror that.
+`TheBigSleep` has four parameters in its arguments so the configuration text will mirror that. The configuration needs to be a sub-section of the `[[PLUGINS]]` section.
 
 ::
 
     configuration = """
-    [{0}]
-    # to allow the section names to be arbitrary
-    # the plugin names are required
-    plugin = Sleep
-    # 'end' should be a timestamp for the end-time (11-12-2013 8:45 pm)
-    # 'total' should be a timestamp for the run-time (1 hr 23 minutes)
-    # 'interval' should be <amount> <units> (1 minute)
-    # if verbose is False, sceen output will be off except at startup
-    # only one of absolute or relative time is required, although both can be used
-    {1} = <absolute time>
-    {2} = <relative time>
-    {3} = 1 second
-    {4} = True
-    """.format(SLEEP_SECTION, END_OPTION,
-               TOTAL_OPTION,
-               INTERVAL_OPTION,
-               VERBOSE_OPTION)
+      [[SLEEP]]
+      # to allow the section names to be arbitrary
+      # the plugin names are required
+      plugin = Sleep
+      # 'end' should be a timestamp for the end-time (11-12-2013 8:45 pm)
+      # 'total' should be a timestamp for the run-time (1 hr 23 minutes)
+      # 'interval' should be <amount> <units> (1 minute)
+      # if verbose is False, sceen output will be off except at startup
+      # only one of absolute or relative time is required, although both can be used
+      end = <absolute time>
+      total = <relative time>
+      interval = 1 second
+      verbose = True
+    """
+    
+
+
+
+The ConfigSpec
+--------------
+
+Since the configuration is being changed to use ConfigObj, a configspec should be used to validate the configuration.
+
+::
+
+    sleep_configspec = """
+    end = absolute_time(default=None)
+    total = relative_time(default=None)
+    interval = relative_time(default=1)
+    verbose = boolean(default=True)
+    """
     
 
 

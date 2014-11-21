@@ -52,9 +52,7 @@ class Dummy(BasePlugin):
         :precondition: self.configuration map has been set
         """
         if self._product is None:
-            kwargs = dict(self.configuration.items(section=self.section_header,
-                                                   optional=True,
-                                                   default={}))
+            kwargs = self.configuration[self.section_header]
             self._product = DummyClass(**kwargs)
         return self._product
 
@@ -151,7 +149,8 @@ class CrashTestDummy(BasePlugin):
         prints a message saying there is no configuration
         """
         print textwrap.dedent("""
-        [CRASHTESTDUMMY]
+        [[CRASHTESTDUMMY]]
+        plugin = CrashTestDummy
         # the dummy will take anything you set here and log it
         any_arbitrary_option = any_arbitrary_value
         another_option = another_value
