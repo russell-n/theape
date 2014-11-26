@@ -15,6 +15,7 @@ A place for exploring code examples.
    Sections <sections.rst>
    User Defined Validation <user_defined_validation.rst>
    Validation <validation.rst>
+   Validation Errors <validation_errors.rst>
 
 .. toctree::
    :maxdepth: 1
