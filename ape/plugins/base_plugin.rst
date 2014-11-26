@@ -127,3 +127,15 @@ These are the classes that the BasePlugin uses.
 ..                                        module=this_file)
 ..     print ".. image:: {0}".format(class_diagram_file)
 .. 
+
+Base Configuration
+------------------
+
+To handle the conversion to configobj, the product building should be handed over to a `Configuration` class.
+
+.. uml::
+
+   BaseConfiguration
+   BaseConfiguration.configuration
+   BaseConfiguration.product
+

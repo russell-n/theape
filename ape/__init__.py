@@ -7,7 +7,7 @@ SUBCOMMAND_GROUP = 'ape.subcommands'
 
 
 from infrastructure.baseclass import BaseClass, BaseThreadClass
-from infrastructure.errors import ApeError, DontCatchError
+from infrastructure.errors import ApeError, DontCatchError, ConfigurationError
 from infrastructure.index_builder import create_toctree
 from components.component import Component
 from plugins.base_plugin import BasePlugin
