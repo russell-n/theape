@@ -310,6 +310,15 @@ def check_extra_false(context):
     return
 
 
+update_sections_configspec = """
+[{section_name}]
+updates_section = string(default=None)
+op1 = integer
+
+[[sub_section]]
+op2 = integer
+"""
+
 update_sections_config = """
 [FAKE]
 op1 = 1
@@ -328,7 +337,7 @@ op2 = 2
 def updates_section(context):
     context.logger = MagicMock()
     context.logger.warning = MagicMock()
-    context.configuration = FakeConfiguration(source=ConfigObj(no_extra_options_config),
+    context.configuration = FakeConfiguration(source=ConfigObj(update_sections_config),
                                               configspec_source=section_name_configspec,
                                               section_name='FAKE2')
     context.configuration._logger = context.logger
@@ -342,6 +351,9 @@ def validate_configuration(context):
 
 @then("the BaseConfiguration implementation will have the updates")
 def check_updates(context):
+    # this needs to be thought out
     assert_that(context.configuration.configuration['FAKE']['op1'],
                 is_(equal_to(1)))
+    assert_that(context.configuration.configuration['FAKE2']['sub_section']['op2'],
+                is_(equal_to(2)))
     return
