@@ -3,6 +3,7 @@ Feature: Crash Test Dummy
   Given an empty crash test dummy configuration
   When the configuration is checked
   Then the crash test dummy configuration has the defaults
+  And it is a Base Configuration
 
  Scenario: User passes in wrong plugin
   Given a crash test dummy with the wrong plugin name

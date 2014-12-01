@@ -12,6 +12,7 @@ A place for exploring code examples.
    :maxdepth: 1
 
    Basic ConfigObj <basics.rst>
+   Extra Values <extra_values.rst>
    Sections <sections.rst>
    User Defined Validation <user_defined_validation.rst>
    Validation <validation.rst>
