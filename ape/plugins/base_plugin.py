@@ -211,11 +211,13 @@ class BaseConfiguration(BaseClass):
         """
         if self._configuration is None:
             configuration = ConfigObj(self.source,
-                                            configspec=self.configspec,
-                                            file_error=True)
-            #if 'updates_section' in configuration[self.section_name]:
-            #
-            #    other_section = configuration[self.section_name]['updates_section']
+                                        configspec=self.configspec,
+                                        file_error=True)
+            self._validation_outcome = configuration.validate(self.validator,
+                                                            preserve_errors=True)
+
+            #if self.source[self.section_name]['updates_section'] is not None:
+            #    other_section = self.source[self.section_name]['updates_section']
             #    configspec_source = self.configspec_source.format(section_name=other_section)
             #    configspec_source = configspec_source.splitlines()
             #    configspec = ConfigObj(configspec_source,
@@ -224,10 +226,14 @@ class BaseConfiguration(BaseClass):
             #    original_section = ConfigObj(self.source,
             #                                 configspec=configspec,
             #                                 file_error=True)
+            #    original_section.validate(self.validator,
+            #                              preserve_errors=True)
             #    original_section.merge(configuration)
-            self._configuration = configuration            
-            self._validation_outcome = self._configuration.validate(self.validator,
-                                                                    preserve_errors=True)
+            #    configuration = original_section
+            #    self._validation_outcome = configuration.validate(self.validator,
+            #                                                      preserve_errors=True)
+            self._configuration = configuration
+            
         return self._configuration
 
     @abstractproperty
