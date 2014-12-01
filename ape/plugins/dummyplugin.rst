@@ -81,10 +81,17 @@ CrashTestDummyConfiguration
 
 A class to handle the config_obj configuration.
 
+.. uml::
+
+   BaseConfiguration <|-- CrashTestDummyConfiguration
+
 .. autosummary::
    :toctree: api
 
    CrashTestDummyConfiguration
+   CrashTestDummyConfiguration.configspec
+   CrashTestDummyConfiguration.configuration
+   CrashTestDummyConfiguration.product
 
 
 

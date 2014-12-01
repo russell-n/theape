@@ -9,7 +9,7 @@ from configobj import ConfigObj
 from validate import Validator
 
 # this package
-from base_plugin import BasePlugin
+from base_plugin import BasePlugin, BaseConfiguration
 from ape.parts.dummy.dummy import DummyClass
 from ape.parts.dummy.dummy import CrashDummy
 from ape.parts.dummy.dummy import HangingDummy
@@ -99,11 +99,11 @@ function = string(default='__call__')
 """
 
 
-class CrashTestDummyConfiguration(object):
+class CrashTestDummyConfiguration(BaseConfiguration):
     """
     Translates the configobj configuration to a CrashTestDummy
     """
-    def __init__(self, section_name, configuration):
+    def __init__(self, *args, **kwargs):
         """
         CrashTestDummyConfiguration
 
@@ -112,45 +112,28 @@ class CrashTestDummyConfiguration(object):
          - `section_name`: name in the configuration with settings
          - `configuration`: dict of configuration values
         """
-        self._configspec = None
-        self.section_name = section_name
-        self._configuration = None
-        self.configuration = configuration
+        super(CrashTestDummyConfiguration, self).__init__(*args, **kwargs)
+        #self._configspec = None
+        #self.section_name = section_name
+        #self._configuration = None
+        #self.configuration = configuration
         return
-    
-    @property
-    def configspec(self):
-        """
-        A configspec that  matches the Operator's Configuration
-        """
-        if self._configspec is None:
-            self._configspec = ConfigObj(crash_configspec.splitlines(),
-                                         list_values=False,
-                                         _inspec=True)
-        return self._configspec
-
 
     @property
-    def configuration(self):
+    def configspec_source(self):
         """
-        A dict-like object with values for the CrashTestDummy
+        the configuration specification source
         """
-        return self._configuration
+        if self._configspec_source is None:
+            self._configspec_source = crash_configspec.splitlines()
+        return self._configspec_source
 
-    @configuration.setter
-    def configuration(self, new_configuration):
+    @property
+    def product(self):
         """
-        validates and sets the configuration using the new_configuration
-
-        :precondition: self.section_name is section in the new_configuration
-        :postcondition: self._configuration is validated configuration
+        A crash test dummy
         """
-        self._configuration = ConfigObj(new_configuration[self.section_name],
-                                        configspec=self.configspec,
-                                        file_error=True)
-        validator = Validator()
-        self._configuration.validate(validator)
-        return
+# end class CrashTestDummyConfiguration    
 
 
 class CrashTestDummy(BasePlugin):

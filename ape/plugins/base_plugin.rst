@@ -131,11 +131,50 @@ These are the classes that the BasePlugin uses.
 Base Configuration
 ------------------
 
+BaseConfigurationConstants
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A holder of constants so other code can reference them.
+
+::
+
+    class BaseConfigurationConstants(object):
+        """
+        Holder of BaseConfiguration constants
+        """
+        __slots__ = ()
+        plugin_option ='plugin'
+        error_name = 'ConfigurationError'
+        bad_option_message = "Option '{option}' in section '{section}' failed validation (error='{error}', should be {option_type})"
+        missing_option_message = "Option '{option}' in section '{section}' of type {option_type} required but missing"
+        missing_section_message = "Section '{section}' to configure '{plugin}' not found in configuration"
+        extra_message = "Extra {item_type} in section '{section}. '{name}'"
+    
+
+
+
+The BaseConfiguration Abstract Base Class
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 To handle the conversion to configobj, the product building should be handed over to a `Configuration` class.
 
 .. uml::
 
+   BaseClass <|-- BaseConfiguration
+
+.. module:: ape.plugins.base_plugin
+.. autosummary::
+   :toctree: api   
+
    BaseConfiguration
    BaseConfiguration.configuration
    BaseConfiguration.product
+   BaseConfiguration.configspec_source
+   BaseConfiguration.configspec
+   BaseConfiguration.configuration
+   BaseConfiguration.section
+   BaseConfiguration.plugin_name   
+   BaseConfiguration.process_errors
+   BaseConfiguration.outcome
+   BaseConfiguration.check_extra_values
 
