@@ -14,11 +14,9 @@ This is a folder to contain plugins. Plugins are meant to be the code available 
 
 source: `Online Etymology Dictionary <http://www.etymonline.com/index.php?term=plug>`_
 
-.. figure:: plug.png
+.. image:: figures/connector-305289_1280.png
    :align: center
-
-   Etymology Tree from google
-
+   :scale: 25
 
 Auto-Generated Documentation
 ----------------------------
