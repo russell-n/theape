@@ -144,6 +144,7 @@ A holder of constants so other code can reference them.
         """
         __slots__ = ()
         plugin_option ='plugin'
+        updates_section_option = 'updates_section'
         error_name = 'ConfigurationError'
         bad_option_message = "Option '{option}' in section '{section}' failed validation (error='{error}', should be {option_type})"
         missing_option_message = "Option '{option}' in section '{section}' of type {option_type} required but missing"
@@ -167,14 +168,26 @@ To handle the conversion to configobj, the product building should be handed ove
    :toctree: api   
 
    BaseConfiguration
-   BaseConfiguration.configuration
-   BaseConfiguration.product
-   BaseConfiguration.configspec_source
-   BaseConfiguration.configspec
-   BaseConfiguration.configuration
-   BaseConfiguration.section
-   BaseConfiguration.plugin_name   
-   BaseConfiguration.process_errors
-   BaseConfiguration.outcome
-   BaseConfiguration.check_extra_values
 
+Properties:
+ 
+.. autosummary::
+   :toctree: api
+
+   BaseConfiguration.configspec
+   BaseConfiguration.configspec_source
+   BaseConfiguration.configuration
+   BaseConfiguration.plugin_name
+   BaseConfiguration.product
+   BaseConfiguration.validation_outcome
+   BaseConfiguration.validator
+
+Methods:
+
+.. autosummary::
+   :toctree: api
+
+   BaseConfiguration.process_errors
+   BaseConfiguration.check_extra_values
+   BaseConfiguration.update
+   

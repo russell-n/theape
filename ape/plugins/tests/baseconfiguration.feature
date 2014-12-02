@@ -13,6 +13,7 @@ Feature: Base Configuration
    Given a BaseConfiguration implementation with a bad option
    When the BaseConfiguration implementation processes the errors
    Then the correct error message is logged
+   And the process_errors outcome was True
 
  Scenario: Missing Option
    Given a BaseConfiguration implementation with a missing option
@@ -23,6 +24,11 @@ Feature: Base Configuration
    Given a BaseConfiguration implementation missing the section
    When the BaseConfiguration implementation processes the errors
    Then the correct error message is logged
+
+ Scenario: Configuration passes
+   Given a BaseConfiguration implementation with valid configuration
+   When the BaseConfiguration implementation processes the errors
+   Then the process_errors outcome was False
  
  Scenario: ConfigSpec Section Name Format
    Given a BaseConfiguration configspec with section_name

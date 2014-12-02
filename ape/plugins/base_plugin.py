@@ -99,6 +99,7 @@ class BaseConfigurationConstants(object):
     """
     __slots__ = ()
     plugin_option ='plugin'
+    updates_section_option = 'updates_section'
     error_name = 'ConfigurationError'
     bad_option_message = "Option '{option}' in section '{section}' failed validation (error='{error}', should be {option_type})"
     missing_option_message = "Option '{option}' in section '{section}' of type {option_type} required but missing"
@@ -111,7 +112,8 @@ class BaseConfiguration(BaseClass):
     Abstract base class for configurations
     """
     __metaclass__ = ABCMeta
-    def __init__(self, source, section_name, configspec_source=None):
+    def __init__(self, source, section_name, configspec_source=None,
+                 updatable=True):
         """
         BaseConfiguration constructor
 
@@ -120,10 +122,12 @@ class BaseConfiguration(BaseClass):
          - `source`: ConfigObj section
          - `section_name`: section-name in the configuration
          - `configspec_source`: list or file with configspec
+         - `updatable`: if True, allows updating from other sections
         """
         super(BaseConfiguration, self).__init__()
         self.section_name = section_name
         self.source = source
+        self.updatable = updatable
         self._configspec_source = configspec_source
         
         self._product = None
@@ -131,7 +135,6 @@ class BaseConfiguration(BaseClass):
         self._configspec = None
         self._configuration = None
         self._plugin_name = None
-        self._section = None
         self._validation_outcome = None
         return
 
@@ -146,26 +149,13 @@ class BaseConfiguration(BaseClass):
         return self._validation_outcome
 
     @property
-    def section(self):
-        """
-        Section extracted using self.section_name (if section_name not in config, sets to self.configuration)
-        """
-        if self._section is None:
-            try:
-                self._section = self.configuration[self.section_name]
-            except KeyError as error:
-                self.logger.debug(error)
-                self._section = self.configuration
-        return self._section
-
-    @property
     def plugin_name(self):
         """
         Gets the plugin name from the section (or empty string if missing)
         """
         if self._plugin_name is None:
             try:
-                self._plugin_name = self.section[BaseConfigurationConstants.plugin_option]
+                self._plugin_name = self.configuration[BaseConfigurationConstants.plugin_option]
             except KeyError as error:
                 self.logger.warning("'plugin' option missing in section '{0}'".format(self.section_name))
                 self._plugin_name = ''
@@ -183,22 +173,18 @@ class BaseConfiguration(BaseClass):
     @property
     def configspec(self):
         """
-        A configspec that  matches the Configuration
+        A configspec built from configspec_source for validation
         """
         if self._configspec is None:
-            # chicken-and-egg problem using configspec_source property
-            # so I'm changing it here
+            # avoiding side-effects
             configspec_source = self.configspec_source
+            
             if type(self.configspec_source) is StringType:
-                # if source has string format option {section_name}
-                # don't change the original because configuration property needs it
-                configspec_source = self.configspec_source.format(section_name=self.section_name)
                 configspec_source = configspec_source.splitlines()
             self._configspec = ConfigObj(configspec_source,
                                          list_values=False,
                                          _inspec=True)
         return self._configspec
-
 
     @property
     def configuration(self):
@@ -210,29 +196,16 @@ class BaseConfiguration(BaseClass):
         :postcondition: self.outcome is the outcome of the validation
         """
         if self._configuration is None:
-            configuration = ConfigObj(self.source,
-                                        configspec=self.configspec,
-                                        file_error=True)
-            self._validation_outcome = configuration.validate(self.validator,
-                                                            preserve_errors=True)
+            # get rid of the other sections so there won't be extra values
+            section = ConfigObj(self.source[self.section_name],
+                                configspec=self.configspec,
+                                file_error=True)
+            if self.updatable:
+                section = self.update(section)
+            self._validation_outcome = section.validate(self.validator,
+                                                        preserve_errors=True)
 
-            #if self.source[self.section_name]['updates_section'] is not None:
-            #    other_section = self.source[self.section_name]['updates_section']
-            #    configspec_source = self.configspec_source.format(section_name=other_section)
-            #    configspec_source = configspec_source.splitlines()
-            #    configspec = ConfigObj(configspec_source,
-            #                           list_values=False,
-            #                           _inspec=True)
-            #    original_section = ConfigObj(self.source,
-            #                                 configspec=configspec,
-            #                                 file_error=True)
-            #    original_section.validate(self.validator,
-            #                              preserve_errors=True)
-            #    original_section.merge(configuration)
-            #    configuration = original_section
-            #    self._validation_outcome = configuration.validate(self.validator,
-            #                                                      preserve_errors=True)
-            self._configuration = configuration
+            self._configuration = section
             
         return self._configuration
 
@@ -250,19 +223,41 @@ class BaseConfiguration(BaseClass):
         """
         return
 
-    def process_errors(self):
+    def update(self, section):
         """
-        logs the errors in outcome
+        Uses 'updates_section' to build configuration from other section
 
         :param:
 
-         - `outcome`: output of `validate` call
+         - `section`: plugin-section to update
+
+        :return: section merged with this section or original if appropriate 
         """
         constants = BaseConfigurationConstants
-        for sections, option, error in flatten_errors(self.configuration,
-                                                      self.validation_outcome):
+        if (constants.updates_section_option in section
+            and section[constants.updates_section_option] is not None ):       
+            other_section = section[constants.updates_section_option]
+            base_section = ConfigObj(self.source[other_section],
+                                     configspec=self.configspec)
+            base_section.merge(section)
+            section = base_section
+        return section
+        
+    def process_errors(self):
+        """
+        processes configuration, validation_outcome and logs the errors
+
+        :return: True if there were errors (same as `not self.validation_outcome`)
+        """
+        constants = BaseConfigurationConstants
+        flattened_errors = flatten_errors(self.configuration,
+                            self.validation_outcome)
+
+        for sections, option, error in flattened_errors:
             section = ",".join(sections)
-            if not section:
+            if len(section):
+                section = "{0},{1}".format(self.section_name, section)
+            else:
                 section = self.section_name
 
             if option is not None: # something is wrong with the option
@@ -288,7 +283,7 @@ class BaseConfiguration(BaseClass):
                 self.log_error(error=constants.error_name,
                                message=constants.missing_section_message.format(section=section,
                                                                                 plugin=self.plugin_name))
-        return
+        return not self.validation_outcome is True
 
     def check_extra_values(self, warn_user=True):
         """
@@ -318,13 +313,17 @@ class BaseConfiguration(BaseClass):
             if isinstance(value, dict):
                 item_type = 'section'
             
-            section = ','.join(sections) or "top level"
+            section = ','.join(sections)
+            if len(section):
+                section = "{0},{1}".format(self.section_name, section)
+            else:
+                section = self.section_name
             message = BaseConfigurationConstants.extra_message.format(section=section,
                                                                     item_type=item_type,
                                                                     name=name)
             if item_type == 'option':
                 message += "='{0}'".format(value)
             logger(message)
-                
-        return len(extra_values)
+                 
+        return len(extra_values) > 0
 # end BaseConfiguration        

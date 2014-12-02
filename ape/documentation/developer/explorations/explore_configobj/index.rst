@@ -13,6 +13,7 @@ A place for exploring code examples.
 
    Basic ConfigObj <basics.rst>
    Extra Values <extra_values.rst>
+   Merging Sections <merging.rst>
    Sections <sections.rst>
    User Defined Validation <user_defined_validation.rst>
    Validation <validation.rst>

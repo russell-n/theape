@@ -1,7 +1,8 @@
 
 # third party
 from behave import given, when, then
-from hamcrest import assert_that, calling, raises, is_, instance_of, equal_to
+from hamcrest import assert_that, calling, raises, is_, instance_of
+from hamcrest import has_entries, equal_to
 from configobj import ConfigObj
 from validate import Validator
 from mock import MagicMock
@@ -87,7 +88,28 @@ def assert_default_properties(context):
     return
 
 
+valid_config_string = """
+[GOODBUTFAKE]
+op = some value
+op2 = 75
+""".splitlines()
+
+@given("a BaseConfiguration implementation with valid configuration")
+def valid_configuration(context):
+    context.configuration = FakeConfiguration(source=ConfigObj(valid_config_string),
+                                              section_name='GOODBUTFAKE')
+    return
+
+
+@then("the process_errors outcome was False")
+def process_errors_false(context):
+    assert_that(context.outcome,
+                is_(False))
+    return
+
+
 bad_option_config = """
+[FAKE]
 op = value
 op2 = not_integer
 """.splitlines()
@@ -113,13 +135,20 @@ def bad_option(context):
 def process_errors(context):
     outcome = context.configuration.configuration.validate(context.configuration.validator,
                                                            preserve_errors=True)
-    context.configuration.process_errors()
+    context.outcome = context.configuration.process_errors()
     return
 
 
 @then("the correct error message is logged")
 def check_error_message(context):
     context.logger.error.assert_called_with(context.expected)
+    return
+
+
+@then("the process_errors outcome was True")
+def process_errors_true(context):
+    assert_that(context.outcome,
+                is_(True))
     return
 
 
@@ -145,13 +174,11 @@ def missing_option(context):
     return
 
 
-# the BaseConfiguration is setting the configuration property using the section name
 # so the configspect can't have the top-level section name
 subsection_configspec = """
-[FAKE]
 plugin = string
 
-[[sub_section]]
+[sub_section]
 op1 = integer
 """.splitlines()
 
@@ -178,10 +205,9 @@ def missing_section(context):
 
 
 section_name_configspec = """
-[{section_name}]
 op1 = integer
 
-[[sub_section]]
+[sub_section]
 op2 = integer
 """
 
@@ -238,6 +264,12 @@ op1 = 1
 [[sub_section]]
 op2 = 5
 op7 = 0
+
+[FAKE2]
+op1 = 3
+
+[[sub_section]]
+op2 = 4
 """.splitlines()
 
 @given("a BaseConfiguration config with options not in the configspec")
@@ -311,11 +343,10 @@ def check_extra_false(context):
 
 
 update_sections_configspec = """
-[{section_name}]
 updates_section = string(default=None)
 op1 = integer
 
-[[sub_section]]
+[sub_section]
 op2 = integer
 """
 
@@ -337,10 +368,14 @@ op2 = 2
 def updates_section(context):
     context.logger = MagicMock()
     context.logger.warning = MagicMock()
-    context.configuration = FakeConfiguration(source=ConfigObj(update_sections_config),
-                                              configspec_source=section_name_configspec,
+    context.fake1 = FakeConfiguration(source=ConfigObj(update_sections_config),
+                                              configspec_source=update_sections_configspec,
+                                              section_name='FAKE')
+    context.fake2 = FakeConfiguration(source=ConfigObj(update_sections_config),
+                                              configspec_source=update_sections_configspec,
                                               section_name='FAKE2')
-    context.configuration._logger = context.logger
+    context.fake1._logger = context.logger
+    context.fake2._logger = context.logger
     return
 
 
@@ -351,9 +386,15 @@ def validate_configuration(context):
 
 @then("the BaseConfiguration implementation will have the updates")
 def check_updates(context):
-    # this needs to be thought out
-    assert_that(context.configuration.configuration['FAKE']['op1'],
-                is_(equal_to(1)))
-    assert_that(context.configuration.configuration['FAKE2']['sub_section']['op2'],
-                is_(equal_to(2)))
+    #import pudb; pudb.set_trace()
+    expected_fake = {'op1':1,
+                     'sub_section': {'op2':5}}
+    assert_that(context.fake1.configuration,
+                has_entries(expected_fake))
+
+    expected_fake2 = {'op1':1,
+                     'sub_section': {'op2':2}}
+    assert_that(context.fake2.configuration,
+                has_entries(expected_fake2))
+
     return
