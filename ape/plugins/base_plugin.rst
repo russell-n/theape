@@ -128,13 +128,10 @@ These are the classes that the BasePlugin uses.
 ..     print ".. image:: {0}".format(class_diagram_file)
 .. 
 
-Base Configuration
-------------------
-
 BaseConfigurationConstants
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------
 
-A holder of constants so other code can reference them.
+A holder of constants for the ``BaseConfiguration`` so other code can reference them.
 
 ::
 
@@ -149,19 +146,23 @@ A holder of constants so other code can reference them.
         bad_option_message = "Option '{option}' in section '{section}' failed validation (error='{error}', should be {option_type})"
         missing_option_message = "Option '{option}' in section '{section}' of type {option_type} required but missing"
         missing_section_message = "Section '{section}' to configure '{plugin}' not found in configuration"
+        missing_plugin_option_message = "'plugin' option missing in section '{0}'"
         extra_message = "Extra {item_type} in section '{section}. '{name}'"
     
 
 
 
 The BaseConfiguration Abstract Base Class
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------------
 
-To handle the conversion to configobj, the product building should be handed over to a `Configuration` class.
+The *BaseConfiguration* is an abstract base class that provides both implemented methods and properties as well as abstract properties which child classes must implement. The intention is for plugin-building classes to build on it so that there is a reasonably uniform pattern across these builders. It is also meant to be a bridge between ConfigObj and the components of the APE or other code that underlies an Ape-plugin. The implementation is based around how ConfigObj handles the expected form of the plugin configuration file sections.
 
 .. uml::
 
    BaseClass <|-- BaseConfiguration
+   BaseConfiguration o- validate.Validator
+   BaseConfiguration o- configobj.ConfigObj
+   BaseConfiguration o- BaseConfigurationConstants   
 
 .. module:: ape.plugins.base_plugin
 .. autosummary::
@@ -169,16 +170,91 @@ To handle the conversion to configobj, the product building should be handed ove
 
    BaseConfiguration
 
-Properties:
- 
+Abstract Properties
+~~~~~~~~~~~~~~~~~~~
+
+There are two properties that inheriting classes need to implement or a *TypeError* will be raised when it is instantiated -- `configspec_source` and `product`.
+
 .. autosummary::
    :toctree: api
 
-   BaseConfiguration.configspec
    BaseConfiguration.configspec_source
+   BaseConfiguration.product
+
+`configspec_source`
++++++++++++++++++++
+
+This is the source that will be used by ConfigObj to validate the configuration. It can be a string, list of strings, or anything that's accepted by ConfigObj -- but it will be converted by the BaseConfiguration so a string would likely be the best form (BaseConfiguration will also split the string into a list of lines for you). It's meant to have at least a `plugin` option and/or an `updates_section` option defined, everything else is up to the plugin.
+
+`plugin`
+````````
+ 
+The `plugin` option is used to match the configuration-file section with the plugin implementation so it is required (but there's no way to enforce it within the configuration classes so the ApePlugin itself will raise an error when it's run and no `plugin` option is found). The value for the `plugin` option should be the name of the plugin class (it's what the :ref:`QuarterMaster <ape-plugins-quartermaster>` uses as the key to the dictionary returned by the :ref:`RyeMother <ape-infrastructure-rye-mother>`).
+
+.. '
+
+`updates_section`
+`````````````````
+
+The `updates_section` option is used to allow plugins to use other sections in the `PLUGINS` section of the configuration as a base and then override only some of the values. This way if some plugin is used multiple times (or more than one plugin shares the same configuration options) then one section can give the full configuration and the other section(s) can over-ride only the values that need to be changed.
+
+Example
+```````
+
+As an example, suppose there is a plugin named `FakePlugin` that allows updating sections and has one required integer option ('age') and one optional string option ('name'). The configspec_source for this configuration might be::
+
+    configspec_source = """
+    plugin = option(FakePlugin)
+    updates_section = string(default=None)
+
+    age = integer
+    name = string(default='Ted')
+    """
+
+The ``option(FakePlugin)`` specification requires that the term ``FakePlugin`` match exactly but as I mentioned it's used by the Ape to find the plugin configuration so if it's wrong then the configuration will never be validated anyway, but I figured it wouldn't hurt to have an extra check in there.
+
+.. '
+
+.. note:: that there's no section name in the configspec. Because there can be multiple plugin configurations in the `PLUGINS` section the section for the particular plugins have to be extracted first so they won't have the section headers. This also means that any sub-sections added should start with first-level section headers (one-bracket pair, e.g. [sub_section]).
+
+An example configuration file might look like this.
+
+.. code-block:: ini
+
+    [OPERATIONS]
+    operation_1 = fake_section
+    
+    [PLUGINS]
+    [[fake_section]]
+    plugin = FakePlugin
+
+    age = 12
+    name = Bob    
+
+product
++++++++
+
+The `product` should return the built object that will be called by the `operation` composite when the Ape is run.
+
+Implemented Properties
+~~~~~~~~~~~~~~~~~~~~~~
+
+configspec
+++++++++++
+ 
+.. figure:: figures/baseconfiguration_configspec_activity.png
+   :align: center
+
+   Activity diagram for the configspec creation.
+
+This is a ConfigObj object that is created from the `configspec_source` and passed to the `configuration` when it is created so that it can be validated.   
+ 
+.. autosummary::
+   :toctree: api
+ 
+   BaseConfiguration.configspec
    BaseConfiguration.configuration
    BaseConfiguration.plugin_name
-   BaseConfiguration.product
    BaseConfiguration.validation_outcome
    BaseConfiguration.validator
 

@@ -42,6 +42,8 @@ Scenario: User instantiates BaseConfiguration implementation
 ::
 
     configspec = """
+    plugin = option(Fake)
+    
     op = string
     op2 = integer
     """.splitlines()
@@ -113,6 +115,8 @@ Scenario: Configuration passes
 
     valid_config_string = """
     [GOODBUTFAKE]
+    plugin = Fake
+    
     op = some value
     op2 = 75
     """.splitlines()
@@ -146,6 +150,8 @@ Scenario: Option fails validation
 
     bad_option_config = """
     [FAKE]
+    plugin = Fake
+    
     op = value
     op2 = not_integer
     """.splitlines()
@@ -203,6 +209,8 @@ Scenario: Missing Option
 
     missing_option_config = """
     [FAKE]
+    plugin = Fake
+    
     op = value
     """.splitlines()
     
@@ -521,6 +529,54 @@ Scenario: Section updates configuration
         assert_that(context.fake2.configuration,
                     has_entries(expected_fake2))
     
+        return
+    
+
+
+
+Scenario: Configuration missing plugin name
+-------------------------------------------
+
+::
+
+    missing_plugin_name_config = """
+    [FAKE]
+    op = some string
+    op2 = 42
+    """.splitlines()
+    
+    @given("a BaseConfiguration section missing a required plugin name")
+    def missing_plugin_name(context):
+        context.configuration = FakeConfiguration(source=ConfigObj(missing_plugin_name_config),
+                                                  section_name='FAKE')
+        return
+    
+
+::
+
+    @when("the BaseConfiguration checks process_errors")
+    def check_process_errors(context):
+        context.outcome = context.configuration.process_errors()
+        return
+    
+
+::
+
+    @then("the process_errors returned True")
+    def process_errors_true(context):
+        assert_that(context.outcome,
+                    is_(True))
+        return
+    
+
+::
+
+    @then("the configuration options that were given are in the configuration")
+    def assert_options(context):
+        expected = {'op':'some string',
+                    'op2': 42}
+        assert_that(context.configuration.configuration,
+                    has_entries(expected))
         return
     
 

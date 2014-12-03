@@ -1,6 +1,9 @@
 Plugins
 =======
 
+.. image:: figures/plugin_eighth_size.png
+   :align: center
+
 <<name='imports', echo=False>>=
 # this package
 from ape import create_toctree
@@ -13,10 +16,6 @@ This is a folder to contain plugins. Plugins are meant to be the code available 
     1620s, originally a seamen's term, probably from Dutch plug, Middle Dutch plugge "bung, stopper," related to Norwegian plugg, Danish ploeg, North Frisian plaak, Middle Low German pluck, German Pflock; ultimate origin uncertain. Irish and Gaelic words are from English. Sense of "wad or stick of tobacco" is attested from 1728, based on resemblance. Electrical sense is from 1883, based on being inserted; meaning "sparking device in an internal combustion engine" is from 1886. Meaning "advertisement" first recorded 1902, American English, perhaps from verb sense "work energetically at" (c.1865).
 
 source: `Online Etymology Dictionary <http://www.etymonline.com/index.php?term=plug>`_
-
-.. image:: figures/connector-305289_1280.png
-   :align: center
-   :scale: 25
 
 Auto-Generated Documentation
 ----------------------------

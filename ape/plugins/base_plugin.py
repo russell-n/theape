@@ -104,6 +104,7 @@ class BaseConfigurationConstants(object):
     bad_option_message = "Option '{option}' in section '{section}' failed validation (error='{error}', should be {option_type})"
     missing_option_message = "Option '{option}' in section '{section}' of type {option_type} required but missing"
     missing_section_message = "Section '{section}' to configure '{plugin}' not found in configuration"
+    missing_plugin_option_message = "'plugin' option missing in section '{0}'"
     extra_message = "Extra {item_type} in section '{section}. '{name}'"
 
 
@@ -113,7 +114,7 @@ class BaseConfiguration(BaseClass):
     """
     __metaclass__ = ABCMeta
     def __init__(self, source, section_name, configspec_source=None,
-                 updatable=True):
+                 updatable=True, constants=None):
         """
         BaseConfiguration constructor
 
@@ -123,8 +124,10 @@ class BaseConfiguration(BaseClass):
          - `section_name`: section-name in the configuration
          - `configspec_source`: list or file with configspec
          - `updatable`: if True, allows updating from other sections
+         - `constants`: object with same properties as BaseConfigurationConstants
         """
         super(BaseConfiguration, self).__init__()
+        self._constants = constants
         self.section_name = section_name
         self.source = source
         self.updatable = updatable
@@ -136,7 +139,17 @@ class BaseConfiguration(BaseClass):
         self._configuration = None
         self._plugin_name = None
         self._validation_outcome = None
+        self._constants
         return
+
+    @property
+    def constants(self):
+        """
+        object with string constants (see BaseConfigurationConstants)
+        """
+        if self._constants is None:
+            self._constants = BaseConfigurationConstants
+        return self._constants
 
     @property
     def validation_outcome(self):
@@ -153,11 +166,11 @@ class BaseConfiguration(BaseClass):
         """
         Gets the plugin name from the section (or empty string if missing)
         """
-        if self._plugin_name is None:
+        if self._plugin_name is None:        
             try:
-                self._plugin_name = self.configuration[BaseConfigurationConstants.plugin_option]
+                self._plugin_name = self.configuration[self.constants.plugin_option]
             except KeyError as error:
-                self.logger.warning("'plugin' option missing in section '{0}'".format(self.section_name))
+                self.logger.warning(self.constants.missing_plugin_option_message.format(self.section_name))
                 self._plugin_name = ''
         return self._plugin_name
 
@@ -176,7 +189,7 @@ class BaseConfiguration(BaseClass):
         A configspec built from configspec_source for validation
         """
         if self._configspec is None:
-            # avoiding side-effects
+            # avoiding side-effects if there's a splitlines call
             configspec_source = self.configspec_source
             
             if type(self.configspec_source) is StringType:
@@ -233,10 +246,9 @@ class BaseConfiguration(BaseClass):
 
         :return: section merged with this section or original if appropriate 
         """
-        constants = BaseConfigurationConstants
-        if (constants.updates_section_option in section
-            and section[constants.updates_section_option] is not None ):       
-            other_section = section[constants.updates_section_option]
+        if (self.constants.updates_section_option in section
+            and section[self.constants.updates_section_option] is not None ):       
+            other_section = section[self.constants.updates_section_option]
             base_section = ConfigObj(self.source[other_section],
                                      configspec=self.configspec)
             base_section.merge(section)
@@ -251,7 +263,7 @@ class BaseConfiguration(BaseClass):
         """
         constants = BaseConfigurationConstants
         flattened_errors = flatten_errors(self.configuration,
-                            self.validation_outcome)
+                                           self.validation_outcome)
 
         for sections, option, error in flattened_errors:
             section = ",".join(sections)
