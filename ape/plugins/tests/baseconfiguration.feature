@@ -56,3 +56,9 @@ Feature: Base Configuration
   Given a BaseConfiguration section that updates another section
   When the BaseConfiguration implementation validates the configuration
   Then the BaseConfiguration implementation will have the updates
+
+ Scenario: Configuration missing plugin name
+  Given a BaseConfiguration section missing a required plugin name
+  When the BaseConfiguration checks process_errors
+  Then the process_errors returned True
+  And the configuration options that were given are in the configuration

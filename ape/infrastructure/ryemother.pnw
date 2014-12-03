@@ -10,9 +10,11 @@ import pkg_resources
 import pkgutil
 @
 
+.. _ape-infrastructure-rye-mother:
+
 The `Rye Mother <http://www.pitt.edu/~dash/gerchange.html#GrimmRyeMother>`_ gathers children.
 
-.. figure:: figures/troll_changeling.jpg
+.. figure:: figures/bianca_maria.jpg
    :align: center
 
    Source: `Wikipedia <http://en.wikipedia.org/wiki/File:En_kv%C3%A4ll_vid_midsommartid_gingo_de_med_Bianca_Maria_djupt_in_i_skogen2.jpg>`_
