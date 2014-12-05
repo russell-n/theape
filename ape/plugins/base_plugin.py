@@ -12,6 +12,7 @@ from validate import Validator
 from ape.infrastructure.baseclass import BaseClass
 from ape.parts.helppage.helppage import HelpPage
 from ape.infrastructure.code_graphs import module_diagram, class_diagram
+from ape.infrastructure.errors import ConfigurationError
 
 
 in_pweave = __name__ == '__builtin__'
@@ -106,6 +107,7 @@ class BaseConfigurationConstants(object):
     missing_section_message = "Section '{section}' to configure '{plugin}' not found in configuration"
     missing_plugin_option_message = "'plugin' option missing in section '{0}'"
     extra_message = "Extra {item_type} in section '{section}. '{name}'"
+    check_rep_failure_message = "Errors in section [{0}] in the configuration"
 
 
 class BaseConfiguration(BaseClass):
@@ -164,14 +166,17 @@ class BaseConfiguration(BaseClass):
     @property
     def plugin_name(self):
         """
-        Gets the plugin name from the section (or empty string if missing)
+        Gets the plugin name from the section
+
+        :raise: configuration error if plugin name is missing
         """
         if self._plugin_name is None:        
             try:
                 self._plugin_name = self.configuration[self.constants.plugin_option]
             except KeyError as error:
-                self.logger.warning(self.constants.missing_plugin_option_message.format(self.section_name))
-                self._plugin_name = ''
+                self.logger.bebug(error)
+                self.log_error(self.constants.missing_plugin_option_message.format(self.section_name))
+                raise ConfigurationError(self.constants.missing_plugin_option_message.format(self.section_name))
         return self._plugin_name
 
     @property
@@ -198,28 +203,25 @@ class BaseConfiguration(BaseClass):
                                          list_values=False,
                                          _inspec=True)
         return self._configspec
-
+            
     @property
     def configuration(self):
         """
         validates and sets the configuration using the source configuration
 
         :precondition: self.configspec has full configspec including section name
-        :postcondition: self.source is validated configuration
-        :postcondition: self.outcome is the outcome of the validation
+        :return:  validated configuration for this section
         """
         if self._configuration is None:
-            # get rid of the other sections so there won't be extra values
             section = ConfigObj(self.source[self.section_name],
-                                configspec=self.configspec,
-                                file_error=True)
+                                    configspec=self.configspec,
+                                    file_error=True)        
             if self.updatable:
                 section = self.update(section)
-            self._validation_outcome = section.validate(self.validator,
-                                                        preserve_errors=True)
 
             self._configuration = section
-            
+            self._validation_outcome = self._configuration.validate(self.validator,
+                                                                preserve_errors=True)
         return self._configuration
 
     @abstractproperty
@@ -338,4 +340,14 @@ class BaseConfiguration(BaseClass):
             logger(message)
                  
         return len(extra_values) > 0
+
+    def check_rep(self):
+        """
+        Calls process_errors
+
+        :raise: ConfigurationError if errors are found
+        """
+        if self.process_errors():
+            raise ConfigurationError(self.constants.check_rep_failure_message.format(self.section_name))
+        return            
 # end BaseConfiguration        

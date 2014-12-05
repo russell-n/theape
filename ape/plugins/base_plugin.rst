@@ -148,6 +148,7 @@ A holder of constants for the ``BaseConfiguration`` so other code can reference 
         missing_section_message = "Section '{section}' to configure '{plugin}' not found in configuration"
         missing_plugin_option_message = "'plugin' option missing in section '{0}'"
         extra_message = "Extra {item_type} in section '{section}. '{name}'"
+        check_rep_failure_message = "Errors in section [{0}] in the configuration"
     
 
 
@@ -184,19 +185,17 @@ There are two properties that inheriting classes need to implement or a *TypeErr
 `configspec_source`
 +++++++++++++++++++
 
-This is the source that will be used by ConfigObj to validate the configuration. It can be a string, list of strings, or anything that's accepted by ConfigObj -- but it will be converted by the BaseConfiguration so a string would likely be the best form (BaseConfiguration will also split the string into a list of lines for you). It's meant to have at least a `plugin` option and/or an `updates_section` option defined, everything else is up to the plugin.
+This is the source that will be used by ConfigObj to validate the configuration. It can be a string, list of strings, or anything that's accepted by ConfigObj -- but it will be converted by the BaseConfiguration so a string would likely be the best form (BaseConfiguration will also split the string into a list of lines for you). It's meant to have at least a `plugin` option and/or an `updates_section` option defined, everything else is up to the plugin. A list of the functions that you can put in the configspec is listed in the `Validate <http://configobj.readthedocs.org/en/latest/validate.html#the-standard-functions>`_ documentation. And ConfigObj's documentation has more information about `using validation <http://configobj.readthedocs.org/en/latest/configobj.html#validation>`_.
 
 `plugin`
 ````````
  
-The `plugin` option is used to match the configuration-file section with the plugin implementation so it is required (but there's no way to enforce it within the configuration classes so the ApePlugin itself will raise an error when it's run and no `plugin` option is found). The value for the `plugin` option should be the name of the plugin class (it's what the :ref:`QuarterMaster <ape-plugins-quartermaster>` uses as the key to the dictionary returned by the :ref:`RyeMother <ape-infrastructure-rye-mother>`).
-
-.. '
+The `plugin` option is used to match the configuration-file section with the plugin implementation so it is required (but there's no way to enforce it within the configuration classes so the configurations will have to defer to the ApePlugin itself to raise an error when no `plugin` option is found). The value for the `plugin` option should be the name of the plugin class (it's what the :ref:`QuarterMaster <ape-plugins-quartermaster>` uses as the key to the dictionary returned by the :ref:`RyeMother <ape-infrastructure-rye-mother>`).
 
 `updates_section`
 `````````````````
 
-The `updates_section` option is used to allow plugins to use other sections in the `PLUGINS` section of the configuration as a base and then override only some of the values. This way if some plugin is used multiple times (or more than one plugin shares the same configuration options) then one section can give the full configuration and the other section(s) can over-ride only the values that need to be changed.
+The `updates_section` option is used to point to a section to update. This is meant to allow plugins to use another section in the `PLUGINS` section of the configuration as a base and then override only some of the values. This way if some plugin is used multiple times (or more than one plugin shares the same configuration options) then one section can give the full configuration and the other section(s) can over-ride (or add) only the values that need to be changed.
 
 Example
 ```````
@@ -209,13 +208,16 @@ As an example, suppose there is a plugin named `FakePlugin` that allows updating
 
     age = integer
     name = string(default='Ted')
+
+    [sub_section]
+    hwp = boolean(default=False)
     """
 
 The ``option(FakePlugin)`` specification requires that the term ``FakePlugin`` match exactly but as I mentioned it's used by the Ape to find the plugin configuration so if it's wrong then the configuration will never be validated anyway, but I figured it wouldn't hurt to have an extra check in there.
 
-.. '
+.. note:: There's no section name in the configspec. Since there can be multiple plugin configurations in the `PLUGINS` section the section for a particular plugin has to be extracted from the `PLUGINS` section first so it won't have the section header. This also means that any sub-sections added should start with first-level section headers (one-bracket pair, e.g. ``[sub_section]``).
 
-.. note:: that there's no section name in the configspec. Because there can be multiple plugin configurations in the `PLUGINS` section the section for the particular plugins have to be extracted first so they won't have the section headers. This also means that any sub-sections added should start with first-level section headers (one-bracket pair, e.g. [sub_section]).
+.. '
 
 An example configuration file might look like this.
 
@@ -229,7 +231,10 @@ An example configuration file might look like this.
     plugin = FakePlugin
 
     age = 12
-    name = Bob    
+    name = Bob
+
+    [[[sub_section]]]
+    hwp = True
 
 product
 +++++++
@@ -239,6 +244,19 @@ The `product` should return the built object that will be called by the `operati
 Implemented Properties
 ~~~~~~~~~~~~~~~~~~~~~~
 
+There are five implemented properties, but the user of the Configuration classes will probably never use them (only the ``product`` attribute is meant for users of these classes).
+
+.. autosummary::
+   :toctree: api
+ 
+   BaseConfiguration.configspec
+   BaseConfiguration.configuration   
+   BaseConfiguration.plugin_name
+   BaseConfiguration.section
+   BaseConfiguration.validation_outcome
+   BaseConfiguration.validator
+
+
 configspec
 ++++++++++
  
@@ -247,18 +265,43 @@ configspec
 
    Activity diagram for the configspec creation.
 
-This is a ConfigObj object that is created from the `configspec_source` and passed to the `configuration` when it is created so that it can be validated.   
+This is a ConfigObj object that is created from the `configspec_source` and passed to the `configuration` when it is created so that it can be validated.
  
-.. autosummary::
-   :toctree: api
- 
-   BaseConfiguration.configspec
-   BaseConfiguration.configuration
-   BaseConfiguration.plugin_name
-   BaseConfiguration.validation_outcome
-   BaseConfiguration.validator
 
-Methods:
+configuration
++++++++++++++
+
+.. figure:: figures/baseconfiguration_configuration_activity.*
+   :align: center
+
+   The ``configuration`` activity diagram. 
+
+The ``configuration`` is a `ConfigObj` object built from the ``source``, ``section_name``, and ``configspec`` properties. If the ``updatable`` property is set to True, then the configuration will be passed to the ``update`` method before being validated and setting the ``validation_outcome`` property as a side-effect. The validation was put in this property so that child-classes wouldn't have to do it as a separate step. This adds some redundancy if the ``validation_outcome`` is retrieved before the ``configuration`` is retrieved since the ``validation_outcome`` uses the ``configuration`` to call the `validate` method, but since validation is such an important thing, I decided it was worth it.
+
+.. '
+
+plugin_name
++++++++++++
+
+.. figure:: figures/baseconfiguration_plugin_name_activity.*
+   :align: center
+
+   The ``plugin_name`` activity diagram.
+
+The ``plugin_name`` property is the name of the plugin as extracted from the configuration. As mentioned elsewhere, the configurations won't be matched to the configuration section if this property is missing so this shouldn't raise an error, but if for some reason it really is missing then calling this property will raise a ``ConfigurationError``.
+
+validation_outcome
+++++++++++++++++++
+
+The ``validation_outcome`` holds the object returned by `ConfigObj.validate`.
+
+validator
++++++++++
+
+The ``validator`` is a ``validate.Validator`` object. It's only used once but I put it here so I wouldn't have to patch-mock it when testing.
+
+Methods
+~~~~~~~
 
 .. autosummary::
    :toctree: api
@@ -266,4 +309,5 @@ Methods:
    BaseConfiguration.process_errors
    BaseConfiguration.check_extra_values
    BaseConfiguration.update
+   BaseConfiguration.check_rep
    
