@@ -106,3 +106,28 @@ Scenario: User calls check_rep on bad configuration
         return
     
 
+
+
+Scenario: User calls check_rep on configuration with extra values
+-----------------------------------------------------------------
+
+::
+
+    extra_option_configuration = """
+    [cement]
+    plugin = Concrete
+    op1 = 53
+    op2 = 64
+    ummagumma = apple_banana
+    """.splitlines()
+    
+    @given("BaseConfiguration implementation with unknown values")
+    def step_implementation(context):
+        context.configuration = ConcreteConfiguration(source=ConfigObj(extra_option_configuration),
+                                                      section_name='cement')
+        return
+    
+
+
+  When check_rep is checked
+  Then a ConfigurationError is raised

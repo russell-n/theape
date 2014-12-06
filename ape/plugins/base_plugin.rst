@@ -144,7 +144,7 @@ A holder of constants for the ``BaseConfiguration`` so other code can reference 
         updates_section_option = 'updates_section'
         error_name = 'ConfigurationError'
         bad_option_message = "Option '{option}' in section '{section}' failed validation (error='{error}', should be {option_type})"
-        missing_option_message = "Option '{option}' in section '{section}' of type {option_type} required but missing"
+        missing_option_message = "Option '{option}' in section '{section}' of type {option_type} for plugin '{plugin}' required but missing"
         missing_section_message = "Section '{section}' to configure '{plugin}' not found in configuration"
         missing_plugin_option_message = "'plugin' option missing in section '{0}'"
         extra_message = "Extra {item_type} in section '{section}. '{name}'"
@@ -182,10 +182,10 @@ There are two properties that inheriting classes need to implement or a *TypeErr
    BaseConfiguration.configspec_source
    BaseConfiguration.product
 
-`configspec_source`
-+++++++++++++++++++
+configspec_source
++++++++++++++++++
 
-This is the source that will be used by ConfigObj to validate the configuration. It can be a string, list of strings, or anything that's accepted by ConfigObj -- but it will be converted by the BaseConfiguration so a string would likely be the best form (BaseConfiguration will also split the string into a list of lines for you). It's meant to have at least a `plugin` option and/or an `updates_section` option defined, everything else is up to the plugin. A list of the functions that you can put in the configspec is listed in the `Validate <http://configobj.readthedocs.org/en/latest/validate.html#the-standard-functions>`_ documentation. And ConfigObj's documentation has more information about `using validation <http://configobj.readthedocs.org/en/latest/configobj.html#validation>`_.
+The ``configspec_source`` property should be a string that specifies the form of the configuration for the plugin. The ConfigObj documentation on `validation <http://configobj.readthedocs.org/en/latest/configobj.html#validate>`_ has some information about it and the `validate <http://configobj.readthedocs.org/en/latest/validate.html#the-standard-functions>`_ documentation has a list of the functions that you can put in the configspec.
 
 `plugin`
 ````````
@@ -306,8 +306,40 @@ Methods
 .. autosummary::
    :toctree: api
 
-   BaseConfiguration.process_errors
    BaseConfiguration.check_extra_values
-   BaseConfiguration.update
    BaseConfiguration.check_rep
+   BaseConfiguration.process_errors
+   BaseConfiguration.update
+
+check_extra_values
+++++++++++++++++++
+
+.. figure:: figures/check_extra_values_activity.*
+   :align: center
+
+   check_extra_values activity diagram
+
+The ``check_extra_values`` method uses the ``configobj.get_extra_values`` function to get the parts of the configuration that weren't defined in the ``configspec``. It logs the items it finds and then returns True if unrecognized items were in fact found in the configuration. The BaseConfiguration doesn't use this itself because I assume that some plugins won't care if there are extra items (like the Dummy). It takes a single parameter (``warn_users``) that, if True (the default) will log the items found at the `warning` level, otherwise it logs them at the `debug` level.
+
+.. '
+
+check_rep
++++++++++
+
+.. figure:: figures/baseconfiguration_check_rep_activity.*
+   :align: center
+
+   check_rep activity diagram
+
+The ``check_rep`` method calls the ``process_errors`` method and the ``check_extra_values`` method, and if either returns True then ``check_rep`` raises a ``ConfigurationError``. Child classes like the Dummy that don't car about extra values should override this method.
+
+.. '
+
+process_errors
+++++++++++++++
+
+.. figure:: figures/baseconfiguration_process_errors_activity.*
+   :align: center
+
+   process_errors activity diagram
    
