@@ -103,7 +103,7 @@ class BaseConfigurationConstants(object):
     updates_section_option = 'updates_section'
     error_name = 'ConfigurationError'
     bad_option_message = "Option '{option}' in section '{section}' failed validation (error='{error}', should be {option_type})"
-    missing_option_message = "Option '{option}' in section '{section}' of type {option_type} required but missing"
+    missing_option_message = "Option '{option}' in section '{section}' of type {option_type} for plugin '{plugin}' required but missing"
     missing_section_message = "Section '{section}' to configure '{plugin}' not found in configuration"
     missing_plugin_option_message = "'plugin' option missing in section '{0}'"
     extra_message = "Extra {item_type} in section '{section}. '{name}'"
@@ -124,7 +124,7 @@ class BaseConfiguration(BaseClass):
 
          - `source`: ConfigObj section
          - `section_name`: section-name in the configuration
-         - `configspec_source`: list or file with configspec
+         - `configspec_source`: string with configuration specification (use to override the default)
          - `updatable`: if True, allows updating from other sections
          - `constants`: object with same properties as BaseConfigurationConstants
         """
@@ -134,7 +134,7 @@ class BaseConfiguration(BaseClass):
         self.source = source
         self.updatable = updatable
         self._configspec_source = configspec_source
-        
+        self._sample = None
         self._product = None
         self._validator = None
         self._configspec = None
@@ -143,6 +143,21 @@ class BaseConfiguration(BaseClass):
         self._validation_outcome = None
         self._constants
         return
+
+    @abstractproperty
+    def configspec_source(self):
+        """
+        abstract: implement as configspec string
+        """
+
+    @property
+    def sample(self):
+        if self._sample is None:
+            sample = self.configspec_source.lstrip('\n')
+            sample = sample.replace('[', '[[[')
+            sample = sample.replace(']', ']]]')
+            self._sample = '[[{0}]]\n'.format(self.section_name) + sample
+        return self._sample
 
     @property
     def constants(self):
@@ -225,16 +240,9 @@ class BaseConfiguration(BaseClass):
         return self._configuration
 
     @abstractproperty
-    def configspec_source(self):
-        """
-        Source for configuration specification (probably list of lines)
-        """
-        return
-
-    @abstractproperty
     def product(self):
         """
-        The object built from the configuration
+        abstract: implement as built object for the ape to call
         """
         return
 
@@ -263,7 +271,6 @@ class BaseConfiguration(BaseClass):
 
         :return: True if there were errors (same as `not self.validation_outcome`)
         """
-        constants = BaseConfigurationConstants
         flattened_errors = flatten_errors(self.configuration,
                                            self.validation_outcome)
 
@@ -282,20 +289,20 @@ class BaseConfiguration(BaseClass):
                 option_type = spec[option]
                 
                 if error: # validation of option failed                    
-                    self.log_error(error=constants.error_name,
-                                   message=constants.bad_option_message.format(option=option,
-                                                                               section=section,
-                                                                               error=error,
-                                                                               option_type=option_type))
+                    self.log_error(error=self.constants.error_name,
+                                   message=self.constants.bad_option_message.format(option=option,
+                                                                                    section=section,
+                                                                                    error=error,
+                                                                                    option_type=option_type))
                 else: # missing option
-                    self.log_error(error=constants.error_name,
-                                   message=constants.missing_option_message.format(option=option,
+                    self.log_error(error=self.constants.error_name,
+                                   message=self.constants.missing_option_message.format(option=option,
                                                                                    section=section,
-                                                                                   option_type=option_type))
+                                                                                   option_type=option_type,
+                                                                                   plugin=self.plugin_name))
             else: # section missing
-                print ",".join(sections)
-                self.log_error(error=constants.error_name,
-                               message=constants.missing_section_message.format(section=section,
+                self.log_error(error=self.constants.error_name,
+                               message=self.constants.missing_section_message.format(section=section,
                                                                                 plugin=self.plugin_name))
         return not self.validation_outcome is True
 
@@ -308,7 +315,7 @@ class BaseConfiguration(BaseClass):
         if warn_user:
             logger = self.logger.warning
         else:
-            # in case the plugin doesn't care
+            # in case the plugin does not care
             logger = self.logger.debug
             
         extra_values = get_extra_values(self.configuration)
@@ -332,9 +339,9 @@ class BaseConfiguration(BaseClass):
                 section = "{0},{1}".format(self.section_name, section)
             else:
                 section = self.section_name
-            message = BaseConfigurationConstants.extra_message.format(section=section,
-                                                                    item_type=item_type,
-                                                                    name=name)
+            message = self.constants.extra_message.format(section=section,
+                                                          item_type=item_type,
+                                                          name=name)
             if item_type == 'option':
                 message += "='{0}'".format(value)
             logger(message)
@@ -345,9 +352,10 @@ class BaseConfiguration(BaseClass):
         """
         Calls process_errors
 
-        :raise: ConfigurationError if errors are found
+        :raise: ConfigurationError if errors are found (or there are unknown options)
         """
-        if self.process_errors():
+        if self.process_errors() or self.check_extra_values():
+            self.logger.info('Expected Configuration Matching:\n{0}'.format(self.sample))
             raise ConfigurationError(self.constants.check_rep_failure_message.format(self.section_name))
         return            
 # end BaseConfiguration        

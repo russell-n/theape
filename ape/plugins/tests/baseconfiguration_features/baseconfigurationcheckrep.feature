@@ -8,3 +8,8 @@ Feature: BaseConfiguration check_rep method
   Given BaseConfiguration implementation with configuration errors
   When check_rep is checked
   Then a ConfigurationError is raised
+
+ Scenario: User calls check_rep on configuration with extra values
+  Given BaseConfiguration implementation with unknown values
+  When check_rep is checked
+  Then a ConfigurationError is raised
