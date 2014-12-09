@@ -1,11 +1,14 @@
 The Ape Plugin
 ==============
 
+
+
 .. image:: ../figures/robot_monster_babe.jpg
    :align: center
 
 .. _ape-plugin:
 This is the plugin that creates the Hortator to run :ref:`Composites <composite-class>`. It will be used when the `run` subcommand is called by the user.
+
 
 
 
@@ -64,7 +67,8 @@ Constants
 
 These are constants put into classes to make it easier for the tests to find them and to make the configuration-file settings more implicit.
 
-::
+
+.. code:: python
 
     class OperatorConfigurationConstants(object):
         """
@@ -85,7 +89,7 @@ These are constants put into classes to make it easier for the tests to find the
         modules_option = 'external_modules'
         timestamp_option = 'timestamp'
         plugin_option = 'plugin'
-        
+    
         # defaults
         default_repetitions = 1
         default_config_glob = None
@@ -96,8 +100,7 @@ These are constants put into classes to make it easier for the tests to find the
         default_timestamp = None
     
         #extra
-        file_storage_name = 'infrastructure'   
-    
+        file_storage_name = 'infrastructure'
     
 
 
@@ -109,7 +112,8 @@ The Configuration Specification for the Operator Configuration. It's used by con
 
 .. '
 
-::
+
+.. code:: python
 
     config_spec = """
     [SETTINGS]
@@ -128,7 +132,6 @@ The Configuration Specification for the Operator Configuration. It's used by con
      [[__many__]]
      plugin = string
     """
-    
 
 
 
@@ -150,6 +153,7 @@ It looks like the way configobj works there isn't a way to force the plugins sec
    OperatorConfigspec.validator
 
    
+
 
 
 OperatorConfiguration
@@ -184,6 +188,7 @@ The OperatorConfiguration builds the dependencies for the Operators.
 
 
 
+
 OperationConfiguration
 ----------------------
 
@@ -204,6 +209,7 @@ A dependency builder for operations.
    OperationConfiguration
    OperationConfiguration.plugin_sections_names
    OperationConfiguration.operation
+
 
 
 
@@ -241,7 +247,13 @@ This means:
 
  * the `Build Composites` happens in creating the ``product`` 
    
-::
+
+
+
+
+
+
+.. code:: python
 
     CONFIGURATION = '''[OPERATIONS]
     # the option names are just identifiers
@@ -298,13 +310,15 @@ This means:
     
     #  [[plugin1]]
     #  plugin = Sleep
+    #  updates_section = <section_name>
     #  <sleep configuration>
     
     #  [[plugin2]]
     #  plugin = Iperf
     #  <Iperf configuration>
     '''
-    
+
+
 
 
 
@@ -314,6 +328,7 @@ Module Dependency Graph
 -----------------------
 
 This is an auto-generated graph of this module.
+
 
 [Errno 2] No such file or directory
 Is pylint installed?
@@ -334,7 +349,7 @@ Class Diagram
 ..                                        filter='OTHER',
 ..                                        module=this_file)
 ..     print ".. image:: {0}".format(class_diagram_file)
-.. 
+.. @
 .. 
 
 
@@ -363,6 +378,7 @@ The API
    Ape.arguments
    Ape.sections
    
+
 
 
 

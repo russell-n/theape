@@ -10,26 +10,23 @@ from mock import MagicMock
 # this package
 from ape.plugins.base_plugin import BaseConfiguration, BaseConfigurationConstants
 from ape.infrastructure.baseclass import RED_ERROR
-
+from ape import ConfigurationError
 
 @given("a BaseConfiguration definition")
 def base_configuration_definition(context):
     context.definition = BaseConfiguration
     return
 
-
 @when("the user instantiates the BaseConfiguration")
 def base_configuration_instantiation(context):
     context.callable = lambda : context.definition()
     return
-
 
 @then("it raises a TypeError")
 def assert_raises(context):
     assert_that(calling(context.callable),
                 raises(TypeError))
     return
-
 
 configspec = """
 plugin = option(Fake)
@@ -58,8 +55,6 @@ config = """
 op = value
 """.splitlines()
 
-
-
 @given("a BaseConfiguration implementation")
 def base_configuration_implementation(context):
     context.configuration = ConfigObj(config)
@@ -68,14 +63,12 @@ def base_configuration_implementation(context):
     context.section_name = 'FAKE'
     return
 
-
 @when("the user instantiates the BaseConfiguration implementation")
 def base_configuration_implementation_instantiation(context):
     context.configuration = context.implementation(source=context.configuration,
                                                    section_name=context.section_name,
                                                    configspec_source=context.configspec_source)
     return
-
 
 @then("it has the BaseConfiguration default properties")
 def assert_default_properties(context):
@@ -88,7 +81,6 @@ def assert_default_properties(context):
     assert_that(context.configuration.validator,
                 is_(instance_of(Validator)))
     return
-
 
 valid_config_string = """
 [GOODBUTFAKE]
@@ -104,13 +96,11 @@ def valid_configuration(context):
                                               section_name='GOODBUTFAKE')
     return
 
-
 @then("the process_errors outcome was False")
 def process_errors_false(context):
     assert_that(context.outcome,
                 is_(False))
     return
-
 
 bad_option_config = """
 [FAKE]
@@ -136,7 +126,6 @@ def bad_option(context):
     context.configuration._logger = context.logger
     return
 
-
 @when("the BaseConfiguration implementation processes the errors")
 def process_errors(context):
     outcome = context.configuration.configuration.validate(context.configuration.validator,
@@ -144,19 +133,16 @@ def process_errors(context):
     context.outcome = context.configuration.process_errors()
     return
 
-
 @then("the correct error message is logged")
 def check_error_message(context):
     context.logger.error.assert_called_with(context.expected)
     return
-
 
 @then("the process_errors outcome was True")
 def process_errors_true(context):
     assert_that(context.outcome,
                 is_(True))
     return
-
 
 missing_option_config = """
 [FAKE]
@@ -174,13 +160,13 @@ def missing_option(context):
     context.expected = RED_ERROR.format(error='ConfigurationError',
                                         message=missing_option_message.format(option='op2',
                                                                             section='FAKE',
+                                                                            plugin='Fake',
                                                                             option_type='integer'))    
     context.configuration = FakeConfiguration(source=ConfigObj(missing_option_config),
                                               section_name='FAKE')
     context.configuration._logger = context.logger
 
     return
-
 
 # so the configspect can't have the top-level section name
 subsection_configspec = """
@@ -211,7 +197,6 @@ def missing_section(context):
     context.configuration._logger = context.logger
     return
 
-
 section_name_configspec = """
 op1 = integer
 
@@ -235,19 +220,16 @@ def configspec_section_name(context):
     context.configuration._logger = MagicMock()
     return
 
-
 @when("the BaseConfiguration implementation is checked")
 def check_implementation(context):
     context.configuration.process_errors()
     return
-
 
 @then("the configuration outcome is True")
 def assert_outcome_true(context):
     assert_that(context.configuration.validation_outcome,
                 is_(True))
     return
-
 
 subsection_only_configspec = """
 op1 = integer
@@ -263,7 +245,6 @@ def configspec_subsection(context):
     context.configuration._logger = MagicMock()
 
     return
-
 
 extra_options_config = """
 [FAKE]
@@ -290,12 +271,10 @@ def extra_options(context):
     context.configuration._logger = context.logger
     return
 
-
 @when("the BaseConfiguration implementation checks extra values")
 def check_extra_values(context):
     context.outcome = context.configuration.check_extra_values()
     return
-
 
 @then("the extra values are logged")
 def extra_values_logged(context):
@@ -308,13 +287,11 @@ def extra_values_logged(context):
     context.logger.warning.assert_called_with(message)
     return
 
-
 @then('check_extra_value returns True')
 def assert_extra_values(context):
     assert_that(context.outcome,
                 is_(True))
     return
-
 
 no_extra_options_config = """
 [FAKE]
@@ -335,20 +312,17 @@ def no_extra_options(context):
 
     return
 
-
 @then("no extra values are logged")
 def no_logging(context):
     assert_that(context.logger.warning.mock_calls,
                 is_(equal_to([])))
     return
 
-
 @then('check_extra_value returns False')
 def check_extra_false(context):
     assert_that(context.outcome,
                 is_(False))
     return
-
 
 update_sections_configspec = """
 updates_section = string(default=None)
@@ -386,11 +360,9 @@ def updates_section(context):
     context.fake2._logger = context.logger
     return
 
-
 @when("the BaseConfiguration implementation validates the configuration")
 def validate_configuration(context):
     return
-
 
 @then("the BaseConfiguration implementation will have the updates")
 def check_updates(context):
@@ -407,7 +379,6 @@ def check_updates(context):
 
     return
 
-
 missing_plugin_name_config = """
 [FAKE]
 op = some string
@@ -420,19 +391,16 @@ def missing_plugin_name(context):
                                               section_name='FAKE')
     return
 
-
 @when("the BaseConfiguration checks process_errors")
 def check_process_errors(context):
-    context.outcome = context.configuration.process_errors()
+    context.callable = context.configuration.process_errors
     return
-
 
 @then("the process_errors returned True")
 def process_errors_true(context):
-    assert_that(context.outcome,
-                is_(True))
+    assert_that(calling(context.callable),
+                raises(ConfigurationError))
     return
-
 
 @then("the configuration options that were given are in the configuration")
 def assert_options(context):

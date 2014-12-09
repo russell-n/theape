@@ -6,40 +6,46 @@ BaseConfiguration
 
 
 
+
 Scenario: User instantiates the BaseConfiguration
 -------------------------------------------------
 
-::
+
+.. code:: python
 
     @given("a BaseConfiguration definition")
     def base_configuration_definition(context):
         context.definition = BaseConfiguration
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @when("the user instantiates the BaseConfiguration")
     def base_configuration_instantiation(context):
         context.callable = lambda : context.definition()
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @then("it raises a TypeError")
     def assert_raises(context):
         assert_that(calling(context.callable),
                     raises(TypeError))
         return
-    
 
 
 
 Scenario: User instantiates BaseConfiguration implementation
 ------------------------------------------------------------
 
-::
+
+.. code:: python
 
     configspec = """
     plugin = option(Fake)
@@ -67,10 +73,11 @@ Scenario: User instantiates BaseConfiguration implementation
     [FAKE]
     op = value
     """.splitlines()
-    
-    
 
-::
+
+
+
+.. code:: python
 
     @given("a BaseConfiguration implementation")
     def base_configuration_implementation(context):
@@ -79,9 +86,11 @@ Scenario: User instantiates BaseConfiguration implementation
         context.configspec_source = configspec
         context.section_name = 'FAKE'
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @when("the user instantiates the BaseConfiguration implementation")
     def base_configuration_implementation_instantiation(context):
@@ -89,9 +98,11 @@ Scenario: User instantiates BaseConfiguration implementation
                                                        section_name=context.section_name,
                                                        configspec_source=context.configspec_source)
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @then("it has the BaseConfiguration default properties")
     def assert_default_properties(context):
@@ -104,14 +115,14 @@ Scenario: User instantiates BaseConfiguration implementation
         assert_that(context.configuration.validator,
                     is_(instance_of(Validator)))
         return
-    
 
 
 
 Scenario: Configuration passes
 ------------------------------
 
-::
+
+.. code:: python
 
     valid_config_string = """
     [GOODBUTFAKE]
@@ -126,27 +137,27 @@ Scenario: Configuration passes
         context.configuration = FakeConfiguration(source=ConfigObj(valid_config_string),
                                                   section_name='GOODBUTFAKE')
         return
-    
 
 
 
 When the BaseConfiguration implementation processes the errors
 
-::
+
+.. code:: python
 
     @then("the process_errors outcome was False")
     def process_errors_false(context):
         assert_that(context.outcome,
                     is_(False))
         return
-    
 
 
 
 Scenario: Option fails validation
 ---------------------------------
 
-::
+
+.. code:: python
 
     bad_option_config = """
     [FAKE]
@@ -171,9 +182,11 @@ Scenario: Option fails validation
                                                   section_name='FAKE')
         context.configuration._logger = context.logger
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @when("the BaseConfiguration implementation processes the errors")
     def process_errors(context):
@@ -181,31 +194,35 @@ Scenario: Option fails validation
                                                                preserve_errors=True)
         context.outcome = context.configuration.process_errors()
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @then("the correct error message is logged")
     def check_error_message(context):
         context.logger.error.assert_called_with(context.expected)
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @then("the process_errors outcome was True")
     def process_errors_true(context):
         assert_that(context.outcome,
                     is_(True))
         return
-    
 
 
 
 Scenario: Missing Option
 ------------------------
 
-::
+
+.. code:: python
 
     missing_option_config = """
     [FAKE]
@@ -223,13 +240,13 @@ Scenario: Missing Option
         context.expected = RED_ERROR.format(error='ConfigurationError',
                                             message=missing_option_message.format(option='op2',
                                                                                 section='FAKE',
+                                                                                plugin='Fake',
                                                                                 option_type='integer'))    
         context.configuration = FakeConfiguration(source=ConfigObj(missing_option_config),
                                                   section_name='FAKE')
         context.configuration._logger = context.logger
     
         return
-    
 
 
 
@@ -241,7 +258,8 @@ Scenario: Missing Section
 
 Because the operators are expecting arbitrary section-names this last errors will only occur if the plugin has defined sub-section names in the configspec (I think).
 
-::
+
+.. code:: python
 
     # so the configspect can't have the top-level section name
     subsection_configspec = """
@@ -271,7 +289,6 @@ Because the operators are expecting arbitrary section-names this last errors wil
                                                   section_name='FAKE')
         context.configuration._logger = context.logger
         return
-    
 
 
 
@@ -282,7 +299,8 @@ When the BaseConfiguration implementation processes the errors,
 Scenario: ConfigSpec Section Name Format
 ----------------------------------------
 
-::
+
+.. code:: python
 
     section_name_configspec = """
     op1 = integer
@@ -306,31 +324,35 @@ Scenario: ConfigSpec Section Name Format
                                                   section_name='FAKE')
         context.configuration._logger = MagicMock()
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @when("the BaseConfiguration implementation is checked")
     def check_implementation(context):
         context.configuration.process_errors()
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @then("the configuration outcome is True")
     def assert_outcome_true(context):
         assert_that(context.configuration.validation_outcome,
                     is_(True))
         return
-    
 
 
 
 Scenario: ConfigSpec string only has sub-section definition
 -----------------------------------------------------------
 
-::
+
+.. code:: python
 
     subsection_only_configspec = """
     op1 = integer
@@ -346,7 +368,6 @@ Scenario: ConfigSpec string only has sub-section definition
         context.configuration._logger = MagicMock()
     
         return
-    
 
 
    when the BaseConfiguration implementation is checked
@@ -355,7 +376,8 @@ Scenario: ConfigSpec string only has sub-section definition
 Scenario: Configuration has extra values
 ----------------------------------------
 
-::
+
+.. code:: python
 
     extra_options_config = """
     [FAKE]
@@ -381,17 +403,21 @@ Scenario: Configuration has extra values
                                                   section_name='FAKE')
         context.configuration._logger = context.logger
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @when("the BaseConfiguration implementation checks extra values")
     def check_extra_values(context):
         context.outcome = context.configuration.check_extra_values()
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @then("the extra values are logged")
     def extra_values_logged(context):
@@ -403,23 +429,25 @@ Scenario: Configuration has extra values
                                                                   name=name) + "='0'"
         context.logger.warning.assert_called_with(message)
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @then('check_extra_value returns True')
     def assert_extra_values(context):
         assert_that(context.outcome,
                     is_(True))
         return
-    
 
 
 
 Scenario: Configuration has no extra values
 -------------------------------------------
 
-::
+
+.. code:: python
 
     no_extra_options_config = """
     [FAKE]
@@ -439,36 +467,38 @@ Scenario: Configuration has no extra values
         context.configuration._logger = context.logger
     
         return
-    
 
 
 
   When the BaseConfiguration implementation checks extra values
 
-::
+
+.. code:: python
 
     @then("no extra values are logged")
     def no_logging(context):
         assert_that(context.logger.warning.mock_calls,
                     is_(equal_to([])))
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @then('check_extra_value returns False')
     def check_extra_false(context):
         assert_that(context.outcome,
                     is_(False))
         return
-    
 
 
 
 Scenario: Section updates configuration
 ---------------------------------------
 
-::
+
+.. code:: python
 
     update_sections_configspec = """
     updates_section = string(default=None)
@@ -505,16 +535,20 @@ Scenario: Section updates configuration
         context.fake1._logger = context.logger
         context.fake2._logger = context.logger
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @when("the BaseConfiguration implementation validates the configuration")
     def validate_configuration(context):
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @then("the BaseConfiguration implementation will have the updates")
     def check_updates(context):
@@ -530,14 +564,14 @@ Scenario: Section updates configuration
                     has_entries(expected_fake2))
     
         return
-    
 
 
 
 Scenario: Configuration missing plugin name
 -------------------------------------------
 
-::
+
+.. code:: python
 
     missing_plugin_name_config = """
     [FAKE]
@@ -550,26 +584,33 @@ Scenario: Configuration missing plugin name
         context.configuration = FakeConfiguration(source=ConfigObj(missing_plugin_name_config),
                                                   section_name='FAKE')
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @when("the BaseConfiguration checks process_errors")
     def check_process_errors(context):
-        context.outcome = context.configuration.process_errors()
+        context.callable = context.configuration.process_errors
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @then("the process_errors returned True")
     def process_errors_true(context):
-        assert_that(context.outcome,
-                    is_(True))
+        assert_that(calling(context.callable),
+                    raises(ConfigurationError))
         return
-    
 
-::
+
+
+
+
+.. code:: python
 
     @then("the configuration options that were given are in the configuration")
     def assert_options(context):
@@ -578,5 +619,5 @@ Scenario: Configuration missing plugin name
         assert_that(context.configuration.configuration,
                     has_entries(expected))
         return
-    
+
 
