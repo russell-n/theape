@@ -3,6 +3,9 @@ The Base Plugin
 .. currentmodule:: ape.plugins.base_plugin
 
 
+
+
+
 .. _base-plugin:
 
 Background
@@ -102,6 +105,7 @@ These are the classes that the BasePlugin uses.
      
 
 
+
 .. Module Graph
 .. ------------
 .. 
@@ -113,7 +117,7 @@ These are the classes that the BasePlugin uses.
 ..     module_diagram_file = module_diagram(module=this_file, project='baseplugin')
 ..     print ".. image:: {0}".format(module_diagram_file)
 .. 
-.. 
+.. @
 
 .. Class Diagram
 .. -------------
@@ -126,14 +130,15 @@ These are the classes that the BasePlugin uses.
 ..                                        filter='OTHER',
 ..                                        module=this_file)
 ..     print ".. image:: {0}".format(class_diagram_file)
-.. 
+.. @
 
 BaseConfigurationConstants
 --------------------------
 
 A holder of constants for the ``BaseConfiguration`` so other code can reference them.
 
-::
+
+.. code:: python
 
     class BaseConfigurationConstants(object):
         """
@@ -149,7 +154,6 @@ A holder of constants for the ``BaseConfiguration`` so other code can reference 
         missing_plugin_option_message = "'plugin' option missing in section '{0}'"
         extra_message = "Extra {item_type} in section '{section}. '{name}'"
         check_rep_failure_message = "Errors in section [{0}] in the configuration"
-    
 
 
 
@@ -342,4 +346,26 @@ process_errors
    :align: center
 
    process_errors activity diagram
+
+The ``process_errors`` method uses ``configobj.flatten_errors`` to convert the validation outcome to a list of triples (sections, option-name, error). The first element in the tuple ``sections`` is a list of sections leading from the top-level of the configuration that was validated down to the sub-section where an error occurred. The BaseConfiguration uses this and the ``section_name`` property to create a meaningful section name for the output. If the problem was that one of the options was invalid then the sections are traversed to the bottom section in sections and the missing or invalid option is logged. If the ``option`` value in the triple is None, then there was a missing section and so that is logged instead.
+
+If the validation was successful then the validation outcome will be True, so the ``process_errors`` method returns True if it failed and False if it passed (it's almost the inverse of ``self.validation_outcome`` except that ``self.validation_outcome`` will only be a boolean if it's True, otherwise it's a dictionary that needs to be processed).
+
+.. '
+
+update
+++++++
+
+.. figure:: figures/baseconfiguration_update_activity.*
+   :align: center
+
+   update activity diagram
+
+The ``update`` method us used to create a plugin-configuration by updating another section. It checks if the section has the 'updates_section' option (meaning the ``configspec`` for the plugin-configuration defined this option) and that its corresponding value is not None (meaning the user set a value for it in the configuration file). If it passes both of the conditions then a ConfigObj object is created from the section named by the ``updates_section`` value and then merges it with the current configuration. The merge will only change the values defined in the current section.
+
+In order for this to work properly, the configspec has to have default values for the options that the updating configuration leaves out and the updating configuration has to be merged with the base-configuration before it is validated (otherwise the defaults will be set and they'll override the base-configuration). See the :ref:`merging default values<ape-explorations-configobj-merging-defaults>` section of the `developer documentation`.
+
+.. '
    
+
+

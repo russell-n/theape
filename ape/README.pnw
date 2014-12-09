@@ -3,3 +3,14 @@ Read Me
 
 The `All-Purpose Executor` is a plugin-based system meant to create a unified front-end for different device-related testing.
 
+Testing Dependencies
+--------------------
+
+The APE is currently being tested using `behave <http://pythonhosted.org/behave/>`_ so if you want to run the tests, you'll need that, `pyhamcrest <http://pyhamcrest.readthedocs.org/en/1.8.0/>`_ and `mock <http://mock.readthedocs.org/en/latest/magicmock.html>`_. All three are on pypi so if you have pip installed you can install them from the web (if installing system wide run as root).
+
+.. code-block:: bash
+
+   pip install behave
+   pip install pyhamcrest
+   pip install mock
+

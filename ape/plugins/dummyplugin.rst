@@ -1,8 +1,15 @@
 The Dummy Plugin
 ================
 
+
+
 .. _dummy-plugin:
 The :ref:`DummyClass <dummy-class>` does not do anything. It is meant to be used to test the infrastructure.
+
+
+
+
+
 
 
 
@@ -23,12 +30,14 @@ The :ref:`DummyClass <dummy-class>` does not do anything. It is meant to be used
 
 
 
+
 Crash-Test-Dummy
 ----------------
 
 This is a dummy that crashes when called. The config-file should specify which error to raise::
 
    [[CRASHTESTDUMMY]]
+   plugin = CrashTestDummy
    error_message = I have Crashed
    error_module = ape.infrastructure.errors
    error = ApeError
@@ -39,7 +48,8 @@ CrashTestDummyConstants
 
 This is a holder of constants for the CrashTestDummy.
 
-::
+
+.. code:: python
 
     class CrashTestDummyConstants(object):
         __slots__ = ()
@@ -47,12 +57,11 @@ This is a holder of constants for the CrashTestDummy.
         error_option = 'error'
         error_message_option = 'error_message'
         function_option = 'function'
-        
+    
         error_module_default = 'exceptions'
         error_default = 'Exception'
         error_message_default = 'My work is done, why wait?'
         function_default = '__call__'
-    
     
 
 
@@ -62,17 +71,17 @@ CrashtestConfigspec
 
 The configuration specification for the Crash Test Dummy.
 
-::
+
+.. code:: python
 
     crash_configspec = """
-    plugin = CrashTestDummy
+    plugin = option('CrashTestDummy')
     
     error_module = string(default='exceptions')
     error = string(default='Exception')
     error_message = string(default='My work is done, why wait?')
     function = string(default='__call__')
     """
-    
 
 
 
@@ -95,6 +104,7 @@ A class to handle the config_obj configuration.
 
 
 
+
 CrashTestDummy
 ~~~~~~~~~~~~~~
 
@@ -105,8 +115,46 @@ CrashTestDummy
    
 
 
+
 Stuck Dummy
 -----------
+
+The Configspec
+~~~~~~~~~~~~~~
+
+The configuration specification for the StuckDummy.
+
+
+.. code:: python
+
+    stuck_dummy_configspec = """
+    plugin = option('StuckDummy)
+    
+    __many__ = string
+    """
+
+
+
+Stuck Dummy Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. uml::
+
+   BaseConfiguration <|-- StuckDummyConfiguration
+
+.. autosummary::
+   :toctree: api
+
+   StuckDummyConfiguration
+   StuckDummyConfiguration.configspec
+   StuckDummyConfiguration.configuration
+   StuckDummyConfiguration.product
+
+
+
+
+Stuck Dummy
+~~~~~~~~~~~
 
 This is a dummy that hangs when called.
 
@@ -114,6 +162,7 @@ This is a dummy that hangs when called.
    :toctree: api
 
    StuckDummy
+
 
 
 

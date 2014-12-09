@@ -16,6 +16,7 @@ from mock import MagicMock
 # this package
 from ape.plugins.base_plugin import BaseConfiguration, BaseConfigurationConstants
 from ape.infrastructure.baseclass import RED_ERROR
+from ape import ConfigurationError
 @
 
 Scenario: User instantiates the BaseConfiguration
@@ -211,6 +212,7 @@ def missing_option(context):
     context.expected = RED_ERROR.format(error='ConfigurationError',
                                         message=missing_option_message.format(option='op2',
                                                                             section='FAKE',
+                                                                            plugin='Fake',
                                                                             option_type='integer'))    
     context.configuration = FakeConfiguration(source=ConfigObj(missing_option_config),
                                               section_name='FAKE')
@@ -511,15 +513,15 @@ def missing_plugin_name(context):
 <<name='check_process_errors', wrap=False>>=
 @when("the BaseConfiguration checks process_errors")
 def check_process_errors(context):
-    context.outcome = context.configuration.process_errors()
+    context.callable = context.configuration.process_errors
     return
 @
 
 <<name='process_errors_true', wrap=False>>=
 @then("the process_errors returned True")
 def process_errors_true(context):
-    assert_that(context.outcome,
-                is_(True))
+    assert_that(calling(context.callable),
+                raises(ConfigurationError))
     return
 @
 

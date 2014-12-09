@@ -22,6 +22,7 @@ NEWLINE = '\n'
 # constants for formatting output
 RED_THING =  "{red}{{{{thing}}}}{reset} {{verb}}".format(red=RED, reset=RESET)
 BOLD_THING = "{bold}{{thing}}{reset} {{{{value}}}}".format(bold=BOLD, reset=RESET)
+BLUE_WARNING = "{blue}{{thing}}{reset}".format(blue=BLUE, reset=RESET)
 CALLED_ON = "'{blue}{{attribute}}{reset}' attribute called on {red}{{thing}}{reset}".format(blue=BLUE,
                                                                                              red=RED,
                                                                                              reset=RESET)

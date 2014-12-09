@@ -5,6 +5,7 @@ TheApe
    :align: center
 
 
+
 This is an attempt to re-start the `Project Arachne` revision of the `APE` (the All-in-one Program Executor). It is being re-designed as a code runner as well as a repository of code components for building programs.
 
 .. figure:: figures/ape.png
@@ -36,6 +37,7 @@ Auto-Generated Documentation
 These are the documents created from the source files.
 
 
+
 .. toctree::
    :maxdepth: 1
 
@@ -50,5 +52,7 @@ These are the documents created from the source files.
    The Ape's Infrastructure <infrastructure/index.rst>
    Parts <parts/index.rst>
    Plugins <plugins/index.rst>
+
+
 
 

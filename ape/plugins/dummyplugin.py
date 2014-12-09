@@ -1,4 +1,6 @@
 
+from __future__ import print_function
+
 # python standard library
 from collections import OrderedDict
 import textwrap
@@ -14,14 +16,11 @@ from ape.parts.dummy.dummy import DummyClass
 from ape.parts.dummy.dummy import CrashDummy
 from ape.parts.dummy.dummy import HangingDummy
 
-
 DESCRIPTION = """{bold}DummyClass{reset} logs its calls and then returns. It is meant to be used as changes are made to the infrastructure so that the {blue}Ape{reset} can be tested without using any other components."""
 EXAMPLES = """{bold}dummy(){reset}"""
 NOTE = "The {bold}DummyClass{reset} will change as the infrastructure changes. In particular the building and testing of plugins and components will likely evolve once real plugins are created."
 
-
 output_documentation = __name__ == '__builtin__'
-
 
 class Dummy(BasePlugin):
     """
@@ -62,19 +61,18 @@ class Dummy(BasePlugin):
 
     def fetch_config(self):
         """
-        prints a message saying there is no configuration
+        prints a sample configuration
         """
-        print textwrap.dedent("""
-        [DUMMY]
+        print(textwrap.dedent("""
+        [[DUMMY]]
         # the section name is arbitrary but must match the name in the [APE] section
         # so the 'plugin' option is what actually specifies the plugin 
         plugin = Dummy
         # the dummy will take anything you set here and log it
         any_arbitrary_option = any_arbitrary_value
-        another_option = another_value""")
+        another_option = another_value"""))
         return
 # end class Dummy
-
 
 class CrashTestDummyConstants(object):
     __slots__ = ()
@@ -88,16 +86,14 @@ class CrashTestDummyConstants(object):
     error_message_default = 'My work is done, why wait?'
     function_default = '__call__'
 
-
 crash_configspec = """
-plugin = CrashTestDummy
+plugin = option('CrashTestDummy')
 
 error_module = string(default='exceptions')
 error = string(default='Exception')
 error_message = string(default='My work is done, why wait?')
 function = string(default='__call__')
 """
-
 
 class CrashTestDummyConfiguration(BaseConfiguration):
     """
@@ -113,10 +109,6 @@ class CrashTestDummyConfiguration(BaseConfiguration):
          - `configuration`: dict of configuration values
         """
         super(CrashTestDummyConfiguration, self).__init__(*args, **kwargs)
-        #self._configspec = None
-        #self.section_name = section_name
-        #self._configuration = None
-        #self.configuration = configuration
         return
 
     @property
@@ -125,7 +117,7 @@ class CrashTestDummyConfiguration(BaseConfiguration):
         the configuration specification source
         """
         if self._configspec_source is None:
-            self._configspec_source = crash_configspec.splitlines()
+            self._configspec_source = crash_configspec
         return self._configspec_source
 
     @property
@@ -133,8 +125,15 @@ class CrashTestDummyConfiguration(BaseConfiguration):
         """
         A crash test dummy
         """
-# end class CrashTestDummyConfiguration    
-
+        if self._product is None:
+            error_module = self.configuration['error_module']
+            error = self.configuration['error']
+            module = importlib.import_module(error_module)
+            err = getattr(module, error)
+            self.configuration['error'] = err
+            self._product = CrashDummy(**self.configuration)
+        return self._product
+# end class CrashTestDummyConfiguration
 
 class CrashTestDummy(BasePlugin):
     """
@@ -142,7 +141,18 @@ class CrashTestDummy(BasePlugin):
     """
     def __init__(self, *args, **kwargs):
         super(CrashTestDummy, self).__init__(*args, **kwargs)
+        self._config_builder = None
         return
+
+    @property
+    def config_builder(self):
+        """
+        A CrashTestDummy configuration
+        """
+        if self._config_builder is None:
+            self._config_builder = CrashTestDummyConfiguration(section_name=self.section_header,
+                                                               source=self.configuration)
+        return self._config_builder
 
     @property
     def sections(self):
@@ -173,44 +183,14 @@ class CrashTestDummy(BasePlugin):
         :return: CrashTestDummy
         """
         if self._product is None:
-            # get the random inputs and create a keyword-argument- dictionary
-            kwargs = self.configuration[self.section_header]
-
-            # see if the user specified an error-module
-            error_module = self.configuration.get(section=self.section_header,
-                                                  option='error_module',
-                                                  optional=True,
-                                                  default=None)
-            if error_module is None:
-                # nope, choose the default
-                error_module = 'exceptions'
-                error = 'Exception'
-            else:
-                error = self.configuration.get(section=self.section_header,
-                                               option='error',
-                                               optional=False)
-            module = importlib.import_module(error_module)
-            err = getattr(module, error)
-            kwargs['error'] = err
-            message = self.configuration.get(section=self.section_header,
-                                             option='error_message',
-                                             optional=True,
-                                             default="Die! Die! My Darling!")
-            kwargs['error_message'] = message
-
-            # this is the method that raises the error
-            function = self.configuration.get(section=self.section_header,
-                                              option='function',
-                                              optional=True,
-                                              default=CrashDummy.CALL)
-            self._product = CrashDummy(**kwargs)
+            self._product = self.config_builder.product
         return self._product
 
     def fetch_config(self):
         """
         prints a message saying there is no configuration
         """
-        print textwrap.dedent("""
+        print(textwrap.dedent("""
         [[CRASHTESTDUMMY]]
         plugin = CrashTestDummy
         # the dummy will take anything you set here and log it
@@ -226,10 +206,48 @@ class CrashTestDummy(BasePlugin):
         # to have it crash somewhere specific in the component interface
         # can be any attribute you want to call
         # e.g. function = umma will crash if dummy.umma() is called or dummy.umma
-        function = __call__""")
+        function = __call__"""))
         return
 # end class CrashTestDummy
 
+stuck_dummy_configspec = """
+plugin = option('StuckDummy)
+
+__many__ = string
+"""
+
+class StuckDummyConfiguration(BaseConfiguration):
+    """
+    Configuration builder for the dummy that hangs
+
+    :param:
+
+         - `section_name`: name in the configuration with settings
+         - `configuration`: dict of configuration values
+
+    """
+    def __init__(self, *args, **kwargs):
+        super(StuckDummyConfiguration, self).__init__(*args, **kwargs)
+        return
+
+    @property
+    def configspec_source(self):
+        """
+        configuration specification source
+        """
+        if self._configspec_source is None:
+            self._configspec_source = stuck_dummy_configspec
+        return self._configspec_source
+
+    @property
+    def product(self):
+        """
+        The HangingDummy callable object
+        """
+        if self._product is None:
+            self._product = HangingDummy(**self.configuration)
+        return self._product
+# end class StuckDummyConfiguration
 
 class StuckDummy(BasePlugin):
     """
@@ -237,7 +255,18 @@ class StuckDummy(BasePlugin):
     """
     def __init__(self, *args, **kwargs):
         super(StuckDummy, self).__init__(*args, **kwargs)
+        self._config_builder = None
         return
+
+    @property
+    def config_builder(self):
+        """
+        Stuck Dummy Configuration 
+        """
+        if self._config_builder is None:
+            self._config_builder = StuckDummyConfiguration(source=self.configuration,
+                                                           section_name=self.section_header)
+        return self._config_builder
 
     @property
     def sections(self):
@@ -268,22 +297,18 @@ class StuckDummy(BasePlugin):
         """
         if self._product is None:
             # get the random inputs and create a keyword-argument- dictionary
-            kwargs = dict(self.configuration.items(section=self.section_header,
-                                                   optional=True,
-                                                   default={}))
-
-            self._product = HangingDummy(**kwargs)
+            self._product = self.config_builder.product            
         return self._product
 
     def fetch_config(self):
         """
         prints a message saying there is no configuration
         """
-        print textwrap.dedent("""
-        [HANGINGDUMMY]
+        print(textwrap.dedent("""
+        [[HANGINGDUMMY]]
         # the dummy will take anything you set here and log it
         any_arbitrary_option = any_arbitrary_value
         another_option = another_value
-        """)
+        """))
         return
 # end class HangingDummy

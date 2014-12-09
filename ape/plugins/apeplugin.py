@@ -1,4 +1,6 @@
 
+from __future__ import print_function
+
 # python standard library
 import re
 import os
@@ -19,7 +21,7 @@ from ape.parts.storage.filestorage import FileStorage
 from base_plugin import BasePlugin
 from ape.infrastructure.code_graphs import module_diagram, class_diagram
 from ape.infrastructure.errors import ApeError, DontCatchError, ConfigurationError
-from ape import APESECTION, MODULES_SECTION
+from ape import APESECTION, MODULES_SECTION, BLUE_WARNING
 import  ape.plugins.quartermaster
 from ape.parts.countdown.countdown import INFO
 #from ape.parts.countdown.countdown import CountdownTimer
@@ -27,7 +29,6 @@ import ape.parts.countdown.countdown
 import ape.infrastructure.singletons as singletons
 #from ape.infrastructure.timemap import RelativeTime, AbsoluteTime
 from ape.infrastructure.timemap import time_validator
-
 
 class OperatorConfigurationConstants(object):
     """
@@ -59,8 +60,7 @@ class OperatorConfigurationConstants(object):
     default_timestamp = None
 
     #extra
-    file_storage_name = 'infrastructure'   
-
+    file_storage_name = 'infrastructure'
 
 config_spec = """
 [SETTINGS]
@@ -79,7 +79,6 @@ __many__ = force_list
  [[__many__]]
  plugin = string
 """
-
 
 class OperatorConfigspec(object):
     """
@@ -110,10 +109,9 @@ class OperatorConfigspec(object):
             self._validator = time_validator
         return self._validator
 
-
 constants = OperatorConfigurationConstants
 
-class OperatorConfiguration(object):
+class OperatorConfiguration(BaseClass):
     """
     Extracts arguments for operators from the configuration
     """
@@ -125,6 +123,7 @@ class OperatorConfiguration(object):
 
          - `source`: name of configuration file
         """
+        super(OperatorConfiguration, self).__init__()
         self.source = source
         self._configuration = None
         self._configspec = None
@@ -171,10 +170,25 @@ class OperatorConfiguration(object):
             try:
                 self._operation_configurations = []
                 operations = self.configuration[constants.operations_section]
+                if not operations:
+                    self.logger.warning(BLUE_WARNING.format(thing="[OPERATIONS] section not found in configuration"))
                 plugins_section = self.configuration[constants.plugins_section]
                 
-                for operation_name, plugin_subsections in operations.iteritems():
-                    self._operation_configurations.append(OperationConfiguration(plugins_section=plugins_section,
+                if not plugins_section:
+                    message = "[PLUGINS] section not found in configuration"
+                    
+                    if not operations:
+                        self.logger.warning(BLUE_WARNING.format(thing=message))
+                    else:
+                        self.log_error("ConfigurationError",
+                                       message)
+                        self.log_error("ConfigurationError",
+                                       "need plugins for {0}".format(operations.values()))
+                        raise ConfigurationError(message)
+                        
+                else:
+                    for operation_name, plugin_subsections in operations.iteritems():
+                        self._operation_configurations.append(OperationConfiguration(plugins_section=plugins_section,
                                                     plugin_subsections=plugin_subsections,
                                                     operation_name=operation_name,
                                                     quartermaster=self.quartermaster,
@@ -242,10 +256,12 @@ class OperatorConfiguration(object):
         ConfigObj built from `source`
         """
         if self._configuration is None:
+
             self._configuration = ConfigObj(self.source,
-                                            configspec=self.configspec.configspec,
-                                            file_error=True)
+                                                configspec=self.configspec.configspec,
+                                                file_error=True)
             self._configuration.validate(self.configspec.validator)
+
         return self._configuration
 
     def initialize_file_storage(self):
@@ -288,7 +304,6 @@ class OperatorConfiguration(object):
         return
 
 # end class OperatorConfiguration
-
 
 class OperationConfiguration(BaseClass):
     """
@@ -347,6 +362,7 @@ class OperationConfiguration(BaseClass):
     def plugin_sections_names(self):
         """
         creates a dict of plugin section-name:plugin-name pairs
+
         """
         if self._plugin_sections_names is None:
             names = (self.plugins_section[section][constants.plugin_option]
@@ -355,15 +371,12 @@ class OperationConfiguration(BaseClass):
                                                    names))
         return self._plugin_sections_names
         
-# end class OperationConfiguration        
-
+# end class OperationConfiguration
 
 in_pweave = __name__ == '__builtin__'
 
-
 COMPILED_EXTENSION = '.compiled'
 FILE_STORAGE_NAME = 'infrastructure'
-
 
 CONFIGURATION = '''[OPERATIONS]
 # the option names are just identifiers
@@ -420,6 +433,7 @@ CONFIGURATION = '''[OPERATIONS]
 
 #  [[plugin1]]
 #  plugin = Sleep
+#  updates_section = <section_name>
 #  <sleep configuration>
 
 #  [[plugin2]]
@@ -427,15 +441,12 @@ CONFIGURATION = '''[OPERATIONS]
 #  <Iperf configuration>
 '''
 
-
 output_documentation = __name__ == '__builtin__'
-
 
 if in_pweave:
     this_file = os.path.join(os.getcwd(), 'apeplugin.py')
     module_diagram_file = module_diagram(module=this_file, project='apeplugin')
-    print ".. image:: {0}".format(module_diagram_file)
-
+    print(".. image:: {0}".format(module_diagram_file))
 
 EXAMPLES = '''
 ape run ape.ini
@@ -543,5 +554,5 @@ class Ape(BasePlugin):
         """
         Prints example configuration to stdout
         """
-        print CONFIGURATION
-# end class Ape        
+        print(CONFIGURATION)
+# end class Ape

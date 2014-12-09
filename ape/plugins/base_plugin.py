@@ -1,5 +1,6 @@
 
 # python standard library
+from __future__ import print_function
 from abc import ABCMeta, abstractmethod, abstractproperty
 import os
 from types import StringType
@@ -14,9 +15,7 @@ from ape.parts.helppage.helppage import HelpPage
 from ape.infrastructure.code_graphs import module_diagram, class_diagram
 from ape.infrastructure.errors import ConfigurationError
 
-
 in_pweave = __name__ == '__builtin__'
-
 
 class BasePlugin(BaseClass):
     """
@@ -72,7 +71,7 @@ class BasePlugin(BaseClass):
          - `width`: number of characters wide to print help
         """
         if self.sections is None:
-            print "'{0}' offers you no help. Such is life.".format(self.__class__.__name__)
+            print("'{0}' offers you no help. Such is life.".format(self.__class__.__name__))
         else:
             self.help_page.wrap = width
             self.help_page()
@@ -91,8 +90,7 @@ class BasePlugin(BaseClass):
         Abstract Method: Get sample config-file snippet required by this plugin
         """
         return   
-# end class BasePlugin                
-
+# end class BasePlugin
 
 class BaseConfigurationConstants(object):
     """
@@ -108,7 +106,6 @@ class BaseConfigurationConstants(object):
     missing_plugin_option_message = "'plugin' option missing in section '{0}'"
     extra_message = "Extra {item_type} in section '{section}. '{name}'"
     check_rep_failure_message = "Errors in section [{0}] in the configuration"
-
 
 class BaseConfiguration(BaseClass):
     """
@@ -189,7 +186,7 @@ class BaseConfiguration(BaseClass):
             try:
                 self._plugin_name = self.configuration[self.constants.plugin_option]
             except KeyError as error:
-                self.logger.bebug(error)
+                self.logger.debug(error)
                 self.log_error(self.constants.missing_plugin_option_message.format(self.section_name))
                 raise ConfigurationError(self.constants.missing_plugin_option_message.format(self.section_name))
         return self._plugin_name
@@ -235,8 +232,10 @@ class BaseConfiguration(BaseClass):
                 section = self.update(section)
 
             self._configuration = section
+
+            # validation has to come after updating for ``update`` to work
             self._validation_outcome = self._configuration.validate(self.validator,
-                                                                preserve_errors=True)
+                                                                    preserve_errors=True)
         return self._configuration
 
     @abstractproperty
@@ -358,4 +357,4 @@ class BaseConfiguration(BaseClass):
             self.logger.info('Expected Configuration Matching:\n{0}'.format(self.sample))
             raise ConfigurationError(self.constants.check_rep_failure_message.format(self.section_name))
         return            
-# end BaseConfiguration        
+# end BaseConfiguration

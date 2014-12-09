@@ -9,3 +9,8 @@ Feature: Crash Test Dummy
   Given a crash test dummy with the wrong plugin name
   When the configuration with the wrong plugin is checked
   Then the crash test dummy validator will raise a ConfigurationError
+
+ Scenario: User gets CrashTestDummy
+  Given a CrashTestDummy Configuration
+  When the user gets the CrashTestDummy product
+  Then the CrashTestDummy is correctly configured
