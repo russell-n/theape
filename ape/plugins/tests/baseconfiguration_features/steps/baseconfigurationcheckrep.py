@@ -1,7 +1,7 @@
 
 #third-party
 from behave import given, when, then
-from hamcrest import assert_that, is_, calling, raises
+from hamcrest import assert_that, is_, calling, raises, equal_to
 from configobj import ConfigObj
 
 # this package
@@ -99,3 +99,23 @@ def step_implementation(context):
     context.configuration = ConcreteConfiguration(source=ConfigObj(extra_option_configuration),
                                                   section_name='cement')
     return
+
+
+@given("BaseConfiguration implementation with allowed unknown values")
+def allowed_unknowns(context):
+    context.configuration = ConcreteConfiguration(source=ConfigObj(extra_option_configuration),
+                                                  section_name='cement',
+                                                  allow_extras=True)
+    return
+
+
+@then("a ConfigurationError not raised")
+def no_error(context):
+    context.callable()
+    return
+
+
+@then("the extra values are in the configuration")
+def assert_extras(context):
+    assert_that(context.configuration.configuration['ummagumma'],
+                is_(equal_to('apple_banana')))

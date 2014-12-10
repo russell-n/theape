@@ -13,3 +13,9 @@ Feature: BaseConfiguration check_rep method
   Given BaseConfiguration implementation with unknown values
   When check_rep is checked
   Then a ConfigurationError is raised
+
+ Scenario: User calls check_rep on configuration with allowed extra values
+  Given BaseConfiguration implementation with allowed unknown values
+  When check_rep is checked
+  Then a ConfigurationError not raised
+  And the extra values are in the configuration

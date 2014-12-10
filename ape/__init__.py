@@ -10,7 +10,7 @@ from infrastructure.baseclass import BaseClass, BaseThreadClass
 from infrastructure.errors import ApeError, DontCatchError, ConfigurationError
 from infrastructure.index_builder import create_toctree
 from components.component import Component
-from plugins.base_plugin import BasePlugin
+from plugins.base_plugin import BasePlugin, BaseConfiguration
 
 # color_constants
 BLUE = "\033[34m"

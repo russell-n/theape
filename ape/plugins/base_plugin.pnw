@@ -460,7 +460,8 @@ class BaseConfiguration(BaseClass):
     Abstract base class for configurations
     """
     __metaclass__ = ABCMeta
-    def __init__(self, source, section_name, configspec_source=None,
+    def __init__(self, source, section_name, allow_extras=False,
+                 configspec_source=None,
                  updatable=True, constants=None):
         """
         BaseConfiguration constructor
@@ -469,6 +470,7 @@ class BaseConfiguration(BaseClass):
 
          - `source`: ConfigObj section
          - `section_name`: section-name in the configuration
+         - `allow_extras`: if True, check_rep only raises errors on error
          - `configspec_source`: string with configuration specification (use to override the default)
          - `updatable`: if True, allows updating from other sections
          - `constants`: object with same properties as BaseConfigurationConstants
@@ -476,6 +478,7 @@ class BaseConfiguration(BaseClass):
         super(BaseConfiguration, self).__init__()
         self._constants = constants
         self.section_name = section_name
+        self.allow_extras = allow_extras
         self.source = source
         self.updatable = updatable
         self._configspec_source = configspec_source
@@ -631,9 +634,13 @@ class BaseConfiguration(BaseClass):
             if option is not None: # something is wrong with the option
                 # if there are sub-sections then the configspec has to be traversed to get the option-type
                 spec = self.configspec
-                for section in sections:
-                    spec = spec[section]
-                option_type = spec[option]
+                try:
+                    for section in sections:
+                        spec = spec[section]                
+                    option_type = spec[option]
+                except KeyError as error:
+                    self.logger.debug(error)
+                    option_type = 'unknown'
                 
                 if error: # validation of option failed                    
                     self.log_error(error=self.constants.error_name,
@@ -699,9 +706,16 @@ class BaseConfiguration(BaseClass):
         """
         Calls process_errors
 
-        :raise: ConfigurationError if errors are found (or there are unknown options)
+        :raise: ConfigurationError if errors are found (or there are unknown options and not allow_extras)
         """
-        if self.process_errors() or self.check_extra_values():
+        extras_error = (not self.allow_extras) and (self.check_extra_values())
+
+        try:
+            if self.process_errors() or extras_error:
+                self.logger.info('Expected Configuration Matching:\n{0}'.format(self.sample))
+                raise ConfigurationError(self.constants.check_rep_failure_message.format(self.section_name))
+        except KeyError as error:
+            self.logger.debug(error)
             self.logger.info('Expected Configuration Matching:\n{0}'.format(self.sample))
             raise ConfigurationError(self.constants.check_rep_failure_message.format(self.section_name))
         return            
