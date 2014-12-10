@@ -131,3 +131,37 @@ Scenario: User calls check_rep on configuration with extra values
 
   When check_rep is checked
   Then a ConfigurationError is raised
+
+Scenario: User calls check_rep on configuration with allowed extra values
+-------------------------------------------------------------------------
+
+::
+
+    @given("BaseConfiguration implementation with allowed unknown values")
+    def allowed_unknowns(context):
+        context.configuration = ConcreteConfiguration(source=ConfigObj(extra_option_configuration),
+                                                      section_name='cement',
+                                                      allow_extras=True)
+        return
+    
+
+
+
+When check_rep is checked
+
+::
+
+    @then("a ConfigurationError not raised")
+    def no_error(context):
+        context.callable()
+        return
+    
+
+::
+
+    @then("the extra values are in the configuration")
+    def assert_extras(context):
+        assert_that(context.configuration.configuration['ummagumma'],
+                    is_(equal_to('apple_banana')))
+    
+
