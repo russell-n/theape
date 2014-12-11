@@ -15,7 +15,9 @@ from ape.parts.helppage.helppage import HelpPage
 from ape.infrastructure.code_graphs import module_diagram, class_diagram
 from ape.infrastructure.errors import ConfigurationError
 
+
 in_pweave = __name__ == '__builtin__'
+
 
 class BasePlugin(BaseClass):
     """
@@ -90,11 +92,12 @@ class BasePlugin(BaseClass):
         Abstract Method: Get sample config-file snippet required by this plugin
         """
         return   
-# end class BasePlugin
+# end class BasePlugin                
 
-class BaseConfigurationConstants(object):
+
+class SubConfigurationConstants(object):
     """
-    Holder of BaseConfiguration constants
+    Holder of SubConfiguration constants
     """
     __slots__ = ()
     plugin_option ='plugin'
@@ -104,19 +107,21 @@ class BaseConfigurationConstants(object):
     missing_option_message = "Option '{option}' in section '{section}' of type {option_type} for plugin '{plugin}' required but missing"
     missing_section_message = "Section '{section}' to configure '{plugin}' not found in configuration"
     missing_plugin_option_message = "'plugin' option missing in section '{0}'"
+    missing_plugin_replacement = "<non-plugin>"
     extra_message = "Extra {item_type} in section '{section}. '{name}'"
     check_rep_failure_message = "Errors in section [{0}] in the configuration"
 
-class BaseConfiguration(BaseClass):
+
+class SubConfiguration(BaseClass):
     """
     Abstract base class for configurations
     """
     __metaclass__ = ABCMeta
     def __init__(self, source, section_name, allow_extras=False,
-                 configspec_source=None,
+                 configspec_source=None, 
                  updatable=True, constants=None):
         """
-        BaseConfiguration constructor
+        SubConfiguration constructor
 
         :param:
 
@@ -125,9 +130,9 @@ class BaseConfiguration(BaseClass):
          - `allow_extras`: if True, check_rep only raises errors on error
          - `configspec_source`: string with configuration specification (use to override the default)
          - `updatable`: if True, allows updating from other sections
-         - `constants`: object with same properties as BaseConfigurationConstants
+         - `constants`: object with same properties as SubConfigurationConstants
         """
-        super(BaseConfiguration, self).__init__()
+        super(SubConfiguration, self).__init__()
         self._constants = constants
         self.section_name = section_name
         self.allow_extras = allow_extras
@@ -135,7 +140,6 @@ class BaseConfiguration(BaseClass):
         self.updatable = updatable
         self._configspec_source = configspec_source
         self._sample = None
-        self._product = None
         self._validator = None
         self._configspec = None
         self._configuration = None
@@ -162,10 +166,10 @@ class BaseConfiguration(BaseClass):
     @property
     def constants(self):
         """
-        object with string constants (see BaseConfigurationConstants)
+        object with string constants (see SubConfigurationConstants)
         """
         if self._constants is None:
-            self._constants = BaseConfigurationConstants
+            self._constants = SubConfigurationConstants
         return self._constants
 
     @property
@@ -183,15 +187,16 @@ class BaseConfiguration(BaseClass):
         """
         Gets the plugin name from the section
 
-        :raise: configuration error if plugin name is missing
+        :return: plugin-name if found or '<non-plugin>'
         """
         if self._plugin_name is None:        
             try:
                 self._plugin_name = self.configuration[self.constants.plugin_option]
             except KeyError as error:
                 self.logger.debug(error)
-                self.log_error(self.constants.missing_plugin_option_message.format(self.section_name))
-                raise ConfigurationError(self.constants.missing_plugin_option_message.format(self.section_name))
+                self.logger.warning(self.constants.missing_plugin_option_message.format(self.section_name))
+                #raise ConfigurationError(self.constants.missing_plugin_option_message.format(self.section_name))
+                self._plugin_name = self.constants.missing_plugin_replacement
         return self._plugin_name
 
     @property
@@ -240,13 +245,6 @@ class BaseConfiguration(BaseClass):
             self._validation_outcome = self._configuration.validate(self.validator,
                                                                     preserve_errors=True)
         return self._configuration
-
-    @abstractproperty
-    def product(self):
-        """
-        abstract: implement as built object for the ape to call
-        """
-        return
 
     def update(self, section):
         """
@@ -371,4 +369,21 @@ class BaseConfiguration(BaseClass):
             self.logger.info('Expected Configuration Matching:\n{0}'.format(self.sample))
             raise ConfigurationError(self.constants.check_rep_failure_message.format(self.section_name))
         return            
-# end BaseConfiguration
+# end SubConfiguration        
+
+
+class BaseConfiguration(SubConfiguration):
+    """
+    A BaseConfiguration to build the product and hold the configuration
+    """
+    def __init__(self, **kwargs):
+        super(BaseConfiguration, self).__init__(**kwargs)
+        self._product = None
+        return
+        
+    @abstractproperty
+    def product(self):
+        """
+        abstract: A built product to run
+        """
+# end class BaseConfiguration

@@ -1,4 +1,10 @@
+SubConfiguration
+=================
 
+.. literalinclude:: ../baseconfiguration.feature
+   :language: gherkin
+
+<<name='imports', echo=False>>=
 # third party
 from behave import given, when, then
 from hamcrest import assert_that, calling, raises, is_, instance_of
@@ -8,26 +14,40 @@ from validate import Validator
 from mock import MagicMock
 
 # this package
-from ape.plugins.base_plugin import BaseConfiguration, SubConfigurationConstants
+from ape.plugins.base_plugin import SubConfiguration, SubConfigurationConstants
 from ape.infrastructure.baseclass import RED_ERROR
 from ape import ConfigurationError
+@
 
-@given("a BaseConfiguration definition")
+Scenario: User instantiates the SubConfiguration
+-------------------------------------------------
+
+<<name='base_configuration_definition', wrap=False>>=
+@given("a SubConfiguration definition")
 def base_configuration_definition(context):
-    context.definition = BaseConfiguration
+    context.definition = SubConfiguration
     return
+@
 
-@when("the user instantiates the BaseConfiguration")
+<<name='base_configuration_instantiation', wrap=False>>=
+@when("the user instantiates the SubConfiguration")
 def base_configuration_instantiation(context):
     context.callable = lambda : context.definition()
     return
+@
 
+<<name='assert_raises', wrap=False>>=
 @then("it raises a TypeError")
 def assert_raises(context):
     assert_that(calling(context.callable),
                 raises(TypeError))
     return
+@
 
+Scenario: User instantiates SubConfiguration implementation
+------------------------------------------------------------
+
+<<name='fake_implementation', wrap=False>>=
 configspec = """
 plugin = option(Fake)
 
@@ -35,7 +55,7 @@ op = string
 op2 = integer
 """.splitlines()
 
-class FakeConfiguration(BaseConfiguration):
+class FakeConfiguration(SubConfiguration):
     def __init__(self, *args, **kwargs):
         super(FakeConfiguration, self).__init__(*args, **kwargs)
         return
@@ -55,22 +75,29 @@ config = """
 op = value
 """.splitlines()
 
-@given("a BaseConfiguration implementation")
+@
+
+<<name='base_configuration_implementation', wrap=False>>=
+@given("a SubConfiguration implementation")
 def base_configuration_implementation(context):
     context.configuration = ConfigObj(config)
     context.implementation = FakeConfiguration
     context.configspec_source = configspec
     context.section_name = 'FAKE'
     return
+@
 
-@when("the user instantiates the BaseConfiguration implementation")
+<<name='base_configuration_implementation_instantiation', wrap=False>>=
+@when("the user instantiates the SubConfiguration implementation")
 def base_configuration_implementation_instantiation(context):
     context.configuration = context.implementation(source=context.configuration,
                                                    section_name=context.section_name,
                                                    configspec_source=context.configspec_source)
     return
+@
 
-@then("it has the BaseConfiguration default properties")
+<<name='assert_default_properties', wrap=False>>=
+@then("it has the SubConfiguration default properties")
 def assert_default_properties(context):
     assert_that(context.configuration.configuration,
                 is_(instance_of(ConfigObj)))
@@ -81,7 +108,12 @@ def assert_default_properties(context):
     assert_that(context.configuration.validator,
                 is_(instance_of(Validator)))
     return
+@
 
+Scenario: Configuration passes
+------------------------------
+
+<<name='valid_configuration', wrap=False>>=
 valid_config_string = """
 [GOODBUTFAKE]
 plugin = Fake
@@ -90,18 +122,27 @@ op = some value
 op2 = 75
 """.splitlines()
 
-@given("a BaseConfiguration implementation with valid configuration")
+@given("a SubConfiguration implementation with valid configuration")
 def valid_configuration(context):
     context.configuration = FakeConfiguration(source=ConfigObj(valid_config_string),
                                               section_name='GOODBUTFAKE')
     return
+@
 
+When the SubConfiguration implementation processes the errors
+
+<<name='process_errors_false', wrap=False>>=
 @then("the process_errors outcome was False")
 def process_errors_false(context):
     assert_that(context.outcome,
                 is_(False))
     return
+@
 
+Scenario: Option fails validation
+---------------------------------
+
+<<name='bad_option', wrap=False>>=
 bad_option_config = """
 [FAKE]
 plugin = Fake
@@ -110,7 +151,7 @@ op = value
 op2 = not_integer
 """.splitlines()
 
-@given("a BaseConfiguration implementation with a bad option")
+@given("a SubConfiguration implementation with a bad option")
 def bad_option(context):
     error = MagicMock()
     context.logger = MagicMock()
@@ -125,25 +166,36 @@ def bad_option(context):
                                               section_name='FAKE')
     context.configuration._logger = context.logger
     return
+@
 
-@when("the BaseConfiguration implementation processes the errors")
+<<name='process_errors', wrap=False>>=
+@when("the SubConfiguration implementation processes the errors")
 def process_errors(context):
     outcome = context.configuration.configuration.validate(context.configuration.validator,
                                                            preserve_errors=True)
     context.outcome = context.configuration.process_errors()
     return
+@
 
+<<name='check_error_message', wrap=False>>=
 @then("the correct error message is logged")
 def check_error_message(context):
     context.logger.error.assert_called_with(context.expected)
     return
+@
 
+<<name='process_errors_true', wrap=False>>=
 @then("the process_errors outcome was True")
 def process_errors_true(context):
     assert_that(context.outcome,
                 is_(True))
     return
+@
 
+Scenario: Missing Option
+------------------------
+
+<<name='missing_option', wrap=False>>=
 missing_option_config = """
 [FAKE]
 plugin = Fake
@@ -151,7 +203,7 @@ plugin = Fake
 op = value
 """.splitlines()
 
-@given("a BaseConfiguration implementation with a missing option")
+@given("a SubConfiguration implementation with a missing option")
 def missing_option(context):
     error = MagicMock()
     context.logger = MagicMock()
@@ -167,7 +219,17 @@ def missing_option(context):
     context.configuration._logger = context.logger
 
     return
+@
 
+When the SubConfiguration implementation processes the errors, 
+   Then the correct error message is logged
+
+Scenario: Missing Section
+-------------------------
+
+Because the operators are expecting arbitrary section-names this last errors will only occur if the plugin has defined sub-section names in the configspec (I think).
+
+<<name='missing_section', wrap=False>>=
 # so the configspect can't have the top-level section name
 subsection_configspec = """
 plugin = string
@@ -181,7 +243,7 @@ missing_section_config = """
 plugin = fake_plugin
 """.splitlines()
 
-@given("a BaseConfiguration implementation missing the section")
+@given("a SubConfiguration implementation missing the section")
 def missing_section(context):
     error = MagicMock()
     context.logger = MagicMock()
@@ -196,7 +258,16 @@ def missing_section(context):
                                               section_name='FAKE')
     context.configuration._logger = context.logger
     return
+@
 
+When the SubConfiguration implementation processes the errors, 
+   Then the correct error message is logged
+
+
+Scenario: ConfigSpec Section Name Format
+----------------------------------------
+
+<<name='configspec_section_name', wrap=False>>=
 section_name_configspec = """
 op1 = integer
 
@@ -212,32 +283,41 @@ op1 = 1
 op2 = 1
 """.splitlines()
 
-@given("a BaseConfiguration configspec with section_name")
+@given("a SubConfiguration configspec with section_name")
 def configspec_section_name(context):
     context.configuration = FakeConfiguration(source=ConfigObj(section_name_config),
                                               configspec_source=section_name_configspec,
                                               section_name='FAKE')
     context.configuration._logger = MagicMock()
     return
+@
 
-@when("the BaseConfiguration implementation is checked")
+<<name='check_implementation', wrap=False>>=
+@when("the SubConfiguration implementation is checked")
 def check_implementation(context):
     context.configuration.process_errors()
     return
+@
 
+<<name='assert_outcome_true', wrap=False>>=
 @then("the configuration outcome is True")
 def assert_outcome_true(context):
     assert_that(context.configuration.validation_outcome,
                 is_(True))
     return
+@
 
+Scenario: ConfigSpec string only has sub-section definition
+-----------------------------------------------------------
+
+<<name='configspec_subsection', wrap=False>>=
 subsection_only_configspec = """
 op1 = integer
 
 [sub_section]
 op2 = integer
 """
-@given("a BaseConfiguration configspec without top-section")
+@given("a SubConfiguration configspec without top-section")
 def configspec_subsection(context):
     context.configuration = FakeConfiguration(source=ConfigObj(section_name_config),
                                               configspec_source=section_name_configspec,
@@ -245,7 +325,14 @@ def configspec_subsection(context):
     context.configuration._logger = MagicMock()
 
     return
+@
+   when the SubConfiguration implementation is checked
+   Then the configuration outcome is True
 
+Scenario: Configuration has extra values
+----------------------------------------
+
+<<name='extra_options', wrap=False>>=
 extra_options_config = """
 [FAKE]
 op1 = 1
@@ -261,7 +348,7 @@ op1 = 3
 op2 = 4
 """.splitlines()
 
-@given("a BaseConfiguration config with options not in the configspec")
+@given("a SubConfiguration config with options not in the configspec")
 def extra_options(context):    
     context.logger = MagicMock()
     context.logger.warning = MagicMock()
@@ -270,12 +357,16 @@ def extra_options(context):
                                               section_name='FAKE')
     context.configuration._logger = context.logger
     return
+@
 
-@when("the BaseConfiguration implementation checks extra values")
+<<name="check_extra_values", wrap=False>>=
+@when("the SubConfiguration implementation checks extra values")
 def check_extra_values(context):
     context.outcome = context.configuration.check_extra_values()
     return
+@
 
+<<name='extra_values_logged', wrap=False>>=
 @then("the extra values are logged")
 def extra_values_logged(context):
     section = 'FAKE,sub_section'
@@ -286,13 +377,20 @@ def extra_values_logged(context):
                                                               name=name) + "='0'"
     context.logger.warning.assert_called_with(message)
     return
+@
 
+<<name='assert_extra_values', wrap=False>>=
 @then('check_extra_value returns True')
 def assert_extra_values(context):
     assert_that(context.outcome,
                 is_(True))
     return
+@
 
+Scenario: Configuration has no extra values
+-------------------------------------------
+
+<<name='no_extra_options', wrap=False>>=
 no_extra_options_config = """
 [FAKE]
 op1 = 1
@@ -301,7 +399,7 @@ op1 = 1
 op2 = 5
 """.splitlines()
 
-@given("a BaseConfiguration config with no options not in the configspec")
+@given("a SubConfiguration config with no options not in the configspec")
 def no_extra_options(context):
     context.logger = MagicMock()
     context.logger.warning = MagicMock()
@@ -311,19 +409,30 @@ def no_extra_options(context):
     context.configuration._logger = context.logger
 
     return
+@
 
+  When the SubConfiguration implementation checks extra values
+
+<<name='no_logging',wrap=False>>=
 @then("no extra values are logged")
 def no_logging(context):
     assert_that(context.logger.warning.mock_calls,
                 is_(equal_to([])))
     return
+@
 
+<<name='check_extra_false', wrap=False>>=
 @then('check_extra_value returns False')
 def check_extra_false(context):
     assert_that(context.outcome,
                 is_(False))
     return
+@
 
+Scenario: Section updates configuration
+---------------------------------------
+
+<<name='updates_section', wrap=False>>=
 update_sections_configspec = """
 updates_section = string(default=None)
 op1 = integer
@@ -346,7 +455,7 @@ updates_section = FAKE
 op2 = 2
 """.splitlines()
 
-@given("a BaseConfiguration section that updates another section")
+@given("a SubConfiguration section that updates another section")
 def updates_section(context):
     context.logger = MagicMock()
     context.logger.warning = MagicMock()
@@ -359,12 +468,16 @@ def updates_section(context):
     context.fake1._logger = context.logger
     context.fake2._logger = context.logger
     return
+@
 
-@when("the BaseConfiguration implementation validates the configuration")
+<<name='validate_configuration', wrap=False>>=
+@when("the SubConfiguration implementation validates the configuration")
 def validate_configuration(context):
     return
+@
 
-@then("the BaseConfiguration implementation will have the updates")
+<<name='check_updates', wrap=False>>=
+@then("the SubConfiguration implementation will have the updates")
 def check_updates(context):
     #import pudb; pudb.set_trace()
     expected_fake = {'op1':1,
@@ -378,30 +491,42 @@ def check_updates(context):
                 has_entries(expected_fake2))
 
     return
+@
 
+Scenario: Configuration missing plugin name
+-------------------------------------------
+
+<<name='missing_plugin_name', wrap=False>>=
 missing_plugin_name_config = """
 [FAKE]
 op = some string
 op2 = 42
 """.splitlines()
 
-@given("a BaseConfiguration section missing a required plugin name")
+@given("a SubConfiguration section missing a required plugin name")
 def missing_plugin_name(context):
     context.configuration = FakeConfiguration(source=ConfigObj(missing_plugin_name_config),
                                               section_name='FAKE')
     return
+@
 
-@when("the BaseConfiguration checks process_errors")
+<<name='check_process_errors', wrap=False>>=
+@when("the SubConfiguration checks process_errors")
 def check_process_errors(context):
     context.callable = context.configuration.process_errors
     return
+@
 
+<<name='process_errors_true', wrap=False>>=
 @then("the process_errors returned True")
 def process_errors_true(context):
     assert_that(calling(context.callable),
                 raises(ConfigurationError))
     return
+@
 
+
+<<name='assert_options', wrap=False>>=
 @then("the configuration options that were given are in the configuration")
 def assert_options(context):
     expected = {'op':'some string',
@@ -409,3 +534,4 @@ def assert_options(context):
     assert_that(context.configuration.configuration,
                 has_entries(expected))
     return
+@

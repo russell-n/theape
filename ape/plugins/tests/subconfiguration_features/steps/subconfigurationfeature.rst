@@ -1,4 +1,4 @@
-BaseConfiguration
+SubConfiguration
 =================
 
 .. literalinclude:: ../baseconfiguration.feature
@@ -7,15 +7,15 @@ BaseConfiguration
 
 
 
-Scenario: User instantiates the BaseConfiguration
+Scenario: User instantiates the SubConfiguration
 -------------------------------------------------
 
 
 .. code:: python
 
-    @given("a BaseConfiguration definition")
+    @given("a SubConfiguration definition")
     def base_configuration_definition(context):
-        context.definition = BaseConfiguration
+        context.definition = SubConfiguration
         return
 
 
@@ -23,7 +23,7 @@ Scenario: User instantiates the BaseConfiguration
 
 .. code:: python
 
-    @when("the user instantiates the BaseConfiguration")
+    @when("the user instantiates the SubConfiguration")
     def base_configuration_instantiation(context):
         context.callable = lambda : context.definition()
         return
@@ -41,7 +41,7 @@ Scenario: User instantiates the BaseConfiguration
 
 
 
-Scenario: User instantiates BaseConfiguration implementation
+Scenario: User instantiates SubConfiguration implementation
 ------------------------------------------------------------
 
 
@@ -54,7 +54,7 @@ Scenario: User instantiates BaseConfiguration implementation
     op2 = integer
     """.splitlines()
     
-    class FakeConfiguration(BaseConfiguration):
+    class FakeConfiguration(SubConfiguration):
         def __init__(self, *args, **kwargs):
             super(FakeConfiguration, self).__init__(*args, **kwargs)
             return
@@ -79,7 +79,7 @@ Scenario: User instantiates BaseConfiguration implementation
 
 .. code:: python
 
-    @given("a BaseConfiguration implementation")
+    @given("a SubConfiguration implementation")
     def base_configuration_implementation(context):
         context.configuration = ConfigObj(config)
         context.implementation = FakeConfiguration
@@ -92,7 +92,7 @@ Scenario: User instantiates BaseConfiguration implementation
 
 .. code:: python
 
-    @when("the user instantiates the BaseConfiguration implementation")
+    @when("the user instantiates the SubConfiguration implementation")
     def base_configuration_implementation_instantiation(context):
         context.configuration = context.implementation(source=context.configuration,
                                                        section_name=context.section_name,
@@ -104,7 +104,7 @@ Scenario: User instantiates BaseConfiguration implementation
 
 .. code:: python
 
-    @then("it has the BaseConfiguration default properties")
+    @then("it has the SubConfiguration default properties")
     def assert_default_properties(context):
         assert_that(context.configuration.configuration,
                     is_(instance_of(ConfigObj)))
@@ -132,7 +132,7 @@ Scenario: Configuration passes
     op2 = 75
     """.splitlines()
     
-    @given("a BaseConfiguration implementation with valid configuration")
+    @given("a SubConfiguration implementation with valid configuration")
     def valid_configuration(context):
         context.configuration = FakeConfiguration(source=ConfigObj(valid_config_string),
                                                   section_name='GOODBUTFAKE')
@@ -140,7 +140,7 @@ Scenario: Configuration passes
 
 
 
-When the BaseConfiguration implementation processes the errors
+When the SubConfiguration implementation processes the errors
 
 
 .. code:: python
@@ -167,7 +167,7 @@ Scenario: Option fails validation
     op2 = not_integer
     """.splitlines()
     
-    @given("a BaseConfiguration implementation with a bad option")
+    @given("a SubConfiguration implementation with a bad option")
     def bad_option(context):
         error = MagicMock()
         context.logger = MagicMock()
@@ -188,7 +188,7 @@ Scenario: Option fails validation
 
 .. code:: python
 
-    @when("the BaseConfiguration implementation processes the errors")
+    @when("the SubConfiguration implementation processes the errors")
     def process_errors(context):
         outcome = context.configuration.configuration.validate(context.configuration.validator,
                                                                preserve_errors=True)
@@ -231,7 +231,7 @@ Scenario: Missing Option
     op = value
     """.splitlines()
     
-    @given("a BaseConfiguration implementation with a missing option")
+    @given("a SubConfiguration implementation with a missing option")
     def missing_option(context):
         error = MagicMock()
         context.logger = MagicMock()
@@ -250,7 +250,7 @@ Scenario: Missing Option
 
 
 
-When the BaseConfiguration implementation processes the errors, 
+When the SubConfiguration implementation processes the errors, 
    Then the correct error message is logged
 
 Scenario: Missing Section
@@ -274,7 +274,7 @@ Because the operators are expecting arbitrary section-names this last errors wil
     plugin = fake_plugin
     """.splitlines()
     
-    @given("a BaseConfiguration implementation missing the section")
+    @given("a SubConfiguration implementation missing the section")
     def missing_section(context):
         error = MagicMock()
         context.logger = MagicMock()
@@ -292,7 +292,7 @@ Because the operators are expecting arbitrary section-names this last errors wil
 
 
 
-When the BaseConfiguration implementation processes the errors, 
+When the SubConfiguration implementation processes the errors, 
    Then the correct error message is logged
 
 
@@ -317,7 +317,7 @@ Scenario: ConfigSpec Section Name Format
     op2 = 1
     """.splitlines()
     
-    @given("a BaseConfiguration configspec with section_name")
+    @given("a SubConfiguration configspec with section_name")
     def configspec_section_name(context):
         context.configuration = FakeConfiguration(source=ConfigObj(section_name_config),
                                                   configspec_source=section_name_configspec,
@@ -330,7 +330,7 @@ Scenario: ConfigSpec Section Name Format
 
 .. code:: python
 
-    @when("the BaseConfiguration implementation is checked")
+    @when("the SubConfiguration implementation is checked")
     def check_implementation(context):
         context.configuration.process_errors()
         return
@@ -360,7 +360,7 @@ Scenario: ConfigSpec string only has sub-section definition
     [sub_section]
     op2 = integer
     """
-    @given("a BaseConfiguration configspec without top-section")
+    @given("a SubConfiguration configspec without top-section")
     def configspec_subsection(context):
         context.configuration = FakeConfiguration(source=ConfigObj(section_name_config),
                                                   configspec_source=section_name_configspec,
@@ -370,7 +370,7 @@ Scenario: ConfigSpec string only has sub-section definition
         return
 
 
-   when the BaseConfiguration implementation is checked
+   when the SubConfiguration implementation is checked
    Then the configuration outcome is True
 
 Scenario: Configuration has extra values
@@ -394,7 +394,7 @@ Scenario: Configuration has extra values
     op2 = 4
     """.splitlines()
     
-    @given("a BaseConfiguration config with options not in the configspec")
+    @given("a SubConfiguration config with options not in the configspec")
     def extra_options(context):    
         context.logger = MagicMock()
         context.logger.warning = MagicMock()
@@ -409,7 +409,7 @@ Scenario: Configuration has extra values
 
 .. code:: python
 
-    @when("the BaseConfiguration implementation checks extra values")
+    @when("the SubConfiguration implementation checks extra values")
     def check_extra_values(context):
         context.outcome = context.configuration.check_extra_values()
         return
@@ -457,7 +457,7 @@ Scenario: Configuration has no extra values
     op2 = 5
     """.splitlines()
     
-    @given("a BaseConfiguration config with no options not in the configspec")
+    @given("a SubConfiguration config with no options not in the configspec")
     def no_extra_options(context):
         context.logger = MagicMock()
         context.logger.warning = MagicMock()
@@ -470,7 +470,7 @@ Scenario: Configuration has no extra values
 
 
 
-  When the BaseConfiguration implementation checks extra values
+  When the SubConfiguration implementation checks extra values
 
 
 .. code:: python
@@ -522,7 +522,7 @@ Scenario: Section updates configuration
     op2 = 2
     """.splitlines()
     
-    @given("a BaseConfiguration section that updates another section")
+    @given("a SubConfiguration section that updates another section")
     def updates_section(context):
         context.logger = MagicMock()
         context.logger.warning = MagicMock()
@@ -541,7 +541,7 @@ Scenario: Section updates configuration
 
 .. code:: python
 
-    @when("the BaseConfiguration implementation validates the configuration")
+    @when("the SubConfiguration implementation validates the configuration")
     def validate_configuration(context):
         return
 
@@ -550,7 +550,7 @@ Scenario: Section updates configuration
 
 .. code:: python
 
-    @then("the BaseConfiguration implementation will have the updates")
+    @then("the SubConfiguration implementation will have the updates")
     def check_updates(context):
         #import pudb; pudb.set_trace()
         expected_fake = {'op1':1,
@@ -579,7 +579,7 @@ Scenario: Configuration missing plugin name
     op2 = 42
     """.splitlines()
     
-    @given("a BaseConfiguration section missing a required plugin name")
+    @given("a SubConfiguration section missing a required plugin name")
     def missing_plugin_name(context):
         context.configuration = FakeConfiguration(source=ConfigObj(missing_plugin_name_config),
                                                   section_name='FAKE')
@@ -590,7 +590,7 @@ Scenario: Configuration missing plugin name
 
 .. code:: python
 
-    @when("the BaseConfiguration checks process_errors")
+    @when("the SubConfiguration checks process_errors")
     def check_process_errors(context):
         context.callable = context.configuration.process_errors
         return
