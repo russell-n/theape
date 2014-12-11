@@ -3,9 +3,6 @@ The Base Plugin
 .. currentmodule:: ape.plugins.base_plugin
 
 
-
-
-
 .. _base-plugin:
 
 Background
@@ -105,7 +102,6 @@ These are the classes that the BasePlugin uses.
      
 
 
-
 .. Module Graph
 .. ------------
 .. 
@@ -117,7 +113,7 @@ These are the classes that the BasePlugin uses.
 ..     module_diagram_file = module_diagram(module=this_file, project='baseplugin')
 ..     print ".. image:: {0}".format(module_diagram_file)
 .. 
-.. @
+.. 
 
 .. Class Diagram
 .. -------------
@@ -130,19 +126,18 @@ These are the classes that the BasePlugin uses.
 ..                                        filter='OTHER',
 ..                                        module=this_file)
 ..     print ".. image:: {0}".format(class_diagram_file)
-.. @
+.. 
 
-BaseConfigurationConstants
+SubConfigurationConstants
 --------------------------
 
-A holder of constants for the ``BaseConfiguration`` so other code can reference them.
+A holder of constants for the ``SubConfiguration`` so other code can reference them.
 
+::
 
-.. code:: python
-
-    class BaseConfigurationConstants(object):
+    class SubConfigurationConstants(object):
         """
-        Holder of BaseConfiguration constants
+        Holder of SubConfiguration constants
         """
         __slots__ = ()
         plugin_option ='plugin'
@@ -152,28 +147,30 @@ A holder of constants for the ``BaseConfiguration`` so other code can reference 
         missing_option_message = "Option '{option}' in section '{section}' of type {option_type} for plugin '{plugin}' required but missing"
         missing_section_message = "Section '{section}' to configure '{plugin}' not found in configuration"
         missing_plugin_option_message = "'plugin' option missing in section '{0}'"
+        missing_plugin_replacement = "<non-plugin>"
         extra_message = "Extra {item_type} in section '{section}. '{name}'"
         check_rep_failure_message = "Errors in section [{0}] in the configuration"
+    
 
 
 
-The BaseConfiguration Abstract Base Class
+The SubConfiguration Abstract Sub Class
 -----------------------------------------
 
-The *BaseConfiguration* is an abstract base class that provides both implemented methods and properties as well as abstract properties which child classes must implement. The intention is for plugin-building classes to build on it so that there is a reasonably uniform pattern across these builders. It is also meant to be a bridge between ConfigObj and the components of the APE or other code that underlies an Ape-plugin. The implementation is based around how ConfigObj handles the expected form of the plugin configuration file sections.
+The *SubConfiguration* is an abstract base class that provides both implemented methods and properties as well as abstract properties which child classes must implement. The intention is for plugin-building classes to build on it so that there is a reasonably uniform pattern across these builders. It is also meant to be a bridge between ConfigObj and the components of the APE or other code that underlies an Ape-plugin. The implementation is based around how ConfigObj handles the expected form of the plugin configuration file sections. This was originally the ``BaseConfiguration`` but when creating plugins for external code I found having one Configuration made things difficult, so this was created to allow the creation of configuration classes that only create the configuration without requiring that a ``product`` property be implemented.
 
 .. uml::
 
-   BaseClass <|-- BaseConfiguration
-   BaseConfiguration o- validate.Validator
-   BaseConfiguration o- configobj.ConfigObj
-   BaseConfiguration o- BaseConfigurationConstants   
+   SubClass <|-- SubConfiguration
+   SubConfiguration o- validate.Validator
+   SubConfiguration o- configobj.ConfigObj
+   SubConfiguration o- SubConfigurationConstants   
 
 .. module:: ape.plugins.base_plugin
 .. autosummary::
    :toctree: api   
 
-   BaseConfiguration
+   SubConfiguration
 
 Abstract Properties
 ~~~~~~~~~~~~~~~~~~~
@@ -183,8 +180,7 @@ There are two properties that inheriting classes need to implement or a *TypeErr
 .. autosummary::
    :toctree: api
 
-   BaseConfiguration.configspec_source
-   BaseConfiguration.product
+   SubConfiguration.configspec_source
 
 configspec_source
 +++++++++++++++++
@@ -248,17 +244,16 @@ The `product` should return the built object that will be called by the `operati
 Implemented Properties
 ~~~~~~~~~~~~~~~~~~~~~~
 
-There are five implemented properties, but the user of the Configuration classes will probably never use them (only the ``product`` attribute is meant for users of these classes).
+There are five implemented properties, but the user of the Configuration classes will probably never use them.
 
 .. autosummary::
    :toctree: api
  
-   BaseConfiguration.configspec
-   BaseConfiguration.configuration   
-   BaseConfiguration.plugin_name
-   BaseConfiguration.section
-   BaseConfiguration.validation_outcome
-   BaseConfiguration.validator
+   SubConfiguration.configspec
+   SubConfiguration.configuration   
+   SubConfiguration.plugin_name
+   SubConfiguration.validation_outcome
+   SubConfiguration.validator
 
 
 configspec
@@ -310,10 +305,10 @@ Methods
 .. autosummary::
    :toctree: api
 
-   BaseConfiguration.check_extra_values
-   BaseConfiguration.check_rep
-   BaseConfiguration.process_errors
-   BaseConfiguration.update
+   SubConfiguration.check_extra_values
+   SubConfiguration.check_rep
+   SubConfiguration.process_errors
+   SubConfiguration.update
 
 check_extra_values
 ++++++++++++++++++
@@ -323,7 +318,7 @@ check_extra_values
 
    check_extra_values activity diagram
 
-The ``check_extra_values`` method uses the ``configobj.get_extra_values`` function to get the parts of the configuration that weren't defined in the ``configspec``. It logs the items it finds and then returns True if unrecognized items were in fact found in the configuration. The BaseConfiguration doesn't use this itself because I assume that some plugins won't care if there are extra items (like the Dummy). It takes a single parameter (``warn_users``) that, if True (the default) will log the items found at the `warning` level, otherwise it logs them at the `debug` level.
+The ``check_extra_values`` method uses the ``configobj.get_extra_values`` function to get the parts of the configuration that weren't defined in the ``configspec``. It logs the items it finds and then returns True if unrecognized items were in fact found in the configuration. The SubConfiguration doesn't use this itself because I assume that some plugins won't care if there are extra items (like the Dummy). It takes a single parameter (``warn_users``) that, if True (the default) will log the items found at the `warning` level, otherwise it logs them at the `debug` level.
 
 .. '
 
@@ -347,7 +342,7 @@ process_errors
 
    process_errors activity diagram
 
-The ``process_errors`` method uses ``configobj.flatten_errors`` to convert the validation outcome to a list of triples (sections, option-name, error). The first element in the tuple ``sections`` is a list of sections leading from the top-level of the configuration that was validated down to the sub-section where an error occurred. The BaseConfiguration uses this and the ``section_name`` property to create a meaningful section name for the output. If the problem was that one of the options was invalid then the sections are traversed to the bottom section in sections and the missing or invalid option is logged. If the ``option`` value in the triple is None, then there was a missing section and so that is logged instead.
+The ``process_errors`` method uses ``configobj.flatten_errors`` to convert the validation outcome to a list of triples (sections, option-name, error). The first element in the tuple ``sections`` is a list of sections leading from the top-level of the configuration that was validated down to the sub-section where an error occurred. The SubConfiguration uses this and the ``section_name`` property to create a meaningful section name for the output. If the problem was that one of the options was invalid then the sections are traversed to the bottom section in sections and the missing or invalid option is logged. If the ``option`` value in the triple is None, then there was a missing section and so that is logged instead.
 
 If the validation was successful then the validation outcome will be True, so the ``process_errors`` method returns True if it failed and False if it passed (it's almost the inverse of ``self.validation_outcome`` except that ``self.validation_outcome`` will only be a boolean if it's True, otherwise it's a dictionary that needs to be processed).
 
@@ -368,4 +363,22 @@ In order for this to work properly, the configspec has to have default values fo
 .. '
    
 
+
+BaseConfiguration
+-----------------
+
+In trying to implement a plugin for some external code, I realized that larger configurations are better handled by sub-configurations with a master-configuration grouping them together. But having the BaseConfiguration handle the configurations and building the product meant that these sub-configurations were forced to implement the `product` property even though they didn't build anything. So the `SubConfiguration` was broken out and now the `BaseConfiguration` composes the `SubConfiguration` and handles the building of the product.
+
+**Update**: I ran into a chicken-or-the-egg problem. If I try to instantiate the `SubConfiguration` instance it crashes because the ``configspec_source`` property is abstract. Looks like I'll have to use inheritance.
+
+.. uml::
+
+   SubConfiguration <|-- BaseConfiguration
+   BaseConfiguration : product
+
+.. autosummary::
+   :toctree: api
+
+   BaseConfiguration
+   BaseConfiguration.product
 

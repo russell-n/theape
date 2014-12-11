@@ -14,7 +14,7 @@ from validate import Validator
 from mock import MagicMock
 
 # this package
-from ape.plugins.base_plugin import BaseConfiguration, BaseConfigurationConstants
+from ape.plugins.base_plugin import BaseConfiguration, SubConfigurationConstants
 from ape.infrastructure.baseclass import RED_ERROR
 from ape import ConfigurationError
 @
@@ -156,7 +156,7 @@ def bad_option(context):
     error = MagicMock()
     context.logger = MagicMock()
     context.logger.error = error
-    bad_option_message = BaseConfigurationConstants.bad_option_message
+    bad_option_message = SubConfigurationConstants.bad_option_message
     context.expected = RED_ERROR.format(error='ConfigurationError',
                                         message=bad_option_message.format(option='op2',
                                                                           section='FAKE',
@@ -208,7 +208,7 @@ def missing_option(context):
     error = MagicMock()
     context.logger = MagicMock()
     context.logger.error = error
-    missing_option_message = BaseConfigurationConstants.missing_option_message
+    missing_option_message = SubConfigurationConstants.missing_option_message
     context.expected = RED_ERROR.format(error='ConfigurationError',
                                         message=missing_option_message.format(option='op2',
                                                                             section='FAKE',
@@ -248,7 +248,7 @@ def missing_section(context):
     error = MagicMock()
     context.logger = MagicMock()
     context.logger.error = error
-    missing_section_message = BaseConfigurationConstants.missing_section_message
+    missing_section_message = SubConfigurationConstants.missing_section_message
     context.expected = RED_ERROR.format(error='ConfigurationError',
                                         message=missing_section_message.format(section='FAKE,sub_section',
                                                                             error='missing section',
@@ -372,7 +372,7 @@ def extra_values_logged(context):
     section = 'FAKE,sub_section'
     item_type = 'option'
     name = 'op7'
-    message = BaseConfigurationConstants.extra_message.format(section=section,
+    message = SubConfigurationConstants.extra_message.format(section=section,
                                                               item_type=item_type,
                                                               name=name) + "='0'"
     context.logger.warning.assert_called_with(message)

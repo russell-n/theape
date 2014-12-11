@@ -8,16 +8,16 @@ from validate import Validator
 from mock import MagicMock
 
 # this package
-from ape.plugins.base_plugin import BaseConfiguration, SubConfigurationConstants
+from ape.plugins.base_plugin import SubConfiguration, SubConfigurationConstants
 from ape.infrastructure.baseclass import RED_ERROR
 from ape import ConfigurationError
 
-@given("a BaseConfiguration definition")
+@given("a SubConfiguration definition")
 def base_configuration_definition(context):
-    context.definition = BaseConfiguration
+    context.definition = SubConfiguration
     return
 
-@when("the user instantiates the BaseConfiguration")
+@when("the user instantiates the SubConfiguration")
 def base_configuration_instantiation(context):
     context.callable = lambda : context.definition()
     return
@@ -35,7 +35,7 @@ op = string
 op2 = integer
 """.splitlines()
 
-class FakeConfiguration(BaseConfiguration):
+class FakeConfiguration(SubConfiguration):
     def __init__(self, *args, **kwargs):
         super(FakeConfiguration, self).__init__(*args, **kwargs)
         return
@@ -55,7 +55,7 @@ config = """
 op = value
 """.splitlines()
 
-@given("a BaseConfiguration implementation")
+@given("a SubConfiguration implementation")
 def base_configuration_implementation(context):
     context.configuration = ConfigObj(config)
     context.implementation = FakeConfiguration
@@ -63,14 +63,14 @@ def base_configuration_implementation(context):
     context.section_name = 'FAKE'
     return
 
-@when("the user instantiates the BaseConfiguration implementation")
+@when("the user instantiates the SubConfiguration implementation")
 def base_configuration_implementation_instantiation(context):
     context.configuration = context.implementation(source=context.configuration,
                                                    section_name=context.section_name,
                                                    configspec_source=context.configspec_source)
     return
 
-@then("it has the BaseConfiguration default properties")
+@then("it has the SubConfiguration default properties")
 def assert_default_properties(context):
     assert_that(context.configuration.configuration,
                 is_(instance_of(ConfigObj)))
@@ -90,7 +90,7 @@ op = some value
 op2 = 75
 """.splitlines()
 
-@given("a BaseConfiguration implementation with valid configuration")
+@given("a SubConfiguration implementation with valid configuration")
 def valid_configuration(context):
     context.configuration = FakeConfiguration(source=ConfigObj(valid_config_string),
                                               section_name='GOODBUTFAKE')
@@ -110,7 +110,7 @@ op = value
 op2 = not_integer
 """.splitlines()
 
-@given("a BaseConfiguration implementation with a bad option")
+@given("a SubConfiguration implementation with a bad option")
 def bad_option(context):
     error = MagicMock()
     context.logger = MagicMock()
@@ -126,7 +126,7 @@ def bad_option(context):
     context.configuration._logger = context.logger
     return
 
-@when("the BaseConfiguration implementation processes the errors")
+@when("the SubConfiguration implementation processes the errors")
 def process_errors(context):
     outcome = context.configuration.configuration.validate(context.configuration.validator,
                                                            preserve_errors=True)
@@ -151,7 +151,7 @@ plugin = Fake
 op = value
 """.splitlines()
 
-@given("a BaseConfiguration implementation with a missing option")
+@given("a SubConfiguration implementation with a missing option")
 def missing_option(context):
     error = MagicMock()
     context.logger = MagicMock()
@@ -181,7 +181,7 @@ missing_section_config = """
 plugin = fake_plugin
 """.splitlines()
 
-@given("a BaseConfiguration implementation missing the section")
+@given("a SubConfiguration implementation missing the section")
 def missing_section(context):
     error = MagicMock()
     context.logger = MagicMock()
@@ -212,7 +212,7 @@ op1 = 1
 op2 = 1
 """.splitlines()
 
-@given("a BaseConfiguration configspec with section_name")
+@given("a SubConfiguration configspec with section_name")
 def configspec_section_name(context):
     context.configuration = FakeConfiguration(source=ConfigObj(section_name_config),
                                               configspec_source=section_name_configspec,
@@ -220,7 +220,7 @@ def configspec_section_name(context):
     context.configuration._logger = MagicMock()
     return
 
-@when("the BaseConfiguration implementation is checked")
+@when("the SubConfiguration implementation is checked")
 def check_implementation(context):
     context.configuration.process_errors()
     return
@@ -237,7 +237,7 @@ op1 = integer
 [sub_section]
 op2 = integer
 """
-@given("a BaseConfiguration configspec without top-section")
+@given("a SubConfiguration configspec without top-section")
 def configspec_subsection(context):
     context.configuration = FakeConfiguration(source=ConfigObj(section_name_config),
                                               configspec_source=section_name_configspec,
@@ -261,7 +261,7 @@ op1 = 3
 op2 = 4
 """.splitlines()
 
-@given("a BaseConfiguration config with options not in the configspec")
+@given("a SubConfiguration config with options not in the configspec")
 def extra_options(context):    
     context.logger = MagicMock()
     context.logger.warning = MagicMock()
@@ -271,7 +271,7 @@ def extra_options(context):
     context.configuration._logger = context.logger
     return
 
-@when("the BaseConfiguration implementation checks extra values")
+@when("the SubConfiguration implementation checks extra values")
 def check_extra_values(context):
     context.outcome = context.configuration.check_extra_values()
     return
@@ -301,7 +301,7 @@ op1 = 1
 op2 = 5
 """.splitlines()
 
-@given("a BaseConfiguration config with no options not in the configspec")
+@given("a SubConfiguration config with no options not in the configspec")
 def no_extra_options(context):
     context.logger = MagicMock()
     context.logger.warning = MagicMock()
@@ -346,7 +346,7 @@ updates_section = FAKE
 op2 = 2
 """.splitlines()
 
-@given("a BaseConfiguration section that updates another section")
+@given("a SubConfiguration section that updates another section")
 def updates_section(context):
     context.logger = MagicMock()
     context.logger.warning = MagicMock()
@@ -360,11 +360,11 @@ def updates_section(context):
     context.fake2._logger = context.logger
     return
 
-@when("the BaseConfiguration implementation validates the configuration")
+@when("the SubConfiguration implementation validates the configuration")
 def validate_configuration(context):
     return
 
-@then("the BaseConfiguration implementation will have the updates")
+@then("the SubConfiguration implementation will have the updates")
 def check_updates(context):
     #import pudb; pudb.set_trace()
     expected_fake = {'op1':1,
@@ -385,13 +385,13 @@ op = some string
 op2 = 42
 """.splitlines()
 
-@given("a BaseConfiguration section missing a required plugin name")
+@given("a SubConfiguration section missing a required plugin name")
 def missing_plugin_name(context):
     context.configuration = FakeConfiguration(source=ConfigObj(missing_plugin_name_config),
                                               section_name='FAKE')
     return
 
-@when("the BaseConfiguration checks process_errors")
+@when("the SubConfiguration checks process_errors")
 def check_process_errors(context):
     context.callable = context.configuration.process_errors
     return
