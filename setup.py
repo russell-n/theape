@@ -5,27 +5,31 @@ except ImportError:
     use_setuptools()
     from setuptools import setup, find_packages
 
-setup(name='ape',
+with open('readme.rst') as reader:
+    long_description = reader.read()
+    
+setup(name='theape',
+      long_description=long_description,
       version= '2014.11.10',
-      description="A program to run code.",
+      description="The All-Purpose Experimenter.",
       author="russell",
       platforms=['linux'],
       url = '',
-      author_email="russellnakamura@us.allion.com",
+      author_email="necromuralist@gmail.com",
       license = "",
-      install_requires = ['pudb', 'paramiko', 'numpy', 'docopt'],
+      install_requires = 'pudb numpy paramiko configobj docopt'.split(),
       packages = find_packages(),
       include_package_data = True,
-      package_data = {"ape":["*.txt", "*.rst", "*.ini"]},
+      package_data = {"theape":["*.txt", "*.rst", "*.ini"]},
       entry_points = """
 	  [console_scripts]
-      ape=ape.main:main
+      ape=theape.main:main
 
       [ape.subcommands]
-      subcommands=ape.infrastructure.arguments
+      subcommands=theape.infrastructure.arguments
 
       [ape.plugins]
-      plugins = ape.plugins
+      plugins = theape.plugins
       """
       )
 
