@@ -1,0 +1,14 @@
+How-To's
+========
+
+This is where I document things that I learned that I might need to do again in the future.
+
+<<name='imports', echo=False>>=
+# this package
+from ape import create_toctree
+@
+
+<<name='toctree', echo=False, results='sphinx'>>=
+create_toctree()
+@
+
