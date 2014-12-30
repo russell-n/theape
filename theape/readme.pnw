@@ -1,0 +1,52 @@
+The APE (Read Me)
+=================
+<<name='imports', echo=False>>=
+# python standard library
+from __future__ import print_function
+import subprocess
+@
+
+The `All-Purpose Experimenter` is a plugin-based system meant to create a unified front-end for different device-related testing. 
+
+Installation
+------------
+
+If you have the repository you can install it by using the ``setup.py`` file.
+
+.. code:: bash
+
+   python setup.py install
+
+Alternately you can pull it from Pypi.
+
+.. code:: bash
+
+   pip install theape
+
+If you are installing it system-wide you will probably have to prefix this and other install commands with ``sudo``.
+
+
+Documentation
+-------------
+
+The APE has some online help.
+
+.. code:: bash
+
+   ape -h
+
+<<name='help_output',  echo=False, wrap=False>>=
+print(subprocess.check_output('ape -h'.split()))
+@
+
+Installing Testing Dependencies
+-------------------------------
+
+The APE is currently being tested using `behave <http://pythonhosted.org/behave/>`_ so if you want to run the tests, you'll need that, `pyhamcrest <http://pyhamcrest.readthedocs.org/en/1.8.0/>`_ and `mock <http://mock.readthedocs.org/en/latest/magicmock.html>`_. All three are on pypi so if you have pip installed you can install them from the web (if installing system wide run as root).
+
+.. code:: bash
+
+   pip install behave
+   pip install pyhamcrest
+   pip install mock
+

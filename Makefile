@@ -1,6 +1,6 @@
 # Makefile for Sphinx documentation
 #
-THIS_NAME = ape
+THIS_NAME = theape
 RSYNC_NAME = ape
 RSYNC_CATEGORY = hortators
 # You can set these variables from the command line.
@@ -50,6 +50,14 @@ html:
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 	rsync -ravz $(BUILDDIR)/html/ $(RSYNC_DIR)
+
+pypi:
+	python setup.py build_sphinx
+	python setup.py register upload_sphinx
+
+test_pypi_html:
+	python setup.py build_sphinx
+	python setup.py register -r test upload_sphinx -r test
 
 dirhtml:
 	$(SPHINXBUILD) -b dirhtml $(ALLSPHINXOPTS) $(BUILDDIR)/dirhtml
