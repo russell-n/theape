@@ -1,6 +1,7 @@
 The List Sub-Command Arguments
 ==============================
-::
+
+.. code:: python
 
     """list subcommand
     
@@ -15,11 +16,11 @@ The List Sub-Command Arguments
       -h, --help                 Show this help message and exit
     
     """
-    
 
 
 
 See the :ref:`developer documentation <docopt-reproducingape-list-sub-command>` for more information.
+
 
 
 
@@ -28,7 +29,8 @@ See the :ref:`developer documentation <docopt-reproducingape-list-sub-command>` 
 The ListArguments Constants
 ---------------------------
 
-::
+
+.. code:: python
 
     class ListArgumentsConstants(object):
         """
@@ -37,7 +39,6 @@ The ListArguments Constants
         __slots__ = ()
         # arguments
         modules = "<module>"
-    
     
 
 
@@ -51,7 +52,7 @@ The List Class
 
    BaseArguments <|-- List
 
-.. currentmodule:: ape.interface.arguments.listarguments
+.. module:: theape].interface.arguments.listarguments
 .. autosummary::
    :toctree: api
 
@@ -59,6 +60,7 @@ The List Class
    List.modules
    List.reset
    List.function
+
 
 
 
@@ -72,10 +74,13 @@ The List Strategy
 
    BaseStrategy <|-- ListStrategy
 
-.. currentmodule:: ape.interface.arguments.listarguments
+.. module:: theape.interface.arguments.listarguments
 .. autosummary::
    :toctree: api
 
    ListStrategy
    ListStrategy.function
+
+
+
 

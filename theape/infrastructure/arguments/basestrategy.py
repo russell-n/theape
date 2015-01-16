@@ -4,21 +4,18 @@ from ConfigParser import NoSectionError
 import datetime
 
 # this package
-from ape import BaseClass
-from ape.infrastructure.errors import ConfigurationError
-from ape.infrastructure.crash_handler import try_except, log_error
-from ape.infrastructure.strings import RED, BOLD, RESET
-from ape.plugins.quartermaster import QuarterMaster
-
+from theape import BaseClass
+from theape.infrastructure.errors import ConfigurationError
+from theape.infrastructure.crash_handler import try_except, log_error
+from theape.infrastructure.strings import RED, BOLD, RESET
+from theape.plugins.quartermaster import QuarterMaster
 
 RED_ERROR = "{red}{bold}{{error}}{reset}".format(red=RED,
                                                  bold=BOLD,
                                                  reset=RESET)
 INFO_STRING = '{b}**** {{0}} ****{r}'.format(b=BOLD, r=RESET)
 
-
 DOCUMENT_THIS = __name__ == '__builtin__'
-
 
 class BaseStrategy(BaseClass):
     """

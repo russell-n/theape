@@ -5,7 +5,7 @@ Wifi
 
 <<name='imports', echo=False>>=
 # this package
-from ape import create_toctree
+from theape import create_toctree
 @
 This package contains wifi-specific helpers.
 

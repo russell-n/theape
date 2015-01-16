@@ -3,9 +3,8 @@
 import unittest
 
 # this package
-from ape.parts.dummy.dummy import CrashDummy
-from ape import ApeError
-
+from theape.parts.dummy.dummy import CrashDummy
+from theape import ApeError
 
 class TestCrashDummy(unittest.TestCase):
     def setUp(self):

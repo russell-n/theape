@@ -2,6 +2,7 @@ The APE (Read Me)
 =================
 
 
+
 The `All-Purpose Experimenter` is a plugin-based system meant to create a unified front-end for different device-related testing. 
 
 Installation
@@ -21,6 +22,7 @@ Alternately you can pull it from Pypi.
 
 If you are installing it system-wide you will probably have to prefix this and other install commands with ``sudo``.
 
+
 Documentation
 -------------
 
@@ -30,7 +32,8 @@ The APE has some online help.
 
    ape -h
 
-::
+
+.. code::
 
     APE (the all-purpose-evaluator)
     

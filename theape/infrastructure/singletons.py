@@ -21,17 +21,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-
 # this package
-from ape import DontCatchError
-from ape.components.component import Composite
-from ape.parts.storage.filestorage import FileStorage
-from ape import FILE_TIMESTAMP
-
+from theape import DontCatchError
+from theape.components.component import Composite
+from theape.parts.storage.filestorage import FileStorage
+from theape import FILE_TIMESTAMP
 
 # the singletons will be kept in this dictionary
 singletons = {}
-
 
 class SingletonEnum(object):
     """
@@ -40,7 +37,6 @@ class SingletonEnum(object):
     __slots__ = ()
     composite = 'composite'
     filestorage = 'filestorage'
-
 
 def get_composite(name, error=DontCatchError, error_message=None,
                   identifier=None, component_category='unknown'):
@@ -71,7 +67,6 @@ def get_composite(name, error=DontCatchError, error_message=None,
                                                               component_category=component_category)
     return singletons[SingletonEnum.composite][name]
 
-
 def get_filestorage(name, path=None, 
                     timestamp=FILE_TIMESTAMP):
     """
@@ -92,7 +87,6 @@ def get_filestorage(name, path=None,
         singletons[SingletonEnum.filestorage][name] = FileStorage(path=path,
                                                                   timestamp=timestamp)
     return singletons[SingletonEnum.filestorage][name]
-
 
 def refresh():
     """

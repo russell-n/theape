@@ -20,9 +20,9 @@ See the :ref:`developer documentation <docopt-reproducingape-list-sub-command>` 
 
 <<name='imports', echo=False>>=
 # the ape
-from ape.infrastructure.crash_handler import try_except
-from ape.infrastructure.arguments.arguments import BaseArguments
-from ape.infrastructure.arguments.basestrategy import BaseStrategy
+from theape.infrastructure.crash_handler import try_except
+from theape.infrastructure.arguments.arguments import BaseArguments
+from theape.infrastructure.arguments.basestrategy import BaseStrategy
 @
 
 .. _ape-interface-arguments-list-arguments-constants:
@@ -49,7 +49,7 @@ The List Class
 
    BaseArguments <|-- List
 
-.. currentmodule:: ape.interface.arguments.listarguments
+.. module:: theape].interface.arguments.listarguments
 .. autosummary::
    :toctree: api
 
@@ -108,7 +108,7 @@ The List Strategy
 
    BaseStrategy <|-- ListStrategy
 
-.. currentmodule:: ape.interface.arguments.listarguments
+.. module:: theape.interface.arguments.listarguments
 .. autosummary::
    :toctree: api
 

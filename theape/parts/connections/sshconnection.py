@@ -1,4 +1,26 @@
 
+# The MIT License (MIT)
+# 
+# Copyright (c) 2013 Russell Nakamura
+# 
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+
 # python standard library
 from collections import namedtuple
 import threading
@@ -7,15 +29,13 @@ import threading
 import paramiko
 
 # this package
-from ape import BaseClass, ApeError
-from ape.parts.storage.socketstorage import SocketStorage
-
+from theape import BaseClass
+from theape.parts.connections.clientbase import ConnectionError
 
 SEMICOLON_JOIN = "{0};{1}"
 SUDO = "sudo {0}"
 ADD_NEWLINE = "{0}\n"
 SPACE_JOIN = "{0} {1}"
-
 
 class SSHConnection(BaseClass):
     def __init__(self, hostname, username, prefix=None, password=None, port=22,
@@ -52,7 +72,7 @@ class SSHConnection(BaseClass):
         """
         an SSHClient instance
 
-        :raise: ApeError for paramiko and socket exceptions
+        :raise: ConnectionError for paramiko and socket exceptions
         :rtype: SSHClient
         :return: SSH Client with the constructor's parameters
         """
@@ -69,31 +89,31 @@ class SSHConnection(BaseClass):
                                  timeout=self.timeout)
             except paramiko.PasswordRequiredException as error:
                 self.log_error(error)
-                raise ApeError("{u}@{h} Public keys not working".format(u=self.username,
+                raise ConnectionError("{u}@{h} Public keys not working".format(u=self.username,
                                                                         h=self.hostname))
             except paramiko.AuthenticationException as error:
                 self.log_error(error)
-                raise ApeError("Password: {p} for {u}@{h} not accepted".format(p=self.password,
+                raise ConnectionError("Password: {p} for {u}@{h} not accepted".format(p=self.password,
                                                                                u=self.username,
                                                                                h=self.hostname))
             except paramiko.SSHException as error:
                 self.log_error(error)
-                raise ApeError('{u}@{h} with password {p} raised "{e}"'.format(u=self.username,
+                raise ConnectionError('{u}@{h} with password {p} raised "{e}"'.format(u=self.username,
                                                                                h=self.hostname,
                                                                                p=self.password,
                                                                                e=error))
             except IOError as error:
                 self.log_error(error)
                 if 'No route to host' in str(error) or 'Network is unreachable' in str(error):
-                    raise ApeError("{h} unreachable from this machine.".format(h=self.hostname))
+                    raise ConnectionError("{h} unreachable from this machine.".format(h=self.hostname))
                 if 'Connection refused' in str(error):
-                    raise ApeError("{u}@{h} refused connection (is the ssh-server running?)".format(u=self.username,
+                    raise ConnectionError("{u}@{h} refused connection (is the ssh-server running?)".format(u=self.username,
                                                                                                      h=self.hostname))
                 if 'timed out' in str(error):                    
-                    raise ApeError("Unable to connect to {u}:{h} within {t} seconds (timed out)".format(u=self.username,
+                    raise ConnectionError("Unable to connect to {u}:{h} within {t} seconds (timed out)".format(u=self.username,
                                                                                                         h=self.hostname,
                                                                                                         t=self.timeout))
-                raise ApeError('({e}) connecting to {u}@{h}'.format(e=error,
+                raise ConnectionError('({e}) connecting to {u}@{h}'.format(e=error,
                                                                      u=self.username,
                                                                      h=self.hostname))
 
@@ -129,12 +149,12 @@ class SSHConnection(BaseClass):
          - `get_pty`: needed for interactive things (like sending the sudo password)
         """
         if self.prefix is not None:
-            command = SEMICOLON_JOIN.format(self.prefix, command)
+            command = SPACE_JOIN.format(self.prefix, command)
         with self.lock:
             stdin, stdout, stderr = self.client.exec_command(command, bufsize=bufsize,
                                                              timeout=timeout,
                                                              get_pty=get_pty)
-        return InOutError(input=SocketStorage(stdin), output=SocketStorage(stdout), error=SocketStorage(stderr))
+        return InOutError(input=stdin, output=stdout, error=stderr)
 
     exec_command = __call__
 
@@ -170,7 +190,6 @@ class SSHConnection(BaseClass):
         self.client.close()
         self._client = None
         return
-# end class SSHConnection    
-
+# end class SSHConnection
 
 InOutError = namedtuple('InOutError', 'input output error'.split())

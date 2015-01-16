@@ -1,6 +1,8 @@
 The SSH Connection
 ==================
-.. _ape-ssh-connection:
+
+
+.. _ssh-connection:
 
 This is the workhorse connection built around the `paramiko` SSHClient. Updates in paramiko's interface as well as a better understanding of how it works has lead me to re-start it as the basis for the other connection types. The main way to use it is meant to be with dot-notation. To do ``ls -a`` for instance, you would do something like::
 
@@ -27,11 +29,6 @@ I have also aliased the call with ``exec_command`` so that code that is expectin
 
     stdin, stdout, stderr = connection.exec_command('iperf -s')
 
-.. note:: What's being returned in all cases is an :ref:`InOutError <ape-sshconnection-inouterror>` named-tuple so you can use either tuple unpacking or the dot-notation to get at the file-like objects. I prefer the dot-notation because I tend to forget in what order the objects are returned.
-
-.. warning:: I am `not` returning Channel-files, I am returning :ref:`SocketStorage <ape-socket-storage>` objects. Assuming I did it right the only real difference is that it will raise an ApeErrror instead of socket errors so that the Composites will try and exit gracefully.
-
-.. '
 
 There is also a ``sudo`` method to let you run something as root::
 
@@ -60,7 +57,12 @@ There's also a lock so that if multiple pieces of code are using the same connec
 
 
 
-.. currentmodule:: ape.parts.connections.sshconnection
+
+
+
+
+
+.. module:: theape.clients.sshconnection
 .. autosummary::
    :toctree: api
 
@@ -110,6 +112,7 @@ The InOutError Named Tuple
 --------------------------
 
 To help prevent the mixing up of the different files returned (stdout, stdin, and stderr (not necessarily in that order)) the SSHConnection will returned a named tuple.
+
 
 
 

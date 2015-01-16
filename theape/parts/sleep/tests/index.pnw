@@ -5,7 +5,7 @@ Testing the Sleep
 
 <<name='imports', echo=False>>=
 # this package
-from ape.commoncode.index_builder import create_toctree
+from theape.infrastructure.indexbuilder import create_toctree
 @
 
 <<Name='toctree', echo=False, results='sphinx'>>=

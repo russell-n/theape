@@ -43,28 +43,19 @@ To get help for a sub-command pass `-h` as the argument. e.g.:
 
 """     
 @
-.. currentmodule:: ape.interface.arguments
+.. module:: theape.interface.arguments
 <<name='imports', echo=False>>=
-# python standard library
-import argparse
-
 # third-party
 import docopt
 
 # this package
-from ape import BaseClass, VERSION
-from ape.infrastructure.ryemother import RyeMother
+from theape import BaseClass, VERSION
+from theape.infrastructure.ryemother import RyeMother
 @
 <<name='check_pweave', echo=False>>=
 document_this = __name__ == '__builtin__'
 @
 
-Contents:
-
-   * :ref:`The Argument Constants <ape-interface-arguments-argumentconstants>`
-   * :ref:`The BaseArguments <ape-interface-arguments-basearguments>`
-
-   
 .. _ape-interface-arguments-argumentconstants:
 
 The ArgumentConstants
@@ -112,7 +103,7 @@ This is the base-class for the newer docopt-based arguments. See the :ref:`devel
    BaseArguments o-- ListArguments
    BaseArguments o-- HelpArguments
 
-.. currentmodule:: ape.interface.arguments.arguments
+.. module:: theape.interface.arguments.arguments
 .. autosummary::
    :toctree: api
 

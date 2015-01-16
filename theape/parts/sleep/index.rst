@@ -5,6 +5,7 @@ Sleep
 
 
 
+
 This is a package for modules that help with sleeping. The initial use case is for a sleep to delay the start of execution for an operation. There should also be a secondary case for introducing delays between plugins or between operations, but I haven't worked out how to set-up the configuration file for that yet (as of November 11, 2013).
 
 .. figure:: sleep_etymology.png
@@ -21,6 +22,7 @@ Personified in English from late 14c., on model of Latin Somnus), Greek Hypnos. 
 Source: `Online Etymological Dictonary <http://www.etymonline.com/index.php?term=sleep>`_
 
 
+
 .. toctree::
    :maxdepth: 1
 
@@ -30,5 +32,7 @@ Source: `Online Etymological Dictonary <http://www.etymonline.com/index.php?term
    :maxdepth: 1
 
    Testing the Sleep <tests/index.rst>
+
+
 
 

@@ -10,15 +10,15 @@ Since they started out as just reflecting what was being called I wasn't testing
 import unittest
 
 # this package
-from ape.parts.dummy.dummy import CrashDummy
-from ape import ApeError
+from theape.parts.dummy.dummy import CrashDummy
+from theape import ApeError
 @
 
 
 Testing the CrashDummy
 ----------------------
 
-.. currentmodule:: ape.parts.dummy.testdummy
+.. module:: theape.parts.dummy.testdummy
 .. autosummary::
    :toctree: api
 

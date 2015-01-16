@@ -1,7 +1,7 @@
 Testing the List Arguments
 ==========================
 
-::
+.. code:: python
 
     #python standard library
     import unittest
@@ -10,34 +10,34 @@ Testing the List Arguments
     from mock import MagicMock, patch
     
     # the ape
-    from ape.interface.arguments.listarguments import ListArguments, ListStrate
-    gy
-    from ape.interface.arguments.basestrategy import BaseStrategy
+    from theape.infrastructure.arguments.listarguments import List,
+    ListStrategy
+    from theape.infrastructure.arguments.basestrategy import BaseStrategy
     
-    
 
 
 
-.. currentmodule:: ape.interface.arguments.test.test_listarguments
+.. module:: theape.interface.arguments.test.test_listarguments
 .. autosummary::
    :toctree: api
 
-   TestListArguments.test_constructor
-   TestListArguments.test_modules
+   TestList.test_constructor
+   TestList.test_modules
 
-::
 
-    class TestListArguments(unittest.TestCase):
+.. code:: python
+
+    class TestList(unittest.TestCase):
         def setUp(self):
             self.args = ['list']
-            self.arguments = ListArguments(args=self.args)
+            self.arguments = List(args=self.args)
             return
-        
+    
         def test_constructor(self):
             """
             Does it build correctly?
             """
-            arguments = ListArguments(args=['list'])
+            arguments = List(args=['list'])
     
             # inderited default
             self.assertFalse(arguments.pudb)
@@ -55,8 +55,7 @@ Testing the List Arguments
             self.arguments.reset()
             self.arguments.args = self.args + modules
             self.assertEqual(modules, self.arguments.modules)
-            return        
-    
+            return
     
 
 
@@ -70,4 +69,6 @@ Testing the List Strategy
    TestListStrategy.test_constructor
    TestListStrategy.test_function
    TestListStrategy.test_try_except
+
+
 

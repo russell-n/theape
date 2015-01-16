@@ -11,11 +11,15 @@ This is a plugin for :ref:`The Big Sleep <ape-big-sleep>`, code that does nothin
    TheBigSleep : __init__(end, total, interval, verbose)
    TheBigSleep : __call__()
 
-.. currentmodule:: ape.parts.sleep.sleep
+.. module:: theape.parts.sleep.sleep
 .. autosummary::
    :toctree: api
 
    TheBigSleep
+
+
+
+
 
 
 
@@ -24,7 +28,8 @@ The Configuration
 
 `TheBigSleep` has four parameters in its arguments so the configuration text will mirror that. The configuration needs to be a sub-section of the `[[PLUGINS]]` section.
 
-::
+
+.. code:: python
 
     configuration = """
       [[SLEEP]]
@@ -41,7 +46,6 @@ The Configuration
       interval = 1 second
       verbose = True
     """
-    
 
 
 
@@ -50,7 +54,8 @@ The ConfigSpec
 
 Since the configuration is being changed to use ConfigObj, a configspec should be used to validate the configuration.
 
-::
+
+.. code:: python
 
     sleep_configspec = """
     end = absolute_time(default=None)
@@ -58,7 +63,6 @@ Since the configuration is being changed to use ConfigObj, a configspec should b
     interval = relative_time(default=1)
     verbose = boolean(default=True)
     """
-    
 
 
 
@@ -67,7 +71,8 @@ The Sections
 
 The help-sections.
 
-::
+
+.. code:: python
 
     sections = OrderedDict()
     sections['name'] = '{bold}sleep{reset} -- a countdown timer that blocks until time is over'
@@ -88,16 +93,18 @@ The help-sections.
     One of {bold}end{reset} or {bold}total{reset} needs to be specified. Everything else is optional.
     """
     sections['author'] = 'ape'
-    
 
 
 
 The Plugin
 ----------
 
-.. currentmodule:: ape.plugins.sleep_plugin
+.. module:: theape.plugins.sleep_plugin
 .. autosummary::
    :toctree: api
 
    Sleep
+
+
+
 

@@ -12,12 +12,10 @@ optional arguments:
     -m, --module <module> ...      Non-ape modules
 """
 
-
 # the APE
-from ape.infrastructure.arguments.arguments import BaseArguments
-from ape.infrastructure.arguments.basestrategy import BaseStrategy
-from ape.infrastructure.crash_handler import try_except
-
+from theape.infrastructure.arguments.arguments import BaseArguments
+from theape.infrastructure.arguments.basestrategy import BaseStrategy
+from theape.infrastructure.crash_handler import try_except
 
 class FetchArgumentsConstants(object):
     """
@@ -30,7 +28,6 @@ class FetchArgumentsConstants(object):
     
     # defaults
     default_names = ['Ape']
-
 
 class Fetch(BaseArguments):
     """
@@ -81,8 +78,7 @@ class Fetch(BaseArguments):
         self._modules = None
         self._names = None
         return
-# end FetchArguments    
-
+# end FetchArguments
 
 class FetchStrategy(BaseStrategy):
     """

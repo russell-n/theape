@@ -1,6 +1,7 @@
 The Check Sub-Command Arguments
 ===============================
-::
+
+.. code:: python
 
     """`check` sub-command
     
@@ -9,8 +10,8 @@ The Check Sub-Command Arguments
     
     Positional Arguments:
     
-        <config-file-name> ...    List of config files (e.g. *.ini - default='[
-    'ape.ini']')
+        <config-file-name> ...    List of config files (e.g. *.ini -
+    default='['ape.ini']')
     
     optional arguments:
     
@@ -19,11 +20,11 @@ The Check Sub-Command Arguments
     
     """
     
-    
 
 
 
 See the :ref:`developer documentation <docopt-reproducingape-check-sub-command>` for more information about this.
+
 
 
 
@@ -32,7 +33,8 @@ See the :ref:`developer documentation <docopt-reproducingape-check-sub-command>`
 The CheckArgumentsConstants
 ---------------------------
 
-::
+
+.. code:: python
 
     class CheckArgumentsConstants(object):
         """
@@ -46,7 +48,6 @@ The CheckArgumentsConstants
         #defaults
         default_configfilenames = ['ape.ini']
     
-    
 
 
 
@@ -59,7 +60,7 @@ The Check Class
 
    BaseArguments <|-- Check
 
-.. currentmodule:: ape.interface.arguments.checkarguments
+.. module:: theape.interface.arguments.checkarguments
 .. autosummary::
    :toctree: api
 
@@ -68,6 +69,7 @@ The Check Class
    Check.modules
    Check.reset
    Check.function
+
 
 
 
@@ -87,4 +89,7 @@ The Check strategy calls `check_rep` on the plugins.
 
    CheckStrategy
    CheckStrategy.function
+
+
+
 

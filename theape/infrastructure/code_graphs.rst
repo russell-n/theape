@@ -5,16 +5,18 @@ This is a module to hold functions for creating graphs that document the code.
 
 
 
+
 Module Diagram
 --------------
 
 This will create class diagram for classes found in a module (see the :ref:`Exploring Pyreverse <exploring-pyreverse-module>` section). Since it is using `pyreverse` it has to be installed and available on the execution path.
 
-.. currentmodule:: ape.commoncode.code_graphs
+.. module:: theape.commoncode.code_graphs
 .. autosummary::
    :toctree: api
 
    module_diagram
+
 
 
 
@@ -27,4 +29,6 @@ This creates a more detailed class diagram. Unlike the module-diagram, this requ
    :toctree: api
 
    class_diagram
+
+
 

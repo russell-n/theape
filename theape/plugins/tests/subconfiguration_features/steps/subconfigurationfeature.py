@@ -8,9 +8,9 @@ from validate import Validator
 from mock import MagicMock
 
 # this package
-from ape.plugins.base_plugin import SubConfiguration, SubConfigurationConstants
-from ape.infrastructure.baseclass import RED_ERROR
-from ape import ConfigurationError
+from theape.plugins.base_plugin import SubConfiguration, SubConfigurationConstants
+from theape.infrastructure.baseclass import RED_ERROR
+from theape import ConfigurationError
 
 @given("a SubConfiguration definition")
 def base_configuration_definition(context):

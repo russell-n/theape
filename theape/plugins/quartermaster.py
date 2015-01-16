@@ -5,14 +5,12 @@ import importlib
 import inspect
 
 # this package
-from ape import BaseClass
-from ape.infrastructure.ryemother import RyeMother
+from theape import BaseClass
+from theape.infrastructure.ryemother import RyeMother
 from base_plugin import BasePlugin
-from ape.infrastructure.code_graphs import module_diagram, class_diagram
-
+from theape.infrastructure.code_graphs import module_diagram, class_diagram
 
 document_this = __name__ == '__builtin__'
-
 
 class QuarterMaster(BaseClass):
     """
@@ -61,7 +59,7 @@ class QuarterMaster(BaseClass):
         Prints the names of the plugins to standard out
         """
         for name in sorted(self.plugins.keys()):
-            print name
+            print( name)
         return
 
     def get_plugin(self, name):
@@ -81,23 +79,19 @@ class QuarterMaster(BaseClass):
         except KeyError as error:
             self.logger.error(error)
         return
-# end class QuarterMaster    
-
+# end class QuarterMaster
 
 if document_this:
-    import ape.plugins.base_plugin as base_plugin
-    print base_plugin.__file__
-
+    import theape.plugins.base_plugin as base_plugin
+    print(base_plugin.__file__)
 
 if document_this:
     path = os.path.dirname(base_plugin.__file__)
     for name in sorted(name for name in os.listdir(path) if name.endswith('.py')):
-        print name
-
+        print(name)
 
 if document_this:
-    print base_plugin.__package__
-
+    print(base_plugin.__package__)
 
 if document_this:
     # remember we need the package
@@ -107,7 +101,6 @@ if document_this:
                    if name.endswith('.py') and not name in exclude)
     basenames_extensions = (os.path.splitext(name) for name in names)
     modules = (importlib.import_module('.'.join((package, base))) for base, extension in basenames_extensions)
-
 
 if document_this:
     isclass = inspect.isclass
@@ -120,12 +113,11 @@ if document_this:
         for member in members:
             # each member is a tuple
             name, definition = member
-            print name
+            print(name)
             plugin = definition(None)
 
-
 if document_this:
-    import ape.plugins.base_plugin
+    import theape.plugins.base_plugin
     names = sorted(name for name in os.listdir(path)
                    if name.endswith('.py') and not name in exclude)
     basenames_extensions = (os.path.splitext(name) for name in names)
@@ -140,16 +132,14 @@ if document_this:
         for member in members:
             # each member is a tuple
             name, definition = member
-            print name
+            print(name)
             plugin = definition(None)
-
 
 # python standard library
 import unittest
 
 # third party
 from mock import patch
-
 
 class TestQuarterMaster(unittest.TestCase):
     def setUp(self):
@@ -166,4 +156,3 @@ class TestQuarterMaster(unittest.TestCase):
     def tearDown(self):
         self.mock_listdir.stop()
         return
-    

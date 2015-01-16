@@ -1,6 +1,7 @@
 The Arguments
 =============
-::
+
+.. code:: python
 
     """APE (the all-purpose-evaluator)
     
@@ -42,25 +43,22 @@ The Arguments
     
         ape run -h
     
-    """     
-    
+    """
 
 
-.. currentmodule:: ape.interface.arguments
+.. module:: theape.interface.arguments
 
 
-Contents:
 
-   * :ref:`The Argument Constants <ape-interface-arguments-argumentconstants>`
-   * :ref:`The BaseArguments <ape-interface-arguments-basearguments>`
 
-   
+
 .. _ape-interface-arguments-argumentconstants:
 
 The ArgumentConstants
 ---------------------
 
-::
+
+.. code:: python
 
     class ArgumentsConstants(object):
         """
@@ -75,8 +73,7 @@ The ArgumentConstants
         callgraph = '--callgraph'
         command = "<command>"
         argument = '<argument>'
-    # end ArgumentConstants    
-    
+    # end ArgumentConstants
     
 
 
@@ -106,7 +103,7 @@ This is the base-class for the newer docopt-based arguments. See the :ref:`devel
    BaseArguments o-- ListArguments
    BaseArguments o-- HelpArguments
 
-.. currentmodule:: ape.interface.arguments.arguments
+.. module:: theape.interface.arguments.arguments
 .. autosummary::
    :toctree: api
 
@@ -120,4 +117,7 @@ This is the base-class for the newer docopt-based arguments. See the :ref:`devel
    BaseArguments.trace
    BaseArguments.callgraph
    BaseArguments.reset
+
+
+
 

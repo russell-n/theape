@@ -32,9 +32,9 @@ This is a module to work with the ``iwconfig`` command. Although ``iwconfig`` ca
 import re
 
 # this package
-from ape import BaseClass, ApeError
-from ape.parts.eventtimer import EventTimer
-from ape.parts import oatbran
+from theape import BaseClass, ApeError
+from theape.parts.eventtimer import EventTimer
+from theape.parts import oatbran
 @
 <<name='constants', echo=False>>=
 DECIBEL_MILLIWATTS = 'dBm'
@@ -95,7 +95,7 @@ IwconfigExpressions
 
 The ``IwconfigExpressions`` holds the compiled regular expressions to tokenize the output of the ``iwconfig`` command.
 
-.. currentmodule:: ape.parts.wifi.iwconfig
+.. module:: theape.parts.wifi.iwconfig
 .. autosummary::
    :toctree: api
 
@@ -381,7 +381,7 @@ The Model and API
    BaseClass <|-- IwconfigQuery
    IwconfigQuery o- IwconfigExpressions
 
-.. currentmodule:: ape.parts.wifi.iwconfig
+.. module:: theape.parts.wifi.iwconfig
 .. autosummary::
    :toctree: api
 

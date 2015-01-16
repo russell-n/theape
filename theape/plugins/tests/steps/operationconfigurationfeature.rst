@@ -6,10 +6,12 @@ Operation Configuration
 
 
 
+
 Scenario: User builds Operation Configuration
 ---------------------------------------------
 
-::
+
+.. code:: python
 
     config_file = """
     [OPERATIONS]
@@ -33,9 +35,11 @@ Scenario: User builds Operation Configuration
         context.configobj = context.operator_configuration.configuration
         context.section = context.configobj['PLUGINS']   
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @when("a user builds the operation configuration")
     def build_operation_configuration(context):
@@ -48,9 +52,11 @@ Scenario: User builds Operation Configuration
                                                                  quartermaster=context.quartermaster)
         #print context.configobj
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @then("the operation configuration has the plugins")
     def check_plugins(context):
@@ -93,5 +99,5 @@ Scenario: User builds Operation Configuration
         assert_that(context.operation_configuration.operation.components,
                     contains(fake_plugin.product, fakir_plugin.product))
         return
-    
+
 

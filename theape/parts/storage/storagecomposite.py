@@ -1,8 +1,7 @@
 
 # this package 
-from ape import BaseClass
-from ape import ApeError
-
+from theape import BaseClass
+from theape import ApeError
 
 def check_opened(method):
     """
@@ -18,8 +17,7 @@ def check_opened(method):
         if self.open_storages is None:
             raise ApeError("storages must be opened before use")
         return method(self, *args, **kwargs)
-    return wrapped            
-
+    return wrapped
 
 class StorageComposite(BaseClass):
     """

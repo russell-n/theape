@@ -8,10 +8,9 @@ import time
 from mock import MagicMock
 
 # this package
-from ape.parts.wifi.iwconfig import IwconfigQuery, IwconfigExpressions
-from ape.parts.wifi.iwconfig import IwconfigEnum
-from ape import ApeError
-
+from theape.parts.wifi.iwconfig import IwconfigQuery, IwconfigExpressions
+from theape.parts.wifi.iwconfig import IwconfigEnum
+from theape import ApeError
 
 try:
     source = open('iwconfig.txt').read()
@@ -20,7 +19,6 @@ try:
 except IOError:
     # sphinx will crash on trying to import this module
     pass
-
 
 class TestIwconfig(unittest.TestCase):
     def setUp(self):
@@ -232,7 +230,6 @@ class TestIwconfig(unittest.TestCase):
     def assert_equal(self, expected, actual):
         self.assertEqual(expected, actual,
                          msg="Expected: {0}, Actual: {1}".format(expected, actual))
-
 
 class TestIwconfigExpressions(unittest.TestCase):
     def setUp(self):

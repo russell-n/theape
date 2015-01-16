@@ -14,3 +14,18 @@ This is an adapter to make the `docopt` based argument-parsers look like argpars
    ArgumentBuilder
    ArgumentBuilder.__call__
 
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+

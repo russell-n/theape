@@ -19,9 +19,9 @@ These are arguments for the `fetch` sub-command (see the :ref:`developer documen
 
 <<name='imports', echo=False>>=
 # the APE
-from ape.infrastructure.arguments.arguments import BaseArguments
-from ape.infrastructure.arguments.basestrategy import BaseStrategy
-from ape.infrastructure.crash_handler import try_except
+from theape.infrastructure.arguments.arguments import BaseArguments
+from theape.infrastructure.arguments.basestrategy import BaseStrategy
+from theape.infrastructure.crash_handler import try_except
 @
 
 .. _ape-interface-arguments-fetch-constants:
@@ -52,7 +52,7 @@ The FetchArguments
 
    BaseArguments <|-- FetchArguments
 
-.. currentmodule:: ape.interface.arguments.fetcharguments
+.. module:: theape.interface.arguments.fetcharguments
 .. autosummary::
    :toctree: api
 

@@ -3,7 +3,8 @@ Testing the Command
 
 
 
-.. currentmodule:: cameraobscura.commands.command.tests
+
+.. module:: theape.parts.command.tests
 .. autosummary:: 
    :toctree: api
 
@@ -16,4 +17,22 @@ Testing the Command
    TestTheCommand.test_timeout
    TestTheCommand.test_error_match
    TestTheCommand.test_not_available
+
+
+
+
+
+.. autosummary::
+   :toctree: api
+
+   random_string_of_letters
+
+
+.. code:: python
+
+    def random_string_of_letters(length=5):
+        return "".join((random.choice(string.letters) for
+                        character in xrange(length)))
+
+
 

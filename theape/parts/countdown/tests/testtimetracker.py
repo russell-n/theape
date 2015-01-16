@@ -9,10 +9,9 @@ from mock import patch, MagicMock, call
 import numpy
 
 # this package
-from ape.parts.countdown.countdown import TimeTracker, INFO, DEBUG, STAT_STRING
-from ape.parts.countdown.countdown import ELAPSED_STRING
-from ape import ApeError
-
+from theape.parts.countdown.countdown import TimeTracker, INFO, DEBUG, STAT_STRING
+from theape.parts.countdown.countdown import ELAPSED_STRING
+from theape import ApeError
 
 class TestingTimeTracker(unittest.TestCase):
     def setUp(self):

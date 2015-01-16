@@ -3,7 +3,6 @@
 import shlex
 import subprocess
 
-
 def module_diagram(module, project, output_format='png'):
     """
     Creates a dependency diagram for the module given.
@@ -22,10 +21,9 @@ def module_diagram(module, project, output_format='png'):
     try:                                               
         subprocess.call(shlex.split(command))
     except OSError as error:
-        print error
-        print "Is pylint installed?"
-    return "classes_{0}.{1}".format(project, output_format)    
-
+        print(error)
+        print( "Is pylint installed?")
+    return "classes_{0}.{1}".format(project, output_format)
 
 def class_diagram(class_name, module, output_format='png',
                   add_module='n', level=1, filter="ALL"):

@@ -1,8 +1,5 @@
 The Dummy Plugin
 ================
-<<name='import_the_future', echo=False>>=
-from __future__ import print_function
-@
 
 .. _dummy-plugin:
 The :ref:`DummyClass <dummy-class>` does not do anything. It is meant to be used to test the infrastructure.
@@ -19,9 +16,9 @@ from validate import Validator
 
 # this package
 from base_plugin import BasePlugin, BaseConfiguration
-from ape.parts.dummy.dummy import DummyClass
-from ape.parts.dummy.dummy import CrashDummy
-from ape.parts.dummy.dummy import HangingDummy
+from theape.parts.dummy.dummy import DummyClass
+from theape.parts.dummy.dummy import CrashDummy
+from theape.parts.dummy.dummy import HangingDummy
 @
 <<name='constants', echo=False>>=
 DESCRIPTION = """{bold}DummyClass{reset} logs its calls and then returns. It is meant to be used as changes are made to the infrastructure so that the {blue}Ape{reset} can be tested without using any other components."""
@@ -37,7 +34,7 @@ output_documentation = __name__ == '__builtin__'
    Dummy -|> BasePlugin
    Dummy o- HelpPage
 
-.. currentmodule:: ape.plugins.dummyplugin
+.. module:: theape.plugins.dummyplugin
 .. autosummary::
    :toctree: api
 
@@ -456,7 +453,7 @@ The Dummy Products
 DummyClass
 ~~~~~~~~~~
 
-.. currentmodule:: ape.parts.dummy.dummy
+.. module:: theape.parts.dummy.dummy
 .. autosummary::
    :toctree: api
    

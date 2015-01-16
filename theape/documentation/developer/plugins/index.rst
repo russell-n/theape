@@ -6,6 +6,10 @@ About Plugins
 This documentation will try to help developers create and use plugins for the ape.
 
 
+
+
+
+
 .. toctree::
    :maxdepth: 1
 
@@ -13,6 +17,8 @@ This documentation will try to help developers create and use plugins for the ap
 
 .. toctree::
    :maxdepth: 1
+
+
 
 
 

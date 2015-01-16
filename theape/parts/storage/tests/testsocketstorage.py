@@ -11,10 +11,9 @@ except ImportError:
     pass
 
 # this package
-from ape.parts.storage.socketstorage import SocketStorage
-import ape.parts.storage.socketstorage as socketstorage
-from ape import ApeError
-
+from theape.parts.storage.socketstorage import SocketStorage
+from theape import ApeError
+import theape.parts.storage.socketstorage as socketstorage
 
 class TestSocketStorage(unittest.TestCase):
     """
@@ -173,7 +172,7 @@ class TestSocketStorage(unittest.TestCase):
         
         self.socket.readline.side_effect = readline
         for index, line in enumerate(self.storage):
-            print index, line
+            print(index, line)
             self.assertEqual(line, lines[index])
             
-# end class TestSocket    
+# end class TestSocket

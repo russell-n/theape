@@ -1,7 +1,7 @@
 Testing The File Storage
 ========================
 
-.. currentmodule:: ape.parts.storage.tests.testfilestorage
+.. module:: theape.parts.storage.tests.testfilestorage
 .. autosummary::
    :toctree: api
 
@@ -14,7 +14,11 @@ Testing The File Storage
    TestFileStorage.test_close
 
 
-::
+
+
+
+
+.. code:: python
 
     PATH = 'ape/call'
     class TestFileStorage(unittest.TestCase):
@@ -38,7 +42,8 @@ Testing The File Storage
             
         def test_write_error(self):
             storage = FileStorage(PATH)
-            self.assertRaises(ApeError, storage.write, ('',))
+            with self.assertRaises(ApeError):
+                storage.write('')
             return
     
         def test_writeline(self):
@@ -79,8 +84,7 @@ Testing The File Storage
         def tearDown(self):
             if os.path.isdir(PATH):
                 shutil.rmtree(PATH)
-            return        
-    
+            return
 
 
 
@@ -111,14 +115,15 @@ Looking at the table it appears that the only time I actually mangle the file na
 
    mangle &= FileExists \land \lnot(Overwrite \lor Append)\\
 
-.. currentmodule:: ape.parts.storage.tests.testfilestorage
+.. module:: theape.parts.storage.tests.testfilestorage
 .. autosummary::
    :toctree: api
 
    TestFileStorageOpen.test_open
    TestFileStorageOpen.test_open_file_exists
    
-::
+
+.. code:: python
 
     PATH = 'ape/call'
     class TestFileStorageOpen(unittest.TestCase):
@@ -203,7 +208,6 @@ Looking at the table it appears that the only time I actually mangle the file na
                             storage._logger.warning.assert_called_with(AMBIGUOUS)
             return
     # end class TestFileStorageOpen
-    
 
 
 
@@ -211,4 +215,6 @@ Looking at the table it appears that the only time I actually mangle the file na
    :toctree: api
 
    TestFileStorageWith.test_with
+
+
 

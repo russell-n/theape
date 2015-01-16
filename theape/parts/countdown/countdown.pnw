@@ -3,14 +3,8 @@ The Countdown
 
 The Countdown Timers are meant to be used by the composites and components to keep track of elapsed (and sometimes remaining) time. The :ref:`Time Tracker <ape-parts-countdown-timetracker>` is used to keep track of how long execution is taking. This is meant primarily for someone wanting to estimate future times by looking at past logs. The :ref:`CountDown Timer <ape-parts-countdown-countdowntimer>` also keeps track of execution time but is meant to also keep track of whether the composite should repeat or not (based on remaining repetitions or time).
 
-Contents:
 
-    * :ref:`TimeTracker <ape-parts-countdown-timetracker>`
-
-    * :ref:`CountdownTimer <ape-parts-countdown-countdowntimer>`
-
-
-.. currentmodule:: ape.parts.countdown.countdown
+.. module:: theape.parts.countdown.countdown
 
 <<name='imports', echo=False>>=
 # python standard library
@@ -80,7 +74,7 @@ The Model
    TimeTracker : elapsed_times
    TimeTracker : __init__(log_level)
 
-.. currentmodule:: ape.parts.countdown.countdown
+.. module:: theape.parts.countdown.countdown
 .. autosummary::
    :toctree: api
 
@@ -245,7 +239,7 @@ To decide on the behavior of the CountdownTimer you set a combination of the thr
    TimeTracker <|-- CountdownTimer
    CountdownTimer : __call__()
 
-.. currentmodule:: ape.parts.countdown.countdown
+.. module:: theape.parts.countdown.countdown
 .. autosummary::
    :toctree: api
 

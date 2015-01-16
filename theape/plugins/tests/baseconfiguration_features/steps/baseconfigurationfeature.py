@@ -8,9 +8,9 @@ from validate import Validator
 from mock import MagicMock
 
 # this package
-from ape.plugins.base_plugin import BaseConfiguration, SubConfigurationConstants
-from ape.infrastructure.baseclass import RED_ERROR
-from ape import ConfigurationError
+from theape.plugins.base_plugin import BaseConfiguration, SubConfigurationConstants
+from theape.infrastructure.baseclass import RED_ERROR
+from theape import ConfigurationError
 
 @given("a BaseConfiguration definition")
 def base_configuration_definition(context):
@@ -394,6 +394,8 @@ def missing_plugin_name(context):
 @when("the BaseConfiguration checks process_errors")
 def check_process_errors(context):
     context.callable = context.configuration.process_errors
+    import pudb; pudb.set_trace()
+    context.callable()
     return
 
 @then("the process_errors returned True")

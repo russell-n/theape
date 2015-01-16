@@ -25,10 +25,10 @@ setup(name='theape',
 	  [console_scripts]
       ape=theape.main:main
 
-      [ape.subcommands]
+      [theape.subcommands]
       subcommands=theape.infrastructure.arguments
 
-      [ape.plugins]
+      [theape.plugins]
       plugins = theape.plugins
       """
       )

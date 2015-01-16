@@ -1,9 +1,13 @@
 Iwconfig
 ========
 
+
 This is a module to work with the ``iwconfig`` command. Although ``iwconfig`` can be used to configure as well as query wireless interfaces, in this case I'll just be using it to get information.
 
 .. '
+
+
+
 
 
 
@@ -32,12 +36,13 @@ A holder of constants so that users of this code will have a reference for the n
 
 
 
+
 IwconfigExpressions
 -------------------
 
 The ``IwconfigExpressions`` holds the compiled regular expressions to tokenize the output of the ``iwconfig`` command.
 
-.. currentmodule:: ape.parts.wifi.iwconfig
+.. module:: theape.parts.wifi.iwconfig
 .. autosummary::
    :toctree: api
 
@@ -56,6 +61,7 @@ The ``IwconfigExpressions`` holds the compiled regular expressions to tokenize t
    IwconfigExpressions.tx_excessive_retries
    IwconfigExpressions.invalid_misc
    IwconfigExpressions.missed_beacons
+
 
 
 
@@ -96,7 +102,7 @@ The Model and API
    BaseClass <|-- IwconfigQuery
    IwconfigQuery o- IwconfigExpressions
 
-.. currentmodule:: ape.parts.wifi.iwconfig
+.. module:: theape.parts.wifi.iwconfig
 .. autosummary::
    :toctree: api
 
@@ -126,6 +132,7 @@ The Model and API
 
 
 
+
 Responsibilities
 ----------------
 
@@ -139,4 +146,6 @@ Collaborators
 -------------
 
  * Connections
+
+
 

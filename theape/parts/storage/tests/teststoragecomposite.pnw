@@ -14,8 +14,8 @@ except ImportError:
     pass
 
 # this package
-from ape.parts.storage.storagecomposite import StorageComposite
-from ape import ApeError
+from theape.parts.storage.storagecomposite import StorageComposite
+from theape import ApeError
 @
 
 <<name='TestStorageComposite', wrap=False>>=

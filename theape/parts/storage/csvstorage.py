@@ -5,10 +5,9 @@ import csv
 from types import DictType
 
 # the ape
-from ape import BaseClass
-from ape import ApeError
-import ape.parts.storage.filestorage
-
+from theape import BaseClass
+from theape import ApeError
+import theape.parts.storage.filestorage
 
 class CsvDictStorage(BaseClass):
     """
@@ -44,7 +43,7 @@ class CsvDictStorage(BaseClass):
         :return: FileStorage        
         """
         if self._storage is None:
-            self._storage = ape.parts.storage.filestorage.FileStorage(path=self.path)
+            self._storage = theape.parts.storage.filestorage.FileStorage(path=self.path)
         return self._storage
 
     @storage.setter
@@ -136,7 +135,6 @@ class CsvDictStorage(BaseClass):
             self.writerow(rowdict)
         return
 
-
 if __name__ == "__main__":
     #import pudb; pudb.set_trace()
     #from mock import mock_open, patch
@@ -153,7 +151,7 @@ if __name__ == "__main__":
 10 11 12"""
     raw_rows = raw_data.split('\n')
     rows = list(dict(zip(headers, row.split())) for row in raw_rows)
-    with ape.parts.storage.filestorage.FileStorage(path='tests', name='test.csv', overwrite=True) as testfile:
+    with theape.parts.storage.filestorage.FileStorage(path='tests', name='test.csv', overwrite=True) as testfile:
         writer = CsvDictStorage(headers=headers,
                                 storage=testfile)
         writer.writerows(rows)

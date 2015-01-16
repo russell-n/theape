@@ -3,6 +3,7 @@ The Rye Mother
 
 
 
+
 .. _ape-infrastructure-rye-mother:
 
 The `Rye Mother <http://www.pitt.edu/~dash/gerchange.html#GrimmRyeMother>`_ gathers children.
@@ -25,8 +26,8 @@ The RyeMother uses entry points defined in the `setup.py` file. The entry_points
 In this case, the RyeMother wants to search the folder for class-definitions so the `object` is left out. As a concrete example, for the ape subcommands, the entry points would look like this::
 
       entry_points = """
-        [ape.subcommands]
-        ape_subcommands = ape.infrastructure.arguments
+        [theape.subcommands]
+        subcommands = theape.infrastructure.arguments
         """
 
 .. note:: The actual `setup.py` has other entries, this is just the sub-commands entry.
@@ -102,7 +103,7 @@ The idea here is that to identify the classes that we're interested in we'll def
 
 The `parent` parameter for the RyeMother is the actual class definition object. For example, if the user of the RyeMother did the following::
 
-   from ape.interface.arguments import BaseArguments
+   from theape.interface.arguments import BaseArguments
 
 Then `BaseArguments` is what would be passed to the call and all the classes that inherit from it will be returned. If we defined `ape.subcommands` as the group and  `ape_subcommands` as the name in the `setup.py` `entry_points` variable as mentioned :ref:`earlier <ape-commoncode-rye-mother-entry-points>`, and we wanted to retrieve the `Run` class, we could use something like this::
 
@@ -138,7 +139,7 @@ This is the main path for the ``__call__``:
 The RyeMother Class
 -------------------
 
-.. currentmodule:: ape.infrastructure.ryemother 
+.. module:: theape.infrastructure.ryemother 
 .. autosummary::
    :toctree: api
 
@@ -148,4 +149,6 @@ The RyeMother Class
 .. note: In the event that the RyeMother needs to be used multiple time, the parameters can be set when it's constructed, but if they are passed into the call, then the passed-in parameters will override the instiation parameters.
 
 .. '
+
+
 

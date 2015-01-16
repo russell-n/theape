@@ -7,10 +7,9 @@ import threading
 from mock import MagicMock
 
 # this package
-from ape.parts.watchers.thewatcher import TheWatcher
-from ape.parts.wifi.iwconfig import IwconfigQuery
-from ape import ApeError
-
+from theape.parts.watchers.thewatcher import TheWatcher
+from theape.parts.wifi.iwconfig import IwconfigQuery
+from theape import ApeError
 
 class TestThewatcher(unittest.TestCase):
     def setUp(self):
@@ -43,7 +42,7 @@ class TestThewatcher(unittest.TestCase):
 
     def test_thread(self):
         """
-        Does it treate a thread with run_thread as the target?
+        Does it create a thread with run_thread as the target?
         """
         self.assertIsInstance(self.watcher.thread, threading.Thread)
         self.assertTrue(self.watcher.thread.daemon)
@@ -76,7 +75,7 @@ class TestThewatcher(unittest.TestCase):
 
     def test_check_rep(self):
         """
-        Does it check the fields
+        Does it check the fields?
         """
         self.watcher.check_rep()
         self.watcher.fields.append('cow')

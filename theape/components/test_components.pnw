@@ -14,15 +14,15 @@ except ImportError:
     pass
 
 # this package
-from ape.commoncode.errors import ApeError, ConfigurationError
-from ape.components.component import Component, Composite
-from ape.commoncode.baseclass import RED_ERROR
+from theape import ApeError, ConfigurationError
+from theape.components.component import Component, Composite
+from theape.infrastructure.baseclass import RED_ERROR
 @
 
 Testing the Component
 ---------------------
 
-.. currentmodule:: ape.components.test_components
+.. module:: theape.components.test_components
 .. autosummary::
    :toctree: api
 

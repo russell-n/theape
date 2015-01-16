@@ -1,12 +1,10 @@
 
 import string
 
-
 # the class-based expressions are mostly for organization
 # but sometimes they're just too clunky
 LEFT_BRACKET = '['
 RIGHT_BRACKET = ']'
-
 
 class FormalDefinition(object):
     """
@@ -16,7 +14,6 @@ class FormalDefinition(object):
     alternative = '|'
     OR = alternative
     kleene_star = "*"
-
 
 class Group(object):
     """
@@ -91,7 +88,6 @@ class Group(object):
         """
         return "(?<!{e})".format(e=prefix)
 
-
 class Quantifier(object):
     """
     A class to hold cardinality helpers
@@ -144,7 +140,6 @@ class Quantifier(object):
         """
         return "{{{m},{n}}}".format(m=m, n=n)
 
-
 class CharacterClass(object):
     """
     A class to help with character classes
@@ -183,7 +178,6 @@ class CharacterClass(object):
         """
         return "[^{e}]".format(e=characters)
 
-
 class Boundaries(object):
     """
     A class to hold boundaries for expressions
@@ -219,7 +213,6 @@ class Boundaries(object):
         """
         return r"^{e}$".format(e=string)
 
-
 class CommonPatterns(object):
     """
     The common patterns that were leftover
@@ -236,7 +229,6 @@ class CommonPatterns(object):
     optional_spaces = Quantifier.zero_or_more(space)
     not_space = r'\S'
     not_spaces = Quantifier.one_or_more(not_space)
-
 
 class Numbers(object):
     """
@@ -288,8 +280,6 @@ class Numbers(object):
     HEX = CharacterClass.character_class(string.hexdigits)
     hexadecimal = Quantifier.one_or_more(HEX)
 
-
-
 class Networking(object):
     """
     Holds expressions to help with networking-related text.
@@ -307,6 +297,3 @@ class Networking(object):
 
     hex_pair =  Numbers.HEX + Quantifier.exactly(2)
     mac_address = ":".join([hex_pair] * 6)
-
-
-

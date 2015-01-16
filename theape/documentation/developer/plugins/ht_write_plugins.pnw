@@ -42,19 +42,19 @@ There are probably other steps like planning and testing, but since the plugins 
    Sleep : Dict sections
    Sleep : TheBigSleep product
 
-.. currentmodule:: ape.plugins.base_plugin
+.. module:: theape.plugins.base_plugin
 .. autosummary::
    :toctree: api
 
    BasePlugin
    
-.. currentmodule:: ape.parts.sleep.sleep
+.. module:: theape.parts.sleep.sleep
 .. autosummary::
    :toctree: api
 
    TheBigSleep
 
-.. currentmodule:: ape.plugins.sleep_plugin
+.. module:: theape.plugins.sleep_plugin
 .. autosummary::
    :toctree: api
 
@@ -68,8 +68,8 @@ There are probably other steps like planning and testing, but since the plugins 
 In order to be recognized by the APE your plugin has to inherit from the :ref:`BasePlugin <base-plugin>` so you will need to import it along with the parts that are composed within your plugin::
 
     # This package
-    from ape import BasePlugin
-    from ape.parts.sleep.sleep import TheBigSleep
+    from theape import BasePlugin
+    from theape.parts.sleep.sleep import TheBigSleep
 
 In addition, the Help section of the plugin uses the keys of a dictionary when building the help string so I like to use an ordered dictionary so I can control what order the sections appear in::
 
@@ -292,7 +292,7 @@ As you can see, it uses the ``self.section_header`` attribute that it inherits f
 
 The ``product`` builder, by and large, just calls the ConfigurationMap (`self.configuration`) and passes in the parameters to the object it's building. Hopefully the calls being made are obvious enough but if not the API might help explain what's being passed into the ``TheBigSleep`` constructor.
 
-.. currentmodule:: ape.infrastructure.configurationmap
+.. module:: theape.infrastructure.configurationmap
 .. autosummary::
    :toctree: api
 

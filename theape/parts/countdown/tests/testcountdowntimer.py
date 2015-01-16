@@ -10,8 +10,7 @@ from mock import MagicMock, patch, call
 import numpy
 
 # this package
-from ape.parts.countdown.countdown import CountdownTimer, INFO, ESTIMATED_REMAINING
-
+from theape.parts.countdown.countdown import CountdownTimer, INFO, ESTIMATED_REMAINING
 
 class TestCountdownTimer(unittest.TestCase):
     def setUp(self):

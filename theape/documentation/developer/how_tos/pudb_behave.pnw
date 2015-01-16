@@ -4,7 +4,7 @@ Using `pudb` with Behave and Fish
 What is this about?
 -------------------
 
-`behave` is a behavior-driven-development (BDD) tool for python that tests whether you have properly implemented the features you have defined in your `features` file(s). In their `tutorial <http://pythonhosted.org/behave/tutorial.html>`_ they tell you how you can set it up so that it will drop into `ipdb` (ipython debugger) when a test fails, but I use `pudb` and the `fish` shell (not `bash`) so this documents what I had to do to get it to work.
+`behave <http://pythonhosted.org/behave/>`_ is a behavior-driven-development (BDD) tool for python that tests whether you have properly implemented the features you have defined in your `features` file(s). In their `tutorial <http://pythonhosted.org/behave/tutorial.html>`_ they tell you how you can set it up so that it will drop into `ipdb <http://ipython.org/ipython-doc/rel-0.10.2/html/api/generated/IPython.Debugger.html>`_ (ipython debugger) when a test fails, but I use `pudb <https://github.com/inducer/pudb>`_ and the `fish <http://fishshell.com/>`_ shell (not `bash`) so this documents what I had to do to get it to work.
 
 How do you do it then?
 ----------------------
@@ -24,7 +24,7 @@ The first thing to do is create a file named `environment.py` in the same folder
                              e_value=None)
         return
 
-This is more-or-less exactly what was in the tutorial except I swapped out `pudb` for `pdb`. This code tells `behave` to run the `pudb.post_mortem` after a step is finished (a step corresponds to one of the functions you define to implement the tests) if the step failed and your shell has an environment variable named `BEHAVE_DEBUG_ON_ERROR` and it is set to something that `strtobool` recognizes as True. This is from the docstring documentation for `strtobool`:
+This is more-or-less exactly what was in the tutorial except I swapped out `pudb` for `pdb`. This code tells `behave` to run the `pudb.post_mortem` after a step is finished (a step corresponds to one of the functions you define to implement the tests) if the step failed and your shell has an environment variable named `BEHAVE_DEBUG_ON_ERROR` and it is set to something that `strtobool` recognizes as True. This is from the docstring documentation for `strtobool <https://docs.python.org/2/distutils/apiref.html#module-distutils.util>`_:
 
  distutils.util.strtobool(val)
     Convert a string representation of truth to true (1) or false (0).
@@ -33,7 +33,7 @@ This is more-or-less exactly what was in the tutorial except I swapped out `pudb
     * false values are `n`, `no`, `f`, `false`, `off` and `0`
     * Raises **ValueError** if val is anything else.
 
-The 'no' in the ``os.environ.get`` function means that it won't execute by default. To have it run you need to set the environment varible to one of the 'true' values. In fish this would be::
+The 'no' in the ``os.environ.get`` function means that it won't execute by default. To have it run you need to set the environment variable to one of the 'true' values. In fish this would be::
 
    set -x BEHAVE_DEBUG_ON_ERROR yes
 
@@ -42,9 +42,9 @@ Now when you run behave it will drop into pudb when a test fails.
 So, what then?
 --------------
 
-Using this has so far been less useful than I thought it would be, since it tends to drop me into the `pyhamcrest` call that failed and although I've managed to step through to the `behave` code I haven't managed to figure out how to get to my own code. It is still useful, though, since `behave` will not stop when it encounters a failed test so this makes it easier to figure out what has failed.
+Using this has so far been less useful than I thought it would be, since it tends to drop me into the `pyhamcrest <https://pypi.python.org/pypi/PyHamcrest>`_ call that failed and although I've managed to step through to the `behave` code I haven't managed to figure out how to get to my own code. It is still useful, though, since `behave` will not stop when it encounters a failed test so this makes it easier to figure out what has failed.
 
-Even though the `pudb-behave` combination is less exciting than I thought it would be, there were several things I learned that I want to document here.
+Even though the `pudb-behave` combination is less exciting than I thought it would be, there were several things I learned that I want to document here for later.
 
 Setting an environment variable in fish
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -57,23 +57,25 @@ And then unset it::
 
    set -e <variable>
 
+I've done this before to set my ``PATH`` variable but for some reason when I tried to search for it this time I got some false-starts at first.
+
 Python's String to Boolean
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-I also learned that python has a built in way to translate strings to booleans. This isn't really a hard thing to do, but it was an interesting discovery. I don't think I would have looked in distutils for it.
-
-Using environment variables for debugging
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Another interesting thing was the way they used `os.environ` to change the behavior of the code. I normally use command-line flags but this might be a better pattern since it pulls it out of the user interface. I think I'll probably get rid of in in the `environment.py` file since I want it to run pretty much all the time, but it's an interesting pattern anyway.
+I also learned that python has a built in way to translate strings to booleans. This isn't really a hard thing to do on your own, but it was an interesting discovery. I don't think I would have looked in `distutils` for it.
 
 `pudb's` post_mortem function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Probably the most interesting thing to find out was that `pudb` has a `post_mortem` function. I like `pudb` but it doesn't seem to be well documented. The ``readme`` does say that it displays the same interface as python's `pdb` so I suppose I could just read their documentation, but it seems like one of those things where you have to know what you don't know to know to look for it.
+Another interesting thing to find out was that `pudb` has a `post_mortem` function. I like `pudb` but it doesn't seem to be well documented. The ``readme`` does say that it displays the same interface as python's `pdb` so I suppose I could just read their documentation, but it seems like one of those things where you have to know what you don't know to know to look for it. In this case I figured out how to call it by looking at the code (it's defined in ``pudb.__init__.py``).
+
+Using environment variables for debugging
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Probably the most interesting thing was the way they used `os.environ` to change the behavior of the code. I normally use command-line options to enable debugging but this might be a better pattern since it pulls it out of the user interface. This means that it won't be as obvious to the user, but I suppose if they're going to debug my code they had better read the documentation and not just rely on ``--help`` anyway. I think I'll probably get rid of in in the `environment.py` file, though, since I want it to run pretty much all the time, but it's an interesting idea anyway.
 
 Conclusion
 ----------
 
-This was a translation of how to set up a post-mortem debugger for behave using `pudb` instead of `ipdb` and `fish` instead of `bash`. It is primarily meant to be a record for me to look at in the future, since I don't set up my `behave` environment on a regular basis. I think the most valuable thing I got out of it was actuall a pattern for setting up debuggers in my own code that I think I'll steal (use).
+This was a translation of how to set up a post-mortem debugger for behave using `pudb` instead of `ipdb` and `fish` instead of `bash`. It is primarily meant to be a record for me to look at in the future, since I don't set up my `behave` environment on a regular basis and tend to have a hard time re-searching for things (possibly because I use `DuckDuckGo <https://duckduckgo.com/>`_ so my search history isn't being used). I think the most valuable thing I got out of it was the pattern for setting up debuggers that I think I'll steal (use) for my own code.
 

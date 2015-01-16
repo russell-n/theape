@@ -12,6 +12,8 @@ CallClass
 
    CallClass -|> BaseClass
 
+.. module:: theape.parts.dummy.callclass
+
 .. autosummary::
    :toctree: api
 

@@ -6,8 +6,7 @@ import unittest
 from mock import MagicMock, call
 
 # the ape
-from ape.plugins.sleep_plugin import Sleep, END_OPTION, TOTAL_OPTION, INTERVAL_OPTION, VERBOSE_OPTION
-
+from theape.plugins.sleep_plugin import Sleep, END_OPTION, TOTAL_OPTION, INTERVAL_OPTION, VERBOSE_OPTION
 
 class TestingSleepPlugin(unittest.TestCase):
     def setUp(self):
@@ -40,4 +39,4 @@ class TestingSleepPlugin(unittest.TestCase):
                                             option=VERBOSE_OPTION,
                                             optional=True,
                                             default=True)
-        return    
+        return

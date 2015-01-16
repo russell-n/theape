@@ -6,8 +6,12 @@ The Big Sleep
 This is a module to integrate pauses with human-readable feedback into the ape.
 
 
-.. figure:: big_sleep.JPG
+.. figure:: figures/big_sleep.JPG
    :align: center
+
+
+
+
 
 
 
@@ -52,7 +56,7 @@ The Class Model
    TheBigSleep : close()
 
 
-.. currentmodule:: ape.parts.sleep.sleep
+.. module:: theape.parts.sleep.sleep
 .. autosummary::
    :toctree: api
 
@@ -73,12 +77,14 @@ The Class Model
 
 
 
+
 .. _sleep-module-diagram:
 
 Module Diagram
 --------------
 
-A Module Diagram for **ape.parts.sleep.sleep**.
+
+A Module Diagram for **theape.parts.sleep.sleep**.
 
 [Errno 2] No such file or directory
 Is pylint installed?
@@ -95,6 +101,10 @@ Is pylint installed?
 ..     class_diagram_file = class_diagram(class_name="TheBigSleep",
 ..                                        filter='OTHER',
 ..                                        module=this_file)
-..     print ".. image:: {0}".format(class_diagram_file)
+..     print( ".. image:: {0}".format(class_diagram_file))
 .. 
-.. 
+.. @
+
+
+
+

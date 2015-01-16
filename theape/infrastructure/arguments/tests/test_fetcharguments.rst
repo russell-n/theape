@@ -1,7 +1,8 @@
 Testing The Fetch Arguments
 ===========================
 
-::
+
+.. code:: python
 
     # python standard library
     import unittest
@@ -10,15 +11,15 @@ Testing The Fetch Arguments
     from mock import MagicMock
     
     # the ape
-    from ape.interface.arguments.fetcharguments import Fetch, FetchStrategy
-    from ape.interface.arguments.basestrategy import BaseStrategy
-    import ape.interface.arguments.fetcharguments
+    from theape.infrastructure.arguments.fetcharguments import Fetch,
+    FetchStrategy
+    from theape.infrastructure.arguments.basestrategy import BaseStrategy
+    import theape.infrastructure.arguments.fetcharguments
     
-    
 
 
 
-.. currentmodule:: ape.interface.arguments.tests.test_fetcharguments
+.. module:: theape.interface.arguments.tests.test_fetcharguments
 .. autosummary::
    :toctree: api
 
@@ -27,15 +28,16 @@ Testing The Fetch Arguments
    TestFetchArguments.test_modules
    TestFetchArguments.test_both
 
-::
 
-    fetch_usage = ape.interface.arguments.fetcharguments.__doc__
+.. code:: python
+
+    fetch_usage = theape.infrastructure.arguments.fetcharguments.__doc__
     class TestFetchArguments(unittest.TestCase):
         def setUp(self):
             self.args = ['fetch']
             self.arguments = Fetch(args=self.args)
             return
-        
+    
         def test_constructor(self):
             """
             Does it build?
@@ -89,13 +91,13 @@ Testing The Fetch Arguments
             """
             names = 'ab cd'.split()
             modules = 'a b c d'.split()
-            arguments_options = names + ['-m'] + ' -m'.join(modules).split()
+            arguments_options = names + ['-m'] + '
+    -m'.join(modules).split()
             self.arguments.args = self.args + arguments_options
             self.assertEqual(names, self.arguments.names)
             self.assertEqual(modules, self.arguments.modules)
             return
-    # end TestFetchArguments    
-    
+    # end TestFetchArguments
     
 
 
@@ -109,7 +111,8 @@ Testing the FetchStrategy
    TestFetchStrategy.test_constructor
    TestFetchStrategy.test_function
 
-::
+
+.. code:: python
 
     class TestFetchStrategy(unittest.TestCase):
         def setUp(self):
@@ -117,7 +120,7 @@ Testing the FetchStrategy
             FetchStrategy.quartemaster = self.quartermaster
             self.strategy = FetchStrategy()
             return
-        
+    
         def test_constructor(self):
             """
             Does it build?
@@ -128,31 +131,32 @@ Testing the FetchStrategy
     
         def test_function(self):
             """
-            Does it implement the `fetch` strategy? 
+            Does it implement the `fetch` strategy?
             """
             self.strategy.quartermaster = self.quartermaster
             args = MagicMock()
             args.names = 'a b c'.split()
             args.modules = 'd e f'.split()
-            definition_a, definition_b, definition_c = MagicMock(), MagicMock()
-    , MagicMock()
+            definition_a, definition_b, definition_c = MagicMock(),
+    MagicMock(), MagicMock()
             definitions = [definition_a, definition_b, definition_c]
-            plugin_a, plugin_b, plugin_c = MagicMock(), MagicMock(), MagicMock(
-    )
+            plugin_a, plugin_b, plugin_c = MagicMock(), MagicMock(),
+    MagicMock()
             definition_a.return_value = plugin_a
             definition_b.return_value = plugin_b
             definition_c.return_value = plugin_c
-            
+    
             plugin_source = dict(zip(args.names, definitions))
     
             def side_effect(name):
                 return plugin_source[name]
-            
+    
             self.quartermaster.get_plugin.side_effect = side_effect
             self.strategy.function(args)
-            self.assertEqual(self.quartermaster, self.strategy.quartermaster)
-            self.assertEqual(self.quartermaster.external_modules, args.modules)
-    
+            self.assertEqual(self.quartermaster,
+    self.strategy.quartermaster)
+            self.assertEqual(self.quartermaster.external_modules,
+    args.modules)
             for definition in definitions:
                 definition.return_value.fetch_config.assert_called_with()
     
@@ -165,10 +169,11 @@ Testing the FetchStrategy
             self.strategy.function(args)
     
             # and the decorator handles other errors
-            definition_a.side_effect = AttributeError("plugin implementation er
-    ror")
+            definition_a.side_effect = AttributeError("plugin
+    implementation error")
             self.strategy.function(args)
             return
     
-    
+
+
 

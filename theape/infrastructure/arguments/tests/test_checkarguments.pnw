@@ -3,6 +3,8 @@ Testing the Check
 
 This checks the arguments for the `check` sub-command.
 
+.. module:: theape.infrastructure.arguments.tests
+
 .. autosummary::
    :toctree: api
 
@@ -19,9 +21,9 @@ import unittest
 from mock import MagicMock
 
 # the APE
-from ape.interface.arguments.arguments import BaseArguments
-from ape.interface.arguments.checkarguments import Check, CheckStrategy
-from ape.interface.arguments.basestrategy import BaseStrategy
+from theape.infrastructure.arguments.arguments import BaseArguments
+from theape.infrastructure.arguments.checkarguments import Check, CheckStrategy
+from theape.infrastructure.arguments.basestrategy import BaseStrategy
 
 class TestCheck(unittest.TestCase):
     def setUp(self):

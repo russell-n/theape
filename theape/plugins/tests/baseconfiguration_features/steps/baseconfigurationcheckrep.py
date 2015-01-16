@@ -5,8 +5,7 @@ from hamcrest import assert_that, is_, calling, raises, equal_to
 from configobj import ConfigObj
 
 # this package
-from ape.plugins.base_plugin import BaseConfiguration, ConfigurationError
-
+from theape.plugins.base_plugin import BaseConfiguration, ConfigurationError
 
 configspec_source = """
 plugin = option('Concrete')
@@ -30,7 +29,6 @@ class ConcreteConfiguration(BaseConfiguration):
     def product(self):
         return
 
-
 valid_configuration = """
 [cement]
 plugin = Concrete
@@ -44,19 +42,16 @@ def step_implementation(context):
                                                   section_name='cement')
     return
 
-
 @when("check_rep is called")
 def step_implementation(context):
     context.outcome = context.configuration.check_rep()
     return
-
 
 @then("nothing happens")
 def step_implementation(context):
     assert_that(context.outcome,
                 is_(None))
     return
-
 
 invalid_configuration = """
 [konkrete]
@@ -72,19 +67,16 @@ def step_implementation(context):
         
     return
 
-
 @when("check_rep is checked")
 def check_rep_check(context):
     context.callable = context.configuration.check_rep
     return
-
 
 @then("a ConfigurationError is raised")
 def step_implementation(context):
     assert_that(calling(context.callable),
                 raises(ConfigurationError))
     return
-
 
 extra_option_configuration = """
 [cement]
@@ -100,7 +92,6 @@ def step_implementation(context):
                                                   section_name='cement')
     return
 
-
 @given("BaseConfiguration implementation with allowed unknown values")
 def allowed_unknowns(context):
     context.configuration = ConcreteConfiguration(source=ConfigObj(extra_option_configuration),
@@ -108,12 +99,10 @@ def allowed_unknowns(context):
                                                   allow_extras=True)
     return
 
-
 @then("a ConfigurationError not raised")
 def no_error(context):
     context.callable()
     return
-
 
 @then("the extra values are in the configuration")
 def assert_extras(context):

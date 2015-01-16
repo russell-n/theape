@@ -5,7 +5,7 @@ Storage
 
 <<name='imports', echo=False>>=
 # this package
-from ape.infrastructure.index_builder import create_toctree
+from theape.infrastructure.indexbuilder import create_toctree
 @
 
 The parts contained herein implement a file-like interface to store and retrieve data.

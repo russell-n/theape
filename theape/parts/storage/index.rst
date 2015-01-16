@@ -5,6 +5,7 @@ Storage
 
 
 
+
 The parts contained herein implement a file-like interface to store and retrieve data.
 
 **store** (n.) 
@@ -16,6 +17,7 @@ source : `Online Etymology Dictionary <http://www.etymonline.com/index.php?term=
    :align: center
    
    Google's etymology
+
 
 
 .. toctree::
@@ -32,5 +34,7 @@ source : `Online Etymology Dictionary <http://www.etymonline.com/index.php?term=
    :maxdepth: 1
 
    Testing the Storage <tests/index.rst>
+
+
 
 

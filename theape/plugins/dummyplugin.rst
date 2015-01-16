@@ -1,9 +1,13 @@
 The Dummy Plugin
 ================
 
-
 .. _dummy-plugin:
 The :ref:`DummyClass <dummy-class>` does not do anything. It is meant to be used to test the infrastructure.
+
+
+
+
+
 
 
 
@@ -12,7 +16,7 @@ The :ref:`DummyClass <dummy-class>` does not do anything. It is meant to be used
    Dummy -|> BasePlugin
    Dummy o- HelpPage
 
-.. currentmodule:: ape.plugins.dummyplugin
+.. module:: theape.plugins.dummyplugin
 .. autosummary::
    :toctree: api
 
@@ -21,6 +25,7 @@ The :ref:`DummyClass <dummy-class>` does not do anything. It is meant to be used
    Dummy.sections
    Dummy.product
    Dummy.fetch_config   
+
 
 
 
@@ -57,7 +62,8 @@ CrashTestDummyConstants
 
 This is a holder of constants for the CrashTestDummy.
 
-::
+
+.. code:: python
 
     class CrashTestDummyConstants(object):
         __slots__ = ()
@@ -65,12 +71,11 @@ This is a holder of constants for the CrashTestDummy.
         error_option = 'error'
         error_message_option = 'error_message'
         function_option = 'function'
-        
+    
         error_module_default = 'exceptions'
         error_default = 'Exception'
         error_message_default = 'My work is done, why wait?'
         function_default = '__call__'
-    
     
 
 
@@ -80,7 +85,8 @@ CrashtestConfigspec
 
 The configuration specification for the Crash Test Dummy.
 
-::
+
+.. code:: python
 
     crash_configspec = """
     plugin = option('CrashTestDummy')
@@ -90,7 +96,6 @@ The configuration specification for the Crash Test Dummy.
     error_message = string(default='My work is done, why wait?')
     function = string(default='__call__')
     """
-    
 
 
 
@@ -113,6 +118,7 @@ A class to handle the config_obj configuration.
 
 
 
+
 CrashTestDummy
 ~~~~~~~~~~~~~~
 
@@ -123,6 +129,7 @@ CrashTestDummy
    
 
 
+
 Stuck Dummy
 -----------
 
@@ -131,14 +138,14 @@ The Configspec
 
 The configuration specification for the StuckDummy.
 
-::
+
+.. code:: python
 
     stuck_dummy_configspec = """
     plugin = option('StuckDummy)
     
     __many__ = string
     """
-    
 
 
 
@@ -159,6 +166,7 @@ Stuck Dummy Configuration
 
 
 
+
 Stuck Dummy
 ~~~~~~~~~~~
 
@@ -171,13 +179,14 @@ This is a dummy that hangs when called.
 
 
 
+
 The Dummy Products
 ------------------
 
 DummyClass
 ~~~~~~~~~~
 
-.. currentmodule:: ape.parts.dummy.dummy
+.. module:: theape.parts.dummy.dummy
 .. autosummary::
    :toctree: api
    

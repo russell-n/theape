@@ -21,12 +21,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-
 # Python Libraries
 import logging
 import logging.handlers
 import os
-
 
 logger = logging.getLogger(__package__)
 SMALL_TIMESTAMP = "%H:%M:%S"
@@ -40,7 +38,6 @@ GIGABYTE = 1073741824
 BACKUP_LOGS = 5
 
 LOGNAME = "{0}.log".format(__package__)
-
 
 def cleanup(log_directory="last_log", log_name=LOGNAME):
     """
@@ -62,7 +59,6 @@ def cleanup(log_directory="last_log", log_name=LOGNAME):
         os.makedirs(log_directory)
     os.rename(log_name, os.path.join(log_directory, log_name))
     return
-
 
 def set_logger(args):
     """
@@ -101,4 +97,4 @@ def set_logger(args):
     logger.addHandler(log_file)
     
 
-    return 
+    return

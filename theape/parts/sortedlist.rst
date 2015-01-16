@@ -3,6 +3,10 @@ Sorted List
 
 This is a Data Collection that extends the List ADT to have an `insort` method that will insert an item in sorted order. If `append` or other non-sorting methods are used then this will not do anything meaningful, but if only insort is used (or a `sort` is called after many appends), then the `insort` will maintain the ordering.
 
+.. todo:: Get rid of numpy
+
+
+
 .. currentmodule:: bisect
 .. autosummary::
    :toctree: api
@@ -22,7 +26,8 @@ I added the `percentile` method to get some statistics from this but it seems li
 
    
 
-.. currentmodule:: ape.commoncode.sortedlist
+
+.. module:: theape.commoncode.sortedlist
 .. autosummary::
    :toctree: api
 

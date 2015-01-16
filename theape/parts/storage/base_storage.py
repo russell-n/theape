@@ -3,9 +3,8 @@
 from abc import ABCMeta, abstractproperty, abstractmethod
 
 # this package
-from ape import BaseClass
-from ape import ApeError
-
+from theape import BaseClass
+from theape import ApeError
 
 class BaseStorage(BaseClass):
     """A base-class based on file-objects"""
@@ -68,7 +67,8 @@ class BaseStorage(BaseClass):
         except exceptions as error:
             self.logger.debug(error)
             error = "{red}{bold}`write` called on unopened file{reset}"
-            raise ApeError(error)
+            self.log_error(error)
+            raise ApeError("`write` called on unopened file")
         return
 
     def writeline(self, text):
@@ -94,4 +94,4 @@ class BaseStorage(BaseClass):
             error = "{red}{bold}`write` called of unopened file{reset}"
             raise ApeError(error)
         return        
-# end BaseStorage    
+# end BaseStorage

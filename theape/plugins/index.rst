@@ -5,6 +5,7 @@ Plugins
    :align: center
 
 
+
 .. _plugins-folder:
 This is a folder to contain plugins. Plugins are meant to be the code available for the user to pick (via the configuration file). This differentiates them from :ref:`parts <ape-parts>` which are available to plugin-creators to use but not meant to be used directly by the end user (if a part is meant to be used stand-alone, a plugin front-end should be built for it).
 
@@ -18,6 +19,7 @@ Auto-Generated Documentation
 ----------------------------
 
 These are the documents created from the source files.
+
 
 
 .. toctree::
@@ -34,5 +36,7 @@ These are the documents created from the source files.
    :maxdepth: 1
 
    Testing the Plugins <tests/index.rst>
+
+
 
 

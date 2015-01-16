@@ -1,7 +1,4 @@
 
-from __future__ import print_function
-
-
 # python standard library
 from collections import OrderedDict
 import textwrap
@@ -13,18 +10,15 @@ from validate import Validator
 
 # this package
 from base_plugin import BasePlugin, BaseConfiguration
-from ape.parts.dummy.dummy import DummyClass
-from ape.parts.dummy.dummy import CrashDummy
-from ape.parts.dummy.dummy import HangingDummy
-
+from theape.parts.dummy.dummy import DummyClass
+from theape.parts.dummy.dummy import CrashDummy
+from theape.parts.dummy.dummy import HangingDummy
 
 DESCRIPTION = """{bold}DummyClass{reset} logs its calls and then returns. It is meant to be used as changes are made to the infrastructure so that the {blue}Ape{reset} can be tested without using any other components."""
 EXAMPLES = """{bold}dummy(){reset}"""
 NOTE = "The {bold}DummyClass{reset} will change as the infrastructure changes. In particular the building and testing of plugins and components will likely evolve once real plugins are created."
 
-
 output_documentation = __name__ == '__builtin__'
-
 
 class Dummy(BasePlugin):
     """
@@ -78,7 +72,6 @@ class Dummy(BasePlugin):
         return
 # end class Dummy
 
-
 class CrashTestDummyConstants(object):
     __slots__ = ()
     error_module_option = 'error_module'
@@ -91,7 +84,6 @@ class CrashTestDummyConstants(object):
     error_message_default = 'My work is done, why wait?'
     function_default = '__call__'
 
-
 crash_configspec = """
 plugin = option('CrashTestDummy')
 
@@ -100,7 +92,6 @@ error = string(default='Exception')
 error_message = string(default='My work is done, why wait?')
 function = string(default='__call__')
 """
-
 
 class CrashTestDummyConfiguration(BaseConfiguration):
     """
@@ -140,8 +131,7 @@ class CrashTestDummyConfiguration(BaseConfiguration):
             self.configuration['error'] = err
             self._product = CrashDummy(**self.configuration)
         return self._product
-# end class CrashTestDummyConfiguration    
-
+# end class CrashTestDummyConfiguration
 
 class CrashTestDummy(BasePlugin):
     """
@@ -218,13 +208,11 @@ class CrashTestDummy(BasePlugin):
         return
 # end class CrashTestDummy
 
-
 stuck_dummy_configspec = """
 plugin = option('StuckDummy)
 
 __many__ = string
 """
-
 
 class StuckDummyConfiguration(BaseConfiguration):
     """
@@ -257,8 +245,7 @@ class StuckDummyConfiguration(BaseConfiguration):
         if self._product is None:
             self._product = HangingDummy(**self.configuration)
         return self._product
-# end class StuckDummyConfiguration    
-
+# end class StuckDummyConfiguration
 
 class StuckDummy(BasePlugin):
     """

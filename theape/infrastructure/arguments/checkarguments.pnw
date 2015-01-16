@@ -25,9 +25,9 @@ See the :ref:`developer documentation <docopt-reproducingape-check-sub-command>`
 import docopt
 
 # this package
-from ape.infrastructure.arguments.arguments import BaseArguments, ArgumentsConstants
-from ape.infrastructure.arguments.basestrategy import BaseStrategy
-from ape.infrastructure.crash_handler import try_except
+from theape.infrastructure.arguments.arguments import BaseArguments, ArgumentsConstants
+from theape.infrastructure.arguments.basestrategy import BaseStrategy
+from theape.infrastructure.crash_handler import try_except
 @
 
 .. _ape-interface-arguments-check-arguments-constants:
@@ -58,7 +58,7 @@ The Check Class
 
    BaseArguments <|-- Check
 
-.. currentmodule:: ape.interface.arguments.checkarguments
+.. module:: theape.interface.arguments.checkarguments
 .. autosummary::
    :toctree: api
 

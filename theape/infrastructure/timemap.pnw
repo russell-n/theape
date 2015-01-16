@@ -1,6 +1,29 @@
 Time Maps
 =========
+<<name='pweave_check', echo=False>>=
+IN_PWEAVE = __name__ == '__builtin__'
+@
+<<name='imports', echo=False>>=
+# python standard library
+import re
+import math
+from datetime import timedelta
+from datetime import datetime
+if IN_PWEAVE:
+    import os
 
+# third-party
+from dateutil.relativedelta import relativedelta
+import dateutil.parser
+from validate import Validator
+
+# this package
+from theape import BaseClass
+from theape import ApeError
+from theape.parts.oatbran import CharacterClass, Numbers, Group
+from theape.parts.oatbran import CommonPatterns
+from theape.infrastructure.code_graphs import module_diagram, class_diagram
+@
 
 .. _relative-time-map:
 
@@ -27,36 +50,11 @@ The UML Model
    RelativeTimeMap : re.RegexObject minute_expression
    RelativeTimeMap : re.RegexObject second_expression      
    
-.. currentmodule:: ape.infrastructure.timemap
+.. module:: theape.infrastructure.timemap
 .. autosummary::
    :toctree: api
 
    RelativeTimeMap
-
-<<name='pweave_check', echo=False>>=
-IN_PWEAVE = __name__ == '__builtin__'
-@
-<<name='imports', echo=False>>=
-# python standard library
-import re
-import math
-from datetime import timedelta
-from datetime import datetime
-if IN_PWEAVE:
-    import os
-
-# third-party
-from dateutil.relativedelta import relativedelta
-import dateutil.parser
-from validate import Validator
-
-# this package
-from ape import BaseClass
-from ape import ApeError
-from ape.parts.oatbran import CharacterClass, Numbers, Group
-from ape.parts.oatbran import CommonPatterns
-from ape.infrastructure.code_graphs import module_diagram, class_diagram
-@
 
 <<name='constants', echo=False>>=
 ZERO = '0'
@@ -735,7 +733,7 @@ This is a class to get ``datetime`` objects based on a string input. It really i
    AbsoluteTime : parserinfo parserinfo
    AbsoluteTime : datetime __call__(string)
 
-.. currentmodule:: ape.interface.timemap
+.. module:: theape.interface.timemap
 .. autosummary::
    :toctree: api
 

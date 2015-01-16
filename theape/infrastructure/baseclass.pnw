@@ -6,7 +6,7 @@ This is a module to hold base-classes for others to sub-class.
 API
 ---
 
-.. module:: ape.infrastructure.baseclass
+.. module:: theape.infrastructure.baseclass
 
 .. autosummary::
    :toctree: api

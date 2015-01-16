@@ -4,12 +4,10 @@ class ApeError(Exception):
     The Base Exception for code in this package
     """
 
-
 class ConfigurationError(ApeError):
     """
     An error to raise if a component or part is mis-configured.
     """
-
 
 class DontCatchError(ApeError):
     """

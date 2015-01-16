@@ -1,9 +1,6 @@
 The Components
 ==============
 
-.. _the-components:
-
-
 .. _components-introduction:
 
 Introduction
@@ -46,7 +43,7 @@ This is the base-class which the other classes will inherit from. All :ref:`Plug
    Component : check_rep()
    Component : close()
 
-.. currentmodule:: ape.components.component
+.. module:: theape.components.component
 .. autosummary::
    :toctree: api
 

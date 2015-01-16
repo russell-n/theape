@@ -9,10 +9,9 @@ except ImportError:
     pass
 
 # this package
-from ape.commoncode.errors import ApeError, ConfigurationError
-from ape.components.component import Component, Composite
-from ape.commoncode.baseclass import RED_ERROR
-
+from theape import ApeError, ConfigurationError
+from theape.components.component import Component, Composite
+from theape.infrastructure.baseclass import RED_ERROR
 
 class BadComponent(Component):
     def __init__(self):
@@ -72,7 +71,6 @@ class TestComponent(unittest.TestCase):
         self.assertRaises(TypeError, StillBadComponent)
         BetterComponent()
         return
-
 
 class TestComposite(unittest.TestCase):
     def setUp(self):
@@ -228,8 +226,6 @@ class TestComposite(unittest.TestCase):
         self.assertIsNone(self.composite._components)
         return
 
-
-
 class TestHortator(unittest.TestCase):
     def setUp(self):
         self.hortator = Composite(error=Exception,
@@ -249,7 +245,6 @@ class TestHortator(unittest.TestCase):
         self.hortator()
         next_operator.assert_called_with()
         return
-
 
 class TestOperator(unittest.TestCase):
     def setUp(self):

@@ -3,16 +3,14 @@
 from collections import OrderedDict
 
 # this package
-from ape import BasePlugin
+from theape import BasePlugin
 #from ape.parts.watchers import TheWatcher
-from ape.parts.storage.filestorage import FileStorage
-
+from theape.parts.storage.filestorage import FileStorage
 
 SECTION = 'WATCHER'
 INTERVAL_OPTION = 'interval'
 TOTAL_OPTION = 'total'
 VERBOSE_OPTION = 'verbose'
-
 
 configuration = """
 [{0}]
@@ -21,7 +19,6 @@ configuration = """
            TOTAL_OPTION,
            INTERVAL_OPTION,
            VERBOSE_OPTION)
-
 
 sections = OrderedDict()
 sections['name'] = '{bold}sleep{reset} -- a countdown timer that blocks until time is over'
@@ -43,7 +40,6 @@ One of {bold}end{reset} or {bold}total{reset} needs to be specified. Everything 
 """
 sections['author'] = 'ape'
 
-
 class Sleep(BasePlugin):
     """
     A plugin for TheBigSleep
@@ -59,7 +55,7 @@ class Sleep(BasePlugin):
         """
         prints a config-file sample
         """
-        print configuration
+        print(configuration)
 
     @property
     def sections(self):

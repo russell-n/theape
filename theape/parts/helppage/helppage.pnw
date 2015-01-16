@@ -162,7 +162,7 @@ With that background material to the aside, here is the actual pager.
    HelpPage o- subprocess.Popen
    HelpPage o- textwrap.TextWrapper
 
-.. currentmodule:: ape.plugins.helppage
+.. module:: theape.plugins.helppage
 .. autosummary::
    :toctree: api
 

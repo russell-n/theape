@@ -8,17 +8,15 @@ from hamcrest import assert_that, is_, equal_to, contains
 from mock import MagicMock, patch, call
 
 # this package
-from ape.plugins.apeplugin import OperatorConfigurationConstants, OperatorConfiguration
-from ape.plugins.apeplugin import OperationConfiguration
-from ape.parts.countdown.countdown import INFO, CountdownTimer
-from ape.plugins.quartermaster import QuarterMaster
-
+from theape.plugins.apeplugin import OperatorConfigurationConstants, OperatorConfiguration
+from theape.plugins.apeplugin import OperationConfiguration
+from theape.parts.countdown.countdown import INFO, CountdownTimer
+from theape.plugins.quartermaster import QuarterMaster
 
 @given("an empty configuration")
 def empty_configuration(context):
     context.configuration = OperatorConfiguration(source=[''])
     return
-
 
 @when("the user checks the operator configuration")
 def check_configuration(context):
@@ -42,7 +40,6 @@ def check_configuration(context):
             pass
     return
 
-
 @then("the operator configuration is the default")
 def default_configuration(context):
     constants = OperatorConfigurationConstants
@@ -58,7 +55,6 @@ def default_configuration(context):
     assert_that(len([config for config in context.configuration.operation_configurations]),
                 is_(0))
     return
-
 
 configuration = """
 [OPERATIONS]
@@ -76,7 +72,6 @@ p3 = 3
 def configuration_operations(context):
     context.configuration = OperatorConfiguration(configuration)
     return
-
 
 @then("the operator configuration has the operation configurations")
 def assert_operation_configurations(context):
@@ -112,7 +107,7 @@ def assert_operation_configurations(context):
 
     context.configuration._operation_configurations = [mock_operation_config, mock_operation_config_2]
 
-    print context.configuration.operator.components
+    print(context.configuration.operator.components)
     assert_that(context.configuration.operator.components,
                     contains(mock_operation, mock_operation_2))
     return

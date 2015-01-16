@@ -30,3 +30,13 @@ In order to support multiple output-targets, a Composite will be used to store S
 
 The ``StorageComposite`` maintains a list of file-like objects and, once ``open`` is called, a list of opened file-like objects.
    
+
+
+
+
+
+
+
+
+   
+

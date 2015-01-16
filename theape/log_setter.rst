@@ -1,6 +1,7 @@
 Log Setter
 ==========
 
+
 This is a module to set the logging level. 
 
 
@@ -20,13 +21,17 @@ This is a module to set the logging level.
 API
 ---
 
-.. currentmodule:: ape.log_setter
+.. module:: theape.log_setter
 
 .. autosummary::
    :toctree: api
 
    set_logger
    cleanup
+
+
+
+
 
 
 
@@ -43,6 +48,7 @@ This function was implemented so the log does not continue to grow even as the c
 Example use::
 
    log_setter.cleanup("output_directory_name")
+
 
 
 
@@ -66,3 +72,5 @@ Example Use::
    log_setter(args)
 
    
+
+

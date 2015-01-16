@@ -6,7 +6,7 @@ The Base Plugin
 from __future__ import print_function
 from abc import ABCMeta, abstractmethod, abstractproperty
 import os
-from types import StringType
+from types import StringType, DictType
 
 # third party
 from configobj import ConfigObj, flatten_errors, get_extra_values
@@ -106,13 +106,13 @@ Aggregated Classes
 
 These are the classes that the BasePlugin uses.
 
-.. currentmodule:: ape.commoncode.baseclass
+.. module:: theape.commoncode.baseclass
 .. autosummary::
    :toctree: api
 
    BaseClass.logger
 
-.. currentmodule:: ape.parts.helppage.helppage
+.. module:: theape.parts.helppage.helppage
 .. autosummary::
    :toctree: api
 
@@ -201,7 +201,7 @@ class BasePlugin(BaseClass):
 .. 
 .. <<name='module_graph', echo=False, results='sphinx'>>=
 .. if in_pweave:
-..     from ape.plugins.base_plugin import BasePlugin
+..     from theape.plugins.base_plugin import BasePlugin
 ..     print "This is a module diagram for **{0}**.\n".format(BasePlugin.__module__)
 ..     this_file = os.path.join(os.getcwd(), 'base_plugin.py')
 ..     module_diagram_file = module_diagram(module=this_file, project='baseplugin')
@@ -222,8 +222,13 @@ class BasePlugin(BaseClass):
 ..     print ".. image:: {0}".format(class_diagram_file)
 .. @
 
+.. _ape-SubConfiguration:
+
+The SubConfiguration
+--------------------
+
 SubConfigurationConstants
---------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A holder of constants for the ``SubConfiguration`` so other code can reference them.
 
@@ -241,12 +246,12 @@ class SubConfigurationConstants(object):
     missing_section_message = "Section '{section}' to configure '{plugin}' not found in configuration"
     missing_plugin_option_message = "'plugin' option missing in section '{0}'"
     missing_plugin_replacement = "<non-plugin>"
-    extra_message = "Extra {item_type} in section '{section}. '{name}'"
+    extra_message = "Extra {item_type} in section [{section}] - '{name}'"
     check_rep_failure_message = "Errors in section [{0}] in the configuration"
 @
 
 The SubConfiguration Abstract Sub Class
------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The *SubConfiguration* is an abstract base class that provides both implemented methods and properties as well as abstract properties which child classes must implement. The intention is for plugin-building classes to build on it so that there is a reasonably uniform pattern across these builders. It is also meant to be a bridge between ConfigObj and the components of the APE or other code that underlies an Ape-plugin. The implementation is based around how ConfigObj handles the expected form of the plugin configuration file sections. This was originally the ``BaseConfiguration`` but when creating plugins for external code I found having one Configuration made things difficult, so this was created to allow the creation of configuration classes that only create the configuration without requiring that a ``product`` property be implemented.
 
@@ -257,16 +262,16 @@ The *SubConfiguration* is an abstract base class that provides both implemented 
    SubConfiguration o- configobj.ConfigObj
    SubConfiguration o- SubConfigurationConstants   
 
-.. module:: ape.plugins.base_plugin
+.. module:: theape.plugins.base_plugin
 .. autosummary::
    :toctree: api   
 
    SubConfiguration
 
 Abstract Properties
-~~~~~~~~~~~~~~~~~~~
++++++++++++++++++++
 
-There are two properties that inheriting classes need to implement or a *TypeError* will be raised when it is instantiated -- `configspec_source` and `product`.
+There is one property that inheriting classes need to implement or a *TypeError* will be raised when it is instantiated -- `configspec_source`. The others are either optional or, in the case of the `plugin` has to be checked by the ape.
 
 .. autosummary::
    :toctree: api
@@ -274,22 +279,22 @@ There are two properties that inheriting classes need to implement or a *TypeErr
    SubConfiguration.configspec_source
 
 configspec_source
-+++++++++++++++++
+.................
 
 The ``configspec_source`` property should be a string that specifies the form of the configuration for the plugin. The ConfigObj documentation on `validation <http://configobj.readthedocs.org/en/latest/configobj.html#validate>`_ has some information about it and the `validate <http://configobj.readthedocs.org/en/latest/validate.html#the-standard-functions>`_ documentation has a list of the functions that you can put in the configspec.
 
 `plugin`
-````````
+________
  
 The `plugin` option is used to match the configuration-file section with the plugin implementation so it is required (but there's no way to enforce it within the configuration classes so the configurations will have to defer to the ApePlugin itself to raise an error when no `plugin` option is found). The value for the `plugin` option should be the name of the plugin class (it's what the :ref:`QuarterMaster <ape-plugins-quartermaster>` uses as the key to the dictionary returned by the :ref:`RyeMother <ape-infrastructure-rye-mother>`).
 
 `updates_section`
-`````````````````
+_________________
 
 The `updates_section` option is used to point to a section to update. This is meant to allow plugins to use another section in the `PLUGINS` section of the configuration as a base and then override only some of the values. This way if some plugin is used multiple times (or more than one plugin shares the same configuration options) then one section can give the full configuration and the other section(s) can over-ride (or add) only the values that need to be changed.
 
 Example
-```````
+_______
 
 As an example, suppose there is a plugin named `FakePlugin` that allows updating sections and has one required integer option ('age') and one optional string option ('name'). The configspec_source for this configuration might be::
 
@@ -327,28 +332,27 @@ An example configuration file might look like this.
     [[[sub_section]]]
     hwp = True
 
-product
-+++++++
-
-The `product` should return the built object that will be called by the `operation` composite when the Ape is run.
 
 Implemented Properties
-~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++++++
 
-There are five implemented properties, but the user of the Configuration classes will probably never use them.
+There are five implemented properties, but the user of the Configuration classes will probably never use most of them.
 
 .. autosummary::
    :toctree: api
  
    SubConfiguration.configspec
-   SubConfiguration.configuration   
+   SubConfiguration.configuration
+   SubConfiguration.constants
    SubConfiguration.plugin_name
+   SubConfiguration.sample
    SubConfiguration.validation_outcome
    SubConfiguration.validator
+   SubConfiguration.check_methods
 
 
 configspec
-++++++++++
+..........
  
 .. figure:: figures/baseconfiguration_configspec_activity.png
    :align: center
@@ -359,7 +363,7 @@ This is a ConfigObj object that is created from the `configspec_source` and pass
  
 
 configuration
-+++++++++++++
+.............
 
 .. figure:: figures/baseconfiguration_configuration_activity.*
    :align: center
@@ -371,7 +375,7 @@ The ``configuration`` is a `ConfigObj` object built from the ``source``, ``secti
 .. '
 
 plugin_name
-+++++++++++
+...........
 
 .. figure:: figures/baseconfiguration_plugin_name_activity.*
    :align: center
@@ -381,17 +385,17 @@ plugin_name
 The ``plugin_name`` property is the name of the plugin as extracted from the configuration. As mentioned elsewhere, the configurations won't be matched to the configuration section if this property is missing so this shouldn't raise an error, but if for some reason it really is missing then calling this property will raise a ``ConfigurationError``.
 
 validation_outcome
-++++++++++++++++++
+..................
 
 The ``validation_outcome`` holds the object returned by `ConfigObj.validate`.
 
 validator
-+++++++++
+.........
 
 The ``validator`` is a ``validate.Validator`` object. It's only used once but I put it here so I wouldn't have to patch-mock it when testing.
 
 Methods
-~~~~~~~
++++++++
 
 .. autosummary::
    :toctree: api
@@ -400,9 +404,10 @@ Methods
    SubConfiguration.check_rep
    SubConfiguration.process_errors
    SubConfiguration.update
+   SubConfiguration.__getattr__
 
 check_extra_values
-++++++++++++++++++
+..................
 
 .. figure:: figures/check_extra_values_activity.*
    :align: center
@@ -414,7 +419,7 @@ The ``check_extra_values`` method uses the ``configobj.get_extra_values`` functi
 .. '
 
 check_rep
-+++++++++
+.........
 
 .. figure:: figures/baseconfiguration_check_rep_activity.*
    :align: center
@@ -426,7 +431,7 @@ The ``check_rep`` method calls the ``process_errors`` method and the ``check_ext
 .. '
 
 process_errors
-++++++++++++++
+..............
 
 .. figure:: figures/baseconfiguration_process_errors_activity.*
    :align: center
@@ -440,7 +445,7 @@ If the validation was successful then the validation outcome will be True, so th
 .. '
 
 update
-++++++
+......
 
 .. figure:: figures/baseconfiguration_update_activity.*
    :align: center
@@ -452,6 +457,16 @@ The ``update`` method us used to create a plugin-configuration by updating anoth
 In order for this to work properly, the configspec has to have default values for the options that the updating configuration leaves out and the updating configuration has to be merged with the base-configuration before it is validated (otherwise the defaults will be set and they'll override the base-configuration). See the :ref:`merging default values<ape-explorations-configobj-merging-defaults>` section of the `developer documentation`.
 
 .. '
+
+__getattr__
+...........
+
+I implemented ``__getattr__`` so as a pass-through to the ConfigObj object that the SubConfiguration is holding. This is somewhat dangerous, but I wanted to use dot-notation. So these are equivalent::
+
+    subconfiguration['someoption']
+    subconfiguration.someoption
+
+But you'll get a ``KeyValue`` error if the key doesn't exist.
    
 <<name='SubConfiguration', echo=False>>=
 class SubConfiguration(BaseClass):
@@ -461,7 +476,8 @@ class SubConfiguration(BaseClass):
     __metaclass__ = ABCMeta
     def __init__(self, source, section_name, allow_extras=False,
                  configspec_source=None, 
-                 updatable=True, constants=None):
+                 updatable=True, constants=None,
+                 check_methods=None):
         """
         SubConfiguration constructor
 
@@ -473,6 +489,7 @@ class SubConfiguration(BaseClass):
          - `configspec_source`: string with configuration specification (use to override the default)
          - `updatable`: if True, allows updating from other sections
          - `constants`: object with same properties as SubConfigurationConstants
+         - `check_methods`: dict of extra check-methods for the Validator
         """
         super(SubConfiguration, self).__init__()
         self._constants = constants
@@ -487,7 +504,31 @@ class SubConfiguration(BaseClass):
         self._configuration = None
         self._plugin_name = None
         self._validation_outcome = None
-        self._constants
+        self._constants = constants
+        self._check_methods = check_methods
+        return
+
+    @property
+    def check_methods(self):
+        """
+        dict of extra check methods for the validator
+        """
+        return self._check_methods
+
+    @check_methods.setter
+    def check_methods(self, new_checks):
+        """
+        updates self._check_methods or sets it if it is None
+
+        :param:
+
+         - `new_checks`: dict of check methods or None
+        """
+        if (type(new_checks) is DictType and
+            type(self._check_methods) is DictType):
+            self._check_methods.update(new_checks)
+        else:
+            self._check_methods = new_checks
         return
 
     @abstractproperty
@@ -498,6 +539,9 @@ class SubConfiguration(BaseClass):
 
     @property
     def sample(self):
+        """
+        Creates a sample configuration section using the configspec_source
+        """
         if self._sample is None:
             sample = self.configspec_source.lstrip('\n')
             sample = sample.replace('[', '[[[')
@@ -537,7 +581,6 @@ class SubConfiguration(BaseClass):
             except KeyError as error:
                 self.logger.debug(error)
                 self.logger.warning(self.constants.missing_plugin_option_message.format(self.section_name))
-                #raise ConfigurationError(self.constants.missing_plugin_option_message.format(self.section_name))
                 self._plugin_name = self.constants.missing_plugin_replacement
         return self._plugin_name
 
@@ -547,7 +590,7 @@ class SubConfiguration(BaseClass):
         validator for the configuration
         """
         if self._validator is None:
-            self._validator = Validator()
+            self._validator = Validator(self.check_methods)
         return self._validator
 
     @property
@@ -710,14 +753,20 @@ class SubConfiguration(BaseClass):
             self.logger.debug(error)
             self.logger.info('Expected Configuration Matching:\n{0}'.format(self.sample))
             raise ConfigurationError(self.constants.check_rep_failure_message.format(self.section_name))
-        return            
+        return
+
+    def __getattr__(self, key):
+        """
+        Passes key to self.configuration
+        """
+        return self.configuration[key]
 # end SubConfiguration        
 @
 
 BaseConfiguration
 -----------------
 
-In trying to implement a plugin for some external code, I realized that larger configurations are better handled by sub-configurations with a master-configuration grouping them together. But having the BaseConfiguration handle the configurations and building the product meant that these sub-configurations were forced to implement the `product` property even though they didn't build anything. So the `SubConfiguration` was broken out and now the `BaseConfiguration` composes the `SubConfiguration` and handles the building of the product.
+In trying to implement a plugin for some external code, I realized that larger configurations are better handled by sub-configurations with a master-configuration grouping them together. But having the BaseConfiguration handle the configurations and building the product meant that these sub-configurations were forced to implement the `product` property even though they didn't build anything. So the `SubConfiguration` was broken out and now the `BaseConfiguration` inherits from the `SubConfiguration` and handles the building of the product.
 
 **Update**: I ran into a chicken-or-the-egg problem. If I try to instantiate the `SubConfiguration` instance it crashes because the ``configspec_source`` property is abstract. Looks like I'll have to use inheritance.
 

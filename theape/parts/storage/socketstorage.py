@@ -7,16 +7,14 @@ import socket
 from base_storage import BaseStorage
 
 #from ape import BaseClass
-from ape import ApeError
-from ape.infrastructure.code_graphs import module_diagram, class_diagram
-
+from theape import ApeError
+from theape.infrastructure.code_graphs import module_diagram, class_diagram
 
 NEWLINE = '\n'
 SPACE = ' '
 EOF = ''
 IN_PWEAVE = __name__ == '__builtin__'
 TIMED_OUT = 'timed out'
-
 
 class SocketStorage(BaseStorage):
     """
@@ -119,11 +117,8 @@ class SocketStorage(BaseStorage):
                 self.logger.debug('socket timed out')
                 yield TIMED_OUT
         return
-    
-
 
 if IN_PWEAVE:
     this_file = os.path.join(os.getcwd(), 'socketstorage.py')
     module_diagram_file = module_diagram(module=this_file, project='socketstorage')
-    print ".. image:: {0}".format(module_diagram_file)
-
+    print( ".. image:: {0}".format(module_diagram_file))

@@ -6,7 +6,6 @@ import inspect
 import pkg_resources
 import pkgutil
 
-
 class RyeMother(object):
     """
     A gatherer of child classes
@@ -142,4 +141,4 @@ class RyeMother(object):
                 name = keyfunction(name)
                 children[name] = definition
         return children
-# end RyeMother    
+# end RyeMother

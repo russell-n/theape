@@ -9,9 +9,8 @@ from behave import given, when, then
 from hamcrest import assert_that, is_, equal_to, contains_inanyorder, contains
 
 # this package
-from ape.plugins.apeplugin import OperatorConfigspec, OperatorConfigurationConstants
-from ape.infrastructure.timemap import RelativeTime, AbsoluteTime
-
+from theape.plugins.apeplugin import OperatorConfigspec, OperatorConfigurationConstants
+from theape.infrastructure.timemap import RelativeTime, AbsoluteTime
 
 @given("an empty configuration file")
 def empty_configuration(context):
@@ -20,13 +19,11 @@ def empty_configuration(context):
                                       configspec=context.configspec.configspec)
     return
 
-
 @when("the file is validated by the operator configspec")
 def validate_config(context):
     validator = context.configspec.validator
     context.configuration.validate(validator)
     return
-
 
 @then("it has the default settings")
 def assert_default_settings(context):
@@ -48,7 +45,6 @@ def assert_default_settings(context):
     assert_that(settings[constants.timestamp_option],
                 is_(equal_to(constants.default_timestamp)))
     return
-
 
 configuration = """
 [SETTINGS]
@@ -86,7 +82,6 @@ def configuration_settings(context):
 
     return
 
-
 @then("it has the user settings")
 def assert_user_settings(context):
     constants = OperatorConfigurationConstants
@@ -111,7 +106,6 @@ def assert_user_settings(context):
                 is_(equal_to(context.timestamp)))
     return
 
-
 operations_configuration = """
 [OPERATIONS]
 op1 = p1, p2
@@ -128,7 +122,6 @@ def configuration_operations(context):
                                       configspec=context.configspec.configspec)
     return
 
-
 @then("it has the operations dictionary")
 def operations_dictionary(context):
     constants = OperatorConfigurationConstants
@@ -140,7 +133,6 @@ def operations_dictionary(context):
         assert_that(operations[operation],
                     contains(*context.op_dict[operation]))
     return
-
 
 plugins_configuration = """
 [SETTINGS]
@@ -165,7 +157,6 @@ def plugins_config(context):
                                       configspec=context.configspec.configspec)
     context.subsections = 'p1 p2'.split()
     return
-
 
 @then("it has the plugins dictionary")
 def assert_plugins(context):

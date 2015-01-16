@@ -6,8 +6,7 @@ import unittest
 from mock import MagicMock, call
 
 # the ape
-from ape.plugins.dummyplugin import Dummy
-
+from theape.plugins.dummyplugin import Dummy
 
 class TestingDummyPlugin(unittest.TestCase):
     def setUp(self):
@@ -33,4 +32,4 @@ class TestingDummyPlugin(unittest.TestCase):
         self.config_map.items.assert_called_with(section=self.section_header,
                                                         optional=True,
                                                         default={})
-        return    
+        return

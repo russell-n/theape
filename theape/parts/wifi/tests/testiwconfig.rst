@@ -1,7 +1,7 @@
 Testing Iwconfig
 ================
 
-.. currentmodule:: ape.parts.wifi.tests.testiwconfig
+.. module:: theape.parts.wifi.tests.testiwconfig
 .. autosummary::
    :toctree: api
 
@@ -13,6 +13,11 @@ Testing Iwconfig
    TestIwconfig.test_essid
    TestIwconfig.test_mac_protocol
    TestIwconfig.test_str
+
+
+
+
+
 
 
 
@@ -35,4 +40,6 @@ Testing Iwconfig
    TestIwconfigExpressions.test_tx_excessive_retries
    TestIwconfigExpressions.test_invalid_misc
    TestIwconfigExpressions.test_missed_beacons
+
+
 

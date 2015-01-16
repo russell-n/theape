@@ -11,11 +11,11 @@ from hamcrest import assert_that, is_, equal_to, calling, raises, instance_of
 from configobj import ConfigObj
 
 # this package
-from ape.parts.dummy.dummy import CrashDummy
-from ape.plugins.dummyplugin import CrashTestDummyConstants
-from ape.plugins.dummyplugin import CrashTestDummyConfiguration
-from ape.plugins.base_plugin import BaseConfiguration
-from ape import ConfigurationError
+from theape.parts.dummy.dummy import CrashDummy
+from theape.plugins.dummyplugin import CrashTestDummyConstants
+from theape.plugins.dummyplugin import CrashTestDummyConfiguration
+from theape.plugins.base_plugin import BaseConfiguration
+from theape import ConfigurationError
 @
 
 Scenario: User doesn't specify any options

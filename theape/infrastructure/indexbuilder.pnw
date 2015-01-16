@@ -5,6 +5,7 @@ Index Builder
 import os
 import string
 @
+
 <<name='constants', echo=False>>=
 RST_EXTENSION = '.rst'
 INDEX = 'index.rst'

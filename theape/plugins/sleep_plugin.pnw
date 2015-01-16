@@ -11,7 +11,7 @@ This is a plugin for :ref:`The Big Sleep <ape-big-sleep>`, code that does nothin
    TheBigSleep : __init__(end, total, interval, verbose)
    TheBigSleep : __call__()
 
-.. currentmodule:: ape.parts.sleep.sleep
+.. module:: theape.parts.sleep.sleep
 .. autosummary::
    :toctree: api
 
@@ -25,9 +25,9 @@ from collections import OrderedDict
 from configobj import ConfigObj
 
 # this package
-from ape import BasePlugin
-from ape.parts.sleep.sleep import TheBigSleep
-from ape.infrastructure.timemap import time_validator
+from theape import BasePlugin
+from theape.parts.sleep.sleep import TheBigSleep
+from theape.infrastructure.timemap import time_validator
 @
 
 <<name='constants', echo=False>>=
@@ -105,7 +105,7 @@ sections['author'] = 'ape'
 The Plugin
 ----------
 
-.. currentmodule:: ape.plugins.sleep_plugin
+.. module:: theape.plugins.sleep_plugin
 .. autosummary::
    :toctree: api
 
@@ -144,7 +144,7 @@ class Sleep(BasePlugin):
         """
         prints a config-file sample
         """
-        print configuration
+        print(configuration)
 
     @property
     def sections(self):

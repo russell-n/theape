@@ -13,7 +13,7 @@ This module holds classes to help test the running of the infrastructure.
 The Dummy Class
 ---------------
 
-.. currentmodule:: ape.components.dummy.dummy
+.. module:: theape.components.dummy.dummy
 .. _dummy-class:
 The Dummy module holds dummy classes that do nothing. They is primarily used to test implementations of infrastructure components.
 
@@ -22,7 +22,7 @@ The Dummy module holds dummy classes that do nothing. They is primarily used to 
    DummyClass -|> BaseClass
    DummyClass o- CallClass
 
-.. currentmodule:: ape.parts.dummy.dummy   
+.. module:: theape.parts.dummy.dummy   
 .. autosummary::
    :toctree: api
 

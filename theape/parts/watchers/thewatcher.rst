@@ -1,6 +1,7 @@
 TheWatcher
 ==========
 
+
 This is a watcher for information. Whatever ``query`` passed into it has to match the list of ``fields``.
 
 .. _ape-thewatcher:
@@ -30,7 +31,7 @@ Collaborators
    TheWatcher : query
    TheWatcher : fields
 
-.. currentmodule:: ape.parts.watchers.thewatcher
+.. module:: theape.parts.watchers.thewatcher
 .. autosummary::
    :toctree: api
 
@@ -56,5 +57,9 @@ storage
 Previously, the storage was always assumed to be a file-like object. To try and make it more flexible, I'm going to start assuming that it instead takes a dictonary and handles it (the behavior is assomed to match the ``csv.DictWriter``).
 
 .. '
+
+
+
+
 
 

@@ -8,13 +8,19 @@ Since they started out as just reflecting what was being called I wasn't testing
 
 
 
+
 Testing the CrashDummy
 ----------------------
 
-.. currentmodule:: ape.parts.dummy.testdummy
+.. module:: theape.parts.dummy.testdummy
 .. autosummary::
    :toctree: api
 
    TestCrashDummy.test_constructor
    TestCrashDummy.test_constructor_crash
+
+
+
+
+   
 

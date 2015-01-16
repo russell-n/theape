@@ -1,7 +1,7 @@
 Testing The File Storage
 ========================
 
-.. currentmodule:: ape.parts.storage.tests.testfilestorage
+.. module:: theape.parts.storage.tests.testfilestorage
 .. autosummary::
    :toctree: api
 
@@ -27,8 +27,8 @@ except ImportError:
     pass    
 
 # this package
-from ape.parts.storage.filestorage import FileStorage, AMBIGUOUS
-from ape.commoncode.errors import ApeError
+from theape.parts.storage.filestorage import FileStorage, AMBIGUOUS
+from theape import ApeError
 @
 
 <<name='TestFileStorage', wrap=False>>=
@@ -54,7 +54,8 @@ class TestFileStorage(unittest.TestCase):
         
     def test_write_error(self):
         storage = FileStorage(PATH)
-        self.assertRaises(ApeError, storage.write, ('',))
+        with self.assertRaises(ApeError):
+            storage.write('')
         return
 
     def test_writeline(self):
@@ -125,7 +126,7 @@ Looking at the table it appears that the only time I actually mangle the file na
 
    mangle &= FileExists \land \lnot(Overwrite \lor Append)\\
 
-.. currentmodule:: ape.parts.storage.tests.testfilestorage
+.. module:: theape.parts.storage.tests.testfilestorage
 .. autosummary::
    :toctree: api
 

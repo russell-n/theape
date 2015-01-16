@@ -5,11 +5,13 @@ Operator Config Spec
    :language: gherkin
 
 
+
    
 Scenario: User validates empty settings
 ---------------------------------------
 
-::
+
+.. code:: python
 
     @given("an empty configuration file")
     def empty_configuration(context):
@@ -17,18 +19,21 @@ Scenario: User validates empty settings
         context.configuration = ConfigObj([""],
                                           configspec=context.configspec.configspec)
         return
-    
 
-::
+
+
+.. code:: python
 
     @when("the file is validated by the operator configspec")
     def validate_config(context):
         validator = context.configspec.validator
         context.configuration.validate(validator)
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @then("it has the default settings")
     def assert_default_settings(context):
@@ -50,14 +55,14 @@ Scenario: User validates empty settings
         assert_that(settings[constants.timestamp_option],
                     is_(equal_to(constants.default_timestamp)))
         return
-    
 
 
 
 Scenario: User validates filled settings
 ----------------------------------------
 
-::
+
+.. code:: python
 
     configuration = """
     [SETTINGS]
@@ -94,12 +99,12 @@ Scenario: User validates filled settings
                                           configspec=context.configspec.configspec)
     
         return
-    
 
 
 When the file is validated by the operator configspec
 
-::
+
+.. code:: python
 
     @then("it has the user settings")
     def assert_user_settings(context):
@@ -124,14 +129,14 @@ When the file is validated by the operator configspec
         assert_that(settings[constants.timestamp_option],
                     is_(equal_to(context.timestamp)))
         return
-    
 
 
 
 Scenario: User validates operations
 -----------------------------------
 
-::
+
+.. code:: python
 
     operations_configuration = """
     [OPERATIONS]
@@ -148,11 +153,11 @@ Scenario: User validates operations
         context.configuration = ConfigObj(operations_configuration,
                                           configspec=context.configspec.configspec)
         return
-    
 
 
   When the file is validated by the operator configspec
-::
+
+.. code:: python
 
     @then("it has the operations dictionary")
     def operations_dictionary(context):
@@ -165,14 +170,14 @@ Scenario: User validates operations
             assert_that(operations[operation],
                         contains(*context.op_dict[operation]))
         return
-    
 
 
 
 Scenario: User validates plugins
 --------------------------------
 
-::
+
+.. code:: python
 
     plugins_configuration = """
     [SETTINGS]
@@ -197,13 +202,13 @@ Scenario: User validates plugins
                                           configspec=context.configspec.configspec)
         context.subsections = 'p1 p2'.split()
         return
-    
 
 
 
 When the file is validated by the operator configspec
 
-::
+
+.. code:: python
 
     @then("it has the plugins dictionary")
     def assert_plugins(context):
@@ -220,5 +225,6 @@ When the file is validated by the operator configspec
                     is_(equal_to(1000)))
     
         return
-    
+
+
 

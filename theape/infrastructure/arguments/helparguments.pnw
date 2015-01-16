@@ -17,17 +17,11 @@ optional arguments:
 """
 @
 
-Contents:
-
-   * :ref:`Help Constants <ape-interface-arguments-help-constants>`
-   * :ref:`Help Arguments Class <ape-interface-help-arguments-class>`
-   * :ref:`Help Strategy <ape-interface-arguments-help-strategy>`
-
 <<name='imports', echo=False>>=
 # the ape
-from ape.infrastructure.crash_handler import try_except
-from ape.infrastructure.arguments.arguments import BaseArguments
-from ape.infrastructure.arguments.basestrategy import BaseStrategy
+from theape.infrastructure.crash_handler import try_except
+from theape.infrastructure.arguments.arguments import BaseArguments
+from theape.infrastructure.arguments.basestrategy import BaseStrategy
 @
 
 .. _ape-interface-arguments-help-constants:
@@ -35,7 +29,7 @@ from ape.infrastructure.arguments.basestrategy import BaseStrategy
 The Help Arguments Constants
 ----------------------------
 
-.. currentmodule:: ape.interface.arguments.helparguments
+.. module:: theape.interface.arguments.helparguments
 .. autosummary::
    :toctree: api
 
@@ -180,8 +174,8 @@ class HelpStrategy(BaseStrategy):
                                message="{0}".format(error))
 
             else:
-                print "'{0}' is not a known plugin.\n".format(args.name)
-                print "These are the known (built-in) plugins:\n"
+                print( "'{0}' is not a known plugin.\n".format(args.name))
+                print( "These are the known (built-in) plugins:\n")
                 self.quartermaster.list_plugins()
         except AttributeError as error:
             self.log_error("{0} has implemented its help incorrectly -- '{1}'".format(args.name,

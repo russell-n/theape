@@ -11,10 +11,9 @@ except ImportError:
     pass
 
 # this package
-from ape.parts.connections.sshconnection import SSHConnection
-from ape.parts.connections.sshconnection import InOutError
-from ape import ApeError
-
+from theape.parts.connections.sshconnection import SSHConnection
+from theape.parts.connections.sshconnection import InOutError
+from theape import ApeError
 
 class TestSSHConnection(unittest.TestCase):
     """
@@ -150,9 +149,9 @@ class TestSSHConnection(unittest.TestCase):
         self.client.exec_command.assert_called_with('sudo {0}'.format(command), bufsize=-1,
                                                     timeout=None, get_pty=True)
         self.stdin.write.assert_called_with(password + '\n')
-        self.assertEqual(ioe.input.file, self.stdin)
-        self.assertEqual(ioe.output.file, self.stdout)
-        self.assertEqual(ioe.error.file, self.stderr)
+        self.assertEqual(ioe.input, self.stdin)
+        self.assertEqual(ioe.output, self.stdout)
+        self.assertEqual(ioe.error, self.stderr)
         return
 
     def test_call(self):
@@ -172,7 +171,7 @@ class TestSSHConnection(unittest.TestCase):
         self.connection.prefix = "Aba daba daba daba daba daba dab. Said the chimpie to the monk."
         command = "What I desire is man's red fire"
         ioe = self.connection(command)
-        self.connection.client.exec_command.assert_called_with("{0};{1}".format(self.connection.prefix, command), bufsize=-1,
+        self.connection.client.exec_command.assert_called_with("{0} {1}".format(self.connection.prefix, command), bufsize=-1,
                                                                timeout=None, get_pty=False)
         
 

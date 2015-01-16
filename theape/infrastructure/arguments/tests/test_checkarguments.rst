@@ -1,15 +1,18 @@
-Testing the CheckArguments
+Testing the Check
 ==========================
 
 This checks the arguments for the `check` sub-command.
 
+.. module:: theape.infrastructure.arguments.tests
+
 .. autosummary::
    :toctree: api
 
-   TestCheckArguments.test_constructor
-   TestCheckArguments.test_configfilenames
-   TestCheckArguments.test_modules
-   TestCheckArguments.test_both
+   TestCheck.test_constructor
+   TestCheck.test_configfilenames
+   TestCheck.test_modules
+   TestCheck.test_both
+
 
 
 
@@ -23,17 +26,18 @@ Testing the Check Strategy
    TestCheckStrategy.test_function
    TestCheckStrategy.test_error_handling
 
-::
+
+.. code:: python
 
     class TestCheckStrategy(unittest.TestCase):
         def setUp(self):
             self.build_ape = MagicMock()
             self.strategy = CheckStrategy()
-            
+    
             # monkey patch!
             self.strategy.build_ape = self.build_ape
             return
-        
+    
         def test_constructor(self):
             """
             Does it build?
@@ -72,5 +76,6 @@ Testing the Check Strategy
             self.strategy.function(args)
             return
     
-    
+
+
 

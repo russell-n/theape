@@ -7,6 +7,10 @@ This is a module for classes that implement a file-like interface to a socket. I
 
 
 
+
+
+
+
 .. _socket-storage-model:
 
 SocketStorage Model
@@ -34,7 +38,7 @@ Not all of the methods make sense (like open) so only a sub-set will be implemen
 SocketStorage API
 -----------------
 
-.. currentmodule:: ape.parts.storage.socketstorage
+.. module:: theape.parts.storage.socketstorage
 .. autosummary::
    :toctree: api
 
@@ -55,10 +59,12 @@ Although the main reason for this class is to trap socket timeouts when reading 
 
 
 
+
 .. _socket-storage-module-diagram:
 
 Module Diagram
 --------------
+
 
 [Errno 2] No such file or directory
 Is pylint installed?
@@ -75,5 +81,8 @@ Is pylint installed?
 ..     class_diagram_file = class_diagram(class_name="SocketStorage",
 ..                                        filter='OTHER',
 ..                                        module=this_file)
-..     print ".. image:: {0}".format(class_diagram_file)
-.. 
+..     print( ".. image:: {0}".format(class_diagram_file))
+.. @
+
+
+
