@@ -1,14 +1,7 @@
 The BaseStrategy
 ================
 
-.. currentmodule:: ape.infrastructure.arguments.basestrategy
-
-Contents:
-
-    * :ref:`Introduction <ape-interface-arguments-base-strategy>`
-    * :ref:`Class Model <ape-interface-arguments-basestrategy-class-model>`
-    * :ref:`Error Explanations <ape-interface-arguments-basestrategy-errors>`
-    * :ref:`UbootKommandant API <ubootkommandant-api>`
+.. module:: theape.infrastructure.arguments.basestrategy
 
 <<name='imports', echo=False>>=
 # python standard library
@@ -16,11 +9,11 @@ from ConfigParser import NoSectionError
 import datetime
 
 # this package
-from ape import BaseClass
-from ape.infrastructure.errors import ConfigurationError
-from ape.infrastructure.crash_handler import try_except, log_error
-from ape.infrastructure.strings import RED, BOLD, RESET
-from ape.plugins.quartermaster import QuarterMaster
+from theape import BaseClass
+from theape.infrastructure.errors import ConfigurationError
+from theape.infrastructure.crash_handler import try_except, log_error
+from theape.infrastructure.strings import RED, BOLD, RESET
+from theape.plugins.quartermaster import QuarterMaster
 @
 <<name='constants', echo=False>>=
 RED_ERROR = "{red}{bold}{{error}}{reset}".format(red=RED,

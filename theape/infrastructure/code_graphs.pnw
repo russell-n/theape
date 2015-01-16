@@ -14,7 +14,7 @@ Module Diagram
 
 This will create class diagram for classes found in a module (see the :ref:`Exploring Pyreverse <exploring-pyreverse-module>` section). Since it is using `pyreverse` it has to be installed and available on the execution path.
 
-.. currentmodule:: ape.commoncode.code_graphs
+.. module:: theape.commoncode.code_graphs
 .. autosummary::
    :toctree: api
 
@@ -39,8 +39,8 @@ def module_diagram(module, project, output_format='png'):
     try:                                               
         subprocess.call(shlex.split(command))
     except OSError as error:
-        print error
-        print "Is pylint installed?"
+        print(error)
+        print( "Is pylint installed?")
     return "classes_{0}.{1}".format(project, output_format)    
 @
 

@@ -9,10 +9,9 @@ except ImportError:
     pass    
 
 # the ape
-from ape.parts.storage.csvstorage import CsvDictStorage
-from ape.parts.storage.filestorage import FileStorage
-from ape import ApeError
-
+from theape.parts.storage.csvstorage import CsvDictStorage
+from theape.parts.storage.filestorage import FileStorage
+from theape import ApeError
 
 class TestCsvStorage(unittest.TestCase):
     def setUp(self):
@@ -51,7 +50,7 @@ class TestCsvStorage(unittest.TestCase):
         file_storage.return_value = file_mock
 
         storage = CsvDictStorage(path=self.path, headers=self.headers)
-        with patch('ape.parts.storage.filestorage.FileStorage', file_storage):
+        with patch('theape.parts.storage.filestorage.FileStorage', file_storage):
             opened_storage = storage.storage
             self.assertEqual(opened_storage, file_mock)
             file_storage.assert_called_with(path=self.path)
@@ -167,4 +166,4 @@ class TestCsvStorage(unittest.TestCase):
             # did it return a copy of itself?
             self.assertIsInstance(writer, CsvDictStorage)
             self.assertNotEqual(writer, self.storage)
-        return        
+        return

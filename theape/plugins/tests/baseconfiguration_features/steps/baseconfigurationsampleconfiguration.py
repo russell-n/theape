@@ -5,8 +5,7 @@ from hamcrest import assert_that, is_, equal_to
 from configobj import ConfigObj
 
 # this package
-from ape.plugins.base_plugin import BaseConfiguration
-
+from theape.plugins.base_plugin import BaseConfiguration
 
 configspec = """
 brains = integer
@@ -27,7 +26,6 @@ class FakeConfiguration(BaseConfiguration):
             self._configspec_source = configspec
         return self._configspec_source
 
-
 source = """
 [monkey]
 brains = 1
@@ -44,11 +42,9 @@ def step_implementation(context):
                                               source=ConfigObj(source))
     return
 
-
 @when("the sample configuration is retrieved")
 def step_implementation(context):
     return
-
 
 expected_sample = """[[monkey]]
 brains = integer

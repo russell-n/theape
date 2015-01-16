@@ -1,27 +1,11 @@
-Connections
-===========
-
-.. _ape-connections:
+Client Connections
+==================
 
 <<name='imports', echo=False>>=
 # this package
-from ape.infrastructure.index_builder import create_toctree
+from theape import create_toctree
 @
 
-.. figure:: figures/connection.png
-   :align: center
-
-   Google's etymology
-
-.. '   
-
-**connection (n.)**
-late 14c., conneccion, later connexioun (mid-15c.), from Old French connexion, from Latin connexionem (nominative connexio) "a binding or joining together," from *connexare, frequentative of conectere "to fasten together, to tie, join together," from com- "together" (see com-) + nectere "to bind, tie" (see nexus).
-
-Spelling shifted from connexion to connection (especially in American English) mid-18c. under influence of connect, abetted by affection, direction, etc.
-
-source: `Online Etymology Dictionary <http://etymonline.com/?term=connection>`_
-   
 <<name='toctree', echo=False, results='sphinx'>>=
 create_toctree()
 @

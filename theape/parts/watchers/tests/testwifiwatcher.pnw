@@ -1,7 +1,7 @@
 Testing the Watcher
 ===================
 
-.. currentmodule:: ape.parts.watchers.tests.testthewatcher
+.. module:: theape.parts.watchers.tests.testthewatcher
 .. autosummary::
 
    TestThewatcher.test_constructor
@@ -19,9 +19,9 @@ import threading
 from mock import MagicMock
 
 # this package
-from ape.parts.watchers.thewatcher import TheWatcher
-from ape.parts.wifi.iwconfig import IwconfigQuery
-from ape import ApeError
+from theape.parts.watchers.thewatcher import TheWatcher
+from theape.parts.wifi.iwconfig import IwconfigQuery
+from theape import ApeError
 @
 <<name='TestThewatcher', echo=False>>=
 class TestThewatcher(unittest.TestCase):
@@ -76,7 +76,7 @@ class TestThewatcher(unittest.TestCase):
         """
         Does it create a header from the fields?
         """
-        self.assertEqual(self.watcher.header, self.header)
+        self.assertEqual(self.watcher.header, 'timestamp,' + self.header)
         return
 
     def test_run(self):

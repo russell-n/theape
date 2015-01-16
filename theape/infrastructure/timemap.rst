@@ -2,6 +2,9 @@ Time Maps
 =========
 
 
+
+
+
 .. _relative-time-map:
 
 Relative Time Map
@@ -27,7 +30,7 @@ The UML Model
    RelativeTimeMap : re.RegexObject minute_expression
    RelativeTimeMap : re.RegexObject second_expression      
    
-.. currentmodule:: ape.infrastructure.timemap
+.. module:: theape.infrastructure.timemap
 .. autosummary::
    :toctree: api
 
@@ -35,10 +38,15 @@ The UML Model
 
 
 
+
 .. _relative-time-map-groups:
 
 Relative Time Map Groups
 ------------------------
+
+
+
+
 
 
 
@@ -110,6 +118,10 @@ Since the operations are expected to raise ApeErrors whenever possible, these de
 
 
 
+
+
+
+
 The Timedelta
 -------------
 
@@ -159,7 +171,7 @@ Equality and inequality have also been implemented but there are two warnings:
 ..                                        module=this_file)
 ..     print ".. image:: {0}".format(class_diagram_file)
 .. 
-.. 
+.. @
 
 .. _ape-absolute-time:
 
@@ -195,12 +207,13 @@ This is a class to get ``datetime`` objects based on a string input. It really i
    AbsoluteTime : parserinfo parserinfo
    AbsoluteTime : datetime __call__(string)
 
-.. currentmodule:: ape.interface.timemap
+.. module:: theape.interface.timemap
 .. autosummary::
    :toctree: api
 
    AbsoluteTime
    AbsoluteTime.__call__
+
 
 
 
@@ -219,7 +232,7 @@ This is a class to get ``datetime`` objects based on a string input. It really i
 ..                                        module=this_file)
 ..     print ".. image:: {0}".format(class_diagram_file)
 .. 
-.. 
+.. @
 
 The AbsoluteTime Attributes
 ---------------------------
@@ -241,11 +254,11 @@ Time Validator
 Since I'm switching from the ConfigurationMap to ConfigObj, I need a validator that knows about time conversions.
 ..'
 
-::
+
+.. code:: python
 
     time_validator = Validator({'relative_time':RelativeTime,
                            'absolute_time':AbsoluteTime()})
-    
 
 
 
@@ -260,4 +273,6 @@ Since I'm switching from the ConfigurationMap to ConfigObj, I need a validator t
 .. if IN_PWEAVE:
 ..     module_diagram_file = module_diagram(module=this_file, project='timemap')
 ..     print ".. image:: {0}".format(module_diagram_file)
-.. 
+.. @
+
+

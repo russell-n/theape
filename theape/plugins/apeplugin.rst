@@ -1,8 +1,6 @@
 The Ape Plugin
 ==============
 
-
-
 .. image:: ../figures/robot_monster_babe.jpg
    :align: center
 
@@ -143,7 +141,7 @@ It looks like the way configobj works there isn't a way to force the plugins sec
 
    OperatorConfigspec o- ConfigObj
 
-.. module:: ape.plugins.apeplugin
+.. module:: theape.plugins.apeplugin
 .. autosummary::
    :toctree: api
 
@@ -170,7 +168,7 @@ The OperatorConfiguration builds the dependencies for the Operators.
    OperatorConfiguration o- QuarterMaster
    OperatorConfiguration o- Composite
 
-.. module:: ape.plugins.apeplugin
+.. module:: theape.plugins.apeplugin
 .. autosummary::
    :toctree: api
 
@@ -367,7 +365,7 @@ Class Diagram
 The API
 -------
 
-.. currentmodule:: ape.plugins.apeplugin   
+.. module:: theape.plugins.apeplugin   
 .. autosummary::
    :toctree: api
 

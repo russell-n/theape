@@ -4,7 +4,11 @@ SubConfiguration Sample Configuration
 .. literalinclude:: ../baseconfigurationsampleconfiguration.feature
    :language: gherkin
 
-::
+
+
+
+
+.. code:: python
 
     configspec = """
     brains = integer
@@ -24,14 +28,14 @@ SubConfiguration Sample Configuration
             if self._configspec_source is None:
                 self._configspec_source = configspec
             return self._configspec_source
-    
 
 
 
 Scenario: User gets a sample configuration
 ------------------------------------------
 
-::
+
+.. code:: python
 
     source = """
     [monkey]
@@ -48,16 +52,20 @@ Scenario: User gets a sample configuration
                                                   section_name='monkey',
                                                   source=ConfigObj(source))
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @when("the sample configuration is retrieved")
     def step_implementation(context):
         return
-    
 
-::
+
+
+
+.. code:: python
 
     expected_sample = """[[monkey]]
     brains = integer
@@ -71,5 +79,5 @@ Scenario: User gets a sample configuration
         assert_that(context.configuration.sample,
                     is_(equal_to(expected_sample)))
         return
-    
+
 

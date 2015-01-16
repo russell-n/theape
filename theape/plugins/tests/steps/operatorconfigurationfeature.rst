@@ -6,18 +6,22 @@ Operator Configuration
 
 
 
+
 Scenario: User builds the default configuration
 -----------------------------------------------
 
-::
+
+.. code:: python
 
     @given("an empty configuration")
     def empty_configuration(context):
         context.configuration = OperatorConfiguration(source=[''])
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @when("the user checks the operator configuration")
     def check_configuration(context):
@@ -40,9 +44,11 @@ Scenario: User builds the default configuration
             for config in context.configuration.operation_configurations:
                 pass
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @then("the operator configuration is the default")
     def default_configuration(context):
@@ -59,14 +65,14 @@ Scenario: User builds the default configuration
         assert_that(len([config for config in context.configuration.operation_configurations]),
                     is_(0))
         return
-    
 
 
 
 Scenario: User builds configuration with operations
 ---------------------------------------------------
 
-::
+
+.. code:: python
 
     configuration = """
     [OPERATIONS]
@@ -84,12 +90,12 @@ Scenario: User builds configuration with operations
     def configuration_operations(context):
         context.configuration = OperatorConfiguration(configuration)
         return
-    
 
 
   When the user checks the operator configuration
 
-::
+
+.. code:: python
 
     @then("the operator configuration has the operation configurations")
     def assert_operation_configurations(context):
@@ -125,9 +131,9 @@ Scenario: User builds configuration with operations
     
         context.configuration._operation_configurations = [mock_operation_config, mock_operation_config_2]
     
-        print context.configuration.operator.components
+        print(context.configuration.operator.components)
         assert_that(context.configuration.operator.components,
                         contains(mock_operation, mock_operation_2))
         return
-    
+
 

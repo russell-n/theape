@@ -6,13 +6,11 @@ import unittest
 from mock import MagicMock, patch
 
 # the ape
-from ape.interface.arguments.runarguments import Run
-from ape.interface.arguments.arguments import BaseArguments
-from ape.interface.arguments.runarguments import RunArgumentsConstants
-from ape.interface.arguments.runarguments import RunStrategy
-from ape.interface.arguments.basestrategy import BaseStrategy
-
-
+from theape.infrastructure.arguments.runarguments import Run
+from theape.infrastructure.arguments.arguments import BaseArguments
+from theape.infrastructure.arguments.runarguments import RunArgumentsConstants
+from theape.infrastructure.arguments.runarguments import RunStrategy
+from theape.infrastructure.arguments.basestrategy import BaseStrategy
 
 class TestRunArguments(unittest.TestCase):
     def setUp(self):
@@ -44,7 +42,6 @@ class TestRunArguments(unittest.TestCase):
         self.arguments.args = self.args + configfiles
         self.assertEqual(self.arguments.configfiles, configfiles)
         return
-
 
 class TestRunStrategy(unittest.TestCase):
     def setUp(self):
@@ -99,7 +96,7 @@ class TestRunStrategy(unittest.TestCase):
         trace.return_value = tracer
         with patch('trace.Trace', trace):
             self.strategy.function(self.args)
-            print tracer.mock_calls
+            print(tracer.mock_calls)
             tracer.runfunc.assert_called_with(self.ape)            
         return
 

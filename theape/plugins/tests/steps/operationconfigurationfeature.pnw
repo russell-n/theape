@@ -11,7 +11,7 @@ from behave import when, then, given
 from hamcrest import assert_that, is_, instance_of, contains, has_entries
 
 # this package
-from ape.plugins.apeplugin import OperationConfiguration, OperatorConfiguration
+from theape.plugins.apeplugin import OperationConfiguration, OperatorConfiguration
 @
 
 Scenario: User builds Operation Configuration

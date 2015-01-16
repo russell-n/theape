@@ -11,9 +11,8 @@ except ImportError:
     pass    
 
 # this package
-from ape.parts.storage.filestorage import FileStorage, AMBIGUOUS
-from ape.commoncode.errors import ApeError
-
+from theape.parts.storage.filestorage import FileStorage, AMBIGUOUS
+from theape import ApeError
 
 PATH = 'ape/call'
 class TestFileStorage(unittest.TestCase):
@@ -37,7 +36,8 @@ class TestFileStorage(unittest.TestCase):
         
     def test_write_error(self):
         storage = FileStorage(PATH)
-        self.assertRaises(ApeError, storage.write, ('',))
+        with self.assertRaises(ApeError):
+            storage.write('')
         return
 
     def test_writeline(self):
@@ -78,8 +78,7 @@ class TestFileStorage(unittest.TestCase):
     def tearDown(self):
         if os.path.isdir(PATH):
             shutil.rmtree(PATH)
-        return        
-
+        return
 
 PATH = 'ape/call'
 class TestFileStorageOpen(unittest.TestCase):
@@ -165,7 +164,6 @@ class TestFileStorageOpen(unittest.TestCase):
         return
 # end class TestFileStorageOpen
 
-
 class TestFileStorageWith(unittest.TestCase):
     def setUp(self):
         self.storage = FileStorage('test')
@@ -191,5 +189,3 @@ class TestFileStorageWith(unittest.TestCase):
         self.assertIsNotNone(new_storage.file)
         new_storage.file.close.assert_called_with()
         return
-        
-                

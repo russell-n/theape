@@ -1,8 +1,7 @@
 
 # this package
-from ape.infrastructure.arguments.argumentbuilder import ArgumentBuilder
-from ape.log_setter import set_logger
-
+from theape.infrastructure.arguments.argumentbuilder import ArgumentBuilder
+from theape.log_setter import set_logger
 
 def enable_debugging(args):
     """
@@ -20,7 +19,6 @@ def enable_debugging(args):
         import pdb
         pdb.set_trace()
     return
-
 
 def main():
     """

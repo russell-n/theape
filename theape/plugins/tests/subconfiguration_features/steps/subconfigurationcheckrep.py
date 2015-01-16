@@ -5,7 +5,7 @@ from hamcrest import assert_that, is_, calling, raises, equal_to
 from configobj import ConfigObj
 
 # this package
-from ape.plugins.base_plugin import SubConfiguration, ConfigurationError
+from theape.plugins.base_plugin import SubConfiguration, ConfigurationError
 
 configspec_source = """
 plugin = option('Concrete')

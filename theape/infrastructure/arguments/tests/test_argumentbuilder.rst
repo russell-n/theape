@@ -1,28 +1,32 @@
 Testing the ArgumentBuilder
 ===========================
 
-.. currentmodule:: ape.interface.arguments.tests.test_argumentbuilder
+.. module:: theape.interface.arguments.tests.test_argumentbuilder
 .. autosummary:: api
 
    TestArgumentBuilder.test_constructor
    TestArgumentBuilder.test_parse_args
 
-::
+
+.. code:: python
 
     # python standard library
     import unittest
     
     # the ape
-    from ape.interface.arguments.argumentbuilder import ArgumentBuilder
-    from ape.interface.arguments.fetcharguments import Fetch
-    from ape.interface.arguments.runarguments import Run
-    from ape.interface.arguments.listarguments import List
-    from ape.interface.arguments.checkarguments import Check
-    from ape.interface.arguments.helparguments import Help
-    
+    from theape.infrastructure.arguments.argumentbuilder import
+    ArgumentBuilder
+    from theape.infrastructure.arguments.fetcharguments import Fetch
+    from theape.infrastructure.arguments.runarguments import Run
+    from theape.infrastructure.arguments.listarguments import List
+    from theape.infrastructure.arguments.checkarguments import Check
+    from theape.infrastructure.arguments.helparguments import Help
     
 
-::
+
+
+
+.. code:: python
 
     class TestArgumentBuilder(unittest.TestCase):
         def test_constructor(self):
@@ -58,5 +62,5 @@ Testing the ArgumentBuilder
             self.assertIsInstance(args, Help)
             return
     
-    
+
 

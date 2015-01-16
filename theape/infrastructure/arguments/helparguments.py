@@ -14,12 +14,10 @@ optional arguments:
     
 """
 
-
 # the ape
-from ape.infrastructure.crash_handler import try_except
-from ape.infrastructure.arguments.arguments import BaseArguments
-from ape.infrastructure.arguments.basestrategy import BaseStrategy
-
+from theape.infrastructure.crash_handler import try_except
+from theape.infrastructure.arguments.arguments import BaseArguments
+from theape.infrastructure.arguments.basestrategy import BaseStrategy
 
 class HelpArgumentsConstants(object):
     """
@@ -31,7 +29,6 @@ class HelpArgumentsConstants(object):
     name = "<name>"
 
     default_name = 'Ape'
-
 
 class Help(BaseArguments):
     """
@@ -93,8 +90,7 @@ class Help(BaseArguments):
         self._modules = None
         self._name = None
         return
-# end Help    
-
+# end Help
 
 class HelpStrategy(BaseStrategy):
     """
@@ -123,8 +119,8 @@ class HelpStrategy(BaseStrategy):
                                message="{0}".format(error))
 
             else:
-                print "'{0}' is not a known plugin.\n".format(args.name)
-                print "These are the known (built-in) plugins:\n"
+                print( "'{0}' is not a known plugin.\n".format(args.name))
+                print( "These are the known (built-in) plugins:\n")
                 self.quartermaster.list_plugins()
         except AttributeError as error:
             self.log_error("{0} has implemented its help incorrectly -- '{1}'".format(args.name,

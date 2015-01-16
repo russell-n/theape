@@ -4,6 +4,7 @@ Parts
 .. _ape-parts:
 
 
+
 This package contains parts that can be re-used by other code. Since the :ref:`plugins <plugins-folder>` are meant to be for users, the parts need to be bundled into plugins if the user is meant to know about them.
 
 **part** (n.) 
@@ -22,9 +23,11 @@ Auto-Generated Documentation
 These are the documents created from the source files.
 
 
+
 .. toctree::
    :maxdepth: 1
 
+   The Event Timer <eventtimer.rst>
    The OatBran <oatbran.rst>
    The Randomizer <randomizer.rst>
    Sorted List <sortedlist.rst>
@@ -32,13 +35,17 @@ These are the documents created from the source files.
 .. toctree::
    :maxdepth: 1
 
-   Wifi <wifi/index.rst>
-   Sleep <sleep/index.rst>
-   Help Page <helppage/index.rst>
+   The Command <command/index.rst>
+   Client Connections <connections/index.rst>
+   Countdown <countdown/index.rst>
    Dummy Components <dummy/index.rst>
-   Connections <connections/index.rst>
+   Help Page <helppage/index.rst>
+   Iperf <iperf/index.rst>
+   Sleep <sleep/index.rst>
    Storage <storage/index.rst>
    Watchers <watchers/index.rst>
-   Countdown <countdown/index.rst>
+   Wifi <wifi/index.rst>
+
+
 
 

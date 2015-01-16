@@ -3,21 +3,25 @@ Testing The RunArguments
 
 This tests the arguments for the `run` sub-command.
 
-.. currentmodule:: ape.interface.arguments.arguments.tests.test_runarguments
+.. module:: theape.interface.arguments.arguments.tests.test_runarguments
 .. autosummary::
    :toctree: api
 
    TestRunArguments.test_constructor
    TestRunArguments.test_configfiles
 
-::
+
+
+
+
+.. code:: python
 
     class TestRunArguments(unittest.TestCase):
         def setUp(self):
             self.args = ['run']
             self.arguments = Run(args=self.args)
             return
-        
+    
         def test_constructor(self):
             """
             Does it build properly?
@@ -43,7 +47,6 @@ This tests the arguments for the `run` sub-command.
             self.assertEqual(self.arguments.configfiles, configfiles)
             return
     
-    
 
 
 
@@ -59,7 +62,8 @@ Testing the Run Strategy
    TestRunStrategy.test_callgraph
    TestRunStrategy.test_errors
 
-::
+
+.. code:: python
 
     class TestRunStrategy(unittest.TestCase):
         def setUp(self):
@@ -73,7 +77,7 @@ Testing the Run Strategy
             # monkey-patch
             self.strategy.build_ape = self.build_ape
             return
-        
+    
         def test_constructor(self):
             """
             Does it build?
@@ -114,8 +118,8 @@ Testing the Run Strategy
             trace.return_value = tracer
             with patch('trace.Trace', trace):
                 self.strategy.function(self.args)
-                print tracer.mock_calls
-                tracer.runfunc.assert_called_with(self.ape)            
+                print(tracer.mock_calls)
+                tracer.runfunc.assert_called_with(self.ape)
             return
     
         def test_errors(self):
@@ -127,5 +131,6 @@ Testing the Run Strategy
             self.strategy.function(self.args)
             return
     
-    
+
+
 

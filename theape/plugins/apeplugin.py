@@ -1,6 +1,4 @@
 
-from __future__ import print_function
-
 # python standard library
 import re
 import os
@@ -11,24 +9,22 @@ from configobj import ConfigObj
 #from validate import Validator
 
 # this package
-from ape import BaseClass
-import ape.infrastructure.arguments.arguments as basearguments
-from ape.infrastructure.arguments.argumentbuilder import ArgumentBuilder
-from ape.infrastructure.configurationmap import ConfigurationMap
-from ape.components.component import Composite
-from ape.parts.storage.filestorage import FileStorage
+from theape import BaseClass
+import theape.infrastructure.arguments.arguments as basearguments
+from theape.infrastructure.arguments.argumentbuilder import ArgumentBuilder
+from theape.infrastructure.configurationmap import ConfigurationMap
+from theape.components.component import Composite
+from theape.parts.storage.filestorage import FileStorage
 
 from base_plugin import BasePlugin
-from ape.infrastructure.code_graphs import module_diagram, class_diagram
-from ape.infrastructure.errors import ApeError, DontCatchError, ConfigurationError
-from ape import APESECTION, MODULES_SECTION, BLUE_WARNING
-import  ape.plugins.quartermaster
-from ape.parts.countdown.countdown import INFO
-#from ape.parts.countdown.countdown import CountdownTimer
-import ape.parts.countdown.countdown
-import ape.infrastructure.singletons as singletons
-#from ape.infrastructure.timemap import RelativeTime, AbsoluteTime
-from ape.infrastructure.timemap import time_validator
+from theape.infrastructure.code_graphs import module_diagram, class_diagram
+from theape.infrastructure.errors import ApeError, DontCatchError, ConfigurationError
+from theape import APESECTION, MODULES_SECTION, BLUE_WARNING
+import  theape.plugins.quartermaster
+from theape.parts.countdown.countdown import INFO
+import theape.parts.countdown.countdown
+import theape.infrastructure.singletons as singletons
+from theape.infrastructure.timemap import time_validator
 
 class OperatorConfigurationConstants(object):
     """
@@ -182,8 +178,6 @@ class OperatorConfiguration(BaseClass):
                     else:
                         self.log_error("ConfigurationError",
                                        message)
-                        self.log_error("ConfigurationError",
-                                       "need plugins for {0}".format(operations.values()))
                         raise ConfigurationError(message)
                         
                 else:

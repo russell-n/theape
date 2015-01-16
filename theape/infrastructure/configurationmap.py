@@ -6,16 +6,14 @@ import os
 from collections import OrderedDict, namedtuple
 
 # this package
-from ape import BaseClass
-from ape.infrastructure.code_graphs import module_diagram, class_diagram
-from ape.infrastructure.errors import ConfigurationError
-from ape.infrastructure.timemap import RelativeTime, AbsoluteTime
-
+from theape import BaseClass
+from theape.infrastructure.code_graphs import module_diagram, class_diagram
+from theape.infrastructure.errors import ConfigurationError
+from theape.infrastructure.timemap import RelativeTime, AbsoluteTime
 
 DEFAULT = 'DEFAULT'
 CONFIG_GLOB = 'config_glob'
 IN_PWEAVE = __name__ == '__builtin__'
-
 
 class ConfigurationMap(BaseClass):
     """
@@ -163,9 +161,9 @@ class ConfigurationMap(BaseClass):
 
     def get_tuple(self, section, option, optional=False, default=None, delimiter=','):
         """
-        Gets the value and converts it to a list
+        Gets the value and converts it to a tuple
 
-        :return: value list with whitespace trimmed
+        :return: value tuple with whitespace trimmed
         """
         return tuple(self.get_list(section, option, optional=False, default=None,
                                    delimiter=delimiter))
@@ -301,10 +299,9 @@ class ConfigurationMap(BaseClass):
         with open(path, 'w') as f:
             self.parser.write(f)
         return
-# end class ConfigurationMap    
-
+# end class ConfigurationMap
 
 if IN_PWEAVE:
     this_file = os.path.join(os.getcwd(), 'configurationmap.py')
     module_diagram_file = module_diagram(module=this_file, project='configurationmap')
-    print ".. image:: {0}".format(module_diagram_file)
+    print( ".. image:: {0}".format(module_diagram_file))

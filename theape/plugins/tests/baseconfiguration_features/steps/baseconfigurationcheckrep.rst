@@ -4,7 +4,11 @@ BaseConfiguration check_rep
 .. literalinclude:: ../baseconfigurationcheckrep.feature
    :language: gherkin
 
-::
+
+
+
+
+.. code:: python
 
     configspec_source = """
     plugin = option('Concrete')
@@ -27,14 +31,14 @@ BaseConfiguration check_rep
         @property
         def product(self):
             return
-    
 
 
 
 Scenario: User calls check_rep on valid configuration
 -----------------------------------------------------
 
-::
+
+.. code:: python
 
     valid_configuration = """
     [cement]
@@ -48,31 +52,35 @@ Scenario: User calls check_rep on valid configuration
         context.configuration = ConcreteConfiguration(source=ConfigObj(valid_configuration),
                                                       section_name='cement')
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @when("check_rep is called")
     def step_implementation(context):
         context.outcome = context.configuration.check_rep()
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @then("nothing happens")
     def step_implementation(context):
         assert_that(context.outcome,
                     is_(None))
         return
-    
 
 
 
 Scenario: User calls check_rep on bad configuration
 ---------------------------------------------------
 
-::
+
+.. code:: python
 
     invalid_configuration = """
     [konkrete]
@@ -87,31 +95,35 @@ Scenario: User calls check_rep on bad configuration
                                                       section_name='konkrete')
             
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @when("check_rep is checked")
     def check_rep_check(context):
         context.callable = context.configuration.check_rep
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @then("a ConfigurationError is raised")
     def step_implementation(context):
         assert_that(calling(context.callable),
                     raises(ConfigurationError))
         return
-    
 
 
 
 Scenario: User calls check_rep on configuration with extra values
 -----------------------------------------------------------------
 
-::
+
+.. code:: python
 
     extra_option_configuration = """
     [cement]
@@ -126,7 +138,6 @@ Scenario: User calls check_rep on configuration with extra values
         context.configuration = ConcreteConfiguration(source=ConfigObj(extra_option_configuration),
                                                       section_name='cement')
         return
-    
 
 
   When check_rep is checked
@@ -135,7 +146,8 @@ Scenario: User calls check_rep on configuration with extra values
 Scenario: User calls check_rep on configuration with allowed extra values
 -------------------------------------------------------------------------
 
-::
+
+.. code:: python
 
     @given("BaseConfiguration implementation with allowed unknown values")
     def allowed_unknowns(context):
@@ -143,25 +155,26 @@ Scenario: User calls check_rep on configuration with allowed extra values
                                                       section_name='cement',
                                                       allow_extras=True)
         return
-    
 
 
 
 When check_rep is checked
 
-::
+
+.. code:: python
 
     @then("a ConfigurationError not raised")
     def no_error(context):
         context.callable()
         return
-    
 
-::
+
+
+
+.. code:: python
 
     @then("the extra values are in the configuration")
     def assert_extras(context):
         assert_that(context.configuration.configuration['ummagumma'],
                     is_(equal_to('apple_banana')))
-    
 

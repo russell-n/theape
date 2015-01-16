@@ -1,7 +1,7 @@
 Testing the Watcher
 ===================
 
-.. currentmodule:: ape.parts.watchers.tests.testthewatcher
+.. module:: theape.parts.watchers.tests.testthewatcher
 .. autosummary::
    :toctree: api
 
@@ -24,9 +24,9 @@ import threading
 from mock import MagicMock
 
 # this package
-from ape.parts.watchers.thewatcher import TheWatcher
-from ape.parts.wifi.iwconfig import IwconfigQuery
-from ape import ApeError
+from theape.parts.watchers.thewatcher import TheWatcher
+from theape.parts.wifi.iwconfig import IwconfigQuery
+from theape import ApeError
 @
 <<name='TestThewatcher', echo=False>>=
 class TestThewatcher(unittest.TestCase):

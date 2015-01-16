@@ -1,6 +1,7 @@
 The OatBran
 ===========
-.. currentmodule:: ape.commoncode.oatbran
+.. currentmodule:: theape.parts.oatbran
+
 Oat Bran helps with regular expressions. Names are uppercased to avoid keyword clashes
 <<name='import', echo=False>>=
 import string
@@ -12,21 +13,6 @@ LEFT_BRACKET = '['
 RIGHT_BRACKET = ']'
 @
 
-Contents:
-
-    * :ref:`Formal Definition <ape-oatbran-formar-definition>`
-
-    * :ref:`Groups <ape-oatbran-groups>`
-
-    * :ref:`Quantifiers <ape-oatbran-quantifiers>`
-
-    * :ref:`Character Classes <ape-oatbran-character-classes>`
-
-    * :ref:`Boundaries <ape-oatbran-boundaries>`
-
-    * :ref:`Common Patterns <ape-oatbran-common-patterns>`
-
-    * :ref:`Numbers <ape-oatbran-numbers>`
 
 .. _ape-oatbran-formal-definition:    
     

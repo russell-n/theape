@@ -3,7 +3,7 @@
 from __future__ import print_function
 from abc import ABCMeta, abstractmethod, abstractproperty
 import os
-from types import StringType
+from types import StringType, DictType
 
 # third party
 from configobj import ConfigObj, flatten_errors, get_extra_values
@@ -105,7 +105,7 @@ class SubConfigurationConstants(object):
     missing_section_message = "Section '{section}' to configure '{plugin}' not found in configuration"
     missing_plugin_option_message = "'plugin' option missing in section '{0}'"
     missing_plugin_replacement = "<non-plugin>"
-    extra_message = "Extra {item_type} in section '{section}. '{name}'"
+    extra_message = "Extra {item_type} in section [{section}] - '{name}'"
     check_rep_failure_message = "Errors in section [{0}] in the configuration"
 
 class SubConfiguration(BaseClass):
@@ -115,7 +115,8 @@ class SubConfiguration(BaseClass):
     __metaclass__ = ABCMeta
     def __init__(self, source, section_name, allow_extras=False,
                  configspec_source=None, 
-                 updatable=True, constants=None):
+                 updatable=True, constants=None,
+                 check_methods=None):
         """
         SubConfiguration constructor
 
@@ -127,6 +128,7 @@ class SubConfiguration(BaseClass):
          - `configspec_source`: string with configuration specification (use to override the default)
          - `updatable`: if True, allows updating from other sections
          - `constants`: object with same properties as SubConfigurationConstants
+         - `check_methods`: dict of extra check-methods for the Validator
         """
         super(SubConfiguration, self).__init__()
         self._constants = constants
@@ -141,7 +143,31 @@ class SubConfiguration(BaseClass):
         self._configuration = None
         self._plugin_name = None
         self._validation_outcome = None
-        self._constants
+        self._constants = constants
+        self._check_methods = check_methods
+        return
+
+    @property
+    def check_methods(self):
+        """
+        dict of extra check methods for the validator
+        """
+        return self._check_methods
+
+    @check_methods.setter
+    def check_methods(self, new_checks):
+        """
+        updates self._check_methods or sets it if it is None
+
+        :param:
+
+         - `new_checks`: dict of check methods or None
+        """
+        if (type(new_checks) is DictType and
+            type(self._check_methods) is DictType):
+            self._check_methods.update(new_checks)
+        else:
+            self._check_methods = new_checks
         return
 
     @abstractproperty
@@ -152,6 +178,9 @@ class SubConfiguration(BaseClass):
 
     @property
     def sample(self):
+        """
+        Creates a sample configuration section using the configspec_source
+        """
         if self._sample is None:
             sample = self.configspec_source.lstrip('\n')
             sample = sample.replace('[', '[[[')
@@ -191,7 +220,6 @@ class SubConfiguration(BaseClass):
             except KeyError as error:
                 self.logger.debug(error)
                 self.logger.warning(self.constants.missing_plugin_option_message.format(self.section_name))
-                #raise ConfigurationError(self.constants.missing_plugin_option_message.format(self.section_name))
                 self._plugin_name = self.constants.missing_plugin_replacement
         return self._plugin_name
 
@@ -201,7 +229,7 @@ class SubConfiguration(BaseClass):
         validator for the configuration
         """
         if self._validator is None:
-            self._validator = Validator()
+            self._validator = Validator(self.check_methods)
         return self._validator
 
     @property
@@ -364,7 +392,13 @@ class SubConfiguration(BaseClass):
             self.logger.debug(error)
             self.logger.info('Expected Configuration Matching:\n{0}'.format(self.sample))
             raise ConfigurationError(self.constants.check_rep_failure_message.format(self.section_name))
-        return            
+        return
+
+    def __getattr__(self, key):
+        """
+        Passes key to self.configuration
+        """
+        return self.configuration[key]
 # end SubConfiguration
 
 class BaseConfiguration(SubConfiguration):

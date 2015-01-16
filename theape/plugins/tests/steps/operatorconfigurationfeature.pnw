@@ -14,10 +14,10 @@ from hamcrest import assert_that, is_, equal_to, contains
 from mock import MagicMock, patch, call
 
 # this package
-from ape.plugins.apeplugin import OperatorConfigurationConstants, OperatorConfiguration
-from ape.plugins.apeplugin import OperationConfiguration
-from ape.parts.countdown.countdown import INFO, CountdownTimer
-from ape.plugins.quartermaster import QuarterMaster
+from theape.plugins.apeplugin import OperatorConfigurationConstants, OperatorConfiguration
+from theape.plugins.apeplugin import OperationConfiguration
+from theape.parts.countdown.countdown import INFO, CountdownTimer
+from theape.plugins.quartermaster import QuarterMaster
 @
 
 Scenario: User builds the default configuration
@@ -130,7 +130,7 @@ def assert_operation_configurations(context):
 
     context.configuration._operation_configurations = [mock_operation_config, mock_operation_config_2]
 
-    print context.configuration.operator.components
+    print(context.configuration.operator.components)
     assert_that(context.configuration.operator.components,
                     contains(mock_operation, mock_operation_2))
     return

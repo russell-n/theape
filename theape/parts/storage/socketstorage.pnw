@@ -14,8 +14,8 @@ import socket
 from base_storage import BaseStorage
 
 #from ape import BaseClass
-from ape import ApeError
-from ape.infrastructure.code_graphs import module_diagram, class_diagram
+from theape import ApeError
+from theape.infrastructure.code_graphs import module_diagram, class_diagram
 @
 
 <<name='constants', echo=False>>=
@@ -53,7 +53,7 @@ Not all of the methods make sense (like open) so only a sub-set will be implemen
 SocketStorage API
 -----------------
 
-.. currentmodule:: ape.parts.storage.socketstorage
+.. module:: theape.parts.storage.socketstorage
 .. autosummary::
    :toctree: api
 
@@ -186,7 +186,7 @@ Module Diagram
 if IN_PWEAVE:
     this_file = os.path.join(os.getcwd(), 'socketstorage.py')
     module_diagram_file = module_diagram(module=this_file, project='socketstorage')
-    print ".. image:: {0}".format(module_diagram_file)
+    print( ".. image:: {0}".format(module_diagram_file))
 
 @
 
@@ -200,7 +200,7 @@ if IN_PWEAVE:
 ..     class_diagram_file = class_diagram(class_name="SocketStorage",
 ..                                        filter='OTHER',
 ..                                        module=this_file)
-..     print ".. image:: {0}".format(class_diagram_file)
+..     print( ".. image:: {0}".format(class_diagram_file))
 .. @
 
 

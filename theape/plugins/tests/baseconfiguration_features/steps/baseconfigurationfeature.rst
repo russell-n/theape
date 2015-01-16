@@ -593,6 +593,8 @@ Scenario: Configuration missing plugin name
     @when("the BaseConfiguration checks process_errors")
     def check_process_errors(context):
         context.callable = context.configuration.process_errors
+        import pudb; pudb.set_trace()
+        context.callable()
         return
 
 

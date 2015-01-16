@@ -52,7 +52,7 @@ Collaborators
    TheWatcher : query
    TheWatcher : fields
 
-.. currentmodule:: ape.parts.watchers.thewatcher
+.. module:: theape.parts.watchers.thewatcher
 .. autosummary::
    :toctree: api
 
@@ -82,10 +82,10 @@ Previously, the storage was always assumed to be a file-like object. To try and 
 
 <<name='imports', echo=False>>=
 # this package
-from ape import BaseThreadClass
-from ape import ApeError
-from ape.parts.eventtimer import wait
-from ape.parts.eventtimer import EventTimer
+from theape import BaseThreadClass
+from theape import ApeError
+from theape.parts.eventtimer import wait
+from theape.parts.eventtimer import EventTimer
 @
 <<name='TheWatcher', echo=False>>=
 class TheWatcher(BaseThreadClass):

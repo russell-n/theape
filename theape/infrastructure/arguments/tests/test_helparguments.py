@@ -8,10 +8,9 @@ import string
 from mock import MagicMock
 
 # the ape
-from ape.interface.arguments.helparguments import Help
-from ape.interface.arguments.helparguments import HelpStrategy
-from ape.interface.arguments.basestrategy import BaseStrategy
-
+from theape.infrastructure.arguments.helparguments import Help
+from theape.infrastructure.arguments.helparguments import HelpStrategy
+from theape.infrastructure.arguments.basestrategy import BaseStrategy
 
 class TestHelp(unittest.TestCase):
     def setUp(self):
@@ -82,7 +81,6 @@ class TestHelp(unittest.TestCase):
         self.assertEqual(modules, self.arguments.modules)
         self.assertEqual(name, self.arguments.name)
         return
-
 
 class TestHelpStrategy(unittest.TestCase):
     def test_constructor(self):

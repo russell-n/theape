@@ -11,12 +11,12 @@ import string
 from mock import MagicMock
 
 # the ape
-from ape.interface.arguments.helparguments import Help
-from ape.interface.arguments.helparguments import HelpStrategy
-from ape.interface.arguments.basestrategy import BaseStrategy
+from theape.infrastructure.arguments.helparguments import Help
+from theape.infrastructure.arguments.helparguments import HelpStrategy
+from theape.infrastructure.arguments.basestrategy import BaseStrategy
 @
 
-.. currentmodule:: ape.interface.arguments.tests.test_helparguments
+.. module:: theape.interface.arguments.tests.test_helparguments
 .. autosummary::
    :toctree: api
 

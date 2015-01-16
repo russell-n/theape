@@ -3,7 +3,7 @@ Testing the TimeTracker
 
 This tests the :ref:`TimeTracker <ape-parts-countdown-timetracker>` class.
 
-.. currentmodule:: ape.parts.countdown.countdown
+.. module:: theape.parts.countdown.countdown
 .. autosummary::
    :toctree: api
 
@@ -20,9 +20,9 @@ from mock import patch, MagicMock, call
 import numpy
 
 # this package
-from ape.parts.countdown.countdown import TimeTracker, INFO, DEBUG, STAT_STRING
-from ape.parts.countdown.countdown import ELAPSED_STRING
-from ape import ApeError
+from theape.parts.countdown.countdown import TimeTracker, INFO, DEBUG, STAT_STRING
+from theape.parts.countdown.countdown import ELAPSED_STRING
+from theape import ApeError
 @
 <<name='TestingTimeTracker', echo=False>>=
 class TestingTimeTracker(unittest.TestCase):

@@ -1,4 +1,4 @@
-usage: ape.interface [-h] [--debug] [--silent] [--pudb] [--pdb]
+usage: theape.interface [-h] [--debug] [--silent] [--pudb] [--pdb]
                             [--trace]
                             {run,fetch,list,check,help} ...
 

@@ -1,7 +1,7 @@
 Testing the Watcher
 ===================
 
-.. currentmodule:: ape.parts.watchers.tests.testthewatcher
+.. module:: theape.parts.watchers.tests.testthewatcher
 .. autosummary::
    :toctree: api
 
@@ -10,4 +10,13 @@ Testing the Watcher
    TestThewatcher.test_call
    TestThewatcher.test_header
    TestThewatcher.test_run
+   TestThewatcher.test_check_rep
+   TestThewatcher.test_stop
+   TestThewatcher.test_timer
+   TestThewatcher.test_close
+
+
+
+
+
 

@@ -6,17 +6,15 @@ from collections import OrderedDict
 from configobj import ConfigObj
 
 # this package
-from ape import BasePlugin
-from ape.parts.sleep.sleep import TheBigSleep
-from ape.infrastructure.timemap import time_validator
-
+from theape import BasePlugin
+from theape.parts.sleep.sleep import TheBigSleep
+from theape.infrastructure.timemap import time_validator
 
 SLEEP_SECTION = 'SLEEP'
 END_OPTION = 'end'
 TOTAL_OPTION = 'total'
 INTERVAL_OPTION = 'interval'
 VERBOSE_OPTION = 'verbose'
-
 
 configuration = """
   [[SLEEP]]
@@ -34,14 +32,12 @@ configuration = """
   verbose = True
 """
 
-
 sleep_configspec = """
 end = absolute_time(default=None)
 total = relative_time(default=None)
 interval = relative_time(default=1)
 verbose = boolean(default=True)
 """
-
 
 sections = OrderedDict()
 sections['name'] = '{bold}sleep{reset} -- a countdown timer that blocks until time is over'
@@ -62,7 +58,6 @@ The configuration options --
 One of {bold}end{reset} or {bold}total{reset} needs to be specified. Everything else is optional.
 """
 sections['author'] = 'ape'
-
 
 class Sleep(BasePlugin):
     """
@@ -96,7 +91,7 @@ class Sleep(BasePlugin):
         """
         prints a config-file sample
         """
-        print configuration
+        print(configuration)
 
     @property
     def sections(self):

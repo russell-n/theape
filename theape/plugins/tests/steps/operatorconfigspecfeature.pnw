@@ -15,8 +15,8 @@ from behave import given, when, then
 from hamcrest import assert_that, is_, equal_to, contains_inanyorder, contains
 
 # this package
-from ape.plugins.apeplugin import OperatorConfigspec, OperatorConfigurationConstants
-from ape.infrastructure.timemap import RelativeTime, AbsoluteTime
+from theape.plugins.apeplugin import OperatorConfigspec, OperatorConfigurationConstants
+from theape.infrastructure.timemap import RelativeTime, AbsoluteTime
 @
    
 Scenario: User validates empty settings

@@ -11,9 +11,11 @@ This is a plugin for :ref:`Composites <ape-thewatcher>`. The plugin creates as i
 
 
 
+
 .. uml::
 
    BasePlugin <|-- Watcher
+
 
 
 
@@ -22,7 +24,8 @@ The Configuration
 
 The `Watcher` is a bundle of `Watcher`, `Query`, `Connection`, and `FileStorage`.
 
-::
+
+.. code:: python
 
     configuration = """
     [{0}]
@@ -31,7 +34,6 @@ The `Watcher` is a bundle of `Watcher`, `Query`, `Connection`, and `FileStorage`
                TOTAL_OPTION,
                INTERVAL_OPTION,
                VERBOSE_OPTION)
-    
 
 
 
@@ -40,7 +42,8 @@ The Sections
 
 The help-sections.
 
-::
+
+.. code:: python
 
     sections = OrderedDict()
     sections['name'] = '{bold}sleep{reset} -- a countdown timer that blocks until time is over'
@@ -61,16 +64,18 @@ The help-sections.
     One of {bold}end{reset} or {bold}total{reset} needs to be specified. Everything else is optional.
     """
     sections['author'] = 'ape'
-    
 
 
 
 The Plugin
 ----------
 
-.. currentmodule:: ape.plugins.sleep_plugin
+.. module:: theape.plugins.sleep_plugin
 .. autosummary::
    :toctree: api
 
    Sleep
+
+
+
 

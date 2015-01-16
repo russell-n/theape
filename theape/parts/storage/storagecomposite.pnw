@@ -32,8 +32,8 @@ The ``StorageComposite`` maintains a list of file-like objects and, once ``open`
    
 <<name='imports', echo=False>>=
 # this package 
-from ape import BaseClass
-from ape import ApeError
+from theape import BaseClass
+from theape import ApeError
 @
 
 <<name='check_opened', echo=False>>=

@@ -6,12 +6,11 @@ import unittest
 from mock import MagicMock
 
 # the ape
-from ape.interface.arguments.fetcharguments import Fetch, FetchStrategy
-from ape.interface.arguments.basestrategy import BaseStrategy
-import ape.interface.arguments.fetcharguments
+from theape.infrastructure.arguments.fetcharguments import Fetch, FetchStrategy
+from theape.infrastructure.arguments.basestrategy import BaseStrategy
+import theape.infrastructure.arguments.fetcharguments
 
-
-fetch_usage = ape.interface.arguments.fetcharguments.__doc__
+fetch_usage = theape.infrastructure.arguments.fetcharguments.__doc__
 class TestFetchArguments(unittest.TestCase):
     def setUp(self):
         self.args = ['fetch']
@@ -76,8 +75,7 @@ class TestFetchArguments(unittest.TestCase):
         self.assertEqual(names, self.arguments.names)
         self.assertEqual(modules, self.arguments.modules)
         return
-# end TestFetchArguments    
-
+# end TestFetchArguments
 
 class TestFetchStrategy(unittest.TestCase):
     def setUp(self):

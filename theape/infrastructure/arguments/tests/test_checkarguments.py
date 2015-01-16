@@ -6,9 +6,9 @@ import unittest
 from mock import MagicMock
 
 # the APE
-from ape.interface.arguments.arguments import BaseArguments
-from ape.interface.arguments.checkarguments import Check, CheckStrategy
-from ape.interface.arguments.basestrategy import BaseStrategy
+from theape.infrastructure.arguments.arguments import BaseArguments
+from theape.infrastructure.arguments.checkarguments import Check, CheckStrategy
+from theape.infrastructure.arguments.basestrategy import BaseStrategy
 
 class TestCheck(unittest.TestCase):
     def setUp(self):
@@ -60,8 +60,7 @@ class TestCheck(unittest.TestCase):
         self.assertEqual('dog war'.split(), self.arguments.configfiles)
         self.assertEqual(["big.pig"], self.arguments.modules)
         return
-# end TestCheck    
-
+# end TestCheck
 
 class TestCheckStrategy(unittest.TestCase):
     def setUp(self):

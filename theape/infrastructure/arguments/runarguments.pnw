@@ -3,8 +3,8 @@ The Run Sub-Command Arguments
 <<name='docstring'>>=
 """`run` sub-command
 
-Usage: ape run -h
-       ape run [<configuration>...]
+Usage: theape run -h
+       theape run [<configuration>...]
 
 Positional Arguments:
 
@@ -24,10 +24,10 @@ See the :ref:`developer documentation <docopt-reproducingape-run-sub-command>` f
 import datetime
 
 # the APE
-from ape.infrastructure.strings import RED, BOLD, RESET
-from ape.infrastructure.arguments.arguments import BaseArguments
-from ape.infrastructure.arguments.basestrategy import BaseStrategy
-from ape.infrastructure.crash_handler import try_except
+from theape.infrastructure.strings import RED, BOLD, RESET
+from theape.infrastructure.arguments.arguments import BaseArguments
+from theape.infrastructure.arguments.basestrategy import BaseStrategy
+from theape.infrastructure.crash_handler import try_except
 @
 
 .. _ape-interface-run-arguments-constants:
@@ -57,7 +57,7 @@ The RunArguments Class
 
    BaseArguments <|-- RunArguments
 
-.. currentmodule:: ape.interface.arguments.runarguments
+.. module:: theape.interface.arguments.runarguments
 .. autosummary::
    :toctree: api
 

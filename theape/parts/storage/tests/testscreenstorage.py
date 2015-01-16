@@ -9,8 +9,7 @@ except ImportError:
     pass    
 
 # this package
-from ape.parts.storage.screenstorage import ScreenStorage
-
+from theape.parts.storage.screenstorage import ScreenStorage
 
 class TestScreenStorage(unittest.TestCase):
     def setUp(self):
@@ -51,4 +50,3 @@ class TestScreenStorage(unittest.TestCase):
         line = 'aoeusnth'
         self.storage.writeline(line)
         self.stdout.write.assert_called_with(line + '\n')
-

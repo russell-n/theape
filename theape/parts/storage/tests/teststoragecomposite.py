@@ -9,9 +9,8 @@ except ImportError:
     pass
 
 # this package
-from ape.parts.storage.storagecomposite import StorageComposite
-from ape import ApeError
-
+from theape.parts.storage.storagecomposite import StorageComposite
+from theape import ApeError
 
 class TestStorageComposite(unittest.TestCase):
     def setUp(self):
@@ -69,4 +68,4 @@ class TestStorageComposite(unittest.TestCase):
         self.opened.close.assert_called_with()
         self.assertIsNone(self.composite.open_storages)
         self.composite.close()
-        return                       
+        return

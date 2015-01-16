@@ -1,33 +1,21 @@
 The OatBran
 ===========
-.. currentmodule:: ape.commoncode.oatbran
+.. currentmodule:: theape.parts.oatbran
+
 Oat Bran helps with regular expressions. Names are uppercased to avoid keyword clashes
-::
+
+
+
+.. code:: python
 
     # the class-based expressions are mostly for organization
     # but sometimes they're just too clunky
     LEFT_BRACKET = '['
     RIGHT_BRACKET = ']'
     
-    
 
 
 
-Contents:
-
-    * :ref:`Formal Definition <ape-oatbran-formar-definition>`
-
-    * :ref:`Groups <ape-oatbran-groups>`
-
-    * :ref:`Quantifiers <ape-oatbran-quantifiers>`
-
-    * :ref:`Character Classes <ape-oatbran-character-classes>`
-
-    * :ref:`Boundaries <ape-oatbran-boundaries>`
-
-    * :ref:`Common Patterns <ape-oatbran-common-patterns>`
-
-    * :ref:`Numbers <ape-oatbran-numbers>`
 
 .. _ape-oatbran-formal-definition:    
     
@@ -53,6 +41,7 @@ These are the basic building blocks of regular expressions.
 
 
 
+
 .. _ape-oatbran-groups:
 
 Groups
@@ -73,6 +62,7 @@ Besides the basic use of grouping with parentheses (to explicitly apply operatio
 
 
 
+
 .. _ape-oatbran-quantifiers:
 
 Quantifiers
@@ -89,6 +79,7 @@ Quantifiers are used to describe repetitions of patterns. The `zero_or_more` qua
    Quantifier.zero_or_one
    Quantifier.exactly
    Quantifier.m_to_n
+
 
 
 
@@ -114,6 +105,7 @@ A helper with character classes (stuff put in square-brackets ('[]')). There are
    
 
 
+
 .. _ape-oatbran-boundaries:
 
 Boundaries
@@ -128,6 +120,7 @@ Boundaries
    Boundaries.word
    Boundaries.string
    
+
 
 
 .. _ape-oatbran-common-patterns:
@@ -151,6 +144,7 @@ These are pattens that I use a lot but I could not think of where to put them.
    CommonPatterns.not_space
    CommonPatterns.not_spaces
    
+
 
 
 .. _ape-oatbran-numbers:
@@ -193,8 +187,12 @@ The numbers are broken up into types based on those listed `here <http://mathwor
    
 
 
+
 .. autosummary::
    :toctree: api
 
    Networking.octet
    
+
+
+

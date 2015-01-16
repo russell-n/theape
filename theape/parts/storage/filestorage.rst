@@ -7,6 +7,10 @@ This is a module for classes that implement a file-like interface to disk-files 
 
 
 
+
+
+
+
 .. _file-storage-model:
 
 FileStorage Model
@@ -57,7 +61,8 @@ Sub-Folders
 
 In order to help tame the explosion of files that can often happen from the repeated execution of code that collects data the FileStorage will accept a path which it will then prepend to any file-name when it is opened. If the sub-folder does not exist it will be created.
 
-::
+
+.. code:: python
 
     if IN_PWEAVE:
         example_path = 'aoeu/snth'
@@ -68,14 +73,13 @@ In order to help tame the explosion of files that can often happen from the repe
         if not os.path.isdir(example_path):
             os.makedirs(example_path)
         for name in os.listdir('aoeu'):
-            print name
+            print(name)
         
         # this will be run multiple times, remove the example so it gets started fresh
         if os.path.isdir(example_path):
-            shutil.rmtree(example_path)    
-    
+            shutil.rmtree(example_path)
 
-::
+.. code::
 
     snth
     
@@ -99,16 +103,16 @@ Adding Timestamps
 
 The timestamp will be added using string formatting -- it will look for a `timestamp` keyword:
 
-::
+
+.. code:: python
 
     if IN_PWEAVE:
         name = "test_{timestamp}.csv"
-        print name.format(timestamp=datetime.datetime.now().strftime(FILE_TIMESTAMP))
-    
+        print(name.format(timestamp=datetime.datetime.now().strftime(FILE_TIMESTAMP)))
 
-::
+.. code::
 
-    test_2014_11_10_04:38:58_PM.csv
+    test_2015_01_15_04:48:15_PM.csv
     
 
 
@@ -125,12 +129,13 @@ Because the name is being made to never match an existing file, the FileStorage 
 
 .. superfluous '
 
-::
+
+.. code:: python
 
     if IN_PWEAVE:
         # what's here?
         for name in (name for name in os.listdir(os.getcwd()) if name.endswith('txt')):
-            print name
+            print(name)
         
         name = "innagaddadavida.txt"
         path = os.getcwd()
@@ -151,10 +156,9 @@ Because the name is being made to never match an existing file, the FileStorage 
             count = str(count + 1).zfill(4)
             name = "{b}_{c}{e}".format(b=base, c=count, e=extension)
         
-        print name            
-    
+        print(name)
 
-::
+.. code::
 
     innagaddadavida.txt
     
@@ -167,7 +171,7 @@ Because the name is being made to never match an existing file, the FileStorage 
 FileStorage API
 ---------------
 
-.. currentmodule:: ape.parts.storage.filestorage
+.. module:: theape.parts.storage.filestorage
 .. autosummary::
    :toctree: api
 
@@ -210,10 +214,12 @@ Path:
 
 
 
+
 .. _file-storage-module-diagram:
 
 Module Diagram
 --------------
+
 
 [Errno 2] No such file or directory
 Is pylint installed?
@@ -231,4 +237,7 @@ Is pylint installed?
 ..                                        filter='OTHER',
 ..                                        module=this_file)
 ..     print ".. image:: {0}".format(class_diagram_file)
-.. 
+.. @
+
+
+

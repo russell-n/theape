@@ -4,14 +4,12 @@ import datetime
 from types import FloatType, IntType
 
 # this package
-from ape import BaseClass
-from ape import ApeError
-from ape import Component
-from ape.parts.eventtimer import EventTimer, wait
-
+from theape import BaseClass
+from theape import ApeError
+from theape import Component
+from theape.parts.eventtimer import EventTimer, wait
 
 IN_PWEAVE = __name__ == '__builtin__'
-
 
 class TheBigSleep(Component):
     """
@@ -172,7 +170,7 @@ class TheBigSleep(Component):
         """
         remaining = max(self.then - datetime.datetime.now(), self.zero)
         if self.verbose:
-            print "{0} Remaining".format(remaining)
+            print( "{0} Remaining".format(remaining))
         return remaining
 
     def check_rep(self):
@@ -202,31 +200,28 @@ class TheBigSleep(Component):
         return "Sleep Until: {0}, checking at {1} second intervals".format(self.then,
                                                                            self.interval)
 
-# end class TheBigSleep        
-
+# end class TheBigSleep
 
 if IN_PWEAVE:
-    from ape.parts.sleep.sleep import TheBigSleep
-    print "A Module Diagram for **{0}**.\n".format(TheBigSleep.__module__)
+    from theape.parts.sleep.sleep import TheBigSleep
+    print("A Module Diagram for **{0}**.\n".format(TheBigSleep.__module__))
     
     import os
-    from ape.infrastructure.code_graphs import module_diagram, class_diagram
+    from theape.infrastructure.code_graphs import module_diagram, class_diagram
     this_file = os.path.join(os.getcwd(), 'sleep.py')
     module_diagram_file = module_diagram(module=this_file, project='thebigsleep')
-    print ".. image:: {0}".format(module_diagram_file)
-
-
+    print( ".. image:: {0}".format(module_diagram_file))
 
 if __name__ == '__main__':
     total = datetime.timedelta(seconds=5)
 
     sleep = TheBigSleep(total=total, interval=1)
     #sleep.timer.clear()
-    print 'sleeping for {0}'.format(sleep.total)
-    print "Event is set: {0}".format(sleep.timer.event.is_set())
+    print( 'sleeping for {0}'.format(sleep.total))
+    print( "Event is set: {0}".format(sleep.timer.event.is_set()))
     sleep()
     end = datetime.datetime.now() + total
     sleep = TheBigSleep(end=end, interval=1)
-    print 'sleeping until {0}'.format(sleep.then)
-    print "Event is set: {0}".format(sleep.timer.event.is_set())
+    print( 'sleeping until {0}'.format(sleep.then))
+    print( "Event is set: {0}".format(sleep.timer.event.is_set()))
     sleep()

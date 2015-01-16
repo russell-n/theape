@@ -3,7 +3,8 @@ The CSV Storage
 
 Although python already has a csv-writer in order to make be able to drop it into the places where the regular file storage is expected I need to add an adapter around it.
 
-::
+
+.. code:: python
 
     # python standard library
     import copy
@@ -11,10 +12,9 @@ Although python already has a csv-writer in order to make be able to drop it int
     from types import DictType
     
     # the ape
-    from ape import BaseClass
-    from ape import ApeError
-    import ape.parts.storage.filestorage
-    
+    from theape import BaseClass
+    from theape import ApeError
+    import theape.parts.storage.filestorage
     
 
 
@@ -82,7 +82,8 @@ This is a pass-through to the DictWriter's writerow method.
 
    csv.DictWriter.writerow
 
-::
+
+.. code:: python
 
     class CsvDictStorage(BaseClass):
         """
@@ -118,7 +119,7 @@ This is a pass-through to the DictWriter's writerow method.
             :return: FileStorage        
             """
             if self._storage is None:
-                self._storage = ape.parts.storage.filestorage.FileStorage(path=self.path)
+                self._storage = theape.parts.storage.filestorage.FileStorage(path=self.path)
             return self._storage
     
         @storage.setter
@@ -209,11 +210,10 @@ This is a pass-through to the DictWriter's writerow method.
             for rowdict in rowdicts:
                 self.writerow(rowdict)
             return
-    
 
 
 
-.. currentmodule:: ape.parts.storage.csvstorage
+.. module:: theape.parts.storage.csvstorage
 .. autosummary::
    :toctree: api
 
@@ -230,4 +230,7 @@ This is a pass-through to the DictWriter's writerow method.
    CsvDictStorage: writerow(rowdict)
    CsvDictStorage: writerows(rowdicts)
    CsvDictStorage: writeheader()
+
+
+
 

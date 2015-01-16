@@ -5,7 +5,8 @@ Some basic unittesting for the sshconnection.
 
 
 
-.. currentmodule:: ape.parts.connections.testsshconnection
+
+.. module:: theape.parts.connections.testsshconnection
 .. autosummary::
    :toctree: api
 
@@ -18,4 +19,6 @@ Some basic unittesting for the sshconnection.
    TestSSHConnection.test_getattr
    TestSSHConnection.test_lock
    TestSSHConnection.test_close
+
+
 

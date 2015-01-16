@@ -39,22 +39,16 @@ To get help for a sub-command pass `-h` as the argument. e.g.:
 
     ape run -h
 
-"""     
-
-
-# python standard library
-import argparse
+"""
 
 # third-party
 import docopt
 
 # this package
-from ape import BaseClass, VERSION
-from ape.infrastructure.ryemother import RyeMother
-
+from theape import BaseClass, VERSION
+from theape.infrastructure.ryemother import RyeMother
 
 document_this = __name__ == '__builtin__'
-
 
 class ArgumentsConstants(object):
     """
@@ -69,8 +63,7 @@ class ArgumentsConstants(object):
     callgraph = '--callgraph'
     command = "<command>"
     argument = '<argument>'
-# end ArgumentConstants    
-
+# end ArgumentConstants
 
 class BaseArguments(BaseClass):
     def __init__(self, usage=__doc__, args=None, options_first=True, sub_usage=None):
@@ -215,4 +208,4 @@ class BaseArguments(BaseClass):
         self._pdb = None
         self._command = None
         return
-# end class BaseArguments    
+# end class BaseArguments

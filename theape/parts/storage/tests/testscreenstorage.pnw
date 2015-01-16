@@ -12,7 +12,7 @@ except ImportError:
     pass    
 
 # this package
-from ape.parts.storage.screenstorage import ScreenStorage
+from theape.parts.storage.screenstorage import ScreenStorage
 @
 
 <<name='TestScreenStorage', wrap=False>>=

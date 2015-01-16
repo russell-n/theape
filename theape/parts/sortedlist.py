@@ -5,7 +5,6 @@ from bisect import insort
 # third party
 import numpy
 
-
 class SortedList(list):
     """
     Extends the `list` built-in with `insort`

@@ -9,10 +9,9 @@ import copy
 # this package
 from base_storage import BaseStorage
 #from ape import BaseClass
-from ape import FILE_TIMESTAMP
-from ape import ApeError
-from ape.infrastructure.code_graphs import module_diagram, class_diagram
-
+from theape import FILE_TIMESTAMP
+from theape import ApeError
+from theape.infrastructure.code_graphs import module_diagram, class_diagram
 
 WRITEABLE = 'w'
 APPENDABLE = 'a'
@@ -23,7 +22,6 @@ FILENAME_SUFFIX = UNDERSCORE + DIGIT + ONE_OR_MORE
 IN_PWEAVE = __name__ == '__builtin__'
 AMBIGUOUS = "Ambiguous call: 'overwrite' True and mode 'a'"
 
-
 if IN_PWEAVE:
     example_path = 'aoeu/snth'
     example_file = 'umma.gumma'
@@ -33,22 +31,20 @@ if IN_PWEAVE:
     if not os.path.isdir(example_path):
         os.makedirs(example_path)
     for name in os.listdir('aoeu'):
-        print name
+        print(name)
     
     # this will be run multiple times, remove the example so it gets started fresh
     if os.path.isdir(example_path):
-        shutil.rmtree(example_path)    
-
+        shutil.rmtree(example_path)
 
 if IN_PWEAVE:
     name = "test_{timestamp}.csv"
-    print name.format(timestamp=datetime.datetime.now().strftime(FILE_TIMESTAMP))
-
+    print(name.format(timestamp=datetime.datetime.now().strftime(FILE_TIMESTAMP)))
 
 if IN_PWEAVE:
     # what's here?
     for name in (name for name in os.listdir(os.getcwd()) if name.endswith('txt')):
-        print name
+        print(name)
     
     name = "innagaddadavida.txt"
     path = os.getcwd()
@@ -69,8 +65,7 @@ if IN_PWEAVE:
         count = str(count + 1).zfill(4)
         name = "{b}_{c}{e}".format(b=base, c=count, e=extension)
     
-    print name            
-
+    print(name)
 
 class FileStorage(BaseStorage):
     """
@@ -221,11 +216,9 @@ class FileStorage(BaseStorage):
         """
         self.logger.debug("Closing the file")
         self.close()
-        return        
-
+        return
 
 if IN_PWEAVE:
     this_file = os.path.join(os.getcwd(), 'filestorage.py')
     module_diagram_file = module_diagram(module=this_file, project='filestorage')
-    print ".. image:: {0}".format(module_diagram_file)
-
+    print(".. image:: {0}".format(module_diagram_file))

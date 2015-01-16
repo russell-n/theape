@@ -2,11 +2,10 @@
 # python standard library
 import sys
 # this package
-from ape import SUBCOMMAND_GROUP
-from ape.infrastructure.ryemother import RyeMother
-from ape import BaseClass
-from ape.infrastructure.arguments import BaseArguments
-
+from theape import SUBCOMMAND_GROUP
+from theape.infrastructure.ryemother import RyeMother
+from theape import BaseClass
+from theape.infrastructure.arguments import BaseArguments
 
 class ArgumentBuilder(BaseClass):
     """
@@ -58,6 +57,6 @@ class ArgumentBuilder(BaseClass):
         except KeyError as error:
             self.logger.debug(error)
             self.logger.error("Unknown sub-command '{0}'".format(args.command))
-            print args.usage
+            print( args.usage)
             sys.exit()
         return args

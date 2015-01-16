@@ -1,7 +1,6 @@
 
 IN_PWEAVE = __name__ == '__builtin__'
 
-
 # python standard library
 import re
 import math
@@ -16,18 +15,16 @@ import dateutil.parser
 from validate import Validator
 
 # this package
-from ape import BaseClass
-from ape import ApeError
-from ape.parts.oatbran import CharacterClass, Numbers, Group
-from ape.parts.oatbran import CommonPatterns
-from ape.infrastructure.code_graphs import module_diagram, class_diagram
-
+from theape import BaseClass
+from theape import ApeError
+from theape.parts.oatbran import CharacterClass, Numbers, Group
+from theape.parts.oatbran import CommonPatterns
+from theape.infrastructure.code_graphs import module_diagram, class_diagram
 
 ZERO = '0'
 INT_ZERO = 0
 ONE = 1
 MICRO = 10**6
-
 
 class RelativeTimeMapGroups(object):
     __slots__ = ()
@@ -38,8 +35,7 @@ class RelativeTimeMapGroups(object):
     hours = 'hours'
     minutes = 'minutes'
     seconds = 'seconds'
-# end RelativeTimeMapGroups    
-
+# end RelativeTimeMapGroups
 
 class RelativeTimeMap(BaseClass):
     """
@@ -144,7 +140,6 @@ class RelativeTimeMap(BaseClass):
         return self._second_expression
 #end class RelativeTimeMap
 
-
 def source_required(method):
     """
     Catches AttributeErrors and TypeErrors and raises ApeErrors in their place so the operators can recover
@@ -209,9 +204,6 @@ def unary_error(method):
             self.log_error(error)
             raise ApeError("timedelta must be object, not '{0}".format(self.timedelta))
     return wrapped
-
-
-
 
 class RelativeTime(BaseClass):
     """
@@ -536,8 +528,7 @@ class RelativeTime(BaseClass):
 
     def __str__(self):
         return self.source
-# end class RelativeTime    
-
+# end class RelativeTime
 
 class AbsoluteTime(BaseClass):
     """
@@ -592,12 +583,10 @@ class AbsoluteTime(BaseClass):
             self.log_error(error)
             raise ApeError("dateutil.parser.parse unable to parse '{0}'".format(source))
         return
-# end class AbsoluteTime            
-
+# end class AbsoluteTime
 
 time_validator = Validator({'relative_time':RelativeTime,
                        'absolute_time':AbsoluteTime()})
-
 
 if __name__ == '__main__':
     import pudb; pudb.set_trace()

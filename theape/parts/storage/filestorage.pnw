@@ -16,9 +16,9 @@ import copy
 # this package
 from base_storage import BaseStorage
 #from ape import BaseClass
-from ape import FILE_TIMESTAMP
-from ape import ApeError
-from ape.infrastructure.code_graphs import module_diagram, class_diagram
+from theape import FILE_TIMESTAMP
+from theape import ApeError
+from theape.infrastructure.code_graphs import module_diagram, class_diagram
 @
 
 <<name='constants', echo=False>>=
@@ -92,7 +92,7 @@ if IN_PWEAVE:
     if not os.path.isdir(example_path):
         os.makedirs(example_path)
     for name in os.listdir('aoeu'):
-        print name
+        print(name)
     
     # this will be run multiple times, remove the example so it gets started fresh
     if os.path.isdir(example_path):
@@ -119,7 +119,7 @@ The timestamp will be added using string formatting -- it will look for a `times
 <<name='timestamp_example', wrap=False>>=
 if IN_PWEAVE:
     name = "test_{timestamp}.csv"
-    print name.format(timestamp=datetime.datetime.now().strftime(FILE_TIMESTAMP))
+    print(name.format(timestamp=datetime.datetime.now().strftime(FILE_TIMESTAMP)))
 @
 
 Appending Increments
@@ -138,7 +138,7 @@ Because the name is being made to never match an existing file, the FileStorage 
 if IN_PWEAVE:
     # what's here?
     for name in (name for name in os.listdir(os.getcwd()) if name.endswith('txt')):
-        print name
+        print(name)
     
     name = "innagaddadavida.txt"
     path = os.getcwd()
@@ -159,7 +159,7 @@ if IN_PWEAVE:
         count = str(count + 1).zfill(4)
         name = "{b}_{c}{e}".format(b=base, c=count, e=extension)
     
-    print name            
+    print(name)
 @
 
 
@@ -168,7 +168,7 @@ if IN_PWEAVE:
 FileStorage API
 ---------------
 
-.. currentmodule:: ape.parts.storage.filestorage
+.. module:: theape.parts.storage.filestorage
 .. autosummary::
    :toctree: api
 
@@ -371,7 +371,7 @@ Module Diagram
 if IN_PWEAVE:
     this_file = os.path.join(os.getcwd(), 'filestorage.py')
     module_diagram_file = module_diagram(module=this_file, project='filestorage')
-    print ".. image:: {0}".format(module_diagram_file)
+    print(".. image:: {0}".format(module_diagram_file))
 
 @
 

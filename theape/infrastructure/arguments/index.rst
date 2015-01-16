@@ -3,7 +3,9 @@ The Arguments
 
 
 
+
 This sub-folder holds the modules that create the command-line interface for the user.
+
 
 
 .. toctree::
@@ -22,4 +24,6 @@ This sub-folder holds the modules that create the command-line interface for the
    :maxdepth: 1
 
    Testing the Arguments <tests/index.rst>
+
+
 

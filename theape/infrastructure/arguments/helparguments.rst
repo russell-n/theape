@@ -1,6 +1,7 @@
 The Help Sub-Command Arguments
 ==============================
-::
+
+.. code:: python
 
     """`help` sub-command
     
@@ -16,15 +17,9 @@ The Help Sub-Command Arguments
         -m, --module <module>     non-ape module with plugins
         
     """
-    
 
 
 
-Contents:
-
-   * :ref:`Help Constants <ape-interface-arguments-help-constants>`
-   * :ref:`Help Arguments Class <ape-interface-help-arguments-class>`
-   * :ref:`Help Strategy <ape-interface-arguments-help-strategy>`
 
 
 
@@ -33,11 +28,12 @@ Contents:
 The Help Arguments Constants
 ----------------------------
 
-.. currentmodule:: ape.interface.arguments.helparguments
+.. module:: theape.interface.arguments.helparguments
 .. autosummary::
    :toctree: api
 
    HelpArgumentsConstants
+
 
 
 
@@ -62,6 +58,7 @@ The Help Class
 
 
 
+
 .. _ape-interface-arguments-help-strategy:
 
 The Help Strategy
@@ -76,4 +73,6 @@ The Help Strategy
 
    HelpStrategy
    HelpStrategy.function
+
+
 

@@ -15,15 +15,13 @@ optional arguments:
 
 """
 
-
 # third-party
 import docopt
 
 # this package
-from ape.infrastructure.arguments.arguments import BaseArguments, ArgumentsConstants
-from ape.infrastructure.arguments.basestrategy import BaseStrategy
-from ape.infrastructure.crash_handler import try_except
-
+from theape.infrastructure.arguments.arguments import BaseArguments, ArgumentsConstants
+from theape.infrastructure.arguments.basestrategy import BaseStrategy
+from theape.infrastructure.crash_handler import try_except
 
 class CheckArgumentsConstants(object):
     """
@@ -36,7 +34,6 @@ class CheckArgumentsConstants(object):
 
     #defaults
     default_configfilenames = ['ape.ini']
-
 
 class Check(BaseArguments):
     """
@@ -88,8 +85,7 @@ class Check(BaseArguments):
         self._configfiles = None
         self._modules = None
         return
-#end Check    
-
+#end Check
 
 class CheckStrategy(BaseStrategy):
     """
@@ -109,4 +105,4 @@ class CheckStrategy(BaseStrategy):
             return
         ape.check_rep()
         return
-# end CheckStrategy    
+# end CheckStrategy

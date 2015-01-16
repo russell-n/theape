@@ -3,7 +3,7 @@ Testing the Big Sleep
 
 Because sleeps are so hard to test, this will mostly be an attribute check, rather than a set of correctness tests.
 
-.. currentmodule:: ape.parts.sleep.tests.testsleep
+.. module:: theape.parts.sleep.tests.testsleep
 .. autosummary::
    :toctree: api
 
@@ -23,8 +23,8 @@ import random
 from mock import MagicMock, patch
 
 # this package
-from ape.parts.sleep.sleep import TheBigSleep
-from ape import ApeError
+from theape.parts.sleep.sleep import TheBigSleep
+from theape import ApeError
 @
 <<name='TestTheBigSleep', echo=False>>=
 class TestTheBigSleep(unittest.TestCase):

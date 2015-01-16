@@ -14,9 +14,9 @@ This is a plugin for :ref:`Composites <ape-thewatcher>`. The plugin creates as i
 from collections import OrderedDict
 
 # this package
-from ape import BasePlugin
+from theape import BasePlugin
 #from ape.parts.watchers import TheWatcher
-from ape.parts.storage.filestorage import FileStorage
+from theape.parts.storage.filestorage import FileStorage
 @
 
 .. uml::
@@ -75,7 +75,7 @@ sections['author'] = 'ape'
 The Plugin
 ----------
 
-.. currentmodule:: ape.plugins.sleep_plugin
+.. module:: theape.plugins.sleep_plugin
 .. autosummary::
    :toctree: api
 
@@ -97,7 +97,7 @@ class Sleep(BasePlugin):
         """
         prints a config-file sample
         """
-        print configuration
+        print(configuration)
 
     @property
     def sections(self):

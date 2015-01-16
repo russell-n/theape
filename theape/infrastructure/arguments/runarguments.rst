@@ -1,23 +1,23 @@
 The Run Sub-Command Arguments
 =============================
-::
+
+.. code:: python
 
     """`run` sub-command
     
-    Usage: ape run -h
-           ape run [<configuration>...]
+    Usage: theape run -h
+           theape run [<configuration>...]
     
     Positional Arguments:
     
-        <configuration>   0 or more configuration-file names [default: ape.ini]
-    
+        <configuration>   0 or more configuration-file names [default:
+    ape.ini]
     
     Options;
     
         -h, --help  This help message.
     
     """
-    
     
 
 
@@ -26,12 +26,14 @@ See the :ref:`developer documentation <docopt-reproducingape-run-sub-command>` f
 
 
 
+
 .. _ape-interface-run-arguments-constants:
 
 The RunArguments Constants
 --------------------------
 
-::
+
+.. code:: python
 
     class RunArgumentsConstants(object):
         """
@@ -39,11 +41,10 @@ The RunArguments Constants
         """
         __slots__ = ()
         configfiles = '<configuration>'
-        
+    
         # defaults
         default_configfiles = ['ape.ini']
-    # RunArgumentsConstants    
-    
+    # RunArgumentsConstants
     
 
 
@@ -57,13 +58,14 @@ The RunArguments Class
 
    BaseArguments <|-- RunArguments
 
-.. currentmodule:: ape.interface.arguments.runarguments
+.. module:: theape.interface.arguments.runarguments
 .. autosummary::
    :toctree: api
 
    RunArguments
    RunArguments.configfiles
    RunArguments.reset
+
 
 
 
@@ -82,4 +84,9 @@ This is the strategy for the `run` sub-command than runs the APE.
    :toctree: api
 
    RunStrategy
+
+
+
+
+
 

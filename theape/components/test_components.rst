@@ -5,14 +5,16 @@ Including the tests in the implementation is making the module-diagrams unreadab
 
 
 
+
 Testing the Component
 ---------------------
 
-.. currentmodule:: ape.components.test_components
+.. module:: theape.components.test_components
 .. autosummary::
    :toctree: api
 
    TestComponent.test_bad_component
+
 
 
 
@@ -31,6 +33,7 @@ Testing the Composite
 
 
 
+
 Testing the Hortator
 --------------------
 
@@ -43,6 +46,7 @@ The Hortator is just an instance of the Composite. This is a check that my idea 
 
 
 
+
 Testing the Operator
 --------------------
 
@@ -52,4 +56,6 @@ Like the Hortator, the Operator is just an instance of the Composite, but it sho
    :toctree: api
 
    TestOperator.test_exception
+
+
 

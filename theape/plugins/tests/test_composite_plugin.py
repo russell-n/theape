@@ -6,8 +6,7 @@ import unittest
 from mock import MagicMock, call
 
 # the ape
-from ape.plugins.watcherplugin import Watcher
-
+from theape.plugins.watcherplugin import Watcher
 
 class TestingWatcherPlugin(unittest.TestCase):
     def setUp(self):
@@ -33,4 +32,4 @@ class TestingWatcherPlugin(unittest.TestCase):
         self.config_map.items.assert_called_with(section=self.section_header,
                                                         optional=True,
                                                         default={})
-        return    
+        return

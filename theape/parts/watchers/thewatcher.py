@@ -21,13 +21,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-
 # this package
-from ape import BaseThreadClass
-from ape import ApeError
-from ape.parts.eventtimer import wait
-from ape.parts.eventtimer import EventTimer
-
+from theape import BaseThreadClass
+from theape import ApeError
+from theape.parts.eventtimer import wait
+from theape.parts.eventtimer import EventTimer
 
 class TheWatcher(BaseThreadClass):
     """

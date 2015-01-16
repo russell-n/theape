@@ -7,12 +7,14 @@ This is a module for an Abstract Base Class to create the minimal file-like inte
 
 
 
+
 The BaseStorage
 ---------------
 
 
 
-.. currentmodule:: ape.parts.storage.base_storage
+
+.. module:: theape.parts.storage.base_storage
 .. autosummary::
    :toctree: api
 

@@ -2,6 +2,7 @@
 # python standard library
 import unittest
 import random
+import string
 import re
 from cStringIO import StringIO
 import socket
@@ -10,10 +11,8 @@ import socket
 from mock import Mock
 
 # this package
-from cameraobscura import CameraobscuraError
-from cameraobscura.commands.command.command import TheCommand, CommandConstants
-from cameraobscura.tests.helpers import random_string_of_letters
-
+from theape import ApeError
+from theape.parts.command.command import TheCommand, CommandConstants
 
 class TestTheCommand(unittest.TestCase):
     def setUp(self):
@@ -140,19 +139,19 @@ class TestTheCommand(unittest.TestCase):
 
     def test_bad_data_expression(self):
         """
-        Does it raise a CameraobscuraError if the expression matches but there's no group?
+        Does it raise an ApeError if the expression matches but there's no group?
         """
         expected = random_string_of_letters()
         expression = expected
         self.command.data_expression = expression
         self.connection.exec_command.return_value = None, StringIO(expected), ''
-        with self.assertRaises(CameraobscuraError):
+        with self.assertRaises(ApeError):
             self.command()
         return
 
     def test_timeout(self):
         """
-        Does it raise a CameraobscuraError if there's a timeout and trap_errors not set?
+        Does it raise a ApeError if there's a timeout and trap_errors not set?
         """
         # catch the errors
         self.command.trap_errors = True
@@ -161,7 +160,7 @@ class TestTheCommand(unittest.TestCase):
 
         # don't catch the errors
         self.command.trap_errors = False
-        with self.assertRaises(CameraobscuraError):
+        with self.assertRaises(ApeError):
             self.command()
         return
 
@@ -175,7 +174,7 @@ class TestTheCommand(unittest.TestCase):
         output = "{0} -- {1}\n".format(prefix, message)
         self.command.error_expression = expression
         self.connection.exec_command.return_value  = None, '', StringIO(output)
-        with self.assertRaises(CameraobscuraError):
+        with self.assertRaises(ApeError):
             self.command()
         return
 
@@ -190,4 +189,8 @@ class TestTheCommand(unittest.TestCase):
         self.command.trap_errors = True
         self.assertEqual(self.not_available, self.command())
         return
-# end TestTheCommand    
+# end TestTheCommand
+
+def random_string_of_letters(length=5):
+    return "".join((random.choice(string.letters) for
+                    character in xrange(length)))

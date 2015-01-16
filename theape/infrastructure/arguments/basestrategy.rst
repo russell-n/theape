@@ -1,14 +1,10 @@
 The BaseStrategy
 ================
 
-.. currentmodule:: ape.infrastructure.arguments.basestrategy
+.. module:: theape.infrastructure.arguments.basestrategy
 
-Contents:
 
-    * :ref:`Introduction <ape-interface-arguments-base-strategy>`
-    * :ref:`Class Model <ape-interface-arguments-basestrategy-class-model>`
-    * :ref:`Error Explanations <ape-interface-arguments-basestrategy-errors>`
-    * :ref:`UbootKommandant API <ubootkommandant-api>`
+
 
 
 
@@ -32,6 +28,7 @@ Class Model
 
 
 
+
 .. _ape-interface-arguments-basestrategy-errors:
 
 The Errors
@@ -45,6 +42,7 @@ There are two kinds of exceptions caught which produce two error-messages:
 
    Exception; Oops, I Crapped My Pants; Something unexpected happened -- this indicates a problem with the code
    KeyboardInterrupt; Oh, I am slain; User killed the runtime for some reason -- clean-up and then close
+
 
 
 

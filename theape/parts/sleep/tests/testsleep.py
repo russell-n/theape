@@ -8,9 +8,8 @@ import random
 from mock import MagicMock, patch
 
 # this package
-from ape.parts.sleep.sleep import TheBigSleep
-from ape import ApeError
-
+from theape.parts.sleep.sleep import TheBigSleep
+from theape import ApeError
 
 class TestTheBigSleep(unittest.TestCase):
     def setUp(self):
@@ -118,4 +117,4 @@ class TestTheBigSleep(unittest.TestCase):
         self.assertEqual(self.sleep.then, self.sleep.zero)
         return
         
-# end class TestTheBigSleep        
+# end class TestTheBigSleep

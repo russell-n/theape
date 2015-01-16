@@ -1,8 +1,8 @@
 
 """`run` sub-command
 
-Usage: ape run -h
-       ape run [<configuration>...]
+Usage: theape run -h
+       theape run [<configuration>...]
 
 Positional Arguments:
 
@@ -14,16 +14,14 @@ Options;
 
 """
 
-
 # python standard library
 import datetime
 
 # the APE
-from ape.infrastructure.strings import RED, BOLD, RESET
-from ape.infrastructure.arguments.arguments import BaseArguments
-from ape.infrastructure.arguments.basestrategy import BaseStrategy
-from ape.infrastructure.crash_handler import try_except
-
+from theape.infrastructure.strings import RED, BOLD, RESET
+from theape.infrastructure.arguments.arguments import BaseArguments
+from theape.infrastructure.arguments.basestrategy import BaseStrategy
+from theape.infrastructure.crash_handler import try_except
 
 class RunArgumentsConstants(object):
     """
@@ -34,8 +32,7 @@ class RunArgumentsConstants(object):
     
     # defaults
     default_configfiles = ['ape.ini']
-# RunArgumentsConstants    
-
+# RunArgumentsConstants
 
 class Run(BaseArguments):
     """
@@ -75,11 +72,9 @@ class Run(BaseArguments):
         super(Run, self).reset()
         self._configfiles = None
         return
-# end RunArguments        
-
+# end RunArguments
 
 INFO_STRING = '{b}**** {{0}} ****{r}'.format(b=BOLD, r=RESET)
-
 
 class RunStrategy(BaseStrategy):
     """

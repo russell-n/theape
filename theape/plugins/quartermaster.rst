@@ -1,9 +1,10 @@
 The QuarterMaster
 =================
 
-.. currentmodule:: ape.plugins.quartermaster
+.. module:: theape.plugins.quartermaster
 
 The `QuarterMaster <http://en.wikipedia.org/wiki/Quartermaster>`_ handles finding and interacting with the plugins.
+
 
 
 
@@ -34,12 +35,13 @@ Auto-Generated Diagrams
 These are auto-generated so they will always be more up-to-date than the previous class-diagrams, but they tend to be harder to read as well (and are just not pretty) so I will leave both in.
 
 
+
 .. <<name='module_graph', echo=False, results='sphinx'>>=
 .. if document_this:
 ..     this_file = os.path.join(os.getcwd(), 'quartermaster.py')
 ..     module_diagram_file = module_diagram(module=this_file, project='quartermaster')
 ..     print ".. image:: {0}".format(module_diagram_file)
-.. 
+.. @
 .. 
 .. <<name='class_diagram', echo=False, results='sphinx'>>=
 .. if document_this:
@@ -47,7 +49,11 @@ These are auto-generated so they will always be more up-to-date than the previou
 ..                                        filter='OTHER',
 ..                                        module=this_file)
 ..     print ".. image:: {0}".format(class_diagram_file)
-.. 
+.. @
+
+
+
+
 
 Some Messy Business
 -------------------
@@ -97,31 +103,31 @@ The `os.listdir <http://docs.python.org/2/library/os.html#files-and-directories>
    os.listdir
    os.path.dirname
 
-::
+
+.. code:: python
 
     if document_this:
-        import ape.plugins.base_plugin as base_plugin
-        print base_plugin.__file__
-    
+        import theape.plugins.base_plugin as base_plugin
+        print(base_plugin.__file__)
 
-::
+.. code::
 
-    /home/charon/repositories/code/hortators/theape/ape/plugins/base_plugin.pyc
+    /home/charon/repositories/code/hortators/theape/theape/plugins/base_plugin.pyc
     
 
 
 
 Looking at the output you can see that the ``__file__`` contains the path to the compiled bytecode of the module. To get the `path` we want for the ``listdir`` function we can use `os.path.dirname <http://docs.python.org/2/library/os.path.html#module-os.path>`_ which takes a path and returns the directory without the file-name. So, with these three elements, and the fact that python files have the `.py` extension, we can find all the files in the same directory as that of a particular module:
 
-::
+
+.. code:: python
 
     if document_this:
         path = os.path.dirname(base_plugin.__file__)
         for name in sorted(name for name in os.listdir(path) if name.endswith('.py')):
-            print name
-    
+            print(name)
 
-::
+.. code::
 
     __init__.py
     apeplugin.py
@@ -138,20 +144,20 @@ I should point out, since it might not be obvious, that the classes within a mod
 
 Anyway, did that work? Yes and no. Notice that it only printed out file-names, not the whole path. If we use this as the base for importing (after removing the extension) it will work for this documentation because I have to compile it while in the same directory, but the moment you run the code anywhere else python will raise an error (unless you happen to be in a directory with files of the same name). So do we just add the paths? That was my first notion, but this will raise an error when you try to import it. It  looks like ``importlib`` is importing a file, but the name you are passing in is actually the name of the module, not the file. This can be confusing but it just means that instead of the file-path, you need to refer to the module the way you would when you import it, using dot-notation::
 
-    import ape.plugins.apeplugin
+    import theape.plugins.apeplugin
 
 So how do we get this? Well, it turns out that import creates another variable in a module-namespace called ``__package__`` which contains the dotted-notation path to the package where the module is located. This was confusing to me at first (and I may still be wrong), but basically packages correspond to directories and modules correspond to files, but they are *not* files and directories and they are not referred to in the same way that the file-system would refer to them. The file-names still have their extensions so I will add the package prefix later, but this is what is in the ``__package__``:
 
-::
+
+.. code:: python
 
     if document_this:
-        print base_plugin.__package__
-    
+        print(base_plugin.__package__)
     
 
-::
+.. code::
 
-    ape.plugins
+    theape.plugins
     
     
 
@@ -170,7 +176,8 @@ Besides filtering on the extension, I am also going to exclude some other files 
 
    importlib.import_module
    
-::
+
+.. code:: python
 
     if document_this:
         # remember we need the package
@@ -180,7 +187,6 @@ Besides filtering on the extension, I am also going to exclude some other files 
                        if name.endswith('.py') and not name in exclude)
         basenames_extensions = (os.path.splitext(name) for name in names)
         modules = (importlib.import_module('.'.join((package, base))) for base, extension in basenames_extensions)
-    
 
 
 
@@ -201,7 +207,8 @@ The `predicate` argument is an optional function that you pass in to filter what
 
 .. warning:: It looks like importing python-standard-library classes will not give them a ``__base__`` attribute so the ``is_plugin`` has to trap for ``AttributeError`` exceptions or any python file that imports a python standard library module has to be excluded from the files that are imported.
 
-::
+
+.. code:: python
 
     if document_this:
         isclass = inspect.isclass
@@ -214,9 +221,8 @@ The `predicate` argument is an optional function that you pass in to filter what
             for member in members:
                 # each member is a tuple
                 name, definition = member
-                print name
+                print(name)
                 plugin = definition(None)
-    
 
 
 
@@ -229,10 +235,11 @@ Oops. What happened there (the ``print`` statement should have created some outp
    os.path.splitext
 
    
-::
+
+.. code:: python
 
     if document_this:
-        import ape.plugins.base_plugin
+        import theape.plugins.base_plugin
         names = sorted(name for name in os.listdir(path)
                        if name.endswith('.py') and not name in exclude)
         basenames_extensions = (os.path.splitext(name) for name in names)
@@ -247,23 +254,20 @@ Oops. What happened there (the ``print`` statement should have created some outp
             for member in members:
                 # each member is a tuple
                 name, definition = member
-                print name
+                print(name)
                 plugin = definition(None)
-    
 
-::
+.. code::
 
-    Ape
-    Sleep
-    CrashTestDummy
-    Dummy
-    StuckDummy
-    Sleep
-    
+    <type 'exceptions.NameError'>
+    global name 'ape' is not defined
 
 
 
 The actual instantiation of the plugin (``plugin = definition(None)``) was done to show that it is a callable object (a Plugin class definition in this case).
+
+
+
 
 
 

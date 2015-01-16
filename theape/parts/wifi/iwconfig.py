@@ -21,21 +21,18 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-
 # python standard library
 import re
 
 # this package
-from ape import BaseClass, ApeError
-from ape.parts.eventtimer import EventTimer
-from ape.parts import oatbran
-
+from theape import BaseClass, ApeError
+from theape.parts.eventtimer import EventTimer
+from theape.parts import oatbran
 
 DECIBEL_MILLIWATTS = 'dBm'
 KILO_MEGA_GIGA = 'kMG'
 HERZ = 'Hz'
 BITS_PER_SECOND = 'b/s'
-
 
 class IwconfigEnum(object):
     """
@@ -58,7 +55,6 @@ class IwconfigEnum(object):
     invalid_misc = 'invalid_misc'
     missed_beacons = 'missed_beacons'
 # end IwconfigEnum
-
 
 class IwconfigExpressions(object):
     """
@@ -285,8 +281,7 @@ class IwconfigExpressions(object):
                                               oatbran.Group.named(IwconfigEnum.missed_beacons,
                                                                   oatbran.Numbers.digits))
         return self._missed_beacons
-# end class IwconfigExpressions            
-
+# end class IwconfigExpressions
 
 class IwconfigQuery(BaseClass):
     """
@@ -531,8 +526,7 @@ class IwconfigQuery(BaseClass):
         :return: output of iwconfig command un-parsed
         """
         return "".join(self.output)
-# end class IwconfigQuery    
-
+# end class IwconfigQuery
 
 if __name__ == '__main__':
     expressions = IwconfigExpressions()

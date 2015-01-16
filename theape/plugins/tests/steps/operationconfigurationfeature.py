@@ -5,8 +5,7 @@ from behave import when, then, given
 from hamcrest import assert_that, is_, instance_of, contains, has_entries
 
 # this package
-from ape.plugins.apeplugin import OperationConfiguration, OperatorConfiguration
-
+from theape.plugins.apeplugin import OperationConfiguration, OperatorConfiguration
 
 config_file = """
 [OPERATIONS]
@@ -31,7 +30,6 @@ def configuration(context):
     context.section = context.configobj['PLUGINS']   
     return
 
-
 @when("a user builds the operation configuration")
 def build_operation_configuration(context):
     context.operation_name = 'op1'
@@ -43,7 +41,6 @@ def build_operation_configuration(context):
                                                              quartermaster=context.quartermaster)
     #print context.configobj
     return
-
 
 @then("the operation configuration has the plugins")
 def check_plugins(context):

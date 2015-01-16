@@ -9,6 +9,8 @@ The `Dummy` plugin inherits from the :ref:`BasePlugin <base-plugin>` and so take
 
 The section parameter `section_header` was added so that more than one configuration of each plugin can be used. Since the operator is passing this in to all  the plugins it can be assumed that it will always exist (in the current implementation of the ape).
 
+.. module:: theape.plugins.tests.test_dumy_pluing
+
 .. autosummary::
    :toctree: api
 
@@ -23,7 +25,7 @@ import unittest
 from mock import MagicMock, call
 
 # the ape
-from ape.plugins.dummyplugin import Dummy
+from theape.plugins.dummyplugin import Dummy
 @
    
 <<name='TestingDummyPlugin', echo=False>>=

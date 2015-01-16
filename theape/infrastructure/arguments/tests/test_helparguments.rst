@@ -1,7 +1,8 @@
 Testing the Help Arguments
 ==========================
 
-::
+
+.. code:: python
 
     # python standard library
     import unittest
@@ -12,37 +13,37 @@ Testing the Help Arguments
     from mock import MagicMock
     
     # the ape
-    from ape.interface.arguments.helparguments import HelpArguments
-    from ape.interface.arguments.helparguments import HelpStrategy
-    from ape.interface.arguments.basestrategy import BaseStrategy
+    from theape.infrastructure.arguments.helparguments import Help
+    from theape.infrastructure.arguments.helparguments import HelpStrategy
+    from theape.infrastructure.arguments.basestrategy import BaseStrategy
     
-    
 
 
 
-.. currentmodule:: ape.interface.arguments.tests.test_helparguments
+.. module:: theape.interface.arguments.tests.test_helparguments
 .. autosummary::
    :toctree: api
 
-   TestHelpArguments.test_constructor
-   TestHelpArguments.test_width
-   TestHelpArguments.test_modules
-   TestHelpArguments.test_name
-   TestHelpArguments.test_whole_shebang
+   TestHelp.test_constructor
+   TestHelp.test_width
+   TestHelp.test_modules
+   TestHelp.test_name
+   TestHelp.test_whole_shebang
 
-::
 
-    class TestHelpArguments(unittest.TestCase):
+.. code:: python
+
+    class TestHelp(unittest.TestCase):
         def setUp(self):
             self.args = ['help']
-            self.arguments = HelpArguments(args=self.args)
+            self.arguments = Help(args=self.args)
             return
-        
+    
         def test_constructor(self):
             """
             Does it build correctly?
             """
-            arguments = HelpArguments(args=['help'])
+            arguments = Help(args=['help'])
             self.assertFalse(arguments.trace)
             return
     
@@ -54,7 +55,8 @@ Testing the Help Arguments
     
             self.arguments.reset()
             width = random.randint(0, 100)
-            self.arguments.args = self.args + ['--width', '{0}'.format(width)]
+            self.arguments.args = self.args + ['--width',
+    '{0}'.format(width)]
             self.assertEqual(width, self.arguments.width)
             return
     
@@ -66,8 +68,8 @@ Testing the Help Arguments
             self.assertEqual([], self.arguments.modules)
     
             self.arguments.reset()
-            modules = ["".join([random.choice(string.letters) for letter in xra
-    nge(random.randrange(1, 10))]) for
+            modules = ["".join([random.choice(string.letters) for letter
+    in xrange(random.randrange(1, 10))]) for
                        module in xrange(random.randrange(2, 10))]
             mod_options = "-m " + ' -m '.join(modules)
             self.arguments.args = self.args + mod_options.split()
@@ -81,8 +83,8 @@ Testing the Help Arguments
             self.assertEqual('Ape', self.arguments.name)
     
             self.arguments.reset()
-            name = ''.join([random.choice(string.letters) for letter in xrange(
-    random.randrange(1, 10))])
+            name = ''.join([random.choice(string.letters) for letter in
+    xrange(random.randrange(1, 10))])
             self.arguments.args = self.args + [name]
             self.assertEqual(name, self.arguments.name)
             return
@@ -93,20 +95,19 @@ Testing the Help Arguments
             """
             width = random.randrange(2, 100)
             width_option = '-w {0}'.format(width)
-            modules = ["".join([random.choice(string.letters) for letter in xra
-    nge(random.randrange(2, 10))]) for
+            modules = ["".join([random.choice(string.letters) for letter
+    in xrange(random.randrange(2, 10))]) for
                        module in xrange(random.randrange(2, 10))]
             mod_options = "-m " + ' -m '.join(modules)
-            name = ''.join([random.choice(string.letters) for letter in xrange(
-    random.randrange(2, 10))])
+            name = ''.join([random.choice(string.letters) for letter in
+    xrange(random.randrange(2, 10))])
     
-            self.arguments.args = self.args + [width_option] + mod_options.spli
-    t() + [name]
+            self.arguments.args = self.args + [width_option] +
+    mod_options.split() + [name]
             self.assertEqual(width, self.arguments.width)
             self.assertEqual(modules, self.arguments.modules)
             self.assertEqual(name, self.arguments.name)
             return
-    
     
 
 
@@ -120,7 +121,8 @@ Testing the Help Strategy
    TestHelpStrategy.test_constructor
    TestHelpStrategy.test_function
 
-::
+
+.. code:: python
 
     class TestHelpStrategy(unittest.TestCase):
         def test_constructor(self):
@@ -141,7 +143,7 @@ Testing the Help Strategy
     
             args.modules = 'x y z'.split()
             args.name = 'bob'
-            args.width = 38 
+            args.width = 38
             definition_bob = MagicMock()
     
             plugin_bob = MagicMock()
@@ -150,9 +152,9 @@ Testing the Help Strategy
             plugin_definitions = {'bob': definition_bob}
             def side_effect(name):
                 return plugin_definitions[name]
-            
+    
             quartermaster.get_plugin.side_effect = side_effect
-            
+    
             strategy = HelpStrategy()
             strategy.function(args)
     
@@ -161,13 +163,15 @@ Testing the Help Strategy
             plugin_bob.help.assert_called_with(args.width)
     
             # type-errors are considered a user-mistake
-            quartermaster.get_plugin.side_effect = TypeError("no comprende")
+            quartermaster.get_plugin.side_effect = TypeError("no
+    comprende")
             strategy.function(args)
             quartermaster.list_plugins.assert_called_with()
     
             #get rid of the TypeError so we can test other errors
             quartermaster.get_plugin.side_effect = side_effect
-            plugin_bob.help.side_effect = AttributeError("no such attribute")
+            plugin_bob.help.side_effect = AttributeError("no such
+    attribute")
             strategy.function(args)
     
             plugin_bob.help.side_effect = Exception("aaaaaaaaahhhhhhh")
@@ -175,5 +179,7 @@ Testing the Help Strategy
             plugin_bob.help.assert_called_with(args.width)
             return
     
-    
+
+
+
 

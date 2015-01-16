@@ -10,8 +10,8 @@ This is a module for an Abstract Base Class to create the minimal file-like inte
 from abc import ABCMeta, abstractproperty, abstractmethod
 
 # this package
-from ape import BaseClass
-from ape import ApeError
+from theape import BaseClass
+from theape import ApeError
 @
 
 The BaseStorage
@@ -79,7 +79,8 @@ class BaseStorage(BaseClass):
         except exceptions as error:
             self.logger.debug(error)
             error = "{red}{bold}`write` called on unopened file{reset}"
-            raise ApeError(error)
+            self.log_error(error)
+            raise ApeError("`write` called on unopened file")
         return
 
     def writeline(self, text):
@@ -108,7 +109,7 @@ class BaseStorage(BaseClass):
 # end BaseStorage    
 @
 
-.. currentmodule:: ape.parts.storage.base_storage
+.. module:: theape.parts.storage.base_storage
 .. autosummary::
    :toctree: api
 

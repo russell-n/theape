@@ -6,9 +6,8 @@ import unittest
 from mock import MagicMock, patch
 
 # the ape
-from ape.interface.arguments.listarguments import List, ListStrategy
-from ape.interface.arguments.basestrategy import BaseStrategy
-
+from theape.infrastructure.arguments.listarguments import List, ListStrategy
+from theape.infrastructure.arguments.basestrategy import BaseStrategy
 
 class TestList(unittest.TestCase):
     def setUp(self):
@@ -38,8 +37,7 @@ class TestList(unittest.TestCase):
         self.arguments.reset()
         self.arguments.args = self.args + modules
         self.assertEqual(modules, self.arguments.modules)
-        return        
-
+        return
 
 class TestListStrategy(unittest.TestCase):
     def setUp(self):

@@ -1,7 +1,7 @@
 The QuarterMaster
 =================
 
-.. currentmodule:: ape.plugins.quartermaster
+.. module:: theape.plugins.quartermaster
 
 The `QuarterMaster <http://en.wikipedia.org/wiki/Quartermaster>`_ handles finding and interacting with the plugins.
 
@@ -12,10 +12,10 @@ import importlib
 import inspect
 
 # this package
-from ape import BaseClass
-from ape.infrastructure.ryemother import RyeMother
+from theape import BaseClass
+from theape.infrastructure.ryemother import RyeMother
 from base_plugin import BasePlugin
-from ape.infrastructure.code_graphs import module_diagram, class_diagram
+from theape.infrastructure.code_graphs import module_diagram, class_diagram
 @
 
 .. uml::
@@ -111,7 +111,7 @@ class QuarterMaster(BaseClass):
         Prints the names of the plugins to standard out
         """
         for name in sorted(self.plugins.keys()):
-            print name
+            print( name)
         return
 
     def get_plugin(self, name):
@@ -184,8 +184,8 @@ The `os.listdir <http://docs.python.org/2/library/os.html#files-and-directories>
 
 <<name='__file__', wrap=False>>=
 if document_this:
-    import ape.plugins.base_plugin as base_plugin
-    print base_plugin.__file__
+    import theape.plugins.base_plugin as base_plugin
+    print(base_plugin.__file__)
 @
 
 Looking at the output you can see that the ``__file__`` contains the path to the compiled bytecode of the module. To get the `path` we want for the ``listdir`` function we can use `os.path.dirname <http://docs.python.org/2/library/os.path.html#module-os.path>`_ which takes a path and returns the directory without the file-name. So, with these three elements, and the fact that python files have the `.py` extension, we can find all the files in the same directory as that of a particular module:
@@ -194,20 +194,20 @@ Looking at the output you can see that the ``__file__`` contains the path to the
 if document_this:
     path = os.path.dirname(base_plugin.__file__)
     for name in sorted(name for name in os.listdir(path) if name.endswith('.py')):
-        print name
+        print(name)
 @
 
 I should point out, since it might not be obvious, that the classes within a module get the ``__file__`` variable added to their namespace as a global variable so the QuarterMaster can just use the ``__file__`` variable directly without importing anything (so in the QuarterMaster you will see ``__file__``, not ``base_plugin.__file__``) but the code I run while documenting this module cannot get access to it without referring to an imported module. I think it has to do with the fact that the import statement is what creates the variable so if this module were imported it would be created, but to generate the document, I run it through Pweave. Just keep that in mind if you look at the code.
 
 Anyway, did that work? Yes and no. Notice that it only printed out file-names, not the whole path. If we use this as the base for importing (after removing the extension) it will work for this documentation because I have to compile it while in the same directory, but the moment you run the code anywhere else python will raise an error (unless you happen to be in a directory with files of the same name). So do we just add the paths? That was my first notion, but this will raise an error when you try to import it. It  looks like ``importlib`` is importing a file, but the name you are passing in is actually the name of the module, not the file. This can be confusing but it just means that instead of the file-path, you need to refer to the module the way you would when you import it, using dot-notation::
 
-    import ape.plugins.apeplugin
+    import theape.plugins.apeplugin
 
 So how do we get this? Well, it turns out that import creates another variable in a module-namespace called ``__package__`` which contains the dotted-notation path to the package where the module is located. This was confusing to me at first (and I may still be wrong), but basically packages correspond to directories and modules correspond to files, but they are *not* files and directories and they are not referred to in the same way that the file-system would refer to them. The file-names still have their extensions so I will add the package prefix later, but this is what is in the ``__package__``:
 
 <<name='package_variable'>>=
 if document_this:
-    print base_plugin.__package__
+    print(base_plugin.__package__)
 @
     
 Finding the Plugins
@@ -263,7 +263,7 @@ if document_this:
         for member in members:
             # each member is a tuple
             name, definition = member
-            print name
+            print(name)
             plugin = definition(None)
 @
 
@@ -278,7 +278,7 @@ Oops. What happened there (the ``print`` statement should have created some outp
    
 <<name='import_plugins_2', wrap=False>>=
 if document_this:
-    import ape.plugins.base_plugin
+    import theape.plugins.base_plugin
     names = sorted(name for name in os.listdir(path)
                    if name.endswith('.py') and not name in exclude)
     basenames_extensions = (os.path.splitext(name) for name in names)
@@ -293,7 +293,7 @@ if document_this:
         for member in members:
             # each member is a tuple
             name, definition = member
-            print name
+            print(name)
             plugin = definition(None)
 @
 

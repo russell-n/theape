@@ -3,18 +3,17 @@ The Configuration Map
 
 .. _configuration-map:
 
-The `Configuration Map` maps a configuration-file-name to data. It extends the `ConfigParser` to have more data-types (and allow missing values) and to add sub-configuration-files (see the :ref:`ConfigParser Explorations <exploring-configparser-whole-shebang>` to get some idea of what I am getting at).
+The `Configuration Map` maps a configuration-file-name to data. It extends `ConfigObj` to have more data-types.
 
 .. _configurationmap-background:    
     
 Background
 ----------
 
-The `ConfigParser` module along with the `glob` module will be used to find and convert files to data. The ConfigParser has methods for the main singular data-types but I will also add collections and times. Additionally I will automatically add any sub-config files matching a `config_glob` found in the DEFAULT section of the main file given. I am also setting the `allow_no_value` option to True so that you can use options without values::
+The `ConfigObj` module will be used to find and convert files to data. ConfigObj has methods for the main singular data-types but I will also add collections and times. 
 
-    [SECTION]
-    option = value
-    valueless_option
+
+
 
 
 
@@ -35,11 +34,12 @@ The ConfigurationError
 
 The `ConfigurationMap` will raise a ConfigurationError to try and trickle up more useful information.
 
-.. currentmodule:: ape.commoncode.errors
+.. module:: theape.infrastructure.errors
 .. autosummary::
    :toctree: api
 
    ConfigurationError
+
 
 
 
@@ -48,7 +48,7 @@ The `ConfigurationMap` will raise a ConfigurationError to try and trickle up mor
 The API
 -------
 
-.. currentmodule:: ape.interface.configurationmap
+.. module:: theape.infrastructure.configurationmap
 .. autosummary::
    :toctree: api
 
@@ -124,6 +124,7 @@ These are the `ConfigParser` Exceptions that I will handle in the `Configuration
 Module Diagram
 --------------
 
+
 [Errno 2] No such file or directory
 Is pylint installed?
 .. image:: classes_configurationmap.png
@@ -141,4 +142,4 @@ Is pylint installed?
 ..                                        filter='OTHER',
 ..                                        module=this_file)
 ..     print ".. image:: {0}".format(class_diagram_file)
-.. 
+.. @

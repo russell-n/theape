@@ -23,13 +23,6 @@ import alabaster
 # If your documentation needs a minimal Sphinx version, state it here.
 #needs_sphinx = '1.0'
 
-rst_prolog = """
-.. |APE| replace:: *All-In-One Performance Evaluation Tools (APETools)*
-.. |DUT| replace:: *Device Under Test (DUT)*
-.. |AP| replace::  *Access Point (AP)*
-.. |SSH| replace:: *Secure Shell (SSH)*
-"""
-
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 
@@ -66,7 +59,7 @@ copyright = u'2014, the cloistered monkey'
 # built documents.
 #
 # The short X.Y version.
-version = '2014.12.30'
+version = '0.0.1'
 # The full version, including alpha/beta/rc tags.
 release = version
 
@@ -115,10 +108,10 @@ html_theme = 'alabaster'
 # further.  For a list of options available for each theme, see the
 # documentation.
 #html_theme_options = {}
-html_theme_options = {
-    'logo':'tuning_fork.jpg',
-    'logo_name': 'true'
-}
+#html_theme_options = {
+#    'logo':'tuning_fork.jpg',
+#    'logo_name': 'true'
+#}
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = [alabaster.get_path()]
@@ -212,7 +205,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'ape.tex', basename + u' Documentation',
+  ('index', 'theape.tex', basename + u' Documentation',
    u'russelln', 'manual'),
 ]
 
@@ -243,7 +236,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', basename, basename + u' Documentation',
-     [u'russelln'], 1)
+     [u'cm'], 1)
 ]
 
 # If true, show URL addresses after external links.
