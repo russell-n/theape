@@ -28,7 +28,7 @@ The Parameters
 
     * The `total` is a timedelta set to amount of time in the future to end
 
-Either the `ape` or the `total` needs to be set and if you set both the `total` will be ignored in favor of the `end`.
+Either the `end` or the `total` needs to be set and if you set both the `total` will be ignored in favor of the `end`.
 
 .. csv-table:: TheBigSleep end and total
    :header: ``end``, ``total``, Outcome
@@ -86,8 +86,6 @@ Module Diagram
 
 A Module Diagram for **theape.parts.sleep.sleep**.
 
-[Errno 2] No such file or directory
-Is pylint installed?
 .. image:: classes_thebigsleep.png
 
 
