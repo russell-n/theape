@@ -27,7 +27,7 @@ There are 5 steps needed to create a plugin:
 
    5. :ref:`Put the plugin somewhere it can be imported <ht-write-plugin-install>`
 
-There are probably other steps like planning and testing, but since the plugins themselves don't do anything other than build and bundle other code, any other steps will be specific to the plugin created. I'll work through these five steps using the :ref:`SleepPlugin <sleep-plugin>` which is one of the plugins that comes with the ape as a concrete example (it's in the `plugin` folder -- ``ape.plugins.sleep_plugin``). The `SleepPlugin` is a plugin for :ref:`TheBigSleep <ape-big-sleep>`, a stand alone part that takes a time-string and sleeps when called.
+There are probably other steps like planning and testing, but since the plugins themselves don't do anything other than build and bundle other code, any other steps will be specific to the plugin created. I'll work through these five steps using the :ref:`SleepPlugin <sleep-plugin>` which is one of the plugins that comes with the ape as a concrete example (it's in the `plugin` folder -- ``theape.plugins.sleep_plugin``). The `SleepPlugin` is a plugin for :ref:`TheBigSleep <ape-big-sleep>`, a stand alone part that takes a time-string and sleeps when called.
 
 .. '
 
@@ -42,19 +42,19 @@ There are probably other steps like planning and testing, but since the plugins 
    Sleep : Dict sections
    Sleep : TheBigSleep product
 
-.. currentmodule:: ape.plugins.base_plugin
+.. module:: theape.plugins.base_plugin
 .. autosummary::
    :toctree: api
 
    BasePlugin
    
-.. currentmodule:: ape.parts.sleep.sleep
+.. module:: theape.parts.sleep.sleep
 .. autosummary::
    :toctree: api
 
    TheBigSleep
 
-.. currentmodule:: ape.plugins.sleep_plugin
+.. module:: theape.plugins.sleep_plugin
 .. autosummary::
    :toctree: api
 
@@ -68,8 +68,8 @@ There are probably other steps like planning and testing, but since the plugins 
 In order to be recognized by the APE your plugin has to inherit from the :ref:`BasePlugin <base-plugin>` so you will need to import it along with the parts that are composed within your plugin::
 
     # This package
-    from ape import BasePlugin
-    from ape.parts.sleep.sleep import TheBigSleep
+    from theape import BasePlugin
+    from theape.parts.sleep.sleep import TheBigSleep
 
 In addition, the Help section of the plugin uses the keys of a dictionary when building the help string so I like to use an ordered dictionary so I can control what order the sections appear in::
 
@@ -196,7 +196,7 @@ There are four parts to implementing the plugin:
 4.1 Sub-class the ``BasePlugin``
 ++++++++++++++++++++++++++++++++
 
-The way the plugin discovery works is that the :ref:`QuarterMaster <quarter-master>` looks in the `plugins` folder (or other modules passed in at run-time) for classes that are sub-classed from the ``ape.BasePlugin`` so anything that needs to be auto-discovered has to be a :ref:`BasePlugin <base-plugin>` child::
+The way the plugin discovery works is that the :ref:`QuarterMaster <quarter-master>` looks in the `plugins` folder (or other modules passed in at run-time) for classes that are sub-classed from the ``theape.BasePlugin`` so anything that needs to be auto-discovered has to be a :ref:`BasePlugin <base-plugin>` child::
 
     class Sleep(BasePlugin):
         """
@@ -292,7 +292,7 @@ As you can see, it uses the ``self.section_header`` attribute that it inherits f
 
 The ``product`` builder, by and large, just calls the ConfigurationMap (`self.configuration`) and passes in the parameters to the object it's building. Hopefully the calls being made are obvious enough but if not the API might help explain what's being passed into the ``TheBigSleep`` constructor.
 
-.. currentmodule:: ape.infrastructure.configurationmap
+.. module:: theape.infrastructure.configurationmap
 .. autosummary::
    :toctree: api
 
@@ -313,7 +313,7 @@ In order for the APE to find a plugin two conditions need to be met:
    1. The plugin has to sub-class the `BasePlugin`
    2. The module with the plugin has to be known to the APE as a plugin source
 
-In the case of the `Sleep` plugin it is part of the APE so it sits in the `ape.plugins` folder (the default place the APE looks for plugins). For non-ape plugins the package they belong to has to be installed (e.g. with `setup.py`) and the module name passed in to the APE on the command line.
+In the case of the `Sleep` plugin it is part of the APE so it sits in the `theape.plugins` folder (the default place the APE looks for plugins). For non-ape plugins the package they belong to has to be installed (e.g. with `setup.py`) and the module name passed in to the APE on the command line.
 
 Let's suppose that instead of the default `Sleep` plugin you made a better one called `BetterSleep` that's in the `bettersleep` package. Once the `bettersleep` package is installed then the user can access it using the ``--modules`` flag.
 
@@ -324,6 +324,8 @@ To see what plugins the APE recognizes in the module::
 To fetch the configuration snippet::
 
     ape fetch --module bettersleep BetterSleep
+
+(this is somewhat confusing, but the ``list`` sub-command only takes one argument so you don't need the ``--module`` flag, but the ``fetch`` sub-command takes either zero, one, or two arguments so I had to add the ``--module`` flag to make it specific that an external module was being called).
 
 To run::
 
