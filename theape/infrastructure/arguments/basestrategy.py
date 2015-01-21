@@ -28,7 +28,7 @@ class BaseStrategy(BaseClass):
         super(BaseStrategy, self).__init__()
         self._logger = None
         self.error = (Exception, KeyboardInterrupt)
-        self.error_message = "Oops, I Crapped My Pants"
+        self.error_message = "APE Error"
         self.ape = None
         return
 

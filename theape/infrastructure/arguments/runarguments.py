@@ -85,7 +85,6 @@ class RunStrategy(BaseStrategy):
         """
         Builds and runs the test
         """
-        self.logger.info(INFO_STRING.format("Starting The APE"))
         start = datetime.datetime.now()
         
         ape = self.build_ape(args.configfiles)
@@ -117,6 +116,7 @@ class RunStrategy(BaseStrategy):
 
         else:
             # the main run (the others are for debugging)
+            self.logger.info(INFO_STRING.format("Starting The APE"))
             ape()
 
         ape.close()

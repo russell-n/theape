@@ -83,9 +83,9 @@ In addition, the Help section of the plugin uses the keys of a dictionary when b
 
 The expected way for a user to get a sample configuration file is to use the ``fetch`` sub-command::
 
-    ape fetch <plugin name>
+    theape fetch <plugin name>
 
-Where ``<plugin name>`` is the name of some plugin. When this sub-command is issued, the ape will build the plugin and call its ``fetch_config`` method, which should return a string with the sample configuration to the APE. As an example, if the user entered ``ape fetch Sleep``, the following should be returned:
+Where ``<plugin name>`` is the name of some plugin. When this sub-command is issued, the ape will build the plugin and call its ``fetch_config`` method, which should return a string with the sample configuration to the APE. As an example, if the user entered ``theape fetch Sleep``, the following should be returned:
 
 .. code-block:: ini
 
@@ -170,7 +170,7 @@ The rest of the help dictionary was created by adding more sections::
 
 To see how this was output type out the help sub-command for sleep::
 
-    ape help Sleep
+    theape help Sleep
 
 Since the output goes through a pager (`less`) I can't show the output here. Also note that the command is case-sensitive so ``ape help sleep`` will fail.
 
@@ -216,7 +216,7 @@ The use of ``*args, **kwargs`` is so that the ``BasePlugin`` can have the :ref:`
 4.2 Implement the `fetch_config` method
 +++++++++++++++++++++++++++++++++++++++
 
-When a user types ``ape fetch <plugin>`` the APE calls the plugin's ``fetch_config`` method to get the configuration string and (currently) sends it to stdout. In the case of our example `Sleep` plugin we already have a `configuration` variable which holds the string so we can just have the `Sleep` print it::
+When a user types ``the ape fetch <plugin>`` the APE calls the plugin's ``fetch_config`` method to get the configuration string and (currently) sends it to stdout. In the case of our example `Sleep` plugin we already have a `configuration` variable which holds the string so we can just have the `Sleep` print it::
 
     def fetch_config(self):
         """
@@ -237,7 +237,7 @@ This might seem excessive but the original APE saved the configuration to a file
 4.3 Implement the `sections` property
 +++++++++++++++++++++++++++++++++++++
 
-When a user calls the ``ape help <plugin>`` sub-command, the APE sends the plugin's `sections` property to the ``less`` command. So to make it work for our `Sleep` plugin we can assign it the ``sections`` dictionary that we created earlier::
+When a user calls the ``theape help <plugin>`` sub-command, the APE sends the plugin's `sections` property to the ``less`` command. So to make it work for our `Sleep` plugin we can assign it the ``sections`` dictionary that we created earlier::
 
     @property
     def sections(self):
@@ -255,7 +255,7 @@ When a user calls the ``ape help <plugin>`` sub-command, the APE sends the plugi
 4.4 Implement the `product` property
 ++++++++++++++++++++++++++++++++++++
 
-The `product` is the object that the APE will call when the program is run (``ape run``). This means that the `product` has to be a callable-object that can be fully configured by the plugin (because no parameters will be passed in to the call). In the case of our example we know that we want to return the `TheBigSleep` object::
+The `product` is the object that the APE will call when the program is run (``theape run``). This means that the `product` has to be a callable-object that can be fully configured by the plugin (because no parameters will be passed in to the call). In the case of our example we know that we want to return the `TheBigSleep` object::
 
     @property
     def product(self):
@@ -319,16 +319,16 @@ Let's suppose that instead of the default `Sleep` plugin you made a better one c
 
 To see what plugins the APE recognizes in the module::
 
-    ape list bettersleep
+    theape list bettersleep
 
 To fetch the configuration snippet::
 
-    ape fetch --module bettersleep BetterSleep
+    theape fetch --module bettersleep BetterSleep
 
 (this is somewhat confusing, but the ``list`` sub-command only takes one argument so you don't need the ``--module`` flag, but the ``fetch`` sub-command takes either zero, one, or two arguments so I had to add the ``--module`` flag to make it specific that an external module was being called).
 
 To run::
 
-    ape run 
+    theape run 
 
 This requires that the user know what modules contain plugins so it isn't an automatic system, but I'm assuming that these cases will be rare enough that this will work. For non-APE maintainers it would make sense just to put the plugin in the APE's plugin folder, the external module solution is so that I can build and use plugins for code that won't be added to the APE itself.

@@ -299,7 +299,7 @@ This means:
     # (default is None)
     # timestamp = <strftime-formatted timestamp>
     
-    #[PLUGINS]
+    [PLUGINS]
     # for each plugin listed in the [OPERATIONS] there has to be a matching
     # subsection below this section
     # sub-sections are denoted by double-brackets (you can indent them too)
@@ -328,8 +328,6 @@ Module Dependency Graph
 This is an auto-generated graph of this module.
 
 
-[Errno 2] No such file or directory
-Is pylint installed?
 .. image:: classes_apeplugin.png
 
 
