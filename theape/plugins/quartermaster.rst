@@ -246,7 +246,7 @@ Oops. What happened there (the ``print`` statement should have created some outp
         modules = (importlib.import_module('.'.join((package, base))) for base, extension in basenames_extensions)
     
         def is_plugin(o):
-            return isclass(o) and o.__base__ is ape.plugins.base_plugin.BasePlugin
+            return isclass(o) and o.__base__ is theape.plugins.base_plugin.BasePlugin
         
         for module in modules:
             members = inspect.getmembers(module,
@@ -259,8 +259,13 @@ Oops. What happened there (the ``print`` statement should have created some outp
 
 .. code::
 
-    <type 'exceptions.NameError'>
-    global name 'ape' is not defined
+    Ape
+    Sleep
+    CrashTestDummy
+    Dummy
+    StuckDummy
+    Sleep
+    
 
 
 

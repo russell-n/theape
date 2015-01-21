@@ -37,7 +37,7 @@ class QuarterMaster(BaseClass):
         """
         if self._import_plugins is None:
             # the group and name values are created in setup.py entry_points
-            self._import_plugins = RyeMother(group='ape.plugins', name='plugins',
+            self._import_plugins = RyeMother(group='theape.plugins', name='plugins',
                                          parent=BasePlugin)
         return self._import_plugins
 
@@ -124,7 +124,7 @@ if document_this:
     modules = (importlib.import_module('.'.join((package, base))) for base, extension in basenames_extensions)
 
     def is_plugin(o):
-        return isclass(o) and o.__base__ is ape.plugins.base_plugin.BasePlugin
+        return isclass(o) and o.__base__ is theape.plugins.base_plugin.BasePlugin
     
     for module in modules:
         members = inspect.getmembers(module,

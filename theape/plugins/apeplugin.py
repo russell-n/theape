@@ -201,7 +201,7 @@ class OperatorConfiguration(BaseClass):
         """
         if self._quartermaster is None:
             modules = self.settings[constants.modules_option]
-            self._quartermaster = ape.plugins.quartermaster.QuarterMaster(external_modules=modules)
+            self._quartermaster = theape.plugins.quartermaster.QuarterMaster(external_modules=modules)
 
             # plugins will pull the file storage so it has to be initiated            
             singletons.refresh()
@@ -223,7 +223,7 @@ class OperatorConfiguration(BaseClass):
         CountdownTimer built from the configuration for the operator
         """
         if self._countdown_timer is None:
-            definition = ape.parts.countdown.countdown.CountdownTimer
+            definition = theape.parts.countdown.countdown.CountdownTimer
 
             repetitions = self.settings[constants.repetitions_option]
             end_time = self.settings[constants.end_time_option]
@@ -264,7 +264,7 @@ class OperatorConfiguration(BaseClass):
 
         :postcondition: file-storage singleton with sub-folder from default section added as path
         """
-        file_storage = ape.infrastructure.singletons.get_filestorage(name=constants.file_storage_name)
+        file_storage = theape.infrastructure.singletons.get_filestorage(name=constants.file_storage_name)
         subfolder = self.settings[constants.subfolder_option]
         timestamp = self.settings[constants.timestamp_option]
         
@@ -418,7 +418,7 @@ CONFIGURATION = '''[OPERATIONS]
 # (default is None)
 # timestamp = <strftime-formatted timestamp>
 
-#[PLUGINS]
+[PLUGINS]
 # for each plugin listed in the [OPERATIONS] there has to be a matching
 # subsection below this section
 # sub-sections are denoted by double-brackets (you can indent them too)

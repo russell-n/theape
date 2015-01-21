@@ -23,7 +23,7 @@ setup(name='theape',
       package_data = {"theape":["*.txt", "*.rst", "*.ini"]},
       entry_points = """
 	  [console_scripts]
-      ape=theape.main:main
+      theape=theape.main:main
 
       [theape.subcommands]
       subcommands=theape.infrastructure.arguments
