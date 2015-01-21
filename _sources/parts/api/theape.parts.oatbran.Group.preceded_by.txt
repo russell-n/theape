@@ -1,0 +1,6 @@
+theape.parts.oatbran.Group.preceded_by
+======================================
+
+.. currentmodule:: theape.parts.oatbran
+
+.. automethod:: Group.preceded_by

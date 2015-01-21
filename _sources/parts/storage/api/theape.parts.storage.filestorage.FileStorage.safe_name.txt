@@ -1,0 +1,6 @@
+theape.parts.storage.filestorage.FileStorage.safe_name
+======================================================
+
+.. currentmodule:: theape.parts.storage.filestorage
+
+.. automethod:: FileStorage.safe_name

@@ -1,0 +1,6 @@
+theape.parts.wifi.tests.testiwconfig.TestIwconfigExpressions.test_bit_rate
+==========================================================================
+
+.. currentmodule:: theape.parts.wifi.tests.testiwconfig
+
+.. automethod:: TestIwconfigExpressions.test_bit_rate

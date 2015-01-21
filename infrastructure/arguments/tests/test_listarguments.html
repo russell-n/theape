@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Testing the List Arguments &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../index.html" />
+    <link rel="up" title="Testing the Arguments" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >The Ape&#8217;s Infrastructure</a> &raquo;</li>
+          <li><a href="../index.html" >The Arguments</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Testing the Arguments</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="testing-the-list-arguments">
+<h1>Testing the List Arguments<a class="headerlink" href="#testing-the-list-arguments" title="Permalink to this headline">¶</a></h1>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c">#python standard library</span>
+<span class="kn">import</span> <span class="nn">unittest</span>
+
+<span class="c"># third party</span>
+<span class="kn">from</span> <span class="nn">mock</span> <span class="kn">import</span> <span class="n">MagicMock</span><span class="p">,</span> <span class="n">patch</span>
+
+<span class="c"># the ape</span>
+<span class="kn">from</span> <span class="nn">theape.infrastructure.arguments.listarguments</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span>
+<span class="n">ListStrategy</span>
+<span class="kn">from</span> <span class="nn">theape.infrastructure.arguments.basestrategy</span> <span class="kn">import</span> <span class="n">BaseStrategy</span>
+</pre></div>
+</div>
+<span class="target" id="module-theape.interface.arguments.test.test_listarguments"></span><table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestList.test_constructor</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestList.test_modules</span></tt></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">TestList</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;list&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arguments</span> <span class="o">=</span> <span class="n">List</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">test_constructor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Does it build correctly?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">arguments</span> <span class="o">=</span> <span class="n">List</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;list&#39;</span><span class="p">])</span>
+
+        <span class="c"># inderited default</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">arguments</span><span class="o">.</span><span class="n">pudb</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">test_modules</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Does it get the list of plugin modules?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># default to empty list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">([],</span> <span class="bp">self</span><span class="o">.</span><span class="n">arguments</span><span class="o">.</span><span class="n">modules</span><span class="p">)</span>
+
+        <span class="c"># positional arguments</span>
+        <span class="n">modules</span> <span class="o">=</span> <span class="s">&#39;ape bat chameleon&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arguments</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arguments</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">+</span> <span class="n">modules</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">modules</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">arguments</span><span class="o">.</span><span class="n">modules</span><span class="p">)</span>
+        <span class="k">return</span>
+</pre></div>
+</div>
+<div class="section" id="testing-the-list-strategy">
+<h2>Testing the List Strategy<a class="headerlink" href="#testing-the-list-strategy" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestListStrategy.test_constructor</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestListStrategy.test_function</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestListStrategy.test_try_except</span></tt></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Testing the List Arguments</a><ul>
+<li><a class="reference internal" href="#testing-the-list-strategy">Testing the List Strategy</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../components/index.html">The Components</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../_sources/infrastructure/arguments/tests/test_listarguments.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>validate.Validator &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Validation" href="../validation.html" />
+    <link rel="prev" title="configobj.get_extra_values" href="configobj.get_extra_values.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="configobj.get_extra_values.html" title="configobj.get_extra_values"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >The Ape Developer Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >The Explorations</a> &raquo;</li>
+          <li><a href="../index.html" >Exploring ConfigObj</a> &raquo;</li>
+          <li><a href="../validation.html" accesskey="U">Validation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="validate-validator">
+<h1>validate.Validator<a class="headerlink" href="#validate-validator" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="validate.Validator">
+<em class="property">class </em><tt class="descclassname">validate.</tt><tt class="descname">Validator</tt><big>(</big><em>functions=None</em><big>)</big><a class="headerlink" href="#validate.Validator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validator is an object that allows you to register a set of &#8216;checks&#8217;.
+These checks take input and test that it conforms to the check.</p>
+<p>This can also involve converting the value from a string into
+the correct datatype.</p>
+<p>The <tt class="docutils literal"><span class="pre">check</span></tt> method takes an input string which configures which
+check is to be used and applies that check to a supplied value.</p>
+<p>An example input string would be:
+&#8216;int_range(param1, param2)&#8217;</p>
+<p>You would then provide something like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">int_range_check</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">min</span><span class="p">,</span> <span class="nb">max</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="c"># turn min and max from strings to integers</span>
+<span class="gp">... </span>    <span class="nb">min</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">min</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">max</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">max</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="c"># check that value is of the correct type.</span>
+<span class="gp">... </span>    <span class="c"># possible valid inputs are integers or strings</span>
+<span class="gp">... </span>    <span class="c"># that represent integers</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">long</span><span class="p">,</span> <span class="n">string_type</span><span class="p">)):</span>
+<span class="gp">... </span>        <span class="k">raise</span> <span class="n">VdtTypeError</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">string_type</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="c"># if we are given a string</span>
+<span class="gp">... </span>        <span class="c"># attempt to convert to an integer</span>
+<span class="gp">... </span>        <span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>            <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+<span class="gp">... </span>            <span class="k">raise</span> <span class="n">VdtValueError</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="c"># check the value is between our constraints</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="ow">not</span> <span class="nb">min</span> <span class="o">&lt;=</span> <span class="n">value</span><span class="p">:</span>
+<span class="gp">... </span>         <span class="k">raise</span> <span class="n">VdtValueTooSmallError</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="nb">max</span><span class="p">:</span>
+<span class="gp">... </span>         <span class="k">raise</span> <span class="n">VdtValueTooBigError</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">value</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">fdict</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;int_range&#39;</span><span class="p">:</span> <span class="n">int_range_check</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vtr1</span> <span class="o">=</span> <span class="n">Validator</span><span class="p">(</span><span class="n">fdict</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vtr1</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="s">&#39;int_range(20, 40)&#39;</span><span class="p">,</span> <span class="s">&#39;30&#39;</span><span class="p">)</span>
+<span class="go">30</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vtr1</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="s">&#39;int_range(20, 40)&#39;</span><span class="p">,</span> <span class="s">&#39;60&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">VdtValueTooBigError</span>: <span class="n">the value &quot;60&quot; is too big.</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">VdtValueTooBigError</span>: <span class="n">the value &quot;60&quot; is too big.</span>
+</pre></div>
+</div>
+<p>New functions can be added with :</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">vtr2</span> <span class="o">=</span> <span class="n">Validator</span><span class="p">()</span>       
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vtr2</span><span class="o">.</span><span class="n">functions</span><span class="p">[</span><span class="s">&#39;int_range&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">int_range_check</span>
+</pre></div>
+</div>
+<p>Or by passing in a dictionary of functions when Validator 
+is instantiated.</p>
+<p>Your functions <em>can</em> use keyword arguments,
+but the first argument should always be &#8216;value&#8217;.</p>
+<p>If the function doesn&#8217;t take additional arguments,
+the parentheses are optional in the check.
+It can be written with either of :</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">keyword</span> <span class="o">=</span> <span class="n">function_name</span>
+<span class="n">keyword</span> <span class="o">=</span> <span class="n">function_name</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The first program to utilise Validator() was Michael Foord&#8217;s
+ConfigObj, an alternative to ConfigParser which supports lists and
+can validate a config file using a config schema.
+For more details on using Validator with ConfigObj see:
+<a class="reference external" href="https://configobj.readthedocs.org/en/latest/configobj.html">https://configobj.readthedocs.org/en/latest/configobj.html</a></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">vtri</span> <span class="o">=</span> <span class="n">Validator</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="validate.Validator.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>functions=None</em><big>)</big><a class="headerlink" href="#validate.Validator.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">vtri</span> <span class="o">=</span> <span class="n">Validator</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#validate.Validator.__init__" title="validate.Validator.__init__"><tt class="xref py py-obj docutils literal"><span class="pre">__init__</span></tt></a>([functions])</td>
+<td><div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">vtri</span> <span class="o">=</span> <span class="n">Validator</span><span class="p">()</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#validate.Validator.check" title="validate.Validator.check"><tt class="xref py py-obj docutils literal"><span class="pre">check</span></tt></a>(check,&nbsp;value[,&nbsp;missing])</td>
+<td>Usage: check(check, value)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#validate.Validator.get_default_value" title="validate.Validator.get_default_value"><tt class="xref py py-obj docutils literal"><span class="pre">get_default_value</span></tt></a>(check)</td>
+<td>Given a check, return the default value for the check (converted to the right type).</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="validate.Validator.check">
+<tt class="descname">check</tt><big>(</big><em>check</em>, <em>value</em>, <em>missing=False</em><big>)</big><a class="headerlink" href="#validate.Validator.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Usage: check(check, value)</p>
+<dl class="docutils">
+<dt>Arguments:</dt>
+<dd>check: string representing check to apply (including arguments)
+value: object to be checked</dd>
+</dl>
+<p>Returns value, converted to correct type if necessary</p>
+<p>If the check fails, raises a <tt class="docutils literal"><span class="pre">ValidateError</span></tt> subclass.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">vtor</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="s">&#39;yoda&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">VdtUnknownCheckError</span>: <span class="n">the check &quot;yoda&quot; is unknown.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vtor</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="s">&#39;yoda()&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">VdtUnknownCheckError</span>: <span class="n">the check &quot;yoda&quot; is unknown.</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">VdtUnknownCheckError</span>: <span class="n">the check &quot;yoda&quot; is unknown.</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">vtor</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="s">&#39;string(default=&quot;&quot;)&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">missing</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">&#39;&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="validate.Validator.get_default_value">
+<tt class="descname">get_default_value</tt><big>(</big><em>check</em><big>)</big><a class="headerlink" href="#validate.Validator.get_default_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a check, return the default value for the check
+(converted to the right type).</p>
+<p>If the check doesn&#8217;t specify a default value then a
+<tt class="docutils literal"><span class="pre">KeyError</span></tt> will be raised.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../user/index.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../../../_sources/documentation/developer/explorations/explore_configobj/api/validate.Validator.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,6 @@
+theape.parts.oatbran.FormalDefinition.OR
+========================================
+
+.. currentmodule:: theape.parts.oatbran
+
+.. autoattribute:: FormalDefinition.OR

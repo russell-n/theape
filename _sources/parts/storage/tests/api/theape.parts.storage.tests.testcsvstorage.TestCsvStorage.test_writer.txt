@@ -1,0 +1,6 @@
+theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_writer
+====================================================================
+
+.. currentmodule:: theape.parts.storage.tests.testcsvstorage
+
+.. automethod:: TestCsvStorage.test_writer

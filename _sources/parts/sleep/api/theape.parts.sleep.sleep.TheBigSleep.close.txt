@@ -1,0 +1,6 @@
+theape.parts.sleep.sleep.TheBigSleep.close
+==========================================
+
+.. currentmodule:: theape.parts.sleep.sleep
+
+.. automethod:: TheBigSleep.close

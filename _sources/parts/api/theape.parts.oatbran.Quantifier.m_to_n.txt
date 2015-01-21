@@ -1,0 +1,6 @@
+theape.parts.oatbran.Quantifier.m_to_n
+======================================
+
+.. currentmodule:: theape.parts.oatbran
+
+.. automethod:: Quantifier.m_to_n

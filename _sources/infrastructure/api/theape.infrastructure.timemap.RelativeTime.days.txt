@@ -1,0 +1,6 @@
+theape.infrastructure.timemap.RelativeTime.days
+===============================================
+
+.. currentmodule:: theape.infrastructure.timemap
+
+.. autoattribute:: RelativeTime.days

@@ -1,0 +1,310 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Testing the Help Arguments &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../index.html" />
+    <link rel="up" title="Testing the Arguments" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >The Ape&#8217;s Infrastructure</a> &raquo;</li>
+          <li><a href="../index.html" >The Arguments</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Testing the Arguments</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="testing-the-help-arguments">
+<h1>Testing the Help Arguments<a class="headerlink" href="#testing-the-help-arguments" title="Permalink to this headline">¶</a></h1>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c"># python standard library</span>
+<span class="kn">import</span> <span class="nn">unittest</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">string</span>
+
+<span class="c"># third-party</span>
+<span class="kn">from</span> <span class="nn">mock</span> <span class="kn">import</span> <span class="n">MagicMock</span>
+
+<span class="c"># the ape</span>
+<span class="kn">from</span> <span class="nn">theape.infrastructure.arguments.helparguments</span> <span class="kn">import</span> <span class="n">Help</span>
+<span class="kn">from</span> <span class="nn">theape.infrastructure.arguments.helparguments</span> <span class="kn">import</span> <span class="n">HelpStrategy</span>
+<span class="kn">from</span> <span class="nn">theape.infrastructure.arguments.basestrategy</span> <span class="kn">import</span> <span class="n">BaseStrategy</span>
+</pre></div>
+</div>
+<span class="target" id="module-theape.interface.arguments.tests.test_helparguments"></span><table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestHelp.test_constructor</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestHelp.test_width</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestHelp.test_modules</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestHelp.test_name</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestHelp.test_whole_shebang</span></tt></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="code python highlight-python"><div class="highlight"><pre>class TestHelp(unittest.TestCase):
+    def setUp(self):
+        self.args = [&#39;help&#39;]
+        self.arguments = Help(args=self.args)
+        return
+
+    def test_constructor(self):
+        &quot;&quot;&quot;
+        Does it build correctly?
+        &quot;&quot;&quot;
+        arguments = Help(args=[&#39;help&#39;])
+        self.assertFalse(arguments.trace)
+        return
+
+    def test_width(self):
+        &quot;&quot;&quot;
+        Does it get the screen-width?
+        &quot;&quot;&quot;
+        self.assertEqual(self.arguments.width, 80)
+
+        self.arguments.reset()
+        width = random.randint(0, 100)
+        self.arguments.args = self.args + [&#39;--width&#39;,
+&#39;{0}&#39;.format(width)]
+        self.assertEqual(width, self.arguments.width)
+        return
+
+    def test_modules(self):
+        &quot;&quot;&quot;
+        Does it get a list of plugin modules?
+        &quot;&quot;&quot;
+        # default is an empty list
+        self.assertEqual([], self.arguments.modules)
+
+        self.arguments.reset()
+        modules = [&quot;&quot;.join([random.choice(string.letters) for letter
+in xrange(random.randrange(1, 10))]) for
+                   module in xrange(random.randrange(2, 10))]
+        mod_options = &quot;-m &quot; + &#39; -m &#39;.join(modules)
+        self.arguments.args = self.args + mod_options.split()
+        self.assertEqual(self.arguments.modules, modules)
+        return
+
+    def test_name(self):
+        &quot;&quot;&quot;
+        Does it get the name of the plugin?
+        &quot;&quot;&quot;
+        self.assertEqual(&#39;Ape&#39;, self.arguments.name)
+
+        self.arguments.reset()
+        name = &#39;&#39;.join([random.choice(string.letters) for letter in
+xrange(random.randrange(1, 10))])
+        self.arguments.args = self.args + [name]
+        self.assertEqual(name, self.arguments.name)
+        return
+
+    def test_whole_shebang(self):
+        &quot;&quot;&quot;
+        Does it get modules, screen width and names?
+        &quot;&quot;&quot;
+        width = random.randrange(2, 100)
+        width_option = &#39;-w {0}&#39;.format(width)
+        modules = [&quot;&quot;.join([random.choice(string.letters) for letter
+in xrange(random.randrange(2, 10))]) for
+                   module in xrange(random.randrange(2, 10))]
+        mod_options = &quot;-m &quot; + &#39; -m &#39;.join(modules)
+        name = &#39;&#39;.join([random.choice(string.letters) for letter in
+xrange(random.randrange(2, 10))])
+
+        self.arguments.args = self.args + [width_option] +
+mod_options.split() + [name]
+        self.assertEqual(width, self.arguments.width)
+        self.assertEqual(modules, self.arguments.modules)
+        self.assertEqual(name, self.arguments.name)
+        return
+</pre></div>
+</div>
+<div class="section" id="testing-the-help-strategy">
+<h2>Testing the Help Strategy<a class="headerlink" href="#testing-the-help-strategy" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestHelpStrategy.test_constructor</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestHelpStrategy.test_function</span></tt></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="code python highlight-python"><div class="highlight"><pre>class TestHelpStrategy(unittest.TestCase):
+    def test_constructor(self):
+        &quot;&quot;&quot;
+        Does it build?
+        &quot;&quot;&quot;
+        strategy = HelpStrategy()
+        self.assertIsInstance(strategy, BaseStrategy)
+        return
+
+    def test_function(self):
+        &quot;&quot;&quot;
+        Does it implement the `help` strategy?
+        &quot;&quot;&quot;
+        args = MagicMock()
+        quartermaster = MagicMock()
+        HelpStrategy.quartermaster = quartermaster
+
+        args.modules = &#39;x y z&#39;.split()
+        args.name = &#39;bob&#39;
+        args.width = 38
+        definition_bob = MagicMock()
+
+        plugin_bob = MagicMock()
+
+        definition_bob.return_value = plugin_bob
+        plugin_definitions = {&#39;bob&#39;: definition_bob}
+        def side_effect(name):
+            return plugin_definitions[name]
+
+        quartermaster.get_plugin.side_effect = side_effect
+
+        strategy = HelpStrategy()
+        strategy.function(args)
+
+        self.assertEqual(quartermaster.external_modules, args.modules)
+        quartermaster.get_plugin.assert_called_with(&#39;bob&#39;)
+        plugin_bob.help.assert_called_with(args.width)
+
+        # type-errors are considered a user-mistake
+        quartermaster.get_plugin.side_effect = TypeError(&quot;no
+comprende&quot;)
+        strategy.function(args)
+        quartermaster.list_plugins.assert_called_with()
+
+        #get rid of the TypeError so we can test other errors
+        quartermaster.get_plugin.side_effect = side_effect
+        plugin_bob.help.side_effect = AttributeError(&quot;no such
+attribute&quot;)
+        strategy.function(args)
+
+        plugin_bob.help.side_effect = Exception(&quot;aaaaaaaaahhhhhhh&quot;)
+        strategy.function(args)
+        plugin_bob.help.assert_called_with(args.width)
+        return
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Testing the Help Arguments</a><ul>
+<li><a class="reference internal" href="#testing-the-help-strategy">Testing the Help Strategy</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../components/index.html">The Components</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../_sources/infrastructure/arguments/tests/test_helparguments.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

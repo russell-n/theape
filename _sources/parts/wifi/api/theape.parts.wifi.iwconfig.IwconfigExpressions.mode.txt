@@ -1,0 +1,6 @@
+theape.parts.wifi.iwconfig.IwconfigExpressions.mode
+===================================================
+
+.. currentmodule:: theape.parts.wifi.iwconfig
+
+.. autoattribute:: IwconfigExpressions.mode

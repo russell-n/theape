@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Testing the Sleep Plugin &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../index.html" />
+    <link rel="up" title="Testing the Plugins" href="index.html" />
+    <link rel="next" title="theape.plugins.tests.test_sleep_plugin.TestingSleepPlugin.test_constructor" href="api/theape.plugins.tests.test_sleep_plugin.TestingSleepPlugin.test_constructor.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/theape.plugins.tests.test_sleep_plugin.TestingSleepPlugin.test_constructor.html" title="theape.plugins.tests.test_sleep_plugin.TestingSleepPlugin.test_constructor"
+             accesskey="N">next</a> |</li>
+        <li><a href="../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Plugins</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Testing the Plugins</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="testing-the-sleep-plugin">
+<h1>Testing the Sleep Plugin<a class="headerlink" href="#testing-the-sleep-plugin" title="Permalink to this headline">¶</a></h1>
+<p>The <cite>Sleep</cite> plugin inherits from the <a class="reference internal" href="../base_plugin.html#base-plugin"><em>BasePlugin</em></a> and so takes two parameters on instantiation:</p>
+<blockquote>
+<div><ul class="simple">
+<li>configuration (a configuration map to get config-file values from)</li>
+<li>section_header (the section name that has values for the plugin)</li>
+</ul>
+</div></blockquote>
+<p>The section parameter <cite>section_header</cite> was added so that more than one configuration of each plugin can be used. Since the operator is passing this in to all  the plugins it can be assumed that it will always exist (in the current implementation of the ape).</p>
+<span class="target" id="module-theape.plugins.tests.test_sleep_plugin"></span><table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.tests.test_sleep_plugin.TestingSleepPlugin.test_constructor.html#theape.plugins.tests.test_sleep_plugin.TestingSleepPlugin.test_constructor" title="theape.plugins.tests.test_sleep_plugin.TestingSleepPlugin.test_constructor"><tt class="xref py py-obj docutils literal"><span class="pre">TestingSleepPlugin.test_constructor</span></tt></a>()</td>
+<td>Does it take the two expected parameters?</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.tests.test_sleep_plugin.TestingSleepPlugin.test_product.html#theape.plugins.tests.test_sleep_plugin.TestingSleepPlugin.test_product" title="theape.plugins.tests.test_sleep_plugin.TestingSleepPlugin.test_product"><tt class="xref py py-obj docutils literal"><span class="pre">TestingSleepPlugin.test_product</span></tt></a>()</td>
+<td>Does it build the product in the way you expect?</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../parts/index.html">Parts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../_sources/plugins/tests/test_sleep_plugin.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

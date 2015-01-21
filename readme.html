@@ -1,0 +1,332 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The APE (Read Me) &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="index.html" />
+    <link rel="next" title="The Components" href="components/index.html" />
+    <link rel="prev" title="ape.main.main" href="api/ape.main.main.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="components/index.html" title="The Components"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="api/ape.main.main.html" title="ape.main.main"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Ape Documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-ape-read-me">
+<h1>The APE (Read Me)<a class="headerlink" href="#the-ape-read-me" title="Permalink to this headline">¶</a></h1>
+<p>The <cite>All-Purpose Experimenter</cite> is a plugin-based system meant to create a unified front-end for different device-related testing. The documentation is on <a class="reference external" href="http://pythonhosted.org//theape/">pythonhosted</a>.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>If you have the repository you can install it by using the <tt class="docutils literal"><span class="pre">setup.py</span></tt> file.</p>
+<div class="code bash highlight-python"><div class="highlight"><pre>python setup.py install
+</pre></div>
+</div>
+<p>Alternately you can pull it from PyPi.</p>
+<div class="code bash highlight-python"><div class="highlight"><pre>pip install theape
+</pre></div>
+</div>
+<p>If you are installing it system-wide you will probably have to prefix this and other install commands with <tt class="docutils literal"><span class="pre">sudo</span></tt>.</p>
+</div>
+<div class="section" id="command-line-help">
+<h2>Command Line Help<a class="headerlink" href="#command-line-help" title="Permalink to this headline">¶</a></h2>
+<p>The APE has some command-line help.</p>
+<div class="code bash highlight-python"><div class="highlight"><pre><span class="n">theape</span> <span class="o">-</span><span class="n">h</span>
+</pre></div>
+</div>
+<div class="code highlight-python"><div class="highlight"><pre>APE (the all-purpose-evaluator)
+
+Usage: ape -h | -v
+       ape [--debug|--silent] [--pudb|--pdb] &lt;command&gt; [&lt;argument&gt;...]
+       ape [--debug|--silent] [--trace|--callgraph] &lt;command&gt; [&lt;argument&gt;...]
+
+Help Options:
+
+    -h, --help     Display this help message and quit.
+    -v, --version  Display the version number and quit.
+
+Logging Options:
+
+    --debug   Set logging level to DEBUG.
+    --silent  Set logging level to ERROR.
+
+Debugging Options:
+
+    --pudb       Enable the `pudb` debugger (if installed)
+    --pdb        Enable the `pdb` (python&#39;s default) debugger
+    --trace      Enable code-tracing
+    --callgraph  Create a call-graph of for the code
+
+Positional Arguments:
+
+    &lt;command&gt;      The name of a sub-command (see below)
+    &lt;argument&gt;...  One or more options or arguments for the sub-command
+
+Available Sub-Commands:
+
+    run    Run a plugin
+    fetch  Fetch a sample configuration-file
+    help   Display more help
+    list   List known plugins
+    check  Check a configuration
+
+To get help for a sub-command pass `-h` as the argument. e.g.:
+
+    ape run -h
+</pre></div>
+</div>
+<p>I don&#8217;t have much user documentation set up yet, so I&#8217;ll just dump the sub-commands&#8217; help.</p>
+<div class="section" id="run-sub-command">
+<h3>Run Sub-Command<a class="headerlink" href="#run-sub-command" title="Permalink to this headline">¶</a></h3>
+<div class="code highlight-python"><div class="highlight"><pre>`run` sub-command
+
+Usage: theape run -h
+       theape run [&lt;configuration&gt;...]
+
+Positional Arguments:
+
+    &lt;configuration&gt;   0 or more configuration-file names [default: ape.ini]
+
+Options;
+
+    -h, --help  This help message.
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">run</span></tt> sub-command grabs the configuration files and runs the plugins listed.</p>
+</div>
+<div class="section" id="fetch-sub-command">
+<h3>Fetch Sub-Command<a class="headerlink" href="#fetch-sub-command" title="Permalink to this headline">¶</a></h3>
+<div class="code highlight-python"><div class="highlight"><pre>fetch subcommand
+
+usage: ape fetch -h
+       ape fetch [&lt;name&gt;...]  [--module &lt;module&gt; ...]
+
+positional arguments:
+    &lt;name&gt;                         List of plugin-names (default=[&#39;Ape&#39;])
+
+optional arguments:
+    -h, --help                     Show this help message and exit
+    -m, --module &lt;module&gt; ...      Non-ape modules
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">fetch</span></tt> sub-command dumps the <cite>theape</cite> sample configuration to standard-out. If you pass in one or more plugin names it will output their sample configurations instead. The intent is for the output to be re-directed to a file for editing or to dump it to the screen if you just want to see the options. You can combine the Ape&#8217;s configuration with other plugins&#8217; configurations by using <cite>Ape</cite> explicitly:</p>
+<div class="highlight-python"><div class="highlight"><pre>theape fetch Ape Sleep Dummy
+</pre></div>
+</div>
+<p>Right nom there aren&#8217;t any interesting ones built into the Ape, as I&#8217;m focusing on building plugin-adapters for some code that I don&#8217;t own, but external plugin-adapters can be referenced using the <tt class="docutils literal"><span class="pre">-m</span></tt> or <tt class="docutils literal"><span class="pre">--module</span></tt> option. Note that it&#8217;s a module name, not a package name that has to be passed in. If, for example, there is an Ape-plugin named <tt class="docutils literal"><span class="pre">Ping</span></tt> in a <tt class="docutils literal"><span class="pre">plugins</span></tt> file within a package named <tt class="docutils literal"><span class="pre">apeplugins</span></tt>, you should be able to get its sample configuration like this:</p>
+<div class="highlight-python"><div class="highlight"><pre>theape fetch --module apeplugins.plugins Ping
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-help-sub-command">
+<h3>The Help Sub-Command<a class="headerlink" href="#the-help-sub-command" title="Permalink to this headline">¶</a></h3>
+<div class="code highlight-python"><div class="highlight"><pre>`help` sub-command
+
+usage: ape help -h
+       ape help [-w WIDTH] [--module &lt;module&gt;...] [&lt;name&gt;]
+
+positional arguments:
+    &lt;name&gt;                A specific plugin to inquire about [default: Ape].
+
+optional arguments:
+    -h, --help            show this help message and exit
+    -w , --width &lt;width&gt;  Number of characters to wide to format the page. [default: 80]
+    -m, --module &lt;module&gt;     non-ape module with plugins
+
+
+
+
+
+
+The ``help`` sub-command displays the help strings provided by the plugins. They are meant to be man-page-like so they are formatted and output to less. As with ``fetch`` you need to specify any non-ape modules.
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-list-sub-command">
+<h3>The List Sub-Command<a class="headerlink" href="#the-list-sub-command" title="Permalink to this headline">¶</a></h3>
+<div class="code highlight-python"><div class="highlight"><pre>list subcommand
+
+usage: ape list -h
+       ape list [&lt;module&gt; ...]
+
+Positional Arguments:
+  &lt;module&gt; ...  Space-separated list of importable module with plugins
+
+optional arguments:
+
+  -h, --help                 Show this help message and exit
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">list</span></tt> subcommand prints out any Ape Plugins that are found. Like the <tt class="docutils literal"><span class="pre">help</span></tt> and <tt class="docutils literal"><span class="pre">fetch</span></tt> sub-commands the <tt class="docutils literal"><span class="pre">list</span></tt> needs to be told about any external plugins. Unlike them it takes them as positional arguments (not using the <tt class="docutils literal"><span class="pre">-m</span></tt> option). This was meant to reduce typing, although I might change this to be more consistent later.</p>
+</div>
+<div class="section" id="the-check-sub-command">
+<h3>The Check Sub-Command<a class="headerlink" href="#the-check-sub-command" title="Permalink to this headline">¶</a></h3>
+<div class="code highlight-python"><div class="highlight"><pre>`check` sub-command
+
+usage: ape check -h
+       ape check  [&lt;config-file-name&gt; ...] [--module &lt;module&gt; ...]
+
+Positional Arguments:
+
+    &lt;config-file-name&gt; ...    List of config files (e.g. *.ini - default=&#39;[&#39;ape.ini&#39;]&#39;)
+
+optional arguments:
+
+    -h, --help                  Show this help message and exit
+    -m, --module &lt;module&gt;       Non-ape module with plugins
+</pre></div>
+</div>
+<p>This sub-command builds the configuration and calls the <tt class="docutils literal"><span class="pre">check_rep</span></tt> method of each of the plugins. It is meant to validate your configuration without running the test.</p>
+</div>
+</div>
+<div class="section" id="building-the-written-documentation">
+<h2>Building the Written Documentation<a class="headerlink" href="#building-the-written-documentation" title="Permalink to this headline">¶</a></h2>
+<p>The APE was written in a literate-programming style with Pweave. The <tt class="docutils literal"><span class="pre">theape</span></tt> folder serves as both the python package code and as a <cite>sphinx</cite> source repository. If you want to compile the documentation you will at a minimum need <a class="reference external" href="http://sphinx-doc.org/">Sphinx</a>, <a class="reference external" href="https://pypi.python.org/pypi/alabaster">alabaster</a> , and <a class="reference external" href="https://pypi.python.org/pypi/sphinxcontrib-plantuml">sphinxcontrib-plantuml</a>. To get the <tt class="docutils literal"><span class="pre">sphinxcontrib-plantuml</span></tt> also requires <a class="reference external" href="http://plantuml.com/">plantuml</a>. Everything except <cite>plantuml</cite> is on pypi so you can get them with pip:</p>
+<div class="highlight-python"><div class="highlight"><pre>pip install sphinx
+pip install sphinxcontrib-plantuml
+pip install alabaster
+</pre></div>
+</div>
+<p>If you are using ubuntu you can use <tt class="docutils literal"><span class="pre">apt-get</span></tt> to get <cite>plantuml</cite>:</p>
+<div class="highlight-python"><div class="highlight"><pre>apt-get install plantuml
+</pre></div>
+</div>
+<p>Once everything is installed you can build the documentation using the Makefile. To build the html, for example:</p>
+<div class="highlight-python"><div class="highlight"><pre>make html
+</pre></div>
+</div>
+<p>This should create a folder named <tt class="docutils literal"><span class="pre">doc</span></tt> with an <tt class="docutils literal"><span class="pre">html</span></tt> sub-folder containing the documentation.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If this is installed in a <cite>virtualenv</cite> then both the <cite>sphinx</cite> installation and the <cite>theape</cite> installation have to be in the same <cite>virtualenv</cite> or the auto-summaries for the code won&#8217;t be built.</p>
+</div>
+</div>
+<div class="section" id="installing-testing-dependencies">
+<h2>Installing Testing Dependencies<a class="headerlink" href="#installing-testing-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>The APE is currently being tested using <a class="reference external" href="http://pythonhosted.org/behave/">behave</a> so if you want to run the tests, you&#8217;ll need that, <a class="reference external" href="http://pyhamcrest.readthedocs.org/en/1.8.0/">pyhamcrest</a> and <a class="reference external" href="http://mock.readthedocs.org/en/latest/magicmock.html">mock</a>. All three are on pypi so if you have pip installed you can install them from the web (if installing system wide run as root).</p>
+<div class="code bash highlight-python"><div class="highlight"><pre>pip install behave
+pip install pyhamcrest
+pip install mock
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The APE (Read Me)</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#command-line-help">Command Line Help</a><ul>
+<li><a class="reference internal" href="#run-sub-command">Run Sub-Command</a></li>
+<li><a class="reference internal" href="#fetch-sub-command">Fetch Sub-Command</a></li>
+<li><a class="reference internal" href="#the-help-sub-command">The Help Sub-Command</a></li>
+<li><a class="reference internal" href="#the-list-sub-command">The List Sub-Command</a></li>
+<li><a class="reference internal" href="#the-check-sub-command">The Check Sub-Command</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#building-the-written-documentation">Building the Written Documentation</a></li>
+<li><a class="reference internal" href="#installing-testing-dependencies">Installing Testing Dependencies</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">The Main Entry Point</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="_sources/readme.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

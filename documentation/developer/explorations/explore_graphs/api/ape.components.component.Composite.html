@@ -1,0 +1,318 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ape.components.component.Composite &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Exploring Pyreverse" href="../explore_pyreverse.html" />
+    <link rel="next" title="PyCallGraph Explorations" href="../explore_pycallgraph.html" />
+    <link rel="prev" title="pylint.pyreverse.main.Run.load_command_line_configuration" href="pylint.pyreverse.main.Run.load_command_line_configuration.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../explore_pycallgraph.html" title="PyCallGraph Explorations"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pylint.pyreverse.main.Run.load_command_line_configuration.html" title="pylint.pyreverse.main.Run.load_command_line_configuration"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >The Ape Developer Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >The Explorations</a> &raquo;</li>
+          <li><a href="../index.html" >Call Graphs</a> &raquo;</li>
+          <li><a href="../explore_pyreverse.html" accesskey="U">Exploring Pyreverse</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ape-components-component-composite">
+<h1>ape.components.component.Composite<a class="headerlink" href="#ape-components-component-composite" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="ape.components.component.Composite">
+<em class="property">class </em><tt class="descclassname">ape.components.component.</tt><tt class="descname">Composite</tt><big>(</big><em>error=None</em>, <em>error_message=None</em>, <em>identifier=None</em>, <em>component_category=None</em>, <em>time_remains=None</em><big>)</big><a class="headerlink" href="#ape.components.component.Composite" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Composite to hold and execute Components</p>
+<p>Composite Constructor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
+<li><cite>error</cite>: Exception to catch when calling components</li>
+<li><cite>error_message</cite>: string for header of error messages</li>
+<li><cite>component_category</cite>: label for error messages when reporting component actions</li>
+<li><cite>identifier</cite>: something to identify this when it starts the call</li>
+<li><tt class="docutils literal"><span class="pre">time_remains</span></tt> - a TimeTracker or CountdownTimer</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="ape.components.component.Composite.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>error=None</em>, <em>error_message=None</em>, <em>identifier=None</em>, <em>component_category=None</em>, <em>time_remains=None</em><big>)</big><a class="headerlink" href="#ape.components.component.Composite.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Composite Constructor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
+<li><cite>error</cite>: Exception to catch when calling components</li>
+<li><cite>error_message</cite>: string for header of error messages</li>
+<li><cite>component_category</cite>: label for error messages when reporting component actions</li>
+<li><cite>identifier</cite>: something to identify this when it starts the call</li>
+<li><tt class="docutils literal"><span class="pre">time_remains</span></tt> - a TimeTracker or CountdownTimer</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#ape.components.component.Composite.__init__" title="ape.components.component.Composite.__init__"><tt class="xref py py-obj docutils literal"><span class="pre">__init__</span></tt></a>([error,&nbsp;error_message,&nbsp;identifier,&nbsp;...])</td>
+<td>Composite Constructor</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ape.components.component.Composite.add" title="ape.components.component.Composite.add"><tt class="xref py py-obj docutils literal"><span class="pre">add</span></tt></a>(component)</td>
+<td>appends the component to self.components</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ape.components.component.Composite.check_rep" title="ape.components.component.Composite.check_rep"><tt class="xref py py-obj docutils literal"><span class="pre">check_rep</span></tt></a>()</td>
+<td>Checks the representation invariant</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">one_call</span></tt>(*args,&nbsp;**kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ape.components.component.Composite.remove" title="ape.components.component.Composite.remove"><tt class="xref py py-obj docutils literal"><span class="pre">remove</span></tt></a>(component)</td>
+<td>Removes the component from the components (if it was there)</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#ape.components.component.Composite.components" title="ape.components.component.Composite.components"><tt class="xref py py-obj docutils literal"><span class="pre">components</span></tt></a></td>
+<td>The list of components</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ape.components.component.Composite.logger" title="ape.components.component.Composite.logger"><tt class="xref py py-obj docutils literal"><span class="pre">logger</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">A logging object.</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="ape.components.component.Composite.add">
+<tt class="descname">add</tt><big>(</big><em>component</em><big>)</big><a class="headerlink" href="#ape.components.component.Composite.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>appends the component to self.components</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first simple">
+<li><cite>component</cite>: A Component</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Postcondition:</th><td class="field-body"><p class="first last">component appended to components</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ape.components.component.Composite.check_rep">
+<tt class="descname">check_rep</tt><big>(</big><big>)</big><a class="headerlink" href="#ape.components.component.Composite.check_rep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks the representation invariant</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raise:</th><td class="field-body">ConfigurationError</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ape.components.component.Composite.close">
+<tt class="descname">close</tt><big>(</big><big>)</big><a class="headerlink" href="#ape.components.component.Composite.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>calls the <cite>close</cite> method on each component</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Postcondition:</th><td class="field-body">comuponents closed and self.components is None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ape.components.component.Composite.log_error">
+<tt class="descname">log_error</tt><big>(</big><em>error</em>, <em>message=''</em><big>)</big><a class="headerlink" href="#ape.components.component.Composite.log_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logs the error in bold red</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
+<li><cite>error</cite>: error type (prefix in red and bold)</li>
+<li><cite>message</cite>: descriptive message (red but not bold)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ape.components.component.Composite.remove">
+<tt class="descname">remove</tt><big>(</big><em>component</em><big>)</big><a class="headerlink" href="#ape.components.component.Composite.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes the component from the components (if it was there)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ape.components.component.Composite.components">
+<tt class="descname">components</tt><a class="headerlink" href="#ape.components.component.Composite.components" title="Permalink to this definition">¶</a></dt>
+<dd><p>The list of components</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ape.components.component.Composite.logger">
+<tt class="descname">logger</tt><a class="headerlink" href="#ape.components.component.Composite.logger" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A logging object.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ape.components.component.Composite.time_remains">
+<tt class="descname">time_remains</tt><a class="headerlink" href="#ape.components.component.Composite.time_remains" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">TimeTracker (default) or CountdownTimer object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../user/index.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../../../_sources/documentation/developer/explorations/explore_graphs/api/ape.components.component.Composite.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

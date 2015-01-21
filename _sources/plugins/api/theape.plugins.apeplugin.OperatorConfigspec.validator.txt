@@ -1,0 +1,6 @@
+theape.plugins.apeplugin.OperatorConfigspec.validator
+=====================================================
+
+.. currentmodule:: theape.plugins.apeplugin
+
+.. autoattribute:: OperatorConfigspec.validator

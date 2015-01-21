@@ -1,0 +1,43 @@
+theape.plugins.dummyplugin.CrashTestDummyConfiguration
+======================================================
+
+.. currentmodule:: theape.plugins.dummyplugin
+
+.. autoclass:: CrashTestDummyConfiguration
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~CrashTestDummyConfiguration.__init__
+      ~CrashTestDummyConfiguration.check_extra_values
+      ~CrashTestDummyConfiguration.check_rep
+      ~CrashTestDummyConfiguration.log_error
+      ~CrashTestDummyConfiguration.process_errors
+      ~CrashTestDummyConfiguration.update
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~CrashTestDummyConfiguration.check_methods
+      ~CrashTestDummyConfiguration.configspec
+      ~CrashTestDummyConfiguration.configspec_source
+      ~CrashTestDummyConfiguration.configuration
+      ~CrashTestDummyConfiguration.constants
+      ~CrashTestDummyConfiguration.logger
+      ~CrashTestDummyConfiguration.plugin_name
+      ~CrashTestDummyConfiguration.product
+      ~CrashTestDummyConfiguration.sample
+      ~CrashTestDummyConfiguration.validation_outcome
+      ~CrashTestDummyConfiguration.validator
+   
+   

@@ -1,0 +1,6 @@
+theape.plugins.base_plugin.SubConfiguration.configuration
+=========================================================
+
+.. currentmodule:: theape.plugins.base_plugin
+
+.. autoattribute:: SubConfiguration.configuration

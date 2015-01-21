@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The Countdown &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../index.html" />
+    <link rel="up" title="Countdown" href="index.html" />
+    <link rel="next" title="theape.parts.countdown.countdown.TimeTracker.__init__" href="api/theape.parts.countdown.countdown.TimeTracker.__init__.html" />
+    <link rel="prev" title="Countdown" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/theape.parts.countdown.countdown.TimeTracker.__init__.html" title="theape.parts.countdown.countdown.TimeTracker.__init__"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Countdown"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Parts</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Countdown</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-countdown">
+<h1>The Countdown<a class="headerlink" href="#the-countdown" title="Permalink to this headline">¶</a></h1>
+<p>The Countdown Timers are meant to be used by the composites and components to keep track of elapsed (and sometimes remaining) time. The <a class="reference internal" href="#ape-parts-countdown-timetracker"><em>Time Tracker</em></a> is used to keep track of how long execution is taking. This is meant primarily for someone wanting to estimate future times by looking at past logs. The <a class="reference internal" href="#ape-parts-countdown-countdowntimer"><em>CountDown Timer</em></a> also keeps track of execution time but is meant to also keep track of whether the composite should repeat or not (based on remaining repetitions or time).</p>
+<span class="target" id="module-theape.parts.countdown.countdown"></span><div class="section" id="the-timetracker">
+<span id="ape-parts-countdown-timetracker"></span><h2>The TimeTracker<a class="headerlink" href="#the-timetracker" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="responsibilities">
+<h3>Responsibilities<a class="headerlink" href="#responsibilities" title="Permalink to this headline">¶</a></h3>
+<p>The TimeTracker:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Tracks start time, stop time, elapsed times</li>
+<li>Logs min, Q1, median, Q3, max elapsed times</li>
+<li>Returns True when running and False when stopped at __call__</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="the-model">
+<h3>The Model<a class="headerlink" href="#the-model" title="Permalink to this headline">¶</a></h3>
+<p class="plantuml">
+<img src="../../_images/plantuml-c926c99f99c45636f0ae26c9111926939372960a.png" alt="BaseClass &lt;|-- TimeTracker
+TimeTracker : Bool __call__()
+TimeTracker : start
+TimeTracker : elapsed_times
+TimeTracker : __init__(log_level)" />
+</p>
+<span class="target" id="module-theape.parts.countdown.countdown"></span><table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.countdown.countdown.TimeTracker.__init__.html#theape.parts.countdown.countdown.TimeTracker.__init__" title="theape.parts.countdown.countdown.TimeTracker.__init__"><tt class="xref py py-obj docutils literal"><span class="pre">TimeTracker.__init__</span></tt></a>([log_level])</td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param:</th><td class="field-body"><cite>log_level</cite>: level at which to report elapsed times (default=&#8217;debug&#8217;)</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.countdown.countdown.TimeTracker.log.html#theape.parts.countdown.countdown.TimeTracker.log" title="theape.parts.countdown.countdown.TimeTracker.log"><tt class="xref py py-obj docutils literal"><span class="pre">TimeTracker.log</span></tt></a></td>
+<td>The logger method indicated by the log_level</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.countdown.countdown.TimeTracker.append.html#theape.parts.countdown.countdown.TimeTracker.append" title="theape.parts.countdown.countdown.TimeTracker.append"><tt class="xref py py-obj docutils literal"><span class="pre">TimeTracker.append</span></tt></a>(item)</td>
+<td>Appends the item to the times array</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.countdown.countdown.TimeTracker.percentile.html#theape.parts.countdown.countdown.TimeTracker.percentile" title="theape.parts.countdown.countdown.TimeTracker.percentile"><tt class="xref py py-obj docutils literal"><span class="pre">TimeTracker.percentile</span></tt></a>(percentile)</td>
+<td>calculates the percentile (e.g. 50 gets the median (the 50% item))</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.countdown.countdown.TimeTracker.__call__.html#theape.parts.countdown.countdown.TimeTracker.__call__" title="theape.parts.countdown.countdown.TimeTracker.__call__"><tt class="xref py py-obj docutils literal"><span class="pre">TimeTracker.__call__</span></tt></a>()</td>
+<td>The main interface - starts and stops (toggles) the timer</td>
+</tr>
+</tbody>
+</table>
+<p>The expected way to use the TimeTracker is as a sentinal in a while loop:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c"># assumes self.t is a TimeTracker instance</span>
+    <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">():</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<p>This would append a timedelta of about 1 second to the TimeTracker&#8217;s times array everytime <tt class="docutils literal"><span class="pre">run</span></tt> is called, and log the current elapsed time and the basic running statistics (which in this case shouldn&#8217;t show any variance)</p>
+</div>
+</div>
+<div class="section" id="the-countdowntimer">
+<span id="ape-parts-countdown-countdowntimer"></span><h2>The CountdownTimer<a class="headerlink" href="#the-countdowntimer" title="Permalink to this headline">¶</a></h2>
+<p>The CountdownTimer is an extension of the TimeTracker that takes a <cite>repetitions</cite> value and decrements it on each call, returning True until it is less than or equal to 0.</p>
+<p>I am also supporting time-outs (setting a total time or an end-time). The <tt class="docutils literal"><span class="pre">total_time</span></tt> should be a timedelta while the <tt class="docutils literal"><span class="pre">end_time</span></tt> should be a datetime (or something that acts like it). This adds a bit of complication so I&#8217;ve chosen a hierarchy where the end-time takes first precedence (if you reach the time quit even if there&#8217;s more repetitions or time), and the total-time take precedence over the repetitions.</p>
+<p>To decide on the behavior of the CountdownTimer you set a combination of the three parameters. In the following table 0 means the attribute is None and 1 means it was set to an appropriate value.</p>
+<table border="1" class="docutils">
+<caption>CountdownTimer Parameters</caption>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><tt class="docutils literal"><span class="pre">end_time</span></tt></th>
+<th class="head"><tt class="docutils literal"><span class="pre">total_time</span></tt></th>
+<th class="head"><tt class="docutils literal"><span class="pre">repetitions</span></tt></th>
+<th class="head">Interpretation</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>0</td>
+<td>0</td>
+<td>time_remains always False (check-rep should fail)</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>0</td>
+<td>1</td>
+<td>Only repetitions are used</td>
+</tr>
+<tr class="row-even"><td>0</td>
+<td>1</td>
+<td>0</td>
+<td>Run for the amount of time given</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>1</td>
+<td>1</td>
+<td>Use repetitions but quit if out of time</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>0</td>
+<td>0</td>
+<td>Run until the end-time is reached</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>0</td>
+<td>1</td>
+<td>Use repetitions but quit if end-time is reached</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>1</td>
+<td>0</td>
+<td>Use total-time but quit if end-time is reached</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>1</td>
+<td>1</td>
+<td>Use repetitions but quit if total-time or end-time run out</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Because I decrement after the start-time is set, this will always return True on the first call (it assumes you want at least one repetition).</p>
+</div>
+<p class="plantuml">
+<img src="../../_images/plantuml-98ee989b3ef18045ff12b67bf98eb935c73fad31.png" alt="TimeTracker &lt;|-- CountdownTimer
+CountdownTimer : __call__()" />
+</p>
+<span class="target" id="module-theape.parts.countdown.countdown"></span><table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.countdown.countdown.CountdownTimer.html#theape.parts.countdown.countdown.CountdownTimer" title="theape.parts.countdown.countdown.CountdownTimer"><tt class="xref py py-obj docutils literal"><span class="pre">CountdownTimer</span></tt></a>([repetitions,&nbsp;end_time,&nbsp;...])</td>
+<td>A time-tracker that counts down</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The Countdown</a><ul>
+<li><a class="reference internal" href="#the-timetracker">The TimeTracker</a><ul>
+<li><a class="reference internal" href="#responsibilities">Responsibilities</a></li>
+<li><a class="reference internal" href="#the-model">The Model</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-countdowntimer">The CountdownTimer</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../_sources/parts/countdown/countdown.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

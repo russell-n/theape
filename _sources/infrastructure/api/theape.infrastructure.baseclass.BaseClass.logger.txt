@@ -1,0 +1,6 @@
+theape.infrastructure.baseclass.BaseClass.logger
+================================================
+
+.. currentmodule:: theape.infrastructure.baseclass
+
+.. autoattribute:: BaseClass.logger

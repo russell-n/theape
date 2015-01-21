@@ -1,0 +1,6 @@
+theape.parts.oatbran.CommonPatterns.optional_letters
+====================================================
+
+.. currentmodule:: theape.parts.oatbran
+
+.. autoattribute:: CommonPatterns.optional_letters

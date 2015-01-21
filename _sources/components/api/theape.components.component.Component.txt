@@ -1,0 +1,31 @@
+theape.components.component.Component
+=====================================
+
+.. currentmodule:: theape.components.component
+
+.. autoclass:: Component
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Component.__init__
+      ~Component.check_rep
+      ~Component.close
+      ~Component.log_error
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Component.logger
+   
+   

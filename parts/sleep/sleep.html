@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The Big Sleep &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../index.html" />
+    <link rel="up" title="Sleep" href="index.html" />
+    <link rel="next" title="theape.parts.sleep.sleep.TheBigSleep" href="api/theape.parts.sleep.sleep.TheBigSleep.html" />
+    <link rel="prev" title="Sleep" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/theape.parts.sleep.sleep.TheBigSleep.html" title="theape.parts.sleep.sleep.TheBigSleep"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Sleep"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Parts</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Sleep</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-big-sleep">
+<h1>The Big Sleep<a class="headerlink" href="#the-big-sleep" title="Permalink to this headline">¶</a></h1>
+<p id="ape-big-sleep">This is a module to integrate pauses with human-readable feedback into the ape.</p>
+<div class="figure align-center">
+<img alt="../../_images/big_sleep.JPG" src="../../_images/big_sleep.JPG" />
+</div>
+<div class="section" id="the-parameters">
+<span id="ape-thebigsleep-parameters"></span><h2>The Parameters<a class="headerlink" href="#the-parameters" title="Permalink to this headline">¶</a></h2>
+<p><cite>TheBigSleep</cite> takes three parameters &#8211; <cite>end</cite>, <cite>total</cite>, and <cite>interval</cite>.</p>
+<blockquote>
+<div><ul class="simple">
+<li>The <cite>interval</cite> is the amount of time to sleep between printing status messages to the screen.</li>
+<li>The <cite>end</cite> is a datetime set to the time (and date) to end</li>
+<li>The <cite>total</cite> is a timedelta set to amount of time in the future to end</li>
+</ul>
+</div></blockquote>
+<p>Either the <cite>end</cite> or the <cite>total</cite> needs to be set and if you set both the <cite>total</cite> will be ignored in favor of the <cite>end</cite>.</p>
+<table border="1" class="docutils">
+<caption>TheBigSleep end and total</caption>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><tt class="docutils literal"><span class="pre">end</span></tt></th>
+<th class="head"><tt class="docutils literal"><span class="pre">total</span></tt></th>
+<th class="head">Outcome</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>None</td>
+<td>None</td>
+<td>ApeError raised</td>
+</tr>
+<tr class="row-odd"><td>None</td>
+<td>timedelta</td>
+<td><tt class="docutils literal"><span class="pre">now()</span> <span class="pre">+</span> <span class="pre">total</span></tt> used</td>
+</tr>
+<tr class="row-even"><td>datetime</td>
+<td>None</td>
+<td><tt class="docutils literal"><span class="pre">end</span></tt> used</td>
+</tr>
+<tr class="row-odd"><td>datetime</td>
+<td>timedelta</td>
+<td><tt class="docutils literal"><span class="pre">end</span></tt> used</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="the-class-model">
+<span id="ape-thebigsleep-model"></span><h2>The Class Model<a class="headerlink" href="#the-class-model" title="Permalink to this headline">¶</a></h2>
+<p class="plantuml">
+<img src="../../_images/plantuml-3066c44d93466db3ae333ccd673e1b6adb33e656.png" alt="TheBigSleep -|&gt; Component
+TheBigSleep: datedtime.datetime end
+TheBigSleep: datetime.timedelta total
+TheBigSleep: float interval
+TheBigSleep o-- EventTimer
+TheBigSleep: __call__()
+TheBigSleep : check_rep()
+TheBigSleep : close()" />
+</p>
+<span class="target" id="module-theape.parts.sleep.sleep"></span><table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../../plugins/api/theape.parts.sleep.sleep.TheBigSleep.html#theape.parts.sleep.sleep.TheBigSleep" title="theape.parts.sleep.sleep.TheBigSleep"><tt class="xref py py-obj docutils literal"><span class="pre">TheBigSleep</span></tt></a>([end,&nbsp;total,&nbsp;interval,&nbsp;verbose])</td>
+<td>A sleeper</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../plugins/api/theape.parts.sleep.sleep.TheBigSleep.html#theape.parts.sleep.sleep.TheBigSleep.end" title="theape.parts.sleep.sleep.TheBigSleep.end"><tt class="xref py py-obj docutils literal"><span class="pre">TheBigSleep.end</span></tt></a></td>
+<td>end datetime</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../plugins/api/theape.parts.sleep.sleep.TheBigSleep.html#theape.parts.sleep.sleep.TheBigSleep.total" title="theape.parts.sleep.sleep.TheBigSleep.total"><tt class="xref py py-obj docutils literal"><span class="pre">TheBigSleep.total</span></tt></a></td>
+<td>Timedelta representing relative time in the future to stop</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../plugins/api/theape.parts.sleep.sleep.TheBigSleep.html#theape.parts.sleep.sleep.TheBigSleep.zero" title="theape.parts.sleep.sleep.TheBigSleep.zero"><tt class="xref py py-obj docutils literal"><span class="pre">TheBigSleep.zero</span></tt></a></td>
+<td>A zero timedelta</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../plugins/api/theape.parts.sleep.sleep.TheBigSleep.html#theape.parts.sleep.sleep.TheBigSleep.timer" title="theape.parts.sleep.sleep.TheBigSleep.timer"><tt class="xref py py-obj docutils literal"><span class="pre">TheBigSleep.timer</span></tt></a></td>
+<td>An EventTimer for the wait decorator</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../plugins/api/theape.parts.sleep.sleep.TheBigSleep.html#theape.parts.sleep.sleep.TheBigSleep.then" title="theape.parts.sleep.sleep.TheBigSleep.then"><tt class="xref py py-obj docutils literal"><span class="pre">TheBigSleep.then</span></tt></a></td>
+<td>the stopping-time</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.sleep.sleep.TheBigSleep.emit.html#theape.parts.sleep.sleep.TheBigSleep.emit" title="theape.parts.sleep.sleep.TheBigSleep.emit"><tt class="xref py py-obj docutils literal"><span class="pre">TheBigSleep.emit</span></tt></a>(*args,&nbsp;**kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../plugins/api/theape.parts.sleep.sleep.TheBigSleep.html#theape.parts.sleep.sleep.TheBigSleep.check_rep" title="theape.parts.sleep.sleep.TheBigSleep.check_rep"><tt class="xref py py-obj docutils literal"><span class="pre">TheBigSleep.check_rep</span></tt></a>()</td>
+<td>Checks the paramaters</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../plugins/api/theape.parts.sleep.sleep.TheBigSleep.html#theape.parts.sleep.sleep.TheBigSleep.close" title="theape.parts.sleep.sleep.TheBigSleep.close"><tt class="xref py py-obj docutils literal"><span class="pre">TheBigSleep.close</span></tt></a>()</td>
+<td>Closes the timer, sets self.then to 0.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.sleep.sleep.TheBigSleep.__call__.html#theape.parts.sleep.sleep.TheBigSleep.__call__" title="theape.parts.sleep.sleep.TheBigSleep.__call__"><tt class="xref py py-obj docutils literal"><span class="pre">TheBigSleep.__call__</span></tt></a>()</td>
+<td>The main interface - blocks until time is up, emitting messages</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This might only have come about because I started using the EventTimer to prevent over-eager access to a server, rather than trying to use it to space intervals, but it didn&#8217;t occur to me originally that the times have to be calculated in the method that is wrapped by the <cite>wait</cite> decorator, because the wait comes before the method call, leaving it 1-second or so behind the time it was called.</p>
+</div>
+</div>
+<div class="section" id="module-diagram">
+<span id="sleep-module-diagram"></span><h2>Module Diagram<a class="headerlink" href="#module-diagram" title="Permalink to this headline">¶</a></h2>
+<p>A Module Diagram for <strong>theape.parts.sleep.sleep</strong>.</p>
+<img alt="../../_images/classes_thebigsleep.png" src="../../_images/classes_thebigsleep.png" />
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The Big Sleep</a><ul>
+<li><a class="reference internal" href="#the-parameters">The Parameters</a></li>
+<li><a class="reference internal" href="#the-class-model">The Class Model</a></li>
+<li><a class="reference internal" href="#module-diagram">Module Diagram</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../_sources/parts/sleep/sleep.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

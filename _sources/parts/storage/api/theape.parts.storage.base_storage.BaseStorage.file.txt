@@ -1,0 +1,6 @@
+theape.parts.storage.base_storage.BaseStorage.file
+==================================================
+
+.. currentmodule:: theape.parts.storage.base_storage
+
+.. autoattribute:: BaseStorage.file

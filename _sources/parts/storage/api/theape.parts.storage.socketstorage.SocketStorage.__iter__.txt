@@ -1,0 +1,6 @@
+theape.parts.storage.socketstorage.SocketStorage.__iter__
+=========================================================
+
+.. currentmodule:: theape.parts.storage.socketstorage
+
+.. automethod:: SocketStorage.__iter__

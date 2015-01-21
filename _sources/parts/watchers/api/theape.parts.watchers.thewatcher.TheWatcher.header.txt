@@ -1,0 +1,6 @@
+theape.parts.watchers.thewatcher.TheWatcher.header
+==================================================
+
+.. currentmodule:: theape.parts.watchers.thewatcher
+
+.. autoattribute:: TheWatcher.header

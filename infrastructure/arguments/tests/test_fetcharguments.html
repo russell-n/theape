@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Testing The Fetch Arguments &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../index.html" />
+    <link rel="up" title="Testing the Arguments" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >The Ape&#8217;s Infrastructure</a> &raquo;</li>
+          <li><a href="../index.html" >The Arguments</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Testing the Arguments</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="testing-the-fetch-arguments">
+<h1>Testing The Fetch Arguments<a class="headerlink" href="#testing-the-fetch-arguments" title="Permalink to this headline">¶</a></h1>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c"># python standard library</span>
+<span class="kn">import</span> <span class="nn">unittest</span>
+
+<span class="c"># third-party</span>
+<span class="kn">from</span> <span class="nn">mock</span> <span class="kn">import</span> <span class="n">MagicMock</span>
+
+<span class="c"># the ape</span>
+<span class="kn">from</span> <span class="nn">theape.infrastructure.arguments.fetcharguments</span> <span class="kn">import</span> <span class="n">Fetch</span><span class="p">,</span>
+<span class="n">FetchStrategy</span>
+<span class="kn">from</span> <span class="nn">theape.infrastructure.arguments.basestrategy</span> <span class="kn">import</span> <span class="n">BaseStrategy</span>
+<span class="kn">import</span> <span class="nn">theape.infrastructure.arguments.fetcharguments</span>
+</pre></div>
+</div>
+<span class="target" id="module-theape.interface.arguments.tests.test_fetcharguments"></span><table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestFetchArguments.test_constructor</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestFetchArguments.test_names</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestFetchArguments.test_modules</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestFetchArguments.test_both</span></tt></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="code python highlight-python"><div class="highlight"><pre>fetch_usage = theape.infrastructure.arguments.fetcharguments.__doc__
+class TestFetchArguments(unittest.TestCase):
+    def setUp(self):
+        self.args = [&#39;fetch&#39;]
+        self.arguments = Fetch(args=self.args)
+        return
+
+    def test_constructor(self):
+        &quot;&quot;&quot;
+        Does it build?
+        &quot;&quot;&quot;
+        arguments = Fetch(args=[&#39;fetch&#39;])
+
+        # test inheritance
+        self.assertFalse(arguments.debug)
+        self.assertEqual(fetch_usage, arguments.sub_usage)
+        return
+
+    def test_names(self):
+        &quot;&quot;&quot;
+        Does it get the list of plugin names?
+        &quot;&quot;&quot;
+        # default
+        self.assertEqual([&#39;Ape&#39;], self.arguments.names)
+
+        # positionl arguments
+        self.arguments.reset()
+        names = &quot;apple banana cat&quot;.split()
+        self.arguments.args = self.args + names
+        self.assertEqual(names, self.arguments.names)
+        return
+
+    def test_modules(self):
+        &quot;&quot;&quot;
+        Does it get a list of external modules?
+        &quot;&quot;&quot;
+        # default is None
+        self.assertEqual([], self.arguments.modules)
+
+        # add one
+        self.arguments.reset()
+        modules = [&#39;aoeu&#39;]
+        options = [&#39;-m&#39;] + modules
+        self.arguments.args = self.args + options
+        self.assertEqual(modules, self.arguments.modules)
+
+        # add multiple
+        self.arguments.reset()
+        modules = &#39;a b c d e&#39;.split()
+        options = [&#39;-m&#39;] + &quot; -m&quot;.join(modules).split()
+        self.arguments.args = self.args + options
+        self.assertEqual(modules, self.arguments.modules)
+        return
+
+    def test_both(self):
+        &quot;&quot;&quot;
+        Can you use both names and modules?
+        &quot;&quot;&quot;
+        names = &#39;ab cd&#39;.split()
+        modules = &#39;a b c d&#39;.split()
+        arguments_options = names + [&#39;-m&#39;] + &#39;
+-m&#39;.join(modules).split()
+        self.arguments.args = self.args + arguments_options
+        self.assertEqual(names, self.arguments.names)
+        self.assertEqual(modules, self.arguments.modules)
+        return
+# end TestFetchArguments
+</pre></div>
+</div>
+<div class="section" id="testing-the-fetchstrategy">
+<h2>Testing the FetchStrategy<a class="headerlink" href="#testing-the-fetchstrategy" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestFetchStrategy.test_constructor</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestFetchStrategy.test_function</span></tt></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="code python highlight-python"><div class="highlight"><pre>class TestFetchStrategy(unittest.TestCase):
+    def setUp(self):
+        self.quartermaster = MagicMock()
+        FetchStrategy.quartemaster = self.quartermaster
+        self.strategy = FetchStrategy()
+        return
+
+    def test_constructor(self):
+        &quot;&quot;&quot;
+        Does it build?
+        &quot;&quot;&quot;
+        strategy = FetchStrategy()
+        self.assertIsInstance(strategy, BaseStrategy)
+        return
+
+    def test_function(self):
+        &quot;&quot;&quot;
+        Does it implement the `fetch` strategy?
+        &quot;&quot;&quot;
+        self.strategy.quartermaster = self.quartermaster
+        args = MagicMock()
+        args.names = &#39;a b c&#39;.split()
+        args.modules = &#39;d e f&#39;.split()
+        definition_a, definition_b, definition_c = MagicMock(),
+MagicMock(), MagicMock()
+        definitions = [definition_a, definition_b, definition_c]
+        plugin_a, plugin_b, plugin_c = MagicMock(), MagicMock(),
+MagicMock()
+        definition_a.return_value = plugin_a
+        definition_b.return_value = plugin_b
+        definition_c.return_value = plugin_c
+
+        plugin_source = dict(zip(args.names, definitions))
+
+        def side_effect(name):
+            return plugin_source[name]
+
+        self.quartermaster.get_plugin.side_effect = side_effect
+        self.strategy.function(args)
+        self.assertEqual(self.quartermaster,
+self.strategy.quartermaster)
+        self.assertEqual(self.quartermaster.external_modules,
+args.modules)
+        for definition in definitions:
+            definition.return_value.fetch_config.assert_called_with()
+
+        args.names.append(&#39;d&#39;)
+        definition_d = MagicMock()
+        definition_d.side_effect = TypeError(&quot;unknown plugin&quot;)
+        plugin_source[&#39;d&#39;] = definition_d
+
+        # nothing should happen, because it handles unknown plugins
+        self.strategy.function(args)
+
+        # and the decorator handles other errors
+        definition_a.side_effect = AttributeError(&quot;plugin
+implementation error&quot;)
+        self.strategy.function(args)
+        return
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Testing The Fetch Arguments</a><ul>
+<li><a class="reference internal" href="#testing-the-fetchstrategy">Testing the FetchStrategy</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../components/index.html">The Components</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../_sources/infrastructure/arguments/tests/test_fetcharguments.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

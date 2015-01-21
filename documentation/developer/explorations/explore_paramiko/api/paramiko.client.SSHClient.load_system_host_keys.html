@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>paramiko.client.SSHClient.load_system_host_keys &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Exploring Paramiko" href="../exploring_paramiko.html" />
+    <link rel="next" title="paramiko.client.MissingHostKeyPolicy" href="paramiko.client.MissingHostKeyPolicy.html" />
+    <link rel="prev" title="paramiko.client.SSHClient.connect" href="paramiko.client.SSHClient.connect.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="paramiko.client.MissingHostKeyPolicy.html" title="paramiko.client.MissingHostKeyPolicy"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="paramiko.client.SSHClient.connect.html" title="paramiko.client.SSHClient.connect"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >The Ape Developer Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >The Explorations</a> &raquo;</li>
+          <li><a href="../index.html" >Exploring Paramiko</a> &raquo;</li>
+          <li><a href="../exploring_paramiko.html" accesskey="U">Exploring Paramiko</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="paramiko-client-sshclient-load-system-host-keys">
+<h1>paramiko.client.SSHClient.load_system_host_keys<a class="headerlink" href="#paramiko-client-sshclient-load-system-host-keys" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="paramiko.client.SSHClient.load_system_host_keys">
+<tt class="descclassname">SSHClient.</tt><tt class="descname">load_system_host_keys</tt><big>(</big><em>filename=None</em><big>)</big><a class="headerlink" href="#paramiko.client.SSHClient.load_system_host_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load host keys from a system (read-only) file.  Host keys read with
+this method will not be saved back by <cite>save_host_keys</cite>.</p>
+<p>This method can be called multiple times.  Each new set of host keys
+will be merged with the existing set (new replacing old if there are
+conflicts).</p>
+<p>If <tt class="docutils literal"><span class="pre">filename</span></tt> is left as <tt class="docutils literal"><span class="pre">None</span></tt>, an attempt will be made to read
+keys from the user&#8217;s local &#8220;known hosts&#8221; file, as used by OpenSSH,
+and no exception will be raised if the file can&#8217;t be read.  This is
+probably only useful on posix.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the filename to read, or <tt class="docutils literal"><span class="pre">None</span></tt></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises IOError:</th><td class="field-body">if a filename was provided and the file could not be read</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../user/index.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../../../_sources/documentation/developer/explorations/explore_paramiko/api/paramiko.client.SSHClient.load_system_host_keys.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

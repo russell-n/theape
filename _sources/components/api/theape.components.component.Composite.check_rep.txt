@@ -1,0 +1,6 @@
+theape.components.component.Composite.check_rep
+===============================================
+
+.. currentmodule:: theape.components.component
+
+.. automethod:: Composite.check_rep

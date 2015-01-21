@@ -1,0 +1,6 @@
+theape.infrastructure.timemap.source_required
+=============================================
+
+.. currentmodule:: theape.infrastructure.timemap
+
+.. autofunction:: source_required

@@ -1,0 +1,6 @@
+theape.parts.storage.csvstorage.CsvDictStorage.writerow
+=======================================================
+
+.. currentmodule:: theape.parts.storage.csvstorage
+
+.. automethod:: CsvDictStorage.writerow

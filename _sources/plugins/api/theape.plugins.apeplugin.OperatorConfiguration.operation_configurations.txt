@@ -1,0 +1,6 @@
+theape.plugins.apeplugin.OperatorConfiguration.operation_configurations
+=======================================================================
+
+.. currentmodule:: theape.plugins.apeplugin
+
+.. autoattribute:: OperatorConfiguration.operation_configurations

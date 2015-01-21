@@ -1,0 +1,6 @@
+theape.parts.wifi.iwconfig.IwconfigExpressions.mac_protocol
+===========================================================
+
+.. currentmodule:: theape.parts.wifi.iwconfig
+
+.. autoattribute:: IwconfigExpressions.mac_protocol

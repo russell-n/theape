@@ -1,0 +1,6 @@
+theape.infrastructure.timemap.RelativeTime.time_map
+===================================================
+
+.. currentmodule:: theape.infrastructure.timemap
+
+.. autoattribute:: RelativeTime.time_map

@@ -1,0 +1,312 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>theape.parts.eventtimer.EventTimer &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../index.html" />
+    <link rel="up" title="The Event Timer" href="../eventtimer.html" />
+    <link rel="next" title="theape.parts.eventtimer.EventTimer.event" href="theape.parts.eventtimer.EventTimer.event.html" />
+    <link rel="prev" title="theape.parts.eventtimer.wait" href="theape.parts.eventtimer.wait.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="theape.parts.eventtimer.EventTimer.event.html" title="theape.parts.eventtimer.EventTimer.event"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="theape.parts.eventtimer.wait.html" title="theape.parts.eventtimer.wait"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Parts</a> &raquo;</li>
+          <li><a href="../eventtimer.html" accesskey="U">The Event Timer</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="theape-parts-eventtimer-eventtimer">
+<h1>theape.parts.eventtimer.EventTimer<a class="headerlink" href="#theape-parts-eventtimer-eventtimer" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="theape.parts.eventtimer.EventTimer">
+<em class="property">class </em><tt class="descclassname">theape.parts.eventtimer.</tt><tt class="descname">EventTimer</tt><big>(</big><em>seconds=0.5</em>, <em>event=None</em><big>)</big><a class="headerlink" href="#theape.parts.eventtimer.EventTimer" title="Permalink to this definition">¶</a></dt>
+<dd><p>A timer object to set an event</p>
+<p>EventTimer constructor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
+<li><cite>event</cite>: a threading.Event to set</li>
+<li><cite>seconds</cite>: number of seconds to run the timer</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="theape.parts.eventtimer.EventTimer.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>seconds=0.5</em>, <em>event=None</em><big>)</big><a class="headerlink" href="#theape.parts.eventtimer.EventTimer.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>EventTimer constructor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
+<li><cite>event</cite>: a threading.Event to set</li>
+<li><cite>seconds</cite>: number of seconds to run the timer</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#theape.parts.eventtimer.EventTimer.__init__" title="theape.parts.eventtimer.EventTimer.__init__"><tt class="xref py py-obj docutils literal"><span class="pre">__init__</span></tt></a>([seconds,&nbsp;event])</td>
+<td>EventTimer constructor</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="theape.parts.eventtimer.EventTimer.clear.html#theape.parts.eventtimer.EventTimer.clear" title="theape.parts.eventtimer.EventTimer.clear"><tt class="xref py py-obj docutils literal"><span class="pre">clear</span></tt></a>()</td>
+<td>A convenience method for users to call the event.clear method.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="theape.parts.eventtimer.EventTimer.close.html#theape.parts.eventtimer.EventTimer.close" title="theape.parts.eventtimer.EventTimer.close"><tt class="xref py py-obj docutils literal"><span class="pre">close</span></tt></a>()</td>
+<td>Cancels the timer and sets the event.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="theape.parts.eventtimer.EventTimer.is_set.html#theape.parts.eventtimer.EventTimer.is_set" title="theape.parts.eventtimer.EventTimer.is_set"><tt class="xref py py-obj docutils literal"><span class="pre">is_set</span></tt></a>()</td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">True if self.event is set</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#theape.parts.eventtimer.EventTimer.log_error" title="theape.parts.eventtimer.EventTimer.log_error"><tt class="xref py py-obj docutils literal"><span class="pre">log_error</span></tt></a>(error[,&nbsp;message])</td>
+<td>Logs the error in bold red</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="theape.parts.eventtimer.EventTimer.set_event.html#theape.parts.eventtimer.EventTimer.set_event" title="theape.parts.eventtimer.EventTimer.set_event"><tt class="xref py py-obj docutils literal"><span class="pre">set_event</span></tt></a>()</td>
+<td>Sets the event</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="theape.parts.eventtimer.EventTimer.start.html#theape.parts.eventtimer.EventTimer.start" title="theape.parts.eventtimer.EventTimer.start"><tt class="xref py py-obj docutils literal"><span class="pre">start</span></tt></a>()</td>
+<td>The main interface - clears the event then starts the timer</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="theape.parts.eventtimer.EventTimer.wait.html#theape.parts.eventtimer.EventTimer.wait" title="theape.parts.eventtimer.EventTimer.wait"><tt class="xref py py-obj docutils literal"><span class="pre">wait</span></tt></a>([timeout])</td>
+<td>Calls event.wait if timeout is None, uses self.seconds</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="theape.parts.eventtimer.EventTimer.event.html#theape.parts.eventtimer.EventTimer.event" title="theape.parts.eventtimer.EventTimer.event"><tt class="xref py py-obj docutils literal"><span class="pre">event</span></tt></a></td>
+<td>Threading event for the timer to set</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#theape.parts.eventtimer.EventTimer.logger" title="theape.parts.eventtimer.EventTimer.logger"><tt class="xref py py-obj docutils literal"><span class="pre">logger</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">A logging object.</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#theape.parts.eventtimer.EventTimer.timer" title="theape.parts.eventtimer.EventTimer.timer"><tt class="xref py py-obj docutils literal"><span class="pre">timer</span></tt></a></td>
+<td>A threading.Timer object</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="theape.parts.eventtimer.EventTimer.clear">
+<tt class="descname">clear</tt><big>(</big><big>)</big><a class="headerlink" href="#theape.parts.eventtimer.EventTimer.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>A convenience method for users to call the event.clear method.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="theape.parts.eventtimer.EventTimer.close">
+<tt class="descname">close</tt><big>(</big><big>)</big><a class="headerlink" href="#theape.parts.eventtimer.EventTimer.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cancels the timer and sets the event.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="theape.parts.eventtimer.EventTimer.is_set">
+<tt class="descname">is_set</tt><big>(</big><big>)</big><a class="headerlink" href="#theape.parts.eventtimer.EventTimer.is_set" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if self.event is set</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="theape.parts.eventtimer.EventTimer.log_error">
+<tt class="descname">log_error</tt><big>(</big><em>error</em>, <em>message=''</em><big>)</big><a class="headerlink" href="#theape.parts.eventtimer.EventTimer.log_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logs the error in bold red</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
+<li><cite>error</cite>: error type (prefix in red and bold)</li>
+<li><cite>message</cite>: descriptive message (red but not bold)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="theape.parts.eventtimer.EventTimer.set_event">
+<tt class="descname">set_event</tt><big>(</big><big>)</big><a class="headerlink" href="#theape.parts.eventtimer.EventTimer.set_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the event</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="theape.parts.eventtimer.EventTimer.start">
+<tt class="descname">start</tt><big>(</big><big>)</big><a class="headerlink" href="#theape.parts.eventtimer.EventTimer.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main interface - clears the event then starts the timer</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="theape.parts.eventtimer.EventTimer.wait">
+<tt class="descname">wait</tt><big>(</big><em>timeout=None</em><big>)</big><a class="headerlink" href="#theape.parts.eventtimer.EventTimer.wait" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls event.wait if timeout is None, uses self.seconds</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.parts.eventtimer.EventTimer.event">
+<tt class="descname">event</tt><a class="headerlink" href="#theape.parts.eventtimer.EventTimer.event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Threading event for the timer to set</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.parts.eventtimer.EventTimer.logger">
+<tt class="descname">logger</tt><a class="headerlink" href="#theape.parts.eventtimer.EventTimer.logger" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A logging object.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.parts.eventtimer.EventTimer.timer">
+<tt class="descname">timer</tt><a class="headerlink" href="#theape.parts.eventtimer.EventTimer.timer" title="Permalink to this definition">¶</a></dt>
+<dd><p>A threading.Timer object</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../_sources/parts/api/theape.parts.eventtimer.EventTimer.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

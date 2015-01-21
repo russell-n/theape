@@ -1,0 +1,6 @@
+theape.parts.oatbran.Numbers.integer
+====================================
+
+.. currentmodule:: theape.parts.oatbran
+
+.. autoattribute:: Numbers.integer

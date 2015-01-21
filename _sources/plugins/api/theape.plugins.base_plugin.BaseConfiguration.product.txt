@@ -1,0 +1,6 @@
+theape.plugins.base_plugin.BaseConfiguration.product
+====================================================
+
+.. currentmodule:: theape.plugins.base_plugin
+
+.. autoattribute:: BaseConfiguration.product

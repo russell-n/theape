@@ -1,0 +1,6 @@
+theape.parts.wifi.tests.testiwconfig.TestIwconfigExpressions.test_invalid_misc
+==============================================================================
+
+.. currentmodule:: theape.parts.wifi.tests.testiwconfig
+
+.. automethod:: TestIwconfigExpressions.test_invalid_misc

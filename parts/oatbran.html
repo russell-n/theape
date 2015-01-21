@@ -1,0 +1,462 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The OatBran &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../index.html" />
+    <link rel="up" title="Parts" href="index.html" />
+    <link rel="next" title="theape.parts.oatbran.FormalDefinition.empty_string" href="api/theape.parts.oatbran.FormalDefinition.empty_string.html" />
+    <link rel="prev" title="theape.parts.eventtimer.wait" href="api/theape.parts.eventtimer.wait.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/theape.parts.oatbran.FormalDefinition.empty_string.html" title="theape.parts.oatbran.FormalDefinition.empty_string"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="api/theape.parts.eventtimer.wait.html" title="theape.parts.eventtimer.wait"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Parts</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-oatbran">
+<h1>The OatBran<a class="headerlink" href="#the-oatbran" title="Permalink to this headline">¶</a></h1>
+<p>Oat Bran helps with regular expressions. Names are uppercased to avoid keyword clashes</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c"># the class-based expressions are mostly for organization</span>
+<span class="c"># but sometimes they&#39;re just too clunky</span>
+<span class="n">LEFT_BRACKET</span> <span class="o">=</span> <span class="s">&#39;[&#39;</span>
+<span class="n">RIGHT_BRACKET</span> <span class="o">=</span> <span class="s">&#39;]&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="formal-definition">
+<span id="ape-oatbran-formal-definition"></span><h2>Formal Definition<a class="headerlink" href="#formal-definition" title="Permalink to this headline">¶</a></h2>
+<p>These are the basic building blocks of regular expressions.</p>
+<table border="1" class="docutils">
+<caption>Formal Definition</caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Symbol</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>empty_string</td>
+<td><img class="math" src="../_images/math/f348c73e654151e416e3c525b2ff7803590754ce.png" alt="\varepsilon"/></td>
+</tr>
+<tr class="row-odd"><td>alternative (OR)</td>
+<td><img class="math" src="../_images/math/5e3ef4453df42b6f064b6e54ba6914ecaca6a4e9.png" alt="|"/></td>
+</tr>
+<tr class="row-even"><td>kleene_star</td>
+<td><img class="math" src="../_images/math/0b8f66a848c851c882bd816037c9c5859ca75570.png" alt="*"/></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.FormalDefinition.empty_string.html#theape.parts.oatbran.FormalDefinition.empty_string" title="theape.parts.oatbran.FormalDefinition.empty_string"><tt class="xref py py-obj docutils literal"><span class="pre">FormalDefinition.empty_string</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.oatbran.FormalDefinition.alternative.html#theape.parts.oatbran.FormalDefinition.alternative" title="theape.parts.oatbran.FormalDefinition.alternative"><tt class="xref py py-obj docutils literal"><span class="pre">FormalDefinition.alternative</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.FormalDefinition.OR.html#theape.parts.oatbran.FormalDefinition.OR" title="theape.parts.oatbran.FormalDefinition.OR"><tt class="xref py py-obj docutils literal"><span class="pre">FormalDefinition.OR</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.oatbran.FormalDefinition.kleene_star.html#theape.parts.oatbran.FormalDefinition.kleene_star" title="theape.parts.oatbran.FormalDefinition.kleene_star"><tt class="xref py py-obj docutils literal"><span class="pre">FormalDefinition.kleene_star</span></tt></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="groups">
+<span id="ape-oatbran-groups"></span><h2>Groups<a class="headerlink" href="#groups" title="Permalink to this headline">¶</a></h2>
+<p>Besides the basic use of grouping with parentheses (to explicitly apply operations to multiple characters, for example), the Group hold perl (<cite>(?&lt;expression&gt;)</cite>) and python (<cite>(?P&lt;expression&gt;)</cite>) group-extensions. Since parentheses have to be symmetric these are applied as methods rather than strings that are added to other strings.</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.Group.html#theape.parts.oatbran.Group" title="theape.parts.oatbran.Group"><tt class="xref py py-obj docutils literal"><span class="pre">Group</span></tt></a></td>
+<td>The Group helps with regular expression groups</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.oatbran.Group.group.html#theape.parts.oatbran.Group.group" title="theape.parts.oatbran.Group.group"><tt class="xref py py-obj docutils literal"><span class="pre">Group.group</span></tt></a>(expression)</td>
+<td>Create a grouped expression</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.Group.named.html#theape.parts.oatbran.Group.named" title="theape.parts.oatbran.Group.named"><tt class="xref py py-obj docutils literal"><span class="pre">Group.named</span></tt></a>(name,&nbsp;expression)</td>
+<td>Creates a named group</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.oatbran.Group.not_followed_by.html#theape.parts.oatbran.Group.not_followed_by" title="theape.parts.oatbran.Group.not_followed_by"><tt class="xref py py-obj docutils literal"><span class="pre">Group.not_followed_by</span></tt></a>(suffix)</td>
+<td>Creates a (perl) negative lookahead expression</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.Group.not_preceded_by.html#theape.parts.oatbran.Group.not_preceded_by" title="theape.parts.oatbran.Group.not_preceded_by"><tt class="xref py py-obj docutils literal"><span class="pre">Group.not_preceded_by</span></tt></a>(prefix)</td>
+<td>Creates a (perl) negative look behind expression</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.oatbran.Group.preceded_by.html#theape.parts.oatbran.Group.preceded_by" title="theape.parts.oatbran.Group.preceded_by"><tt class="xref py py-obj docutils literal"><span class="pre">Group.preceded_by</span></tt></a>(prefix)</td>
+<td>Creates a look-behind expression</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.Group.followed_by.html#theape.parts.oatbran.Group.followed_by" title="theape.parts.oatbran.Group.followed_by"><tt class="xref py py-obj docutils literal"><span class="pre">Group.followed_by</span></tt></a>(suffix)</td>
+<td>Creates the expression to match if followed by the suffix</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="quantifiers">
+<span id="ape-oatbran-quantifiers"></span><h2>Quantifiers<a class="headerlink" href="#quantifiers" title="Permalink to this headline">¶</a></h2>
+<p>Quantifiers are used to describe repetitions of patterns. The <cite>zero_or_more</cite> quantifier is an alias for the <cite>FormalDefinition.kleene_star</cite>. Although I usually think of these as suffixes, the exact and m-to-n versions need braces so the quantifiers are applied as methods to make their use uniform. I use the string <cite>format</cite> method so they will not raise errors if passed non-strings as patterns.</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.Quantifier.html#theape.parts.oatbran.Quantifier" title="theape.parts.oatbran.Quantifier"><tt class="xref py py-obj docutils literal"><span class="pre">Quantifier</span></tt></a></td>
+<td>A class to hold cardinality helpers</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.oatbran.Quantifier.one_or_more.html#theape.parts.oatbran.Quantifier.one_or_more" title="theape.parts.oatbran.Quantifier.one_or_more"><tt class="xref py py-obj docutils literal"><span class="pre">Quantifier.one_or_more</span></tt></a>(pattern)</td>
+<td>Adds the one-or-more quantifier to the end of the pattern.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.Quantifier.zero_or_more.html#theape.parts.oatbran.Quantifier.zero_or_more" title="theape.parts.oatbran.Quantifier.zero_or_more"><tt class="xref py py-obj docutils literal"><span class="pre">Quantifier.zero_or_more</span></tt></a>(pattern)</td>
+<td>Adds the kleene star to the pattern</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.oatbran.Quantifier.zero_or_one.html#theape.parts.oatbran.Quantifier.zero_or_one" title="theape.parts.oatbran.Quantifier.zero_or_one"><tt class="xref py py-obj docutils literal"><span class="pre">Quantifier.zero_or_one</span></tt></a>(pattern)</td>
+<td>Adds the zero-or-one quantifier to the pattern</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.Quantifier.exactly.html#theape.parts.oatbran.Quantifier.exactly" title="theape.parts.oatbran.Quantifier.exactly"><tt class="xref py py-obj docutils literal"><span class="pre">Quantifier.exactly</span></tt></a>(repetitions)</td>
+<td>Creates suffix to match source repeated exactly n times</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.oatbran.Quantifier.m_to_n.html#theape.parts.oatbran.Quantifier.m_to_n" title="theape.parts.oatbran.Quantifier.m_to_n"><tt class="xref py py-obj docutils literal"><span class="pre">Quantifier.m_to_n</span></tt></a>(m,&nbsp;n)</td>
+<td>Creates a repetition ranges suffix {m,n}</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="character-classes">
+<span id="ape-oatbran-character-classes"></span><h2>Character Classes<a class="headerlink" href="#character-classes" title="Permalink to this headline">¶</a></h2>
+<p>A helper with character classes (stuff put in square-brackets (&#8216;[]&#8217;)). There are some similar patterns in other classes. I tried to put single characters in this class (e.g. digit) and multiple characters or those with quantifiers in other classes (e.g. digits or optional_digits).</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.CharacterClass.html#theape.parts.oatbran.CharacterClass" title="theape.parts.oatbran.CharacterClass"><tt class="xref py py-obj docutils literal"><span class="pre">CharacterClass</span></tt></a></td>
+<td>A class to help with character classes</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.oatbran.CharacterClass.character_class.html#theape.parts.oatbran.CharacterClass.character_class" title="theape.parts.oatbran.CharacterClass.character_class"><tt class="xref py py-obj docutils literal"><span class="pre">CharacterClass.character_class</span></tt></a>(characters)</td>
+<td>Creates a character class from the expression</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.CharacterClass.alpha_num.html#theape.parts.oatbran.CharacterClass.alpha_num" title="theape.parts.oatbran.CharacterClass.alpha_num"><tt class="xref py py-obj docutils literal"><span class="pre">CharacterClass.alpha_num</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.oatbran.CharacterClass.alpha_nums.html#theape.parts.oatbran.CharacterClass.alpha_nums" title="theape.parts.oatbran.CharacterClass.alpha_nums"><tt class="xref py py-obj docutils literal"><span class="pre">CharacterClass.alpha_nums</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.CharacterClass.digit.html#theape.parts.oatbran.CharacterClass.digit" title="theape.parts.oatbran.CharacterClass.digit"><tt class="xref py py-obj docutils literal"><span class="pre">CharacterClass.digit</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.oatbran.CharacterClass.non_digit.html#theape.parts.oatbran.CharacterClass.non_digit" title="theape.parts.oatbran.CharacterClass.non_digit"><tt class="xref py py-obj docutils literal"><span class="pre">CharacterClass.non_digit</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.CharacterClass.non_zero_digit.html#theape.parts.oatbran.CharacterClass.non_zero_digit" title="theape.parts.oatbran.CharacterClass.non_zero_digit"><tt class="xref py py-obj docutils literal"><span class="pre">CharacterClass.non_zero_digit</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.oatbran.CharacterClass.character_class.html#theape.parts.oatbran.CharacterClass.character_class" title="theape.parts.oatbran.CharacterClass.character_class"><tt class="xref py py-obj docutils literal"><span class="pre">CharacterClass.character_class</span></tt></a>(characters)</td>
+<td>Creates a character class from the expression</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.CharacterClass.not_in.html#theape.parts.oatbran.CharacterClass.not_in" title="theape.parts.oatbran.CharacterClass.not_in"><tt class="xref py py-obj docutils literal"><span class="pre">CharacterClass.not_in</span></tt></a>(characters)</td>
+<td>Creates a complement character class</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="boundaries">
+<span id="ape-oatbran-boundaries"></span><h2>Boundaries<a class="headerlink" href="#boundaries" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.Boundaries.html#theape.parts.oatbran.Boundaries" title="theape.parts.oatbran.Boundaries"><tt class="xref py py-obj docutils literal"><span class="pre">Boundaries</span></tt></a></td>
+<td>A class to hold boundaries for expressions</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.oatbran.Boundaries.string_start.html#theape.parts.oatbran.Boundaries.string_start" title="theape.parts.oatbran.Boundaries.string_start"><tt class="xref py py-obj docutils literal"><span class="pre">Boundaries.string_start</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.Boundaries.string_end.html#theape.parts.oatbran.Boundaries.string_end" title="theape.parts.oatbran.Boundaries.string_end"><tt class="xref py py-obj docutils literal"><span class="pre">Boundaries.string_end</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.oatbran.Boundaries.word.html#theape.parts.oatbran.Boundaries.word" title="theape.parts.oatbran.Boundaries.word"><tt class="xref py py-obj docutils literal"><span class="pre">Boundaries.word</span></tt></a>(word)</td>
+<td>Adds word boundaries to the word</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.Boundaries.string.html#theape.parts.oatbran.Boundaries.string" title="theape.parts.oatbran.Boundaries.string"><tt class="xref py py-obj docutils literal"><span class="pre">Boundaries.string</span></tt></a>(string)</td>
+<td>Adds boundaries to only match an entire string</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="common-patterns">
+<span id="ape-oatbran-common-patterns"></span><h2>Common Patterns<a class="headerlink" href="#common-patterns" title="Permalink to this headline">¶</a></h2>
+<p>These are pattens that I use a lot but I could not think of where to put them.</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.CommonPatterns.anything.html#theape.parts.oatbran.CommonPatterns.anything" title="theape.parts.oatbran.CommonPatterns.anything"><tt class="xref py py-obj docutils literal"><span class="pre">CommonPatterns.anything</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.oatbran.CommonPatterns.everything.html#theape.parts.oatbran.CommonPatterns.everything" title="theape.parts.oatbran.CommonPatterns.everything"><tt class="xref py py-obj docutils literal"><span class="pre">CommonPatterns.everything</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.CommonPatterns.letter.html#theape.parts.oatbran.CommonPatterns.letter" title="theape.parts.oatbran.CommonPatterns.letter"><tt class="xref py py-obj docutils literal"><span class="pre">CommonPatterns.letter</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.oatbran.CommonPatterns.letters.html#theape.parts.oatbran.CommonPatterns.letters" title="theape.parts.oatbran.CommonPatterns.letters"><tt class="xref py py-obj docutils literal"><span class="pre">CommonPatterns.letters</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.CommonPatterns.optional_letters.html#theape.parts.oatbran.CommonPatterns.optional_letters" title="theape.parts.oatbran.CommonPatterns.optional_letters"><tt class="xref py py-obj docutils literal"><span class="pre">CommonPatterns.optional_letters</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.oatbran.CommonPatterns.space.html#theape.parts.oatbran.CommonPatterns.space" title="theape.parts.oatbran.CommonPatterns.space"><tt class="xref py py-obj docutils literal"><span class="pre">CommonPatterns.space</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.CommonPatterns.spaces.html#theape.parts.oatbran.CommonPatterns.spaces" title="theape.parts.oatbran.CommonPatterns.spaces"><tt class="xref py py-obj docutils literal"><span class="pre">CommonPatterns.spaces</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.oatbran.CommonPatterns.optional_spaces.html#theape.parts.oatbran.CommonPatterns.optional_spaces" title="theape.parts.oatbran.CommonPatterns.optional_spaces"><tt class="xref py py-obj docutils literal"><span class="pre">CommonPatterns.optional_spaces</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.CommonPatterns.not_space.html#theape.parts.oatbran.CommonPatterns.not_space" title="theape.parts.oatbran.CommonPatterns.not_space"><tt class="xref py py-obj docutils literal"><span class="pre">CommonPatterns.not_space</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.oatbran.CommonPatterns.not_spaces.html#theape.parts.oatbran.CommonPatterns.not_spaces" title="theape.parts.oatbran.CommonPatterns.not_spaces"><tt class="xref py py-obj docutils literal"><span class="pre">CommonPatterns.not_spaces</span></tt></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="numbers">
+<span id="ape-oatbran-numbers"></span><h2>Numbers<a class="headerlink" href="#numbers" title="Permalink to this headline">¶</a></h2>
+<p>The numbers are broken up into types based on those listed <a class="reference external" href="http://mathworld.wolfram.com/CountingNumber.html">here</a>. I was originally using the more <a class="reference external" href="http://en.wikipedia.org/wiki/List_of_types_of_numbers">traditional number types</a> but I keep forgetting which ones have zero in them so I will work with just positive/negative, non-positive/non-negative, and integer/real.</p>
+<table border="1" class="docutils">
+<caption>Numbers</caption>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+<th class="head">Symbol</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>positive_integer</td>
+<td><img class="math" src="../_images/math/949c706c3f35474927311ab580e7106647408db0.png" alt="1,2,\ldots"/></td>
+<td><img class="math" src="../_images/math/6fc40882d011289bd4ddf77d890ae4f5d2878fee.png" alt="\mathbb{Z}^+"/></td>
+</tr>
+<tr class="row-odd"><td>non_negative_integer</td>
+<td>:math:0,1,ldots`</td>
+<td><img class="math" src="../_images/math/8c7a73446b40923c3b937a9770b450ea6bd4d8ac.png" alt="\mathbb{Z}^*"/></td>
+</tr>
+<tr class="row-even"><td>non_positive_integer</td>
+<td>:math:0, -1, -2,ldots`</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>integer</td>
+<td>positive, negative, 0</td>
+<td><img class="math" src="../_images/math/5fdff137bc42a8949aa1b49bbb9418c4bd6f4230.png" alt="\mathbb{Z}"/></td>
+</tr>
+<tr class="row-even"><td>real_number</td>
+<td>Positive,negative, 0</td>
+<td><img class="math" src="../_images/math/858dca350c68cd6e22d70cf4324efbc875002ef2.png" alt="\mathbb{R}"/></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The integers are allowed to match even when surrounded by punctuation. This makes it okay for sentences and csvs, etc. but means that if given a floating point number it will match the substring to the left of the decimal point (e.g. 10.00213 will match 10).</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Along with the previous warning it should be noted that <cite>nonnegative_integer</cite> extracts the non-negative portion, it does not ignore negative integers. So if you have -300, the match will be 300. This may change once I start using this, but for now that is the behavior (useful for extracting ranges, maybe &#8211; nonnegative_integer + &#8216;-&#8216; + nonnegative_integer):</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><cite>real</cite> is treated as a super-set that matches floats or integers.</p>
+</div>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.Numbers.html#theape.parts.oatbran.Numbers" title="theape.parts.oatbran.Numbers"><tt class="xref py py-obj docutils literal"><span class="pre">Numbers</span></tt></a></td>
+<td>A class to hold number-related expressions</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.oatbran.Numbers.decimal_point.html#theape.parts.oatbran.Numbers.decimal_point" title="theape.parts.oatbran.Numbers.decimal_point"><tt class="xref py py-obj docutils literal"><span class="pre">Numbers.decimal_point</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.Numbers.digits.html#theape.parts.oatbran.Numbers.digits" title="theape.parts.oatbran.Numbers.digits"><tt class="xref py py-obj docutils literal"><span class="pre">Numbers.digits</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.oatbran.Numbers.two_digits.html#theape.parts.oatbran.Numbers.two_digits" title="theape.parts.oatbran.Numbers.two_digits"><tt class="xref py py-obj docutils literal"><span class="pre">Numbers.two_digits</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.Numbers.one_hundreds.html#theape.parts.oatbran.Numbers.one_hundreds" title="theape.parts.oatbran.Numbers.one_hundreds"><tt class="xref py py-obj docutils literal"><span class="pre">Numbers.one_hundreds</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.oatbran.Numbers.positive_integer.html#theape.parts.oatbran.Numbers.positive_integer" title="theape.parts.oatbran.Numbers.positive_integer"><tt class="xref py py-obj docutils literal"><span class="pre">Numbers.positive_integer</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.Numbers.nonnegative_integer.html#theape.parts.oatbran.Numbers.nonnegative_integer" title="theape.parts.oatbran.Numbers.nonnegative_integer"><tt class="xref py py-obj docutils literal"><span class="pre">Numbers.nonnegative_integer</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.oatbran.Numbers.integer.html#theape.parts.oatbran.Numbers.integer" title="theape.parts.oatbran.Numbers.integer"><tt class="xref py py-obj docutils literal"><span class="pre">Numbers.integer</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.Numbers.real.html#theape.parts.oatbran.Numbers.real" title="theape.parts.oatbran.Numbers.real"><tt class="xref py py-obj docutils literal"><span class="pre">Numbers.real</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.oatbran.Numbers.hexadecimal.html#theape.parts.oatbran.Numbers.hexadecimal" title="theape.parts.oatbran.Numbers.hexadecimal"><tt class="xref py py-obj docutils literal"><span class="pre">Numbers.hexadecimal</span></tt></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.oatbran.Networking.octet.html#theape.parts.oatbran.Networking.octet" title="theape.parts.oatbran.Networking.octet"><tt class="xref py py-obj docutils literal"><span class="pre">Networking.octet</span></tt></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The OatBran</a><ul>
+<li><a class="reference internal" href="#formal-definition">Formal Definition</a></li>
+<li><a class="reference internal" href="#groups">Groups</a></li>
+<li><a class="reference internal" href="#quantifiers">Quantifiers</a></li>
+<li><a class="reference internal" href="#character-classes">Character Classes</a></li>
+<li><a class="reference internal" href="#boundaries">Boundaries</a></li>
+<li><a class="reference internal" href="#common-patterns">Common Patterns</a></li>
+<li><a class="reference internal" href="#numbers">Numbers</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../_sources/parts/oatbran.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

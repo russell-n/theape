@@ -1,0 +1,778 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Exploring ConfigParser &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
+    <link rel="up" title="Exploring ConfigParser" href="index.html" />
+    <link rel="next" title="ConfigParser.SafeConfigParser" href="api/ConfigParser.SafeConfigParser.html" />
+    <link rel="prev" title="Exploring ConfigParser" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/ConfigParser.SafeConfigParser.html" title="ConfigParser.SafeConfigParser"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Exploring ConfigParser"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >The Ape Developer Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >The Explorations</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Exploring ConfigParser</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="exploring-configparser">
+<h1>Exploring ConfigParser<a class="headerlink" href="#exploring-configparser" title="Permalink to this headline">¶</a></h1>
+<p id="id1">Contents:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="#exploring-configparser-safeconfigparser"><em>SafeConfigParser Reference</em></a></li>
+<li><a class="reference internal" href="#exploring-configparser-case-sensitivity"><em>Case-Sensitivity</em></a></li>
+<li><a class="reference internal" href="#exploring-configparser-read"><em>Reading Multiple Files</em></a></li>
+<li><a class="reference internal" href="#exploring-configparser-defaults"><em>Defaults</em></a></li>
+<li><a class="reference internal" href="#exploring-configparser-whole-shebang"><em>The Whole Shebang</em></a></li>
+</ul>
+</div></blockquote>
+<div class="section" id="safeconfigparser-reference">
+<h2>SafeConfigParser Reference<a class="headerlink" href="#safeconfigparser-reference" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../../../../infrastructure/api/ConfigParser.SafeConfigParser.html#ConfigParser.SafeConfigParser" title="ConfigParser.SafeConfigParser"><tt class="xref py py-obj docutils literal"><span class="pre">SafeConfigParser</span></tt></a>([defaults,&nbsp;dict_type,&nbsp;...])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../../infrastructure/api/ConfigParser.SafeConfigParser.read.html#ConfigParser.SafeConfigParser.read" title="ConfigParser.SafeConfigParser.read"><tt class="xref py py-obj docutils literal"><span class="pre">SafeConfigParser.read</span></tt></a>(filenames)</td>
+<td>Read and parse a filename or a list of filenames.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../../infrastructure/api/ConfigParser.SafeConfigParser.has_section.html#ConfigParser.SafeConfigParser.has_section" title="ConfigParser.SafeConfigParser.has_section"><tt class="xref py py-obj docutils literal"><span class="pre">SafeConfigParser.has_section</span></tt></a>(section)</td>
+<td>Indicate whether the named section is present in the configuration.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../../infrastructure/api/ConfigParser.SafeConfigParser.has_option.html#ConfigParser.SafeConfigParser.has_option" title="ConfigParser.SafeConfigParser.has_option"><tt class="xref py py-obj docutils literal"><span class="pre">SafeConfigParser.has_option</span></tt></a>(section,&nbsp;option)</td>
+<td>Check for the existence of a given option in a given section.</td>
+</tr>
+</tbody>
+</table>
+<p>We can see how the SafeConfigParser is built using a module graph of a class made here:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">FakeConfigParser</span><span class="p">(</span><span class="n">SafeConfigParser</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<img alt="../../../../_images/classes_exploreconfigparse.png" src="../../../../_images/classes_exploreconfigparse.png" />
+</div>
+<div class="section" id="are-options-and-sections-case-sensitive">
+<h2>Are options and sections case-sensitive?<a class="headerlink" href="#are-options-and-sections-case-sensitive" title="Permalink to this headline">¶</a></h2>
+<p>The config-file:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">CamelCase</span><span class="p">]</span>
+<span class="n">OptionOne</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">OptionTwo</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="p">[</span><span class="n">ALLCAPS</span><span class="p">]</span>
+<span class="n">OPTIONONE</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">OPTIONTWO</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">case_config</span> <span class="o">=</span> <span class="n">SafeConfigParser</span><span class="p">()</span>
+<span class="n">case_config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">FILE_1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="section-case">
+<h3>Section Case<a class="headerlink" href="#section-case" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="s">&quot;Matches section camel-case: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">case_config</span><span class="o">.</span><span class="n">has_section</span><span class="p">(</span><span class="s">&#39;CamelCase&#39;</span><span class="p">))</span>
+<span class="k">print</span> <span class="s">&quot;Matches section all-caps: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">case_config</span><span class="o">.</span><span class="n">has_section</span><span class="p">(</span><span class="s">&#39;CAMELCASE&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Matches section camel-case: True
+Matches section all-caps: False
+</pre></div>
+</div>
+</div>
+<div class="section" id="option-case">
+<h3>Option Case<a class="headerlink" href="#option-case" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="s">&quot;Matches option camel-case: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">case_config</span><span class="o">.</span><span class="n">has_option</span><span class="p">(</span><span class="s">&#39;CamelCase&#39;</span><span class="p">,</span> <span class="s">&#39;OptionOne&#39;</span><span class="p">))</span>
+<span class="k">print</span> <span class="s">&quot;Matches option all-lower: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">case_config</span><span class="o">.</span><span class="n">has_option</span><span class="p">(</span><span class="s">&#39;CamelCase&#39;</span><span class="p">,</span> <span class="s">&#39;optionone&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Matches option camel-case: True
+Matches option all-lower: True
+</pre></div>
+</div>
+<p>So it looks like section-names are case-sensitive but option-names are not. What does <cite>optionxform</cite> do?</p>
+</div>
+<div class="section" id="optionxform">
+<h3>optionxform<a class="headerlink" href="#optionxform" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/ConfigParser.SafeConfigParser.optionxform.html#ConfigParser.SafeConfigParser.optionxform" title="ConfigParser.SafeConfigParser.optionxform"><tt class="xref py py-obj docutils literal"><span class="pre">SafeConfigParser.optionxform</span></tt></a>(optionstr)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">case_config</span><span class="o">.</span><span class="n">optionxform</span> <span class="o">=</span> <span class="nb">str</span>
+<span class="k">print</span> <span class="s">&quot;Matches option camel-case: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">case_config</span><span class="o">.</span><span class="n">has_option</span><span class="p">(</span><span class="s">&#39;CamelCase&#39;</span><span class="p">,</span> <span class="s">&#39;OptionOne&#39;</span><span class="p">))</span>
+<span class="k">print</span> <span class="s">&quot;Matches option all-lower: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">case_config</span><span class="o">.</span><span class="n">has_option</span><span class="p">(</span><span class="s">&#39;CamelCase&#39;</span><span class="p">,</span> <span class="s">&#39;optionone&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Matches option camel-case: False
+Matches option all-lower: True
+</pre></div>
+</div>
+<p>What?</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">case_config</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="s">&#39;CamelCase&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="s">&#39;optionone&#39;</span><span class="p">,</span> <span class="s">&#39;optiontwo&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>So it looks like by default <cite>ConfigParser</cite> casts the options to lower-case when they are read in, but since I changed it to be case-sensitive (passing in <tt class="docutils literal"><span class="pre">str</span></tt> means it uses string-equality to find the option) after reading in the file, it will only match lower-cased option names.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">case_config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">FILE_1</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&quot;Matches option camel-case: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">case_config</span><span class="o">.</span><span class="n">has_option</span><span class="p">(</span><span class="s">&#39;CamelCase&#39;</span><span class="p">,</span> <span class="s">&#39;OptionOne&#39;</span><span class="p">))</span>
+<span class="k">print</span> <span class="s">&quot;Matches option all-lower: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">case_config</span><span class="o">.</span><span class="n">has_option</span><span class="p">(</span><span class="s">&#39;CamelCase&#39;</span><span class="p">,</span> <span class="s">&#39;optionone&#39;</span><span class="p">))</span>
+<span class="k">print</span> <span class="n">case_config</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="s">&#39;CamelCase&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Matches option camel-case: True
+Matches option all-lower: True
+[&#39;optionone&#39;, &#39;optiontwo&#39;, &#39;OptionOne&#39;, &#39;OptionTwo&#39;]
+</pre></div>
+</div>
+<p>Well, that wasn&#8217;t what I was expecting, but it is good to know &#8211; if you read in a file it adds to the existing section rather than replacing it. One more time.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">case_config</span><span class="o">.</span><span class="n">remove_section</span><span class="p">(</span><span class="s">&#39;CamelCase&#39;</span><span class="p">)</span>
+<span class="n">case_config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">FILE_1</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&quot;Matches option camel-case: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">case_config</span><span class="o">.</span><span class="n">has_option</span><span class="p">(</span><span class="s">&#39;CamelCase&#39;</span><span class="p">,</span> <span class="s">&#39;OptionOne&#39;</span><span class="p">))</span>
+<span class="k">print</span> <span class="s">&quot;Matches option all-lower: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">case_config</span><span class="o">.</span><span class="n">has_option</span><span class="p">(</span><span class="s">&#39;CamelCase&#39;</span><span class="p">,</span> <span class="s">&#39;optionone&#39;</span><span class="p">))</span>
+<span class="k">print</span> <span class="n">case_config</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="s">&#39;CamelCase&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Matches option camel-case: True
+Matches option all-lower: False
+[&#39;OptionOne&#39;, &#39;OptionTwo&#39;]
+</pre></div>
+</div>
+<p>Well, that was harder than I thought it would be, but the discovery that the options append leads to the next section.</p>
+</div>
+</div>
+<div class="section" id="what-happens-when-you-use-read-more-than-once">
+<h2>What happens when you use <tt class="docutils literal"><span class="pre">read</span></tt> more than once?<a class="headerlink" href="#what-happens-when-you-use-read-more-than-once" title="Permalink to this headline">¶</a></h2>
+<p>If I read the same file twice, what happens to it?</p>
+<p>First a print function to create tables for the output:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">HEADER</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">.. csv-table:: {section}</span>
+<span class="s">   :header: Option,Value</span>
+
+<span class="s">&quot;&quot;&quot;</span>
+
+<span class="n">LINE</span> <span class="o">=</span> <span class="s">&quot;   {option},{value}&quot;</span>
+
+<span class="k">def</span> <span class="nf">print_config</span><span class="p">(</span><span class="n">parser</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sends a rst csv-table to stdout</span>
+
+<span class="sd">    :param:</span>
+
+<span class="sd">     - `parser`: loaded ConfigParser</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">parser</span><span class="o">.</span><span class="n">sections</span><span class="p">()):</span>
+            <span class="k">print</span> <span class="n">HEADER</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">section</span><span class="o">=</span><span class="n">section</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">option</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="n">parser</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="n">section</span><span class="p">):</span>
+                <span class="k">print</span> <span class="n">LINE</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">option</span><span class="o">=</span><span class="n">option</span><span class="p">,</span>
+                                  <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">ConfigParser</span><span class="o">.</span><span class="n">Error</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">error</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<p>Now I read the file twice:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">safe_config</span> <span class="o">=</span> <span class="n">SafeConfigParser</span><span class="p">()</span>
+<span class="n">safe_config</span><span class="o">.</span><span class="n">read</span><span class="p">((</span><span class="n">FILE_1</span><span class="p">,</span> <span class="n">FILE_1</span><span class="p">))</span>
+</pre></div>
+</div>
+<table border="1" class="docutils">
+<caption>ALLCAPS</caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>optionone</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>optiontwo</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<caption>CamelCase</caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>optionone</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>optiontwo</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>That doesn&#8217;t seem to do anything (so it&#8217;s safe, as long as you don&#8217;t mess with the case the way I did). What if you load a similar but different file?</p>
+<p>The new file:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">CamelCase</span><span class="p">]</span>
+<span class="n">OptionOne</span> <span class="o">=</span> <span class="n">One</span>
+<span class="n">OptionTwo</span> <span class="o">=</span> <span class="n">Two</span>
+<span class="n">OptionThree</span> <span class="o">=</span> <span class="n">Three</span>
+
+<span class="p">[</span><span class="n">ALLCAPS</span><span class="p">]</span>
+<span class="n">OPTIONONE</span> <span class="o">=</span> <span class="n">ONE</span>
+<span class="n">OPTIONTWO</span> <span class="o">=</span> <span class="n">TWO</span>
+<span class="n">OPTIONTHREE</span> <span class="o">=</span> <span class="n">THREE</span>
+
+<span class="p">[</span><span class="n">CAMELCASE</span><span class="p">]</span>
+<span class="n">OPTIONONE</span> <span class="o">=</span> <span class="n">ONE</span>
+<span class="n">OPTIONTWO</span> <span class="o">=</span> <span class="n">TWO</span>
+
+<span class="p">[</span><span class="n">AllCaps</span><span class="p">]</span>
+<span class="n">OptionOne</span> <span class="o">=</span> <span class="n">One</span>
+<span class="n">OptionTwo</span> <span class="o">=</span> <span class="n">Two</span>
+</pre></div>
+</div>
+<p>Now I read the new file:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">safe_config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">FILE_2</span><span class="p">)</span>
+</pre></div>
+</div>
+<table border="1" class="docutils">
+<caption>ALLCAPS</caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>optionone</td>
+<td>ONE</td>
+</tr>
+<tr class="row-odd"><td>optiontwo</td>
+<td>TWO</td>
+</tr>
+<tr class="row-even"><td>optionthree</td>
+<td>THREE</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<caption>AllCaps</caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>optionone</td>
+<td>One</td>
+</tr>
+<tr class="row-odd"><td>optiontwo</td>
+<td>Two</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<caption>CAMELCASE</caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>optionone</td>
+<td>ONE</td>
+</tr>
+<tr class="row-odd"><td>optiontwo</td>
+<td>TWO</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<caption>CamelCase</caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>optionone</td>
+<td>One</td>
+</tr>
+<tr class="row-odd"><td>optiontwo</td>
+<td>Two</td>
+</tr>
+<tr class="row-even"><td>optionthree</td>
+<td>Three</td>
+</tr>
+</tbody>
+</table>
+<p>It appears to behave just like a dictionary (and if you look at the diagram above you can see that the <cite>_sections</cite> attribute is an <cite>OrderedDict</cite>) &#8211; if the section or option exists, it changes the value, if it doesn&#8217;t it adds the section/option and the value.</p>
+</div>
+<div class="section" id="how-does-the-default-section-work">
+<h2>How does the DEFAULT section work?<a class="headerlink" href="#how-does-the-default-section-work" title="Permalink to this headline">¶</a></h2>
+<p>While somewhat dangerous, using default values can be convenient and can make a file easier to read an maintain. The main drawback, I think, is that if you intend to give this to a non-programmer, trying to troubleshoot errors might be more than they want to deal with. But I suppose that&#8217;s true of most anything.</p>
+<p>Does it matter where you put it?</p>
+<p>The config-file:</p>
+<div class="highlight-python"><div class="highlight"><pre>[NotDefault]
+a = a
+b = b
+# I originally tried `c = %(c)s` and got a recursion error (don&#39;t do it)
+d = %(c)s
+
+[DEFAULT]
+c = d
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">config</span> <span class="o">=</span> <span class="n">SafeConfigParser</span><span class="p">()</span>
+<span class="n">config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">FILE_3</span><span class="p">)</span>
+</pre></div>
+</div>
+<table border="1" class="docutils">
+<caption>NotDefault</caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>c</td>
+<td>d</td>
+</tr>
+<tr class="row-odd"><td>a</td>
+<td>a</td>
+</tr>
+<tr class="row-even"><td>b</td>
+<td>b</td>
+</tr>
+<tr class="row-odd"><td>d</td>
+<td>d</td>
+</tr>
+</tbody>
+</table>
+<p>So, it looks like you can place the DEFAULT section after the section that references it without any problems. Oddly, though, the &#8216;c&#8217; option showed up in the <cite>NotDefault</cite> section. It kind of looks like the DEFAULT is read first, then its values are added to each of the sections.</p>
+<p>The config file:</p>
+<div class="highlight-python"><div class="highlight"><pre>[FirstSection]
+a = 1
+b = 2
+c = 3
+d = %(e)s
+
+[DEFAULT]
+e = 4
+f = d
+
+[SecondSection]
+a = a
+b = b
+c = c
+d = %(f)s
+
+[ThirdSection]
+e = e
+f = f
+g = u
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">config</span> <span class="o">=</span> <span class="n">SafeConfigParser</span><span class="p">()</span>
+<span class="n">config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">FILE_4</span><span class="p">)</span>
+</pre></div>
+</div>
+<table border="1" class="docutils">
+<caption>FirstSection</caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>e</td>
+<td>4</td>
+</tr>
+<tr class="row-odd"><td>f</td>
+<td>d</td>
+</tr>
+<tr class="row-even"><td>a</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>b</td>
+<td>2</td>
+</tr>
+<tr class="row-even"><td>c</td>
+<td>3</td>
+</tr>
+<tr class="row-odd"><td>d</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<caption>SecondSection</caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>e</td>
+<td>4</td>
+</tr>
+<tr class="row-odd"><td>f</td>
+<td>d</td>
+</tr>
+<tr class="row-even"><td>a</td>
+<td>a</td>
+</tr>
+<tr class="row-odd"><td>b</td>
+<td>b</td>
+</tr>
+<tr class="row-even"><td>c</td>
+<td>c</td>
+</tr>
+<tr class="row-odd"><td>d</td>
+<td>d</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<caption>ThirdSection</caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>e</td>
+<td>e</td>
+</tr>
+<tr class="row-odd"><td>f</td>
+<td>f</td>
+</tr>
+<tr class="row-even"><td>g</td>
+<td>u</td>
+</tr>
+</tbody>
+</table>
+<p>It does look like everything put in the DEFAULT section is added to the other sections, but the values it adds are replaced if the section defines the same options.</p>
+</div>
+<div class="section" id="the-whole-shebang">
+<h2>The Whole Shebang<a class="headerlink" href="#the-whole-shebang" title="Permalink to this headline">¶</a></h2>
+<p>The reason I looked into this was so that I could put a file-glob in a main configuration file and refer to other files so that I can isolate the parts that change or are complicated from the parts that don&#8217;t... or aren&#8217;t... I don&#8217;t yet know if that&#8217;s a good idea &#8211; nothing to do but to try.</p>
+<p>The base-configuration in this directory:</p>
+<div class="highlight-python"><div class="highlight"><pre>[DEFAULT]
+hortence = hoo
+glob = samples/sample_*.ini
+</pre></div>
+</div>
+<p>The two sub-configurations in the <cite>samples</cite> sub-folder:</p>
+<div class="highlight-python"><div class="highlight"><pre>[Section_B]
+how = now
+brown = cow
+what = %(hortence)s
+
+[Section_A]
+bela = abzug
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>[Section_C]
+in_a_boat = False
+with_a_goat = False
+i_am = %(hortence)s
+
+[Section_A]
+lugosi = dead
+</pre></div>
+</div>
+<p>A module to get the filenames:</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/glob.iglob.html#glob.iglob" title="glob.iglob"><tt class="xref py py-obj docutils literal"><span class="pre">iglob</span></tt></a>(pathname)</td>
+<td>Return an iterator which yields the paths matching a pathname pattern.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">config</span> <span class="o">=</span> <span class="n">SafeConfigParser</span><span class="p">()</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">names</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">SAMPLE_BASE</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">iglob</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;DEFAULT&#39;</span><span class="p">,</span> <span class="s">&#39;glob&#39;</span><span class="p">)):</span>
+    <span class="n">names</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+</pre></div>
+</div>
+<table border="1" class="docutils">
+<caption>Section_A</caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>hortence</td>
+<td>hoo</td>
+</tr>
+<tr class="row-odd"><td>glob</td>
+<td>samples/sample_*.ini</td>
+</tr>
+<tr class="row-even"><td>lugosi</td>
+<td>dead</td>
+</tr>
+<tr class="row-odd"><td>bela</td>
+<td>abzug</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<caption>Section_B</caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>hortence</td>
+<td>hoo</td>
+</tr>
+<tr class="row-odd"><td>glob</td>
+<td>samples/sample_*.ini</td>
+</tr>
+<tr class="row-even"><td>how</td>
+<td>now</td>
+</tr>
+<tr class="row-odd"><td>brown</td>
+<td>cow</td>
+</tr>
+<tr class="row-even"><td>what</td>
+<td>hoo</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<caption>Section_C</caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>hortence</td>
+<td>hoo</td>
+</tr>
+<tr class="row-odd"><td>glob</td>
+<td>samples/sample_*.ini</td>
+</tr>
+<tr class="row-even"><td>in_a_boat</td>
+<td>False</td>
+</tr>
+<tr class="row-odd"><td>with_a_goat</td>
+<td>False</td>
+</tr>
+<tr class="row-even"><td>i_am</td>
+<td>hoo</td>
+</tr>
+</tbody>
+</table>
+<p>So what we got was:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Section_A is a composite of DEFAULT, and the two Section_A sections from the sub-files</li>
+<li>Section_B and Section_C used the DEFAULT <cite>hortence</cite> to complete themselves</li>
+<li>None of the Sections were in the original file, they were composed from the sub-files found by the glob</li>
+</ul>
+</div></blockquote>
+<p>I didn&#8217;t notice it before, but the ConfigParser is returning the name of the file it reads. I don&#8217;t know how useful this is since you pass in the filename, but I guess there was a reason for it.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">Filenames Read:&quot;</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s">&quot;   {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Filenames Read:
+   sample_a.ini
+   samples/sample_c.ini
+   samples/sample_b.ini
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Exploring ConfigParser</a><ul>
+<li><a class="reference internal" href="#safeconfigparser-reference">SafeConfigParser Reference</a></li>
+<li><a class="reference internal" href="#are-options-and-sections-case-sensitive">Are options and sections case-sensitive?</a><ul>
+<li><a class="reference internal" href="#section-case">Section Case</a></li>
+<li><a class="reference internal" href="#option-case">Option Case</a></li>
+<li><a class="reference internal" href="#optionxform">optionxform</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#what-happens-when-you-use-read-more-than-once">What happens when you use <tt class="docutils literal"><span class="pre">read</span></tt> more than once?</a></li>
+<li><a class="reference internal" href="#how-does-the-default-section-work">How does the DEFAULT section work?</a></li>
+<li><a class="reference internal" href="#the-whole-shebang">The Whole Shebang</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../user/index.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../../_sources/documentation/developer/explorations/explore_configparse/explore_configparse.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

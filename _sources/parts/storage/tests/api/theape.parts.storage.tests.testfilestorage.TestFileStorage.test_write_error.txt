@@ -1,0 +1,6 @@
+theape.parts.storage.tests.testfilestorage.TestFileStorage.test_write_error
+===========================================================================
+
+.. currentmodule:: theape.parts.storage.tests.testfilestorage
+
+.. automethod:: TestFileStorage.test_write_error

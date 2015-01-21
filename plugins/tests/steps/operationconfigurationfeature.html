@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Operation Configuration &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../index.html" />
+    <link rel="up" title="Plugins Features" href="index.html" />
+    <link rel="next" title="Operator Config Spec" href="operatorconfigspecfeature.html" />
+    <link rel="prev" title="Crash Test Dummy" href="crashtestdummyfeature.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="operatorconfigspecfeature.html" title="Operator Config Spec"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="crashtestdummyfeature.html" title="Crash Test Dummy"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Plugins</a> &raquo;</li>
+          <li><a href="../index.html" >Testing the Plugins</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Plugins Features</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="operation-configuration">
+<h1>Operation Configuration<a class="headerlink" href="#operation-configuration" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">Feature:</span><span class="nf"> Operation Configuration</span>
+<span class="nf"> </span><span class="k">Scenario:</span><span class="nf"> User builds Operation Configuration</span>
+<span class="k">  Given </span><span class="nf">a configuration with operations and plugins for the operation configuration</span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">a user builds the operation configuration</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">the operation configuration has the plugins</span>
+</pre></div>
+</div>
+<div class="section" id="scenario-user-builds-operation-configuration">
+<h2>Scenario: User builds Operation Configuration<a class="headerlink" href="#scenario-user-builds-operation-configuration" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">config_file</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">[OPERATIONS]</span>
+<span class="s">op1 = p2, p3</span>
+
+<span class="s">[PLUGINS]</span>
+<span class="s"> [[p2]]</span>
+<span class="s"> plugin = Fake</span>
+
+<span class="s"> option1 = value1</span>
+
+<span class="s"> [[p3]]</span>
+<span class="s"> plugin = Fakir</span>
+
+<span class="s"> option1 = value2</span>
+<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+
+<span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configuration with operations and plugins for the operation configuration&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">configuration</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">operator_configuration</span> <span class="o">=</span> <span class="n">OperatorConfiguration</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">operator_configuration</span><span class="o">.</span><span class="n">configuration</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">section</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">configobj</span><span class="p">[</span><span class="s">&#39;PLUGINS&#39;</span><span class="p">]</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@when</span><span class="p">(</span><span class="s">&quot;a user builds the operation configuration&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">build_operation_configuration</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">operation_name</span> <span class="o">=</span> <span class="s">&#39;op1&#39;</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">plugin_sections</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">configobj</span><span class="p">[</span><span class="s">&#39;OPERATIONS&#39;</span><span class="p">][</span><span class="n">context</span><span class="o">.</span><span class="n">operation_name</span><span class="p">]</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">quartermaster</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">operation_configuration</span> <span class="o">=</span> <span class="n">OperationConfiguration</span><span class="p">(</span><span class="n">plugins_section</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">section</span><span class="p">,</span>
+                                                             <span class="n">plugin_subsections</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">plugin_sections</span><span class="p">,</span>
+                                                             <span class="n">operation_name</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">operation_name</span><span class="p">,</span>
+                                                             <span class="n">quartermaster</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">quartermaster</span><span class="p">)</span>
+    <span class="c">#print context.configobj</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;the operation configuration has the plugins&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">check_plugins</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">operation_configuration</span><span class="p">,</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">instance_of</span><span class="p">(</span><span class="n">OperationConfiguration</span><span class="p">)))</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">operation_configuration</span><span class="o">.</span><span class="n">operation_name</span><span class="p">,</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">operation_name</span><span class="p">))</span>
+
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">operation_configuration</span><span class="o">.</span><span class="n">plugin_subsections</span><span class="p">,</span>
+                <span class="n">contains</span><span class="p">(</span><span class="s">&#39;p2&#39;</span><span class="p">,</span> <span class="s">&#39;p3&#39;</span><span class="p">))</span>
+
+    <span class="n">expected</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="s">&#39;p2 p3&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="s">&#39;Fake Fakir&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
+    <span class="c">#assert_that(context.operation_configuration.plugin_names,</span>
+    <span class="c">#            contains(&#39;Fake&#39;, &#39;Fakir&#39;))</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">operation_configuration</span><span class="o">.</span><span class="n">plugin_sections_names</span><span class="p">,</span>
+                <span class="n">has_entries</span><span class="p">(</span><span class="n">expected</span><span class="p">))</span>
+
+    <span class="n">fake_definition</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;fake&#39;</span><span class="p">)</span>
+    <span class="n">fake_plugin</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;fake_plugin&#39;</span><span class="p">)</span>
+    <span class="n">fake_definition</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">fake_plugin</span>
+
+
+    <span class="n">fakir_definition</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;fakir&#39;</span><span class="p">)</span>
+    <span class="n">fakir_plugin</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;fakir_plugin&#39;</span><span class="p">)</span>
+
+    <span class="n">fakir_definition</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">fakir_plugin</span>
+
+    <span class="n">p_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="s">&#39;Fake Fakir&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="p">(</span><span class="n">fake_definition</span><span class="p">,</span> <span class="n">fakir_definition</span><span class="p">)))</span>
+
+    <span class="n">get_plugin</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">name</span><span class="p">:</span> <span class="n">p_dict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">quartermaster</span><span class="o">.</span><span class="n">get_plugin</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="n">get_plugin</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">operation_configuration</span><span class="o">.</span><span class="n">operation</span>
+    <span class="n">fake_definition</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span><span class="n">configuration</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">operation_configuration</span><span class="o">.</span><span class="n">plugins_section</span><span class="p">,</span>
+                            <span class="n">section_header</span><span class="o">=</span><span class="s">&#39;p2&#39;</span><span class="p">)</span>
+    <span class="n">fakir_definition</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span><span class="n">configuration</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">operation_configuration</span><span class="o">.</span><span class="n">plugins_section</span><span class="p">,</span>
+                            <span class="n">section_header</span><span class="o">=</span><span class="s">&#39;p3&#39;</span><span class="p">)</span>
+
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">operation_configuration</span><span class="o">.</span><span class="n">operation</span><span class="o">.</span><span class="n">components</span><span class="p">,</span>
+                <span class="n">contains</span><span class="p">(</span><span class="n">fake_plugin</span><span class="o">.</span><span class="n">product</span><span class="p">,</span> <span class="n">fakir_plugin</span><span class="o">.</span><span class="n">product</span><span class="p">))</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Operation Configuration</a><ul>
+<li><a class="reference internal" href="#scenario-user-builds-operation-configuration">Scenario: User builds Operation Configuration</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../_sources/plugins/tests/steps/operationconfigurationfeature.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

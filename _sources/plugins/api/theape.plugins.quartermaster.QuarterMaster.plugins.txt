@@ -1,0 +1,6 @@
+theape.plugins.quartermaster.QuarterMaster.plugins
+==================================================
+
+.. currentmodule:: theape.plugins.quartermaster
+
+.. autoattribute:: QuarterMaster.plugins

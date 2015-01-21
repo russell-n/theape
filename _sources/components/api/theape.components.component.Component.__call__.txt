@@ -1,0 +1,6 @@
+theape.components.component.Component.__call__
+==============================================
+
+.. currentmodule:: theape.components.component
+
+.. automethod:: Component.__call__

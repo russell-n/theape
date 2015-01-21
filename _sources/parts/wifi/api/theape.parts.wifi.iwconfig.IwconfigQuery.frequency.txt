@@ -1,0 +1,6 @@
+theape.parts.wifi.iwconfig.IwconfigQuery.frequency
+==================================================
+
+.. currentmodule:: theape.parts.wifi.iwconfig
+
+.. autoattribute:: IwconfigQuery.frequency

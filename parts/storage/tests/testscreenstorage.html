@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Testing the Screen Storage &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../index.html" />
+    <link rel="up" title="Testing the Storage" href="index.html" />
+    <link rel="next" title="Testing the SocketStorage" href="testsocketstorage.html" />
+    <link rel="prev" title="theape.parts.storage.tests.testfilestorage.TestFileStorageWith.test_with" href="api/theape.parts.storage.tests.testfilestorage.TestFileStorageWith.test_with.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="testsocketstorage.html" title="Testing the SocketStorage"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="api/theape.parts.storage.tests.testfilestorage.TestFileStorageWith.test_with.html" title="theape.parts.storage.tests.testfilestorage.TestFileStorageWith.test_with"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Parts</a> &raquo;</li>
+          <li><a href="../index.html" >Storage</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Testing the Storage</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="testing-the-screen-storage">
+<h1>Testing the Screen Storage<a class="headerlink" href="#testing-the-screen-storage" title="Permalink to this headline">¶</a></h1>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c"># python standard library</span>
+<span class="kn">import</span> <span class="nn">unittest</span>
+
+<span class="c"># third-party</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">mock</span> <span class="kn">import</span> <span class="n">patch</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="c"># this package</span>
+<span class="kn">from</span> <span class="nn">theape.parts.storage.screenstorage</span> <span class="kn">import</span> <span class="n">ScreenStorage</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">TestScreenStorage</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sys_patch</span> <span class="o">=</span> <span class="n">patch</span><span class="p">(</span><span class="s">&#39;sys.stdout&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sys_patch</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">storage</span> <span class="o">=</span> <span class="n">ScreenStorage</span><span class="p">()</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">tearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sys_patch</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">test_constructor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">test_close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">close</span><span class="o">.</span><span class="n">called</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">test_open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;fake&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">open</span><span class="o">.</span><span class="n">called</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">test_write</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;cow&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span><span class="s">&#39;cow&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">test_writelines</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="s">&#39;a b c d&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">writelines</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">test_writeline</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="s">&#39;aoeusnth&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">writeline</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span><span class="n">line</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../_sources/parts/storage/tests/testscreenstorage.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

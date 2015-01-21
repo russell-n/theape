@@ -1,0 +1,29 @@
+theape.parts.dummy.callclass.CallClass
+======================================
+
+.. currentmodule:: theape.parts.dummy.callclass
+
+.. autoclass:: CallClass
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~CallClass.__init__
+      ~CallClass.log_error
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~CallClass.logger
+   
+   

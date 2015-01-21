@@ -1,0 +1,6 @@
+theape.infrastructure.timemap.RelativeTime.microseconds
+=======================================================
+
+.. currentmodule:: theape.infrastructure.timemap
+
+.. autoattribute:: RelativeTime.microseconds

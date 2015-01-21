@@ -1,0 +1,6 @@
+theape.parts.oatbran.Boundaries.word
+====================================
+
+.. currentmodule:: theape.parts.oatbran
+
+.. automethod:: Boundaries.word

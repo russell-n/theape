@@ -1,0 +1,6 @@
+theape.components.component.Composite.__len__
+=============================================
+
+.. currentmodule:: theape.components.component
+
+.. automethod:: Composite.__len__

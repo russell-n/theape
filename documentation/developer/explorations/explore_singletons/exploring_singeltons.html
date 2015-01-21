@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Exploring Singletons &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
+    <link rel="up" title="Exploring Singletons" href="index.html" />
+    <link rel="next" title="The Singleton Source" href="singleton_source.html" />
+    <link rel="prev" title="Exploring Singletons" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="singleton_source.html" title="The Singleton Source"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Exploring Singletons"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >The Ape Developer Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >The Explorations</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Exploring Singletons</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="exploring-singletons">
+<h1>Exploring Singletons<a class="headerlink" href="#exploring-singletons" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<span id="ape-documentation-exploring-singletons"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This won&#8217;t be an extensive exploration since it seems to be relatively straightforward. This is a test of creating a <a class="reference external" href="http://en.wikipedia.org/wiki/Singleton_pattern">singleton</a> in python. The motivation for it is that I want to allow plugins to add themselves to aggregating composites without having to worry if others have alread created one.</p>
+</div>
+<div class="section" id="the-idea">
+<h2>The Idea<a class="headerlink" href="#the-idea" title="Permalink to this headline">¶</a></h2>
+<p>To create the singleton you just need to rely on the fact that when you make multiple calls to the same module in python, the interpreter only creates one instance of it. So you can create a function in it that instantiates the object and even if multiple modules import it, they each get the same object.</p>
+</div>
+<div class="section" id="the-function-test">
+<h2>The Function Test<a class="headerlink" href="#the-function-test" title="Permalink to this headline">¶</a></h2>
+<p>I created a file called <a class="reference internal" href="singleton_source.html#ape-documentation-singleton-source"><em>singleton_source.py</em></a> that creates a function called get that creates and returns an instance of the <tt class="docutils literal"><span class="pre">SingletonTest</span></tt> class. I then created two files <tt class="docutils literal"><span class="pre">test_1.py</span></tt> and <tt class="docutils literal"><span class="pre">test_2.py</span></tt> that get the singletons from the singleton source.</p>
+<p><tt class="docutils literal"><span class="pre">test_1.py</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">singleton_source</span>
+
+<span class="hll"><span class="n">t1</span> <span class="o">=</span> <span class="n">singleton_source</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</span>
+<span class="n">test_1</span> <span class="o">=</span> <span class="n">singleton_source</span><span class="o">.</span><span class="n">test_instance</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">test_2.py</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">singleton_source</span>
+
+<span class="hll"><span class="n">t2</span> <span class="o">=</span> <span class="n">singleton_source</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</span>
+<span class="n">test_2</span> <span class="o">=</span> <span class="n">singleton_source</span><span class="o">.</span><span class="n">test_instance</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">ape.documentation.developer.appendices.explore_singletons.test_1</span> <span class="kn">import</span> <span class="n">t1</span>
+<span class="kn">from</span> <span class="nn">ape.documentation.developer.appendices.explore_singletons.test_2</span> <span class="kn">import</span> <span class="n">t2</span>
+
+<span class="k">assert</span> <span class="n">t1</span> <span class="ow">is</span> <span class="n">t2</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="testing-without-the-function">
+<h2>Testing Without the Function<a class="headerlink" href="#testing-without-the-function" title="Permalink to this headline">¶</a></h2>
+<p>I think the reason why the example I saw used the function call was so that you can refresh it, but it seems to me that if you aren&#8217;t going to, you should just be able to create an instance in the module without using a function. Using the same modules as above:</p>
+<p><tt class="docutils literal"><span class="pre">test_1.py</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">singleton_source</span>
+
+<span class="n">t1</span> <span class="o">=</span> <span class="n">singleton_source</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+<span class="hll"><span class="n">test_1</span> <span class="o">=</span> <span class="n">singleton_source</span><span class="o">.</span><span class="n">test_instance</span>
+</span></pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">test_2.py</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">singleton_source</span>
+
+<span class="n">t2</span> <span class="o">=</span> <span class="n">singleton_source</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+<span class="hll"><span class="n">test_2</span> <span class="o">=</span> <span class="n">singleton_source</span><span class="o">.</span><span class="n">test_instance</span>
+</span></pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">ape.documentation.developer.appendices.explore_singletons.test_1</span> <span class="kn">import</span> <span class="n">test_1</span>
+<span class="kn">from</span> <span class="nn">ape.documentation.developer.appendices.explore_singletons.test_2</span> <span class="kn">import</span> <span class="n">test_2</span>
+
+<span class="k">assert</span> <span class="n">test_1</span> <span class="ow">is</span> <span class="n">test_2</span>
+</pre></div>
+</div>
+<p>I think I&#8217;ll use the second version for the plugins.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Exploring Singletons</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#the-idea">The Idea</a></li>
+<li><a class="reference internal" href="#the-function-test">The Function Test</a></li>
+<li><a class="reference internal" href="#testing-without-the-function">Testing Without the Function</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../user/index.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../../_sources/documentation/developer/explorations/explore_singletons/exploring_singeltons.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

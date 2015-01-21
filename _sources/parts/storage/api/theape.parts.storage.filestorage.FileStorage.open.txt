@@ -1,0 +1,6 @@
+theape.parts.storage.filestorage.FileStorage.open
+=================================================
+
+.. currentmodule:: theape.parts.storage.filestorage
+
+.. automethod:: FileStorage.open

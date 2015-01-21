@@ -1,0 +1,381 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>theape.plugins.base_plugin.BaseConfiguration &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../index.html" />
+    <link rel="up" title="The Base Plugin" href="../base_plugin.html" />
+    <link rel="next" title="theape.plugins.base_plugin.BaseConfiguration.product" href="theape.plugins.base_plugin.BaseConfiguration.product.html" />
+    <link rel="prev" title="theape.plugins.base_plugin.SubConfiguration.__getattr__" href="theape.plugins.base_plugin.SubConfiguration.__getattr__.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="theape.plugins.base_plugin.BaseConfiguration.product.html" title="theape.plugins.base_plugin.BaseConfiguration.product"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="theape.plugins.base_plugin.SubConfiguration.__getattr__.html" title="theape.plugins.base_plugin.SubConfiguration.__getattr__"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Plugins</a> &raquo;</li>
+          <li><a href="../base_plugin.html" accesskey="U">The Base Plugin</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="theape-plugins-base-plugin-baseconfiguration">
+<h1>theape.plugins.base_plugin.BaseConfiguration<a class="headerlink" href="#theape-plugins-base-plugin-baseconfiguration" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="theape.plugins.base_plugin.BaseConfiguration">
+<em class="property">class </em><tt class="descclassname">theape.plugins.base_plugin.</tt><tt class="descname">BaseConfiguration</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#theape.plugins.base_plugin.BaseConfiguration" title="Permalink to this definition">¶</a></dt>
+<dd><p>A BaseConfiguration to build the product and hold the configuration</p>
+<dl class="method">
+<dt id="theape.plugins.base_plugin.BaseConfiguration.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#theape.plugins.base_plugin.BaseConfiguration.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#theape.plugins.base_plugin.BaseConfiguration.__init__" title="theape.plugins.base_plugin.BaseConfiguration.__init__"><tt class="xref py py-obj docutils literal"><span class="pre">__init__</span></tt></a>(**kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#theape.plugins.base_plugin.BaseConfiguration.check_extra_values" title="theape.plugins.base_plugin.BaseConfiguration.check_extra_values"><tt class="xref py py-obj docutils literal"><span class="pre">check_extra_values</span></tt></a>([warn_user])</td>
+<td>checks the configuration for values not in the configspec</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#theape.plugins.base_plugin.BaseConfiguration.check_rep" title="theape.plugins.base_plugin.BaseConfiguration.check_rep"><tt class="xref py py-obj docutils literal"><span class="pre">check_rep</span></tt></a>()</td>
+<td>Calls process_errors</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#theape.plugins.base_plugin.BaseConfiguration.log_error" title="theape.plugins.base_plugin.BaseConfiguration.log_error"><tt class="xref py py-obj docutils literal"><span class="pre">log_error</span></tt></a>(error[,&nbsp;message])</td>
+<td>Logs the error in bold red</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#theape.plugins.base_plugin.BaseConfiguration.process_errors" title="theape.plugins.base_plugin.BaseConfiguration.process_errors"><tt class="xref py py-obj docutils literal"><span class="pre">process_errors</span></tt></a>()</td>
+<td>processes configuration, validation_outcome and logs the errors</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#theape.plugins.base_plugin.BaseConfiguration.update" title="theape.plugins.base_plugin.BaseConfiguration.update"><tt class="xref py py-obj docutils literal"><span class="pre">update</span></tt></a>(section)</td>
+<td>Uses &#8216;updates_section&#8217; to build configuration from other section</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#theape.plugins.base_plugin.BaseConfiguration.check_methods" title="theape.plugins.base_plugin.BaseConfiguration.check_methods"><tt class="xref py py-obj docutils literal"><span class="pre">check_methods</span></tt></a></td>
+<td>dict of extra check methods for the validator</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#theape.plugins.base_plugin.BaseConfiguration.configspec" title="theape.plugins.base_plugin.BaseConfiguration.configspec"><tt class="xref py py-obj docutils literal"><span class="pre">configspec</span></tt></a></td>
+<td>A configspec built from configspec_source for validation</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#theape.plugins.base_plugin.BaseConfiguration.configspec_source" title="theape.plugins.base_plugin.BaseConfiguration.configspec_source"><tt class="xref py py-obj docutils literal"><span class="pre">configspec_source</span></tt></a></td>
+<td>abstract: implement as configspec string</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#theape.plugins.base_plugin.BaseConfiguration.configuration" title="theape.plugins.base_plugin.BaseConfiguration.configuration"><tt class="xref py py-obj docutils literal"><span class="pre">configuration</span></tt></a></td>
+<td>validates and sets the configuration using the source configuration</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#theape.plugins.base_plugin.BaseConfiguration.constants" title="theape.plugins.base_plugin.BaseConfiguration.constants"><tt class="xref py py-obj docutils literal"><span class="pre">constants</span></tt></a></td>
+<td>object with string constants (see SubConfigurationConstants)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#theape.plugins.base_plugin.BaseConfiguration.logger" title="theape.plugins.base_plugin.BaseConfiguration.logger"><tt class="xref py py-obj docutils literal"><span class="pre">logger</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">A logging object.</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#theape.plugins.base_plugin.BaseConfiguration.plugin_name" title="theape.plugins.base_plugin.BaseConfiguration.plugin_name"><tt class="xref py py-obj docutils literal"><span class="pre">plugin_name</span></tt></a></td>
+<td>Gets the plugin name from the section</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="theape.plugins.base_plugin.BaseConfiguration.product.html#theape.plugins.base_plugin.BaseConfiguration.product" title="theape.plugins.base_plugin.BaseConfiguration.product"><tt class="xref py py-obj docutils literal"><span class="pre">product</span></tt></a></td>
+<td>abstract: A built product to run</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#theape.plugins.base_plugin.BaseConfiguration.sample" title="theape.plugins.base_plugin.BaseConfiguration.sample"><tt class="xref py py-obj docutils literal"><span class="pre">sample</span></tt></a></td>
+<td>Creates a sample configuration section using the configspec_source</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#theape.plugins.base_plugin.BaseConfiguration.validation_outcome" title="theape.plugins.base_plugin.BaseConfiguration.validation_outcome"><tt class="xref py py-obj docutils literal"><span class="pre">validation_outcome</span></tt></a></td>
+<td>Outcome of validating the configuration</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#theape.plugins.base_plugin.BaseConfiguration.validator" title="theape.plugins.base_plugin.BaseConfiguration.validator"><tt class="xref py py-obj docutils literal"><span class="pre">validator</span></tt></a></td>
+<td>validator for the configuration</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="theape.plugins.base_plugin.BaseConfiguration.check_extra_values">
+<tt class="descname">check_extra_values</tt><big>(</big><em>warn_user=True</em><big>)</big><a class="headerlink" href="#theape.plugins.base_plugin.BaseConfiguration.check_extra_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>checks the configuration for values not in the configspec</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if extra values, false otherwise</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="theape.plugins.base_plugin.BaseConfiguration.check_rep">
+<tt class="descname">check_rep</tt><big>(</big><big>)</big><a class="headerlink" href="#theape.plugins.base_plugin.BaseConfiguration.check_rep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls process_errors</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raise:</th><td class="field-body">ConfigurationError if errors are found (or there are unknown options and not allow_extras)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="theape.plugins.base_plugin.BaseConfiguration.log_error">
+<tt class="descname">log_error</tt><big>(</big><em>error</em>, <em>message=''</em><big>)</big><a class="headerlink" href="#theape.plugins.base_plugin.BaseConfiguration.log_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logs the error in bold red</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
+<li><cite>error</cite>: error type (prefix in red and bold)</li>
+<li><cite>message</cite>: descriptive message (red but not bold)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="theape.plugins.base_plugin.BaseConfiguration.process_errors">
+<tt class="descname">process_errors</tt><big>(</big><big>)</big><a class="headerlink" href="#theape.plugins.base_plugin.BaseConfiguration.process_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>processes configuration, validation_outcome and logs the errors</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if there were errors (same as <cite>not self.validation_outcome</cite>)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="theape.plugins.base_plugin.BaseConfiguration.update">
+<tt class="descname">update</tt><big>(</big><em>section</em><big>)</big><a class="headerlink" href="#theape.plugins.base_plugin.BaseConfiguration.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses &#8216;updates_section&#8217; to build configuration from other section</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first simple">
+<li><cite>section</cite>: plugin-section to update</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">section merged with this section or original if appropriate</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.plugins.base_plugin.BaseConfiguration.check_methods">
+<tt class="descname">check_methods</tt><a class="headerlink" href="#theape.plugins.base_plugin.BaseConfiguration.check_methods" title="Permalink to this definition">¶</a></dt>
+<dd><p>dict of extra check methods for the validator</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.plugins.base_plugin.BaseConfiguration.configspec">
+<tt class="descname">configspec</tt><a class="headerlink" href="#theape.plugins.base_plugin.BaseConfiguration.configspec" title="Permalink to this definition">¶</a></dt>
+<dd><p>A configspec built from configspec_source for validation</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.plugins.base_plugin.BaseConfiguration.configspec_source">
+<tt class="descname">configspec_source</tt><a class="headerlink" href="#theape.plugins.base_plugin.BaseConfiguration.configspec_source" title="Permalink to this definition">¶</a></dt>
+<dd><p>abstract: implement as configspec string</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.plugins.base_plugin.BaseConfiguration.configuration">
+<tt class="descname">configuration</tt><a class="headerlink" href="#theape.plugins.base_plugin.BaseConfiguration.configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>validates and sets the configuration using the source configuration</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Precondition:</th><td class="field-body">self.configspec has full configspec including section name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">validated configuration for this section</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.plugins.base_plugin.BaseConfiguration.constants">
+<tt class="descname">constants</tt><a class="headerlink" href="#theape.plugins.base_plugin.BaseConfiguration.constants" title="Permalink to this definition">¶</a></dt>
+<dd><p>object with string constants (see SubConfigurationConstants)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.plugins.base_plugin.BaseConfiguration.logger">
+<tt class="descname">logger</tt><a class="headerlink" href="#theape.plugins.base_plugin.BaseConfiguration.logger" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A logging object.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.plugins.base_plugin.BaseConfiguration.plugin_name">
+<tt class="descname">plugin_name</tt><a class="headerlink" href="#theape.plugins.base_plugin.BaseConfiguration.plugin_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the plugin name from the section</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">plugin-name if found or &#8216;&lt;non-plugin&gt;&#8217;</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.plugins.base_plugin.BaseConfiguration.product">
+<tt class="descname">product</tt><a class="headerlink" href="#theape.plugins.base_plugin.BaseConfiguration.product" title="Permalink to this definition">¶</a></dt>
+<dd><p>abstract: A built product to run</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.plugins.base_plugin.BaseConfiguration.sample">
+<tt class="descname">sample</tt><a class="headerlink" href="#theape.plugins.base_plugin.BaseConfiguration.sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a sample configuration section using the configspec_source</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.plugins.base_plugin.BaseConfiguration.validation_outcome">
+<tt class="descname">validation_outcome</tt><a class="headerlink" href="#theape.plugins.base_plugin.BaseConfiguration.validation_outcome" title="Permalink to this definition">¶</a></dt>
+<dd><p>Outcome of validating the configuration</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.plugins.base_plugin.BaseConfiguration.validator">
+<tt class="descname">validator</tt><a class="headerlink" href="#theape.plugins.base_plugin.BaseConfiguration.validator" title="Permalink to this definition">¶</a></dt>
+<dd><p>validator for the configuration</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../parts/index.html">Parts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../_sources/plugins/api/theape.plugins.base_plugin.BaseConfiguration.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

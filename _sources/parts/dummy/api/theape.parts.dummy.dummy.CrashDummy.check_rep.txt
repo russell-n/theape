@@ -1,0 +1,6 @@
+theape.parts.dummy.dummy.CrashDummy.check_rep
+=============================================
+
+.. currentmodule:: theape.parts.dummy.dummy
+
+.. automethod:: CrashDummy.check_rep

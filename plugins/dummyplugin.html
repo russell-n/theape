@@ -1,0 +1,373 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The Dummy Plugin &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../index.html" />
+    <link rel="up" title="Plugins" href="index.html" />
+    <link rel="next" title="theape.plugins.dummyplugin.Dummy" href="api/theape.plugins.dummyplugin.Dummy.html" />
+    <link rel="prev" title="theape.plugins.sleep_plugin.Sleep" href="api/theape.plugins.sleep_plugin.Sleep.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/theape.plugins.dummyplugin.Dummy.html" title="theape.plugins.dummyplugin.Dummy"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="api/theape.plugins.sleep_plugin.Sleep.html" title="theape.plugins.sleep_plugin.Sleep"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Plugins</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-dummy-plugin">
+<h1>The Dummy Plugin<a class="headerlink" href="#the-dummy-plugin" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="../parts/dummy/dummy.html#dummy-class"><em>DummyClass</em></a> does not do anything. It is meant to be used to test the infrastructure.</p>
+<p class="plantuml">
+<img src="../_images/plantuml-0c3f96a963c6448cea2cc7877d9abaa58dd05442.png" alt="Dummy -|&gt; BasePlugin
+Dummy o- HelpPage" />
+</p>
+<span class="target" id="module-theape.plugins.dummyplugin"></span><table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.dummyplugin.Dummy.html#theape.plugins.dummyplugin.Dummy" title="theape.plugins.dummyplugin.Dummy"><tt class="xref py py-obj docutils literal"><span class="pre">Dummy</span></tt></a>(*args,&nbsp;**kwargs)</td>
+<td>A plugin to test the infrastructure (a no-op)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.dummyplugin.Dummy.help.html#theape.plugins.dummyplugin.Dummy.help" title="theape.plugins.dummyplugin.Dummy.help"><tt class="xref py py-obj docutils literal"><span class="pre">Dummy.help</span></tt></a>([width])</td>
+<td>Prints a help-string for the plugin</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.dummyplugin.Dummy.sections.html#theape.plugins.dummyplugin.Dummy.sections" title="theape.plugins.dummyplugin.Dummy.sections"><tt class="xref py py-obj docutils literal"><span class="pre">Dummy.sections</span></tt></a></td>
+<td>An ordered dict for the help page</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.dummyplugin.Dummy.product.html#theape.plugins.dummyplugin.Dummy.product" title="theape.plugins.dummyplugin.Dummy.product"><tt class="xref py py-obj docutils literal"><span class="pre">Dummy.product</span></tt></a></td>
+<td>builds and returns a DummyClass</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.dummyplugin.Dummy.fetch_config.html#theape.plugins.dummyplugin.Dummy.fetch_config" title="theape.plugins.dummyplugin.Dummy.fetch_config"><tt class="xref py py-obj docutils literal"><span class="pre">Dummy.fetch_config</span></tt></a>()</td>
+<td>prints a sample configuration</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="dummy-configuration">
+<h2>Dummy Configuration<a class="headerlink" href="#dummy-configuration" title="Permalink to this headline">¶</a></h2>
+<p>This is how the configuration sub-section should appear.</p>
+<div class="section" id="crash-test-dummy">
+<h3>Crash-Test-Dummy<a class="headerlink" href="#crash-test-dummy" title="Permalink to this headline">¶</a></h3>
+<p>This is a dummy that crashes when called. The config-file should specify which error to raise:</p>
+<div class="highlight-python"><div class="highlight"><pre>[[CRASHTESTDUMMY]]
+plugin = CrashTestDummy
+error_message = I have Crashed
+error_module = ape.infrastructure.errors
+error = ApeError
+function = __call__
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="crashtestdummyconstants">
+<h2>CrashTestDummyConstants<a class="headerlink" href="#crashtestdummyconstants" title="Permalink to this headline">¶</a></h2>
+<p>This is a holder of constants for the CrashTestDummy.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">CrashTestDummyConstants</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">__slots__</span> <span class="o">=</span> <span class="p">()</span>
+    <span class="n">error_module_option</span> <span class="o">=</span> <span class="s">&#39;error_module&#39;</span>
+    <span class="n">error_option</span> <span class="o">=</span> <span class="s">&#39;error&#39;</span>
+    <span class="n">error_message_option</span> <span class="o">=</span> <span class="s">&#39;error_message&#39;</span>
+    <span class="n">function_option</span> <span class="o">=</span> <span class="s">&#39;function&#39;</span>
+
+    <span class="n">error_module_default</span> <span class="o">=</span> <span class="s">&#39;exceptions&#39;</span>
+    <span class="n">error_default</span> <span class="o">=</span> <span class="s">&#39;Exception&#39;</span>
+    <span class="n">error_message_default</span> <span class="o">=</span> <span class="s">&#39;My work is done, why wait?&#39;</span>
+    <span class="n">function_default</span> <span class="o">=</span> <span class="s">&#39;__call__&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="crashtestconfigspec">
+<h2>CrashtestConfigspec<a class="headerlink" href="#crashtestconfigspec" title="Permalink to this headline">¶</a></h2>
+<p>The configuration specification for the Crash Test Dummy.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">crash_configspec</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">plugin = option(&#39;CrashTestDummy&#39;)</span>
+
+<span class="s">error_module = string(default=&#39;exceptions&#39;)</span>
+<span class="s">error = string(default=&#39;Exception&#39;)</span>
+<span class="s">error_message = string(default=&#39;My work is done, why wait?&#39;)</span>
+<span class="s">function = string(default=&#39;__call__&#39;)</span>
+<span class="s">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="crashtestdummyconfiguration">
+<h2>CrashTestDummyConfiguration<a class="headerlink" href="#crashtestdummyconfiguration" title="Permalink to this headline">¶</a></h2>
+<p>A class to handle the config_obj configuration.</p>
+<p class="plantuml">
+<img src="../_images/plantuml-ad6faabf9dcc32e44a86c1963ce6e4bc7eea899e.png" alt="BaseConfiguration &lt;|-- CrashTestDummyConfiguration" />
+</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.dummyplugin.CrashTestDummyConfiguration.html#theape.plugins.dummyplugin.CrashTestDummyConfiguration" title="theape.plugins.dummyplugin.CrashTestDummyConfiguration"><tt class="xref py py-obj docutils literal"><span class="pre">CrashTestDummyConfiguration</span></tt></a>(*args,&nbsp;**kwargs)</td>
+<td>Translates the configobj configuration to a CrashTestDummy</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.dummyplugin.CrashTestDummyConfiguration.configspec.html#theape.plugins.dummyplugin.CrashTestDummyConfiguration.configspec" title="theape.plugins.dummyplugin.CrashTestDummyConfiguration.configspec"><tt class="xref py py-obj docutils literal"><span class="pre">CrashTestDummyConfiguration.configspec</span></tt></a></td>
+<td>A configspec built from configspec_source for validation</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.dummyplugin.CrashTestDummyConfiguration.configuration.html#theape.plugins.dummyplugin.CrashTestDummyConfiguration.configuration" title="theape.plugins.dummyplugin.CrashTestDummyConfiguration.configuration"><tt class="xref py py-obj docutils literal"><span class="pre">CrashTestDummyConfiguration.configuration</span></tt></a></td>
+<td>validates and sets the configuration using the source configuration</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.dummyplugin.CrashTestDummyConfiguration.product.html#theape.plugins.dummyplugin.CrashTestDummyConfiguration.product" title="theape.plugins.dummyplugin.CrashTestDummyConfiguration.product"><tt class="xref py py-obj docutils literal"><span class="pre">CrashTestDummyConfiguration.product</span></tt></a></td>
+<td>A crash test dummy</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="crashtestdummy">
+<h2>CrashTestDummy<a class="headerlink" href="#crashtestdummy" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.dummyplugin.CrashTestDummy.html#theape.plugins.dummyplugin.CrashTestDummy" title="theape.plugins.dummyplugin.CrashTestDummy"><tt class="xref py py-obj docutils literal"><span class="pre">CrashTestDummy</span></tt></a>(*args,&nbsp;**kwargs)</td>
+<td>A plugin to test the infrastructure by crashing</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="stuck-dummy">
+<h3>Stuck Dummy<a class="headerlink" href="#stuck-dummy" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="the-configspec">
+<h2>The Configspec<a class="headerlink" href="#the-configspec" title="Permalink to this headline">¶</a></h2>
+<p>The configuration specification for the StuckDummy.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">stuck_dummy_configspec</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">plugin = option(&#39;StuckDummy)</span>
+
+<span class="s">__many__ = string</span>
+<span class="s">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="stuck-dummy-configuration">
+<h2>Stuck Dummy Configuration<a class="headerlink" href="#stuck-dummy-configuration" title="Permalink to this headline">¶</a></h2>
+<p class="plantuml">
+<img src="../_images/plantuml-ac87606047ee3a01f50f234a89e10d595a79a861.png" alt="BaseConfiguration &lt;|-- StuckDummyConfiguration" />
+</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.dummyplugin.StuckDummyConfiguration.html#theape.plugins.dummyplugin.StuckDummyConfiguration" title="theape.plugins.dummyplugin.StuckDummyConfiguration"><tt class="xref py py-obj docutils literal"><span class="pre">StuckDummyConfiguration</span></tt></a>(*args,&nbsp;**kwargs)</td>
+<td>Configuration builder for the dummy that hangs</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.dummyplugin.StuckDummyConfiguration.configspec.html#theape.plugins.dummyplugin.StuckDummyConfiguration.configspec" title="theape.plugins.dummyplugin.StuckDummyConfiguration.configspec"><tt class="xref py py-obj docutils literal"><span class="pre">StuckDummyConfiguration.configspec</span></tt></a></td>
+<td>A configspec built from configspec_source for validation</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.dummyplugin.StuckDummyConfiguration.configuration.html#theape.plugins.dummyplugin.StuckDummyConfiguration.configuration" title="theape.plugins.dummyplugin.StuckDummyConfiguration.configuration"><tt class="xref py py-obj docutils literal"><span class="pre">StuckDummyConfiguration.configuration</span></tt></a></td>
+<td>validates and sets the configuration using the source configuration</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.dummyplugin.StuckDummyConfiguration.product.html#theape.plugins.dummyplugin.StuckDummyConfiguration.product" title="theape.plugins.dummyplugin.StuckDummyConfiguration.product"><tt class="xref py py-obj docutils literal"><span class="pre">StuckDummyConfiguration.product</span></tt></a></td>
+<td>The HangingDummy callable object</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id1">
+<h2>Stuck Dummy<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>This is a dummy that hangs when called.</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.dummyplugin.StuckDummy.html#theape.plugins.dummyplugin.StuckDummy" title="theape.plugins.dummyplugin.StuckDummy"><tt class="xref py py-obj docutils literal"><span class="pre">StuckDummy</span></tt></a>(*args,&nbsp;**kwargs)</td>
+<td>A plugin to test the infrastructure by hanging</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="the-dummy-products">
+<h3>The Dummy Products<a class="headerlink" href="#the-dummy-products" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="module-theape.parts.dummy.dummy">
+<span id="dummyclass"></span><h2>DummyClass<a class="headerlink" href="#module-theape.parts.dummy.dummy" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.dummy.dummy.DummyClass.html#theape.parts.dummy.dummy.DummyClass" title="theape.parts.dummy.dummy.DummyClass"><tt class="xref py py-obj docutils literal"><span class="pre">DummyClass</span></tt></a>(*args,&nbsp;**kwargs)</td>
+<td>The Dummy Class does nothing</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.dummy.dummy.DummyClass.__call__.html#theape.parts.dummy.dummy.DummyClass.__call__" title="theape.parts.dummy.dummy.DummyClass.__call__"><tt class="xref py py-obj docutils literal"><span class="pre">DummyClass.__call__</span></tt></a>(*args,&nbsp;**kwargs)</td>
+<td>Logs the fact that it was called</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="crashdummy">
+<h2>CrashDummy<a class="headerlink" href="#crashdummy" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.dummy.dummy.CrashDummy.html#theape.parts.dummy.dummy.CrashDummy" title="theape.parts.dummy.dummy.CrashDummy"><tt class="xref py py-obj docutils literal"><span class="pre">CrashDummy</span></tt></a>(error[,&nbsp;error_message,&nbsp;function])</td>
+<td>A dummy that crashes</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.dummy.dummy.CrashDummy.__call__.html#theape.parts.dummy.dummy.CrashDummy.__call__" title="theape.parts.dummy.dummy.CrashDummy.__call__"><tt class="xref py py-obj docutils literal"><span class="pre">CrashDummy.__call__</span></tt></a>()</td>
+<td>Raises error if self.function is __call__ (this needs to be defined to work)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="hangingdummy">
+<h2>HangingDummy<a class="headerlink" href="#hangingdummy" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.dummy.dummy.HangingDummy.html#theape.parts.dummy.dummy.HangingDummy" title="theape.parts.dummy.dummy.HangingDummy"><tt class="xref py py-obj docutils literal"><span class="pre">HangingDummy</span></tt></a>(*args,&nbsp;**kwargs)</td>
+<td>A dummy that hangs</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.dummy.dummy.HangingDummy.__call__.html#theape.parts.dummy.dummy.HangingDummy.__call__" title="theape.parts.dummy.dummy.HangingDummy.__call__"><tt class="xref py py-obj docutils literal"><span class="pre">HangingDummy.__call__</span></tt></a>(*args,&nbsp;**kwargs)</td>
+<td>Sleeps for three years in an infinite loop</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The Dummy Plugin</a><ul>
+<li><a class="reference internal" href="#dummy-configuration">Dummy Configuration</a><ul>
+<li><a class="reference internal" href="#crash-test-dummy">Crash-Test-Dummy</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#crashtestdummyconstants">CrashTestDummyConstants</a></li>
+<li><a class="reference internal" href="#crashtestconfigspec">CrashtestConfigspec</a></li>
+<li><a class="reference internal" href="#crashtestdummyconfiguration">CrashTestDummyConfiguration</a></li>
+<li><a class="reference internal" href="#crashtestdummy">CrashTestDummy</a><ul>
+<li><a class="reference internal" href="#stuck-dummy">Stuck Dummy</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-configspec">The Configspec</a></li>
+<li><a class="reference internal" href="#stuck-dummy-configuration">Stuck Dummy Configuration</a></li>
+<li><a class="reference internal" href="#id1">Stuck Dummy</a><ul>
+<li><a class="reference internal" href="#the-dummy-products">The Dummy Products</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-theape.parts.dummy.dummy">DummyClass</a></li>
+<li><a class="reference internal" href="#crashdummy">CrashDummy</a></li>
+<li><a class="reference internal" href="#hangingdummy">HangingDummy</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parts/index.html">Parts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../_sources/plugins/dummyplugin.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

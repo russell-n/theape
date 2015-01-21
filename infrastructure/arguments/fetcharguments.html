@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The Fetch Sub-Command Arguments &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../index.html" />
+    <link rel="up" title="The Arguments" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >The Ape&#8217;s Infrastructure</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">The Arguments</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-fetch-sub-command-arguments">
+<h1>The Fetch Sub-Command Arguments<a class="headerlink" href="#the-fetch-sub-command-arguments" title="Permalink to this headline">¶</a></h1>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="sd">&quot;&quot;&quot;fetch subcommand</span>
+
+<span class="sd">usage: ape fetch -h</span>
+<span class="sd">       ape fetch [&lt;name&gt;...]  [--module &lt;module&gt; ...]</span>
+
+<span class="sd">positional arguments:</span>
+<span class="sd">    &lt;name&gt;                         List of plugin-names</span>
+<span class="sd">(default=[&#39;Ape&#39;])</span>
+
+<span class="sd">optional arguments:</span>
+<span class="sd">    -h, --help                     Show this help message and exit</span>
+<span class="sd">    -m, --module &lt;module&gt; ...      Non-ape modules</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p>These are arguments for the <cite>fetch</cite> sub-command (see the <a class="reference internal" href="../../documentation/developer/explorations/explore_docopt/reproducingape.html#docopt-reproducingape-fetch-sub-command"><em>developer documentation</em></a> for more information).</p>
+<div class="section" id="the-fetch-arguments-constants">
+<span id="ape-interface-arguments-fetch-constants"></span><h2>The Fetch Arguments Constants<a class="headerlink" href="#the-fetch-arguments-constants" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">FetchArgumentsConstants</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Constants for the `fetch` sub-command arguments</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__slots__</span> <span class="o">=</span> <span class="p">()</span>
+    <span class="c"># arguments and options</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="s">&quot;&lt;name&gt;&quot;</span>
+    <span class="n">modules</span> <span class="o">=</span> <span class="s">&#39;--module&#39;</span>
+
+    <span class="c"># defaults</span>
+    <span class="n">default_names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Ape&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-fetcharguments">
+<span id="ape-interface-arguments-fetch-arguments"></span><h2>The FetchArguments<a class="headerlink" href="#the-fetcharguments" title="Permalink to this headline">¶</a></h2>
+<p class="plantuml">
+<img src="../../_images/plantuml-74cd4d7aa21546c6092a76c463c231d3644d0427.png" alt="BaseArguments &lt;|-- FetchArguments" />
+</p>
+<span class="target" id="module-theape.interface.arguments.fetcharguments"></span><table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">FetchArguments</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">FetchArguments.names</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">FetchArguments.modules</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">FetchArguments.reset</span></tt></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="the-fetchstrategy">
+<span id="ape-interface-arguments-fetch-strategy"></span><h2>The FetchStrategy<a class="headerlink" href="#the-fetchstrategy" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">FetchStrategy</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">FetchStrategy.function</span></tt></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>The <cite>function</cite> method is wrapped by the <a class="reference internal" href="../crash_handler.html#ape-commoncode-try-except-decorator"><em>try_except decorator</em></a> so it should never crash.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The Fetch Sub-Command Arguments</a><ul>
+<li><a class="reference internal" href="#the-fetch-arguments-constants">The Fetch Arguments Constants</a></li>
+<li><a class="reference internal" href="#the-fetcharguments">The FetchArguments</a></li>
+<li><a class="reference internal" href="#the-fetchstrategy">The FetchStrategy</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../_sources/infrastructure/arguments/fetcharguments.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,448 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Time Maps &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../index.html" />
+    <link rel="up" title="The Ape’s Infrastructure" href="index.html" />
+    <link rel="next" title="theape.infrastructure.timemap.RelativeTimeMap" href="api/theape.infrastructure.timemap.RelativeTimeMap.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/theape.infrastructure.timemap.RelativeTimeMap.html" title="theape.infrastructure.timemap.RelativeTimeMap"
+             accesskey="N">next</a> |</li>
+        <li><a href="../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">The Ape&#8217;s Infrastructure</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="time-maps">
+<h1>Time Maps<a class="headerlink" href="#time-maps" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="relative-time-map">
+<span id="id1"></span><h2>Relative Time Map<a class="headerlink" href="#relative-time-map" title="Permalink to this headline">¶</a></h2>
+<p>The <cite>RelativeTimeMap</cite> maps strings of relative times to seconds. It tries to be as liberal as possible so there has to be a fair amount of certainty that the string is in fact a time and not something similar but different. &#8216;5 yolks&#8217; will match &#8216;5&#8217; years, for instance, and if that is not the desired behavior then something else has to do a check first to filter out bad strings.</p>
+<p>It uses <a class="reference external" href="http://labix.org/python-dateutil">dateutil</a> to calculate everything but the seconds because dateutil will handle the ambiguous values like years (which have leap-years) and months which have 28, 29, 30, or 31 days.</p>
+</div>
+<div class="section" id="the-uml-model">
+<span id="relative-time-map-model"></span><h2>The UML Model<a class="headerlink" href="#the-uml-model" title="Permalink to this headline">¶</a></h2>
+<p class="plantuml">
+<img src="../_images/plantuml-4f40a18dfe1e7aa4d4e0b3d417a75dcca3c9b537.png" alt="RelativeTimeMap --|&gt; BaseClass
+RelativeTimeMap : re.RegexObject year_expression
+RelativeTimeMap : re.RegexObject month_expression
+RelativeTimeMap : re.RegexObject week_expression
+RelativeTimeMap : re.RegexObject day_expression
+RelativeTimeMap : re.RegexObject hour_expression
+RelativeTimeMap : re.RegexObject minute_expression
+RelativeTimeMap : re.RegexObject second_expression" />
+</p>
+<span class="target" id="module-theape.infrastructure.timemap"></span><table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.infrastructure.timemap.RelativeTimeMap.html#theape.infrastructure.timemap.RelativeTimeMap" title="theape.infrastructure.timemap.RelativeTimeMap"><tt class="xref py py-obj docutils literal"><span class="pre">RelativeTimeMap</span></tt></a>()</td>
+<td>A converter from strings with relative times to seconds</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="relative-time-map-groups">
+<span id="id2"></span><h2>Relative Time Map Groups<a class="headerlink" href="#relative-time-map-groups" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="the-relativetime">
+<span id="ape-relative-time"></span><h2>The RelativeTime<a class="headerlink" href="#the-relativetime" title="Permalink to this headline">¶</a></h2>
+<p>This is an attempt to extend the <cite>timedelta</cite> with weeks, hours, and minutes. The original intention was to also allow months and years, requiring the use of the <cite>dateutil</cite> package, but at this point I can&#8217;t see an immediate use for it, so I&#8217;ll stop at weeks, since it doesn&#8217;t need special cases the way months and years do.</p>
+<p class="plantuml">
+<img src="../_images/plantuml-056374afd6a08c0d5efd8cfddc31da737e06fdaa.png" alt="RelativeTime -|&gt; BaseClass
+RelativeTime o-- RelativeTimeMap
+RelativeTime : __init__(source)
+RelativeTime : int days
+RelativeTime : int seconds
+RelativeTime : int microseconds
+RelativeTime : datetime.timedelta
+RelativeTime : float total_seconds" />
+</p>
+<p>By and large the intention is to use this like a time-delta object but with extra fields, so the operators will be overloaded too.</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.infrastructure.timemap.RelativeTime.html#theape.infrastructure.timemap.RelativeTime" title="theape.infrastructure.timemap.RelativeTime"><tt class="xref py py-obj docutils literal"><span class="pre">RelativeTime</span></tt></a>([source])</td>
+<td>A timedeltas extension</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.infrastructure.timemap.RelativeTime.time_map.html#theape.infrastructure.timemap.RelativeTime.time_map" title="theape.infrastructure.timemap.RelativeTime.time_map"><tt class="xref py py-obj docutils literal"><span class="pre">RelativeTime.time_map</span></tt></a></td>
+<td>A relative time map instance to parse the source.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.infrastructure.timemap.RelativeTime.days.html#theape.infrastructure.timemap.RelativeTime.days" title="theape.infrastructure.timemap.RelativeTime.days"><tt class="xref py py-obj docutils literal"><span class="pre">RelativeTime.days</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.infrastructure.timemap.RelativeTime.seconds.html#theape.infrastructure.timemap.RelativeTime.seconds" title="theape.infrastructure.timemap.RelativeTime.seconds"><tt class="xref py py-obj docutils literal"><span class="pre">RelativeTime.seconds</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.infrastructure.timemap.RelativeTime.microseconds.html#theape.infrastructure.timemap.RelativeTime.microseconds" title="theape.infrastructure.timemap.RelativeTime.microseconds"><tt class="xref py py-obj docutils literal"><span class="pre">RelativeTime.microseconds</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.infrastructure.timemap.RelativeTime.reset.html#theape.infrastructure.timemap.RelativeTime.reset" title="theape.infrastructure.timemap.RelativeTime.reset"><tt class="xref py py-obj docutils literal"><span class="pre">RelativeTime.reset</span></tt></a>()</td>
+<td>Resets the attributes (undoes populate_fields)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.infrastructure.timemap.RelativeTime.total_seconds.html#theape.infrastructure.timemap.RelativeTime.total_seconds" title="theape.infrastructure.timemap.RelativeTime.total_seconds"><tt class="xref py py-obj docutils literal"><span class="pre">RelativeTime.total_seconds</span></tt></a>(*args,&nbsp;**kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.infrastructure.timemap.source_required.html#theape.infrastructure.timemap.source_required" title="theape.infrastructure.timemap.source_required"><tt class="xref py py-obj docutils literal"><span class="pre">source_required</span></tt></a>(method)</td>
+<td>Catches AttributeErrors and TypeErrors and raises ApeErrors in their place so the operators can recover</td>
+</tr>
+</tbody>
+</table>
+<p>I&#8217;ve run into a circular call problem &#8211; my intention was to defer the calculations of the properties until someone called them, but since the larger properties cascade into the smaller ones (e.g. 1.5 minutes would add 30 to seconds to get rid of the fraction) I have to have a single point where the calculations are done so that all of them are done. To do this without requiring anyone to do an explicit method call I&#8217;m doing the calculations on the setting of the source. Since I am averse to forcing calculations on construction of an object, the <cite>source</cite> parameter has been changed to optional and setting it to None should reset the fields.</p>
+<p>To make it more obvious that the fields have not been populated they will have the default of None. This way if the source has not been set and a calculation is attempted using the fields it will raise an error.</p>
+<p>Reading the timedelta information more closely, it appears that it actually accepts anything I want to give it (up to weeks), it just converts them to days, seconds, and microseconds to store them. So the cascading that I was trying to do (separating out the fraction and propagating it to another unit) is actually unnecessary unless there&#8217;s a need to preserve the separate units. To make it easier I won&#8217;t.</p>
+<p>Well... now that I think about it, I&#8217;ve changed things so much that it has brought me back around to where using the relativedelta might make sense. Unfortunately I still need the hack, but this should allow it to accept months and years.</p>
+<table border="1" class="docutils">
+<caption>relativetimedelta Attributes</caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Constructor</th>
+<th class="head">Attribute</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>years</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>months</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>weeks</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>days</td>
+<td>days</td>
+</tr>
+<tr class="row-even"><td>hours</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>minutes</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>seconds</td>
+<td>seconds</td>
+</tr>
+<tr class="row-odd"><td>microseconds</td>
+<td>microseconds</td>
+</tr>
+</tbody>
+</table>
+<p>The timedelta only stores three attributes &#8211; days, seconds, and microseconds, athough it takes the other attributes on construction of the object and then converts them to the three permanent attributes.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><tt class="docutils literal"><span class="pre">timedelta</span></tt> takes floats (like 3.2) but the extra attributes for relativedelta (months and years) have to be integers.</p>
+</div>
+</div>
+<div class="section" id="apeerror-translators">
+<h2>ApeError Translators<a class="headerlink" href="#apeerror-translators" title="Permalink to this headline">¶</a></h2>
+<p>Since the operations are expected to raise ApeErrors whenever possible, these decorators will translate standard exceptions to ApeErrors.</p>
+</div>
+<div class="section" id="the-timedelta">
+<h2>The Timedelta<a class="headerlink" href="#the-timedelta" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/datetime.timedelta.html#datetime.timedelta" title="datetime.timedelta"><tt class="xref py py-obj docutils literal"><span class="pre">timedelta</span></tt></a></td>
+<td>Difference between two datetime values.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/datetime.timedelta.days.html#datetime.timedelta.days" title="datetime.timedelta.days"><tt class="xref py py-obj docutils literal"><span class="pre">timedelta.days</span></tt></a></td>
+<td>Number of days.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/datetime.timedelta.seconds.html#datetime.timedelta.seconds" title="datetime.timedelta.seconds"><tt class="xref py py-obj docutils literal"><span class="pre">timedelta.seconds</span></tt></a></td>
+<td>Number of seconds (&gt;= 0 and less than 1 day).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/datetime.timedelta.microseconds.html#datetime.timedelta.microseconds" title="datetime.timedelta.microseconds"><tt class="xref py py-obj docutils literal"><span class="pre">timedelta.microseconds</span></tt></a></td>
+<td>Number of microseconds (&gt;= 0 and less than 1 second).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/datetime.timedelta.total_seconds.html#datetime.timedelta.total_seconds" title="datetime.timedelta.total_seconds"><tt class="xref py py-obj docutils literal"><span class="pre">timedelta.total_seconds</span></tt></a></td>
+<td>Total seconds in the duration.</td>
+</tr>
+</tbody>
+</table>
+<p>Since the timedelta supports operations, the RelativeTime has overloaded the following operations so that it behaves like a timedelta object.</p>
+<table border="1" class="docutils">
+<caption>Timedelta Operations</caption>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Operation</th>
+<th class="head">Description</th>
+<th class="head">&nbsp;</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>t1 + t2</td>
+<td>Sums two timedeltas</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>t1 - t2</td>
+<td>Subtracts one timedelta from another</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>t1 * int</td>
+<td>Mulitplies a timedelta by an integer</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>t1 // int</td>
+<td>Calculates the floor of a timedelta</td>
+<td>throws away the remainder</td>
+</tr>
+<tr class="row-even"><td>+t1</td>
+<td>Makes the timedelta positive</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>-t1</td>
+<td>Negates the timedelta</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>abs(t1)</td>
+<td>Depends on number of days</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>str(t)</td>
+<td>string</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>repr(t)</td>
+<td>representation string</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p>Equality and inequality have also been implemented but there are two warnings:</p>
+<blockquote>
+<div><ul class="simple">
+<li>If you have too many decimal places for parameters fed to a timedelta they might not equate with the RelativeTime, even if given the same parameters</li>
+<li>This only works if the RelativeTime is on the left-hand-side (RelativeTime == timedelta)</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="absolutetime">
+<span id="ape-absolute-time"></span><h2>AbsoluteTime<a class="headerlink" href="#absolutetime" title="Permalink to this headline">¶</a></h2>
+<p>This is a class to get <tt class="docutils literal"><span class="pre">datetime</span></tt> objects based on a string input. It really is just a pass-through to <tt class="docutils literal"><span class="pre">dateutil.parser.parse</span></tt> but holds persistent values so they don&#8217;t have to be passed in for every function call by the user.</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/dateutil.parser.parse.html#dateutil.parser.parse" title="dateutil.parser.parse"><tt class="xref py py-obj docutils literal"><span class="pre">parse</span></tt></a>(timestr[,&nbsp;parserinfo])</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/datetime.datetime.html#datetime.datetime" title="datetime.datetime"><tt class="xref py py-obj docutils literal"><span class="pre">datetime</span></tt></a></td>
+<td>datetime(year, month, day[, hour[, minute[, second[, microsecond[,tzinfo]]]]])</td>
+</tr>
+</tbody>
+</table>
+<p class="plantuml">
+<img src="../_images/plantuml-18576ee90a7b62a901468f495ffcddba08cfed1b.png" alt="AbsoluteTime -|&gt; BaseClass
+AbsoluteTime o-- dateutil.parse
+AbsoluteTime : datetime default
+AbsoluteTime : boolean ignoretz
+AbsoluteTime : (function or dict) tzinfos
+AbsoluteTime : boolean dayfirst
+AbsoluteTime : boolean yearfirst
+AbsoluteTime : boolean fuzzy
+AbsoluteTime : parserinfo parserinfo
+AbsoluteTime : datetime __call__(string)" />
+</p>
+<span class="target" id="module-theape.interface.timemap"></span><table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">AbsoluteTime</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">AbsoluteTime.__call__</span></tt></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="the-absolutetime-attributes">
+<h2>The AbsoluteTime Attributes<a class="headerlink" href="#the-absolutetime-attributes" title="Permalink to this headline">¶</a></h2>
+<p>These are the same as the <tt class="docutils literal"><span class="pre">parse</span></tt> function&#8217;s arguments. I think in most cases the defaults are all that you&#8217;ll need, but I&#8217;ll at least document how the <cite>dayfirst</cite> and <cite>yearfirst</cite> arguments affect the format precedence. If the timestamp is unambiguous, they won&#8217;t matter, but for the cases where the fields <em>are</em> ambiguous (e.g. &#8216;11-11-23&#8217;) the two parameters decide what to assume about the timestamp.</p>
+<table border="1" class="docutils">
+<caption>Format Precedence</caption>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><tt class="docutils literal"><span class="pre">dayfirst</span></tt></th>
+<th class="head"><tt class="docutils literal"><span class="pre">yearfirst</span></tt></th>
+<th class="head">Order of Precedence (Left to Right)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>False</td>
+<td>False</td>
+<td>MM-DD-YY, DD-MM-YY, YY-MM-DD (default)</td>
+</tr>
+<tr class="row-odd"><td>False</td>
+<td>True</td>
+<td>YY-MM-DD, MM-DD-YY, DD-MM-YY</td>
+</tr>
+<tr class="row-even"><td>True</td>
+<td>False</td>
+<td>DD-MM-YY, MM-DD-YY, YY-MM-DD</td>
+</tr>
+<tr class="row-odd"><td>True</td>
+<td>True</td>
+<td>YY-MM-DD, DD-MM-YY, MM-DD-yy</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="time-validator">
+<h2>Time Validator<a class="headerlink" href="#time-validator" title="Permalink to this headline">¶</a></h2>
+<p>Since I&#8217;m switching from the ConfigurationMap to ConfigObj, I need a validator that knows about time conversions.
+..&#8217;</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">time_validator</span> <span class="o">=</span> <span class="n">Validator</span><span class="p">({</span><span class="s">&#39;relative_time&#39;</span><span class="p">:</span><span class="n">RelativeTime</span><span class="p">,</span>
+                       <span class="s">&#39;absolute_time&#39;</span><span class="p">:</span><span class="n">AbsoluteTime</span><span class="p">()})</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Time Maps</a><ul>
+<li><a class="reference internal" href="#relative-time-map">Relative Time Map</a></li>
+<li><a class="reference internal" href="#the-uml-model">The UML Model</a></li>
+<li><a class="reference internal" href="#relative-time-map-groups">Relative Time Map Groups</a></li>
+<li><a class="reference internal" href="#the-relativetime">The RelativeTime</a></li>
+<li><a class="reference internal" href="#apeerror-translators">ApeError Translators</a></li>
+<li><a class="reference internal" href="#the-timedelta">The Timedelta</a></li>
+<li><a class="reference internal" href="#absolutetime">AbsoluteTime</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-absolutetime-attributes">The AbsoluteTime Attributes</a></li>
+<li><a class="reference internal" href="#time-validator">Time Validator</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../_sources/infrastructure/timemap.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

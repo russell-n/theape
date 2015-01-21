@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Fetch Subcommand &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../../index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">Ape Documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="fetch-subcommand">
+<h1>Fetch Subcommand<a class="headerlink" href="#fetch-subcommand" title="Permalink to this headline">¶</a></h1>
+<p>The <cite>fetch</cite> sub-command should be similar to the <cite>run</cite> sub-command.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># python standard library</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+
+<span class="c"># third-party</span>
+<span class="kn">import</span> <span class="nn">docopt</span>
+
+<span class="c"># this documentation</span>
+<span class="kn">from</span> <span class="nn">commons</span> <span class="kn">import</span> <span class="n">catch_exit</span><span class="p">,</span> <span class="n">usage</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="s">&#39;ape fetch -h&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>usage: ape.interface.arguments fetch [-h] [--modules [MODULES [MODULES ...]
+]]
+                                     [names [names ...]]
+
+positional arguments:
+  names                 List of plugin-names (default=[&#39;Ape&#39;])
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --modules [MODULES [MODULES ...]]
+                        Non-ape modules
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">commons</span> <span class="kn">import</span> <span class="n">fetch_usage</span>
+<span class="n">catch_exit</span><span class="p">(</span><span class="n">fetch_usage</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;--help&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>fetch subcommand
+
+usage: ape fetch -h
+       ape fetch [&lt;name&gt;...]  [--module &lt;module&gt; ...]
+
+positional arguments:
+    &lt;name&gt;                                List of plugin-names (default=[&#39;Ape&#39;])
+
+optional arguments:
+    -h, --help                           Show this help message and exit
+    -m, --module &lt;module&gt; ...      Non-ape modules
+</pre></div>
+</div>
+<p>So it kind of looks like it works. I&#8217;m not sure if the <cite>help</cite> options should be optional or not, since all the arguments are optional. I guess it&#8217;s a matter of taste.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">arguments</span> <span class="o">=</span> <span class="s">&quot;fetch Dummy Sparky Iperf --module pig.thing --m cow.dog&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="n">arguments</span><span class="p">,</span> <span class="n">options_first</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span><span class="n">output</span><span class="p">[</span><span class="s">&#39;&lt;command&gt;&#39;</span><span class="p">]]</span> <span class="o">+</span> <span class="n">output</span><span class="p">[</span><span class="s">&#39;&lt;argument&gt;&#39;</span><span class="p">]</span>
+<span class="k">print</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">fetch_usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="n">arguments</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;--help&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s">&#39;--module&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;pig.thing&#39;</span><span class="p">,</span> <span class="s">&#39;cow.dog&#39;</span><span class="p">],</span>
+ <span class="s">&#39;&lt;name&gt;&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;Dummy&#39;</span><span class="p">,</span> <span class="s">&#39;Sparky&#39;</span><span class="p">,</span> <span class="s">&#39;Iperf&#39;</span><span class="p">],</span>
+ <span class="s">&#39;fetch&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">the <tt class="docutils literal"><span class="pre">arguments</span> <span class="pre">=</span> <span class="pre">[output['&lt;command&gt;']]</span> <span class="pre">+</span> <span class="pre">output['&lt;argument&gt;']</span></tt> line in the above is necessary because the usage lines start with <tt class="docutils literal"><span class="pre">ape</span> <span class="pre">fetch</span></tt> but the <tt class="docutils literal"><span class="pre">fetch</span></tt> token is being assigned to the <tt class="docutils literal"><span class="pre">&lt;command&gt;</span></tt> key in the <tt class="docutils literal"><span class="pre">output</span></tt> dictionary so the <tt class="docutils literal"><span class="pre">&lt;argument&gt;</span></tt> list doesn&#8217;t have it. If you don&#8217;t re-add it to the arguments, <cite>docopt</cite> will print the usage string and quit. The <cite>run</cite> section above only worked because I cheated and assumed I was getting the list of file-names, not a list of arguments to pass to <cite>docopt</cite>.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">I mentioned it in the <cite>run</cite> section, but the first call to <cite>docopt</cite> has to set <cite>options_first</cite> to True or the options for the sub-command will get added to the top-level dictionary.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../../../_sources/documentation/developer/explorations/explore_docopt/sections/fetchsubcommand.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

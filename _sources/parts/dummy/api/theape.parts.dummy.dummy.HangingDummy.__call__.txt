@@ -1,0 +1,6 @@
+theape.parts.dummy.dummy.HangingDummy.__call__
+==============================================
+
+.. currentmodule:: theape.parts.dummy.dummy
+
+.. automethod:: HangingDummy.__call__

@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The Telnet Client &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../index.html" />
+    <link rel="up" title="Client Connections" href="index.html" />
+    <link rel="next" title="telnetlib.Telnet" href="api/telnetlib.Telnet.html" />
+    <link rel="prev" title="paramiko.client.SSHClient.exec_command" href="api/paramiko.client.SSHClient.exec_command.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/telnetlib.Telnet.html" title="telnetlib.Telnet"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="api/paramiko.client.SSHClient.exec_command.html" title="paramiko.client.SSHClient.exec_command"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Parts</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Client Connections</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-telnet-client">
+<h1>The Telnet Client<a class="headerlink" href="#the-telnet-client" title="Permalink to this headline">¶</a></h1>
+<p>The Telnet Client is an adapter that provides an interface that matches the <a class="reference internal" href="simpleclient.html#id1"><em>SimpleClient</em></a> but using python&#8217;s Telnet class.</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/telnetlib.Telnet.html#telnetlib.Telnet" title="telnetlib.Telnet"><tt class="xref py py-obj docutils literal"><span class="pre">telnetlib.Telnet</span></tt></a>([host,&nbsp;port,&nbsp;timeout])</td>
+<td>Telnet interface class.</td>
+</tr>
+</tbody>
+</table>
+<div class="code highlight-python"><div class="highlight"><pre>&lt;type &#39;exceptions.ImportError&#39;&gt;
+No module named clients.clientbase
+</pre></div>
+</div>
+<div class="section" id="module-theape.clients.telnetclient">
+<span id="the-telnetclient-class"></span><span id="telnet-client"></span><h2>The TelnetClient Class<a class="headerlink" href="#module-theape.clients.telnetclient" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TelnetClient</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">TelnetClient.client</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TelnetClient.exec_command</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">TelnetClient.writeline</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TelnetClient.__del__</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">TelnetClient.__str__</span></tt></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="code highlight-python"><div class="highlight"><pre>&lt;type &#39;exceptions.NameError&#39;&gt;
+name &#39;BaseClient&#39; is not defined
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-telnetoutput-class">
+<span id="telnet-client-telnet-output"></span><h2>The TelnetOutput Class<a class="headerlink" href="#the-telnetoutput-class" title="Permalink to this headline">¶</a></h2>
+<p>This tries to mimic the stdout objects that the SSHClient returns. It is using <cite>expect</cite> to search for the prompt or end of line so it&#8217;s important that they both be correct.</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TelnetOutput</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">TelnetOutput.readline</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TelnetOutput.next</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">TelnetOutput.readlines</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TelnetOutput.read</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">TelnetOutput.__iter__</span></tt></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="the-connect">
+<span id="telnet-connect"></span><h2>The Connect<a class="headerlink" href="#the-connect" title="Permalink to this headline">¶</a></h2>
+<p>One of the things that makes the telnet and serial interfaces hard to work with is their lack of a file-like output. The <a class="reference internal" href="#telnet-client-telnet-output"><em>TelnetOutput</em></a> tries to get around some of that but ultimately there is a problem in needing to search for the prompt to see if the device is ready for input. Either the user has to set the prompt correctly (and it has to be unique enough that it won&#8217;t show up in any command&#8217;s output) or the code has to set it to something it knows. I decided to let the user set it if they want and then to set it to a random string if it isn&#8217;t set. To do this I&#8217;m assuming that the shell support setting the <cite>PS1</cite> environment variable. One wrinkle I ran into was that the shell I use (<a class="reference external" href="http://fishshell.com/">fish</a>) uses functions instead of environment variables. I can&#8217;t see supporting that, though, so for now only shells that use <cite>PS1</cite> will work with the prompt-mangling. Otherwise the prompt has to be passed in to the TelnetClient before it tries to connect to the server.</p>
+<div class="figure align-center">
+<img src="../../_images/telnet_connect_activities.svg" /></div>
+<p>The diagram is probably more complicated than you would normally expect for a telnet connection but I am expecting to use this to work with forwarded serial connections as well, and they tend to be a little... difficult.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The Telnet Client</a><ul>
+<li><a class="reference internal" href="#module-theape.clients.telnetclient">The TelnetClient Class</a></li>
+<li><a class="reference internal" href="#the-telnetoutput-class">The TelnetOutput Class</a></li>
+<li><a class="reference internal" href="#the-connect">The Connect</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../_sources/parts/connections/telnetclient.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,444 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The Docopt Test &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
+    <link rel="up" title="Exploring Docopt" href="index.html" />
+    <link rel="next" title="docopt.docopt" href="api/docopt.docopt.html" />
+    <link rel="prev" title="Exploring Docopt" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/docopt.docopt.html" title="docopt.docopt"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Exploring Docopt"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >The Ape Developer Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >The Explorations</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Exploring Docopt</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-docopt-test">
+<h1>The Docopt Test<a class="headerlink" href="#the-docopt-test" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="#docoptest-usage"><em>Usage</em></a></li>
+<li><a class="reference internal" href="#docoptest-arguments"><em>Arguments</em></a></li>
+<li><a class="reference internal" href="#docoptest-options"><em>Options</em></a></li>
+</ul>
+</div></blockquote>
+<div class="section" id="usage">
+<span id="docoptest-usage"></span><h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>The most basic way to create a doc-opt is to give it one line starting with <cite>Usage: &lt;command&gt;</cite> and ending with an empty line.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">usage</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;Usage: docoptest</span>
+
+<span class="s">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p>This gets passed to the <cite>docopt</cite> function along with the arguments.</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../../../../infrastructure/arguments/api/docopt.docopt.html#docopt.docopt" title="docopt.docopt"><tt class="xref py py-obj docutils literal"><span class="pre">docopt</span></tt></a>(doc[,&nbsp;argv,&nbsp;help,&nbsp;version,&nbsp;options_first])</td>
+<td>Parse <cite>argv</cite> based on command-line interface described in <cite>doc</cite>.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">docopt</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="p">[])</span>
+<span class="k">print</span> <span class="n">output</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{}</span>
+</pre></div>
+</div>
+<p>Not very exciting. There are three elements that can follow the command:</p>
+<blockquote>
+<div><ul class="simple">
+<li>arguments</li>
+<li>options</li>
+<li>commands</li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <cite>docoptest</cite> command doesn&#8217;t exist, <cite>docopt</cite> acts only as a argument-parser.</p>
+</div>
+</div>
+<div class="section" id="arguments">
+<span id="docoptest-arguments"></span><h2>Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline">¶</a></h2>
+<p><em>Arguments</em> are positional arguments that are specified as either upper-case or with brackets.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">usage</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;Usage: docoptest SOMEARGUMENT</span>
+<span class="s">                  docoptest SOMEARGUMENT &lt;some-other-argument&gt;</span>
+
+<span class="s">&quot;&quot;&quot;</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;cowboy&quot;</span><span class="p">])</span>
+<span class="k">print</span> <span class="n">output</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;&lt;some-other-argument&gt;&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+ <span class="s">&#39;SOMEARGUMENT&#39;</span><span class="p">:</span> <span class="s">&#39;cowboy&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">output</span> <span class="o">=</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="s">&quot;cowboy bob&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="k">print</span> <span class="n">output</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;&lt;some-other-argument&gt;&#39;</span><span class="p">:</span> <span class="s">&#39;bob&#39;</span><span class="p">,</span>
+ <span class="s">&#39;SOMEARGUMENT&#39;</span><span class="p">:</span> <span class="s">&#39;cowboy&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="options">
+<span id="docoptest-options"></span><h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options are declared on a <cite>Usage</cite> line but defined in the <cite>Options</cite> section below the usage lines.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">usage</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;Usage: docoptest --number=&lt;count&gt;</span>
+
+<span class="s">&quot;&quot;&quot;</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="s">&quot;--number 2&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="k">print</span> <span class="n">output</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;--number&#39;</span><span class="p">:</span> <span class="s">&#39;2&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>If the option is optional, put it in brackets. It will default to None, if you want a value specify it in the <cite>Options</cite>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">usage</span><span class="o">=</span><span class="s">&quot;&quot;&quot;Usage: docoptest [--number=&lt;count&gt;]</span>
+
+<span class="s">Options:</span>
+
+<span class="s">    -n, --number &lt;count&gt;  Some number. [default: 3]</span>
+
+<span class="s">&quot;&quot;&quot;</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="p">[])</span>
+<span class="k">print</span> <span class="n">output</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;--number&#39;</span><span class="p">:</span> <span class="s">&#39;3&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can separate the short and long options using either a comma or a single-space. The description (<cite>Some number</cite> in the previous example) has to be preceded by <strong>2</strong> spaces.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You indicate an option description line by making the first non-space character a <cite>-</cite> (e.g. <tt class="docutils literal"><span class="pre">-n</span></tt> in the previous example).</p>
+</div>
+<p>You can also put other text before the usage line to make things clearer.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">usage</span><span class="o">=</span><span class="s">&quot;&quot;&quot;Manatee</span>
+
+<span class="s">An optional option example.</span>
+
+<span class="s">Usage: docoptest [--number=&lt;count&gt;]</span>
+
+<span class="s">Options:</span>
+
+<span class="s">    -n , --number &lt;count&gt;  Some number. [default: 3]</span>
+
+<span class="s">&quot;&quot;&quot;</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="s">&#39;-n 8&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="k">print</span> <span class="n">output</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;--number&#39;</span><span class="p">:</span> <span class="s">&#39;8&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>If you have a lot of options you can reduce the <cite>Usage</cite> line two ways &#8211; use <tt class="docutils literal"><span class="pre">[options]</span></tt> or combined short-options.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">usage</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;Usage: docoptest [options]</span>
+
+<span class="s">    -n, --name &lt;name&gt;  The Name. [default: bob]</span>
+
+<span class="s">&quot;&quot;&quot;</span>
+<span class="k">print</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="p">[])</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;--name&#39;</span><span class="p">:</span> <span class="s">&#39;bob&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This changes the behavior somewhat &#8211; all options become optional with defaults of None (unless you change the default). Also, if there&#8217;s an error, the program will only print the <cite>Usage</cite> so it will be less useful for users.</p>
+</div>
+<p>The other way to shorten it is to smash-together the short-options.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">usage</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;Usage: docoptest [-lmn]</span>
+
+<span class="s">In this case we&#39;re assumng all the options are boolean flags.</span>
+
+<span class="s">Options:</span>
+
+<span class="s">    -l, --long    Use long-mode</span>
+<span class="s">    -m, --middle  Use middle-mode</span>
+<span class="s">    -n, --nunya   None ya</span>
+<span class="s">&quot;&quot;&quot;</span>
+<span class="k">print</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;-ln&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;--long&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+ <span class="s">&#39;--middle&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s">&#39;--nunya&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="required-options-and-alternatives">
+<h2>Required Options and Alternatives<a class="headerlink" href="#required-options-and-alternatives" title="Permalink to this headline">¶</a></h2>
+<p>Parentheses <cite>()</cite> group required options. <cite>|</cite> (logical or) groups alternatives. If you put alternatives in parentheses:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">docoptest</span> <span class="p">(</span><span class="o">-</span><span class="n">n</span> <span class="o">|</span> <span class="o">-</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then one of the alternatives is required. If you put it in square brackets (<cite>[]</cite>) then 0 or 1 of them is required.</p>
+<blockquote>
+<div>docoptest [-n | -c]</div></blockquote>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">usage</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;Usage: docoptest [-n=&lt;n&gt; | -c=&lt;c&gt;] (-a=&lt;a&gt;) (-x=&lt;x&gt; | -y=&lt;y&gt;)</span>
+
+<span class="s">Options:</span>
+
+<span class="s">    -n, --number &lt;n&gt;  Number of things. [default: 12]</span>
+<span class="s">    -c, --count &lt;c&gt;   Count of things. [default: 12]</span>
+
+<span class="s">    -a, --ant &lt;a&gt;  Ants</span>
+<span class="s">    -x, --xray &lt;x&gt;  X-rays</span>
+<span class="s">    -y, --yme &lt;y&gt;  Y-Me</span>
+
+<span class="s">&quot;&quot;&quot;</span>
+
+<span class="k">print</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="s">&#39;-a aoeu --yme because&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;--ant&#39;</span><span class="p">:</span> <span class="s">&#39;aoeu&#39;</span><span class="p">,</span>
+ <span class="s">&#39;--count&#39;</span><span class="p">:</span> <span class="s">&#39;12&#39;</span><span class="p">,</span>
+ <span class="s">&#39;--number&#39;</span><span class="p">:</span> <span class="s">&#39;12&#39;</span><span class="p">,</span>
+ <span class="s">&#39;--xray&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+ <span class="s">&#39;--yme&#39;</span><span class="p">:</span> <span class="s">&#39;because&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>I can&#8217;t give an example of what happens when you leave out a required option because <cite>docopt</cite> just dumps a usage message to standard error and <cite>pweave</cite> doesn&#8217;t catch it.</p>
+</div>
+<div class="section" id="boolean-options">
+<h2>Boolean Options<a class="headerlink" href="#boolean-options" title="Permalink to this headline">¶</a></h2>
+<p>If you don&#8217;t supply a destination for the value (using <cite>&lt;&gt;</cite>) the option is assumed to be a boolean flag.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">usage</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;Usage: docoptest [options]</span>
+
+<span class="s">Options:</span>
+
+<span class="s">    -b, --boolean  Boolean Flag.</span>
+
+<span class="s">&quot;&quot;&quot;</span>
+<span class="k">print</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="s">&quot;-b&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="k">print</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="p">[])</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;--boolean&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&#39;--boolean&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="multiple-values">
+<h2>Multiple Values<a class="headerlink" href="#multiple-values" title="Permalink to this headline">¶</a></h2>
+<p>To specify an option that can take one or more values, use ellipses (...).</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">usage</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;Usage: docoptest [-f &lt;filename&gt;...]</span>
+
+<span class="s">Options:</span>
+
+<span class="s">    -f &lt;filename&gt;...     List of file-names to use. [default: [&quot;ape.pie&quot;]]</span>
+
+<span class="s">&quot;&quot;&quot;</span>
+<span class="k">print</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="p">[])</span>
+<span class="k">print</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="s">&#39;-f apple.pie&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;-f&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;[&quot;ape.pie&quot;]&#39;</span><span class="p">]}</span>
+<span class="p">{</span><span class="s">&#39;-f&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;apple.pie&#39;</span><span class="p">]}</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This doesn&#8217;t work like &#8216;nargs&#8217;, you have to pass in the option-name before each of the values.</p>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="s">&#39;-f apple.pie -f cow.pie&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;-f&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;apple.pie&#39;</span><span class="p">,</span> <span class="s">&#39;cow.pie&#39;</span><span class="p">]}</span>
+</pre></div>
+</div>
+<p>It will work like <tt class="docutils literal"><span class="pre">nargs</span></tt> if you use it as a positional argument instead.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">usage</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;Usage: docoptest [&lt;filename&gt;...]</span>
+
+<span class="s">&quot;&quot;&quot;</span>
+<span class="k">print</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="s">&#39;apple.pie cow.pie&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;&lt;filename&gt;&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;apple.pie&#39;</span><span class="p">,</span> <span class="s">&#39;cow.pie&#39;</span><span class="p">]}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="multiple-definitions">
+<h2>Multiple Definitions<a class="headerlink" href="#multiple-definitions" title="Permalink to this headline">¶</a></h2>
+<p>If you can take multiple valid combinations of parameters, you can list them separately in the doc-string.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">usage</span><span class="o">=</span><span class="s">&quot;&quot;&quot;Megilla Gorilla</span>
+
+<span class="s">Usage: megilla [&lt;name&gt;]</span>
+<span class="s">       megilla -f</span>
+<span class="s">       megilla -bf &lt;name&gt;</span>
+
+<span class="s">I think this means if the user sets the &#39;b&#39; flag then f and &lt;name&gt; are requ</span>
+<span class="s">ired.</span>
+
+<span class="s">Arguments:</span>
+
+<span class="s">    &lt;name&gt;   Some name. [default: Tom]</span>
+
+<span class="s">Options:</span>
+
+<span class="s">     -f, --fluid   Use fluids</span>
+<span class="s">     -b, --bob     It&#39;s Bob</span>
+
+<span class="s">&quot;&quot;&quot;</span>
+<span class="k">print</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="p">[])</span>
+<span class="k">print</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;-f&#39;</span><span class="p">])</span>
+<span class="k">print</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="s">&#39;-fb Him&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="s">&#39;-b&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="k">except</span> <span class="n">docopt</span><span class="o">.</span><span class="n">DocoptExit</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">error</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>{&#39;--bob&#39;: False,
+ &#39;--fluid&#39;: False,
+ &#39;&lt;name&gt;&#39;: None}
+{&#39;--bob&#39;: False,
+ &#39;--fluid&#39;: True,
+ &#39;&lt;name&gt;&#39;: None}
+{&#39;--bob&#39;: True,
+ &#39;--fluid&#39;: True,
+ &#39;&lt;name&gt;&#39;: &#39;Him&#39;}
+Usage: megilla [&lt;name&gt;]
+       megilla -f
+       megilla -bf &lt;name&gt;
+</pre></div>
+</div>
+<p>So we can see two things &#8211; The default argument doesn&#8217;t work and a DocoptExit exception is raised and the usage string is printed if the arguments don&#8217;t match one of the usage lines.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The Docopt Test</a><ul>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#arguments">Arguments</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+<li><a class="reference internal" href="#required-options-and-alternatives">Required Options and Alternatives</a></li>
+<li><a class="reference internal" href="#boolean-options">Boolean Options</a></li>
+<li><a class="reference internal" href="#multiple-values">Multiple Values</a></li>
+<li><a class="reference internal" href="#multiple-definitions">Multiple Definitions</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../user/index.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../../_sources/documentation/developer/explorations/explore_docopt/docoptest.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,29 @@
+theape.plugins.apeplugin.OperatorConfigspec
+===========================================
+
+.. currentmodule:: theape.plugins.apeplugin
+
+.. autoclass:: OperatorConfigspec
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~OperatorConfigspec.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~OperatorConfigspec.configspec
+      ~OperatorConfigspec.validator
+   
+   

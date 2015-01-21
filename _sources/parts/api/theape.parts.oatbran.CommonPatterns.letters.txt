@@ -1,0 +1,6 @@
+theape.parts.oatbran.CommonPatterns.letters
+===========================================
+
+.. currentmodule:: theape.parts.oatbran
+
+.. autoattribute:: CommonPatterns.letters

@@ -1,0 +1,6 @@
+theape.parts.wifi.iwconfig.IwconfigExpressions.invalid_misc
+===========================================================
+
+.. currentmodule:: theape.parts.wifi.iwconfig
+
+.. autoattribute:: IwconfigExpressions.invalid_misc

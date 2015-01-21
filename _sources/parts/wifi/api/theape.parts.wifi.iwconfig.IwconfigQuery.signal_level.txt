@@ -1,0 +1,6 @@
+theape.parts.wifi.iwconfig.IwconfigQuery.signal_level
+=====================================================
+
+.. currentmodule:: theape.parts.wifi.iwconfig
+
+.. autoattribute:: IwconfigQuery.signal_level

@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The Dummy &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../index.html" />
+    <link rel="up" title="Dummy Components" href="index.html" />
+    <link rel="next" title="theape.parts.dummy.dummy.DummyClass" href="api/theape.parts.dummy.dummy.DummyClass.html" />
+    <link rel="prev" title="theape.parts.dummy.callclass.CallClass.__name__" href="api/theape.parts.dummy.callclass.CallClass.__name__.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/theape.parts.dummy.dummy.DummyClass.html" title="theape.parts.dummy.dummy.DummyClass"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="api/theape.parts.dummy.callclass.CallClass.__name__.html" title="theape.parts.dummy.callclass.CallClass.__name__"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Parts</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Dummy Components</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-dummy">
+<h1>The Dummy<a class="headerlink" href="#the-dummy" title="Permalink to this headline">¶</a></h1>
+<p>This module holds classes to help test the running of the infrastructure.</p>
+<div class="section" id="module-theape.components.dummy.dummy">
+<span id="the-dummy-class"></span><h2>The Dummy Class<a class="headerlink" href="#module-theape.components.dummy.dummy" title="Permalink to this headline">¶</a></h2>
+<p>The Dummy module holds dummy classes that do nothing. They is primarily used to test implementations of infrastructure components.</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-83126f35173021fdc9e13ef9fe95abd943f8f1e4.png" alt="DummyClass -|&gt; BaseClass
+DummyClass o- CallClass" />
+</p>
+<span class="target" id="module-theape.parts.dummy.dummy"></span><table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../../plugins/api/theape.parts.dummy.dummy.DummyClass.html#theape.parts.dummy.dummy.DummyClass" title="theape.parts.dummy.dummy.DummyClass"><tt class="xref py py-obj docutils literal"><span class="pre">DummyClass</span></tt></a>(*args,&nbsp;**kwargs)</td>
+<td>The Dummy Class does nothing</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../plugins/api/theape.parts.dummy.dummy.DummyClass.__call__.html#theape.parts.dummy.dummy.DummyClass.__call__" title="theape.parts.dummy.dummy.DummyClass.__call__"><tt class="xref py py-obj docutils literal"><span class="pre">DummyClass.__call__</span></tt></a>(*args,&nbsp;**kwargs)</td>
+<td>Logs the fact that it was called</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.dummy.dummy.DummyClass.__str__.html#theape.parts.dummy.dummy.DummyClass.__str__" title="theape.parts.dummy.dummy.DummyClass.__str__"><tt class="xref py py-obj docutils literal"><span class="pre">DummyClass.__str__</span></tt></a>()</td>
+<td>Returns the class name</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.dummy.dummy.DummyClass.__getattr__.html#theape.parts.dummy.dummy.DummyClass.__getattr__" title="theape.parts.dummy.dummy.DummyClass.__getattr__"><tt class="xref py py-obj docutils literal"><span class="pre">DummyClass.__getattr__</span></tt></a>(attribute)</td>
+<td>To catch unimplemented parts of the class and log them</td>
+</tr>
+</tbody>
+</table>
+<p>The Dummy Class logs (at the <cite>info</cite>) level when it is created and when it is called.</p>
+</div>
+<div class="section" id="a-crash-dummy">
+<h2>A Crash Dummy<a class="headerlink" href="#a-crash-dummy" title="Permalink to this headline">¶</a></h2>
+<p>This is a Dummy that raises an error when called.</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-38330e7476126e0e7790a4075d0c215b3fadf485.png" alt="CrashDummy -|&gt; DummyClass" />
+</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../../plugins/api/theape.parts.dummy.dummy.CrashDummy.html#theape.parts.dummy.dummy.CrashDummy" title="theape.parts.dummy.dummy.CrashDummy"><tt class="xref py py-obj docutils literal"><span class="pre">CrashDummy</span></tt></a>(error[,&nbsp;error_message,&nbsp;function])</td>
+<td>A dummy that crashes</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../plugins/api/theape.parts.dummy.dummy.CrashDummy.html#theape.parts.dummy.dummy.CrashDummy.check_rep" title="theape.parts.dummy.dummy.CrashDummy.check_rep"><tt class="xref py py-obj docutils literal"><span class="pre">CrashDummy.check_rep</span></tt></a>()</td>
+<td>crashes on check_rep() if that&#8217;s the function</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../plugins/api/theape.parts.dummy.dummy.CrashDummy.html#theape.parts.dummy.dummy.CrashDummy.close" title="theape.parts.dummy.dummy.CrashDummy.close"><tt class="xref py py-obj docutils literal"><span class="pre">CrashDummy.close</span></tt></a>()</td>
+<td>Crashes if close is the function</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.dummy.dummy.CrashDummy.__getattr__.html#theape.parts.dummy.dummy.CrashDummy.__getattr__" title="theape.parts.dummy.dummy.CrashDummy.__getattr__"><tt class="xref py py-obj docutils literal"><span class="pre">CrashDummy.__getattr__</span></tt></a>(attribute)</td>
+<td>To catch unimplemented parts of the class and log them</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">check_rep and close don&#8217;t need to be implemented to crash, but the Composite is checking if it has the attributes before calling them so they have to be implemented to crash them</p>
+</div>
+</div>
+<div class="section" id="the-hanging-dummy">
+<h2>The Hanging Dummy<a class="headerlink" href="#the-hanging-dummy" title="Permalink to this headline">¶</a></h2>
+<p>This is a Dummy that will block forever.</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-6a335f4ea6100f7fee241024463329e85f5eae65.png" alt="HangingDummy -|&gt; DummyClass" />
+</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../../plugins/api/theape.parts.dummy.dummy.HangingDummy.html#theape.parts.dummy.dummy.HangingDummy" title="theape.parts.dummy.dummy.HangingDummy"><tt class="xref py py-obj docutils literal"><span class="pre">HangingDummy</span></tt></a>(*args,&nbsp;**kwargs)</td>
+<td>A dummy that hangs</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../plugins/api/theape.parts.dummy.dummy.HangingDummy.__call__.html#theape.parts.dummy.dummy.HangingDummy.__call__" title="theape.parts.dummy.dummy.HangingDummy.__call__"><tt class="xref py py-obj docutils literal"><span class="pre">HangingDummy.__call__</span></tt></a>(*args,&nbsp;**kwargs)</td>
+<td>Sleeps for three years in an infinite loop</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="an-example">
+<h2>An Example<a class="headerlink" href="#an-example" title="Permalink to this headline">¶</a></h2>
+<p>As an example we can create an operator and make some fake calls to it (I do not think the logging will get captured by Pweave, though).</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="n">output_documentation</span><span class="p">:</span>
+    <span class="k">class</span> <span class="nc">FakeLogger</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">KingKong</span><span class="p">(</span><span class="n">DummyClass</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">KingKong</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span> <span class="o">=</span> <span class="n">FakeLogger</span><span class="p">()</span>
+            <span class="k">return</span>
+
+
+    <span class="n">kongs</span> <span class="o">=</span> <span class="p">(</span><span class="n">KingKong</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">index</span><span class="p">,</span><span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="s">&#39;Kong MightyJoe&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
+    <span class="k">for</span> <span class="n">kong</span> <span class="ow">in</span> <span class="n">kongs</span><span class="p">:</span>
+        <span class="n">kong</span><span class="o">.</span><span class="n">rampage</span><span class="p">()</span>
+        <span class="n">kong</span><span class="p">(</span><span class="s">&#39;fay wray&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="code highlight-python"><div class="highlight"><pre>&#39;[34mrampage[0;0m&#39; attribute called on [31mKingKong[0;0m
+[31mKingKong[0;0m Called
+[1mArgs:[0;0m (&#39;fay wray&#39;,)
+[1mKwargs:[0;0m {}
+&#39;[34mrampage[0;0m&#39; attribute called on [31mKingKong[0;0m
+[31mKingKong[0;0m Called
+[1mArgs:[0;0m (&#39;fay wray&#39;,)
+[1mKwargs:[0;0m {}
+</pre></div>
+</div>
+<p>I had to add a fake logger because pweave does not capture logging output. If you run this module:</p>
+<div class="highlight-python"><div class="highlight"><pre>python dummy.py
+</pre></div>
+</div>
+<p>You should see what is being sent to the logger in full color (without the extra ANSI codes).</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The Dummy</a><ul>
+<li><a class="reference internal" href="#module-theape.components.dummy.dummy">The Dummy Class</a></li>
+<li><a class="reference internal" href="#a-crash-dummy">A Crash Dummy</a></li>
+<li><a class="reference internal" href="#the-hanging-dummy">The Hanging Dummy</a></li>
+<li><a class="reference internal" href="#an-example">An Example</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../_sources/parts/dummy/dummy.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

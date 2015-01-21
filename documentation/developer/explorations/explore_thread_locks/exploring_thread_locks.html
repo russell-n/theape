@@ -1,0 +1,257 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Moving Thread Locks Close To the Problem &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
+    <link rel="up" title="Exploring Thread Locks" href="index.html" />
+    <link rel="next" title="Exploring Time" href="../explore_time/index.html" />
+    <link rel="prev" title="Exploring Thread Locks" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../explore_time/index.html" title="Exploring Time"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Exploring Thread Locks"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >The Ape Developer Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >The Explorations</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Exploring Thread Locks</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="moving-thread-locks-close-to-the-problem">
+<h1>Moving Thread Locks Close To the Problem<a class="headerlink" href="#moving-thread-locks-close-to-the-problem" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="#exploring-thread-locks-introduction"><em>Introduction</em></a></li>
+<li><a class="reference internal" href="#exploring-thread-locks-methods"><em>Methods</em></a></li>
+<li><a class="reference internal" href="#exploring-thread-locks-results"><em>Results</em></a></li>
+<li><a class="reference internal" href="#exploring-thread-locks-discussion"><em>Discussion</em></a></li>
+</ul>
+</div></blockquote>
+<div class="section" id="introduction">
+<span id="exploring-thread-locks-introduction"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>In order to search for correlations between measured values (e.g. bitrate and throughput) I have in the past monitored multiple files and programs on devices using timestamps to correlate them later. Since monitoring has to be run in parallel to be useful I&#8217;ve used threads to run background processes in the background along with the primary one. One problem that arises in these situations is that threads have to call non-thread-safe methods (e.g. <cite>paramiko&#8217;s</cite> <tt class="docutils literal"><span class="pre">SSHClient.exec_command</span></tt>) and this can cause problems when called if the threads share the same object.</p>
+<p>The primary solution to this problem has been to use different <cite>SSHClient</cite> instances &#8211; and this has worked well. There have, however, been cases where the devices seemed to struggle under the load of having too many open processes. While I don&#8217;t believe that eliminating ssh-sessions is necessarily the solution for these cases, I would like to have the option to run a single session shared by multiple threads.</p>
+<p>My previous solution to providing a single instance in a safe way has been to share a lock among threads that share the ssh-session, but this seems to overly complicate things. My initial idea was to put the lock in the object that uses the non-thread-safe call so that the users of the holder of the ssh-session would not need to worry about it, but then I thought that it didn&#8217;t seem likely that you could keep calling the same method object without the method finishing, so I decided to investigate what happens when you try. This is a record of what I found.</p>
+</div>
+<div class="section" id="methods">
+<span id="exploring-thread-locks-methods"></span><h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<p>Two classes were created &#8211; one with a <tt class="docutils literal"><span class="pre">run</span></tt> method that would would be shared among the threads. The <tt class="docutils literal"><span class="pre">run</span></tt> method will use a <tt class="docutils literal"><span class="pre">threading.Lock</span></tt> object to prevent multiple threads from being able to get to the second print statement within it.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># python standard library</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">time</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Shared</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param:</span>
+
+<span class="sd">         - `name`: identifier to use in print statements</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">print</span> <span class="s">&quot;{0} Acquiring Lock&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">lock</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot;{0} in Lock&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="c"># the sleep makes sure the calls to this method overlap</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">print</span> <span class="s">&quot;{0} released Lock&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">return</span>
+<span class="c"># end of class Shared</span>
+</pre></div>
+</div>
+<p>The other class will be used to create the threads that use the <tt class="docutils literal"><span class="pre">Shared</span></tt> object.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Test</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param:</span>
+
+<span class="sd">         - `name`: identifier to print in ``run`` calls</span>
+<span class="sd">         - `target`: run method object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="n">target</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">,</span>
+                                       <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;name&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">thread</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">join</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+        <span class="k">return</span>
+<span class="c"># end class Test</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="results">
+<span id="exploring-thread-locks-results"></span><h2>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h2>
+<p>One instance of the <tt class="docutils literal"><span class="pre">Shared</span></tt> class was created and its run method passed to ten instances of the <tt class="docutils literal"><span class="pre">Test</span></tt> class.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">s</span> <span class="o">=</span> <span class="n">Shared</span><span class="p">()</span>
+<span class="n">tests</span> <span class="o">=</span> <span class="p">[</span><span class="n">Test</span><span class="p">(</span><span class="s">&quot;Test {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">number</span><span class="p">),</span> <span class="n">s</span><span class="o">.</span><span class="n">run</span><span class="p">)</span> <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+
+<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">tests</span><span class="p">:</span>
+    <span class="n">test</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">tests</span><span class="p">:</span>
+    <span class="n">test</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Test 0 Acquiring Lock
+Test 0 in Lock
+Test 1 Acquiring Lock
+Test 2 Acquiring Lock
+Test 3 Acquiring Lock
+Test 4 Acquiring Lock
+Test 5 Acquiring Lock
+Test 6 Acquiring Lock
+Test 7 Acquiring Lock
+Test 8 Acquiring Lock
+Test 9 Acquiring Lock
+Test 0 released Lock
+Test 1 in Lock
+Test 1 released Lock
+Test 2 in Lock
+Test 2 released Lock
+Test 3 in Lock
+Test 3 released Lock
+Test 4 in Lock
+Test 4 released Lock
+Test 5 in Lock
+Test 5 released Lock
+Test 6 in Lock
+Test 6 released Lock
+Test 7 in Lock
+Test 7 released Lock
+Test 8 in Lock
+Test 8 released Lock
+Test 9 in Lock
+Test 9 released Lock
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">Shared.run</span></tt> method was executed repeatedly even though previous calls weren&#8217;t finished and then each waited for the previous call to finish before entering the protected area.</p>
+</div>
+<div class="section" id="discussion">
+<span id="exploring-thread-locks-discussion"></span><h2>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">¶</a></h2>
+<p>Since all calls to the same <tt class="docutils literal"><span class="pre">Shared.run</span></tt> method reached the first print statement before all calls were completed, it appears that python allows calling the same method object even prior to the completed execution of prior calls, at least in the case where everything within the method is thread-safe or protected by a lock. The output in this experiment indicated that the calls finished in order but the documentation notes that the order in which threads acquire the lock is not guaranteed. Given the outcome it is reasonable to use locks within method calls that need to protect non-thread-safe calls rather than requiring users of the object to maintain and use the lock &#8211; in particular this can be used to protect <tt class="docutils literal"><span class="pre">SSHClient.exec_command</span></tt> calls.</p>
+<p>There are drawbacks to this method. If the protected call takes an excessive time those waiting for it to finish will have extra (unpredictable) delays added to them.  Having the clients share the same method also makes the system brittle &#8211; one failure affects all those that share it. Because of these drawbacks, in most cases it would seem to be better not to use resource-sharing unnecessarily, but since the call to the lock is relatively inexpensive, integrating it even though it won&#8217;t be used for most cases seems to offer the advantage of lower-complexity to systems that don&#8217;t need high-performance, which would likely include most cases where non-atomic calls need to be protected by a lock.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Moving Thread Locks Close To the Problem</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#methods">Methods</a></li>
+<li><a class="reference internal" href="#results">Results</a></li>
+<li><a class="reference internal" href="#discussion">Discussion</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../user/index.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../../_sources/documentation/developer/explorations/explore_thread_locks/exploring_thread_locks.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

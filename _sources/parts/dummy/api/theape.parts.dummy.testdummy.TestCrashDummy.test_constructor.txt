@@ -1,0 +1,6 @@
+theape.parts.dummy.testdummy.TestCrashDummy.test_constructor
+============================================================
+
+.. currentmodule:: theape.parts.dummy.testdummy
+
+.. automethod:: TestCrashDummy.test_constructor

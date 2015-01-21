@@ -1,0 +1,6 @@
+theape.infrastructure.configurationmap.ConfigurationMap.options
+===============================================================
+
+.. currentmodule:: theape.infrastructure.configurationmap
+
+.. automethod:: ConfigurationMap.options

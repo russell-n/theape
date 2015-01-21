@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The BaseStrategy &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../index.html" />
+    <link rel="up" title="The Arguments" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >The Ape&#8217;s Infrastructure</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">The Arguments</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-theape.infrastructure.arguments.basestrategy">
+<span id="the-basestrategy"></span><h1>The BaseStrategy<a class="headerlink" href="#module-theape.infrastructure.arguments.basestrategy" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="ape-interface-arguments-base-strategy">
+<span id="id1"></span><h2>The BaseStrategy<a class="headerlink" href="#ape-interface-arguments-base-strategy" title="Permalink to this headline">¶</a></h2>
+<p>This is a holder of sub-commands for the arguments. Its main purpose is to  provide the QuarterMaster and Ape-plugin, since one or both is being used by various sub-commands.</p>
+</div>
+<div class="section" id="class-model">
+<span id="ape-interface-arguments-basestrategy-class-model"></span><h2>Class Model<a class="headerlink" href="#class-model" title="Permalink to this headline">¶</a></h2>
+<p class="plantuml">
+<img src="../../_images/plantuml-f8d318f9f9c7c1f9dbfcba2994a0cddee4321e2b.png" alt="BaseStrategy o- QuarterMaster
+BaseStrategy o- TheApe
+BaseStrategy --|&gt; BaseClass" />
+</p>
+</div>
+<div class="section" id="the-errors">
+<span id="ape-interface-arguments-basestrategy-errors"></span><h2>The Errors<a class="headerlink" href="#the-errors" title="Permalink to this headline">¶</a></h2>
+<p>There are two kinds of exceptions caught which produce two error-messages:</p>
+<table border="1" class="docutils">
+<caption>Error Messages</caption>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Exception</th>
+<th class="head">Message</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Exception</td>
+<td>APE Error</td>
+<td>Something unexpected happened &#8211; this indicates a problem with the code</td>
+</tr>
+<tr class="row-odd"><td>KeyboardInterrupt</td>
+<td>Oh, I am slain</td>
+<td>User killed the runtime for some reason &#8211; clean-up and then close</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="the-api">
+<span id="ubootkommandant-api"></span><h2>The API<a class="headerlink" href="#the-api" title="Permalink to this headline">¶</a></h2>
+<p>The decorator (<em class="xref std std-ref">try_except</em>) around most of these methods is blocking the docstrings. Follow the links to the source code to see what they do.</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">UbootKommandant</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">UbootKommandant.handle_help</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">UbootKommandant.run</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">UbootKommandant.fetch</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">UbootKommandant.list_plugins</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">UbootKommandant.check</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">UbootKommandant.clean_up</span></tt></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="supporting-code">
+<h2>Supporting Code<a class="headerlink" href="#supporting-code" title="Permalink to this headline">¶</a></h2>
+<p>These are used within the UbootKommandant.</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="../baseclass.html#ape-baseclass-baseclass"><em>The Base Class</em></a></li>
+<li><a class="reference internal" href="../crash_handler.html#ape-commoncode-try-except-decorator"><em>The try-except Decorator</em></a></li>
+<li><a class="reference internal" href="../crash_handler.html#ape-commoncode-crash-handler-log-error"><em>The crash_handler log_error function</em></a></li>
+<li><em class="xref std std-ref">The QuarterMaster</em></li>
+<li><a class="reference internal" href="../../plugins/apeplugin.html#apeplugin-introduction"><em>The Ape Plugin</em></a></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The BaseStrategy</a><ul>
+<li><a class="reference internal" href="#ape-interface-arguments-base-strategy">The BaseStrategy</a></li>
+<li><a class="reference internal" href="#class-model">Class Model</a></li>
+<li><a class="reference internal" href="#the-errors">The Errors</a></li>
+<li><a class="reference internal" href="#the-api">The API</a></li>
+<li><a class="reference internal" href="#supporting-code">Supporting Code</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../_sources/infrastructure/arguments/basestrategy.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

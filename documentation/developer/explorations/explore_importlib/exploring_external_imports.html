@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Exploring External Imports &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
+    <link rel="up" title="Exploring Importlib" href="index.html" />
+    <link rel="next" title="Explore Inspect" href="../explore_inspect/index.html" />
+    <link rel="prev" title="Exploring Importlib" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../explore_inspect/index.html" title="Explore Inspect"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Exploring Importlib"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >The Ape Developer Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >The Explorations</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Exploring Importlib</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="exploring-external-imports">
+<h1>Exploring External Imports<a class="headerlink" href="#exploring-external-imports" title="Permalink to this headline">¶</a></h1>
+<p id="id1">The goal is to be able to import plugins that have been created in external packages so that there won&#8217;t be a need to put everything into the <cite>ape</cite>. This is an exploration of how that might work.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># python standard library</span>
+<span class="kn">import</span> <span class="nn">importlib</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+
+<span class="c"># ape</span>
+<span class="kn">from</span> <span class="nn">ape.plugins.base_plugin</span> <span class="kn">import</span> <span class="n">BasePlugin</span>
+</pre></div>
+</div>
+<div class="section" id="testing-an-import">
+<h2>Testing An Import<a class="headerlink" href="#testing-an-import" title="Permalink to this headline">¶</a></h2>
+<p>There is a folder structure below this one that looks like:</p>
+<div class="highlight-python"><div class="highlight"><pre>fake_package/
+    setup.py
+    fakepackage/
+        __init__.py
+        fakeplugin.py
+</pre></div>
+</div>
+<p>Since there&#8217;s no <tt class="docutils literal"><span class="pre">__init__.py</span></tt> in the <cite>fake_package</cite> folder, it should not be picked up as part of this package. The goal is to import the <a class="reference internal" href="fake_package/fakepackage/fakeplugin.html#fake-plugin"><em>FakePlugin</em></a> from this package.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">module_name</span> <span class="o">=</span> <span class="s">&#39;fakepackage.fakeplugin&#39;</span>
+<span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span>
+<span class="n">members</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmembers</span><span class="p">(</span><span class="n">module</span><span class="p">,</span>
+                             <span class="k">lambda</span> <span class="n">o</span><span class="p">:</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isclass</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="ow">and</span>
+                             <span class="n">o</span><span class="o">.</span><span class="n">__base__</span> <span class="ow">is</span> <span class="n">BasePlugin</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="n">members</span><span class="p">:</span>
+    <span class="n">name</span><span class="p">,</span> <span class="n">definition</span> <span class="o">=</span> <span class="n">member</span>
+    <span class="k">print</span> <span class="n">name</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">definition</span><span class="p">()</span>
+    <span class="n">d</span><span class="o">.</span><span class="n">fetch_config</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">BrokenPlugin</span>
+<span class="n">FakePlugin</span>
+
+<span class="p">[</span><span class="n">FAKEPLUGIN</span><span class="p">]</span>
+<span class="c">#this is a fake plugin that creates a DummyClass instance</span>
+<span class="c"># anything put in this section will be logged</span>
+<span class="c"># but nothing will be done with it</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Exploring External Imports</a><ul>
+<li><a class="reference internal" href="#testing-an-import">Testing An Import</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../user/index.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../../_sources/documentation/developer/explorations/explore_importlib/exploring_external_imports.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

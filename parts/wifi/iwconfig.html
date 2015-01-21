@@ -1,0 +1,616 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Iwconfig &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../index.html" />
+    <link rel="up" title="Wifi" href="index.html" />
+    <link rel="next" title="theape.parts.wifi.iwconfig.IwconfigExpressions.essid" href="api/theape.parts.wifi.iwconfig.IwconfigExpressions.essid.html" />
+    <link rel="prev" title="Wifi" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/theape.parts.wifi.iwconfig.IwconfigExpressions.essid.html" title="theape.parts.wifi.iwconfig.IwconfigExpressions.essid"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Wifi"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Parts</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Wifi</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="iwconfig">
+<h1>Iwconfig<a class="headerlink" href="#iwconfig" title="Permalink to this headline">¶</a></h1>
+<p>This is a module to work with the <tt class="docutils literal"><span class="pre">iwconfig</span></tt> command. Although <tt class="docutils literal"><span class="pre">iwconfig</span></tt> can be used to configure as well as query wireless interfaces, in this case I&#8217;ll just be using it to get information.</p>
+<div class="section" id="iwconfigenum">
+<h2>IwconfigEnum<a class="headerlink" href="#iwconfigenum" title="Permalink to this headline">¶</a></h2>
+<p>A holder of constants so that users of this code will have a reference for the names used in the regular expressions.</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-29fbadf076697e2c43742779bc8c1b0cfc34fb0e.png" alt="IwconfigEnum : essid
+IwconfigEnum : mac_protocol
+IwconfigEnum : mode
+IwconfigEnum : frequency
+IwconfigEnum : access_point
+IwconfigEnum : bit_rate
+IwconfigEnum : tx_power
+IwconfigEnum : link_quality
+IwconfigEnum : signal_level
+IwconfigEnum : rx_invalid_nwid
+IwconfigEnum : rx_invalid_crypt
+IwconfigEnum : rx_invalid_frag
+IwconfigEnum : tx_excessive_retries
+IwconfigEnum : invalid_misc
+IwconfigEnum : missed_beacons" />
+</p>
+</div>
+<div class="section" id="iwconfigexpressions">
+<h2>IwconfigExpressions<a class="headerlink" href="#iwconfigexpressions" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">IwconfigExpressions</span></tt> holds the compiled regular expressions to tokenize the output of the <tt class="docutils literal"><span class="pre">iwconfig</span></tt> command.</p>
+<span class="target" id="module-theape.parts.wifi.iwconfig"></span><table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigExpressions.essid.html#theape.parts.wifi.iwconfig.IwconfigExpressions.essid" title="theape.parts.wifi.iwconfig.IwconfigExpressions.essid"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigExpressions.essid</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">compiled regular expression to match the essid</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigExpressions.mac_protocol.html#theape.parts.wifi.iwconfig.IwconfigExpressions.mac_protocol" title="theape.parts.wifi.iwconfig.IwconfigExpressions.mac_protocol"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigExpressions.mac_protocol</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">regex to match protocol (requires self.interface to be set)</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigExpressions.mode.html#theape.parts.wifi.iwconfig.IwconfigExpressions.mode" title="theape.parts.wifi.iwconfig.IwconfigExpressions.mode"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigExpressions.mode</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">compiled regex to match the mode (e.g. Managed)</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigExpressions.frequency.html#theape.parts.wifi.iwconfig.IwconfigExpressions.frequency" title="theape.parts.wifi.iwconfig.IwconfigExpressions.frequency"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigExpressions.frequency</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">compiled regex to get the frequency</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigExpressions.access_point.html#theape.parts.wifi.iwconfig.IwconfigExpressions.access_point" title="theape.parts.wifi.iwconfig.IwconfigExpressions.access_point"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigExpressions.access_point</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">compiled regex to get the access point</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigExpressions.bit_rate.html#theape.parts.wifi.iwconfig.IwconfigExpressions.bit_rate" title="theape.parts.wifi.iwconfig.IwconfigExpressions.bit_rate"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigExpressions.bit_rate</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">expression to get the bit rate</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigExpressions.tx_power.html#theape.parts.wifi.iwconfig.IwconfigExpressions.tx_power" title="theape.parts.wifi.iwconfig.IwconfigExpressions.tx_power"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigExpressions.tx_power</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">compiled regex to match the tx-power</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigExpressions.link_quality.html#theape.parts.wifi.iwconfig.IwconfigExpressions.link_quality" title="theape.parts.wifi.iwconfig.IwconfigExpressions.link_quality"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigExpressions.link_quality</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">compiled regular expression to get the link quality</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigExpressions.signal_level.html#theape.parts.wifi.iwconfig.IwconfigExpressions.signal_level" title="theape.parts.wifi.iwconfig.IwconfigExpressions.signal_level"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigExpressions.signal_level</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">compiled regex to get the signal level</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigExpressions.rx_invalid_nwid.html#theape.parts.wifi.iwconfig.IwconfigExpressions.rx_invalid_nwid" title="theape.parts.wifi.iwconfig.IwconfigExpressions.rx_invalid_nwid"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigExpressions.rx_invalid_nwid</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">compiled regex to get count of invalid nwid</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigExpressions.rx_invalid_crypt.html#theape.parts.wifi.iwconfig.IwconfigExpressions.rx_invalid_crypt" title="theape.parts.wifi.iwconfig.IwconfigExpressions.rx_invalid_crypt"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigExpressions.rx_invalid_crypt</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">compiled regex to get count of un-decryptable packets</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigExpressions.rx_invalid_frag.html#theape.parts.wifi.iwconfig.IwconfigExpressions.rx_invalid_frag" title="theape.parts.wifi.iwconfig.IwconfigExpressions.rx_invalid_frag"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigExpressions.rx_invalid_frag</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">compiled regex to get count of invalid packet fragments</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigExpressions.tx_excessive_retries.html#theape.parts.wifi.iwconfig.IwconfigExpressions.tx_excessive_retries" title="theape.parts.wifi.iwconfig.IwconfigExpressions.tx_excessive_retries"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigExpressions.tx_excessive_retries</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">compiled regex to get count of packets hardware failed to deliver</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigExpressions.invalid_misc.html#theape.parts.wifi.iwconfig.IwconfigExpressions.invalid_misc" title="theape.parts.wifi.iwconfig.IwconfigExpressions.invalid_misc"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigExpressions.invalid_misc</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">compiled regex to get count of packets lost for misc reasons</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigExpressions.missed_beacons.html#theape.parts.wifi.iwconfig.IwconfigExpressions.missed_beacons" title="theape.parts.wifi.iwconfig.IwconfigExpressions.missed_beacons"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigExpressions.missed_beacons</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">compiled regex to get count of beacons from Cell or AP missed</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="iwconfigquery">
+<span id="ape-iwconfigquery"></span><h2>IwconfigQuery<a class="headerlink" href="#iwconfigquery" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h3>
+<p>According to the current (December 13, 2013) Ubuntu 13.10 man-page:</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><em>ESSID</em> identifies cells that are part of the same virtual network (all APs with the same ESSID)</p>
+</li>
+<li><p class="first"><em>Access Point</em> is the specific AP within the virtual network that the node is associated with</p>
+</li>
+<li><p class="first"><em>mode</em> can be one of:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>Ad-Hoc</em> (only one cell, no AP)</li>
+<li><em>Managed</em> (node cat connect to many APS (allows roaming))</li>
+<li><em>Master</em> (node acts as syncronization master or Access Point)</li>
+<li><em>Repeater</em> (forwards packets to other wireless nodes)</li>
+<li><em>Secondary</em> (acts as backup master/repeater)</li>
+<li><em>Monitor</em> (passively monitor all packets on the frequency (not associated with a cell))</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><em>Bit Rate</em> is the speed at which bits are transmitted (user speed lower due to congestion and overhead)</p>
+</li>
+<li><p class="first"><em>RTS Threshold</em> - threshold for  handshake to make sure channel is clear (helps with congestion )</p>
+</li>
+<li><p class="first"><em>fragmentation</em> splits IP packet into smaller fragments to help with interference</p>
+</li>
+<li><p class="first"><em>Rx invalid nwid</em> is count of packets with different ESSID. Detects adjacent network on the same frequency.</p>
+</li>
+<li><p class="first"><em>Tx excessive retries</em> is the number of packets not delivered.</p>
+</li>
+<li><p class="first"><em>Invalid misc</em> is the number of packets lost for other wireless operations</p>
+</li>
+<li><p class="first"><em>Missed beacon</em> is number of periodic beacons from the AP missed. Usually indicates out of range.</p>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="the-model-and-api">
+<h3>The Model and API<a class="headerlink" href="#the-model-and-api" title="Permalink to this headline">¶</a></h3>
+<p class="plantuml">
+<img src="../../_images/plantuml-9ee8f2319c9a39917987d011210914536f321c05.png" alt="BaseClass &lt;|-- IwconfigQuery
+IwconfigQuery o- IwconfigExpressions" />
+</p>
+<span class="target" id="module-theape.parts.wifi.iwconfig"></span><table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigQuery.html#theape.parts.wifi.iwconfig.IwconfigQuery" title="theape.parts.wifi.iwconfig.IwconfigQuery"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigQuery</span></tt></a>(connection[,&nbsp;interface,&nbsp;...])</td>
+<td>Queries <tt class="docutils literal"><span class="pre">iwconfig</span></tt> for information</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigQuery.event_timer.html#theape.parts.wifi.iwconfig.IwconfigQuery.event_timer" title="theape.parts.wifi.iwconfig.IwconfigQuery.event_timer"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigQuery.event_timer</span></tt></a></td>
+<td>An EventTimer to track intervals between calling iwconfig</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigQuery.output.html#theape.parts.wifi.iwconfig.IwconfigQuery.output" title="theape.parts.wifi.iwconfig.IwconfigQuery.output"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigQuery.output</span></tt></a></td>
+<td>Output of the iwconfig command, refreshed after self.interval second intervals</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigQuery.command.html#theape.parts.wifi.iwconfig.IwconfigQuery.command" title="theape.parts.wifi.iwconfig.IwconfigQuery.command"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigQuery.command</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">command to send to connection to query iwconfig</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigQuery.essid.html#theape.parts.wifi.iwconfig.IwconfigQuery.essid" title="theape.parts.wifi.iwconfig.IwconfigQuery.essid"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigQuery.essid</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">the essid from the iwconfig command</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigQuery.mac_protocol.html#theape.parts.wifi.iwconfig.IwconfigQuery.mac_protocol" title="theape.parts.wifi.iwconfig.IwconfigQuery.mac_protocol"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigQuery.mac_protocol</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">the MAC protocol</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigQuery.mode.html#theape.parts.wifi.iwconfig.IwconfigQuery.mode" title="theape.parts.wifi.iwconfig.IwconfigQuery.mode"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigQuery.mode</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">the mode</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigQuery.frequency.html#theape.parts.wifi.iwconfig.IwconfigQuery.frequency" title="theape.parts.wifi.iwconfig.IwconfigQuery.frequency"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigQuery.frequency</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">current frequency</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigQuery.access_point.html#theape.parts.wifi.iwconfig.IwconfigQuery.access_point" title="theape.parts.wifi.iwconfig.IwconfigQuery.access_point"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigQuery.access_point</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">MAC address of associated AP</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigQuery.bit_rate.html#theape.parts.wifi.iwconfig.IwconfigQuery.bit_rate" title="theape.parts.wifi.iwconfig.IwconfigQuery.bit_rate"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigQuery.bit_rate</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">bit-rate</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigQuery.tx_power.html#theape.parts.wifi.iwconfig.IwconfigQuery.tx_power" title="theape.parts.wifi.iwconfig.IwconfigQuery.tx_power"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigQuery.tx_power</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">the TX-power for the node</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigQuery.link_quality.html#theape.parts.wifi.iwconfig.IwconfigQuery.link_quality" title="theape.parts.wifi.iwconfig.IwconfigQuery.link_quality"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigQuery.link_quality</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">link-quality perceived by driver</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigQuery.signal_level.html#theape.parts.wifi.iwconfig.IwconfigQuery.signal_level" title="theape.parts.wifi.iwconfig.IwconfigQuery.signal_level"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigQuery.signal_level</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">signal level (RSSI)</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigQuery.rx_invalid_nwid.html#theape.parts.wifi.iwconfig.IwconfigQuery.rx_invalid_nwid" title="theape.parts.wifi.iwconfig.IwconfigQuery.rx_invalid_nwid"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigQuery.rx_invalid_nwid</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">count of packets with SSID&#8217;s not matching current cell</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigQuery.rx_invalid_crypt.html#theape.parts.wifi.iwconfig.IwconfigQuery.rx_invalid_crypt" title="theape.parts.wifi.iwconfig.IwconfigQuery.rx_invalid_crypt"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigQuery.rx_invalid_crypt</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">count of packets not unencryptable</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigQuery.rx_invalid_frag.html#theape.parts.wifi.iwconfig.IwconfigQuery.rx_invalid_frag" title="theape.parts.wifi.iwconfig.IwconfigQuery.rx_invalid_frag"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigQuery.rx_invalid_frag</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">count of packets whose fragments couldn&#8217;t be re-assembled</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigQuery.tx_excessive_retries.html#theape.parts.wifi.iwconfig.IwconfigQuery.tx_excessive_retries" title="theape.parts.wifi.iwconfig.IwconfigQuery.tx_excessive_retries"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigQuery.tx_excessive_retries</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">count of packets not successfully transmitted</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigQuery.invalid_misc.html#theape.parts.wifi.iwconfig.IwconfigQuery.invalid_misc" title="theape.parts.wifi.iwconfig.IwconfigQuery.invalid_misc"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigQuery.invalid_misc</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">count of invalid packets (received only?)</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigQuery.missed_beacons.html#theape.parts.wifi.iwconfig.IwconfigQuery.missed_beacons" title="theape.parts.wifi.iwconfig.IwconfigQuery.missed_beacons"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigQuery.missed_beacons</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">count of beacons not received</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigQuery.__call__.html#theape.parts.wifi.iwconfig.IwconfigQuery.__call__" title="theape.parts.wifi.iwconfig.IwconfigQuery.__call__"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigQuery.__call__</span></tt></a>()</td>
+<td>Calls the iwconfig command and returns the output</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigQuery.__str__.html#theape.parts.wifi.iwconfig.IwconfigQuery.__str__" title="theape.parts.wifi.iwconfig.IwconfigQuery.__str__"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigQuery.__str__</span></tt></a>()</td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">output of iwconfig command un-parsed</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigQuery.check_errors.html#theape.parts.wifi.iwconfig.IwconfigQuery.check_errors" title="theape.parts.wifi.iwconfig.IwconfigQuery.check_errors"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigQuery.check_errors</span></tt></a>(stderr)</td>
+<td>Checks for known errors</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.wifi.iwconfig.IwconfigQuery.close.html#theape.parts.wifi.iwconfig.IwconfigQuery.close" title="theape.parts.wifi.iwconfig.IwconfigQuery.close"><tt class="xref py py-obj docutils literal"><span class="pre">IwconfigQuery.close</span></tt></a>()</td>
+<td>Closes the event timer</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="responsibilities">
+<h2>Responsibilities<a class="headerlink" href="#responsibilities" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>maintains the expressions needed to parse the output of the <tt class="docutils literal"><span class="pre">iwconfig</span></tt> command</li>
+<li>issue command to connection</li>
+<li>returns requested values from the iwconfig output</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="collaborators">
+<h2>Collaborators<a class="headerlink" href="#collaborators" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Connections</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Iwconfig</a><ul>
+<li><a class="reference internal" href="#iwconfigenum">IwconfigEnum</a></li>
+<li><a class="reference internal" href="#iwconfigexpressions">IwconfigExpressions</a></li>
+<li><a class="reference internal" href="#iwconfigquery">IwconfigQuery</a><ul>
+<li><a class="reference internal" href="#notes">Notes</a></li>
+<li><a class="reference internal" href="#the-model-and-api">The Model and API</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#responsibilities">Responsibilities</a></li>
+<li><a class="reference internal" href="#collaborators">Collaborators</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../_sources/parts/wifi/iwconfig.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

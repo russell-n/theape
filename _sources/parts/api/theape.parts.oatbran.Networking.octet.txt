@@ -1,0 +1,6 @@
+theape.parts.oatbran.Networking.octet
+=====================================
+
+.. currentmodule:: theape.parts.oatbran
+
+.. autoattribute:: Networking.octet

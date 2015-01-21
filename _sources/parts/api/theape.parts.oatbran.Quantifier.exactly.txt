@@ -1,0 +1,6 @@
+theape.parts.oatbran.Quantifier.exactly
+=======================================
+
+.. currentmodule:: theape.parts.oatbran
+
+.. automethod:: Quantifier.exactly

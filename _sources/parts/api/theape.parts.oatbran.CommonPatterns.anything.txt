@@ -1,0 +1,6 @@
+theape.parts.oatbran.CommonPatterns.anything
+============================================
+
+.. currentmodule:: theape.parts.oatbran
+
+.. autoattribute:: CommonPatterns.anything

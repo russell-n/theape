@@ -1,0 +1,6 @@
+theape.parts.wifi.tests.testiwconfig.TestIwconfigExpressions.test_link_quality
+==============================================================================
+
+.. currentmodule:: theape.parts.wifi.tests.testiwconfig
+
+.. automethod:: TestIwconfigExpressions.test_link_quality

@@ -1,0 +1,50 @@
+theape.parts.wifi.iwconfig.IwconfigQuery
+========================================
+
+.. currentmodule:: theape.parts.wifi.iwconfig
+
+.. autoclass:: IwconfigQuery
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~IwconfigQuery.__init__
+      ~IwconfigQuery.check_errors
+      ~IwconfigQuery.close
+      ~IwconfigQuery.log_error
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~IwconfigQuery.access_point
+      ~IwconfigQuery.bit_rate
+      ~IwconfigQuery.command
+      ~IwconfigQuery.essid
+      ~IwconfigQuery.event_timer
+      ~IwconfigQuery.expressions
+      ~IwconfigQuery.frequency
+      ~IwconfigQuery.invalid_misc
+      ~IwconfigQuery.link_quality
+      ~IwconfigQuery.logger
+      ~IwconfigQuery.mac_protocol
+      ~IwconfigQuery.missed_beacons
+      ~IwconfigQuery.mode
+      ~IwconfigQuery.output
+      ~IwconfigQuery.rx_invalid_crypt
+      ~IwconfigQuery.rx_invalid_frag
+      ~IwconfigQuery.rx_invalid_nwid
+      ~IwconfigQuery.signal_level
+      ~IwconfigQuery.tx_excessive_retries
+      ~IwconfigQuery.tx_power
+   
+   

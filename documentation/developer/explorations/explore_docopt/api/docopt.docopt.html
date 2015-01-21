@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>docopt.docopt &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../../index.html" />
+    <link rel="up" title="The Docopt Test" href="../docoptest.html" />
+    <link rel="next" title="Reproducing the APE’s Interface" href="../reproducingape.html" />
+    <link rel="prev" title="docopt.docopt" href="" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../reproducingape.html" title="Reproducing the APE’s Interface"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="#" title="docopt.docopt"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >The Ape Developer Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >The Explorations</a> &raquo;</li>
+          <li><a href="../index.html" >Exploring Docopt</a> &raquo;</li>
+          <li><a href="../docoptest.html" accesskey="U">The Docopt Test</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="docopt-docopt">
+<h1>docopt.docopt<a class="headerlink" href="#docopt-docopt" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="docopt.docopt">
+<tt class="descclassname">docopt.</tt><tt class="descname">docopt</tt><big>(</big><em>doc</em>, <em>argv=None</em>, <em>help=True</em>, <em>version=None</em>, <em>options_first=False</em><big>)</big><a class="headerlink" href="#docopt.docopt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse <cite>argv</cite> based on command-line interface described in <cite>doc</cite>.</p>
+<p><cite>docopt</cite> creates your command-line interface based on its
+description that you pass as <cite>doc</cite>. Such description can contain
+&#8211;options, &lt;positional-argument&gt;, commands, which could be
+[optional], (required), (mutually | exclusive) or repeated...</p>
+<dl class="docutils">
+<dt>doc <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>Description of your command-line interface.</dd>
+<dt>argv <span class="classifier-delimiter">:</span> <span class="classifier">list of str, optional</span></dt>
+<dd>Argument vector to be parsed. sys.argv[1:] is used if not
+provided.</dd>
+<dt>help <span class="classifier-delimiter">:</span> <span class="classifier">bool (default: True)</span></dt>
+<dd>Set to False to disable automatic help on -h or &#8211;help
+options.</dd>
+<dt>version <span class="classifier-delimiter">:</span> <span class="classifier">any object</span></dt>
+<dd>If passed, the object will be printed if &#8211;version is in
+<cite>argv</cite>.</dd>
+<dt>options_first <span class="classifier-delimiter">:</span> <span class="classifier">bool (default: False)</span></dt>
+<dd>Set to True to require options preceed positional arguments,
+i.e. to forbid options and positional arguments intermix.</dd>
+</dl>
+<dl class="docutils">
+<dt>args <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd>A dictionary, where keys are names of command-line elements
+such as e.g. &#8220;&#8211;verbose&#8221; and &#8220;&lt;path&gt;&#8221;, and values are the
+parsed values of those elements.</dd>
+</dl>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">docopt</span> <span class="kn">import</span> <span class="n">docopt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">doc</span> <span class="o">=</span> <span class="s">&#39;&#39;&#39;</span>
+<span class="go">Usage:</span>
+<span class="go">    my_program tcp &lt;host&gt; &lt;port&gt; [--timeout=&lt;seconds&gt;]</span>
+<span class="go">    my_program serial &lt;port&gt; [--baud=&lt;n&gt;] [--timeout=&lt;seconds&gt;]</span>
+<span class="go">    my_program (-h | --help | --version)</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Options:</dt>
+<dd><table class="first last docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></td>
+<td>Show this screen and exit.</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--baud=<var>&lt;n&gt;</var></span></kbd></td>
+<td>Baudrate [default: 9600]</td></tr>
+</tbody>
+</table>
+</dd>
+</dl>
+<p>&#8216;&#8217;&#8217;
+&gt;&gt;&gt; argv = [&#8216;tcp&#8217;, &#8216;127.0.0.1&#8217;, &#8216;80&#8217;, &#8216;&#8211;timeout&#8217;, &#8216;30&#8217;]
+&gt;&gt;&gt; docopt(doc, argv)
+{&#8216;&#8211;baud&#8217;: &#8216;9600&#8217;,</p>
+<blockquote>
+<div>&#8216;&#8211;help&#8217;: False,
+&#8216;&#8211;timeout&#8217;: &#8216;30&#8217;,
+&#8216;&#8211;version&#8217;: False,
+&#8216;&lt;host&gt;&#8217;: &#8216;127.0.0.1&#8217;,
+&#8216;&lt;port&gt;&#8217;: &#8216;80&#8217;,
+&#8216;serial&#8217;: False,
+&#8216;tcp&#8217;: True}</div></blockquote>
+<ul class="simple">
+<li>For video introduction see <a class="reference external" href="http://docopt.org">http://docopt.org</a></li>
+<li>Full documentation is available in README.rst as well as online
+at <a class="reference external" href="https://github.com/docopt/docopt#readme">https://github.com/docopt/docopt#readme</a></li>
+</ul>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../user/index.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../../../_sources/documentation/developer/explorations/explore_docopt/api/docopt.docopt.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

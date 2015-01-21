@@ -1,0 +1,6 @@
+theape.plugins.apeplugin.OperationConfiguration.plugin_sections_names
+=====================================================================
+
+.. currentmodule:: theape.plugins.apeplugin
+
+.. autoattribute:: OperationConfiguration.plugin_sections_names

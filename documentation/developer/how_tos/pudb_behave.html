@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using pudb with Behave and Fish &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../index.html" />
+    <link rel="up" title="How-To’s" href="index.html" />
+    <link rel="next" title="About Plugins" href="../plugins/index.html" />
+    <link rel="prev" title="How-To’s" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../plugins/index.html" title="About Plugins"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="How-To’s"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >The Ape Developer Documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">How-To&#8217;s</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="using-pudb-with-behave-and-fish">
+<h1>Using <cite>pudb</cite> with Behave and Fish<a class="headerlink" href="#using-pudb-with-behave-and-fish" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-this-about">
+<h2>What is this about?<a class="headerlink" href="#what-is-this-about" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://pythonhosted.org/behave/">behave</a> is a behavior-driven-development (BDD) tool for python that tests whether you have properly implemented the features you have defined in your <cite>features</cite> file(s). In their <a class="reference external" href="http://pythonhosted.org/behave/tutorial.html">tutorial</a> they tell you how you can set it up so that it will drop into <a class="reference external" href="http://ipython.org/ipython-doc/rel-0.10.2/html/api/generated/IPython.Debugger.html">ipdb</a> (ipython debugger) when a test fails, but I use <a class="reference external" href="https://github.com/inducer/pudb">pudb</a> and the <a class="reference external" href="http://fishshell.com/">fish</a> shell (not <cite>bash</cite>) so this documents what I had to do to get it to work.</p>
+</div>
+<div class="section" id="how-do-you-do-it-then">
+<h2>How do you do it then?<a class="headerlink" href="#how-do-you-do-it-then" title="Permalink to this headline">¶</a></h2>
+<p>The first thing to do is create a file named <cite>environment.py</cite> in the same folder as the <cite>features</cite> file. Inside of it put the following:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">distutils.util</span> <span class="kn">import</span> <span class="n">strtobool</span> <span class="k">as</span> <span class="n">_bool</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">BEHAVE_DEBUG_ON_ERROR</span> <span class="o">=</span> <span class="n">_bool</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;BEHAVE_DEBUG_ON_ERROR&quot;</span><span class="p">,</span>
+                                             <span class="s">&quot;no&quot;</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">after_step</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">BEHAVE_DEBUG_ON_ERROR</span> <span class="ow">and</span> <span class="n">step</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="s">&#39;failed&#39;</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">pudb</span>
+        <span class="n">pudb</span><span class="o">.</span><span class="n">post_mortem</span><span class="p">(</span><span class="n">tb</span><span class="o">=</span><span class="n">step</span><span class="o">.</span><span class="n">exc_traceback</span><span class="p">,</span>
+                         <span class="n">e_type</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                         <span class="n">e_value</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<p>This is more-or-less exactly what was in the tutorial except I swapped out <cite>pudb</cite> for <cite>pdb</cite>. This code tells <cite>behave</cite> to run the <cite>pudb.post_mortem</cite> after a step is finished (a step corresponds to one of the functions you define to implement the tests) if the step failed and your shell has an environment variable named <cite>BEHAVE_DEBUG_ON_ERROR</cite> and it is set to something that <cite>strtobool</cite> recognizes as True. This is from the docstring documentation for <a class="reference external" href="https://docs.python.org/2/distutils/apiref.html#module-distutils.util">strtobool</a>:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>distutils.util.strtobool(val)</dt>
+<dd><p class="first">Convert a string representation of truth to true (1) or false (0).</p>
+<ul class="last simple">
+<li>True values are <cite>y</cite>, <cite>yes</cite>, <cite>t</cite>, <cite>true</cite>, <cite>on</cite> and <cite>1</cite></li>
+<li>false values are <cite>n</cite>, <cite>no</cite>, <cite>f</cite>, <cite>false</cite>, <cite>off</cite> and <cite>0</cite></li>
+<li>Raises <strong>ValueError</strong> if val is anything else.</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<p>The &#8216;no&#8217; in the <tt class="docutils literal"><span class="pre">os.environ.get</span></tt> function means that it won&#8217;t execute by default. To have it run you need to set the environment variable to one of the &#8216;true&#8217; values. In fish this would be:</p>
+<div class="highlight-python"><div class="highlight"><pre>set -x BEHAVE_DEBUG_ON_ERROR yes
+</pre></div>
+</div>
+<p>Now when you run behave it will drop into pudb when a test fails.</p>
+</div>
+<div class="section" id="so-what-then">
+<h2>So, what then?<a class="headerlink" href="#so-what-then" title="Permalink to this headline">¶</a></h2>
+<p>Using this has so far been less useful than I thought it would be, since it tends to drop me into the <a class="reference external" href="https://pypi.python.org/pypi/PyHamcrest">pyhamcrest</a> call that failed and although I&#8217;ve managed to step through to the <cite>behave</cite> code I haven&#8217;t managed to figure out how to get to my own code. It is still useful, though, since <cite>behave</cite> will not stop when it encounters a failed test so this makes it easier to figure out what has failed.</p>
+<p>Even though the <cite>pudb-behave</cite> combination is less exciting than I thought it would be, there were several things I learned that I want to document here for later.</p>
+<div class="section" id="setting-an-environment-variable-in-fish">
+<h3>Setting an environment variable in fish<a class="headerlink" href="#setting-an-environment-variable-in-fish" title="Permalink to this headline">¶</a></h3>
+<p>To set a fish environment variable:</p>
+<div class="highlight-python"><div class="highlight"><pre>set -x &lt;variable&gt; &lt;value&gt;
+</pre></div>
+</div>
+<p>And then unset it:</p>
+<div class="highlight-python"><div class="highlight"><pre>set -e &lt;variable&gt;
+</pre></div>
+</div>
+<p>I&#8217;ve done this before to set my <tt class="docutils literal"><span class="pre">PATH</span></tt> variable but for some reason when I tried to search for it this time I got some false-starts at first.</p>
+</div>
+<div class="section" id="python-s-string-to-boolean">
+<h3>Python&#8217;s String to Boolean<a class="headerlink" href="#python-s-string-to-boolean" title="Permalink to this headline">¶</a></h3>
+<p>I also learned that python has a built in way to translate strings to booleans. This isn&#8217;t really a hard thing to do on your own, but it was an interesting discovery. I don&#8217;t think I would have looked in <cite>distutils</cite> for it.</p>
+</div>
+<div class="section" id="pudb-s-post-mortem-function">
+<h3><cite>pudb&#8217;s</cite> post_mortem function<a class="headerlink" href="#pudb-s-post-mortem-function" title="Permalink to this headline">¶</a></h3>
+<p>Another interesting thing to find out was that <cite>pudb</cite> has a <cite>post_mortem</cite> function. I like <cite>pudb</cite> but it doesn&#8217;t seem to be well documented. The <tt class="docutils literal"><span class="pre">readme</span></tt> does say that it displays the same interface as python&#8217;s <cite>pdb</cite> so I suppose I could just read their documentation, but it seems like one of those things where you have to know what you don&#8217;t know to know to look for it. In this case I figured out how to call it by looking at the code (it&#8217;s defined in <tt class="docutils literal"><span class="pre">pudb.__init__.py</span></tt>).</p>
+</div>
+<div class="section" id="using-environment-variables-for-debugging">
+<h3>Using environment variables for debugging<a class="headerlink" href="#using-environment-variables-for-debugging" title="Permalink to this headline">¶</a></h3>
+<p>Probably the most interesting thing was the way they used <cite>os.environ</cite> to change the behavior of the code. I normally use command-line options to enable debugging but this might be a better pattern since it pulls it out of the user interface. This means that it won&#8217;t be as obvious to the user, but I suppose if they&#8217;re going to debug my code they had better read the documentation and not just rely on <tt class="docutils literal"><span class="pre">--help</span></tt> anyway. I think I&#8217;ll probably get rid of in in the <cite>environment.py</cite> file, though, since I want it to run pretty much all the time, but it&#8217;s an interesting idea anyway.</p>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>This was a translation of how to set up a post-mortem debugger for behave using <cite>pudb</cite> instead of <cite>ipdb</cite> and <cite>fish</cite> instead of <cite>bash</cite>. It is primarily meant to be a record for me to look at in the future, since I don&#8217;t set up my <cite>behave</cite> environment on a regular basis and tend to have a hard time re-searching for things (possibly because I use <a class="reference external" href="https://duckduckgo.com/">DuckDuckGo</a> so my search history isn&#8217;t being used). I think the most valuable thing I got out of it was the pattern for setting up debuggers that I think I&#8217;ll steal (use) for my own code.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Using <cite>pudb</cite> with Behave and Fish</a><ul>
+<li><a class="reference internal" href="#what-is-this-about">What is this about?</a></li>
+<li><a class="reference internal" href="#how-do-you-do-it-then">How do you do it then?</a></li>
+<li><a class="reference internal" href="#so-what-then">So, what then?</a><ul>
+<li><a class="reference internal" href="#setting-an-environment-variable-in-fish">Setting an environment variable in fish</a></li>
+<li><a class="reference internal" href="#python-s-string-to-boolean">Python&#8217;s String to Boolean</a></li>
+<li><a class="reference internal" href="#pudb-s-post-mortem-function"><cite>pudb&#8217;s</cite> post_mortem function</a></li>
+<li><a class="reference internal" href="#using-environment-variables-for-debugging">Using environment variables for debugging</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../user/index.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../_sources/documentation/developer/how_tos/pudb_behave.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

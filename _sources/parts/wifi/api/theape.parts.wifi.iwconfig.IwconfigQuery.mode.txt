@@ -1,0 +1,6 @@
+theape.parts.wifi.iwconfig.IwconfigQuery.mode
+=============================================
+
+.. currentmodule:: theape.parts.wifi.iwconfig
+
+.. autoattribute:: IwconfigQuery.mode

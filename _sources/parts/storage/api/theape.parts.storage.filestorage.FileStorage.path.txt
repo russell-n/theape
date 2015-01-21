@@ -1,0 +1,6 @@
+theape.parts.storage.filestorage.FileStorage.path
+=================================================
+
+.. currentmodule:: theape.parts.storage.filestorage
+
+.. autoattribute:: FileStorage.path

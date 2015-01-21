@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The Default Trace &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
+    <link rel="up" title="Exploring Trace" href="index.html" />
+    <link rel="next" title="CountCallers" href="countcallers.html" />
+    <link rel="prev" title="Countfuncs" href="countfuncs.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="countcallers.html" title="CountCallers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="countfuncs.html" title="Countfuncs"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >The Ape Developer Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >The Explorations</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Exploring Trace</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-default-trace">
+<h1>The Default Trace<a class="headerlink" href="#the-default-trace" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># python standard library</span>
+<span class="kn">from</span> <span class="nn">trace</span> <span class="kn">import</span> <span class="n">Trace</span>
+
+<span class="kn">from</span> <span class="nn">test_class</span> <span class="kn">import</span> <span class="n">TestExec</span>
+</pre></div>
+</div>
+<div class="section" id="the-exec-statement">
+<h2>The <tt class="docutils literal"><span class="pre">exec</span></tt> Statement<a class="headerlink" href="#the-exec-statement" title="Permalink to this headline">¶</a></h2>
+<p>To use <tt class="docutils literal"><span class="pre">Trace</span></tt> you can pass its <tt class="docutils literal"><span class="pre">run</span></tt> method either a string or an object that the <a class="reference external" href="http://docs.python.org/2/reference/simple_stmts.html#the-exec-statement">exec</a> statement accepts.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">t</span> <span class="o">=</span> <span class="n">TestExec</span><span class="p">()</span>
+<span class="k">exec</span><span class="p">(</span><span class="s">&#39;t.run_this()&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Getting that to work had me stumped for a bit. Since the documentation says <cite>code object</cite> I thought you would pass in the <tt class="docutils literal"><span class="pre">TestExec</span></tt> instance, but it has some kind of magic going on that allows you to import or define code and then run it using strings.</p>
+</div>
+<div class="section" id="id1">
+<h2>The Default Trace<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>With that background out of the way we can see what the default behavior is.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">trace</span> <span class="o">=</span> <span class="n">Trace</span><span class="p">()</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">trace</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s">&#39;t.run_this_and_that()&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;END_DEFAULT&#39;</span>
+<span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+    <span class="k">print</span> <span class="ne">NameError</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre> --- modulename: Pweave, funcname: &lt;module&gt;
+&lt;string&gt;(1):   --- modulename: trace, funcname: _unsettrace
+trace.py(80):         sys.settrace(None)
+&lt;type &#39;exceptions.NameError&#39;&gt;
+</pre></div>
+</div>
+<p>Okay, it turns out that Pweave raises a NameError if you run a trace inside of it so I have to add it afterwards, but if you run the tangled python code the trace will dump to stdout:</p>
+<div class="highlight-python"><div class="highlight"><pre>1,2,3
+ --- modulename: explore_trace, funcname: &lt;module&gt;
+&lt;string&gt;(1):   --- modulename: explore_trace, funcname: run_this_and_that
+explore_trace.py(22):         self.run_this()
+ --- modulename: explore_trace, funcname: run_this
+explore_trace.py(11):         x = 1
+explore_trace.py(12):         y = 2
+explore_trace.py(13):         print &quot;{0},{1},{2}&quot;.format(x,y,x+y)
+1,2,3
+explore_trace.py(14):         return
+explore_trace.py(23):         self.run_that()
+ --- modulename: explore_trace, funcname: run_that
+explore_trace.py(17):         self.x = 1
+explore_trace.py(18):         self.y = 2
+explore_trace.py(19):         return
+explore_trace.py(24):         return
+ --- modulename: trace, funcname: _unsettrace
+trace.py(80):         sys.settrace(None)
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The Default Trace</a><ul>
+<li><a class="reference internal" href="#the-exec-statement">The <tt class="docutils literal"><span class="pre">exec</span></tt> Statement</a></li>
+<li><a class="reference internal" href="#id1">The Default Trace</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../user/index.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../../_sources/documentation/developer/explorations/explore_trace/default_trace.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

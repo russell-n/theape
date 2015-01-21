@@ -1,0 +1,6 @@
+theape.plugins.apeplugin.OperatorConfiguration.initialize_file_storage
+======================================================================
+
+.. currentmodule:: theape.plugins.apeplugin
+
+.. automethod:: OperatorConfiguration.initialize_file_storage

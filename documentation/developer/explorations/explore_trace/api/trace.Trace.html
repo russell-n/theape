@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>trace.Trace &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Exploring Trace" href="../explore_trace.html" />
+    <link rel="next" title="Runfunc" href="../runfunc.html" />
+    <link rel="prev" title="Runfunc" href="../runfunc.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../runfunc.html" title="Runfunc"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../runfunc.html" title="Runfunc"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >The Ape Developer Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >The Explorations</a> &raquo;</li>
+          <li><a href="../index.html" >Exploring Trace</a> &raquo;</li>
+          <li><a href="../explore_trace.html" accesskey="U">Exploring Trace</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="trace-trace">
+<h1>trace.Trace<a class="headerlink" href="#trace-trace" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="trace.Trace">
+<em class="property">class </em><tt class="descclassname">trace.</tt><tt class="descname">Trace</tt><big>(</big><em>count=1</em>, <em>trace=1</em>, <em>countfuncs=0</em>, <em>countcallers=0</em>, <em>ignoremods=()</em>, <em>ignoredirs=()</em>, <em>infile=None</em>, <em>outfile=None</em>, <em>timing=False</em><big>)</big><a class="headerlink" href="#trace.Trace" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>&#64;param count true iff it should count number of times each</dt>
+<dd>line is executed</dd>
+<dt>&#64;param trace true iff it should print out each line that is</dt>
+<dd>being counted</dd>
+<dt>&#64;param countfuncs true iff it should just output a list of</dt>
+<dd>(filename, modulename, funcname,) for functions
+that were called at least once;  This overrides
+<a href="#id1"><span class="problematic" id="id2">`</span></a>count&#8217; and <a href="#id3"><span class="problematic" id="id4">`</span></a>trace&#8217;</dd>
+</dl>
+<p>&#64;param ignoremods a list of the names of modules to ignore
+&#64;param ignoredirs a list of the names of directories to ignore</p>
+<blockquote>
+<div>all of the (recursive) contents of</div></blockquote>
+<dl class="docutils">
+<dt>&#64;param infile file from which to read stored counts to be</dt>
+<dd>added into the results</dd>
+</dl>
+<p>&#64;param outfile file in which to write the results
+&#64;param timing true iff timing information be displayed</p>
+<dl class="method">
+<dt id="trace.Trace.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>count=1</em>, <em>trace=1</em>, <em>countfuncs=0</em>, <em>countcallers=0</em>, <em>ignoremods=()</em>, <em>ignoredirs=()</em>, <em>infile=None</em>, <em>outfile=None</em>, <em>timing=False</em><big>)</big><a class="headerlink" href="#trace.Trace.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>&#64;param count true iff it should count number of times each</dt>
+<dd>line is executed</dd>
+<dt>&#64;param trace true iff it should print out each line that is</dt>
+<dd>being counted</dd>
+<dt>&#64;param countfuncs true iff it should just output a list of</dt>
+<dd>(filename, modulename, funcname,) for functions
+that were called at least once;  This overrides
+<a href="#id5"><span class="problematic" id="id6">`</span></a>count&#8217; and <a href="#id7"><span class="problematic" id="id8">`</span></a>trace&#8217;</dd>
+</dl>
+<p>&#64;param ignoremods a list of the names of modules to ignore
+&#64;param ignoredirs a list of the names of directories to ignore</p>
+<blockquote>
+<div>all of the (recursive) contents of</div></blockquote>
+<dl class="docutils">
+<dt>&#64;param infile file from which to read stored counts to be</dt>
+<dd>added into the results</dd>
+</dl>
+<p>&#64;param outfile file in which to write the results
+&#64;param timing true iff timing information be displayed</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#trace.Trace.__init__" title="trace.Trace.__init__"><tt class="xref py py-obj docutils literal"><span class="pre">__init__</span></tt></a>([count,&nbsp;trace,&nbsp;countfuncs,&nbsp;...])</td>
+<td>&#64;param count true iff it should count number of times each</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">file_module_function_of</span></tt>(frame)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#trace.Trace.globaltrace_countfuncs" title="trace.Trace.globaltrace_countfuncs"><tt class="xref py py-obj docutils literal"><span class="pre">globaltrace_countfuncs</span></tt></a>(frame,&nbsp;why,&nbsp;arg)</td>
+<td>Handler for call events.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#trace.Trace.globaltrace_lt" title="trace.Trace.globaltrace_lt"><tt class="xref py py-obj docutils literal"><span class="pre">globaltrace_lt</span></tt></a>(frame,&nbsp;why,&nbsp;arg)</td>
+<td>Handler for call events.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#trace.Trace.globaltrace_trackcallers" title="trace.Trace.globaltrace_trackcallers"><tt class="xref py py-obj docutils literal"><span class="pre">globaltrace_trackcallers</span></tt></a>(frame,&nbsp;why,&nbsp;arg)</td>
+<td>Handler for call events.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">localtrace_count</span></tt>(frame,&nbsp;why,&nbsp;arg)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">localtrace_trace</span></tt>(frame,&nbsp;why,&nbsp;arg)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">localtrace_trace_and_count</span></tt>(frame,&nbsp;why,&nbsp;arg)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://docs.python.org/library/trace.html#trace.Trace.results" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">results</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://docs.python.org/library/trace.html#trace.Trace.run" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">run</span></tt></a>(cmd)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://docs.python.org/library/trace.html#trace.Trace.runctx" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">runctx</span></tt></a>(cmd[,&nbsp;globals,&nbsp;locals])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://docs.python.org/library/trace.html#trace.Trace.runfunc" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">runfunc</span></tt></a>(func,&nbsp;*args,&nbsp;**kw)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="trace.Trace.globaltrace_countfuncs">
+<tt class="descname">globaltrace_countfuncs</tt><big>(</big><em>frame</em>, <em>why</em>, <em>arg</em><big>)</big><a class="headerlink" href="#trace.Trace.globaltrace_countfuncs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handler for call events.</p>
+<p>Adds (filename, modulename, funcname) to the self._calledfuncs dict.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="trace.Trace.globaltrace_lt">
+<tt class="descname">globaltrace_lt</tt><big>(</big><em>frame</em>, <em>why</em>, <em>arg</em><big>)</big><a class="headerlink" href="#trace.Trace.globaltrace_lt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handler for call events.</p>
+<p>If the code block being entered is to be ignored, returns <a href="#id9"><span class="problematic" id="id10">`</span></a>None&#8217;,
+else returns self.localtrace.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="trace.Trace.globaltrace_trackcallers">
+<tt class="descname">globaltrace_trackcallers</tt><big>(</big><em>frame</em>, <em>why</em>, <em>arg</em><big>)</big><a class="headerlink" href="#trace.Trace.globaltrace_trackcallers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handler for call events.</p>
+<p>Adds information about who called who to the self._callers dict.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../user/index.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../../../_sources/documentation/developer/explorations/explore_trace/api/trace.Trace.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

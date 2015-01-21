@@ -1,0 +1,6 @@
+theape.infrastructure.timemap.RelativeTime.total_seconds
+========================================================
+
+.. currentmodule:: theape.infrastructure.timemap
+
+.. automethod:: RelativeTime.total_seconds

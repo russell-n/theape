@@ -1,0 +1,6 @@
+theape.plugins.dummyplugin.CrashTestDummyConfiguration.configspec
+=================================================================
+
+.. currentmodule:: theape.plugins.dummyplugin
+
+.. autoattribute:: CrashTestDummyConfiguration.configspec

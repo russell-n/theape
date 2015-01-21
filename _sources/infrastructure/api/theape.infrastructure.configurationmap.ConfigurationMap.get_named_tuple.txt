@@ -1,0 +1,6 @@
+theape.infrastructure.configurationmap.ConfigurationMap.get_named_tuple
+=======================================================================
+
+.. currentmodule:: theape.infrastructure.configurationmap
+
+.. automethod:: ConfigurationMap.get_named_tuple

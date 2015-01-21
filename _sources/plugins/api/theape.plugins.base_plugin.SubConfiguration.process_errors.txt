@@ -1,0 +1,6 @@
+theape.plugins.base_plugin.SubConfiguration.process_errors
+==========================================================
+
+.. currentmodule:: theape.plugins.base_plugin
+
+.. automethod:: SubConfiguration.process_errors

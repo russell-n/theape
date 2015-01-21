@@ -1,0 +1,6 @@
+theape.parts.watchers.tests.testthewatcher.TestThewatcher.test_call
+===================================================================
+
+.. currentmodule:: theape.parts.watchers.tests.testthewatcher
+
+.. automethod:: TestThewatcher.test_call

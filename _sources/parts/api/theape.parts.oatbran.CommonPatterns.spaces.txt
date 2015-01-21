@@ -1,0 +1,6 @@
+theape.parts.oatbran.CommonPatterns.spaces
+==========================================
+
+.. currentmodule:: theape.parts.oatbran
+
+.. autoattribute:: CommonPatterns.spaces

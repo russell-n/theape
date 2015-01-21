@@ -1,0 +1,6 @@
+theape.components.component.Composite.components
+================================================
+
+.. currentmodule:: theape.components.component
+
+.. autoattribute:: Composite.components

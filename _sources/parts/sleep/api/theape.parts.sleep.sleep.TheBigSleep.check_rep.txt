@@ -1,0 +1,6 @@
+theape.parts.sleep.sleep.TheBigSleep.check_rep
+==============================================
+
+.. currentmodule:: theape.parts.sleep.sleep
+
+.. automethod:: TheBigSleep.check_rep

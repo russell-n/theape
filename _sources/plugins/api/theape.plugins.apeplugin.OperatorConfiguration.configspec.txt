@@ -1,0 +1,6 @@
+theape.plugins.apeplugin.OperatorConfiguration.configspec
+=========================================================
+
+.. currentmodule:: theape.plugins.apeplugin
+
+.. autoattribute:: OperatorConfiguration.configspec

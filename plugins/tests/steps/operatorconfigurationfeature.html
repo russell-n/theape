@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Operator Configuration &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../index.html" />
+    <link rel="up" title="Plugins Features" href="index.html" />
+    <link rel="prev" title="Operator Config Spec" href="operatorconfigspecfeature.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="operatorconfigspecfeature.html" title="Operator Config Spec"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Plugins</a> &raquo;</li>
+          <li><a href="../index.html" >Testing the Plugins</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Plugins Features</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="operator-configuration">
+<h1>Operator Configuration<a class="headerlink" href="#operator-configuration" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">Feature:</span><span class="nf"> Operator Configuration</span>
+<span class="nf"> </span><span class="k">Scenario:</span><span class="nf"> User builds the default configuration</span>
+<span class="k">  Given </span><span class="nf">an empty configuration</span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">the user checks the operator configuration</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">the operator configuration is the default</span>
+
+<span class="nf"> </span><span class="k">Scenario:</span><span class="nf"> User builds configuration with operations</span>
+<span class="k">  Given </span><span class="nf">a configuration with operations and plugins</span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">the user checks the operator configuration</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">the operator configuration has the operation configurations</span>
+</pre></div>
+</div>
+<div class="section" id="scenario-user-builds-the-default-configuration">
+<h2>Scenario: User builds the default configuration<a class="headerlink" href="#scenario-user-builds-the-default-configuration" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;an empty configuration&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">empty_configuration</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="n">OperatorConfiguration</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;&#39;</span><span class="p">])</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@when</span><span class="p">(</span><span class="s">&quot;the user checks the operator configuration&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">check_configuration</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">timer_definition</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">CountdownTimer</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">singletons</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">quartermaster_definition</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">QuarterMaster</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">operation_configuration</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">OperationConfiguration</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">operation</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">operation_configuration</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">operation</span>
+
+    <span class="k">with</span> <span class="n">nested</span><span class="p">(</span>
+            <span class="n">patch</span><span class="p">(</span><span class="s">&#39;ape.parts.countdown.countdown.CountdownTimer&#39;</span><span class="p">,</span> <span class="n">context</span><span class="o">.</span><span class="n">timer_definition</span><span class="p">),</span>
+            <span class="n">patch</span><span class="p">(</span><span class="s">&#39;ape.infrastructure.singletons&#39;</span><span class="p">,</span> <span class="n">context</span><span class="o">.</span><span class="n">singletons</span><span class="p">),</span>
+            <span class="n">patch</span><span class="p">(</span><span class="s">&#39;ape.plugins.quartermaster.QuarterMaster&#39;</span><span class="p">,</span> <span class="n">context</span><span class="o">.</span><span class="n">quartermaster_definition</span><span class="p">),</span>
+            <span class="n">patch</span><span class="p">(</span><span class="s">&#39;ape.plugins.apeplugin.OperationConfiguration&#39;</span><span class="p">,</span> <span class="n">context</span><span class="o">.</span><span class="n">operation_configuration</span><span class="p">)):</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">timer</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">countdown_timer</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">initialize_file_storage</span><span class="p">()</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">operation_timer</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">operation_timer</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">quartermaster</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">quartermaster</span>
+        <span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">operation_configurations</span><span class="p">:</span>
+            <span class="k">pass</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;the operator configuration is the default&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">default_configuration</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">constants</span> <span class="o">=</span> <span class="n">OperatorConfigurationConstants</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">timer_definition</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span><span class="n">repetitions</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">default_repetitions</span><span class="p">,</span>
+                                            <span class="n">end_time</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">default_end_time</span><span class="p">,</span>
+                                            <span class="n">total_time</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">default_total_time</span><span class="p">,</span>
+                                            <span class="n">log_level</span><span class="o">=</span><span class="n">INFO</span><span class="p">)</span>
+
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">singletons</span><span class="o">.</span><span class="n">get_filestorage</span><span class="o">.</span><span class="n">called_with</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">file_storage_name</span><span class="p">))</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">quartermaster_definition</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span><span class="n">external_modules</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">default_modules</span><span class="p">)</span>
+
+    <span class="n">assert_that</span><span class="p">(</span><span class="nb">len</span><span class="p">([</span><span class="n">config</span> <span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">operation_configurations</span><span class="p">]),</span>
+                <span class="n">is_</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="scenario-user-builds-configuration-with-operations">
+<h2>Scenario: User builds configuration with operations<a class="headerlink" href="#scenario-user-builds-configuration-with-operations" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre>  configuration = &quot;&quot;&quot;
+  [OPERATIONS]
+  op1 = p1
+  op2 = p2,p3
+
+  [PLUGINS]
+  # this isn&#39;t valid, but the OperatorConfiguration doesn&#39;t build plugins anyway
+  p1 = 1
+  p2 = 2
+  p3 = 3
+  &quot;&quot;&quot;.splitlines()
+
+  @given(&quot;a configuration with operations and plugins&quot;)
+  def configuration_operations(context):
+      context.configuration = OperatorConfiguration(configuration)
+      return
+
+
+When the user checks the operator configuration
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;the operator configuration has the operation configurations&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">assert_operation_configurations</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">constants</span> <span class="o">=</span> <span class="n">OperatorConfigurationConstants</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">timer_definition</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span><span class="n">repetitions</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">default_repetitions</span><span class="p">,</span>
+                                            <span class="n">end_time</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">default_end_time</span><span class="p">,</span>
+                                            <span class="n">total_time</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">default_total_time</span><span class="p">,</span>
+                                            <span class="n">log_level</span><span class="o">=</span><span class="n">INFO</span><span class="p">)</span>
+
+    <span class="n">p_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="s">&#39;p1 p2 p3&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="s">&#39;1 2 3&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
+
+    <span class="n">expected</span> <span class="o">=</span> <span class="p">[</span><span class="n">call</span><span class="p">(</span><span class="n">plugins_section</span><span class="o">=</span><span class="n">p_dict</span><span class="p">,</span>
+                     <span class="n">plugin_subsections</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;p1&#39;</span><span class="p">],</span>
+                     <span class="n">operation_name</span><span class="o">=</span><span class="s">&#39;op1&#39;</span><span class="p">,</span>
+                     <span class="n">quartermaster</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">quartermaster</span><span class="p">,</span>
+                     <span class="n">countdown_timer</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">operation_timer</span><span class="p">),</span>
+
+                <span class="n">call</span><span class="p">(</span><span class="n">plugins_section</span><span class="o">=</span><span class="n">p_dict</span><span class="p">,</span>
+                     <span class="n">plugin_subsections</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;p2&#39;</span><span class="p">,</span> <span class="s">&#39;p3&#39;</span> <span class="p">],</span>
+                     <span class="n">operation_name</span><span class="o">=</span><span class="s">&#39;op2&#39;</span><span class="p">,</span>
+                     <span class="n">quartermaster</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">quartermaster</span><span class="p">,</span>
+                     <span class="n">countdown_timer</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">operation_timer</span><span class="p">)]</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">operation_configuration</span><span class="o">.</span><span class="n">mock_calls</span><span class="p">,</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">equal_to</span><span class="p">(</span><span class="n">expected</span><span class="p">)))</span>
+
+    <span class="n">mock_operation_config</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;operation config&#39;</span><span class="p">)</span>
+    <span class="n">mock_operation_config_2</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;operation config&#39;</span><span class="p">)</span>
+    <span class="n">mock_operation</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;operation&#39;</span><span class="p">)</span>
+    <span class="n">mock_operation_2</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+    <span class="n">mock_operation_config</span><span class="o">.</span><span class="n">operation</span> <span class="o">=</span> <span class="n">mock_operation</span>
+    <span class="n">mock_operation_config_2</span><span class="o">.</span><span class="n">operation</span> <span class="o">=</span> <span class="n">mock_operation_2</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">_operation_configurations</span> <span class="o">=</span> <span class="p">[</span><span class="n">mock_operation_config</span><span class="p">,</span> <span class="n">mock_operation_config_2</span><span class="p">]</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">operator</span><span class="o">.</span><span class="n">components</span><span class="p">)</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">operator</span><span class="o">.</span><span class="n">components</span><span class="p">,</span>
+                    <span class="n">contains</span><span class="p">(</span><span class="n">mock_operation</span><span class="p">,</span> <span class="n">mock_operation_2</span><span class="p">))</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Operator Configuration</a><ul>
+<li><a class="reference internal" href="#scenario-user-builds-the-default-configuration">Scenario: User builds the default configuration</a></li>
+<li><a class="reference internal" href="#scenario-user-builds-configuration-with-operations">Scenario: User builds configuration with operations</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../_sources/plugins/tests/steps/operatorconfigurationfeature.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

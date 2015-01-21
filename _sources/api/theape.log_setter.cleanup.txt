@@ -1,0 +1,6 @@
+theape.log_setter.cleanup
+=========================
+
+.. currentmodule:: theape.log_setter
+
+.. autofunction:: cleanup

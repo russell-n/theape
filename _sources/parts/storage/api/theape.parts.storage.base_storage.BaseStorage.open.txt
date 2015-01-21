@@ -1,0 +1,6 @@
+theape.parts.storage.base_storage.BaseStorage.open
+==================================================
+
+.. currentmodule:: theape.parts.storage.base_storage
+
+.. automethod:: BaseStorage.open

@@ -1,0 +1,611 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ape.infrastructure.configurationmap.ConfigurationMap &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Ape Documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ape-infrastructure-configurationmap-configurationmap">
+<h1>ape.infrastructure.configurationmap.ConfigurationMap<a class="headerlink" href="#ape-infrastructure-configurationmap-configurationmap" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="ape.infrastructure.configurationmap.ConfigurationMap">
+<em class="property">class </em><tt class="descclassname">ape.infrastructure.configurationmap.</tt><tt class="descname">ConfigurationMap</tt><big>(</big><em>filename</em><big>)</big><a class="headerlink" href="#ape.infrastructure.configurationmap.ConfigurationMap" title="Permalink to this definition">¶</a></dt>
+<dd><p>A map from configuration files to data</p>
+<p>ConfigurationMap constructor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
+<li><cite>filename</cite>: filename(s) to create configuration</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="ape.infrastructure.configurationmap.ConfigurationMap.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>filename</em><big>)</big><a class="headerlink" href="#ape.infrastructure.configurationmap.ConfigurationMap.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>ConfigurationMap constructor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
+<li><cite>filename</cite>: filename(s) to create configuration</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#ape.infrastructure.configurationmap.ConfigurationMap.__init__" title="ape.infrastructure.configurationmap.ConfigurationMap.__init__"><tt class="xref py py-obj docutils literal"><span class="pre">__init__</span></tt></a>(filename)</td>
+<td>ConfigurationMap constructor</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ape.infrastructure.configurationmap.ConfigurationMap.get" title="ape.infrastructure.configurationmap.ConfigurationMap.get"><tt class="xref py py-obj docutils literal"><span class="pre">get</span></tt></a>(section,&nbsp;option[,&nbsp;optional,&nbsp;default])</td>
+<td>Gets the option from the section as a string</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="ape.infrastructure.configurationmap.ConfigurationMap.get_boolean.html#ape.infrastructure.configurationmap.ConfigurationMap.get_boolean" title="ape.infrastructure.configurationmap.ConfigurationMap.get_boolean"><tt class="xref py py-obj docutils literal"><span class="pre">get_boolean</span></tt></a>(section,&nbsp;option[,&nbsp;optional,&nbsp;default])</td>
+<td>Gets a value and casts it to a boolean</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="ape.infrastructure.configurationmap.ConfigurationMap.get_datetime.html#ape.infrastructure.configurationmap.ConfigurationMap.get_datetime" title="ape.infrastructure.configurationmap.ConfigurationMap.get_datetime"><tt class="xref py py-obj docutils literal"><span class="pre">get_datetime</span></tt></a>(section,&nbsp;option[,&nbsp;optional,&nbsp;...])</td>
+<td>Gets a datetime object based on the option (value is timestamp) (see timemap.AbsoluteTime)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ape.infrastructure.configurationmap.ConfigurationMap.get_dictionary" title="ape.infrastructure.configurationmap.ConfigurationMap.get_dictionary"><tt class="xref py py-obj docutils literal"><span class="pre">get_dictionary</span></tt></a>(section,&nbsp;option[,&nbsp;optional,&nbsp;...])</td>
+<td>converts a delimiter-separated line to a key:value based dictionary (values are strings)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ape.infrastructure.configurationmap.ConfigurationMap.get_float" title="ape.infrastructure.configurationmap.ConfigurationMap.get_float"><tt class="xref py py-obj docutils literal"><span class="pre">get_float</span></tt></a>(section,&nbsp;option[,&nbsp;optional,&nbsp;default])</td>
+<td>gets the value as a float</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ape.infrastructure.configurationmap.ConfigurationMap.get_int" title="ape.infrastructure.configurationmap.ConfigurationMap.get_int"><tt class="xref py py-obj docutils literal"><span class="pre">get_int</span></tt></a>(section,&nbsp;option[,&nbsp;optional,&nbsp;default])</td>
+<td>gets the value as an integer</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ape.infrastructure.configurationmap.ConfigurationMap.get_list" title="ape.infrastructure.configurationmap.ConfigurationMap.get_list"><tt class="xref py py-obj docutils literal"><span class="pre">get_list</span></tt></a>(section,&nbsp;option[,&nbsp;optional,&nbsp;...])</td>
+<td>Gets the value and converts it to a list</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ape.infrastructure.configurationmap.ConfigurationMap.get_named_tuple" title="ape.infrastructure.configurationmap.ConfigurationMap.get_named_tuple"><tt class="xref py py-obj docutils literal"><span class="pre">get_named_tuple</span></tt></a>(section,&nbsp;option[,&nbsp;optional,&nbsp;...])</td>
+<td>Converts a line to a named tuple (Like the get_dictionary but keys are properties)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ape.infrastructure.configurationmap.ConfigurationMap.get_ordered_dictionary" title="ape.infrastructure.configurationmap.ConfigurationMap.get_ordered_dictionary"><tt class="xref py py-obj docutils literal"><span class="pre">get_ordered_dictionary</span></tt></a>(section,&nbsp;option[,&nbsp;...])</td>
+<td>converts a delimiter-separated line to a key:value based dictionary (values are strings)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="ape.infrastructure.configurationmap.ConfigurationMap.get_relativetime.html#ape.infrastructure.configurationmap.ConfigurationMap.get_relativetime" title="ape.infrastructure.configurationmap.ConfigurationMap.get_relativetime"><tt class="xref py py-obj docutils literal"><span class="pre">get_relativetime</span></tt></a>(section,&nbsp;option[,&nbsp;...])</td>
+<td>Gets a relativetime object based on the option (assumes value is timestamp) (see timemap.RelativeTime)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ape.infrastructure.configurationmap.ConfigurationMap.get_tuple" title="ape.infrastructure.configurationmap.ConfigurationMap.get_tuple"><tt class="xref py py-obj docutils literal"><span class="pre">get_tuple</span></tt></a>(section,&nbsp;option[,&nbsp;optional,&nbsp;...])</td>
+<td>Gets the value and converts it to a list</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ape.infrastructure.configurationmap.ConfigurationMap.get_type" title="ape.infrastructure.configurationmap.ConfigurationMap.get_type"><tt class="xref py py-obj docutils literal"><span class="pre">get_type</span></tt></a>(cast,&nbsp;section,&nbsp;option[,&nbsp;optional,&nbsp;...])</td>
+<td>Gets a value and casts it</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ape.infrastructure.configurationmap.ConfigurationMap.getboolean" title="ape.infrastructure.configurationmap.ConfigurationMap.getboolean"><tt class="xref py py-obj docutils literal"><span class="pre">getboolean</span></tt></a>(section,&nbsp;option[,&nbsp;optional,&nbsp;default])</td>
+<td>Gets a value and casts it to a boolean</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ape.infrastructure.configurationmap.ConfigurationMap.getfloat" title="ape.infrastructure.configurationmap.ConfigurationMap.getfloat"><tt class="xref py py-obj docutils literal"><span class="pre">getfloat</span></tt></a>(section,&nbsp;option[,&nbsp;optional,&nbsp;default])</td>
+<td>gets the value as a float</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ape.infrastructure.configurationmap.ConfigurationMap.getint" title="ape.infrastructure.configurationmap.ConfigurationMap.getint"><tt class="xref py py-obj docutils literal"><span class="pre">getint</span></tt></a>(section,&nbsp;option[,&nbsp;optional,&nbsp;default])</td>
+<td>gets the value as an integer</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ape.infrastructure.configurationmap.ConfigurationMap.has_option" title="ape.infrastructure.configurationmap.ConfigurationMap.has_option"><tt class="xref py py-obj docutils literal"><span class="pre">has_option</span></tt></a>(section,&nbsp;option)</td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">True if section has this option</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ape.infrastructure.configurationmap.ConfigurationMap.items" title="ape.infrastructure.configurationmap.ConfigurationMap.items"><tt class="xref py py-obj docutils literal"><span class="pre">items</span></tt></a>(section[,&nbsp;optional,&nbsp;default])</td>
+<td>Gets tuples of (option, value) pairs for section</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ape.infrastructure.configurationmap.ConfigurationMap.log_error" title="ape.infrastructure.configurationmap.ConfigurationMap.log_error"><tt class="xref py py-obj docutils literal"><span class="pre">log_error</span></tt></a>(error[,&nbsp;message])</td>
+<td>Logs the error in bold red</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ape.infrastructure.configurationmap.ConfigurationMap.options" title="ape.infrastructure.configurationmap.ConfigurationMap.options"><tt class="xref py py-obj docutils literal"><span class="pre">options</span></tt></a>(section[,&nbsp;optional,&nbsp;default])</td>
+<td>gets a list of option-names</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ape.infrastructure.configurationmap.ConfigurationMap.write" title="ape.infrastructure.configurationmap.ConfigurationMap.write"><tt class="xref py py-obj docutils literal"><span class="pre">write</span></tt></a>(path)</td>
+<td>Writes the current configuration to the path (filename)</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#ape.infrastructure.configurationmap.ConfigurationMap.defaults" title="ape.infrastructure.configurationmap.ConfigurationMap.defaults"><tt class="xref py py-obj docutils literal"><span class="pre">defaults</span></tt></a></td>
+<td>the [DEFAULT] section</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ape.infrastructure.configurationmap.ConfigurationMap.logger" title="ape.infrastructure.configurationmap.ConfigurationMap.logger"><tt class="xref py py-obj docutils literal"><span class="pre">logger</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">A logging object.</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ape.infrastructure.configurationmap.ConfigurationMap.parser" title="ape.infrastructure.configurationmap.ConfigurationMap.parser"><tt class="xref py py-obj docutils literal"><span class="pre">parser</span></tt></a></td>
+<td>A SafeConfigParser instance with <cite>allow_no_value</cite> set to True</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ape.infrastructure.configurationmap.ConfigurationMap.sections" title="ape.infrastructure.configurationmap.ConfigurationMap.sections"><tt class="xref py py-obj docutils literal"><span class="pre">sections</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">section names other than DEFAULT</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="ape.infrastructure.configurationmap.ConfigurationMap.get">
+<tt class="descname">get</tt><big>(</big><em>section</em>, <em>option</em>, <em>optional=True</em>, <em>default=None</em><big>)</big><a class="headerlink" href="#ape.infrastructure.configurationmap.ConfigurationMap.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the option from the section as a string</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
+<li><cite>section</cite>: section within the config file</li>
+<li><cite>option</cite>: option within the section</li>
+<li><cite>optional</cite>: If true return default instead of raising error for missing option</li>
+<li><cite>default</cite>: what to return if optional and not found</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ape.infrastructure.configurationmap.ConfigurationMap.get_boolean">
+<tt class="descname">get_boolean</tt><big>(</big><em>section</em>, <em>option</em>, <em>optional=False</em>, <em>default=None</em><big>)</big><a class="headerlink" href="#ape.infrastructure.configurationmap.ConfigurationMap.get_boolean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a value and casts it to a boolean</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first simple">
+<li><cite>cast</cite>: function to cast the value</li>
+<li><cite>section</cite>: section with value</li>
+<li><cite>option</cite>: option in section with value</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">value from section:option</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raise:</th><td class="field-body"><p class="first last">ConfigurationError if it can&#8217;t be cast</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ape.infrastructure.configurationmap.ConfigurationMap.get_datetime">
+<tt class="descname">get_datetime</tt><big>(</big><em>section</em>, <em>option</em>, <em>optional=False</em>, <em>default=None</em><big>)</big><a class="headerlink" href="#ape.infrastructure.configurationmap.ConfigurationMap.get_datetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a datetime object based on the option (value is timestamp) (see timemap.AbsoluteTime)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">datetime object or default</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ape.infrastructure.configurationmap.ConfigurationMap.get_dictionary">
+<tt class="descname">get_dictionary</tt><big>(</big><em>section</em>, <em>option</em>, <em>optional=False</em>, <em>default=None</em>, <em>delimiter='</em>, <em>'</em>, <em>separator=':'</em><big>)</big><a class="headerlink" href="#ape.infrastructure.configurationmap.ConfigurationMap.get_dictionary" title="Permalink to this definition">¶</a></dt>
+<dd><p>converts a delimiter-separated line to a key:value based dictionary (values are strings)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ape.infrastructure.configurationmap.ConfigurationMap.get_float">
+<tt class="descname">get_float</tt><big>(</big><em>section</em>, <em>option</em>, <em>optional=False</em>, <em>default=None</em><big>)</big><a class="headerlink" href="#ape.infrastructure.configurationmap.ConfigurationMap.get_float" title="Permalink to this definition">¶</a></dt>
+<dd><p>gets the value as a float</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ape.infrastructure.configurationmap.ConfigurationMap.get_int">
+<tt class="descname">get_int</tt><big>(</big><em>section</em>, <em>option</em>, <em>optional=False</em>, <em>default=None</em><big>)</big><a class="headerlink" href="#ape.infrastructure.configurationmap.ConfigurationMap.get_int" title="Permalink to this definition">¶</a></dt>
+<dd><p>gets the value as an integer</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">value from section:option</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raise:</th><td class="field-body">ConfigurationError if it can&#8217;t be cast</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ape.infrastructure.configurationmap.ConfigurationMap.get_list">
+<tt class="descname">get_list</tt><big>(</big><em>section</em>, <em>option</em>, <em>optional=False</em>, <em>default=None</em>, <em>delimiter='</em>, <em>'</em><big>)</big><a class="headerlink" href="#ape.infrastructure.configurationmap.ConfigurationMap.get_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the value and converts it to a list</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">value list with whitespace trimmed</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ape.infrastructure.configurationmap.ConfigurationMap.get_named_tuple">
+<tt class="descname">get_named_tuple</tt><big>(</big><em>section</em>, <em>option</em>, <em>optional=False</em>, <em>default=None</em>, <em>delimiter='</em>, <em>'</em>, <em>separator=':'</em>, <em>cast=&lt;type 'str'&gt;</em><big>)</big><a class="headerlink" href="#ape.infrastructure.configurationmap.ConfigurationMap.get_named_tuple" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a line to a named tuple (Like the get_dictionary but keys are properties)</p>
+<p>namedtuple(section, fields)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
+<li><cite>section</cite>: section in config (used as name for namedtuple</li>
+<li><cite>option</cite>: with &lt;field&gt;&lt;delimiter&gt;&lt;value&gt;&lt;separator&gt; &lt;field&gt;&lt;delimiter&gt;&lt;value&gt;</li>
+<li><cite>optional</cite>: if True, missing option returns default</li>
+<li><cite>default</cite>: if optional and no option, return this</li>
+<li><cite>delimiter</cite>: token to separate &lt;field&gt;&lt;value&gt; pairs</li>
+<li><a href="#id1"><span class="problematic" id="id2">`</span></a>separator: token to separate each &lt;field&gt;&lt;value&gt; pair</li>
+<li><cite>cast</cite>:  function to cast all values</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ape.infrastructure.configurationmap.ConfigurationMap.get_ordered_dictionary">
+<tt class="descname">get_ordered_dictionary</tt><big>(</big><em>section</em>, <em>option</em>, <em>optional=False</em>, <em>default=None</em>, <em>delimiter='</em>, <em>'</em>, <em>separator=':'</em><big>)</big><a class="headerlink" href="#ape.infrastructure.configurationmap.ConfigurationMap.get_ordered_dictionary" title="Permalink to this definition">¶</a></dt>
+<dd><p>converts a delimiter-separated line to a key:value based dictionary (values are strings)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ape.infrastructure.configurationmap.ConfigurationMap.get_relativetime">
+<tt class="descname">get_relativetime</tt><big>(</big><em>section</em>, <em>option</em>, <em>optional=False</em>, <em>default=None</em><big>)</big><a class="headerlink" href="#ape.infrastructure.configurationmap.ConfigurationMap.get_relativetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a relativetime object based on the option (assumes value is timestamp) (see timemap.RelativeTime)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">RelativeTime object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ape.infrastructure.configurationmap.ConfigurationMap.get_tuple">
+<tt class="descname">get_tuple</tt><big>(</big><em>section</em>, <em>option</em>, <em>optional=False</em>, <em>default=None</em>, <em>delimiter='</em>, <em>'</em><big>)</big><a class="headerlink" href="#ape.infrastructure.configurationmap.ConfigurationMap.get_tuple" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the value and converts it to a list</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">value list with whitespace trimmed</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ape.infrastructure.configurationmap.ConfigurationMap.get_type">
+<tt class="descname">get_type</tt><big>(</big><em>cast</em>, <em>section</em>, <em>option</em>, <em>optional=False</em>, <em>default=None</em><big>)</big><a class="headerlink" href="#ape.infrastructure.configurationmap.ConfigurationMap.get_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a value and casts it</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first simple">
+<li><cite>cast</cite>: function to cast the value</li>
+<li><cite>section</cite>: section with value</li>
+<li><cite>option</cite>: option in section with value</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">value from section:option</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raise:</th><td class="field-body"><p class="first last">ConfigurationError if it can&#8217;t be cast</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ape.infrastructure.configurationmap.ConfigurationMap.getboolean">
+<tt class="descname">getboolean</tt><big>(</big><em>section</em>, <em>option</em>, <em>optional=False</em>, <em>default=None</em><big>)</big><a class="headerlink" href="#ape.infrastructure.configurationmap.ConfigurationMap.getboolean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a value and casts it to a boolean</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first simple">
+<li><cite>cast</cite>: function to cast the value</li>
+<li><cite>section</cite>: section with value</li>
+<li><cite>option</cite>: option in section with value</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">value from section:option</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raise:</th><td class="field-body"><p class="first last">ConfigurationError if it can&#8217;t be cast</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ape.infrastructure.configurationmap.ConfigurationMap.getfloat">
+<tt class="descname">getfloat</tt><big>(</big><em>section</em>, <em>option</em>, <em>optional=False</em>, <em>default=None</em><big>)</big><a class="headerlink" href="#ape.infrastructure.configurationmap.ConfigurationMap.getfloat" title="Permalink to this definition">¶</a></dt>
+<dd><p>gets the value as a float</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ape.infrastructure.configurationmap.ConfigurationMap.getint">
+<tt class="descname">getint</tt><big>(</big><em>section</em>, <em>option</em>, <em>optional=False</em>, <em>default=None</em><big>)</big><a class="headerlink" href="#ape.infrastructure.configurationmap.ConfigurationMap.getint" title="Permalink to this definition">¶</a></dt>
+<dd><p>gets the value as an integer</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">value from section:option</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raise:</th><td class="field-body">ConfigurationError if it can&#8217;t be cast</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ape.infrastructure.configurationmap.ConfigurationMap.has_option">
+<tt class="descname">has_option</tt><big>(</big><em>section</em>, <em>option</em><big>)</big><a class="headerlink" href="#ape.infrastructure.configurationmap.ConfigurationMap.has_option" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if section has this option</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ape.infrastructure.configurationmap.ConfigurationMap.items">
+<tt class="descname">items</tt><big>(</big><em>section</em>, <em>optional=False</em>, <em>default=None</em><big>)</big><a class="headerlink" href="#ape.infrastructure.configurationmap.ConfigurationMap.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets tuples of (option, value) pairs for section</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">tuples</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ape.infrastructure.configurationmap.ConfigurationMap.log_error">
+<tt class="descname">log_error</tt><big>(</big><em>error</em>, <em>message=''</em><big>)</big><a class="headerlink" href="#ape.infrastructure.configurationmap.ConfigurationMap.log_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logs the error in bold red</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
+<li><cite>error</cite>: error type (prefix in red and bold)</li>
+<li><cite>message</cite>: descriptive message (red but not bold)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ape.infrastructure.configurationmap.ConfigurationMap.options">
+<tt class="descname">options</tt><big>(</big><em>section</em>, <em>optional=False</em>, <em>default=None</em><big>)</big><a class="headerlink" href="#ape.infrastructure.configurationmap.ConfigurationMap.options" title="Permalink to this definition">¶</a></dt>
+<dd><p>gets a list of option-names</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first simple">
+<li><cite>section</cite>: section-name in the configuration</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">options in section</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ape.infrastructure.configurationmap.ConfigurationMap.write">
+<tt class="descname">write</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#ape.infrastructure.configurationmap.ConfigurationMap.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the current configuration to the path (filename)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ape.infrastructure.configurationmap.ConfigurationMap.defaults">
+<tt class="descname">defaults</tt><a class="headerlink" href="#ape.infrastructure.configurationmap.ConfigurationMap.defaults" title="Permalink to this definition">¶</a></dt>
+<dd><p>the [DEFAULT] section</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">dict of default values</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ape.infrastructure.configurationmap.ConfigurationMap.logger">
+<tt class="descname">logger</tt><a class="headerlink" href="#ape.infrastructure.configurationmap.ConfigurationMap.logger" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A logging object.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ape.infrastructure.configurationmap.ConfigurationMap.parser">
+<tt class="descname">parser</tt><a class="headerlink" href="#ape.infrastructure.configurationmap.ConfigurationMap.parser" title="Permalink to this definition">¶</a></dt>
+<dd><p>A SafeConfigParser instance with <cite>allow_no_value</cite> set to True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ape.infrastructure.configurationmap.ConfigurationMap.sections">
+<tt class="descname">sections</tt><a class="headerlink" href="#ape.infrastructure.configurationmap.ConfigurationMap.sections" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">section names other than DEFAULT</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../../_sources/documentation/developer/plugins/api/ape.infrastructure.configurationmap.ConfigurationMap.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,6 @@
+theape.infrastructure.errors.ConfigurationError
+===============================================
+
+.. currentmodule:: theape.infrastructure.errors
+
+.. autoexception:: ConfigurationError

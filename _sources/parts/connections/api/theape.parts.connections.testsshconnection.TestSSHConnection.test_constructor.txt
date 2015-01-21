@@ -1,0 +1,6 @@
+theape.parts.connections.testsshconnection.TestSSHConnection.test_constructor
+=============================================================================
+
+.. currentmodule:: theape.parts.connections.testsshconnection
+
+.. automethod:: TestSSHConnection.test_constructor

@@ -1,0 +1,6 @@
+theape.parts.wifi.tests.testiwconfig.TestIwconfigExpressions.test_access_point
+==============================================================================
+
+.. currentmodule:: theape.parts.wifi.tests.testiwconfig
+
+.. automethod:: TestIwconfigExpressions.test_access_point

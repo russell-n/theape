@@ -1,0 +1,6 @@
+theape.components.test_components.TestHortator.test_exception
+=============================================================
+
+.. currentmodule:: theape.components.test_components
+
+.. automethod:: TestHortator.test_exception

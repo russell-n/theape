@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Socket Storage &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../index.html" />
+    <link rel="up" title="Storage" href="index.html" />
+    <link rel="next" title="theape.parts.storage.socketstorage.SocketStorage" href="api/theape.parts.storage.socketstorage.SocketStorage.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/theape.parts.storage.socketstorage.SocketStorage.html" title="theape.parts.storage.socketstorage.SocketStorage"
+             accesskey="N">next</a> |</li>
+        <li><a href="../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Parts</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Storage</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="socket-storage">
+<h1>Socket Storage<a class="headerlink" href="#socket-storage" title="Permalink to this headline">¶</a></h1>
+<p id="ape-socket-storage">This is a module for classes that implement a file-like interface to a socket. Its main purpose is to catch socket timeout errors.</p>
+<div class="section" id="socketstorage-model">
+<span id="socket-storage-model"></span><h2>SocketStorage Model<a class="headerlink" href="#socketstorage-model" title="Permalink to this headline">¶</a></h2>
+<p>Not all of the methods make sense (like open) so only a sub-set will be implemented. The assumption will be that a file-like object was created elsewhere and passed in to the constructor.</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-c22a53647aa892e848c53ca2d764aa2f6ffb86c1.png" alt="SocketStorage -|&gt; BaseStorage
+SocketStorage :  __init__(file)
+SocketStorage : close()
+SocketStorage : String read()
+SocketStorage : String readline()
+SocketStorage : List readlines()
+SocketStorage : write(text)
+SocketStorage : writeline(text)
+SocketStorage : writelines(list)
+SocketStorage : closed
+SocketStorage : name
+SocketStorage : __iter__()" />
+</p>
+</div>
+<div class="section" id="module-theape.parts.storage.socketstorage">
+<span id="socketstorage-api"></span><span id="socket-storage-api"></span><h2>SocketStorage API<a class="headerlink" href="#module-theape.parts.storage.socketstorage" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.storage.socketstorage.SocketStorage.html#theape.parts.storage.socketstorage.SocketStorage" title="theape.parts.storage.socketstorage.SocketStorage"><tt class="xref py py-obj docutils literal"><span class="pre">SocketStorage</span></tt></a>(file_object)</td>
+<td>A class to store data to a file</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.storage.socketstorage.SocketStorage.close.html#theape.parts.storage.socketstorage.SocketStorage.close" title="theape.parts.storage.socketstorage.SocketStorage.close"><tt class="xref py py-obj docutils literal"><span class="pre">SocketStorage.close</span></tt></a>()</td>
+<td>Closes self.file if it exists, sets self.closed to True</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.storage.socketstorage.SocketStorage.write.html#theape.parts.storage.socketstorage.SocketStorage.write" title="theape.parts.storage.socketstorage.SocketStorage.write"><tt class="xref py py-obj docutils literal"><span class="pre">SocketStorage.write</span></tt></a>(text)</td>
+<td>write text to a file</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.storage.socketstorage.SocketStorage.writeline.html#theape.parts.storage.socketstorage.SocketStorage.writeline" title="theape.parts.storage.socketstorage.SocketStorage.writeline"><tt class="xref py py-obj docutils literal"><span class="pre">SocketStorage.writeline</span></tt></a>(text)</td>
+<td>Adds newline to end of text and writes it to the file</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.storage.socketstorage.SocketStorage.writelines.html#theape.parts.storage.socketstorage.SocketStorage.writelines" title="theape.parts.storage.socketstorage.SocketStorage.writelines"><tt class="xref py py-obj docutils literal"><span class="pre">SocketStorage.writelines</span></tt></a>(texts)</td>
+<td>write lines to a file (does not add newline character to end of lines)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.storage.socketstorage.SocketStorage.readline.html#theape.parts.storage.socketstorage.SocketStorage.readline" title="theape.parts.storage.socketstorage.SocketStorage.readline"><tt class="xref py py-obj docutils literal"><span class="pre">SocketStorage.readline</span></tt></a>()</td>
+<td>Calls a single read-line returns &#8216;timed out&#8217; if socket.timeout</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.storage.socketstorage.SocketStorage.readlines.html#theape.parts.storage.socketstorage.SocketStorage.readlines" title="theape.parts.storage.socketstorage.SocketStorage.readlines"><tt class="xref py py-obj docutils literal"><span class="pre">SocketStorage.readlines</span></tt></a>()</td>
+<td>reads all the output and returns a list of lines</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.storage.socketstorage.SocketStorage.read.html#theape.parts.storage.socketstorage.SocketStorage.read" title="theape.parts.storage.socketstorage.SocketStorage.read"><tt class="xref py py-obj docutils literal"><span class="pre">SocketStorage.read</span></tt></a>()</td>
+<td>reads all the output and returns as a single string</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.storage.socketstorage.SocketStorage.__iter__.html#theape.parts.storage.socketstorage.SocketStorage.__iter__" title="theape.parts.storage.socketstorage.SocketStorage.__iter__"><tt class="xref py py-obj docutils literal"><span class="pre">SocketStorage.__iter__</span></tt></a>()</td>
+<td>Traverses the file</td>
+</tr>
+</tbody>
+</table>
+<p>Although the main reason for this class is to trap socket timeouts when reading lines, it will raise an ApeError when an attempt is made to read the entire buffer (i.e. read readlines) so that if it is really an error to have a timeout, these methods can be used instead. Generally, the main interface is assumed to be the __iter__ method, though, which will catch the timeouts forever, returning the socketstorage.TIMED_OUT string (copying python&#8217;s socket.timeout message-string).</p>
+</div>
+<div class="section" id="module-diagram">
+<span id="socket-storage-module-diagram"></span><h2>Module Diagram<a class="headerlink" href="#module-diagram" title="Permalink to this headline">¶</a></h2>
+<p>[Errno 2] No such file or directory
+Is pylint installed?
+.. image:: classes_socketstorage.png</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Socket Storage</a><ul>
+<li><a class="reference internal" href="#socketstorage-model">SocketStorage Model</a></li>
+<li><a class="reference internal" href="#module-theape.parts.storage.socketstorage">SocketStorage API</a></li>
+<li><a class="reference internal" href="#module-diagram">Module Diagram</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../_sources/parts/storage/socketstorage.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

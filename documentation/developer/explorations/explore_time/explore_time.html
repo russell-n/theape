@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Exploring Time &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
+    <link rel="up" title="Exploring Time" href="index.html" />
+    <link rel="next" title="Exploring Trace" href="../explore_trace/index.html" />
+    <link rel="prev" title="Exploring Time" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../explore_trace/index.html" title="Exploring Trace"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Exploring Time"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >The Ape Developer Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >The Explorations</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Exploring Time</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="exploring-time">
+<h1>Exploring Time<a class="headerlink" href="#exploring-time" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<p>The motivating question &#8211; <em>how do you translate strings to times?</em> There are two cases that I am going to look at:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Relative Time: a specification of hours, minutes, seconds, etc.</li>
+<li>Absolute Time: a unique moment (e.g. &#8216;10-24-2013 9:14 pm&#8217;)</li>
+</ul>
+</div></blockquote>
+<p>The reason for looking at this is to find a way or ways to translate a configuration file to time-specifications for running code. Some possible uses:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Finding an execution-time for a command such as <cite>iperf</cite></li>
+<li>Finding a stopping time when the code shouldn&#8217;t go past</li>
+<li>Finding a starting time when code should be run</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="relative-time">
+<h2>Relative Time<a class="headerlink" href="#relative-time" title="Permalink to this headline">¶</a></h2>
+<p>This seems to be the easier case. Say we have a specification of the form:</p>
+<div class="highlight-python"><div class="highlight"><pre>run_time = 1 hour 20 minutes
+</pre></div>
+</div>
+<p>For certain cases it would make sense to convert it to an integer or float so you could pass it to a command (like <cite>time.sleep</cite>) in other cases it might make sense to convert it to a timedelta so you can compare it to a specific time (like <cite>datetime.now</cite>). In any case, the first step would seem to be to tokenize the string to get the times. Since the configuration for this package largely passes through ConfigParse, I am going to assume that only strings with only the time information will be handled (i.e. &#8216;run_time =&#8217; won&#8217;t be in the string gotten from the example specification given above).</p>
+<p>First, I&#8217;ll set up some regular expressions to tokenize the strings.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">DIGIT</span> <span class="o">=</span> <span class="s">r&#39;\d&#39;</span>
+<span class="n">ONE_OR_MORE</span> <span class="o">=</span> <span class="s">r&quot;+&quot;</span>
+<span class="n">ZERO_OR_MORE</span> <span class="o">=</span> <span class="s">r&#39;*&#39;</span>
+<span class="n">DECIMAL</span> <span class="o">=</span> <span class="s">r&#39;\.&#39;</span>
+<span class="n">SPACE</span> <span class="o">=</span> <span class="s">r&#39;\s&#39;</span>
+<span class="n">SPACES</span> <span class="o">=</span> <span class="n">SPACE</span> <span class="o">+</span> <span class="n">ONE_OR_MORE</span>
+<span class="n">OPTIONAL_SPACES</span> <span class="o">=</span> <span class="n">SPACE</span> <span class="o">+</span> <span class="n">ZERO_OR_MORE</span>
+<span class="n">OR</span> <span class="o">=</span> <span class="s">r&#39;|&#39;</span>
+
+<span class="c"># groups</span>
+<span class="n">NAMED</span> <span class="o">=</span> <span class="s">&quot;(?P&lt;{n}&gt;{e})&quot;</span>
+<span class="n">GROUPED</span> <span class="o">=</span> <span class="s">&quot;({0})&quot;</span>
+
+<span class="c"># numbers</span>
+<span class="n">INTEGER</span> <span class="o">=</span> <span class="n">DIGIT</span> <span class="o">+</span> <span class="n">ONE_OR_MORE</span>
+<span class="n">FLOAT</span> <span class="o">=</span> <span class="n">INTEGER</span> <span class="o">+</span> <span class="n">DECIMAL</span> <span class="o">+</span> <span class="n">INTEGER</span>
+
+<span class="n">REAL</span> <span class="o">=</span> <span class="n">INTEGER</span> <span class="o">+</span> <span class="n">OR</span> <span class="o">+</span> <span class="n">FLOAT</span>
+
+<span class="n">WEEKS</span> <span class="o">=</span> <span class="n">NAMED</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="s">&#39;weeks&#39;</span><span class="p">,</span> <span class="n">e</span><span class="o">=</span><span class="n">REAL</span><span class="p">)</span> <span class="o">+</span> <span class="n">OPTIONAL_SPACES</span> <span class="o">+</span> <span class="s">&#39;[wW]&#39;</span>
+<span class="n">DAYS</span> <span class="o">=</span> <span class="n">NAMED</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="s">&#39;days&#39;</span><span class="p">,</span> <span class="n">e</span><span class="o">=</span><span class="n">REAL</span><span class="p">)</span> <span class="o">+</span> <span class="n">OPTIONAL_SPACES</span> <span class="o">+</span> <span class="s">&#39;[dD]&#39;</span>
+
+<span class="c"># compiled_expressions</span>
+<span class="n">DAY_EXPRESSION</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">DAYS</span><span class="p">)</span>
+<span class="n">WEEK_EXPRESSION</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">WEEKS</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">example_1</span> <span class="o">=</span> <span class="s">&#39;2 days 3 hours 10 Weeks&#39;</span>
+<span class="n">example_2</span> <span class="o">=</span>  <span class="s">&#39;1.2Weeks 6.2 days&#39;</span>
+
+<span class="n">match</span> <span class="o">=</span> <span class="n">DAY_EXPRESSION</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">example_1</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&quot;Days: &quot;</span> <span class="o">+</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s">&#39;days&#39;</span><span class="p">)</span>
+
+<span class="n">match</span> <span class="o">=</span> <span class="n">DAY_EXPRESSION</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">example_2</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;Days: &#39;</span> <span class="o">+</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s">&#39;days&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Days: 2
+Days: 6.2
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">match</span> <span class="o">=</span> <span class="n">WEEK_EXPRESSION</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">example_1</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;weeks: &#39;</span> <span class="o">+</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s">&#39;weeks&#39;</span><span class="p">)</span>
+<span class="n">match</span> <span class="o">=</span> <span class="n">WEEK_EXPRESSION</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">example_2</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;Weeks: &#39;</span> <span class="o">+</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s">&#39;weeks&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>weeks: 10
+Weeks: 1.2
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Exploring Time</a><ul>
+<li><a class="reference internal" href="#background">Background</a></li>
+<li><a class="reference internal" href="#relative-time">Relative Time</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../user/index.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../../_sources/documentation/developer/explorations/explore_time/explore_time.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

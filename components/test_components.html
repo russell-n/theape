@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Testing Components &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../index.html" />
+    <link rel="up" title="The Components" href="index.html" />
+    <link rel="next" title="theape.components.test_components.TestComponent.test_bad_component" href="api/theape.components.test_components.TestComponent.test_bad_component.html" />
+    <link rel="prev" title="theape.components.component.Composite.time_remains" href="api/theape.components.component.Composite.time_remains.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/theape.components.test_components.TestComponent.test_bad_component.html" title="theape.components.test_components.TestComponent.test_bad_component"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="api/theape.components.component.Composite.time_remains.html" title="theape.components.component.Composite.time_remains"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">The Components</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="testing-components">
+<h1>Testing Components<a class="headerlink" href="#testing-components" title="Permalink to this headline">¶</a></h1>
+<p>Including the tests in the implementation is making the module-diagrams unreadable so they are moved here.</p>
+<div class="section" id="module-theape.components.test_components">
+<span id="testing-the-component"></span><h2>Testing the Component<a class="headerlink" href="#module-theape.components.test_components" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.test_components.TestComponent.test_bad_component.html#theape.components.test_components.TestComponent.test_bad_component" title="theape.components.test_components.TestComponent.test_bad_component"><tt class="xref py py-obj docutils literal"><span class="pre">TestComponent.test_bad_component</span></tt></a>()</td>
+<td>Does it raise a TypeError if you do not implement the __call__ or check_rep?</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="testing-the-composite">
+<h2>Testing the Composite<a class="headerlink" href="#testing-the-composite" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.test_components.TestComposite.test_add_component.html#theape.components.test_components.TestComposite.test_add_component" title="theape.components.test_components.TestComposite.test_add_component"><tt class="xref py py-obj docutils literal"><span class="pre">TestComposite.test_add_component</span></tt></a>()</td>
+<td>Can you add a component once and only once?</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.components.test_components.TestComposite.test_remove_component.html#theape.components.test_components.TestComposite.test_remove_component" title="theape.components.test_components.TestComposite.test_remove_component"><tt class="xref py py-obj docutils literal"><span class="pre">TestComposite.test_remove_component</span></tt></a>()</td>
+<td>Can you remove a component you added?</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.test_components.TestComposite.test_slice.html#theape.components.test_components.TestComposite.test_slice" title="theape.components.test_components.TestComposite.test_slice"><tt class="xref py py-obj docutils literal"><span class="pre">TestComposite.test_slice</span></tt></a>()</td>
+<td>Can you use the siice syntax to get a subset ofe the components?</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.components.test_components.TestComposite.test_check_rep.html#theape.components.test_components.TestComposite.test_check_rep" title="theape.components.test_components.TestComposite.test_check_rep"><tt class="xref py py-obj docutils literal"><span class="pre">TestComposite.test_check_rep</span></tt></a>()</td>
+<td>Does check_rep check the Composite and all its components?</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.test_components.TestComposite.test_evil_component.html#theape.components.test_components.TestComposite.test_evil_component" title="theape.components.test_components.TestComposite.test_evil_component"><tt class="xref py py-obj docutils literal"><span class="pre">TestComposite.test_evil_component</span></tt></a>()</td>
+<td>Does a mis-implemented component raise an ApeError on call and a warning for others?</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestComponent.test_broken_component</span></tt></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="testing-the-hortator">
+<h2>Testing the Hortator<a class="headerlink" href="#testing-the-hortator" title="Permalink to this headline">¶</a></h2>
+<p>The Hortator is just an instance of the Composite. This is a check that my idea of how to implement it will work.</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.test_components.TestHortator.test_exception.html#theape.components.test_components.TestHortator.test_exception" title="theape.components.test_components.TestHortator.test_exception"><tt class="xref py py-obj docutils literal"><span class="pre">TestHortator.test_exception</span></tt></a>()</td>
+<td>Does the hortator&#8217;s call catch Exceptions so the Ape doesn&#8217;t crash and move to the next operator?</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="testing-the-operator">
+<h2>Testing the Operator<a class="headerlink" href="#testing-the-operator" title="Permalink to this headline">¶</a></h2>
+<p>Like the Hortator, the Operator is just an instance of the Composite, but it should only catch ApeErrors.</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.test_components.TestOperator.test_exception.html#theape.components.test_components.TestOperator.test_exception" title="theape.components.test_components.TestOperator.test_exception"><tt class="xref py py-obj docutils literal"><span class="pre">TestOperator.test_exception</span></tt></a>()</td>
+<td>Does the operator catch ApeErrors but not Exceptions?</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Testing Components</a><ul>
+<li><a class="reference internal" href="#module-theape.components.test_components">Testing the Component</a></li>
+<li><a class="reference internal" href="#testing-the-composite">Testing the Composite</a></li>
+<li><a class="reference internal" href="#testing-the-hortator">Testing the Hortator</a></li>
+<li><a class="reference internal" href="#testing-the-operator">Testing the Operator</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../_sources/components/test_components.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

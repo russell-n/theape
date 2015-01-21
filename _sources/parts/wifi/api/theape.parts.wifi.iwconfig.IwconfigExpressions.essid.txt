@@ -1,0 +1,6 @@
+theape.parts.wifi.iwconfig.IwconfigExpressions.essid
+====================================================
+
+.. currentmodule:: theape.parts.wifi.iwconfig
+
+.. autoattribute:: IwconfigExpressions.essid

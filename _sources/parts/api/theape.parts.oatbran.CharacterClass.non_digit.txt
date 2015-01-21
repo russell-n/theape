@@ -1,0 +1,6 @@
+theape.parts.oatbran.CharacterClass.non_digit
+=============================================
+
+.. currentmodule:: theape.parts.oatbran
+
+.. autoattribute:: CharacterClass.non_digit

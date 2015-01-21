@@ -1,0 +1,6 @@
+theape.plugins.tests.test_sleep_plugin.TestingSleepPlugin.test_product
+======================================================================
+
+.. currentmodule:: theape.plugins.tests.test_sleep_plugin
+
+.. automethod:: TestingSleepPlugin.test_product

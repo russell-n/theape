@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>SubConfiguration check_rep &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Ape Documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="subconfiguration-check-rep">
+<h1>SubConfiguration check_rep<a class="headerlink" href="#subconfiguration-check-rep" title="Permalink to this headline">¶</a></h1>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">configspec_source</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">plugin = option(&#39;Concrete&#39;)</span>
+
+<span class="s">op1 = integer</span>
+<span class="s">op2 = integer</span>
+<span class="s">&quot;&quot;&quot;</span>
+
+<span class="k">class</span> <span class="nc">ConcreteConfiguration</span><span class="p">(</span><span class="n">SubConfiguration</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Test configuration</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">configspec_source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_configspec_source</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_configspec_source</span> <span class="o">=</span> <span class="n">configspec_source</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_configspec_source</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">product</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span>
+</pre></div>
+</div>
+<div class="section" id="scenario-user-calls-check-rep-on-valid-configuration">
+<h2>Scenario: User calls check_rep on valid configuration<a class="headerlink" href="#scenario-user-calls-check-rep-on-valid-configuration" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">valid_configuration</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">[cement]</span>
+<span class="s">plugin = Concrete</span>
+<span class="s">op1 = 53</span>
+<span class="s">op2 = 64</span>
+<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+
+<span class="nd">@given</span><span class="p">(</span><span class="s">&quot;SubConfiguration implementation with valid configuration&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">step_implementation</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="n">ConcreteConfiguration</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">ConfigObj</span><span class="p">(</span><span class="n">valid_configuration</span><span class="p">),</span>
+                                                  <span class="n">section_name</span><span class="o">=</span><span class="s">&#39;cement&#39;</span><span class="p">)</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@when</span><span class="p">(</span><span class="s">&quot;check_rep is called&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">step_implementation</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">outcome</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">check_rep</span><span class="p">()</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;nothing happens&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">step_implementation</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">outcome</span><span class="p">,</span>
+                <span class="n">is_</span><span class="p">(</span><span class="bp">None</span><span class="p">))</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="scenario-user-calls-check-rep-on-bad-configuration">
+<h2>Scenario: User calls check_rep on bad configuration<a class="headerlink" href="#scenario-user-calls-check-rep-on-bad-configuration" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">invalid_configuration</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">[konkrete]</span>
+<span class="s">plugin = Concrete</span>
+<span class="s">op1 = apple</span>
+<span class="s">op2 = banana</span>
+<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+
+<span class="nd">@given</span><span class="p">(</span><span class="s">&quot;SubConfiguration implementation with configuration errors&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">step_implementation</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="n">ConcreteConfiguration</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">ConfigObj</span><span class="p">(</span><span class="n">invalid_configuration</span><span class="p">),</span>
+                                                  <span class="n">section_name</span><span class="o">=</span><span class="s">&#39;konkrete&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@when</span><span class="p">(</span><span class="s">&quot;check_rep is checked&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">check_rep_check</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">callable</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">check_rep</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;a ConfigurationError is raised&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">step_implementation</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">calling</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">callable</span><span class="p">),</span>
+                <span class="n">raises</span><span class="p">(</span><span class="n">ConfigurationError</span><span class="p">))</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="scenario-user-calls-check-rep-on-configuration-with-extra-values">
+<h2>Scenario: User calls check_rep on configuration with extra values<a class="headerlink" href="#scenario-user-calls-check-rep-on-configuration-with-extra-values" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre>  extra_option_configuration = &quot;&quot;&quot;
+  [cement]
+  plugin = Concrete
+  op1 = 53
+  op2 = 64
+  ummagumma = apple_banana
+  &quot;&quot;&quot;.splitlines()
+
+  @given(&quot;SubConfiguration implementation with unknown values&quot;)
+  def step_implementation(context):
+      context.configuration = ConcreteConfiguration(source=ConfigObj(extra_option_configuration),
+                                                    section_name=&#39;cement&#39;)
+      return
+
+
+When check_rep is checked
+Then a ConfigurationError is raised
+</pre></div>
+</div>
+</div>
+<div class="section" id="scenario-user-calls-check-rep-on-configuration-with-allowed-extra-values">
+<h2>Scenario: User calls check_rep on configuration with allowed extra values<a class="headerlink" href="#scenario-user-calls-check-rep-on-configuration-with-allowed-extra-values" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;SubConfiguration implementation with allowed unknown values&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">allowed_unknowns</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="n">ConcreteConfiguration</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">ConfigObj</span><span class="p">(</span><span class="n">extra_option_configuration</span><span class="p">),</span>
+                                                  <span class="n">section_name</span><span class="o">=</span><span class="s">&#39;cement&#39;</span><span class="p">,</span>
+                                                  <span class="n">allow_extras</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<p>When check_rep is checked</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;a ConfigurationError not raised&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">no_error</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">callable</span><span class="p">()</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;the extra values are in the configuration&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">assert_extras</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s">&#39;ummagumma&#39;</span><span class="p">],</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">equal_to</span><span class="p">(</span><span class="s">&#39;apple_banana&#39;</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">SubConfiguration check_rep</a><ul>
+<li><a class="reference internal" href="#scenario-user-calls-check-rep-on-valid-configuration">Scenario: User calls check_rep on valid configuration</a></li>
+<li><a class="reference internal" href="#scenario-user-calls-check-rep-on-bad-configuration">Scenario: User calls check_rep on bad configuration</a></li>
+<li><a class="reference internal" href="#scenario-user-calls-check-rep-on-configuration-with-extra-values">Scenario: User calls check_rep on configuration with extra values</a></li>
+<li><a class="reference internal" href="#scenario-user-calls-check-rep-on-configuration-with-allowed-extra-values">Scenario: User calls check_rep on configuration with allowed extra values</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../../_sources/plugins/tests/subconfiguration_features/steps/subconfigurationcheckrep.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

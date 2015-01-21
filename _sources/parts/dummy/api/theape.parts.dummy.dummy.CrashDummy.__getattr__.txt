@@ -1,0 +1,6 @@
+theape.parts.dummy.dummy.CrashDummy.__getattr__
+===============================================
+
+.. currentmodule:: theape.parts.dummy.dummy
+
+.. automethod:: CrashDummy.__getattr__

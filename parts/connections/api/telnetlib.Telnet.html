@@ -1,0 +1,450 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>telnetlib.Telnet &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../index.html" />
+    <link rel="up" title="The Telnet Client" href="../telnetclient.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Parts</a> &raquo;</li>
+          <li><a href="../index.html" >Client Connections</a> &raquo;</li>
+          <li><a href="../telnetclient.html" accesskey="U">The Telnet Client</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="telnetlib-telnet">
+<h1>telnetlib.Telnet<a class="headerlink" href="#telnetlib-telnet" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="telnetlib.Telnet">
+<em class="property">class </em><tt class="descclassname">telnetlib.</tt><tt class="descname">Telnet</tt><big>(</big><em>host=None</em>, <em>port=0</em>, <em>timeout=&lt;object object at 0x2ab6e27d1140&gt;</em><big>)</big><a class="headerlink" href="#telnetlib.Telnet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Telnet interface class.</p>
+<p>An instance of this class represents a connection to a telnet
+server.  The instance is initially not connected; the open()
+method must be used to establish a connection.  Alternatively, the
+host name and optional port number can be passed to the
+constructor, too.</p>
+<p>Don&#8217;t try to reopen an already connected instance.</p>
+<p>This class has many read_*() methods.  Note that some of them
+raise EOFError when the end of the connection is read, because
+they can return an empty string for other reasons.  See the
+individual doc strings.</p>
+<dl class="docutils">
+<dt>read_until(expected, [timeout])</dt>
+<dd>Read until the expected string has been seen, or a timeout is
+hit (default is no timeout); may block.</dd>
+<dt>read_all()</dt>
+<dd>Read all data until EOF; may block.</dd>
+<dt>read_some()</dt>
+<dd>Read at least one byte or EOF; may block.</dd>
+<dt>read_very_eager()</dt>
+<dd>Read all data available already queued or on the socket,
+without blocking.</dd>
+<dt>read_eager()</dt>
+<dd>Read either data already queued or some data available on the
+socket, without blocking.</dd>
+<dt>read_lazy()</dt>
+<dd>Read all data in the raw queue (processing it first), without
+doing any socket I/O.</dd>
+<dt>read_very_lazy()</dt>
+<dd>Reads all data in the cooked queue, without doing any socket
+I/O.</dd>
+<dt>read_sb_data()</dt>
+<dd>Reads available data between SB ... SE sequence. Don&#8217;t block.</dd>
+<dt>set_option_negotiation_callback(callback)</dt>
+<dd><p class="first">Each time a telnet option is read on the input flow, this callback
+(if set) is called with the following parameters :
+callback(telnet socket, command, option)</p>
+<blockquote>
+<div>option will be chr(0) when there is no option.</div></blockquote>
+<p class="last">No other action is done afterwards by telnetlib.</p>
+</dd>
+</dl>
+<p>Constructor.</p>
+<p>When called without arguments, create an unconnected instance.
+With a hostname argument, it connects the instance; port number
+and timeout are optional.</p>
+<dl class="method">
+<dt id="telnetlib.Telnet.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>host=None</em>, <em>port=0</em>, <em>timeout=&lt;object object at 0x2ab6e27d1140&gt;</em><big>)</big><a class="headerlink" href="#telnetlib.Telnet.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<p>When called without arguments, create an unconnected instance.
+With a hostname argument, it connects the instance; port number
+and timeout are optional.</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#telnetlib.Telnet.__init__" title="telnetlib.Telnet.__init__"><tt class="xref py py-obj docutils literal"><span class="pre">__init__</span></tt></a>([host,&nbsp;port,&nbsp;timeout])</td>
+<td>Constructor.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#telnetlib.Telnet.close" title="telnetlib.Telnet.close"><tt class="xref py py-obj docutils literal"><span class="pre">close</span></tt></a>()</td>
+<td>Close the connection.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#telnetlib.Telnet.expect" title="telnetlib.Telnet.expect"><tt class="xref py py-obj docutils literal"><span class="pre">expect</span></tt></a>(list[,&nbsp;timeout])</td>
+<td>Read until one from a list of a regular expressions matches.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#telnetlib.Telnet.fileno" title="telnetlib.Telnet.fileno"><tt class="xref py py-obj docutils literal"><span class="pre">fileno</span></tt></a>()</td>
+<td>Return the fileno() of the socket object used internally.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#telnetlib.Telnet.fill_rawq" title="telnetlib.Telnet.fill_rawq"><tt class="xref py py-obj docutils literal"><span class="pre">fill_rawq</span></tt></a>()</td>
+<td>Fill raw queue from exactly one recv() system call.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#telnetlib.Telnet.get_socket" title="telnetlib.Telnet.get_socket"><tt class="xref py py-obj docutils literal"><span class="pre">get_socket</span></tt></a>()</td>
+<td>Return the socket object used internally.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#telnetlib.Telnet.interact" title="telnetlib.Telnet.interact"><tt class="xref py py-obj docutils literal"><span class="pre">interact</span></tt></a>()</td>
+<td>Interaction function, emulates a very dumb telnet client.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#telnetlib.Telnet.listener" title="telnetlib.Telnet.listener"><tt class="xref py py-obj docutils literal"><span class="pre">listener</span></tt></a>()</td>
+<td>Helper for mt_interact() &#8211; this executes in the other thread.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#telnetlib.Telnet.msg" title="telnetlib.Telnet.msg"><tt class="xref py py-obj docutils literal"><span class="pre">msg</span></tt></a>(msg,&nbsp;*args)</td>
+<td>Print a debug message, when the debug level is &gt; 0.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#telnetlib.Telnet.mt_interact" title="telnetlib.Telnet.mt_interact"><tt class="xref py py-obj docutils literal"><span class="pre">mt_interact</span></tt></a>()</td>
+<td>Multithreaded version of interact().</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#telnetlib.Telnet.open" title="telnetlib.Telnet.open"><tt class="xref py py-obj docutils literal"><span class="pre">open</span></tt></a>(host[,&nbsp;port,&nbsp;timeout])</td>
+<td>Connect to a host.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#telnetlib.Telnet.process_rawq" title="telnetlib.Telnet.process_rawq"><tt class="xref py py-obj docutils literal"><span class="pre">process_rawq</span></tt></a>()</td>
+<td>Transfer from raw queue to cooked queue.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#telnetlib.Telnet.rawq_getchar" title="telnetlib.Telnet.rawq_getchar"><tt class="xref py py-obj docutils literal"><span class="pre">rawq_getchar</span></tt></a>()</td>
+<td>Get next char from raw queue.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#telnetlib.Telnet.read_all" title="telnetlib.Telnet.read_all"><tt class="xref py py-obj docutils literal"><span class="pre">read_all</span></tt></a>()</td>
+<td>Read all data until EOF; block until connection closed.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#telnetlib.Telnet.read_eager" title="telnetlib.Telnet.read_eager"><tt class="xref py py-obj docutils literal"><span class="pre">read_eager</span></tt></a>()</td>
+<td>Read readily available data.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#telnetlib.Telnet.read_lazy" title="telnetlib.Telnet.read_lazy"><tt class="xref py py-obj docutils literal"><span class="pre">read_lazy</span></tt></a>()</td>
+<td>Process and return data that&#8217;s already in the queues (lazy).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#telnetlib.Telnet.read_sb_data" title="telnetlib.Telnet.read_sb_data"><tt class="xref py py-obj docutils literal"><span class="pre">read_sb_data</span></tt></a>()</td>
+<td>Return any data available in the SB ...</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#telnetlib.Telnet.read_some" title="telnetlib.Telnet.read_some"><tt class="xref py py-obj docutils literal"><span class="pre">read_some</span></tt></a>()</td>
+<td>Read at least one byte of cooked data unless EOF is hit.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#telnetlib.Telnet.read_until" title="telnetlib.Telnet.read_until"><tt class="xref py py-obj docutils literal"><span class="pre">read_until</span></tt></a>(match[,&nbsp;timeout])</td>
+<td>Read until a given string is encountered or until timeout.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#telnetlib.Telnet.read_very_eager" title="telnetlib.Telnet.read_very_eager"><tt class="xref py py-obj docutils literal"><span class="pre">read_very_eager</span></tt></a>()</td>
+<td>Read everything that&#8217;s possible without blocking in I/O (eager).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#telnetlib.Telnet.read_very_lazy" title="telnetlib.Telnet.read_very_lazy"><tt class="xref py py-obj docutils literal"><span class="pre">read_very_lazy</span></tt></a>()</td>
+<td>Return any data available in the cooked queue (very lazy).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#telnetlib.Telnet.set_debuglevel" title="telnetlib.Telnet.set_debuglevel"><tt class="xref py py-obj docutils literal"><span class="pre">set_debuglevel</span></tt></a>(debuglevel)</td>
+<td>Set the debug level.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#telnetlib.Telnet.set_option_negotiation_callback" title="telnetlib.Telnet.set_option_negotiation_callback"><tt class="xref py py-obj docutils literal"><span class="pre">set_option_negotiation_callback</span></tt></a>(callback)</td>
+<td>Provide a callback function called after each receipt of a telnet option.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#telnetlib.Telnet.sock_avail" title="telnetlib.Telnet.sock_avail"><tt class="xref py py-obj docutils literal"><span class="pre">sock_avail</span></tt></a>()</td>
+<td>Test whether data is available on the socket.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#telnetlib.Telnet.write" title="telnetlib.Telnet.write"><tt class="xref py py-obj docutils literal"><span class="pre">write</span></tt></a>(buffer)</td>
+<td>Write a string to the socket, doubling any IAC characters.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="telnetlib.Telnet.close">
+<tt class="descname">close</tt><big>(</big><big>)</big><a class="headerlink" href="#telnetlib.Telnet.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close the connection.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="telnetlib.Telnet.expect">
+<tt class="descname">expect</tt><big>(</big><em>list</em>, <em>timeout=None</em><big>)</big><a class="headerlink" href="#telnetlib.Telnet.expect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read until one from a list of a regular expressions matches.</p>
+<p>The first argument is a list of regular expressions, either
+compiled (re.RegexObject instances) or uncompiled (strings).
+The optional second argument is a timeout, in seconds; default
+is no timeout.</p>
+<p>Return a tuple of three items: the index in the list of the
+first regular expression that matches; the match object
+returned; and the text read up till and including the match.</p>
+<p>If EOF is read and no text was read, raise EOFError.
+Otherwise, when nothing matches, return (-1, None, text) where
+text is the text received so far (may be the empty string if a
+timeout happened).</p>
+<p>If a regular expression ends with a greedy match (e.g. &#8216;.*&#8217;)
+or if more than one expression can match the same input, the
+results are undeterministic, and may depend on the I/O timing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="telnetlib.Telnet.fileno">
+<tt class="descname">fileno</tt><big>(</big><big>)</big><a class="headerlink" href="#telnetlib.Telnet.fileno" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the fileno() of the socket object used internally.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="telnetlib.Telnet.fill_rawq">
+<tt class="descname">fill_rawq</tt><big>(</big><big>)</big><a class="headerlink" href="#telnetlib.Telnet.fill_rawq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fill raw queue from exactly one recv() system call.</p>
+<p>Block if no data is immediately available.  Set self.eof when
+connection is closed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="telnetlib.Telnet.get_socket">
+<tt class="descname">get_socket</tt><big>(</big><big>)</big><a class="headerlink" href="#telnetlib.Telnet.get_socket" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the socket object used internally.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="telnetlib.Telnet.interact">
+<tt class="descname">interact</tt><big>(</big><big>)</big><a class="headerlink" href="#telnetlib.Telnet.interact" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interaction function, emulates a very dumb telnet client.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="telnetlib.Telnet.listener">
+<tt class="descname">listener</tt><big>(</big><big>)</big><a class="headerlink" href="#telnetlib.Telnet.listener" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper for mt_interact() &#8211; this executes in the other thread.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="telnetlib.Telnet.msg">
+<tt class="descname">msg</tt><big>(</big><em>msg</em>, <em>*args</em><big>)</big><a class="headerlink" href="#telnetlib.Telnet.msg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print a debug message, when the debug level is &gt; 0.</p>
+<p>If extra arguments are present, they are substituted in the
+message using the standard string formatting operator.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="telnetlib.Telnet.mt_interact">
+<tt class="descname">mt_interact</tt><big>(</big><big>)</big><a class="headerlink" href="#telnetlib.Telnet.mt_interact" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multithreaded version of interact().</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="telnetlib.Telnet.open">
+<tt class="descname">open</tt><big>(</big><em>host</em>, <em>port=0</em>, <em>timeout=&lt;object object at 0x2ab6e27d1140&gt;</em><big>)</big><a class="headerlink" href="#telnetlib.Telnet.open" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connect to a host.</p>
+<p>The optional second argument is the port number, which
+defaults to the standard telnet port (23).</p>
+<p>Don&#8217;t try to reopen an already connected instance.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="telnetlib.Telnet.process_rawq">
+<tt class="descname">process_rawq</tt><big>(</big><big>)</big><a class="headerlink" href="#telnetlib.Telnet.process_rawq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transfer from raw queue to cooked queue.</p>
+<p>Set self.eof when connection is closed.  Don&#8217;t block unless in
+the midst of an IAC sequence.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="telnetlib.Telnet.rawq_getchar">
+<tt class="descname">rawq_getchar</tt><big>(</big><big>)</big><a class="headerlink" href="#telnetlib.Telnet.rawq_getchar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get next char from raw queue.</p>
+<p>Block if no data is immediately available.  Raise EOFError
+when connection is closed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="telnetlib.Telnet.read_all">
+<tt class="descname">read_all</tt><big>(</big><big>)</big><a class="headerlink" href="#telnetlib.Telnet.read_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read all data until EOF; block until connection closed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="telnetlib.Telnet.read_eager">
+<tt class="descname">read_eager</tt><big>(</big><big>)</big><a class="headerlink" href="#telnetlib.Telnet.read_eager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read readily available data.</p>
+<p>Raise EOFError if connection closed and no cooked data
+available.  Return &#8216;&#8217; if no cooked data available otherwise.
+Don&#8217;t block unless in the midst of an IAC sequence.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="telnetlib.Telnet.read_lazy">
+<tt class="descname">read_lazy</tt><big>(</big><big>)</big><a class="headerlink" href="#telnetlib.Telnet.read_lazy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process and return data that&#8217;s already in the queues (lazy).</p>
+<p>Raise EOFError if connection closed and no data available.
+Return &#8216;&#8217; if no cooked data available otherwise.  Don&#8217;t block
+unless in the midst of an IAC sequence.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="telnetlib.Telnet.read_sb_data">
+<tt class="descname">read_sb_data</tt><big>(</big><big>)</big><a class="headerlink" href="#telnetlib.Telnet.read_sb_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return any data available in the SB ... SE queue.</p>
+<p>Return &#8216;&#8217; if no SB ... SE available. Should only be called
+after seeing a SB or SE command. When a new SB command is
+found, old unread SB data will be discarded. Don&#8217;t block.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="telnetlib.Telnet.read_some">
+<tt class="descname">read_some</tt><big>(</big><big>)</big><a class="headerlink" href="#telnetlib.Telnet.read_some" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read at least one byte of cooked data unless EOF is hit.</p>
+<p>Return &#8216;&#8217; if EOF is hit.  Block if no data is immediately
+available.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="telnetlib.Telnet.read_until">
+<tt class="descname">read_until</tt><big>(</big><em>match</em>, <em>timeout=None</em><big>)</big><a class="headerlink" href="#telnetlib.Telnet.read_until" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read until a given string is encountered or until timeout.</p>
+<p>When no match is found, return whatever is available instead,
+possibly the empty string.  Raise EOFError if the connection
+is closed and no cooked data is available.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="telnetlib.Telnet.read_very_eager">
+<tt class="descname">read_very_eager</tt><big>(</big><big>)</big><a class="headerlink" href="#telnetlib.Telnet.read_very_eager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read everything that&#8217;s possible without blocking in I/O (eager).</p>
+<p>Raise EOFError if connection closed and no cooked data
+available.  Return &#8216;&#8217; if no cooked data available otherwise.
+Don&#8217;t block unless in the midst of an IAC sequence.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="telnetlib.Telnet.read_very_lazy">
+<tt class="descname">read_very_lazy</tt><big>(</big><big>)</big><a class="headerlink" href="#telnetlib.Telnet.read_very_lazy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return any data available in the cooked queue (very lazy).</p>
+<p>Raise EOFError if connection closed and no data available.
+Return &#8216;&#8217; if no cooked data available otherwise.  Don&#8217;t block.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="telnetlib.Telnet.set_debuglevel">
+<tt class="descname">set_debuglevel</tt><big>(</big><em>debuglevel</em><big>)</big><a class="headerlink" href="#telnetlib.Telnet.set_debuglevel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the debug level.</p>
+<p>The higher it is, the more debug output you get (on sys.stdout).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="telnetlib.Telnet.set_option_negotiation_callback">
+<tt class="descname">set_option_negotiation_callback</tt><big>(</big><em>callback</em><big>)</big><a class="headerlink" href="#telnetlib.Telnet.set_option_negotiation_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provide a callback function called after each receipt of a telnet option.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="telnetlib.Telnet.sock_avail">
+<tt class="descname">sock_avail</tt><big>(</big><big>)</big><a class="headerlink" href="#telnetlib.Telnet.sock_avail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test whether data is available on the socket.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="telnetlib.Telnet.write">
+<tt class="descname">write</tt><big>(</big><em>buffer</em><big>)</big><a class="headerlink" href="#telnetlib.Telnet.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write a string to the socket, doubling any IAC characters.</p>
+<p>Can block if the connection is blocked.  May raise
+socket.error if the connection is closed.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../_sources/parts/connections/api/telnetlib.Telnet.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

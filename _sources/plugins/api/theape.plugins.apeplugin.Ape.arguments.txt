@@ -1,0 +1,6 @@
+theape.plugins.apeplugin.Ape.arguments
+======================================
+
+.. currentmodule:: theape.plugins.apeplugin
+
+.. autoattribute:: Ape.arguments

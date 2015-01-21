@@ -1,0 +1,6 @@
+theape.infrastructure.timemap.RelativeTime.reset
+================================================
+
+.. currentmodule:: theape.infrastructure.timemap
+
+.. automethod:: RelativeTime.reset

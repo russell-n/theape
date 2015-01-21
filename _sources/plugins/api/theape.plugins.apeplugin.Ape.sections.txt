@@ -1,0 +1,6 @@
+theape.plugins.apeplugin.Ape.sections
+=====================================
+
+.. currentmodule:: theape.plugins.apeplugin
+
+.. autoattribute:: Ape.sections

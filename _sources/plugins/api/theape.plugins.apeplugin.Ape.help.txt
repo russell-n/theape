@@ -1,0 +1,6 @@
+theape.plugins.apeplugin.Ape.help
+=================================
+
+.. currentmodule:: theape.plugins.apeplugin
+
+.. automethod:: Ape.help

@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>TheWatcher &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../index.html" />
+    <link rel="up" title="Watchers" href="index.html" />
+    <link rel="next" title="theape.parts.watchers.thewatcher.TheWatcher" href="api/theape.parts.watchers.thewatcher.TheWatcher.html" />
+    <link rel="prev" title="Watchers" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/theape.parts.watchers.thewatcher.TheWatcher.html" title="theape.parts.watchers.thewatcher.TheWatcher"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Watchers"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Parts</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Watchers</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="thewatcher">
+<h1>TheWatcher<a class="headerlink" href="#thewatcher" title="Permalink to this headline">¶</a></h1>
+<p>This is a watcher for information. Whatever <tt class="docutils literal"><span class="pre">query</span></tt> passed into it has to match the list of <tt class="docutils literal"><span class="pre">fields</span></tt>.</p>
+<div class="section" id="thewatcher-class">
+<span id="ape-thewatcher"></span><h2>TheWatcher Class<a class="headerlink" href="#thewatcher-class" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="role">
+<h3>Role<a class="headerlink" href="#role" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>Gets values from a query at timed-intervals</li>
+<li>Sends values to storage</li>
+<li>if threaded, runs in background</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="collaborators">
+<h3>Collaborators<a class="headerlink" href="#collaborators" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>Query</li>
+<li>Storage</li>
+</ul>
+</div></blockquote>
+<p class="plantuml">
+<img src="../../_images/plantuml-6e4cf5805ef6f19d8c57dd89d5159fd6b9f25a95.png" alt="BaseThreadClass &lt;|-- TheWatcher
+TheWatcher o- Query
+TheWatcher o- EventTimer
+TheWatcher o- Storage
+TheWatcher : query
+TheWatcher : fields" />
+</p>
+<span class="target" id="module-theape.parts.watchers.thewatcher"></span><table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.watchers.thewatcher.TheWatcher.html#theape.parts.watchers.thewatcher.TheWatcher" title="theape.parts.watchers.thewatcher.TheWatcher"><tt class="xref py py-obj docutils literal"><span class="pre">TheWatcher</span></tt></a>(query,&nbsp;storage,&nbsp;fields[,&nbsp;...])</td>
+<td>A watcher of wifi information</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.watchers.thewatcher.TheWatcher.header.html#theape.parts.watchers.thewatcher.TheWatcher.header" title="theape.parts.watchers.thewatcher.TheWatcher.header"><tt class="xref py py-obj docutils literal"><span class="pre">TheWatcher.header</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">fields joined by separator to use as first line of data output</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.watchers.thewatcher.TheWatcher.__call__.html#theape.parts.watchers.thewatcher.TheWatcher.__call__" title="theape.parts.watchers.thewatcher.TheWatcher.__call__"><tt class="xref py py-obj docutils literal"><span class="pre">TheWatcher.__call__</span></tt></a>()</td>
+<td>The main interface.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.watchers.thewatcher.TheWatcher.check_rep.html#theape.parts.watchers.thewatcher.TheWatcher.check_rep" title="theape.parts.watchers.thewatcher.TheWatcher.check_rep"><tt class="xref py py-obj docutils literal"><span class="pre">TheWatcher.check_rep</span></tt></a>()</td>
+<td>Checks that the querier has the fields passed in</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="query">
+<h3>query<a class="headerlink" href="#query" title="Permalink to this headline">¶</a></h3>
+<p>The <tt class="docutils literal"><span class="pre">query</span></tt> parameter should be a built query object (e.g. <a class="reference internal" href="../wifi/iwconfig.html#ape-iwconfigquery"><em>IwconfigQuery</em></a>). The main interface runs threaded so the connection that it holds has to be thread-safe.</p>
+</div>
+<div class="section" id="fields">
+<h3>fields<a class="headerlink" href="#fields" title="Permalink to this headline">¶</a></h3>
+<p>The <tt class="docutils literal"><span class="pre">fields</span></tt> parameter should be a list of names that match the properties of the query object that should be checked for output. If you want the RSSI and bitrate from the <tt class="docutils literal"><span class="pre">IwconfigQuery</span></tt>, for instance, you would pass in a list of <tt class="docutils literal"><span class="pre">['signal_level',</span> <span class="pre">'bit_rate']</span></tt> for the fields.</p>
+</div>
+<div class="section" id="storage">
+<h3>storage<a class="headerlink" href="#storage" title="Permalink to this headline">¶</a></h3>
+<p>Previously, the storage was always assumed to be a file-like object. To try and make it more flexible, I&#8217;m going to start assuming that it instead takes a dictonary and handles it (the behavior is assomed to match the <tt class="docutils literal"><span class="pre">csv.DictWriter</span></tt>).</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">TheWatcher</a><ul>
+<li><a class="reference internal" href="#thewatcher-class">TheWatcher Class</a><ul>
+<li><a class="reference internal" href="#role">Role</a></li>
+<li><a class="reference internal" href="#collaborators">Collaborators</a></li>
+<li><a class="reference internal" href="#query">query</a></li>
+<li><a class="reference internal" href="#fields">fields</a></li>
+<li><a class="reference internal" href="#storage">storage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../_sources/parts/watchers/thewatcher.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

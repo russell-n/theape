@@ -1,0 +1,6 @@
+theape.parts.watchers.tests.testthewatcher.TestThewatcher.test_timer
+====================================================================
+
+.. currentmodule:: theape.parts.watchers.tests.testthewatcher
+
+.. automethod:: TestThewatcher.test_timer

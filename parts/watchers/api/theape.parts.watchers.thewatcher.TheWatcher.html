@@ -1,0 +1,392 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>theape.parts.watchers.thewatcher.TheWatcher &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../index.html" />
+    <link rel="up" title="TheWatcher" href="../thewatcher.html" />
+    <link rel="next" title="theape.parts.watchers.thewatcher.TheWatcher.header" href="theape.parts.watchers.thewatcher.TheWatcher.header.html" />
+    <link rel="prev" title="theape.parts.watchers.thewatcher.TheWatcher.check_rep" href="theape.parts.watchers.thewatcher.TheWatcher.check_rep.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="theape.parts.watchers.thewatcher.TheWatcher.header.html" title="theape.parts.watchers.thewatcher.TheWatcher.header"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="theape.parts.watchers.thewatcher.TheWatcher.check_rep.html" title="theape.parts.watchers.thewatcher.TheWatcher.check_rep"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Parts</a> &raquo;</li>
+          <li><a href="../index.html" >Watchers</a> &raquo;</li>
+          <li><a href="../thewatcher.html" accesskey="U">TheWatcher</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="theape-parts-watchers-thewatcher-thewatcher">
+<h1>theape.parts.watchers.thewatcher.TheWatcher<a class="headerlink" href="#theape-parts-watchers-thewatcher-thewatcher" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="theape.parts.watchers.thewatcher.TheWatcher">
+<em class="property">class </em><tt class="descclassname">theape.parts.watchers.thewatcher.</tt><tt class="descname">TheWatcher</tt><big>(</big><em>query</em>, <em>storage</em>, <em>fields</em>, <em>use_header=True</em>, <em>interval=1</em>, <em>separator='</em>, <em>'</em>, <em>use_timestamp=True</em>, <em>timestamp=None</em><big>)</big><a class="headerlink" href="#theape.parts.watchers.thewatcher.TheWatcher" title="Permalink to this definition">¶</a></dt>
+<dd><p>A watcher of wifi information</p>
+<p>TheWatcher constructor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
+<li><cite>query</cite>: A query (e.g. IwconfigQuery)</li>
+<li><cite>storage</cite>: a file-like (thread-safe) object to write output to</li>
+<li><cite>fields</cite>: a list of attribute-names for the query object</li>
+<li><cite>use_header</cite>: if True, saves field-names as header before data starts</li>
+<li><cite>interval</cite>: seconds between queries</li>
+<li><cite>separator</cite>: token to separate fields in the data output</li>
+<li><cite>use_timestamp</cite>: if true first column of data will be timestamp</li>
+<li><cite>timestamp</cite>: timestamp format (strftime format) (uses storage.timestamp if None)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="theape.parts.watchers.thewatcher.TheWatcher.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>query</em>, <em>storage</em>, <em>fields</em>, <em>use_header=True</em>, <em>interval=1</em>, <em>separator='</em>, <em>'</em>, <em>use_timestamp=True</em>, <em>timestamp=None</em><big>)</big><a class="headerlink" href="#theape.parts.watchers.thewatcher.TheWatcher.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>TheWatcher constructor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
+<li><cite>query</cite>: A query (e.g. IwconfigQuery)</li>
+<li><cite>storage</cite>: a file-like (thread-safe) object to write output to</li>
+<li><cite>fields</cite>: a list of attribute-names for the query object</li>
+<li><cite>use_header</cite>: if True, saves field-names as header before data starts</li>
+<li><cite>interval</cite>: seconds between queries</li>
+<li><cite>separator</cite>: token to separate fields in the data output</li>
+<li><cite>use_timestamp</cite>: if true first column of data will be timestamp</li>
+<li><cite>timestamp</cite>: timestamp format (strftime format) (uses storage.timestamp if None)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#theape.parts.watchers.thewatcher.TheWatcher.__init__" title="theape.parts.watchers.thewatcher.TheWatcher.__init__"><tt class="xref py py-obj docutils literal"><span class="pre">__init__</span></tt></a>(query,&nbsp;storage,&nbsp;fields[,&nbsp;...])</td>
+<td>TheWatcher constructor</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="theape.parts.watchers.thewatcher.TheWatcher.check_rep.html#theape.parts.watchers.thewatcher.TheWatcher.check_rep" title="theape.parts.watchers.thewatcher.TheWatcher.check_rep"><tt class="xref py py-obj docutils literal"><span class="pre">check_rep</span></tt></a>()</td>
+<td>Checks that the querier has the fields passed in</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#theape.parts.watchers.thewatcher.TheWatcher.close" title="theape.parts.watchers.thewatcher.TheWatcher.close"><tt class="xref py py-obj docutils literal"><span class="pre">close</span></tt></a>()</td>
+<td>sets stopped to true, closes storage</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">log_data</span></tt>(*args,&nbsp;**kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#theape.parts.watchers.thewatcher.TheWatcher.log_error" title="theape.parts.watchers.thewatcher.TheWatcher.log_error"><tt class="xref py py-obj docutils literal"><span class="pre">log_error</span></tt></a>(error[,&nbsp;message])</td>
+<td>Logs the error in bold red</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#theape.parts.watchers.thewatcher.TheWatcher.run" title="theape.parts.watchers.thewatcher.TheWatcher.run"><tt class="xref py py-obj docutils literal"><span class="pre">run</span></tt></a>()</td>
+<td>The method to be called by the BaseThreadClass&#8217; run_thread</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#theape.parts.watchers.thewatcher.TheWatcher.run_thread" title="theape.parts.watchers.thewatcher.TheWatcher.run_thread"><tt class="xref py py-obj docutils literal"><span class="pre">run_thread</span></tt></a>(*args,&nbsp;**kwargs)</td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param:</th><td class="field-body">Whatever self.run accepts</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#theape.parts.watchers.thewatcher.TheWatcher.stop" title="theape.parts.watchers.thewatcher.TheWatcher.stop"><tt class="xref py py-obj docutils literal"><span class="pre">stop</span></tt></a>()</td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">postcondition:</th><td class="field-body">self.stopped is True</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="theape.parts.watchers.thewatcher.TheWatcher.header.html#theape.parts.watchers.thewatcher.TheWatcher.header" title="theape.parts.watchers.thewatcher.TheWatcher.header"><tt class="xref py py-obj docutils literal"><span class="pre">header</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">fields joined by separator to use as first line of data output</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#theape.parts.watchers.thewatcher.TheWatcher.logger" title="theape.parts.watchers.thewatcher.TheWatcher.logger"><tt class="xref py py-obj docutils literal"><span class="pre">logger</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">A logging object.</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#theape.parts.watchers.thewatcher.TheWatcher.thread" title="theape.parts.watchers.thewatcher.TheWatcher.thread"><tt class="xref py py-obj docutils literal"><span class="pre">thread</span></tt></a></td>
+<td>This passes no arguments to run_thread &#8211; override if needed</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#theape.parts.watchers.thewatcher.TheWatcher.timer" title="theape.parts.watchers.thewatcher.TheWatcher.timer"><tt class="xref py py-obj docutils literal"><span class="pre">timer</span></tt></a></td>
+<td>An event timer for the <tt class="docutils literal"><span class="pre">wait</span></tt> decorator to keep time</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#theape.parts.watchers.thewatcher.TheWatcher.timestamp" title="theape.parts.watchers.thewatcher.TheWatcher.timestamp"><tt class="xref py py-obj docutils literal"><span class="pre">timestamp</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">strftime string format for datetime</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="theape.parts.watchers.thewatcher.TheWatcher.check_rep">
+<tt class="descname">check_rep</tt><big>(</big><big>)</big><a class="headerlink" href="#theape.parts.watchers.thewatcher.TheWatcher.check_rep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that the querier has the fields passed in</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="theape.parts.watchers.thewatcher.TheWatcher.close">
+<tt class="descname">close</tt><big>(</big><big>)</big><a class="headerlink" href="#theape.parts.watchers.thewatcher.TheWatcher.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>sets stopped to true, closes storage</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="theape.parts.watchers.thewatcher.TheWatcher.log_error">
+<tt class="descname">log_error</tt><big>(</big><em>error</em>, <em>message=''</em><big>)</big><a class="headerlink" href="#theape.parts.watchers.thewatcher.TheWatcher.log_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logs the error in bold red</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
+<li><cite>error</cite>: error type (prefix in red and bold)</li>
+<li><cite>message</cite>: descriptive message (red but not bold)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="theape.parts.watchers.thewatcher.TheWatcher.run">
+<tt class="descname">run</tt><big>(</big><big>)</big><a class="headerlink" href="#theape.parts.watchers.thewatcher.TheWatcher.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>The method to be called by the BaseThreadClass&#8217; run_thread</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="theape.parts.watchers.thewatcher.TheWatcher.run_thread">
+<tt class="descname">run_thread</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#theape.parts.watchers.thewatcher.TheWatcher.run_thread" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">Whatever self.run accepts</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Precondition:</th><td class="field-body">self.run method exists and is thread-safe</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="theape.parts.watchers.thewatcher.TheWatcher.stop">
+<tt class="descname">stop</tt><big>(</big><big>)</big><a class="headerlink" href="#theape.parts.watchers.thewatcher.TheWatcher.stop" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Postcondition:</th><td class="field-body">self.stopped is True</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.parts.watchers.thewatcher.TheWatcher.header">
+<tt class="descname">header</tt><a class="headerlink" href="#theape.parts.watchers.thewatcher.TheWatcher.header" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">fields joined by separator to use as first line of data output</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.parts.watchers.thewatcher.TheWatcher.logger">
+<tt class="descname">logger</tt><a class="headerlink" href="#theape.parts.watchers.thewatcher.TheWatcher.logger" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A logging object.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.parts.watchers.thewatcher.TheWatcher.thread">
+<tt class="descname">thread</tt><a class="headerlink" href="#theape.parts.watchers.thewatcher.TheWatcher.thread" title="Permalink to this definition">¶</a></dt>
+<dd><p>This passes no arguments to run_thread &#8211; override if needed</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">threading.Thread with self.run_thread as target and daemon True</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.parts.watchers.thewatcher.TheWatcher.timer">
+<tt class="descname">timer</tt><a class="headerlink" href="#theape.parts.watchers.thewatcher.TheWatcher.timer" title="Permalink to this definition">¶</a></dt>
+<dd><p>An event timer for the <tt class="docutils literal"><span class="pre">wait</span></tt> decorator to keep time</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.parts.watchers.thewatcher.TheWatcher.timestamp">
+<tt class="descname">timestamp</tt><a class="headerlink" href="#theape.parts.watchers.thewatcher.TheWatcher.timestamp" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">strftime string format for datetime</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../_sources/parts/watchers/api/theape.parts.watchers.thewatcher.TheWatcher.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,6 @@
+theape.parts.oatbran.Numbers.two_digits
+=======================================
+
+.. currentmodule:: theape.parts.oatbran
+
+.. autoattribute:: Numbers.two_digits

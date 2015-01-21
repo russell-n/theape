@@ -1,0 +1,293 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Exploring Paramiko’s Errors &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
+    <link rel="up" title="Exploring Paramiko" href="index.html" />
+    <link rel="next" title="errno.ENOENT" href="api/errno.ENOENT.html" />
+    <link rel="prev" title="Exploring Paramiko" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/errno.ENOENT.html" title="errno.ENOENT"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Exploring Paramiko"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >The Ape Developer Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >The Explorations</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Exploring Paramiko</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="exploring-paramiko-s-errors">
+<h1>Exploring Paramiko&#8217;s Errors<a class="headerlink" href="#exploring-paramiko-s-errors" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="#paramiko-bad-hostname"><em>Bad Hostname</em></a></li>
+<li><a class="reference internal" href="#paramiko-bad-username"><em>Bad Username</em></a></li>
+<li><a class="reference internal" href="#paramiko-bad-password"><em>Bad Password</em></a></li>
+<li><a class="reference internal" href="#paramiko-socket-timeout"><em>Socket Timeout</em></a></li>
+<li><a class="reference internal" href="#paramiko-stderr-checking"><em>Paramiko and StandardError</em></a></li>
+</ul>
+</div></blockquote>
+<div class="section" id="bad-hostname">
+<span id="paramiko-bad-hostname"></span><h2>Bad Hostname<a class="headerlink" href="#bad-hostname" title="Permalink to this headline">¶</a></h2>
+<p>What happens if you give it a bad host-name?</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">client</span> <span class="o">=</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">SSHClient</span><span class="p">()</span>
+<span class="n">client</span><span class="o">.</span><span class="n">set_missing_host_key_policy</span><span class="p">(</span><span class="n">paramiko</span><span class="o">.</span><span class="n">AutoAddPolicy</span><span class="p">())</span>
+<span class="c">#client.load_system_host_keys()</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&#39;badhostname&#39;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s">&#39;fakeuser&#39;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">IOError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">error</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>[Errno 2] No such file or directory
+</pre></div>
+</div>
+<p>That is dissapointingly vague, but at least I know how to catch the exception (it&#8217;s actually raising a <cite>socket.error</cite> but that&#8217;s a child of IOError so you can catch either one). The error number is a system error number:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="s">&quot;ENOENT: {0} &#39;{1}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">errno</span><span class="o">.</span><span class="n">ENOENT</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="o">.</span><span class="n">ENOENT</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>ENOENT: 2 &#39;No such file or directory&#39;
+</pre></div>
+</div>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/errno.ENOENT.html#errno.ENOENT" title="errno.ENOENT"><tt class="xref py py-obj docutils literal"><span class="pre">ENOENT</span></tt></a></td>
+<td>int(x=0) -&gt; int or long</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/os.strerror.html#os.strerror" title="os.strerror"><tt class="xref py py-obj docutils literal"><span class="pre">strerror</span></tt></a>((code)&nbsp;-&gt;&nbsp;string)</td>
+<td>Translate an error code to a message string.</td>
+</tr>
+</tbody>
+</table>
+<p>Looking at the documentation, though, it looks like it might make more sense to catch gaierror, not IOError.</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="http://docs.python.org/library/socket.html#socket.gaierror" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">socket.gaierror</span></tt></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>But, that doesn&#8217;t work, because the connect raises a <tt class="docutils literal"><span class="pre">socket.error</span></tt> instead.</p>
+</div>
+<div class="section" id="bad-username">
+<span id="paramiko-bad-username"></span><h2>Bad Username<a class="headerlink" href="#bad-username" title="Permalink to this headline">¶</a></h2>
+<p>What happens if the address is okay but the user-name is wrong (it doesn&#8217;t exist)?</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">try</span><span class="p">:</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s">&#39;ummagumma&#39;</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">PasswordRequiredException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">error</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Private key file is encrypted
+</pre></div>
+</div>
+<p>So, there&#8217;s three really bad things that happened here.</p>
+<blockquote>
+<div><ul class="simple">
+<li>Ubuntu popped up a gui asking for the password for the private-key which will then block the code forever since there&#8217;s no way to tell gnome what to do in the code.</li>
+<li>Even though I typed in my password it rejected it.</li>
+<li>The error message indicates that the private key is encrypted, even though it clearly isn&#8217;t, given that I can ssh to real usernames. This seems like something that would be really hard to work around.</li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By (re) moving /etc/xdg/autostart/gnome-keyring-ssh.desktop I was able to disable the pop-up and it now fails without user-interaction. I don&#8217;t know how reasonable it is to expect that all users will know to do this, but at least it works.</p>
+</div>
+</div>
+<div class="section" id="bad-password">
+<span id="paramiko-bad-password"></span><h2>Bad Password<a class="headerlink" href="#bad-password" title="Permalink to this headline">¶</a></h2>
+<p>I assume that the bad username and the bad password errors will be the same, since it raised a <cite>PasswordRequiredException</cite>, but I guess it&#8217;s better to test it and see.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">try</span><span class="p">:</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s">&#39;fakeuser&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">&#39;badpassword&#39;</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">AuthenticationException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">error</span>
+</pre></div>
+</div>
+<p>Ooops... okay so a bad password is an <cite>AuthenticationException</cite> but a bad username is a <cite>PasswordRequiredException</cite>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Once I killed the keyring the <cite>PasswordRequiredException</cite> popped up when I forgot to execute <cite>ssh-add</cite> so although the error string doesn&#8217;t seem to be meaningful, the exception is &#8211; it is raised if a password is needed and you didn&#8217;t give it one (the bad username is then kind of a red-herring, ssh interprets it as a bad password).</p>
+</div>
+</div>
+<div class="section" id="socket-timeouts">
+<span id="paramiko-socket-timeout"></span><h2>Socket Timeouts<a class="headerlink" href="#socket-timeouts" title="Permalink to this headline">¶</a></h2>
+<p>The last thing to check is the socket timeouts. These will pop up if you give paramiko a timeout and it&#8217;s exceeded (surprised?).</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s">&#39;fakeuser&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="n">i</span><span class="p">,</span><span class="n">o</span><span class="p">,</span><span class="n">e</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="s">&#39;ps -e | grep iperf&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">o</span><span class="p">:</span>
+    <span class="n">pid</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="s">&#39;kill -9 {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pid</span><span class="p">))</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="n">stdin</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="s">&#39;iperf -s&#39;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">stdout</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">line</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">stderr</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">line</span>
+<span class="k">except</span> <span class="n">socket</span><span class="o">.</span><span class="n">timeout</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s">&quot;socket.timeout doesn&#39;t give an error message&quot;</span>
+    <span class="k">print</span> <span class="n">error</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>------------------------------------------------------------
+
+Server listening on TCP port 5001
+
+TCP window size: 85.3 KByte (default)
+
+------------------------------------------------------------
+
+socket.timeout doesn&#39;t give an error message
+</pre></div>
+</div>
+</div>
+<div class="section" id="on-standarderror">
+<span id="paramiko-stderr-checking"></span><h2>On StandardError<a class="headerlink" href="#on-standarderror" title="Permalink to this headline">¶</a></h2>
+<p>When I was working with the previous section I initially forgot to kill the <cite>iperf</cite> process between runs of this code and was not getting any output because I wasn&#8217;t checking stderr &#8211; an error from the command won&#8217;t raise an exception in paramiko, so to be safe you have to always check stderr. But also note that not all stderr output is an error:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">stdin</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="s">&#39;iperf -v&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">stderr</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">line</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>iperf version 2.0.5 (08 Jul 2010) pthreads
+</pre></div>
+</div>
+<p>So it seems there is no universal way to decide if there was an error in the execution of the command &#8211; you have to know what to expect and interpret it for each command.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Exploring Paramiko&#8217;s Errors</a><ul>
+<li><a class="reference internal" href="#bad-hostname">Bad Hostname</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#bad-username">Bad Username</a></li>
+<li><a class="reference internal" href="#bad-password">Bad Password</a></li>
+<li><a class="reference internal" href="#socket-timeouts">Socket Timeouts</a></li>
+<li><a class="reference internal" href="#on-standarderror">On StandardError</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../user/index.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../../_sources/documentation/developer/explorations/explore_paramiko/exploring_errors.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

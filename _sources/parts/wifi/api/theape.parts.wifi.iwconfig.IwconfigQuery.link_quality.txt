@@ -1,0 +1,6 @@
+theape.parts.wifi.iwconfig.IwconfigQuery.link_quality
+=====================================================
+
+.. currentmodule:: theape.parts.wifi.iwconfig
+
+.. autoattribute:: IwconfigQuery.link_quality

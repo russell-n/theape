@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ape.infrastructure.timemap.RelativeTimeMap &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Ape Documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ape-infrastructure-timemap-relativetimemap">
+<h1>ape.infrastructure.timemap.RelativeTimeMap<a class="headerlink" href="#ape-infrastructure-timemap-relativetimemap" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="ape.infrastructure.timemap.RelativeTimeMap">
+<em class="property">class </em><tt class="descclassname">ape.infrastructure.timemap.</tt><tt class="descname">RelativeTimeMap</tt><a class="headerlink" href="#ape.infrastructure.timemap.RelativeTimeMap" title="Permalink to this definition">¶</a></dt>
+<dd><p>A converter from strings with relative times to seconds</p>
+<dl class="method">
+<dt id="ape.infrastructure.timemap.RelativeTimeMap.__init__">
+<tt class="descname">__init__</tt><big>(</big><big>)</big><a class="headerlink" href="#ape.infrastructure.timemap.RelativeTimeMap.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#ape.infrastructure.timemap.RelativeTimeMap.__init__" title="ape.infrastructure.timemap.RelativeTimeMap.__init__"><tt class="xref py py-obj docutils literal"><span class="pre">__init__</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ape.infrastructure.timemap.RelativeTimeMap.log_error" title="ape.infrastructure.timemap.RelativeTimeMap.log_error"><tt class="xref py py-obj docutils literal"><span class="pre">log_error</span></tt></a>(error[,&nbsp;message])</td>
+<td>Logs the error in bold red</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#ape.infrastructure.timemap.RelativeTimeMap.day_expression" title="ape.infrastructure.timemap.RelativeTimeMap.day_expression"><tt class="xref py py-obj docutils literal"><span class="pre">day_expression</span></tt></a></td>
+<td>A compiled regex to extract the number of days</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ape.infrastructure.timemap.RelativeTimeMap.hour_expression" title="ape.infrastructure.timemap.RelativeTimeMap.hour_expression"><tt class="xref py py-obj docutils literal"><span class="pre">hour_expression</span></tt></a></td>
+<td>A compiled regex to extract the number of hours</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ape.infrastructure.timemap.RelativeTimeMap.logger" title="ape.infrastructure.timemap.RelativeTimeMap.logger"><tt class="xref py py-obj docutils literal"><span class="pre">logger</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">A logging object.</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ape.infrastructure.timemap.RelativeTimeMap.minute_expression" title="ape.infrastructure.timemap.RelativeTimeMap.minute_expression"><tt class="xref py py-obj docutils literal"><span class="pre">minute_expression</span></tt></a></td>
+<td>A compiled regex to extract the number of minutes</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ape.infrastructure.timemap.RelativeTimeMap.month_expression" title="ape.infrastructure.timemap.RelativeTimeMap.month_expression"><tt class="xref py py-obj docutils literal"><span class="pre">month_expression</span></tt></a></td>
+<td>A compiled regex to match a month (check for &#8216;mo&#8217; only)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ape.infrastructure.timemap.RelativeTimeMap.second_expression" title="ape.infrastructure.timemap.RelativeTimeMap.second_expression"><tt class="xref py py-obj docutils literal"><span class="pre">second_expression</span></tt></a></td>
+<td>A compiled regex to extract the number of seconds</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ape.infrastructure.timemap.RelativeTimeMap.week_expression" title="ape.infrastructure.timemap.RelativeTimeMap.week_expression"><tt class="xref py py-obj docutils literal"><span class="pre">week_expression</span></tt></a></td>
+<td>A compiled regex to extract a number of weeks</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ape.infrastructure.timemap.RelativeTimeMap.year_expression" title="ape.infrastructure.timemap.RelativeTimeMap.year_expression"><tt class="xref py py-obj docutils literal"><span class="pre">year_expression</span></tt></a></td>
+<td>A compiled regex to match a year (only checks for y)</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="ape.infrastructure.timemap.RelativeTimeMap.log_error">
+<tt class="descname">log_error</tt><big>(</big><em>error</em>, <em>message=''</em><big>)</big><a class="headerlink" href="#ape.infrastructure.timemap.RelativeTimeMap.log_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logs the error in bold red</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
+<li><cite>error</cite>: error type (prefix in red and bold)</li>
+<li><cite>message</cite>: descriptive message (red but not bold)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ape.infrastructure.timemap.RelativeTimeMap.day_expression">
+<tt class="descname">day_expression</tt><a class="headerlink" href="#ape.infrastructure.timemap.RelativeTimeMap.day_expression" title="Permalink to this definition">¶</a></dt>
+<dd><p>A compiled regex to extract the number of days</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ape.infrastructure.timemap.RelativeTimeMap.hour_expression">
+<tt class="descname">hour_expression</tt><a class="headerlink" href="#ape.infrastructure.timemap.RelativeTimeMap.hour_expression" title="Permalink to this definition">¶</a></dt>
+<dd><p>A compiled regex to extract the number of hours</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ape.infrastructure.timemap.RelativeTimeMap.logger">
+<tt class="descname">logger</tt><a class="headerlink" href="#ape.infrastructure.timemap.RelativeTimeMap.logger" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A logging object.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ape.infrastructure.timemap.RelativeTimeMap.minute_expression">
+<tt class="descname">minute_expression</tt><a class="headerlink" href="#ape.infrastructure.timemap.RelativeTimeMap.minute_expression" title="Permalink to this definition">¶</a></dt>
+<dd><p>A compiled regex to extract the number of minutes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ape.infrastructure.timemap.RelativeTimeMap.month_expression">
+<tt class="descname">month_expression</tt><a class="headerlink" href="#ape.infrastructure.timemap.RelativeTimeMap.month_expression" title="Permalink to this definition">¶</a></dt>
+<dd><p>A compiled regex to match a month (check for &#8216;mo&#8217; only)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ape.infrastructure.timemap.RelativeTimeMap.second_expression">
+<tt class="descname">second_expression</tt><a class="headerlink" href="#ape.infrastructure.timemap.RelativeTimeMap.second_expression" title="Permalink to this definition">¶</a></dt>
+<dd><p>A compiled regex to extract the number of seconds</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ape.infrastructure.timemap.RelativeTimeMap.week_expression">
+<tt class="descname">week_expression</tt><a class="headerlink" href="#ape.infrastructure.timemap.RelativeTimeMap.week_expression" title="Permalink to this definition">¶</a></dt>
+<dd><p>A compiled regex to extract a number of weeks</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ape.infrastructure.timemap.RelativeTimeMap.year_expression">
+<tt class="descname">year_expression</tt><a class="headerlink" href="#ape.infrastructure.timemap.RelativeTimeMap.year_expression" title="Permalink to this definition">¶</a></dt>
+<dd><p>A compiled regex to match a year (only checks for y)</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../_sources/infrastructure/api/ape.infrastructure.timemap.RelativeTimeMap.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

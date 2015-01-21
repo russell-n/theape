@@ -1,0 +1,6 @@
+theape.parts.oatbran.FormalDefinition.kleene_star
+=================================================
+
+.. currentmodule:: theape.parts.oatbran
+
+.. autoattribute:: FormalDefinition.kleene_star

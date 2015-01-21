@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The Event Timer &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../index.html" />
+    <link rel="up" title="Parts" href="index.html" />
+    <link rel="next" title="theape.parts.eventtimer.EventTimer" href="api/theape.parts.eventtimer.EventTimer.html" />
+    <link rel="prev" title="Parts" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/theape.parts.eventtimer.EventTimer.html" title="theape.parts.eventtimer.EventTimer"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Parts"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Parts</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-event-timer">
+<h1>The Event Timer<a class="headerlink" href="#the-event-timer" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-theape.parts.eventtimer">
+<span id="the-eventtimer-class"></span><h2>The EventTimer Class<a class="headerlink" href="#module-theape.parts.eventtimer" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.eventtimer.EventTimer.html#theape.parts.eventtimer.EventTimer" title="theape.parts.eventtimer.EventTimer"><tt class="xref py py-obj docutils literal"><span class="pre">EventTimer</span></tt></a>([seconds,&nbsp;event])</td>
+<td>A timer object to set an event</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.eventtimer.EventTimer.event.html#theape.parts.eventtimer.EventTimer.event" title="theape.parts.eventtimer.EventTimer.event"><tt class="xref py py-obj docutils literal"><span class="pre">EventTimer.event</span></tt></a></td>
+<td>Threading event for the timer to set</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.eventtimer.EventTimer.set_event.html#theape.parts.eventtimer.EventTimer.set_event" title="theape.parts.eventtimer.EventTimer.set_event"><tt class="xref py py-obj docutils literal"><span class="pre">EventTimer.set_event</span></tt></a>()</td>
+<td>Sets the event</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.eventtimer.EventTimer.start.html#theape.parts.eventtimer.EventTimer.start" title="theape.parts.eventtimer.EventTimer.start"><tt class="xref py py-obj docutils literal"><span class="pre">EventTimer.start</span></tt></a>()</td>
+<td>The main interface - clears the event then starts the timer</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.eventtimer.EventTimer.clear.html#theape.parts.eventtimer.EventTimer.clear" title="theape.parts.eventtimer.EventTimer.clear"><tt class="xref py py-obj docutils literal"><span class="pre">EventTimer.clear</span></tt></a>()</td>
+<td>A convenience method for users to call the event.clear method.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.eventtimer.EventTimer.wait.html#theape.parts.eventtimer.EventTimer.wait" title="theape.parts.eventtimer.EventTimer.wait"><tt class="xref py py-obj docutils literal"><span class="pre">EventTimer.wait</span></tt></a>([timeout])</td>
+<td>Calls event.wait if timeout is None, uses self.seconds</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.eventtimer.EventTimer.close.html#theape.parts.eventtimer.EventTimer.close" title="theape.parts.eventtimer.EventTimer.close"><tt class="xref py py-obj docutils literal"><span class="pre">EventTimer.close</span></tt></a>()</td>
+<td>Cancels the timer and sets the event.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.eventtimer.EventTimer.is_set.html#theape.parts.eventtimer.EventTimer.is_set" title="theape.parts.eventtimer.EventTimer.is_set"><tt class="xref py py-obj docutils literal"><span class="pre">EventTimer.is_set</span></tt></a>()</td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">True if self.event is set</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="the-wait-decorator-function">
+<h2>The Wait (decorator) Function<a class="headerlink" href="#the-wait-decorator-function" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.eventtimer.wait.html#theape.parts.eventtimer.wait" title="theape.parts.eventtimer.wait"><tt class="xref py py-obj docutils literal"><span class="pre">wait</span></tt></a>(method)</td>
+<td>Decorator to wait for previous timers and to start a new one on exit</td>
+</tr>
+</tbody>
+</table>
+<p>The <tt class="docutils literal"><span class="pre">wait</span></tt> decorator expects that it is decorating a method in a class that has an EventTimer object as a <tt class="docutils literal"><span class="pre">timer</span></tt> property (it references <tt class="docutils literal"><span class="pre">self.timer</span></tt>).</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The Event Timer</a><ul>
+<li><a class="reference internal" href="#module-theape.parts.eventtimer">The EventTimer Class</a></li>
+<li><a class="reference internal" href="#the-wait-decorator-function">The Wait (decorator) Function</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../_sources/parts/eventtimer.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

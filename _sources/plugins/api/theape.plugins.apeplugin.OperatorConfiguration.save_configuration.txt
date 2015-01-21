@@ -1,0 +1,6 @@
+theape.plugins.apeplugin.OperatorConfiguration.save_configuration
+=================================================================
+
+.. currentmodule:: theape.plugins.apeplugin
+
+.. automethod:: OperatorConfiguration.save_configuration

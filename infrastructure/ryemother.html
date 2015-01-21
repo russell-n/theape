@@ -1,0 +1,320 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The Rye Mother &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../index.html" />
+    <link rel="up" title="The Ape’s Infrastructure" href="index.html" />
+    <link rel="next" title="pkg_resources.load_entry_point" href="api/pkg_resources.load_entry_point.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/pkg_resources.load_entry_point.html" title="pkg_resources.load_entry_point"
+             accesskey="N">next</a> |</li>
+        <li><a href="../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">The Ape&#8217;s Infrastructure</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-rye-mother">
+<h1>The Rye Mother<a class="headerlink" href="#the-rye-mother" title="Permalink to this headline">¶</a></h1>
+<p id="ape-infrastructure-rye-mother">The <a class="reference external" href="http://www.pitt.edu/~dash/gerchange.html#GrimmRyeMother">Rye Mother</a> gathers children.</p>
+<div class="figure align-center">
+<img alt="../_images/bianca_maria.jpg" src="../_images/bianca_maria.jpg" />
+<p class="caption">Source: <a class="reference external" href="http://en.wikipedia.org/wiki/File:En_kv%C3%A4ll_vid_midsommartid_gingo_de_med_Bianca_Maria_djupt_in_i_skogen2.jpg">Wikipedia</a></p>
+</div>
+<div class="section" id="the-entry-points">
+<span id="ape-commoncode-rye-mother-entry-points"></span><h2>The Entry Points<a class="headerlink" href="#the-entry-points" title="Permalink to this headline">¶</a></h2>
+<p>The RyeMother uses entry points defined in the <cite>setup.py</cite> file. The entry_points use an ini-like format with the form:</p>
+<div class="highlight-python"><div class="highlight"><pre>[group]
+name = module:object
+</pre></div>
+</div>
+<p>In this case, the RyeMother wants to search the folder for class-definitions so the <cite>object</cite> is left out. As a concrete example, for the ape subcommands, the entry points would look like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">entry_points</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">  [theape.subcommands]</span>
+<span class="s">  subcommands = theape.infrastructure.arguments</span>
+<span class="s">  &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The actual <cite>setup.py</cite> has other entries, this is just the sub-commands entry.</p>
+</div>
+<p>The <cite>[ape.subcommands]</cite> defines a group name, you can put multiple entries under it for other modules or objects. <cite>ape_subcommands</cite> is the name that is used to reference the <cite>ape.interface.arguments</cite> module in the code.</p>
+</div>
+<div class="section" id="dependencies">
+<span id="ape-commoncode-rye-mother-dependecies"></span><h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<p>The RyeMother relies on several python modules.</p>
+<table border="1" class="docutils">
+<caption>Dependencies</caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Package</th>
+<th class="head">Source</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference external" href="https://docs.python.org/2/library/pkgutil.html">pkgutil</a></td>
+<td>python standard library</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://docs.python.org/2.7/library/importlib.html">importlib</a></td>
+<td>python standard library</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://docs.python.org/2/library/os.path.html">os.path</a></td>
+<td>python standard library</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://docs.python.org/2/library/inspect.html">inspect</a></td>
+<td>python standard library</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://pythonhosted.org/setuptools/pkg_resources.html">pkg_resources</a></td>
+<td>setuptools</td>
+</tr>
+</tbody>
+</table>
+<p>The methods used:</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/pkg_resources.load_entry_point.html#pkg_resources.load_entry_point" title="pkg_resources.load_entry_point"><tt class="xref py py-obj docutils literal"><span class="pre">pkg_resources.load_entry_point</span></tt></a>(dist,&nbsp;group,&nbsp;name)</td>
+<td>Return <cite>name</cite> entry point of <cite>group</cite> for <cite>dist</cite> or raise ImportError</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/os.path.dirname.html#os.path.dirname" title="os.path.dirname"><tt class="xref py py-obj docutils literal"><span class="pre">dirname</span></tt></a>(p)</td>
+<td>Returns the directory component of a pathname</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/pkgutil.iter_modules.html#pkgutil.iter_modules" title="pkgutil.iter_modules"><tt class="xref py py-obj docutils literal"><span class="pre">iter_modules</span></tt></a>([path,&nbsp;prefix])</td>
+<td>Yields (module_loader, name, ispkg) for all submodules on path, or, if path is None, all top-level modules on sys.path.</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/inspect.getmembers.html#inspect.getmembers" title="inspect.getmembers"><tt class="xref py py-obj docutils literal"><span class="pre">getmembers</span></tt></a>(object[,&nbsp;predicate])</td>
+<td>Return all members of an object as (name, value) pairs sorted by name.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="what-the-ryemother-does">
+<span id="ape-commoncode-rye-mother-algorithm"></span><h2>What the RyeMother Does<a class="headerlink" href="#what-the-ryemother-does" title="Permalink to this headline">¶</a></h2>
+<p>The RyeMother&#8217;s __call__ method converts the parameters to a dictionary of class definition objects.</p>
+<table border="1" class="docutils">
+<caption>Call Parameters</caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><cite>parent</cite></td>
+<td>The Base Class of the child-classes that we want to import</td>
+</tr>
+<tr class="row-odd"><td><cite>group</cite></td>
+<td>Group name in the <cite>entry_points</cite> variable in <cite>setup.py</cite> (see <a class="reference internal" href="#ape-commoncode-rye-mother-entry-points"><em>Entry Points</em></a>)</td>
+</tr>
+<tr class="row-even"><td><cite>name</cite></td>
+<td>name of the module in the <cite>entry_points</cite> variable in <cite>setup.py</cite></td>
+</tr>
+<tr class="row-odd"><td><cite>keyfunction</cite></td>
+<td>function to transform the keys of the dictionary (default uses the actual class names)</td>
+</tr>
+</tbody>
+</table>
+<p>The idea here is that to identify the classes that we&#8217;re interested in we&#8217;ll define them as children of a specific class.</p>
+<p class="plantuml">
+<img src="../_images/plantuml-843d10abcf0858e3d512bd9de6c7ee96a7d242e4.png" alt="Parent &lt;|-- Child_1
+Parent &lt;|-- Child_2
+Parent &lt;|-- Child_3" />
+</p>
+<p>The <cite>parent</cite> parameter for the RyeMother is the actual class definition object. For example, if the user of the RyeMother did the following:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">theape.interface.arguments</span> <span class="kn">import</span> <span class="n">BaseArguments</span>
+</pre></div>
+</div>
+<p>Then <cite>BaseArguments</cite> is what would be passed to the call and all the classes that inherit from it will be returned. If we defined <cite>ape.subcommands</cite> as the group and  <cite>ape_subcommands</cite> as the name in the <cite>setup.py</cite> <cite>entry_points</cite> variable as mentioned <a class="reference internal" href="#ape-commoncode-rye-mother-entry-points"><em>earlier</em></a>, and we wanted to retrieve the <cite>Run</cite> class, we could use something like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">mother</span> <span class="o">=</span> <span class="n">RyeMother</span><span class="p">()</span>
+<span class="n">children</span> <span class="o">=</span> <span class="n">mother</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">BaseArguments</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s">&#39;ape.subcommands&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;ape_subcommands&#39;</span><span class="p">)</span>
+<span class="n">Run</span> <span class="o">=</span> <span class="n">children</span><span class="p">[</span><span class="s">&#39;Run&#39;</span><span class="p">]</span>
+<span class="n">run_instance</span> <span class="o">=</span> <span class="n">Run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The <cite>keyfunction</cite> is used to change the keys in the dictionary. One of the reasons that the RyeMother was created was so that classes could be auto-discovered and displayed for the users. Since the human-readable name might not always match the class-name, rather than forcing the classes to change their names, the <cite>keyfunction</cite> can be used to make a limited tranformation of the strings used as the keys.</p>
+<p>To make them lower-cased you could use something like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">keyfunction</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s">&#39;lower&#39;</span><span class="p">)()</span>
+</pre></div>
+</div>
+<p>The use of the gettattr might not seem intuitive, but since they recommend using string methods, I figured it&#8217;d be the best way. Another common transform might occur if the class names have a common suffix. Say they all have the suffix &#8216;Arguments&#8217; and you don&#8217;t want that in the dictionaries keys. You could do something like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">keyfunction</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s">&#39;rstrip&#39;</span><span class="p">)(</span><span class="s">&#39;Arguments&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is the main path for the <tt class="docutils literal"><span class="pre">__call__</span></tt>:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Create a dictionary called <cite>children</cite></li>
+<li>Import the package (folder) that contains the modules (files) that have the class definitions we want</li>
+<li>Get the package&#8217;s directory</li>
+<li>Create a <cite>prefix</cite> using the module&#8217;s package name</li>
+<li>Generate a list of module names within the imported module&#8217;s directory and add the prefix to them (<cite>&lt;prefix&gt;.&lt;name&gt;</cite>)</li>
+<li>Import each of the module names from the previous step</li>
+<li>For each of the modules import all members that are children of the parent base-class</li>
+<li>For each member, if <cite>keyfunction</cite> is defined, transform its name</li>
+<li>For each member, add it to the children dictionary, using the name as a key and the class-definition object as the value</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="module-theape.infrastructure.ryemother">
+<span id="the-ryemother-class"></span><span id="ape-commoncode-rye-mother-class"></span><h2>The RyeMother Class<a class="headerlink" href="#module-theape.infrastructure.ryemother" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.infrastructure.ryemother.RyeMother.html#theape.infrastructure.ryemother.RyeMother" title="theape.infrastructure.ryemother.RyeMother"><tt class="xref py py-obj docutils literal"><span class="pre">RyeMother</span></tt></a>([exclusions,&nbsp;parent,&nbsp;...])</td>
+<td>A gatherer of child classes</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.infrastructure.ryemother.RyeMother.__call__.html#theape.infrastructure.ryemother.RyeMother.__call__" title="theape.infrastructure.ryemother.RyeMother.__call__"><tt class="xref py py-obj docutils literal"><span class="pre">RyeMother.__call__</span></tt></a>([parent,&nbsp;group,&nbsp;name,&nbsp;...])</td>
+<td>The main interface</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The Rye Mother</a><ul>
+<li><a class="reference internal" href="#the-entry-points">The Entry Points</a></li>
+<li><a class="reference internal" href="#dependencies">Dependencies</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#what-the-ryemother-does">What the RyeMother Does</a></li>
+<li><a class="reference internal" href="#module-theape.infrastructure.ryemother">The RyeMother Class</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../_sources/infrastructure/ryemother.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

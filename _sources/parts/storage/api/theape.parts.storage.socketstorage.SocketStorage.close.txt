@@ -1,0 +1,6 @@
+theape.parts.storage.socketstorage.SocketStorage.close
+======================================================
+
+.. currentmodule:: theape.parts.storage.socketstorage
+
+.. automethod:: SocketStorage.close

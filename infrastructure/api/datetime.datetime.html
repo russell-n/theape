@@ -1,0 +1,411 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>datetime.datetime &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../index.html" />
+    <link rel="up" title="Time Maps" href="../timemap.html" />
+    <link rel="prev" title="dateutil.parser.parse" href="dateutil.parser.parse.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="dateutil.parser.parse.html" title="dateutil.parser.parse"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >The Ape&#8217;s Infrastructure</a> &raquo;</li>
+          <li><a href="../timemap.html" accesskey="U">Time Maps</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="datetime-datetime">
+<h1>datetime.datetime<a class="headerlink" href="#datetime-datetime" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="datetime.datetime">
+<em class="property">class </em><tt class="descclassname">datetime.</tt><tt class="descname">datetime</tt><a class="headerlink" href="#datetime.datetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>datetime(year, month, day[, hour[, minute[, second[, microsecond[,tzinfo]]]]])</p>
+<p>The year, month and day arguments are required. tzinfo may be None, or an
+instance of a tzinfo subclass. The remaining arguments may be ints or longs.</p>
+<dl class="method">
+<dt id="datetime.datetime.__init__">
+<tt class="descname">__init__</tt><big>(</big><big>)</big><a class="headerlink" href="#datetime.datetime.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__init__(...) initializes x; see help(type(x)) for signature</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#datetime.datetime.astimezone" title="datetime.datetime.astimezone"><tt class="xref py py-obj docutils literal"><span class="pre">astimezone</span></tt></a></td>
+<td>tz -&gt; convert to local time in new timezone tz</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#datetime.datetime.combine" title="datetime.datetime.combine"><tt class="xref py py-obj docutils literal"><span class="pre">combine</span></tt></a></td>
+<td>date, time -&gt; datetime with same date and time fields</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#datetime.datetime.ctime" title="datetime.datetime.ctime"><tt class="xref py py-obj docutils literal"><span class="pre">ctime</span></tt></a></td>
+<td>Return ctime() style string.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#datetime.datetime.date" title="datetime.datetime.date"><tt class="xref py py-obj docutils literal"><span class="pre">date</span></tt></a></td>
+<td>Return date object with same year, month and day.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#datetime.datetime.dst" title="datetime.datetime.dst"><tt class="xref py py-obj docutils literal"><span class="pre">dst</span></tt></a></td>
+<td>Return self.tzinfo.dst(self).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#datetime.datetime.fromordinal" title="datetime.datetime.fromordinal"><tt class="xref py py-obj docutils literal"><span class="pre">fromordinal</span></tt></a></td>
+<td>int -&gt; date corresponding to a proleptic Gregorian ordinal.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#datetime.datetime.fromtimestamp" title="datetime.datetime.fromtimestamp"><tt class="xref py py-obj docutils literal"><span class="pre">fromtimestamp</span></tt></a></td>
+<td>timestamp[, tz] -&gt; tz&#8217;s local time from POSIX timestamp.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#datetime.datetime.isocalendar" title="datetime.datetime.isocalendar"><tt class="xref py py-obj docutils literal"><span class="pre">isocalendar</span></tt></a></td>
+<td>Return a 3-tuple containing ISO year, week number, and weekday.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#datetime.datetime.isoformat" title="datetime.datetime.isoformat"><tt class="xref py py-obj docutils literal"><span class="pre">isoformat</span></tt></a></td>
+<td>[sep] -&gt; string in ISO 8601 format, YYYY-MM-DDTHH:MM:SS[.mmmmmm][+HH:MM].</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#datetime.datetime.isoweekday" title="datetime.datetime.isoweekday"><tt class="xref py py-obj docutils literal"><span class="pre">isoweekday</span></tt></a></td>
+<td>Return the day of the week represented by the date.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#datetime.datetime.now" title="datetime.datetime.now"><tt class="xref py py-obj docutils literal"><span class="pre">now</span></tt></a></td>
+<td>[tz] -&gt; new datetime with tz&#8217;s local day and time.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#datetime.datetime.replace" title="datetime.datetime.replace"><tt class="xref py py-obj docutils literal"><span class="pre">replace</span></tt></a></td>
+<td>Return datetime with new specified fields.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#datetime.datetime.strftime" title="datetime.datetime.strftime"><tt class="xref py py-obj docutils literal"><span class="pre">strftime</span></tt></a></td>
+<td>format -&gt; strftime() style string.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#datetime.datetime.strptime" title="datetime.datetime.strptime"><tt class="xref py py-obj docutils literal"><span class="pre">strptime</span></tt></a></td>
+<td>string, format -&gt; new datetime parsed from a string (like time.strptime()).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#datetime.datetime.time" title="datetime.datetime.time"><tt class="xref py py-obj docutils literal"><span class="pre">time</span></tt></a></td>
+<td>Return time object with same time but with tzinfo=None.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#datetime.datetime.timetuple" title="datetime.datetime.timetuple"><tt class="xref py py-obj docutils literal"><span class="pre">timetuple</span></tt></a></td>
+<td>Return time tuple, compatible with time.localtime().</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#datetime.datetime.timetz" title="datetime.datetime.timetz"><tt class="xref py py-obj docutils literal"><span class="pre">timetz</span></tt></a></td>
+<td>Return time object with same time and tzinfo.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#datetime.datetime.today" title="datetime.datetime.today"><tt class="xref py py-obj docutils literal"><span class="pre">today</span></tt></a></td>
+<td>Current date or datetime:  same as self.__class__.fromtimestamp(time.time()).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#datetime.datetime.toordinal" title="datetime.datetime.toordinal"><tt class="xref py py-obj docutils literal"><span class="pre">toordinal</span></tt></a></td>
+<td>Return proleptic Gregorian ordinal.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#datetime.datetime.tzname" title="datetime.datetime.tzname"><tt class="xref py py-obj docutils literal"><span class="pre">tzname</span></tt></a></td>
+<td>Return self.tzinfo.tzname(self).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#datetime.datetime.utcfromtimestamp" title="datetime.datetime.utcfromtimestamp"><tt class="xref py py-obj docutils literal"><span class="pre">utcfromtimestamp</span></tt></a></td>
+<td>timestamp -&gt; UTC datetime from a POSIX timestamp (like time.time()).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#datetime.datetime.utcnow" title="datetime.datetime.utcnow"><tt class="xref py py-obj docutils literal"><span class="pre">utcnow</span></tt></a></td>
+<td>Return a new datetime representing UTC day and time.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#datetime.datetime.utcoffset" title="datetime.datetime.utcoffset"><tt class="xref py py-obj docutils literal"><span class="pre">utcoffset</span></tt></a></td>
+<td>Return self.tzinfo.utcoffset(self).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#datetime.datetime.utctimetuple" title="datetime.datetime.utctimetuple"><tt class="xref py py-obj docutils literal"><span class="pre">utctimetuple</span></tt></a></td>
+<td>Return UTC time tuple, compatible with time.localtime().</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#datetime.datetime.weekday" title="datetime.datetime.weekday"><tt class="xref py py-obj docutils literal"><span class="pre">weekday</span></tt></a></td>
+<td>Return the day of the week represented by the date.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="http://docs.python.org/library/datetime.html#datetime.datetime.day" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">day</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://docs.python.org/library/datetime.html#datetime.datetime.hour" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">hour</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://docs.python.org/library/datetime.html#datetime.datetime.max" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">max</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://docs.python.org/library/datetime.html#datetime.datetime.microsecond" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">microsecond</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://docs.python.org/library/datetime.html#datetime.datetime.min" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">min</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://docs.python.org/library/datetime.html#datetime.datetime.minute" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">minute</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://docs.python.org/library/datetime.html#datetime.datetime.month" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">month</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://docs.python.org/library/datetime.html#datetime.datetime.resolution" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">resolution</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://docs.python.org/library/datetime.html#datetime.datetime.second" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">second</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://docs.python.org/library/datetime.html#datetime.datetime.tzinfo" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">tzinfo</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://docs.python.org/library/datetime.html#datetime.datetime.year" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">year</span></tt></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="datetime.datetime.astimezone">
+<tt class="descname">astimezone</tt><big>(</big><big>)</big><a class="headerlink" href="#datetime.datetime.astimezone" title="Permalink to this definition">¶</a></dt>
+<dd><p>tz -&gt; convert to local time in new timezone tz</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="datetime.datetime.combine">
+<em class="property">static </em><tt class="descname">combine</tt><big>(</big><big>)</big><a class="headerlink" href="#datetime.datetime.combine" title="Permalink to this definition">¶</a></dt>
+<dd><p>date, time -&gt; datetime with same date and time fields</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="datetime.datetime.ctime">
+<tt class="descname">ctime</tt><big>(</big><big>)</big><a class="headerlink" href="#datetime.datetime.ctime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return ctime() style string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="datetime.datetime.date">
+<tt class="descname">date</tt><big>(</big><big>)</big><a class="headerlink" href="#datetime.datetime.date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return date object with same year, month and day.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="datetime.datetime.dst">
+<tt class="descname">dst</tt><big>(</big><big>)</big><a class="headerlink" href="#datetime.datetime.dst" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return self.tzinfo.dst(self).</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="datetime.datetime.fromordinal">
+<em class="property">static </em><tt class="descname">fromordinal</tt><big>(</big><big>)</big><a class="headerlink" href="#datetime.datetime.fromordinal" title="Permalink to this definition">¶</a></dt>
+<dd><p>int -&gt; date corresponding to a proleptic Gregorian ordinal.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="datetime.datetime.fromtimestamp">
+<em class="property">static </em><tt class="descname">fromtimestamp</tt><big>(</big><big>)</big><a class="headerlink" href="#datetime.datetime.fromtimestamp" title="Permalink to this definition">¶</a></dt>
+<dd><p>timestamp[, tz] -&gt; tz&#8217;s local time from POSIX timestamp.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="datetime.datetime.isocalendar">
+<tt class="descname">isocalendar</tt><big>(</big><big>)</big><a class="headerlink" href="#datetime.datetime.isocalendar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a 3-tuple containing ISO year, week number, and weekday.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="datetime.datetime.isoformat">
+<tt class="descname">isoformat</tt><big>(</big><big>)</big><a class="headerlink" href="#datetime.datetime.isoformat" title="Permalink to this definition">¶</a></dt>
+<dd><p>[sep] -&gt; string in ISO 8601 format, YYYY-MM-DDTHH:MM:SS[.mmmmmm][+HH:MM].</p>
+<p>sep is used to separate the year from the time, and defaults to &#8216;T&#8217;.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="datetime.datetime.isoweekday">
+<tt class="descname">isoweekday</tt><big>(</big><big>)</big><a class="headerlink" href="#datetime.datetime.isoweekday" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the day of the week represented by the date.
+Monday == 1 ... Sunday == 7</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="datetime.datetime.now">
+<em class="property">static </em><tt class="descname">now</tt><big>(</big><big>)</big><a class="headerlink" href="#datetime.datetime.now" title="Permalink to this definition">¶</a></dt>
+<dd><p>[tz] -&gt; new datetime with tz&#8217;s local day and time.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="datetime.datetime.replace">
+<tt class="descname">replace</tt><big>(</big><big>)</big><a class="headerlink" href="#datetime.datetime.replace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return datetime with new specified fields.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="datetime.datetime.strftime">
+<tt class="descname">strftime</tt><big>(</big><big>)</big><a class="headerlink" href="#datetime.datetime.strftime" title="Permalink to this definition">¶</a></dt>
+<dd><p>format -&gt; strftime() style string.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="datetime.datetime.strptime">
+<em class="property">static </em><tt class="descname">strptime</tt><big>(</big><big>)</big><a class="headerlink" href="#datetime.datetime.strptime" title="Permalink to this definition">¶</a></dt>
+<dd><p>string, format -&gt; new datetime parsed from a string (like time.strptime()).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="datetime.datetime.time">
+<tt class="descname">time</tt><big>(</big><big>)</big><a class="headerlink" href="#datetime.datetime.time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return time object with same time but with tzinfo=None.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="datetime.datetime.timetuple">
+<tt class="descname">timetuple</tt><big>(</big><big>)</big><a class="headerlink" href="#datetime.datetime.timetuple" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return time tuple, compatible with time.localtime().</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="datetime.datetime.timetz">
+<tt class="descname">timetz</tt><big>(</big><big>)</big><a class="headerlink" href="#datetime.datetime.timetz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return time object with same time and tzinfo.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="datetime.datetime.today">
+<em class="property">static </em><tt class="descname">today</tt><big>(</big><big>)</big><a class="headerlink" href="#datetime.datetime.today" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current date or datetime:  same as self.__class__.fromtimestamp(time.time()).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="datetime.datetime.toordinal">
+<tt class="descname">toordinal</tt><big>(</big><big>)</big><a class="headerlink" href="#datetime.datetime.toordinal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return proleptic Gregorian ordinal.  January 1 of year 1 is day 1.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="datetime.datetime.tzname">
+<tt class="descname">tzname</tt><big>(</big><big>)</big><a class="headerlink" href="#datetime.datetime.tzname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return self.tzinfo.tzname(self).</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="datetime.datetime.utcfromtimestamp">
+<em class="property">static </em><tt class="descname">utcfromtimestamp</tt><big>(</big><big>)</big><a class="headerlink" href="#datetime.datetime.utcfromtimestamp" title="Permalink to this definition">¶</a></dt>
+<dd><p>timestamp -&gt; UTC datetime from a POSIX timestamp (like time.time()).</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="datetime.datetime.utcnow">
+<em class="property">static </em><tt class="descname">utcnow</tt><big>(</big><big>)</big><a class="headerlink" href="#datetime.datetime.utcnow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a new datetime representing UTC day and time.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="datetime.datetime.utcoffset">
+<tt class="descname">utcoffset</tt><big>(</big><big>)</big><a class="headerlink" href="#datetime.datetime.utcoffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return self.tzinfo.utcoffset(self).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="datetime.datetime.utctimetuple">
+<tt class="descname">utctimetuple</tt><big>(</big><big>)</big><a class="headerlink" href="#datetime.datetime.utctimetuple" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return UTC time tuple, compatible with time.localtime().</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="datetime.datetime.weekday">
+<tt class="descname">weekday</tt><big>(</big><big>)</big><a class="headerlink" href="#datetime.datetime.weekday" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the day of the week represented by the date.
+Monday == 0 ... Sunday == 6</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../_sources/infrastructure/api/datetime.datetime.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

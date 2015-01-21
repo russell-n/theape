@@ -1,0 +1,6 @@
+theape.parts.wifi.iwconfig.IwconfigExpressions.rx_invalid_nwid
+==============================================================
+
+.. currentmodule:: theape.parts.wifi.iwconfig
+
+.. autoattribute:: IwconfigExpressions.rx_invalid_nwid

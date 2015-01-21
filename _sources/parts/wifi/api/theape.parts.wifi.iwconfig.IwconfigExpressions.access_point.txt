@@ -1,0 +1,6 @@
+theape.parts.wifi.iwconfig.IwconfigExpressions.access_point
+===========================================================
+
+.. currentmodule:: theape.parts.wifi.iwconfig
+
+.. autoattribute:: IwconfigExpressions.access_point

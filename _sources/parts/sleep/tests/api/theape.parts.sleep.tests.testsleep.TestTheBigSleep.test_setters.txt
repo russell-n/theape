@@ -1,0 +1,6 @@
+theape.parts.sleep.tests.testsleep.TestTheBigSleep.test_setters
+===============================================================
+
+.. currentmodule:: theape.parts.sleep.tests.testsleep
+
+.. automethod:: TestTheBigSleep.test_setters

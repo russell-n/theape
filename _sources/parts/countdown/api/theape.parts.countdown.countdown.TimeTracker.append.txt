@@ -1,0 +1,6 @@
+theape.parts.countdown.countdown.TimeTracker.append
+===================================================
+
+.. currentmodule:: theape.parts.countdown.countdown
+
+.. automethod:: TimeTracker.append

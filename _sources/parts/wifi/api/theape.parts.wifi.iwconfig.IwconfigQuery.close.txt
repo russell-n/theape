@@ -1,0 +1,6 @@
+theape.parts.wifi.iwconfig.IwconfigQuery.close
+==============================================
+
+.. currentmodule:: theape.parts.wifi.iwconfig
+
+.. automethod:: IwconfigQuery.close

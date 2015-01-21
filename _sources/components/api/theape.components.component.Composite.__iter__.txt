@@ -1,0 +1,6 @@
+theape.components.component.Composite.__iter__
+==============================================
+
+.. currentmodule:: theape.components.component
+
+.. automethod:: Composite.__iter__

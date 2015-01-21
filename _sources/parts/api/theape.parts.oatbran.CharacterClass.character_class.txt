@@ -1,0 +1,6 @@
+theape.parts.oatbran.CharacterClass.character_class
+===================================================
+
+.. currentmodule:: theape.parts.oatbran
+
+.. automethod:: CharacterClass.character_class

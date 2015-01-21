@@ -1,0 +1,272 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>theape.plugins.dummyplugin.StuckDummy &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../index.html" />
+    <link rel="up" title="The Dummy Plugin" href="../dummyplugin.html" />
+    <link rel="next" title="theape.parts.dummy.dummy.DummyClass" href="theape.parts.dummy.dummy.DummyClass.html" />
+    <link rel="prev" title="theape.plugins.dummyplugin.StuckDummyConfiguration.product" href="theape.plugins.dummyplugin.StuckDummyConfiguration.product.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="theape.parts.dummy.dummy.DummyClass.html" title="theape.parts.dummy.dummy.DummyClass"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="theape.plugins.dummyplugin.StuckDummyConfiguration.product.html" title="theape.plugins.dummyplugin.StuckDummyConfiguration.product"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Plugins</a> &raquo;</li>
+          <li><a href="../dummyplugin.html" accesskey="U">The Dummy Plugin</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="theape-plugins-dummyplugin-stuckdummy">
+<h1>theape.plugins.dummyplugin.StuckDummy<a class="headerlink" href="#theape-plugins-dummyplugin-stuckdummy" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="theape.plugins.dummyplugin.StuckDummy">
+<em class="property">class </em><tt class="descclassname">theape.plugins.dummyplugin.</tt><tt class="descname">StuckDummy</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#theape.plugins.dummyplugin.StuckDummy" title="Permalink to this definition">¶</a></dt>
+<dd><p>A plugin to test the infrastructure by hanging</p>
+<dl class="method">
+<dt id="theape.plugins.dummyplugin.StuckDummy.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#theape.plugins.dummyplugin.StuckDummy.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#theape.plugins.dummyplugin.StuckDummy.__init__" title="theape.plugins.dummyplugin.StuckDummy.__init__"><tt class="xref py py-obj docutils literal"><span class="pre">__init__</span></tt></a>(*args,&nbsp;**kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#theape.plugins.dummyplugin.StuckDummy.fetch_config" title="theape.plugins.dummyplugin.StuckDummy.fetch_config"><tt class="xref py py-obj docutils literal"><span class="pre">fetch_config</span></tt></a>()</td>
+<td>prints a message saying there is no configuration</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#theape.plugins.dummyplugin.StuckDummy.help" title="theape.plugins.dummyplugin.StuckDummy.help"><tt class="xref py py-obj docutils literal"><span class="pre">help</span></tt></a>([width])</td>
+<td>Prints a help-string for the plugin</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#theape.plugins.dummyplugin.StuckDummy.log_error" title="theape.plugins.dummyplugin.StuckDummy.log_error"><tt class="xref py py-obj docutils literal"><span class="pre">log_error</span></tt></a>(error[,&nbsp;message])</td>
+<td>Logs the error in bold red</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#theape.plugins.dummyplugin.StuckDummy.config_builder" title="theape.plugins.dummyplugin.StuckDummy.config_builder"><tt class="xref py py-obj docutils literal"><span class="pre">config_builder</span></tt></a></td>
+<td>Stuck Dummy Configuration</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#theape.plugins.dummyplugin.StuckDummy.help_page" title="theape.plugins.dummyplugin.StuckDummy.help_page"><tt class="xref py py-obj docutils literal"><span class="pre">help_page</span></tt></a></td>
+<td>A HelpPage to use if self.sections has been defined</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#theape.plugins.dummyplugin.StuckDummy.logger" title="theape.plugins.dummyplugin.StuckDummy.logger"><tt class="xref py py-obj docutils literal"><span class="pre">logger</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">A logging object.</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#theape.plugins.dummyplugin.StuckDummy.product" title="theape.plugins.dummyplugin.StuckDummy.product"><tt class="xref py py-obj docutils literal"><span class="pre">product</span></tt></a></td>
+<td>builds and returns a HangingDummy</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#theape.plugins.dummyplugin.StuckDummy.sections" title="theape.plugins.dummyplugin.StuckDummy.sections"><tt class="xref py py-obj docutils literal"><span class="pre">sections</span></tt></a></td>
+<td>An ordered dict for the help page</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="theape.plugins.dummyplugin.StuckDummy.fetch_config">
+<tt class="descname">fetch_config</tt><big>(</big><big>)</big><a class="headerlink" href="#theape.plugins.dummyplugin.StuckDummy.fetch_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>prints a message saying there is no configuration</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="theape.plugins.dummyplugin.StuckDummy.help">
+<tt class="descname">help</tt><big>(</big><em>width=80</em><big>)</big><a class="headerlink" href="#theape.plugins.dummyplugin.StuckDummy.help" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints a help-string for the plugin</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
+<li><cite>width</cite>: number of characters wide to print help</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="theape.plugins.dummyplugin.StuckDummy.log_error">
+<tt class="descname">log_error</tt><big>(</big><em>error</em>, <em>message=''</em><big>)</big><a class="headerlink" href="#theape.plugins.dummyplugin.StuckDummy.log_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logs the error in bold red</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
+<li><cite>error</cite>: error type (prefix in red and bold)</li>
+<li><cite>message</cite>: descriptive message (red but not bold)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.plugins.dummyplugin.StuckDummy.config_builder">
+<tt class="descname">config_builder</tt><a class="headerlink" href="#theape.plugins.dummyplugin.StuckDummy.config_builder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stuck Dummy Configuration</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.plugins.dummyplugin.StuckDummy.help_page">
+<tt class="descname">help_page</tt><a class="headerlink" href="#theape.plugins.dummyplugin.StuckDummy.help_page" title="Permalink to this definition">¶</a></dt>
+<dd><p>A HelpPage to use if self.sections has been defined</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.plugins.dummyplugin.StuckDummy.logger">
+<tt class="descname">logger</tt><a class="headerlink" href="#theape.plugins.dummyplugin.StuckDummy.logger" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A logging object.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.plugins.dummyplugin.StuckDummy.product">
+<tt class="descname">product</tt><a class="headerlink" href="#theape.plugins.dummyplugin.StuckDummy.product" title="Permalink to this definition">¶</a></dt>
+<dd><p>builds and returns a HangingDummy</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Precondition:</th><td class="field-body">self.configuration map has been set</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.plugins.dummyplugin.StuckDummy.sections">
+<tt class="descname">sections</tt><a class="headerlink" href="#theape.plugins.dummyplugin.StuckDummy.sections" title="Permalink to this definition">¶</a></dt>
+<dd><p>An ordered dict for the help page</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../parts/index.html">Parts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../_sources/plugins/api/theape.plugins.dummyplugin.StuckDummy.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

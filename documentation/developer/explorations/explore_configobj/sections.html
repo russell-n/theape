@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Sections &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
+    <link rel="up" title="Exploring ConfigObj" href="index.html" />
+    <link rel="next" title="configobj.Section" href="api/configobj.Section.html" />
+    <link rel="prev" title="Merging Sections" href="merging.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/configobj.Section.html" title="configobj.Section"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="merging.html" title="Merging Sections"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >The Ape Developer Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >The Explorations</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Exploring ConfigObj</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="sections">
+<h1>Sections<a class="headerlink" href="#sections" title="Permalink to this headline">¶</a></h1>
+<p><cite>ConfigObj</cite> objects are sub-classes of the <cite>Section</cite> class (which is itself a sub-class of the <cite>dict</cite>). Besides the dictionary methods that Section inherits, it also contributes some of its own. I&#8217;m not planning to use most of them so I&#8217;ll just look at the type-casting and <cite>merge</cite> methods here.</p>
+<div class="section" id="module-configobj">
+<span id="type-casting"></span><h2>Type Casting<a class="headerlink" href="#module-configobj" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/configobj.Section.html#configobj.Section" title="configobj.Section"><tt class="xref py py-obj docutils literal"><span class="pre">Section</span></tt></a>(parent,&nbsp;depth,&nbsp;main[,&nbsp;indict,&nbsp;name])</td>
+<td>A dictionary-like object that represents a section in a config file.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/configobj.Section.as_bool.html#configobj.Section.as_bool" title="configobj.Section.as_bool"><tt class="xref py py-obj docutils literal"><span class="pre">Section.as_bool</span></tt></a>(key)</td>
+<td>Accepts a key as input.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/configobj.Section.as_int.html#configobj.Section.as_int" title="configobj.Section.as_int"><tt class="xref py py-obj docutils literal"><span class="pre">Section.as_int</span></tt></a>(key)</td>
+<td>A convenience method which coerces the specified value to an integer.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/configobj.Section.as_float.html#configobj.Section.as_float" title="configobj.Section.as_float"><tt class="xref py py-obj docutils literal"><span class="pre">Section.as_float</span></tt></a>(key)</td>
+<td>A convenience method which coerces the specified value to a float.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/configobj.Section.as_list.html#configobj.Section.as_list" title="configobj.Section.as_list"><tt class="xref py py-obj docutils literal"><span class="pre">Section.as_list</span></tt></a>(key)</td>
+<td>A convenience method which fetches the specified value, guaranteeing that it is a list.</td>
+</tr>
+</tbody>
+</table>
+<p>The type-casting methods for the <cite>Section</cite> behave pretty much like the <cite>ConfigParser</cite> <cite>get</cite> methods except with the addition of a list option.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">text</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">[test]</span>
+<span class="s">ape = grape</span>
+<span class="s">turned = on</span>
+<span class="s">count = 10</span>
+<span class="s">weight = 32.3</span>
+<span class="s">tarts = apple, rhubarb</span>
+<span class="s">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p>Since ConfigObj will break the list up (&#8216;tarts&#8217;) when the object is created I&#8217;ll set <cite>list_values</cite> to False in the constructor.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">parser</span> <span class="o">=</span> <span class="n">SafeConfigParser</span><span class="p">()</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">readfp</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">splitlines</span><span class="p">(),</span> <span class="n">list_values</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>First ConfigParser.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="s">&#39;ape: &#39;</span><span class="p">,</span> <span class="n">parser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;test&#39;</span><span class="p">,</span> <span class="s">&#39;ape&#39;</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;turned: &#39;</span><span class="p">,</span> <span class="n">parser</span><span class="o">.</span><span class="n">getboolean</span><span class="p">(</span><span class="s">&#39;test&#39;</span><span class="p">,</span> <span class="s">&#39;turned&#39;</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;count: &#39;</span><span class="p">,</span> <span class="n">parser</span><span class="o">.</span><span class="n">getint</span><span class="p">(</span><span class="s">&#39;test&#39;</span><span class="p">,</span> <span class="s">&#39;count&#39;</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;weight: &#39;</span><span class="p">,</span> <span class="n">parser</span><span class="o">.</span><span class="n">getfloat</span><span class="p">(</span><span class="s">&#39;test&#39;</span><span class="p">,</span> <span class="s">&#39;weight&#39;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s">&#39;tarts: &#39;</span><span class="p">,</span> <span class="n">parser</span><span class="o">.</span><span class="n">getlist</span><span class="p">(</span><span class="s">&#39;test&#39;</span><span class="p">,</span> <span class="s">&#39;tarts&#39;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">error</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>ape:  grape
+turned:  True
+count:  10
+weight:  32.3
+tarts:  SafeConfigParser instance has no attribute &#39;getlist&#39;
+</pre></div>
+</div>
+<p>Now ConfigObj.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">section</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;test&#39;</span><span class="p">]</span>
+<span class="k">print</span> <span class="s">&#39;ape: &#39;</span><span class="p">,</span> <span class="n">section</span><span class="p">[</span><span class="s">&#39;ape&#39;</span><span class="p">]</span>
+<span class="k">print</span> <span class="s">&#39;turned: &#39;</span><span class="p">,</span> <span class="n">section</span><span class="o">.</span><span class="n">as_bool</span><span class="p">(</span><span class="s">&#39;turned&#39;</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;count: &#39;</span><span class="p">,</span> <span class="n">section</span><span class="o">.</span><span class="n">as_int</span><span class="p">(</span><span class="s">&#39;count&#39;</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;weight: &#39;</span><span class="p">,</span> <span class="n">section</span><span class="o">.</span><span class="n">as_float</span><span class="p">(</span><span class="s">&#39;weight&#39;</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;tarts: &#39;</span><span class="p">,</span> <span class="n">section</span><span class="o">.</span><span class="n">as_list</span><span class="p">(</span><span class="s">&#39;tarts&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>ape:  grape
+turned:  True
+count:  10
+weight:  32.3
+tarts:  [&#39;apple, rhubarb&#39;]
+</pre></div>
+</div>
+<p>The <cite>as_list</cite> method doesn&#8217;t work the way I thought it would, all it did was put the string into a list, it didn&#8217;t split the value into a comma-separated list. I&#8217;m not really sure why this is useful.</p>
+</div>
+<div class="section" id="merge">
+<h2>Merge<a class="headerlink" href="#merge" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/configobj.Section.merge.html#configobj.Section.merge" title="configobj.Section.merge"><tt class="xref py py-obj docutils literal"><span class="pre">Section.merge</span></tt></a>(indict)</td>
+<td>A recursive update - useful for merging config files.</td>
+</tr>
+</tbody>
+</table>
+<p>An interesting method is the <cite>merge</cite> method. It updates an existing Section with values from another, allowing you to create a default ConfigObj and replace only the values that the user set.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">update_text</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">[test]</span>
+<span class="s">tarts = Sally, Jessie, Rhubarb</span>
+<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+
+<span class="n">update_config</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">update_text</span><span class="p">)</span>
+<span class="n">config</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">update_config</span><span class="p">)</span>
+
+<span class="n">section</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;test&#39;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">section</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">&quot;{0}: {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>ape: grape
+turned: on
+count: 10
+weight: 32.3
+tarts: [&#39;Sally&#39;, &#39;Jessie&#39;, &#39;Rhubarb&#39;]
+</pre></div>
+</div>
+</div>
+<div class="section" id="merging-sub-sections">
+<h2>Merging Sub-Sections<a class="headerlink" href="#merging-sub-sections" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">default</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">[ape]</span>
+<span class="s">cow = boy</span>
+<span class="s"> [[chimp]]</span>
+<span class="s"> boy = howdy</span>
+<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">default</span><span class="p">)</span>
+
+<span class="n">update</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">cow = man</span>
+<span class="s">boy = girl</span>
+<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+
+<span class="n">update_config</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">update</span><span class="p">)</span>
+
+<span class="n">config</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">update_config</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">&quot;{0}: {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>cow: man
+boy: girl
+ape: {&#39;cow&#39;: &#39;boy&#39;, &#39;chimp&#39;: {&#39;boy&#39;: &#39;howdy&#39;}}
+</pre></div>
+</div>
+<p>Well, that didn&#8217;t work. It looks like ConfigObj respects nesting when updating (which seems a good thing) so it added the key-value pairs to the root section.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># first get rid of the mistake</span>
+<span class="k">del</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s">&#39;cow&#39;</span><span class="p">])</span>
+<span class="k">del</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s">&#39;boy&#39;</span><span class="p">])</span>
+
+<span class="n">update</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">[[chimp]]</span>
+<span class="s">boy = girl</span>
+<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">update_config</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">update</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">NestingError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">error</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Section too nested at line 2.
+</pre></div>
+</div>
+<p>Oops. Even though we&#8217;re changing only the value in the &#8216;chimp&#8217; section we have to create the tree-structure for ConfigObj (once again this seems a good thing).</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">update</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">[ape]</span>
+<span class="s">[[chimp]]</span>
+<span class="s">boy = girl</span>
+<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+
+<span class="n">update_config</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">update</span><span class="p">)</span>
+
+<span class="n">config</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">update_config</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">&quot;{0} {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>ape {&#39;cow&#39;: &#39;boy&#39;, &#39;chimp&#39;: {&#39;boy&#39;: &#39;girl&#39;}}
+</pre></div>
+</div>
+<p>There are other methods as well, but I can&#8217;t see a use for them right now. Even the type-casting seem superfluous, especiall if you&#8217;re using schema-validation, but I thought they&#8217;d be interesting to see.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Sections</a><ul>
+<li><a class="reference internal" href="#module-configobj">Type Casting</a></li>
+<li><a class="reference internal" href="#merge">Merge</a></li>
+<li><a class="reference internal" href="#merging-sub-sections">Merging Sub-Sections</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../user/index.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../../_sources/documentation/developer/explorations/explore_configobj/sections.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

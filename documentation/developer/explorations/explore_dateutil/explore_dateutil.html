@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Exploring Dateutil’s Relativedelta &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
+    <link rel="up" title="Exploring Dateutil" href="index.html" />
+    <link rel="next" title="dateutil.relativedelta.relativedelta" href="api/dateutil.relativedelta.relativedelta.html" />
+    <link rel="prev" title="dateutil.relativedelta.relativedelta" href="api/dateutil.relativedelta.relativedelta.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/dateutil.relativedelta.relativedelta.html" title="dateutil.relativedelta.relativedelta"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="api/dateutil.relativedelta.relativedelta.html" title="dateutil.relativedelta.relativedelta"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >The Ape Developer Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >The Explorations</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Exploring Dateutil</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="exploring-dateutil-s-relativedelta">
+<h1>Exploring Dateutil&#8217;s Relativedelta<a class="headerlink" href="#exploring-dateutil-s-relativedelta" title="Permalink to this headline">¶</a></h1>
+<p>The first thing that I want to use <cite>dateutil</cite> for is calculating seconds based on times. Dateutil doesn&#8217;t appear to be set up for this so I&#8217;m going to use a hack to see if it gets close enough.</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/dateutil.relativedelta.relativedelta.html#dateutil.relativedelta.relativedelta" title="dateutil.relativedelta.relativedelta"><tt class="xref py py-obj docutils literal"><span class="pre">relativedelta</span></tt></a>([dt1,&nbsp;dt2,&nbsp;years,&nbsp;months,&nbsp;...])</td>
+<td>The relativedelta type is based on the specification of the excelent work done by M.-A.</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="minutes">
+<h2>Minutes<a class="headerlink" href="#minutes" title="Permalink to this headline">¶</a></h2>
+<p>The <cite>relativetimedelta</cite> is a time-delta object, so you can&#8217;t get seconds directly, but you can get it by adding and subtracting the same time.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="n">minutes</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">expected</span> <span class="o">=</span> <span class="n">minutes</span> <span class="o">*</span> <span class="mi">60</span>
+<span class="n">delta</span> <span class="o">=</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="n">minutes</span><span class="p">)</span>
+<span class="n">actual</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span> <span class="o">+</span> <span class="n">delta</span> <span class="o">-</span> <span class="n">time</span><span class="p">)</span><span class="o">.</span><span class="n">seconds</span>
+<span class="k">print</span> <span class="n">expected</span> <span class="o">==</span> <span class="n">actual</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="bp">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Exploring Dateutil&#8217;s Relativedelta</a><ul>
+<li><a class="reference internal" href="#minutes">Minutes</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../user/index.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../../_sources/documentation/developer/explorations/explore_dateutil/explore_dateutil.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

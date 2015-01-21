@@ -1,0 +1,6 @@
+theape.plugins.dummyplugin.Dummy.fetch_config
+=============================================
+
+.. currentmodule:: theape.plugins.dummyplugin
+
+.. automethod:: Dummy.fetch_config

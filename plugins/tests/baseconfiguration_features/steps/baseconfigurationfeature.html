@@ -1,0 +1,683 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>BaseConfiguration &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Ape Documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="baseconfiguration">
+<h1>BaseConfiguration<a class="headerlink" href="#baseconfiguration" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">Feature:</span><span class="nf"> Base Configuration</span>
+<span class="nf"> </span><span class="k">Scenario:</span><span class="nf"> User instantiates the BaseConfiguration</span>
+<span class="k">  Given </span><span class="nf">a BaseConfiguration definition</span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">the user instantiates the BaseConfiguration</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">it raises a TypeError</span>
+
+<span class="nf"> </span><span class="k">Scenario:</span><span class="nf"> User instantiates BaseConfiguration implementation</span>
+<span class="k">  Given </span><span class="nf">a BaseConfiguration implementation</span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">the user instantiates the BaseConfiguration implementation</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">it has the BaseConfiguration default properties</span>
+
+<span class="nf"> </span><span class="k">Scenario:</span><span class="nf"> Option fails validation</span>
+<span class="k">   Given </span><span class="nf">a BaseConfiguration implementation with a bad option</span>
+<span class="nf">   </span><span class="k">When </span><span class="nf">the BaseConfiguration implementation processes the errors</span>
+<span class="nf">   </span><span class="k">Then </span><span class="nf">the correct error message is logged</span>
+<span class="nf">   </span><span class="k">And </span><span class="nf">the process_errors outcome was True</span>
+
+<span class="nf"> </span><span class="k">Scenario:</span><span class="nf"> Missing Option</span>
+<span class="k">   Given </span><span class="nf">a BaseConfiguration implementation with a missing option</span>
+<span class="nf">   </span><span class="k">When </span><span class="nf">the BaseConfiguration implementation processes the errors</span>
+<span class="nf">   </span><span class="k">Then </span><span class="nf">the correct error message is logged</span>
+
+<span class="nf"> </span><span class="k">Scenario:</span><span class="nf"> Missing Section</span>
+<span class="k">   Given </span><span class="nf">a BaseConfiguration implementation missing the section</span>
+<span class="nf">   </span><span class="k">When </span><span class="nf">the BaseConfiguration implementation processes the errors</span>
+<span class="nf">   </span><span class="k">Then </span><span class="nf">the correct error message is logged</span>
+
+<span class="nf"> </span><span class="k">Scenario:</span><span class="nf"> Configuration passes</span>
+<span class="k">   Given </span><span class="nf">a BaseConfiguration implementation with valid configuration</span>
+<span class="nf">   </span><span class="k">When </span><span class="nf">the BaseConfiguration implementation processes the errors</span>
+<span class="nf">   </span><span class="k">Then </span><span class="nf">the process_errors outcome was False</span>
+<span class="nf"> </span>
+<span class="nf"> </span><span class="k">Scenario:</span><span class="nf"> ConfigSpec Section Name Format</span>
+<span class="k">   Given </span><span class="nf">a BaseConfiguration configspec with section_name</span>
+<span class="nf">   </span><span class="k">When </span><span class="nf">the BaseConfiguration implementation is checked</span>
+<span class="nf">   </span><span class="k">Then </span><span class="nf">the configuration outcome is True</span>
+
+<span class="nf"> </span><span class="k">Scenario:</span><span class="nf"> ConfigSpec string only has sub-section definition</span>
+<span class="k">   Given </span><span class="nf">a BaseConfiguration configspec without top-section</span>
+<span class="nf">   </span><span class="k">When </span><span class="nf">the BaseConfiguration implementation is checked</span>
+<span class="nf">   </span><span class="k">Then </span><span class="nf">the configuration outcome is True</span>
+
+<span class="nf"> </span><span class="k">Scenario:</span><span class="nf"> Configuration has extra values</span>
+<span class="k">  Given </span><span class="nf">a BaseConfiguration config with options not in the configspec</span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">the BaseConfiguration implementation checks extra values</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">the extra values are logged</span>
+<span class="nf">  </span><span class="k">And </span><span class="nf">check_extra_value returns True</span>
+
+<span class="nf"> </span><span class="k">Scenario:</span><span class="nf"> Configuration has no extra values</span>
+<span class="k">  Given </span><span class="nf">a BaseConfiguration config with no options not in the configspec</span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">the BaseConfiguration implementation checks extra values</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">no extra values are logged</span>
+<span class="nf">  </span><span class="k">And </span><span class="nf">check_extra_value returns False</span>
+<span class="nf">  </span>
+<span class="nf"> </span><span class="k">Scenario:</span><span class="nf"> Section updates configuration</span>
+<span class="k">  Given </span><span class="nf">a BaseConfiguration section that updates another section</span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">the BaseConfiguration implementation validates the configuration</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">the BaseConfiguration implementation will have the updates</span>
+
+<span class="nf"> </span><span class="k">Scenario:</span><span class="nf"> Configuration missing plugin name</span>
+<span class="k">  Given </span><span class="nf">a BaseConfiguration section missing a required plugin name</span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">the BaseConfiguration checks process_errors</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">the process_errors returned True</span>
+<span class="nf">  </span><span class="k">And </span><span class="nf">the configuration options that were given are in the configuration</span>
+</pre></div>
+</div>
+<div class="section" id="scenario-user-instantiates-the-baseconfiguration">
+<h2>Scenario: User instantiates the BaseConfiguration<a class="headerlink" href="#scenario-user-instantiates-the-baseconfiguration" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a BaseConfiguration definition&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">base_configuration_definition</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">definition</span> <span class="o">=</span> <span class="n">BaseConfiguration</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@when</span><span class="p">(</span><span class="s">&quot;the user instantiates the BaseConfiguration&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">base_configuration_instantiation</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">callable</span> <span class="o">=</span> <span class="k">lambda</span> <span class="p">:</span> <span class="n">context</span><span class="o">.</span><span class="n">definition</span><span class="p">()</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;it raises a TypeError&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">assert_raises</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">calling</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">callable</span><span class="p">),</span>
+                <span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">))</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="scenario-user-instantiates-baseconfiguration-implementation">
+<h2>Scenario: User instantiates BaseConfiguration implementation<a class="headerlink" href="#scenario-user-instantiates-baseconfiguration-implementation" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">configspec</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">plugin = option(Fake)</span>
+
+<span class="s">op = string</span>
+<span class="s">op2 = integer</span>
+<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">FakeConfiguration</span><span class="p">(</span><span class="n">BaseConfiguration</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">FakeConfiguration</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">product</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">configspec_source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_configspec_source</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_configspec_source</span> <span class="o">=</span> <span class="n">configspec</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_configspec_source</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">[FAKE]</span>
+<span class="s">op = value</span>
+<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a BaseConfiguration implementation&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">base_configuration_implementation</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">implementation</span> <span class="o">=</span> <span class="n">FakeConfiguration</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configspec_source</span> <span class="o">=</span> <span class="n">configspec</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">section_name</span> <span class="o">=</span> <span class="s">&#39;FAKE&#39;</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@when</span><span class="p">(</span><span class="s">&quot;the user instantiates the BaseConfiguration implementation&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">base_configuration_implementation_instantiation</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">implementation</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="p">,</span>
+                                                   <span class="n">section_name</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">section_name</span><span class="p">,</span>
+                                                   <span class="n">configspec_source</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">configspec_source</span><span class="p">)</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;it has the BaseConfiguration default properties&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">assert_default_properties</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">configuration</span><span class="p">,</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">instance_of</span><span class="p">(</span><span class="n">ConfigObj</span><span class="p">)))</span>
+
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">configspec</span><span class="p">,</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">instance_of</span><span class="p">(</span><span class="n">ConfigObj</span><span class="p">)))</span>
+
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">validator</span><span class="p">,</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">instance_of</span><span class="p">(</span><span class="n">Validator</span><span class="p">)))</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="scenario-configuration-passes">
+<h2>Scenario: Configuration passes<a class="headerlink" href="#scenario-configuration-passes" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">valid_config_string</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">[GOODBUTFAKE]</span>
+<span class="s">plugin = Fake</span>
+
+<span class="s">op = some value</span>
+<span class="s">op2 = 75</span>
+<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+
+<span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a BaseConfiguration implementation with valid configuration&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">valid_configuration</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="n">FakeConfiguration</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">ConfigObj</span><span class="p">(</span><span class="n">valid_config_string</span><span class="p">),</span>
+                                              <span class="n">section_name</span><span class="o">=</span><span class="s">&#39;GOODBUTFAKE&#39;</span><span class="p">)</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<p>When the BaseConfiguration implementation processes the errors</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;the process_errors outcome was False&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">process_errors_false</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">outcome</span><span class="p">,</span>
+                <span class="n">is_</span><span class="p">(</span><span class="bp">False</span><span class="p">))</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="scenario-option-fails-validation">
+<h2>Scenario: Option fails validation<a class="headerlink" href="#scenario-option-fails-validation" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">bad_option_config</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">[FAKE]</span>
+<span class="s">plugin = Fake</span>
+
+<span class="s">op = value</span>
+<span class="s">op2 = not_integer</span>
+<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+
+<span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a BaseConfiguration implementation with a bad option&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">bad_option</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="n">error</span>
+    <span class="n">bad_option_message</span> <span class="o">=</span> <span class="n">SubConfigurationConstants</span><span class="o">.</span><span class="n">bad_option_message</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">RED_ERROR</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="s">&#39;ConfigurationError&#39;</span><span class="p">,</span>
+                                        <span class="n">message</span><span class="o">=</span><span class="n">bad_option_message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">option</span><span class="o">=</span><span class="s">&#39;op2&#39;</span><span class="p">,</span>
+                                                                          <span class="n">section</span><span class="o">=</span><span class="s">&#39;FAKE&#39;</span><span class="p">,</span>
+                                                                          <span class="n">error</span><span class="o">=</span><span class="s">&#39;the value &quot;not_integer&quot; is of the wrong type.&#39;</span><span class="p">,</span>
+                                                                          <span class="n">option_type</span><span class="o">=</span><span class="s">&#39;integer&#39;</span><span class="p">))</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="n">FakeConfiguration</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">ConfigObj</span><span class="p">(</span><span class="n">bad_option_config</span><span class="p">),</span>
+                                              <span class="n">section_name</span><span class="o">=</span><span class="s">&#39;FAKE&#39;</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">_logger</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">logger</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@when</span><span class="p">(</span><span class="s">&quot;the BaseConfiguration implementation processes the errors&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">process_errors</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">outcome</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">validator</span><span class="p">,</span>
+                                                           <span class="n">preserve_errors</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">outcome</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">process_errors</span><span class="p">()</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;the correct error message is logged&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">check_error_message</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">)</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;the process_errors outcome was True&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">process_errors_true</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">outcome</span><span class="p">,</span>
+                <span class="n">is_</span><span class="p">(</span><span class="bp">True</span><span class="p">))</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="scenario-missing-option">
+<h2>Scenario: Missing Option<a class="headerlink" href="#scenario-missing-option" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">missing_option_config</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">[FAKE]</span>
+<span class="s">plugin = Fake</span>
+
+<span class="s">op = value</span>
+<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+
+<span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a BaseConfiguration implementation with a missing option&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">missing_option</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="n">error</span>
+    <span class="n">missing_option_message</span> <span class="o">=</span> <span class="n">SubConfigurationConstants</span><span class="o">.</span><span class="n">missing_option_message</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">RED_ERROR</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="s">&#39;ConfigurationError&#39;</span><span class="p">,</span>
+                                        <span class="n">message</span><span class="o">=</span><span class="n">missing_option_message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">option</span><span class="o">=</span><span class="s">&#39;op2&#39;</span><span class="p">,</span>
+                                                                            <span class="n">section</span><span class="o">=</span><span class="s">&#39;FAKE&#39;</span><span class="p">,</span>
+                                                                            <span class="n">plugin</span><span class="o">=</span><span class="s">&#39;Fake&#39;</span><span class="p">,</span>
+                                                                            <span class="n">option_type</span><span class="o">=</span><span class="s">&#39;integer&#39;</span><span class="p">))</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="n">FakeConfiguration</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">ConfigObj</span><span class="p">(</span><span class="n">missing_option_config</span><span class="p">),</span>
+                                              <span class="n">section_name</span><span class="o">=</span><span class="s">&#39;FAKE&#39;</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">_logger</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">logger</span>
+
+    <span class="k">return</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>When the BaseConfiguration implementation processes the errors,</dt>
+<dd>Then the correct error message is logged</dd>
+</dl>
+</div>
+<div class="section" id="scenario-missing-section">
+<h2>Scenario: Missing Section<a class="headerlink" href="#scenario-missing-section" title="Permalink to this headline">¶</a></h2>
+<p>Because the operators are expecting arbitrary section-names this last errors will only occur if the plugin has defined sub-section names in the configspec (I think).</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c"># so the configspect can&#39;t have the top-level section name</span>
+<span class="n">subsection_configspec</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">plugin = string</span>
+
+<span class="s">[sub_section]</span>
+<span class="s">op1 = integer</span>
+<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+
+<span class="n">missing_section_config</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">[FAKE]</span>
+<span class="s">plugin = fake_plugin</span>
+<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+
+<span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a BaseConfiguration implementation missing the section&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">missing_section</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="n">error</span>
+    <span class="n">missing_section_message</span> <span class="o">=</span> <span class="n">SubConfigurationConstants</span><span class="o">.</span><span class="n">missing_section_message</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">RED_ERROR</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="s">&#39;ConfigurationError&#39;</span><span class="p">,</span>
+                                        <span class="n">message</span><span class="o">=</span><span class="n">missing_section_message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">section</span><span class="o">=</span><span class="s">&#39;FAKE,sub_section&#39;</span><span class="p">,</span>
+                                                                            <span class="n">error</span><span class="o">=</span><span class="s">&#39;missing section&#39;</span><span class="p">,</span>
+                                                                            <span class="n">plugin</span><span class="o">=</span><span class="s">&#39;fake_plugin&#39;</span><span class="p">))</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="n">FakeConfiguration</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">ConfigObj</span><span class="p">(</span><span class="n">missing_section_config</span><span class="p">),</span>
+                                              <span class="n">configspec_source</span><span class="o">=</span><span class="n">subsection_configspec</span><span class="p">,</span>
+                                              <span class="n">section_name</span><span class="o">=</span><span class="s">&#39;FAKE&#39;</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">_logger</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">logger</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>When the BaseConfiguration implementation processes the errors,</dt>
+<dd>Then the correct error message is logged</dd>
+</dl>
+</div>
+<div class="section" id="scenario-configspec-section-name-format">
+<h2>Scenario: ConfigSpec Section Name Format<a class="headerlink" href="#scenario-configspec-section-name-format" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">section_name_configspec</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">op1 = integer</span>
+
+<span class="s">[sub_section]</span>
+<span class="s">op2 = integer</span>
+<span class="s">&quot;&quot;&quot;</span>
+
+<span class="n">section_name_config</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">[FAKE]</span>
+<span class="s">op1 = 1</span>
+
+<span class="s">[[sub_section]]</span>
+<span class="s">op2 = 1</span>
+<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+
+<span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a BaseConfiguration configspec with section_name&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">configspec_section_name</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="n">FakeConfiguration</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">ConfigObj</span><span class="p">(</span><span class="n">section_name_config</span><span class="p">),</span>
+                                              <span class="n">configspec_source</span><span class="o">=</span><span class="n">section_name_configspec</span><span class="p">,</span>
+                                              <span class="n">section_name</span><span class="o">=</span><span class="s">&#39;FAKE&#39;</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">_logger</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@when</span><span class="p">(</span><span class="s">&quot;the BaseConfiguration implementation is checked&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">check_implementation</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">process_errors</span><span class="p">()</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;the configuration outcome is True&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">assert_outcome_true</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">validation_outcome</span><span class="p">,</span>
+                <span class="n">is_</span><span class="p">(</span><span class="bp">True</span><span class="p">))</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="scenario-configspec-string-only-has-sub-section-definition">
+<h2>Scenario: ConfigSpec string only has sub-section definition<a class="headerlink" href="#scenario-configspec-string-only-has-sub-section-definition" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre> subsection_only_configspec = &quot;&quot;&quot;
+ op1 = integer
+
+ [sub_section]
+ op2 = integer
+ &quot;&quot;&quot;
+ @given(&quot;a BaseConfiguration configspec without top-section&quot;)
+ def configspec_subsection(context):
+     context.configuration = FakeConfiguration(source=ConfigObj(section_name_config),
+                                               configspec_source=section_name_configspec,
+                                               section_name=&#39;FAKE&#39;)
+     context.configuration._logger = MagicMock()
+
+     return
+
+
+when the BaseConfiguration implementation is checked
+Then the configuration outcome is True
+</pre></div>
+</div>
+</div>
+<div class="section" id="scenario-configuration-has-extra-values">
+<h2>Scenario: Configuration has extra values<a class="headerlink" href="#scenario-configuration-has-extra-values" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">extra_options_config</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">[FAKE]</span>
+<span class="s">op1 = 1</span>
+
+<span class="s">[[sub_section]]</span>
+<span class="s">op2 = 5</span>
+<span class="s">op7 = 0</span>
+
+<span class="s">[FAKE2]</span>
+<span class="s">op1 = 3</span>
+
+<span class="s">[[sub_section]]</span>
+<span class="s">op2 = 4</span>
+<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+
+<span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a BaseConfiguration config with options not in the configspec&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">extra_options</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="n">FakeConfiguration</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">ConfigObj</span><span class="p">(</span><span class="n">extra_options_config</span><span class="p">),</span>
+                                              <span class="n">configspec_source</span><span class="o">=</span><span class="n">section_name_configspec</span><span class="p">,</span>
+                                              <span class="n">section_name</span><span class="o">=</span><span class="s">&#39;FAKE&#39;</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">_logger</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">logger</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@when</span><span class="p">(</span><span class="s">&quot;the BaseConfiguration implementation checks extra values&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">check_extra_values</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">outcome</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">check_extra_values</span><span class="p">()</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;the extra values are logged&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">extra_values_logged</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">section</span> <span class="o">=</span> <span class="s">&#39;FAKE,sub_section&#39;</span>
+    <span class="n">item_type</span> <span class="o">=</span> <span class="s">&#39;option&#39;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;op7&#39;</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="n">SubConfigurationConstants</span><span class="o">.</span><span class="n">extra_message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">section</span><span class="o">=</span><span class="n">section</span><span class="p">,</span>
+                                                              <span class="n">item_type</span><span class="o">=</span><span class="n">item_type</span><span class="p">,</span>
+                                                              <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;=&#39;0&#39;&quot;</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&#39;check_extra_value returns True&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">assert_extra_values</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">outcome</span><span class="p">,</span>
+                <span class="n">is_</span><span class="p">(</span><span class="bp">True</span><span class="p">))</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="scenario-configuration-has-no-extra-values">
+<h2>Scenario: Configuration has no extra values<a class="headerlink" href="#scenario-configuration-has-no-extra-values" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre>  no_extra_options_config = &quot;&quot;&quot;
+  [FAKE]
+  op1 = 1
+
+  [[sub_section]]
+  op2 = 5
+  &quot;&quot;&quot;.splitlines()
+
+  @given(&quot;a BaseConfiguration config with no options not in the configspec&quot;)
+  def no_extra_options(context):
+      context.logger = MagicMock()
+      context.logger.warning = MagicMock()
+      context.configuration = FakeConfiguration(source=ConfigObj(no_extra_options_config),
+                                                configspec_source=section_name_configspec,
+                                                section_name=&#39;FAKE&#39;)
+      context.configuration._logger = context.logger
+
+      return
+
+
+
+When the BaseConfiguration implementation checks extra values
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;no extra values are logged&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">no_logging</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="o">.</span><span class="n">mock_calls</span><span class="p">,</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">equal_to</span><span class="p">([])))</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&#39;check_extra_value returns False&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">check_extra_false</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">outcome</span><span class="p">,</span>
+                <span class="n">is_</span><span class="p">(</span><span class="bp">False</span><span class="p">))</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="scenario-section-updates-configuration">
+<h2>Scenario: Section updates configuration<a class="headerlink" href="#scenario-section-updates-configuration" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">update_sections_configspec</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">updates_section = string(default=None)</span>
+<span class="s">op1 = integer</span>
+
+<span class="s">[sub_section]</span>
+<span class="s">op2 = integer</span>
+<span class="s">&quot;&quot;&quot;</span>
+
+<span class="n">update_sections_config</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">[FAKE]</span>
+<span class="s">op1 = 1</span>
+
+<span class="s">[[sub_section]]</span>
+<span class="s">op2 = 5</span>
+
+<span class="s">[FAKE2]</span>
+<span class="s">updates_section = FAKE</span>
+
+<span class="s">[[sub_section]]</span>
+<span class="s">op2 = 2</span>
+<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+
+<span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a BaseConfiguration section that updates another section&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">updates_section</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">fake1</span> <span class="o">=</span> <span class="n">FakeConfiguration</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">ConfigObj</span><span class="p">(</span><span class="n">update_sections_config</span><span class="p">),</span>
+                                              <span class="n">configspec_source</span><span class="o">=</span><span class="n">update_sections_configspec</span><span class="p">,</span>
+                                              <span class="n">section_name</span><span class="o">=</span><span class="s">&#39;FAKE&#39;</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">fake2</span> <span class="o">=</span> <span class="n">FakeConfiguration</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">ConfigObj</span><span class="p">(</span><span class="n">update_sections_config</span><span class="p">),</span>
+                                              <span class="n">configspec_source</span><span class="o">=</span><span class="n">update_sections_configspec</span><span class="p">,</span>
+                                              <span class="n">section_name</span><span class="o">=</span><span class="s">&#39;FAKE2&#39;</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">fake1</span><span class="o">.</span><span class="n">_logger</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">logger</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">fake2</span><span class="o">.</span><span class="n">_logger</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">logger</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@when</span><span class="p">(</span><span class="s">&quot;the BaseConfiguration implementation validates the configuration&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">validate_configuration</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;the BaseConfiguration implementation will have the updates&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">check_updates</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="c">#import pudb; pudb.set_trace()</span>
+    <span class="n">expected_fake</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;op1&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                     <span class="s">&#39;sub_section&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;op2&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">}}</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">fake1</span><span class="o">.</span><span class="n">configuration</span><span class="p">,</span>
+                <span class="n">has_entries</span><span class="p">(</span><span class="n">expected_fake</span><span class="p">))</span>
+
+    <span class="n">expected_fake2</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;op1&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                     <span class="s">&#39;sub_section&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;op2&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">}}</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">fake2</span><span class="o">.</span><span class="n">configuration</span><span class="p">,</span>
+                <span class="n">has_entries</span><span class="p">(</span><span class="n">expected_fake2</span><span class="p">))</span>
+
+    <span class="k">return</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="scenario-configuration-missing-plugin-name">
+<h2>Scenario: Configuration missing plugin name<a class="headerlink" href="#scenario-configuration-missing-plugin-name" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">missing_plugin_name_config</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">[FAKE]</span>
+<span class="s">op = some string</span>
+<span class="s">op2 = 42</span>
+<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+
+<span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a BaseConfiguration section missing a required plugin name&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">missing_plugin_name</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="n">FakeConfiguration</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">ConfigObj</span><span class="p">(</span><span class="n">missing_plugin_name_config</span><span class="p">),</span>
+                                              <span class="n">section_name</span><span class="o">=</span><span class="s">&#39;FAKE&#39;</span><span class="p">)</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@when</span><span class="p">(</span><span class="s">&quot;the BaseConfiguration checks process_errors&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">check_process_errors</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">callable</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">process_errors</span>
+    <span class="kn">import</span> <span class="nn">pudb</span><span class="p">;</span> <span class="n">pudb</span><span class="o">.</span><span class="n">set_trace</span><span class="p">()</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">callable</span><span class="p">()</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;the process_errors returned True&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">process_errors_true</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">calling</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">callable</span><span class="p">),</span>
+                <span class="n">raises</span><span class="p">(</span><span class="n">ConfigurationError</span><span class="p">))</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;the configuration options that were given are in the configuration&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">assert_options</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;op&#39;</span><span class="p">:</span><span class="s">&#39;some string&#39;</span><span class="p">,</span>
+                <span class="s">&#39;op2&#39;</span><span class="p">:</span> <span class="mi">42</span><span class="p">}</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">configuration</span><span class="p">,</span>
+                <span class="n">has_entries</span><span class="p">(</span><span class="n">expected</span><span class="p">))</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">BaseConfiguration</a><ul>
+<li><a class="reference internal" href="#scenario-user-instantiates-the-baseconfiguration">Scenario: User instantiates the BaseConfiguration</a></li>
+<li><a class="reference internal" href="#scenario-user-instantiates-baseconfiguration-implementation">Scenario: User instantiates BaseConfiguration implementation</a></li>
+<li><a class="reference internal" href="#scenario-configuration-passes">Scenario: Configuration passes</a></li>
+<li><a class="reference internal" href="#scenario-option-fails-validation">Scenario: Option fails validation</a></li>
+<li><a class="reference internal" href="#scenario-missing-option">Scenario: Missing Option</a></li>
+<li><a class="reference internal" href="#scenario-missing-section">Scenario: Missing Section</a></li>
+<li><a class="reference internal" href="#scenario-configspec-section-name-format">Scenario: ConfigSpec Section Name Format</a></li>
+<li><a class="reference internal" href="#scenario-configspec-string-only-has-sub-section-definition">Scenario: ConfigSpec string only has sub-section definition</a></li>
+<li><a class="reference internal" href="#scenario-configuration-has-extra-values">Scenario: Configuration has extra values</a></li>
+<li><a class="reference internal" href="#scenario-configuration-has-no-extra-values">Scenario: Configuration has no extra values</a></li>
+<li><a class="reference internal" href="#scenario-section-updates-configuration">Scenario: Section updates configuration</a></li>
+<li><a class="reference internal" href="#scenario-configuration-missing-plugin-name">Scenario: Configuration missing plugin name</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../../_sources/plugins/tests/baseconfiguration_features/steps/baseconfigurationfeature.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

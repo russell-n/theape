@@ -1,0 +1,6 @@
+theape.parts.watchers.tests.testthewatcher.TestThewatcher.test_check_rep
+========================================================================
+
+.. currentmodule:: theape.parts.watchers.tests.testthewatcher
+
+.. automethod:: TestThewatcher.test_check_rep

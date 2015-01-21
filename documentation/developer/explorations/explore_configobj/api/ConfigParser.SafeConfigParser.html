@@ -1,0 +1,324 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ConfigParser.SafeConfigParser &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Basic ConfigObj" href="../basics.html" />
+    <link rel="next" title="configobj.ConfigObj" href="configobj.ConfigObj.html" />
+    <link rel="prev" title="configobj.ConfigObj" href="configobj.ConfigObj.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="configobj.ConfigObj.html" title="configobj.ConfigObj"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="configobj.ConfigObj.html" title="configobj.ConfigObj"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >The Ape Developer Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >The Explorations</a> &raquo;</li>
+          <li><a href="../index.html" >Exploring ConfigObj</a> &raquo;</li>
+          <li><a href="../basics.html" accesskey="U">Basic ConfigObj</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="configparser-safeconfigparser">
+<h1>ConfigParser.SafeConfigParser<a class="headerlink" href="#configparser-safeconfigparser" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="ConfigParser.SafeConfigParser">
+<em class="property">class </em><tt class="descclassname">ConfigParser.</tt><tt class="descname">SafeConfigParser</tt><big>(</big><em>defaults=None</em>, <em>dict_type=&lt;class 'collections.OrderedDict'&gt;</em>, <em>allow_no_value=False</em><big>)</big><a class="headerlink" href="#ConfigParser.SafeConfigParser" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="ConfigParser.SafeConfigParser.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>defaults=None</em>, <em>dict_type=&lt;class 'collections.OrderedDict'&gt;</em>, <em>allow_no_value=False</em><big>)</big><a class="headerlink" href="#ConfigParser.SafeConfigParser.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../../../../../infrastructure/api/ConfigParser.SafeConfigParser.html#ConfigParser.SafeConfigParser.__init__" title="ConfigParser.SafeConfigParser.__init__"><tt class="xref py py-obj docutils literal"><span class="pre">__init__</span></tt></a>([defaults,&nbsp;dict_type,&nbsp;allow_no_value])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../../../infrastructure/api/ConfigParser.SafeConfigParser.html#ConfigParser.SafeConfigParser.add_section" title="ConfigParser.SafeConfigParser.add_section"><tt class="xref py py-obj docutils literal"><span class="pre">add_section</span></tt></a>(section)</td>
+<td>Create a new section in the configuration.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">defaults</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../../../infrastructure/api/ConfigParser.SafeConfigParser.get.html#ConfigParser.SafeConfigParser.get" title="ConfigParser.SafeConfigParser.get"><tt class="xref py py-obj docutils literal"><span class="pre">get</span></tt></a>(section,&nbsp;option[,&nbsp;raw,&nbsp;vars])</td>
+<td>Get an option value for a given section.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../../../infrastructure/api/ConfigParser.SafeConfigParser.getboolean.html#ConfigParser.SafeConfigParser.getboolean" title="ConfigParser.SafeConfigParser.getboolean"><tt class="xref py py-obj docutils literal"><span class="pre">getboolean</span></tt></a>(section,&nbsp;option)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../../../infrastructure/api/ConfigParser.SafeConfigParser.getfloat.html#ConfigParser.SafeConfigParser.getfloat" title="ConfigParser.SafeConfigParser.getfloat"><tt class="xref py py-obj docutils literal"><span class="pre">getfloat</span></tt></a>(section,&nbsp;option)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../../../infrastructure/api/ConfigParser.SafeConfigParser.getint.html#ConfigParser.SafeConfigParser.getint" title="ConfigParser.SafeConfigParser.getint"><tt class="xref py py-obj docutils literal"><span class="pre">getint</span></tt></a>(section,&nbsp;option)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../../../infrastructure/api/ConfigParser.SafeConfigParser.has_option.html#ConfigParser.SafeConfigParser.has_option" title="ConfigParser.SafeConfigParser.has_option"><tt class="xref py py-obj docutils literal"><span class="pre">has_option</span></tt></a>(section,&nbsp;option)</td>
+<td>Check for the existence of a given option in a given section.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../../../infrastructure/api/ConfigParser.SafeConfigParser.has_section.html#ConfigParser.SafeConfigParser.has_section" title="ConfigParser.SafeConfigParser.has_section"><tt class="xref py py-obj docutils literal"><span class="pre">has_section</span></tt></a>(section)</td>
+<td>Indicate whether the named section is present in the configuration.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../../../infrastructure/api/ConfigParser.SafeConfigParser.items.html#ConfigParser.SafeConfigParser.items" title="ConfigParser.SafeConfigParser.items"><tt class="xref py py-obj docutils literal"><span class="pre">items</span></tt></a>(section[,&nbsp;raw,&nbsp;vars])</td>
+<td>Return a list of tuples with (name, value) for each option in the section.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../../../infrastructure/api/ConfigParser.SafeConfigParser.options.html#ConfigParser.SafeConfigParser.options" title="ConfigParser.SafeConfigParser.options"><tt class="xref py py-obj docutils literal"><span class="pre">options</span></tt></a>(section)</td>
+<td>Return a list of option names for the given section name.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../explore_configparse/api/ConfigParser.SafeConfigParser.optionxform.html#ConfigParser.SafeConfigParser.optionxform" title="ConfigParser.SafeConfigParser.optionxform"><tt class="xref py py-obj docutils literal"><span class="pre">optionxform</span></tt></a>(optionstr)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../../../infrastructure/api/ConfigParser.SafeConfigParser.read.html#ConfigParser.SafeConfigParser.read" title="ConfigParser.SafeConfigParser.read"><tt class="xref py py-obj docutils literal"><span class="pre">read</span></tt></a>(filenames)</td>
+<td>Read and parse a filename or a list of filenames.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../../../infrastructure/api/ConfigParser.SafeConfigParser.html#ConfigParser.SafeConfigParser.readfp" title="ConfigParser.SafeConfigParser.readfp"><tt class="xref py py-obj docutils literal"><span class="pre">readfp</span></tt></a>(fp[,&nbsp;filename])</td>
+<td>Like read() but the argument must be a file-like object.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../../../infrastructure/api/ConfigParser.SafeConfigParser.html#ConfigParser.SafeConfigParser.remove_option" title="ConfigParser.SafeConfigParser.remove_option"><tt class="xref py py-obj docutils literal"><span class="pre">remove_option</span></tt></a>(section,&nbsp;option)</td>
+<td>Remove an option.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../../../infrastructure/api/ConfigParser.SafeConfigParser.html#ConfigParser.SafeConfigParser.remove_section" title="ConfigParser.SafeConfigParser.remove_section"><tt class="xref py py-obj docutils literal"><span class="pre">remove_section</span></tt></a>(section)</td>
+<td>Remove a file section.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../../../infrastructure/api/ConfigParser.SafeConfigParser.sections.html#ConfigParser.SafeConfigParser.sections" title="ConfigParser.SafeConfigParser.sections"><tt class="xref py py-obj docutils literal"><span class="pre">sections</span></tt></a>()</td>
+<td>Return a list of section names, excluding [DEFAULT]</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../../../infrastructure/api/ConfigParser.SafeConfigParser.html#ConfigParser.SafeConfigParser.set" title="ConfigParser.SafeConfigParser.set"><tt class="xref py py-obj docutils literal"><span class="pre">set</span></tt></a>(section,&nbsp;option[,&nbsp;value])</td>
+<td>Set an option.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../../../infrastructure/api/ConfigParser.SafeConfigParser.write.html#ConfigParser.SafeConfigParser.write" title="ConfigParser.SafeConfigParser.write"><tt class="xref py py-obj docutils literal"><span class="pre">write</span></tt></a>(fp)</td>
+<td>Write an .ini-format representation of the configuration state.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">OPTCRE</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">OPTCRE_NV</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">SECTCRE</span></tt></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="ConfigParser.SafeConfigParser.add_section">
+<tt class="descname">add_section</tt><big>(</big><em>section</em><big>)</big><a class="headerlink" href="#ConfigParser.SafeConfigParser.add_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new section in the configuration.</p>
+<p>Raise DuplicateSectionError if a section by the specified name
+already exists. Raise ValueError if name is DEFAULT or any of it&#8217;s
+case-insensitive variants.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ConfigParser.SafeConfigParser.get">
+<tt class="descname">get</tt><big>(</big><em>section</em>, <em>option</em>, <em>raw=False</em>, <em>vars=None</em><big>)</big><a class="headerlink" href="#ConfigParser.SafeConfigParser.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an option value for a given section.</p>
+<p>If <a href="#id1"><span class="problematic" id="id2">`</span></a>vars&#8217; is provided, it must be a dictionary. The option is looked up
+in <a href="#id3"><span class="problematic" id="id4">`</span></a>vars&#8217; (if provided), <a href="#id5"><span class="problematic" id="id6">`</span></a>section&#8217;, and in <a href="#id7"><span class="problematic" id="id8">`</span></a>defaults&#8217; in that order.</p>
+<p>All % interpolations are expanded in the return values, unless the
+optional argument <a href="#id9"><span class="problematic" id="id10">`</span></a>raw&#8217; is true. Values for interpolation keys are
+looked up in the same manner as the option.</p>
+<p>The section DEFAULT is special.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ConfigParser.SafeConfigParser.has_option">
+<tt class="descname">has_option</tt><big>(</big><em>section</em>, <em>option</em><big>)</big><a class="headerlink" href="#ConfigParser.SafeConfigParser.has_option" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check for the existence of a given option in a given section.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ConfigParser.SafeConfigParser.has_section">
+<tt class="descname">has_section</tt><big>(</big><em>section</em><big>)</big><a class="headerlink" href="#ConfigParser.SafeConfigParser.has_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicate whether the named section is present in the configuration.</p>
+<p>The DEFAULT section is not acknowledged.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ConfigParser.SafeConfigParser.items">
+<tt class="descname">items</tt><big>(</big><em>section</em>, <em>raw=False</em>, <em>vars=None</em><big>)</big><a class="headerlink" href="#ConfigParser.SafeConfigParser.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of tuples with (name, value) for each option
+in the section.</p>
+<p>All % interpolations are expanded in the return values, based on the
+defaults passed into the constructor, unless the optional argument
+<a href="#id11"><span class="problematic" id="id12">`</span></a>raw&#8217; is true.  Additional substitutions may be provided using the
+<a href="#id13"><span class="problematic" id="id14">`</span></a>vars&#8217; argument, which must be a dictionary whose contents overrides
+any pre-existing defaults.</p>
+<p>The section DEFAULT is special.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ConfigParser.SafeConfigParser.options">
+<tt class="descname">options</tt><big>(</big><em>section</em><big>)</big><a class="headerlink" href="#ConfigParser.SafeConfigParser.options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of option names for the given section name.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ConfigParser.SafeConfigParser.read">
+<tt class="descname">read</tt><big>(</big><em>filenames</em><big>)</big><a class="headerlink" href="#ConfigParser.SafeConfigParser.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read and parse a filename or a list of filenames.</p>
+<p>Files that cannot be opened are silently ignored; this is
+designed so that you can specify a list of potential
+configuration file locations (e.g. current directory, user&#8217;s
+home directory, systemwide directory), and all existing
+configuration files in the list will be read.  A single
+filename may also be given.</p>
+<p>Return list of successfully read files.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ConfigParser.SafeConfigParser.readfp">
+<tt class="descname">readfp</tt><big>(</big><em>fp</em>, <em>filename=None</em><big>)</big><a class="headerlink" href="#ConfigParser.SafeConfigParser.readfp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Like read() but the argument must be a file-like object.</p>
+<p>The <a href="#id15"><span class="problematic" id="id16">`</span></a>fp&#8217; argument must have a <a href="#id17"><span class="problematic" id="id18">`</span></a>readline&#8217; method.  Optional
+second argument is the <a href="#id19"><span class="problematic" id="id20">`</span></a>filename&#8217;, which if not given, is
+taken from fp.name.  If fp has no <a href="#id21"><span class="problematic" id="id22">`</span></a>name&#8217; attribute, <a href="#id23"><span class="problematic" id="id24">`</span></a>&lt;???&gt;&#8217; is
+used.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ConfigParser.SafeConfigParser.remove_option">
+<tt class="descname">remove_option</tt><big>(</big><em>section</em>, <em>option</em><big>)</big><a class="headerlink" href="#ConfigParser.SafeConfigParser.remove_option" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove an option.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ConfigParser.SafeConfigParser.remove_section">
+<tt class="descname">remove_section</tt><big>(</big><em>section</em><big>)</big><a class="headerlink" href="#ConfigParser.SafeConfigParser.remove_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a file section.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ConfigParser.SafeConfigParser.sections">
+<tt class="descname">sections</tt><big>(</big><big>)</big><a class="headerlink" href="#ConfigParser.SafeConfigParser.sections" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of section names, excluding [DEFAULT]</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ConfigParser.SafeConfigParser.set">
+<tt class="descname">set</tt><big>(</big><em>section</em>, <em>option</em>, <em>value=None</em><big>)</big><a class="headerlink" href="#ConfigParser.SafeConfigParser.set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set an option.  Extend ConfigParser.set: check for string values.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ConfigParser.SafeConfigParser.write">
+<tt class="descname">write</tt><big>(</big><em>fp</em><big>)</big><a class="headerlink" href="#ConfigParser.SafeConfigParser.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write an .ini-format representation of the configuration state.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../user/index.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../../../_sources/documentation/developer/explorations/explore_configobj/api/ConfigParser.SafeConfigParser.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

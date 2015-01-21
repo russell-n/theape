@@ -1,0 +1,6 @@
+theape.plugins.apeplugin.Ape.fetch_config
+=========================================
+
+.. currentmodule:: theape.plugins.apeplugin
+
+.. automethod:: Ape.fetch_config

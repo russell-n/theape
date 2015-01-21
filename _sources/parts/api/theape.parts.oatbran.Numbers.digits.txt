@@ -1,0 +1,6 @@
+theape.parts.oatbran.Numbers.digits
+===================================
+
+.. currentmodule:: theape.parts.oatbran
+
+.. autoattribute:: Numbers.digits

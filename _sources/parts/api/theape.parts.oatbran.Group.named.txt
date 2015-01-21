@@ -1,0 +1,6 @@
+theape.parts.oatbran.Group.named
+================================
+
+.. currentmodule:: theape.parts.oatbran
+
+.. automethod:: Group.named

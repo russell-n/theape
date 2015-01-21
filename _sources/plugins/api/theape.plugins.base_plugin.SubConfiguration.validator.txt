@@ -1,0 +1,6 @@
+theape.plugins.base_plugin.SubConfiguration.validator
+=====================================================
+
+.. currentmodule:: theape.plugins.base_plugin
+
+.. autoattribute:: SubConfiguration.validator

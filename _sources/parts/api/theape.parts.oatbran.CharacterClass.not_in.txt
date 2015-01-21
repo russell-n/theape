@@ -1,0 +1,6 @@
+theape.parts.oatbran.CharacterClass.not_in
+==========================================
+
+.. currentmodule:: theape.parts.oatbran
+
+.. automethod:: CharacterClass.not_in

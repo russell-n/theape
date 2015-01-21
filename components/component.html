@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The Components &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../index.html" />
+    <link rel="up" title="The Components" href="index.html" />
+    <link rel="next" title="theape.components.component.Component" href="api/theape.components.component.Component.html" />
+    <link rel="prev" title="The Components" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/theape.components.component.Component.html" title="theape.components.component.Component"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="The Components"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">The Components</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-components">
+<h1>The Components<a class="headerlink" href="#the-components" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<span id="components-introduction"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This is a module to hold classes that (loosely) implement the <a class="reference external" href="http://en.wikipedia.org/wiki/Composite_pattern">Composite Pattern</a>. See the <a class="reference internal" href="../plugins/apeplugin.html#ape-plugin"><em>Ape Plugin</em></a> for how the Composites are being used in the <cite>ape</cite> (it is implemented in the <cite>product</cite> property).</p>
+</div>
+<div class="section" id="module-diagram">
+<h2>Module Diagram<a class="headerlink" href="#module-diagram" title="Permalink to this headline">¶</a></h2>
+<p>This is an auto-generated graph of the classes in this module.</p>
+</div>
+<div class="section" id="the-component-class">
+<span id="component-class"></span><h2>The Component Class<a class="headerlink" href="#the-component-class" title="Permalink to this headline">¶</a></h2>
+<p>This is the base-class which the other classes will inherit from. All <a class="reference internal" href="../plugins/base_plugin.html#base-plugin-product"><em>Plugin products</em></a> should look like this (it doesn&#8217;t do much but every method is called at some point by the Composites so all plugin products should implement it).</p>
+<p class="plantuml">
+<img src="../_images/plantuml-54b7cf7d245e5112bf93b079ec2a6559ac23f820.png" alt="Component -|&gt; BaseClass
+Component : __call__()
+Component : check_rep()
+Component : close()" />
+</p>
+<span class="target" id="module-theape.components.component"></span><table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.component.Component.html#theape.components.component.Component" title="theape.components.component.Component"><tt class="xref py py-obj docutils literal"><span class="pre">Component</span></tt></a>()</td>
+<td>A base-class for Composite and Leaf</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.components.component.Component.__call__.html#theape.components.component.Component.__call__" title="theape.components.component.Component.__call__"><tt class="xref py py-obj docutils literal"><span class="pre">Component.__call__</span></tt></a>()</td>
+<td>abstractmethod that will be the main invocation when implememented</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.component.Component.check_rep.html#theape.components.component.Component.check_rep" title="theape.components.component.Component.check_rep"><tt class="xref py py-obj docutils literal"><span class="pre">Component.check_rep</span></tt></a>()</td>
+<td>abstract: Representation-check called by composite</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.components.component.Component.close.html#theape.components.component.Component.close" title="theape.components.component.Component.close"><tt class="xref py py-obj docutils literal"><span class="pre">Component.close</span></tt></a>()</td>
+<td>abstractmethod: called for Keyboard Interrupts to allow file-closing</td>
+</tr>
+</tbody>
+</table>
+<p>This is an autogenerated version of the class-diagram.</p>
+</div>
+<div class="section" id="the-composite">
+<span id="composite-class"></span><h2>The Composite<a class="headerlink" href="#the-composite" title="Permalink to this headline">¶</a></h2>
+<p class="plantuml">
+<img src="../_images/plantuml-c8604f27883deb8689c3be89ec14b1ea28854e00.png" alt="Composite -|&gt; Component" />
+</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.component.Composite.html#theape.components.component.Composite" title="theape.components.component.Composite"><tt class="xref py py-obj docutils literal"><span class="pre">Composite</span></tt></a>([error,&nbsp;error_message,&nbsp;...])</td>
+<td>A Composite to hold and execute Components</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.components.component.Composite.components.html#theape.components.component.Composite.components" title="theape.components.component.Composite.components"><tt class="xref py py-obj docutils literal"><span class="pre">Composite.components</span></tt></a></td>
+<td>The list of components</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.component.Composite.add.html#theape.components.component.Composite.add" title="theape.components.component.Composite.add"><tt class="xref py py-obj docutils literal"><span class="pre">Composite.add</span></tt></a>(component)</td>
+<td>appends the component to self.components</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.components.component.Composite.remove.html#theape.components.component.Composite.remove" title="theape.components.component.Composite.remove"><tt class="xref py py-obj docutils literal"><span class="pre">Composite.remove</span></tt></a>(component)</td>
+<td>Removes the component from the components (if it was there)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.component.Composite.__call__.html#theape.components.component.Composite.__call__" title="theape.components.component.Composite.__call__"><tt class="xref py py-obj docutils literal"><span class="pre">Composite.__call__</span></tt></a>()</td>
+<td>The main interface &#8211; starts components after doing a check_rep</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.components.component.Composite.__iter__.html#theape.components.component.Composite.__iter__" title="theape.components.component.Composite.__iter__"><tt class="xref py py-obj docutils literal"><span class="pre">Composite.__iter__</span></tt></a>()</td>
+<td>Iterates over the components</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.component.Composite.__len__.html#theape.components.component.Composite.__len__" title="theape.components.component.Composite.__len__"><tt class="xref py py-obj docutils literal"><span class="pre">Composite.__len__</span></tt></a>()</td>
+<td>Counts the components</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.components.component.Composite.__getitem__.html#theape.components.component.Composite.__getitem__" title="theape.components.component.Composite.__getitem__"><tt class="xref py py-obj docutils literal"><span class="pre">Composite.__getitem__</span></tt></a>(index)</td>
+<td>gets slice or index of components</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.component.Composite.one_call.html#theape.components.component.Composite.one_call" title="theape.components.component.Composite.one_call"><tt class="xref py py-obj docutils literal"><span class="pre">Composite.one_call</span></tt></a>(*args,&nbsp;**kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.components.component.Composite.check_rep.html#theape.components.component.Composite.check_rep" title="theape.components.component.Composite.check_rep"><tt class="xref py py-obj docutils literal"><span class="pre">Composite.check_rep</span></tt></a>()</td>
+<td>Checks the representation invariant</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.component.Composite.close.html#theape.components.component.Composite.close" title="theape.components.component.Composite.close"><tt class="xref py py-obj docutils literal"><span class="pre">Composite.close</span></tt></a>()</td>
+<td>calls the <cite>close</cite> method on each component</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.components.component.Composite.time_remains.html#theape.components.component.Composite.time_remains" title="theape.components.component.Composite.time_remains"><tt class="xref py py-obj docutils literal"><span class="pre">Composite.time_remains</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">TimeTracker (default) or CountdownTimer object</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The <cite>Composite</cite> was created to be a generalization of the <cite>Hortator</cite>, <cite>Operator</cite> and <cite>Operations</cite>. By specifying the error that it will catch, the error message it will display if there is one, its components, and the component-category of its components, you specify what type of composite it is. It can also act as a regular composite to contain other parts, but this was the original use-case &#8211; to create the infrastructure for the APE.</p>
+<blockquote>
+<div><ul class="simple">
+<li>Each component call is wrapped by the <em class="xref std std-ref">try_except decorator</em> which catches the Exception in self.error</li>
+<li>The default for <tt class="docutils literal"><span class="pre">self.time_remains</span></tt> is a <a class="reference internal" href="../parts/countdown/countdown.html#ape-parts-countdown-timetracker"><em>TimeTracker</em></a> but can also be a <a class="reference internal" href="../parts/countdown/countdown.html#ape-parts-countdown-countdowntimer"><em>CountdownTimer</em></a></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The Components</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#module-diagram">Module Diagram</a></li>
+<li><a class="reference internal" href="#the-component-class">The Component Class</a></li>
+<li><a class="reference internal" href="#the-composite">The Composite</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../_sources/components/component.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

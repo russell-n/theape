@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Testing The CSV Storage &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../index.html" />
+    <link rel="up" title="Testing the Storage" href="index.html" />
+    <link rel="next" title="theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_constructor" href="api/theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_constructor.html" />
+    <link rel="prev" title="Testing the Storage" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_constructor.html" title="theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_constructor"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Testing the Storage"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Parts</a> &raquo;</li>
+          <li><a href="../index.html" >Storage</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Testing the Storage</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="testing-the-csv-storage">
+<h1>Testing The CSV Storage<a class="headerlink" href="#testing-the-csv-storage" title="Permalink to this headline">¶</a></h1>
+<p>This tests the csv-storage. It&#8217;s assumed that the <tt class="docutils literal"><span class="pre">DictWriter</span></tt> will be the main interface, not the regular <tt class="docutils literal"><span class="pre">writer</span></tt>.</p>
+<span class="target" id="module-theape.parts.storage.tests.testcsvstorage"></span><table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_constructor.html#theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_constructor" title="theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_constructor"><tt class="xref py py-obj docutils literal"><span class="pre">TestCsvStorage.test_constructor</span></tt></a>()</td>
+<td>Does it take the expected fields?</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_path_only.html#theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_path_only" title="theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_path_only"><tt class="xref py py-obj docutils literal"><span class="pre">TestCsvStorage.test_path_only</span></tt></a>()</td>
+<td>Does it create the storage if only the path is given?</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_bad_constructor.html#theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_bad_constructor" title="theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_bad_constructor"><tt class="xref py py-obj docutils literal"><span class="pre">TestCsvStorage.test_bad_constructor</span></tt></a>()</td>
+<td>Does it raise an error if neither path nor storage are given?</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_writerow.html#theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_writerow" title="theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_writerow"><tt class="xref py py-obj docutils literal"><span class="pre">TestCsvStorage.test_writerow</span></tt></a>()</td>
+<td>Does it write the row?</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_open.html#theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_open" title="theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_open"><tt class="xref py py-obj docutils literal"><span class="pre">TestCsvStorage.test_open</span></tt></a>()</td>
+<td>Does it open a file with the given filename?</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_writerows.html#theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_writerows" title="theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_writerows"><tt class="xref py py-obj docutils literal"><span class="pre">TestCsvStorage.test_writerows</span></tt></a>()</td>
+<td>Does it write each dict in the list?</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_writer.html#theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_writer" title="theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_writer"><tt class="xref py py-obj docutils literal"><span class="pre">TestCsvStorage.test_writer</span></tt></a>()</td>
+<td>Does it create a new DictWriter if the file-storage allows it?</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<caption>Parameter Tests</caption>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Path</th>
+<th class="head">Header</th>
+<th class="head">Storage</th>
+<th class="head">Expected Outcome</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>None</td>
+<td>None</td>
+<td>None</td>
+<td>ApeError</td>
+</tr>
+<tr class="row-odd"><td>None</td>
+<td>None</td>
+<td>storage</td>
+<td>ApeError</td>
+</tr>
+<tr class="row-even"><td>None</td>
+<td>header</td>
+<td>None</td>
+<td>ApeError</td>
+</tr>
+<tr class="row-odd"><td>None</td>
+<td>header</td>
+<td>storage</td>
+<td>header and rows written to storage</td>
+</tr>
+<tr class="row-even"><td>path</td>
+<td>None</td>
+<td>None</td>
+<td>ApeError</td>
+</tr>
+<tr class="row-odd"><td>path</td>
+<td>None</td>
+<td>storage</td>
+<td>ApeError</td>
+</tr>
+<tr class="row-even"><td>path</td>
+<td>header</td>
+<td>None</td>
+<td>header and rows written to new storage</td>
+</tr>
+<tr class="row-odd"><td>path</td>
+<td>header</td>
+<td>storage</td>
+<td>header and rows written to storage</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../_sources/parts/storage/tests/testcsvstorage.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

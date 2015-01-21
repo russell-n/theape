@@ -1,0 +1,6 @@
+theape.parts.wifi.iwconfig.IwconfigQuery.event_timer
+====================================================
+
+.. currentmodule:: theape.parts.wifi.iwconfig
+
+.. autoattribute:: IwconfigQuery.event_timer

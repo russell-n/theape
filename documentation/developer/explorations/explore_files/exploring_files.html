@@ -1,0 +1,381 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Exploring Files &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
+    <link rel="up" title="Exploring Files" href="index.html" />
+    <link rel="next" title="__builtin__.file" href="api/__builtin__.file.html" />
+    <link rel="prev" title="Exploring Files" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/__builtin__.file.html" title="__builtin__.file"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Exploring Files"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >The Ape Developer Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >The Explorations</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Exploring Files</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="exploring-files">
+<h1>Exploring Files<a class="headerlink" href="#exploring-files" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="#exploring-files-background"><em>Background</em></a></li>
+<li><a class="reference internal" href="#exploring-files-api"><em>The file API</em></a></li>
+<li><a class="reference internal" href="#exploring-files-context-manager"><em>Implementing the Context Manager</em></a></li>
+</ul>
+</div></blockquote>
+<div class="section" id="background">
+<span id="exploring-files-background"></span><h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<p>The goal of part of the APE is to create a <a class="reference internal" href="../../../../parts/storage/index.html#ape-storage"><em>Storage</em></a> class that acts like a file but adds some extra features and allows for the introduction of other classes with the same interface that can be dropped into it. In order to make it easier to decide what to implement, the built-in python <a class="reference external" href="http://docs.python.org/2/library/stdtypes.html#bltin-file-objects">file object</a> will be used as the starting point. As such, this will be a record of what&#8217;s in it.</p>
+<p>Most of this will be about <cite>file</cite>, which is what you create when using the <cite>open</cite> function:</p>
+<div class="highlight-python"><div class="highlight"><pre>open(name[, mode[, buffering]]) -&gt; file object
+
+Open a file using the file() type, returns a file object.  This is the
+preferred way to open a file.  See file.__doc__ for further information.
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-context-manager">
+<span id="exploring-files-context-manager"></span><h2>The Context Manager<a class="headerlink" href="#the-context-manager" title="Permalink to this headline">¶</a></h2>
+<p>The file&#8217;s <tt class="docutils literal"><span class="pre">close</span></tt> method is automatically called when you use a <a class="reference external" href="http://www.python.org/dev/peps/pep-0343/">context manager</a> which is apparently the preferred method (although it only seems reasonable when you don&#8217;t need extended access to a file). In order to support this in a file-like class you need to define an <tt class="docutils literal"><span class="pre">__enter__</span></tt> and an <tt class="docutils literal"><span class="pre">__exit__</span></tt>.</p>
+<p>First &#8211; what if I don&#8217;t?</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">FakeFile</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="k">return</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">FakeFile</span><span class="p">(</span><span class="s">&#39;cow&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="k">print</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">__exit__</span>
+</pre></div>
+</div>
+<p>Well, the error message was a little obscure, but I&#8217;ll add an <tt class="docutils literal"><span class="pre">__exit__</span></tt> method to fix it.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">FakeFile</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">FakeFile</span><span class="p">(</span><span class="s">&#39;cow&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="k">print</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">__enter__</span>
+</pre></div>
+</div>
+<p>Now, an <tt class="docutils literal"><span class="pre">__enter__</span></tt>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">FakeFile</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">FakeFile</span><span class="p">(</span><span class="s">&#39;cow&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="k">print</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>__exit__() takes exactly 1 argument (4 given)
+</pre></div>
+</div>
+<p>Well, it&#8217;s a different error, so we must be maxing progress. Looking at Fredrick Lundh&#8217;s <a class="reference external" href="http://effbot.org/zone/python-with-statement.htm">explanation</a> of the <tt class="docutils literal"><span class="pre">with</span></tt> statement, it looks like the <tt class="docutils literal"><span class="pre">__exit__</span></tt> method is being passed some arguments that don&#8217;t exist in my method definition.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">FakeFile</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Setup the file&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Tear it down&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+        <span class="k">print</span> <span class="s">&quot;{0} is exited&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&quot;{0} is closed&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span>
+
+<span class="k">with</span> <span class="n">FakeFile</span><span class="p">(</span><span class="s">&#39;cow&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;pie</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pie</span>
+<span class="n">cow</span> <span class="ow">is</span> <span class="n">exited</span>
+</pre></div>
+</div>
+<p>Well, that isn&#8217;t really a concrete example of much, but it sits here as a reference for what has to be implemented to support context managers.</p>
+<p>As an aside, python has a way that you can use any file-like object with a context manager, even if it doesn&#8217;t have the <tt class="docutils literal"><span class="pre">__enter__</span></tt> and <tt class="docutils literal"><span class="pre">__exit__</span></tt> methods:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">closing</span>
+
+<span class="k">class</span> <span class="nc">FakeFile</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="k">print</span> <span class="n">text</span>
+
+    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&quot;{0} has been closed&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">return</span>
+
+<span class="k">with</span> <span class="n">closing</span><span class="p">(</span><span class="n">FakeFile</span><span class="p">(</span><span class="s">&#39;noexit&#39;</span><span class="p">))</span> <span class="k">as</span> <span class="n">fake</span><span class="p">:</span>
+    <span class="n">fake</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;ummagumma&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>ummagumma
+noexit has been closed
+</pre></div>
+</div>
+<p>In this case I&#8217;m implementing the file-like object so I should&#8217;nt need it, but it&#8217;s noted here for future use. An interesting thing to note is that the class with <tt class="docutils literal"><span class="pre">__enter__</span></tt> and <tt class="docutils literal"><span class="pre">__exit__</span></tt> implemented doesn&#8217;t call close() while the <tt class="docutils literal"><span class="pre">closing</span></tt> context manager does, so they are similar but not the same.</p>
+</div>
+<div class="section" id="flush">
+<span id="exploring-files-flush"></span><h2>flush<a class="headerlink" href="#flush" title="Permalink to this headline">¶</a></h2>
+<p>The documentation notes that calling <tt class="docutils literal"><span class="pre">file.flush</span></tt> flushes the buffer, but this is not the same thing as writing to disk. If that&#8217;s what you want you would need two calls:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">f</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>  <span class="c"># flush the file-buffer</span>
+<span class="n">os</span><span class="o">.</span><span class="n">fsync</span><span class="p">()</span> <span class="c"># tell the OS to write the file to the disk</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-builtin-file-api">
+<span id="exploring-files-api"></span><h2>The __builtin__.file API<a class="headerlink" href="#the-builtin-file-api" title="Permalink to this headline">¶</a></h2>
+<p>Basic things common to all files.</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/__builtin__.file.html#__builtin__.file" title="__builtin__.file"><tt class="xref py py-obj docutils literal"><span class="pre">file</span></tt></a></td>
+<td>file(name[, mode[, buffering]]) -&gt; file object</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/__builtin__.file.close.html#__builtin__.file.close" title="__builtin__.file.close"><tt class="xref py py-obj docutils literal"><span class="pre">file.close</span></tt></a>(...)</td>
+<td>Sets data attribute .closed to True.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/__builtin__.file.flush.html#__builtin__.file.flush" title="__builtin__.file.flush"><tt class="xref py py-obj docutils literal"><span class="pre">file.flush</span></tt></a>(...)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/__builtin__.file.fileno.html#__builtin__.file.fileno" title="__builtin__.file.fileno"><tt class="xref py py-obj docutils literal"><span class="pre">file.fileno</span></tt></a>(()&nbsp;-&gt;&nbsp;integer&nbsp;&#8220;file&nbsp;descriptor&#8221;.)</td>
+<td>This is needed for lower-level file interfaces, such os.read().</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/__builtin__.file.isatty.html#__builtin__.file.isatty" title="__builtin__.file.isatty"><tt class="xref py py-obj docutils literal"><span class="pre">file.isatty</span></tt></a>(...)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Methods for reading.</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/__builtin__.file.next.html#__builtin__.file.next" title="__builtin__.file.next"><tt class="xref py py-obj docutils literal"><span class="pre">file.next</span></tt></a></td>
+<td>x.next() -&gt; the next value, or raise StopIteration</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/__builtin__.file.read.html#__builtin__.file.read" title="__builtin__.file.read"><tt class="xref py py-obj docutils literal"><span class="pre">file.read</span></tt></a>(...)</td>
+<td>If the size argument is negative or omitted, read until EOF is reached.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/__builtin__.file.readline.html#__builtin__.file.readline" title="__builtin__.file.readline"><tt class="xref py py-obj docutils literal"><span class="pre">file.readline</span></tt></a>(...)</td>
+<td>Retain newline.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/__builtin__.file.readlines.html#__builtin__.file.readlines" title="__builtin__.file.readlines"><tt class="xref py py-obj docutils literal"><span class="pre">file.readlines</span></tt></a>(([size])&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;strings,&nbsp;...)</td>
+<td>Call readline() repeatedly and return a list of the lines so read.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/__builtin__.file.seek.html#__builtin__.file.seek" title="__builtin__.file.seek"><tt class="xref py py-obj docutils literal"><span class="pre">file.seek</span></tt></a>((offset[,&nbsp;...)</td>
+<td>Argument offset is a byte count.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/__builtin__.file.tell.html#__builtin__.file.tell" title="__builtin__.file.tell"><tt class="xref py py-obj docutils literal"><span class="pre">file.tell</span></tt></a>(()&nbsp;-&gt;&nbsp;current&nbsp;file&nbsp;position,&nbsp;...)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Methods for writing.</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/__builtin__.file.write.html#__builtin__.file.write" title="__builtin__.file.write"><tt class="xref py py-obj docutils literal"><span class="pre">file.write</span></tt></a>(...)</td>
+<td>Note that due to buffering, flush() or close() may be needed before the file on disk reflects the data written.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/__builtin__.file.writelines.html#__builtin__.file.writelines" title="__builtin__.file.writelines"><tt class="xref py py-obj docutils literal"><span class="pre">file.writelines</span></tt></a>(...)</td>
+<td>Note that newlines are not added.</td>
+</tr>
+</tbody>
+</table>
+<p>Properties.</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/__builtin__.file.closed.html#__builtin__.file.closed" title="__builtin__.file.closed"><tt class="xref py py-obj docutils literal"><span class="pre">file.closed</span></tt></a></td>
+<td>True if the file is closed</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/__builtin__.file.encoding.html#__builtin__.file.encoding" title="__builtin__.file.encoding"><tt class="xref py py-obj docutils literal"><span class="pre">file.encoding</span></tt></a></td>
+<td>file encoding</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/__builtin__.file.errors.html#__builtin__.file.errors" title="__builtin__.file.errors"><tt class="xref py py-obj docutils literal"><span class="pre">file.errors</span></tt></a></td>
+<td>Unicode error handler</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/__builtin__.file.mode.html#__builtin__.file.mode" title="__builtin__.file.mode"><tt class="xref py py-obj docutils literal"><span class="pre">file.mode</span></tt></a></td>
+<td>file mode (&#8216;r&#8217;, &#8216;U&#8217;, &#8216;w&#8217;, &#8216;a&#8217;, possibly with &#8216;b&#8217; or &#8216;+&#8217; added)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/__builtin__.file.name.html#__builtin__.file.name" title="__builtin__.file.name"><tt class="xref py py-obj docutils literal"><span class="pre">file.name</span></tt></a></td>
+<td>file name</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/__builtin__.file.newlines.html#__builtin__.file.newlines" title="__builtin__.file.newlines"><tt class="xref py py-obj docutils literal"><span class="pre">file.newlines</span></tt></a></td>
+<td>end-of-line convention used in this file</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/__builtin__.file.softspace.html#__builtin__.file.softspace" title="__builtin__.file.softspace"><tt class="xref py py-obj docutils literal"><span class="pre">file.softspace</span></tt></a></td>
+<td>flag indicating that a space needs to be printed; used by print</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Exploring Files</a><ul>
+<li><a class="reference internal" href="#background">Background</a></li>
+<li><a class="reference internal" href="#the-context-manager">The Context Manager</a></li>
+<li><a class="reference internal" href="#flush">flush</a></li>
+<li><a class="reference internal" href="#the-builtin-file-api">The __builtin__.file API</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../user/index.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../../_sources/documentation/developer/explorations/explore_files/exploring_files.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

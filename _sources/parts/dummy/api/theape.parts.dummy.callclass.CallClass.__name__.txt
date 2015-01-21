@@ -1,0 +1,6 @@
+theape.parts.dummy.callclass.CallClass.__name__
+===============================================
+
+.. currentmodule:: theape.parts.dummy.callclass
+
+.. autoattribute:: CallClass.__name__

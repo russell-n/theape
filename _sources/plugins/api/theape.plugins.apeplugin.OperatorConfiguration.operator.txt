@@ -1,0 +1,6 @@
+theape.plugins.apeplugin.OperatorConfiguration.operator
+=======================================================
+
+.. currentmodule:: theape.plugins.apeplugin
+
+.. autoattribute:: OperatorConfiguration.operator

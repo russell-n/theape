@@ -1,0 +1,6 @@
+theape.parts.oatbran.Numbers.hexadecimal
+========================================
+
+.. currentmodule:: theape.parts.oatbran
+
+.. autoattribute:: Numbers.hexadecimal

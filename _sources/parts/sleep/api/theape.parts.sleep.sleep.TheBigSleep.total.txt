@@ -1,0 +1,6 @@
+theape.parts.sleep.sleep.TheBigSleep.total
+==========================================
+
+.. currentmodule:: theape.parts.sleep.sleep
+
+.. autoattribute:: TheBigSleep.total

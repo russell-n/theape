@@ -1,0 +1,6 @@
+theape.components.test_components.TestComponent.test_bad_component
+==================================================================
+
+.. currentmodule:: theape.components.test_components
+
+.. automethod:: TestComponent.test_bad_component

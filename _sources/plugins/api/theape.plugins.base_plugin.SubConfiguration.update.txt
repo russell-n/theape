@@ -1,0 +1,6 @@
+theape.plugins.base_plugin.SubConfiguration.update
+==================================================
+
+.. currentmodule:: theape.plugins.base_plugin
+
+.. automethod:: SubConfiguration.update

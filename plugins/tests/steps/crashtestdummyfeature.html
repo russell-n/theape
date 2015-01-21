@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Crash Test Dummy &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../index.html" />
+    <link rel="up" title="Plugins Features" href="index.html" />
+    <link rel="next" title="Operation Configuration" href="operationconfigurationfeature.html" />
+    <link rel="prev" title="Plugins Features" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="operationconfigurationfeature.html" title="Operation Configuration"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Plugins Features"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Plugins</a> &raquo;</li>
+          <li><a href="../index.html" >Testing the Plugins</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Plugins Features</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="crash-test-dummy">
+<h1>Crash Test Dummy<a class="headerlink" href="#crash-test-dummy" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">Feature:</span><span class="nf"> Crash Test Dummy</span>
+<span class="nf"> </span><span class="k">Scenario:</span><span class="nf"> User doesn&#39;t specify any options</span>
+<span class="k">  Given </span><span class="nf">an empty crash test dummy configuration</span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">the configuration is checked</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">the crash test dummy configuration has the defaults</span>
+<span class="nf">  </span><span class="k">And </span><span class="nf">it is a Base Configuration</span>
+
+<span class="nf"> </span><span class="k">Scenario:</span><span class="nf"> User passes in wrong plugin</span>
+<span class="k">  Given </span><span class="nf">a crash test dummy with the wrong plugin name</span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">the configuration with the wrong plugin is checked</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">the crash test dummy validator will raise a ConfigurationError</span>
+
+<span class="nf"> </span><span class="k">Scenario:</span><span class="nf"> User gets CrashTestDummy</span>
+<span class="k">  Given </span><span class="nf">a CrashTestDummy Configuration</span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">the user gets the CrashTestDummy product</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">the CrashTestDummy is correctly configured</span>
+</pre></div>
+</div>
+<div class="section" id="scenario-user-doesn-t-specify-any-options">
+<h2>Scenario: User doesn&#8217;t specify any options<a class="headerlink" href="#scenario-user-doesn-t-specify-any-options" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">empty_config</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">[default_crash]</span>
+<span class="s">plugin = CrashTestDummy</span>
+<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+
+<span class="nd">@given</span><span class="p">(</span><span class="s">&quot;an empty crash test dummy configuration&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">empty_crash_test_dummy_configuration</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">dummy_configuration</span> <span class="o">=</span> <span class="n">CrashTestDummyConfiguration</span><span class="p">(</span><span class="n">section_name</span><span class="o">=</span><span class="s">&#39;default_crash&#39;</span><span class="p">,</span>
+                                                              <span class="n">source</span><span class="o">=</span><span class="n">ConfigObj</span><span class="p">(</span><span class="n">empty_config</span><span class="p">))</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@when</span><span class="p">(</span><span class="s">&quot;the configuration is checked&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">check_configuration</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">dummy_configuration</span><span class="o">.</span><span class="n">configuration</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;the crash test dummy configuration has the defaults&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">assert_default_configuration</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">constants</span> <span class="o">=</span> <span class="n">CrashTestDummyConstants</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">error_module_option</span><span class="p">],</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">equal_to</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">error_module_default</span><span class="p">)))</span>
+
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">error_option</span><span class="p">],</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">equal_to</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">error_default</span><span class="p">)))</span>
+
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">error_message_option</span><span class="p">],</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">equal_to</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">error_message_default</span><span class="p">)))</span>
+
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">function_option</span><span class="p">],</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">equal_to</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">function_default</span><span class="p">)))</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;it is a Base Configuration&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">assert_base_configuration</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">dummy_configuration</span><span class="p">,</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">instance_of</span><span class="p">(</span><span class="n">BaseConfiguration</span><span class="p">)))</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="scenario-user-passes-in-wrong-plugin">
+<h2>Scenario: User passes in wrong plugin<a class="headerlink" href="#scenario-user-passes-in-wrong-plugin" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">bad_plugin</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">[bad_plugin]</span>
+<span class="s">plugin = BadBadBad</span>
+<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+
+<span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a crash test dummy with the wrong plugin name&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">wrong_plugin</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">dummy_configuration</span> <span class="o">=</span> <span class="n">CrashTestDummyConfiguration</span><span class="p">(</span><span class="n">section_name</span><span class="o">=</span><span class="s">&#39;bad_plugin&#39;</span><span class="p">,</span>
+                                                              <span class="n">source</span><span class="o">=</span><span class="n">ConfigObj</span><span class="p">(</span><span class="n">bad_plugin</span><span class="p">))</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@when</span><span class="p">(</span><span class="s">&quot;the configuration with the wrong plugin is checked&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">check_wrong_plugin</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">check</span> <span class="o">=</span> <span class="k">lambda</span> <span class="p">:</span> <span class="n">context</span><span class="o">.</span><span class="n">dummy_configuration</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;the crash test dummy validator will raise a ConfigurationError&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">raise_error</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="c">#assert_that(calling(context.check),</span>
+    <span class="c">#            raises(ConfigurationError))</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="scenario-user-gets-crashtestdummy">
+<h2>Scenario: User gets CrashTestDummy<a class="headerlink" href="#scenario-user-gets-crashtestdummy" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">plugin_config</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">[test_dummy]</span>
+<span class="s">plugin = CrashTestDummy</span>
+
+<span class="s">&quot;&quot;&quot;</span>
+
+<span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a CrashTestDummy Configuration&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">crash_test_dummy_configuration</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="n">CrashTestDummyConfiguration</span><span class="p">(</span><span class="n">section_name</span><span class="o">=</span><span class="s">&#39;test_dummy&#39;</span><span class="p">,</span>
+                                                        <span class="n">source</span><span class="o">=</span><span class="n">ConfigObj</span><span class="p">(</span><span class="n">plugin_config</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()))</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@when</span><span class="p">(</span><span class="s">&quot;the user gets the CrashTestDummy product&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">crash_test_dummy_product</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;the CrashTestDummy is correctly configured&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">check_configuration</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">product</span><span class="p">,</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">instance_of</span><span class="p">(</span><span class="n">CrashDummy</span><span class="p">)))</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Crash Test Dummy</a><ul>
+<li><a class="reference internal" href="#scenario-user-doesn-t-specify-any-options">Scenario: User doesn&#8217;t specify any options</a></li>
+<li><a class="reference internal" href="#scenario-user-passes-in-wrong-plugin">Scenario: User passes in wrong plugin</a></li>
+<li><a class="reference internal" href="#scenario-user-gets-crashtestdummy">Scenario: User gets CrashTestDummy</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../_sources/plugins/tests/steps/crashtestdummyfeature.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

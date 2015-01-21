@@ -1,0 +1,6 @@
+theape.parts.wifi.tests.testiwconfig.TestIwconfig.test_call
+===========================================================
+
+.. currentmodule:: theape.parts.wifi.tests.testiwconfig
+
+.. automethod:: TestIwconfig.test_call

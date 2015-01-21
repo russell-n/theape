@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Testing The RunArguments &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../index.html" />
+    <link rel="up" title="Testing the Arguments" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >The Ape&#8217;s Infrastructure</a> &raquo;</li>
+          <li><a href="../index.html" >The Arguments</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Testing the Arguments</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="testing-the-runarguments">
+<h1>Testing The RunArguments<a class="headerlink" href="#testing-the-runarguments" title="Permalink to this headline">¶</a></h1>
+<p>This tests the arguments for the <cite>run</cite> sub-command.</p>
+<span class="target" id="module-theape.interface.arguments.arguments.tests.test_runarguments"></span><table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestRunArguments.test_constructor</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestRunArguments.test_configfiles</span></tt></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">TestRunArguments</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;run&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arguments</span> <span class="o">=</span> <span class="n">Run</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">test_constructor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Does it build properly?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">arguments</span> <span class="o">=</span> <span class="n">Run</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="s">&#39;run&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">arguments</span><span class="p">,</span> <span class="n">BaseArguments</span><span class="p">)</span>
+        <span class="c"># test the inheritance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">arguments</span><span class="o">.</span><span class="n">debug</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">test_configfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Does it get the configfiles list?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># test default</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arguments</span><span class="o">.</span><span class="n">configfiles</span><span class="p">,</span>
+                         <span class="n">RunArgumentsConstants</span><span class="o">.</span><span class="n">default_configfiles</span><span class="p">)</span>
+
+        <span class="c">#test arguments</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arguments</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="n">configfiles</span> <span class="o">=</span>  <span class="s">&#39;ape.ini cow.txt pie.bla&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arguments</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">+</span> <span class="n">configfiles</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arguments</span><span class="o">.</span><span class="n">configfiles</span><span class="p">,</span> <span class="n">configfiles</span><span class="p">)</span>
+        <span class="k">return</span>
+</pre></div>
+</div>
+<div class="section" id="testing-the-run-strategy">
+<h2>Testing the Run Strategy<a class="headerlink" href="#testing-the-run-strategy" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestRunStrategy.test_constructor</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestRunStrategy.test_function</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestRunStrategy.test_trace</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestRunStrategy.test_callgraph</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestRunStrategy.test_errors</span></tt></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">TestRunStrategy</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">build_ape</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span> <span class="o">=</span> <span class="n">RunStrategy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">trace</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">callgraph</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ape</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="c"># monkey-patch</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span><span class="o">.</span><span class="n">build_ape</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_ape</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">test_constructor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Does it build?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">strategy</span> <span class="o">=</span> <span class="n">RunStrategy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">strategy</span><span class="p">,</span> <span class="n">BaseStrategy</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">test_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Does it implement the strategy correctly?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">configfiles</span> <span class="o">=</span> <span class="s">&#39;how now brown cow&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">configfiles</span> <span class="o">=</span> <span class="n">configfiles</span>
+        <span class="c"># unsuccessful build</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">build_ape</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">build_ape</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span><span class="n">configfiles</span><span class="p">)</span>
+
+        <span class="c"># succellful build</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">build_ape</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ape</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ape</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ape</span><span class="o">.</span><span class="n">close</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">()</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">test_trace</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Does it trace the calls?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">trace</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">build_ape</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ape</span>
+
+        <span class="c"># trace mocks the module import</span>
+        <span class="n">trace</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="c"># tracer mocks the Trace object</span>
+        <span class="n">tracer</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">trace</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">tracer</span>
+        <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s">&#39;trace.Trace&#39;</span><span class="p">,</span> <span class="n">trace</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">tracer</span><span class="o">.</span><span class="n">mock_calls</span><span class="p">)</span>
+            <span class="n">tracer</span><span class="o">.</span><span class="n">runfunc</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ape</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">test_errors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Does it trap errors?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">build_ape</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ape</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ape</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;oop&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">return</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Testing The RunArguments</a><ul>
+<li><a class="reference internal" href="#testing-the-run-strategy">Testing the Run Strategy</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../components/index.html">The Components</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../_sources/infrastructure/arguments/tests/test_runarguments.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

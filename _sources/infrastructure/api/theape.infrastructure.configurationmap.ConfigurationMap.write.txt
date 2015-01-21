@@ -1,0 +1,6 @@
+theape.infrastructure.configurationmap.ConfigurationMap.write
+=============================================================
+
+.. currentmodule:: theape.infrastructure.configurationmap
+
+.. automethod:: ConfigurationMap.write

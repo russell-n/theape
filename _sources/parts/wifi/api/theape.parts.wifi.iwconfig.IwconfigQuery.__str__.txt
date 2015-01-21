@@ -1,0 +1,6 @@
+theape.parts.wifi.iwconfig.IwconfigQuery.__str__
+================================================
+
+.. currentmodule:: theape.parts.wifi.iwconfig
+
+.. automethod:: IwconfigQuery.__str__

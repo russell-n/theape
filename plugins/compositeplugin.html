@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Composite Plugin &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../index.html" />
+    <link rel="up" title="Plugins" href="index.html" />
+    <link rel="next" title="theape.plugins.sleep_plugin.Sleep" href="api/theape.plugins.sleep_plugin.Sleep.html" />
+    <link rel="prev" title="theape.plugins.base_plugin.BaseConfiguration.product" href="api/theape.plugins.base_plugin.BaseConfiguration.product.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/theape.plugins.sleep_plugin.Sleep.html" title="theape.plugins.sleep_plugin.Sleep"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="api/theape.plugins.base_plugin.BaseConfiguration.product.html" title="theape.plugins.base_plugin.BaseConfiguration.product"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Plugins</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="composite-plugin">
+<h1>Composite Plugin<a class="headerlink" href="#composite-plugin" title="Permalink to this headline">¶</a></h1>
+<p>This is a plugin for <a class="reference internal" href="../parts/watchers/thewatcher.html#ape-thewatcher"><em>Composites</em></a>. The plugin creates as its product a singleton composite into which components are added. To specify the components the configuration-file will need a cascade of sections.</p>
+<blockquote>
+<div><ul class="simple">
+<li>In the APE section, the name of the section with information for this plugin needs to be listed (as is the case for all plugins).</li>
+<li>In the section for the plugin the sections with information for the components needs to be added</li>
+<li>The section also needs an identifier for the singleton so it can be re-used later in the operation if needed</li>
+</ul>
+</div></blockquote>
+<p class="plantuml">
+<img src="../_images/plantuml-aa9868ae6882fc9cff6d344fc12d108f62ecfeb1.png" alt="BasePlugin &lt;|-- Watcher" />
+</p>
+<div class="section" id="the-configuration">
+<h2>The Configuration<a class="headerlink" href="#the-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The <cite>Watcher</cite> is a bundle of <cite>Watcher</cite>, <cite>Query</cite>, <cite>Connection</cite>, and <cite>FileStorage</cite>.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">configuration</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">[{0}]</span>
+<span class="s">#</span>
+<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">SECTION</span><span class="p">,</span>
+           <span class="n">TOTAL_OPTION</span><span class="p">,</span>
+           <span class="n">INTERVAL_OPTION</span><span class="p">,</span>
+           <span class="n">VERBOSE_OPTION</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-sections">
+<h2>The Sections<a class="headerlink" href="#the-sections" title="Permalink to this headline">¶</a></h2>
+<p>The help-sections.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">sections</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+<span class="n">sections</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;{bold}sleep{reset} -- a countdown timer that blocks until time is over&#39;</span>
+<span class="n">sections</span><span class="p">[</span><span class="s">&#39;description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;{bold}sleep{reset} is a verbose no-op (by default) meant to allow the insertion of a pause in the execution of the APE. At this point all calls to sleep will get the same configuration.&#39;</span>
+<span class="n">sections</span><span class="p">[</span><span class="s">&#39;configuration&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">configuration</span>
+<span class="n">sections</span><span class="p">[</span><span class="s">&#39;see also&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;EventTimer, RelativeTime, AbsoluteTime&#39;</span>
+<span class="n">sections</span><span class="p">[</span><span class="s">&#39;options&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">The configuration options --</span>
+
+<span class="s">    {bold}end{reset} : an absolute time given as a time-stamp that can be interpreted by `dateutil.parser.parse`. This is for the cases where you have a specific time that you want the sleep to end.</span>
+
+<span class="s">    {bold}total{reset} : a relative time given as pairs of &#39;&lt;amount&gt; &lt;units&gt;&#39; -- e.g. &#39;3.4 hours&#39;. Most units only use the first letter, but since `months` and `minutes` both start with `m`, you have to use two letters to specify them. The sleep will stop at the start of the sleep + the total time given.</span>
+
+<span class="s">    {bold}interval{reset} : The amount of time beween reports of the time remaining (default = 1 second). Use the same formatting as the `total` option.</span>
+
+<span class="s">    {bold}verbose{reset} : If True (the default) then report time remaining at specified intervals while the sleep runs.</span>
+
+<span class="s">One of {bold}end{reset} or {bold}total{reset} needs to be specified. Everything else is optional.</span>
+<span class="s">&quot;&quot;&quot;</span>
+<span class="n">sections</span><span class="p">[</span><span class="s">&#39;author&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;ape&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="module-theape.plugins.sleep_plugin">
+<span id="the-plugin"></span><h2>The Plugin<a class="headerlink" href="#module-theape.plugins.sleep_plugin" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.sleep_plugin.Sleep.html#theape.plugins.sleep_plugin.Sleep" title="theape.plugins.sleep_plugin.Sleep"><tt class="xref py py-obj docutils literal"><span class="pre">Sleep</span></tt></a>(*args,&nbsp;**kwargs)</td>
+<td>A plugin for TheBigSleep</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Composite Plugin</a><ul>
+<li><a class="reference internal" href="#the-configuration">The Configuration</a></li>
+<li><a class="reference internal" href="#the-sections">The Sections</a></li>
+<li><a class="reference internal" href="#module-theape.plugins.sleep_plugin">The Plugin</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parts/index.html">Parts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../_sources/plugins/compositeplugin.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

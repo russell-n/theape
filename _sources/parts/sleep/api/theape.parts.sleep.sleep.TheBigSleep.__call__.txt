@@ -1,0 +1,6 @@
+theape.parts.sleep.sleep.TheBigSleep.__call__
+=============================================
+
+.. currentmodule:: theape.parts.sleep.sleep
+
+.. automethod:: TheBigSleep.__call__

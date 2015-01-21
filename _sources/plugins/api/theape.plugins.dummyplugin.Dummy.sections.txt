@@ -1,0 +1,6 @@
+theape.plugins.dummyplugin.Dummy.sections
+=========================================
+
+.. currentmodule:: theape.plugins.dummyplugin
+
+.. autoattribute:: Dummy.sections

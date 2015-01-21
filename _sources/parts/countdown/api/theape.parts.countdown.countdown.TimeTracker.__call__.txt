@@ -1,0 +1,6 @@
+theape.parts.countdown.countdown.TimeTracker.__call__
+=====================================================
+
+.. currentmodule:: theape.parts.countdown.countdown
+
+.. automethod:: TimeTracker.__call__

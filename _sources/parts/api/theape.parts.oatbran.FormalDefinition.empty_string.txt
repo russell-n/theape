@@ -1,0 +1,6 @@
+theape.parts.oatbran.FormalDefinition.empty_string
+==================================================
+
+.. currentmodule:: theape.parts.oatbran
+
+.. autoattribute:: FormalDefinition.empty_string

@@ -1,0 +1,6 @@
+theape.parts.storage.tests.testfilestorage.TestFileStorageOpen.test_open
+========================================================================
+
+.. currentmodule:: theape.parts.storage.tests.testfilestorage
+
+.. automethod:: TestFileStorageOpen.test_open

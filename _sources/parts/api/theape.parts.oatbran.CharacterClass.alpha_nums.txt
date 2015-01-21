@@ -1,0 +1,6 @@
+theape.parts.oatbran.CharacterClass.alpha_nums
+==============================================
+
+.. currentmodule:: theape.parts.oatbran
+
+.. autoattribute:: CharacterClass.alpha_nums

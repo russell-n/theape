@@ -1,0 +1,6 @@
+theape.components.component.Composite.close
+===========================================
+
+.. currentmodule:: theape.components.component
+
+.. automethod:: Composite.close

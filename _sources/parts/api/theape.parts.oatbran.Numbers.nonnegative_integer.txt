@@ -1,0 +1,6 @@
+theape.parts.oatbran.Numbers.nonnegative_integer
+================================================
+
+.. currentmodule:: theape.parts.oatbran
+
+.. autoattribute:: Numbers.nonnegative_integer

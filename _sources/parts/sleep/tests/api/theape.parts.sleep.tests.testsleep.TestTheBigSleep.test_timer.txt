@@ -1,0 +1,6 @@
+theape.parts.sleep.tests.testsleep.TestTheBigSleep.test_timer
+=============================================================
+
+.. currentmodule:: theape.parts.sleep.tests.testsleep
+
+.. automethod:: TestTheBigSleep.test_timer

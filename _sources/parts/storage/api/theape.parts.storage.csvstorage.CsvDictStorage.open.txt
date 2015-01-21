@@ -1,0 +1,6 @@
+theape.parts.storage.csvstorage.CsvDictStorage.open
+===================================================
+
+.. currentmodule:: theape.parts.storage.csvstorage
+
+.. automethod:: CsvDictStorage.open

@@ -1,0 +1,6 @@
+theape.parts.oatbran.Numbers.one_hundreds
+=========================================
+
+.. currentmodule:: theape.parts.oatbran
+
+.. autoattribute:: Numbers.one_hundreds

@@ -1,0 +1,6 @@
+theape.plugins.quartermaster.QuarterMaster.get_plugin
+=====================================================
+
+.. currentmodule:: theape.plugins.quartermaster
+
+.. automethod:: QuarterMaster.get_plugin

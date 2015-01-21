@@ -1,0 +1,6 @@
+theape.infrastructure.configurationmap.ConfigurationMap.get_int
+===============================================================
+
+.. currentmodule:: theape.infrastructure.configurationmap
+
+.. automethod:: ConfigurationMap.get_int

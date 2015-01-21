@@ -1,0 +1,43 @@
+theape.plugins.base_plugin.BaseConfiguration
+============================================
+
+.. currentmodule:: theape.plugins.base_plugin
+
+.. autoclass:: BaseConfiguration
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BaseConfiguration.__init__
+      ~BaseConfiguration.check_extra_values
+      ~BaseConfiguration.check_rep
+      ~BaseConfiguration.log_error
+      ~BaseConfiguration.process_errors
+      ~BaseConfiguration.update
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BaseConfiguration.check_methods
+      ~BaseConfiguration.configspec
+      ~BaseConfiguration.configspec_source
+      ~BaseConfiguration.configuration
+      ~BaseConfiguration.constants
+      ~BaseConfiguration.logger
+      ~BaseConfiguration.plugin_name
+      ~BaseConfiguration.product
+      ~BaseConfiguration.sample
+      ~BaseConfiguration.validation_outcome
+      ~BaseConfiguration.validator
+   
+   

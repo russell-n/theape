@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ape.infrastructure.baseclass.BaseThreadClass &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Ape Documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ape-infrastructure-baseclass-basethreadclass">
+<h1>ape.infrastructure.baseclass.BaseThreadClass<a class="headerlink" href="#ape-infrastructure-baseclass-basethreadclass" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="ape.infrastructure.baseclass.BaseThreadClass">
+<em class="property">class </em><tt class="descclassname">ape.infrastructure.baseclass.</tt><tt class="descname">BaseThreadClass</tt><a class="headerlink" href="#ape.infrastructure.baseclass.BaseThreadClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extends the base-class with a run_thread method that will log tracebacks on exceptions.</p>
+<p>This is meant to log errors that kill threads.</p>
+<dl class="method">
+<dt id="ape.infrastructure.baseclass.BaseThreadClass.__init__">
+<tt class="descname">__init__</tt><big>(</big><big>)</big><a class="headerlink" href="#ape.infrastructure.baseclass.BaseThreadClass.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#ape.infrastructure.baseclass.BaseThreadClass.__init__" title="ape.infrastructure.baseclass.BaseThreadClass.__init__"><tt class="xref py py-obj docutils literal"><span class="pre">__init__</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ape.infrastructure.baseclass.BaseThreadClass.log_error" title="ape.infrastructure.baseclass.BaseThreadClass.log_error"><tt class="xref py py-obj docutils literal"><span class="pre">log_error</span></tt></a>(error[,&nbsp;message])</td>
+<td>Logs the error in bold red</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ape.infrastructure.baseclass.BaseThreadClass.run" title="ape.infrastructure.baseclass.BaseThreadClass.run"><tt class="xref py py-obj docutils literal"><span class="pre">run</span></tt></a>()</td>
+<td>This is called by the run_thread() method</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ape.infrastructure.baseclass.BaseThreadClass.run_thread" title="ape.infrastructure.baseclass.BaseThreadClass.run_thread"><tt class="xref py py-obj docutils literal"><span class="pre">run_thread</span></tt></a>(*args,&nbsp;**kwargs)</td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param:</th><td class="field-body">Whatever self.run accepts</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#ape.infrastructure.baseclass.BaseThreadClass.logger" title="ape.infrastructure.baseclass.BaseThreadClass.logger"><tt class="xref py py-obj docutils literal"><span class="pre">logger</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">A logging object.</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ape.infrastructure.baseclass.BaseThreadClass.thread" title="ape.infrastructure.baseclass.BaseThreadClass.thread"><tt class="xref py py-obj docutils literal"><span class="pre">thread</span></tt></a></td>
+<td>This passes no arguments to run_thread &#8211; override if needed</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="ape.infrastructure.baseclass.BaseThreadClass.log_error">
+<tt class="descname">log_error</tt><big>(</big><em>error</em>, <em>message=''</em><big>)</big><a class="headerlink" href="#ape.infrastructure.baseclass.BaseThreadClass.log_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logs the error in bold red</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
+<li><cite>error</cite>: error type (prefix in red and bold)</li>
+<li><cite>message</cite>: descriptive message (red but not bold)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ape.infrastructure.baseclass.BaseThreadClass.run">
+<tt class="descname">run</tt><big>(</big><big>)</big><a class="headerlink" href="#ape.infrastructure.baseclass.BaseThreadClass.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is called by the run_thread() method</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ape.infrastructure.baseclass.BaseThreadClass.run_thread">
+<tt class="descname">run_thread</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#ape.infrastructure.baseclass.BaseThreadClass.run_thread" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">Whatever self.run accepts</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Precondition:</th><td class="field-body">self.run method exists and is thread-safe</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ape.infrastructure.baseclass.BaseThreadClass.logger">
+<tt class="descname">logger</tt><a class="headerlink" href="#ape.infrastructure.baseclass.BaseThreadClass.logger" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A logging object.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ape.infrastructure.baseclass.BaseThreadClass.thread">
+<tt class="descname">thread</tt><a class="headerlink" href="#ape.infrastructure.baseclass.BaseThreadClass.thread" title="Permalink to this definition">¶</a></dt>
+<dd><p>This passes no arguments to run_thread &#8211; override if needed</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">threading.Thread with self.run_thread as target and daemon True</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../_sources/infrastructure/api/ape.infrastructure.baseclass.BaseThreadClass.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

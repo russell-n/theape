@@ -1,0 +1,324 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The Base Usage String &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../../index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">Ape Documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-base-usage-string">
+<h1>The Base Usage String<a class="headerlink" href="#the-base-usage-string" title="Permalink to this headline">¶</a></h1>
+<p>I&#8217;ll start by trying to reproduce the usage string, taking advantage of the greater flexibility of docopt.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">usage</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;The APE</span>
+
+<span class="s">The All-in-one Performance Evaluator.</span>
+
+<span class="s">Usage: ape -h|-v</span>
+
+<span class="s">Optional Arguments:</span>
+
+<span class="s">    -h, --help     Print a help message.</span>
+<span class="s">    -v, --version  Print the version number.</span>
+
+<span class="s">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<div class="section" id="help-and-version">
+<h2>Help and Version<a class="headerlink" href="#help-and-version" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">help</span></tt> and <tt class="docutils literal"><span class="pre">version</span></tt> are special flags that are intercepted by <tt class="docutils literal"><span class="pre">docopt</span></tt> so you don&#8217;t have to handle them (using version requires you to pass in the version to the <cite>docopt</cite> function call). Since the <tt class="docutils literal"><span class="pre">docopt</span></tt> help and version calls force the program to exit, I created a function to trap the exception called catch_exit (otherwise Pweave will quit and this documentation won&#8217;t get built).</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">catch_exit</span><span class="p">(</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;-h&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>The APE
+
+The All-in-one Performance Evaluator.
+
+Usage: ape -h|-v
+
+Optional Arguments:
+
+    -h, --help     Print a help message.
+    -v, --version  Print the version number.
+</pre></div>
+</div>
+<p>Without the version set it thinks <cite>-v</cite> is just another option:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;-v&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;--help&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s">&#39;--version&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>With the version set <cite>-v</cite> tells it to print the version:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">catch_exit</span><span class="p">(</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;-v&#39;</span><span class="p">],</span> <span class="n">version</span><span class="o">=</span><span class="s">&quot;alpha.beta.gamma&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">alpha</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">gamma</span>
+</pre></div>
+</div>
+<p>I defined the options as mutually exclusive (<tt class="docutils literal"><span class="pre">-h</span> <span class="pre">|</span> <span class="pre">-v</span></tt>), what happens if we pass in both flags?</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">catch_exit</span><span class="p">(</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="s">&#39;--help --version&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="n">version</span><span class="o">=</span><span class="s">&#39;abc&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>The APE
+
+The All-in-one Performance Evaluator.
+
+Usage: ape -h|-v
+
+Optional Arguments:
+
+    -h, --help     Print a help message.
+    -v, --version  Print the version number.
+</pre></div>
+</div>
+<p>It unexpectedly accepts the <cite>help</cite> option and ignores the <cite>version</cite> option. Is it the ordering that matters?</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">catch_exit</span><span class="p">(</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="s">&#39;-v -h&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>The APE
+
+The All-in-one Performance Evaluator.
+
+Usage: ape -h|-v
+
+Optional Arguments:
+
+    -h, --help     Print a help message.
+    -v, --version  Print the version number.
+</pre></div>
+</div>
+<p>Apparently <cite>help</cite> intercepts the other options.</p>
+</div>
+</div>
+<div class="section" id="base-options">
+<span id="docopt-reproducingape-base-options"></span><h1>Base Options<a class="headerlink" href="#base-options" title="Permalink to this headline">¶</a></h1>
+<p>Now that help and version are out of the way, let&#8217;s add some options for the ape to interpret.</p>
+<div class="section" id="logging-levels">
+<h2>Logging Levels<a class="headerlink" href="#logging-levels" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">usage</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;APE</span>
+<span class="s">Usage: ape -h | -v</span>
+<span class="s">       ape --debug | --silent</span>
+
+<span class="s">Help Options:</span>
+
+<span class="s">    -h, --help     Display this help message and quit.</span>
+<span class="s">    -v, --version  Display the version number and quit.</span>
+
+<span class="s">Ape Options:</span>
+
+<span class="s">    --debug   Set logging level to DEBUG.</span>
+<span class="s">    --silent  Set logging level to ERROR.</span>
+
+<span class="s">&quot;&quot;&quot;</span>
+<span class="k">print</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;--silent&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;--debug&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s">&#39;--help&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s">&#39;--silent&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+ <span class="s">&#39;--version&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>As expected, the options default to <cite>False</cite> and since we passed in the <tt class="docutils literal"><span class="pre">--silent</span></tt> only <cite>silent</cite> in the returned dictionary was set to <cite>True</cite>. What if we pass both silent and debug?</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">catch_exit</span><span class="p">(</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="s">&#39;--silent --debug&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Usage: ape -h | -v
+       ape --debug | --silent
+</pre></div>
+</div>
+<p>It looks like with the exception of cases where <cite>help</cite> is involved, <cite>docopt</cite> will enforce the 0 or 1 cardinality for the alternative options &#8211; you can either choose one or leave it out altogether, but you can&#8217;t pick more than one of them.</p>
+</div>
+<div class="section" id="interactive-debugging">
+<h2>Interactive Debugging<a class="headerlink" href="#interactive-debugging" title="Permalink to this headline">¶</a></h2>
+<p>What about adding interactive debugging options (<cite>pudb</cite> or <cite>pdb</cite>)?</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">usage</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;APE</span>
+<span class="s">Usage: ape -h | -v</span>
+<span class="s">       ape [--debug | --silent] [--pudb | --pdb]</span>
+
+<span class="s">Help Options:</span>
+
+<span class="s">    -h, --help     Display this help message and quit.</span>
+<span class="s">    -v, --version  Display the version number and quit.</span>
+
+<span class="s">Ape Options:</span>
+
+<span class="s">    --debug   Set logging level to DEBUG.</span>
+<span class="s">    --silent  Set logging level to ERROR.</span>
+
+<span class="s">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p>I&#8217;ll try setting both logging and debugging, which are both optional and not mutually exclusive.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="s">&quot;--silent --pudb&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;--debug&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s">&#39;--help&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s">&#39;--pdb&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s">&#39;--pudb&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+ <span class="s">&#39;--silent&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+ <span class="s">&#39;--version&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>As expected, the dictionary entries for <tt class="docutils literal"><span class="pre">--silent</span></tt> and <tt class="docutils literal"><span class="pre">--pudb</span></tt> are True and and all the others are False.</p>
+</div>
+<div class="section" id="trace-and-callback">
+<h2>Trace and Callback<a class="headerlink" href="#trace-and-callback" title="Permalink to this headline">¶</a></h2>
+<p>The last of the top-level options are <cite>trace</cite> and <cite>callback</cite> (which I don&#8217;t remember as being particularly useful). Does it make sense to be able to set an interactive debugger when using trace or callback? Probably not, but what about the logging level? Maybe. I&#8217;ll say yes for now.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">usage</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;APE</span>
+<span class="s">Usage: ape -h | -v</span>
+<span class="s">       ape [--debug | --silent] [--pudb | --pdb]</span>
+<span class="s">       ape  [--debug | --silent] [--trace] [--callback]</span>
+
+<span class="s">Help Options:</span>
+
+<span class="s">    -h, --help     Display this help message and quit.</span>
+<span class="s">    -v, --version  Display the version number and quit.</span>
+
+<span class="s">Ape Options:</span>
+
+<span class="s">    --debug   Set logging level to DEBUG.</span>
+<span class="s">    --silent  Set logging level to ERROR.</span>
+
+<span class="s">&quot;&quot;&quot;</span>
+<span class="k">print</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="s">&quot;--trace --debug --callback&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;--callback&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+ <span class="s">&#39;--debug&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+ <span class="s">&#39;--help&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s">&#39;--pdb&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s">&#39;--pudb&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s">&#39;--silent&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s">&#39;--trace&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+ <span class="s">&#39;--version&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>If you look at the dictionary that was returned you can see that <tt class="docutils literal"><span class="pre">--trace,</span> <span class="pre">--debug</span></tt> and <tt class="docutils literal"><span class="pre">--callback</span></tt> were set to True and all the others to False, so it&#8217;s still working as expected. We now have three usage lines that each takes a different set of options, what happens if you mix up options from two different lines?</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">catch_exit</span><span class="p">(</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="s">&#39;--callback --pudb&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Usage: ape -h | -v
+       ape [--debug | --silent] [--pudb | --pdb]
+       ape  [--debug | --silent] [--trace] [--callback]
+</pre></div>
+</div>
+<p>It looks like it enforces the usage strings so your arguments have to match one of the usage-lines: <cite>&#8211;pudb</cite> isn&#8217;t offered on the same line that has <cite>&#8211;callback</cite> so it (docopt) prints the usage message and quits.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The Base Usage String</a><ul>
+<li><a class="reference internal" href="#help-and-version">Help and Version</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#base-options">Base Options</a><ul>
+<li><a class="reference internal" href="#logging-levels">Logging Levels</a></li>
+<li><a class="reference internal" href="#interactive-debugging">Interactive Debugging</a></li>
+<li><a class="reference internal" href="#trace-and-callback">Trace and Callback</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../../../_sources/documentation/developer/explorations/explore_docopt/sections/baseusagestring.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

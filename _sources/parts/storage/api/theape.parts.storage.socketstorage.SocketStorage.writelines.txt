@@ -1,0 +1,6 @@
+theape.parts.storage.socketstorage.SocketStorage.writelines
+===========================================================
+
+.. currentmodule:: theape.parts.storage.socketstorage
+
+.. automethod:: SocketStorage.writelines

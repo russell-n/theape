@@ -1,0 +1,6 @@
+theape.plugins.base_plugin.SubConfiguration.check_methods
+=========================================================
+
+.. currentmodule:: theape.plugins.base_plugin
+
+.. autoattribute:: SubConfiguration.check_methods

@@ -1,0 +1,6 @@
+theape.parts.storage.base_storage.BaseStorage.writelines
+========================================================
+
+.. currentmodule:: theape.parts.storage.base_storage
+
+.. automethod:: BaseStorage.writelines

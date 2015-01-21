@@ -1,0 +1,353 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Exploring Paramiko &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
+    <link rel="up" title="Exploring Paramiko" href="index.html" />
+    <link rel="next" title="paramiko.SSHClient" href="api/paramiko.SSHClient.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/paramiko.SSHClient.html" title="paramiko.SSHClient"
+             accesskey="N">next</a> |</li>
+        <li><a href="../../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >The Ape Developer Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >The Explorations</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Exploring Paramiko</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="exploring-paramiko">
+<h1>Exploring Paramiko<a class="headerlink" href="#exploring-paramiko" title="Permalink to this headline">¶</a></h1>
+<div class="figure align-center">
+<img alt="../../../../_images/thorazine.jpg" src="../../../../_images/thorazine.jpg" />
+<p class="caption">Thorazine Advertisement (<a class="reference external" href="http://simple.wikipedia.org/wiki/File:Thorazine_advert.jpg">source: wikipedia</a>)</p>
+</div>
+<p>This is an exploration of <a class="reference external" href="http://www.lag.net/paramiko/">paramiko,</a> a python implementation of an <a class="reference external" href="http://en.wikipedia.org/wiki/Secure_Shell">SSH client</a>. I will focus primarily on the <a class="reference external" href="http://www.lag.net/paramiko/docs/paramiko.SSHClient-class.html">SSHClient</a> class that it provides, as this is what I work with the most.</p>
+<p>Contents:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="#paramiko-readme-what"><em>Paramiko&#8217;s What</em></a></li>
+<li><a class="reference internal" href="#paramiko-api"><em>Paramiko&#8217;s API</em></a></li>
+<li><a class="reference internal" href="#paramiko-module-diagram"><em>Paramiko Module Diagram</em></a></li>
+<li><a class="reference internal" href="#paramiko-sshclient-class-diagram"><em>Paramiko SSHClient Class Diagram</em></a></li>
+<li><a class="reference internal" href="#paramiko-localhost-experiment"><em>A Localhost Experiment</em></a></li>
+<li><a class="reference internal" href="#paramiko-sshclient-connect"><em>Paramiko&#8217;s SSHClient.connect Method</em></a></li>
+</ul>
+</div></blockquote>
+<div class="section" id="paramiko-what">
+<span id="paramiko-readme-what"></span><h2>Paramiko What?<a class="headerlink" href="#paramiko-what" title="Permalink to this headline">¶</a></h2>
+<p>This is taken from the README file:</p>
+<div class="section" id="what">
+<h3>What<a class="headerlink" href="#what" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div>&#8220;paramiko&#8221; is a combination of the esperanto words for &#8220;paranoid&#8221; and &#8220;friend&#8221;.  it&#8217;s a module for python 2.5+ that implements the SSH2 protocol for secure (encrypted and authenticated) connections to remote machines. Unlike SSL (aka TLS), SSH2 protocol does not require hierarchical certificates signed by a powerful central authority. you may know SSH2 as the protocol that replaced telnet and rsh for secure access to remote shells, but the protocol also includes the ability to open arbitrary channels to remote services across the encrypted tunnel (this is how sftp works, for example).</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">According to <a class="reference external" href="http://translate.google.com/translate_t?safe=off&amp;bav=on.2,or.r_cp.r_qf.&amp;bvm=bv.55819444,d.cGE&amp;biw=1152&amp;bih=651&amp;um=1&amp;ie=UTF-8&amp;hl=en&amp;sl=en&amp;tl=eo&amp;text=paranoid+friend&amp;client=ob">Google Translate</a> &#8216;paranoid friend&#8217; translates to &#8216;paranoja amiko&#8217; in esperanto.</p>
+</div>
+</div>
+</div>
+<div class="section" id="the-api">
+<span id="paramiko-api"></span><h2>The API<a class="headerlink" href="#the-api" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../../../../parts/connections/api/paramiko.SSHClient.html#paramiko.SSHClient" title="paramiko.SSHClient"><tt class="xref py py-obj docutils literal"><span class="pre">SSHClient</span></tt></a>()</td>
+<td>A high-level representation of a session with an SSH server.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="the-module-diagram">
+<span id="paramiko-module-diagram"></span><h2>The Module Diagram<a class="headerlink" href="#the-module-diagram" title="Permalink to this headline">¶</a></h2>
+<p>Let&#8217;s see what the module looks like.</p>
+<img alt="../../../../_images/classes_paramiko.png" class="align-center" src="../../../../_images/classes_paramiko.png" />
+<p>Well, there&#8217;s a lot there. If nothing else, this might indicate how complicated the SSHClient is.</p>
+</div>
+<div class="section" id="class-diagram">
+<span id="paramiko-sshclient-class-diagram"></span><h2>Class Diagram<a class="headerlink" href="#class-diagram" title="Permalink to this headline">¶</a></h2>
+<p>Okay, having looked at the module-dependencies for paramiko.client, let&#8217;s look at the SSHClient class itself.</p>
+<div class="figure align-center">
+<img alt="../../../../_images/SSHClient.png" src="../../../../_images/SSHClient.png" />
+</div>
+</div>
+<div class="section" id="a-localhost-experiment">
+<span id="paramiko-localhost-experiment"></span><h2>A Localhost Experiment<a class="headerlink" href="#a-localhost-experiment" title="Permalink to this headline">¶</a></h2>
+<p>Okay, so now that I see the diagrams and the API, how would I use this to connect to a host? As it turns out I have a user called <cite>fakeuser</cite> on this computer set-up, along with a running open-ssh-server, so let&#8217;s try a <cite>connect</cite> call.</p>
+<div class="section" id="the-connect-api">
+<h3>The connect API<a class="headerlink" href="#the-connect-api" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../../../../parts/connections/api/paramiko.client.SSHClient.html#paramiko.client.SSHClient.connect" title="paramiko.client.SSHClient.connect"><tt class="xref py py-obj docutils literal"><span class="pre">SSHClient.connect</span></tt></a>(hostname[,&nbsp;port,&nbsp;...])</td>
+<td>Connect to an SSH server and authenticate to it.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="the-connect-call">
+<h3>The Connect Call<a class="headerlink" href="#the-connect-call" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">client</span> <span class="o">=</span> <span class="n">SSHClient</span><span class="p">()</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s">&#39;fakeuser&#39;</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">SSHException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">error</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Server &#39;localhost&#39; not found in known_hosts
+</pre></div>
+</div>
+<p>Well, that didn&#8217;t work. If you look in the docstring for the SSHClient you will see that they recommend making a call to <tt class="docutils literal"><span class="pre">client.load_system_host_keys</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">client</span> <span class="o">=</span> <span class="n">SSHClient</span>
+<span class="n">client</span><span class="o">.</span><span class="n">load_system_host_keys</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="load-system-host-keys-api">
+<h3>Load System Host Keys API<a class="headerlink" href="#load-system-host-keys-api" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../../../../parts/connections/api/paramiko.client.SSHClient.html#paramiko.client.SSHClient.load_system_host_keys" title="paramiko.client.SSHClient.load_system_host_keys"><tt class="xref py py-obj docutils literal"><span class="pre">SSHClient.load_system_host_keys</span></tt></a>([filename])</td>
+<td>Load host keys from a system (read-only) file.</td>
+</tr>
+</tbody>
+</table>
+<p>So, let&#8217;s try that again.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">client</span><span class="o">.</span><span class="n">load_system_host_keys</span><span class="p">()</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s">&#39;fakeuser&#39;</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">SSHException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">error</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Server &#39;localhost&#39; not found in known_hosts
+</pre></div>
+</div>
+<p>Looking at my earlier code (from the original <cite>ApeTools</cite>), I&#8217;m setting the missing-host-key-policy with a method call:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># this was in the ape</span>
+<span class="n">client</span><span class="o">.</span><span class="n">set_missing_host_key_policy</span><span class="p">(</span><span class="n">paramiko</span><span class="o">.</span><span class="n">AutoAddPolicy</span><span class="p">())</span>
+<span class="n">client</span><span class="o">.</span><span class="n">load_system_host_keys</span><span class="p">()</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s">&#39;fakeuser&#39;</span><span class="p">)</span>
+    <span class="n">stdin</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="s">&#39;ls&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">stdout</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&quot;StdOut: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="p">(</span><span class="ne">IOError</span><span class="p">,</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">SSHException</span><span class="p">)</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">error</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>StdOut: examples.desktop
+</pre></div>
+</div>
+<p>Which seems to have fixed it (the output has the files my <cite>fakeuser</cite> has in  the home directory (I used <cite>adduser</cite> to add the <cite>fakeuser</cite> so there&#8217;s none of the default folders like <cite>Desktop</cite> or <cite>Documents</cite>)).</p>
+<p>The key seems to have been setting the <cite>MissingHostKeyPolicy</cite> to use the <cite>AutoAddPolicy</cite> which seems to mean that it adds the hostname to the known-hosts automatically if it doesn&#8217;t find the name in the known-hosts. Alternatively, according to the API, you should be able to set a file-name directly for your &#8216;known_hosts&#8217; file. I&#8217;m guessing that Paramiko failed earlier because it doesn&#8217;t know about the <tt class="docutils literal"><span class="pre">~/.ssh/known_hosts</span></tt> file (or at least doesn&#8217;t check it by default.</p>
+</div>
+<div class="section" id="the-related-api">
+<h3>The Related API<a class="headerlink" href="#the-related-api" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/paramiko.client.MissingHostKeyPolicy.html#paramiko.client.MissingHostKeyPolicy" title="paramiko.client.MissingHostKeyPolicy"><tt class="xref py py-obj docutils literal"><span class="pre">MissingHostKeyPolicy</span></tt></a></td>
+<td>Interface for defining the policy that <cite>.SSHClient</cite> should use when the SSH server&#8217;s hostname is not in either the system host keys or the application&#8217;s keys.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/paramiko.client.AutoAddPolicy.html#paramiko.client.AutoAddPolicy" title="paramiko.client.AutoAddPolicy"><tt class="xref py py-obj docutils literal"><span class="pre">AutoAddPolicy</span></tt></a></td>
+<td>Policy for automatically adding the hostname and new host key to the local <cite>.HostKeys</cite> object, and saving it.</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/paramiko.hostkeys.HostKeys.html#paramiko.hostkeys.HostKeys" title="paramiko.hostkeys.HostKeys"><tt class="xref py py-obj docutils literal"><span class="pre">HostKeys</span></tt></a>([filename])</td>
+<td>Representation of an OpenSSH-style &#8220;known hosts&#8221; file.</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/paramiko.agent.AgentSSH.html#paramiko.agent.AgentSSH" title="paramiko.agent.AgentSSH"><tt class="xref py py-obj docutils literal"><span class="pre">AgentSSH</span></tt></a>()</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="the-sshclient-connect">
+<span id="paramiko-sshclient-connect"></span><h2>The SSHClient.connect<a class="headerlink" href="#the-sshclient-connect" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../../../../parts/connections/api/paramiko.client.SSHClient.html#paramiko.client.SSHClient.connect" title="paramiko.client.SSHClient.connect"><tt class="xref py py-obj docutils literal"><span class="pre">SSHClient.connect</span></tt></a>(hostname[,&nbsp;port,&nbsp;...])</td>
+<td>Connect to an SSH server and authenticate to it.</td>
+</tr>
+</tbody>
+</table>
+<p>Now that I know how to get it to work, maybe I can look at what actually happened. This is the the signature for the <tt class="docutils literal"><span class="pre">SSHClient.connect</span></tt> method:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">SSHClient</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">hostname</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">pkey</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">key_filename</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">allow_agent</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">look_for_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">sock</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And the start of the docstring:</p>
+<blockquote>
+<div><p>Connect to an SSH server and authenticate to it. The server&#8217;s host key is checked against the system host keys (see <tt class="docutils literal"><span class="pre">load_system_host_keys</span></tt>) and any local host keys (<tt class="docutils literal"><span class="pre">load_host_keys</span></tt>). If the server&#8217;s hostname is not found in either set of host keys, the missing host key policy is used (see <tt class="docutils literal"><span class="pre">set_missing_host_key_policy</span></tt>). The default policy is to reject the key and raise an <tt class="docutils literal"><span class="pre">SSHException</span></tt>.</p>
+<p>Authentication is attempted in the following order of priority:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>The <tt class="docutils literal"><span class="pre">pkey</span></tt> or <tt class="docutils literal"><span class="pre">key_filename</span></tt> passed in (if any)</li>
+<li>Any key we can find through an SSH agent</li>
+<li>Any <tt class="docutils literal"><span class="pre">id_rsa</span></tt> or <tt class="docutils literal"><span class="pre">id_dsa</span></tt> key discoverable in ~/.ssh/</li>
+<li>Plain username/password auth, if a password was given</li>
+</ol>
+</div></blockquote>
+<p>If a private key requires a password to unlock it, and a password is passed in, that password will be used to attempt to unlock the key.</p>
+</div></blockquote>
+<p>So looking at that and the <cite>MissingHostKeyPolicy</cite> and <cite>AutoAddPolicy</cite> links above, it looks like the system did not have <cite>localhost</cite> in the list of known hosts and by setting <cite>AutoAddPolicy</cite> I told it to add any unknown hosts I give it to the list of known hosts, fixing it. It seems like there would be no point to having a known hosts file and requiring confirmation for new hosts if you are going to add them automatically, so this is probably some kind of securrity risk. But given that my main use for this will be to talk to my machines on the LAN, this seems to be okay. Luckily I&#8217;m not a security expert so I don&#8217;t know how bad this really might be (ignorance is bliss, though not as much fun as mushrooms, unfortunately).</p>
+<p>The other part of the setup (&#8216;load_system_host_keys&#8217;) loads the private keys from your agent. I think. In testing this doesn&#8217;t seem to do anything useful. I the agent isn&#8217;t running and the key not added it will return an error. If it is running and the key added, then it works even without this call.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Exploring Paramiko</a><ul>
+<li><a class="reference internal" href="#paramiko-what">Paramiko What?</a><ul>
+<li><a class="reference internal" href="#what">What</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-api">The API</a></li>
+<li><a class="reference internal" href="#the-module-diagram">The Module Diagram</a></li>
+<li><a class="reference internal" href="#class-diagram">Class Diagram</a></li>
+<li><a class="reference internal" href="#a-localhost-experiment">A Localhost Experiment</a><ul>
+<li><a class="reference internal" href="#the-connect-api">The connect API</a></li>
+<li><a class="reference internal" href="#the-connect-call">The Connect Call</a></li>
+<li><a class="reference internal" href="#load-system-host-keys-api">Load System Host Keys API</a></li>
+<li><a class="reference internal" href="#the-related-api">The Related API</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-sshclient-connect">The SSHClient.connect</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../user/index.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../../_sources/documentation/developer/explorations/explore_paramiko/exploring_paramiko.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

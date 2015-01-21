@@ -1,0 +1,6 @@
+theape.infrastructure.ryemother.RyeMother.__call__
+==================================================
+
+.. currentmodule:: theape.infrastructure.ryemother
+
+.. automethod:: RyeMother.__call__

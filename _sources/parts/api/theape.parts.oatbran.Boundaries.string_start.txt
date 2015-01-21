@@ -1,0 +1,6 @@
+theape.parts.oatbran.Boundaries.string_start
+============================================
+
+.. currentmodule:: theape.parts.oatbran
+
+.. autoattribute:: Boundaries.string_start

@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>SimpleClient &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../index.html" />
+    <link rel="up" title="Client Connections" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Parts</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Client Connections</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="simpleclient">
+<h1>SimpleClient<a class="headerlink" href="#simpleclient" title="Permalink to this headline">¶</a></h1>
+<p>This is a wrapper around paramiko&#8217;s <cite>SSHClient</cite> that sets some flags to avoid host-key errors. The following are roughly equivalent.</p>
+<p>SSHClient:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">c</span> <span class="o">=</span> <span class="n">SSHClient</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">set_missing_host_key_policy</span><span class="p">(</span><span class="n">paramiko</span><span class="o">.</span><span class="n">AutoAddPolicy</span><span class="p">())</span>
+<span class="n">c</span><span class="o">.</span><span class="n">load_system_host_keys</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">hostname</span><span class="o">=</span><span class="s">&#39;192.168.10.24&#39;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s">&#39;allion&#39;</span><span class="p">)</span>
+<span class="n">stdin</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderror</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="s">&#39;ls&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>SimpleClient:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">c</span> <span class="o">=</span> <span class="n">SimpleClient</span><span class="p">(</span><span class="n">hostname</span><span class="o">=</span><span class="s">&#39;192.168.10.24&#39;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s">&#39;allion&#39;</span><span class="p">)</span>
+<span class="n">stdin</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="s">&#39;ls&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="paramiko-s-sshclient">
+<span id="simpleclient-paramiko"></span><h2>Paramiko&#8217;s SSHClient<a class="headerlink" href="#paramiko-s-sshclient" title="Permalink to this headline">¶</a></h2>
+<p>This is some basic documentation for the SSHClient&#8217;s methods. Only some of them are re-implemented by the SimpleClient (because it&#8217;s simple), but the getattr is implemented so you can call the paramiko methods and they should work, but the errors will be different from the SimpleClient (they will be <tt class="docutils literal"><span class="pre">socket</span></tt> or <tt class="docutils literal"><span class="pre">paramiko</span></tt> errors) so you have to trap them.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">set_missing_host_key_policy and load_system_host_keys is called when the client is created, so you shouldn&#8217;t call it. The only extra methods you will likely ever use are <tt class="docutils literal"><span class="pre">invoke_shell</span></tt> and <tt class="docutils literal"><span class="pre">open_sftp</span></tt>. Otherwise you might as well use the SSHClient directly. The purpose of this module was to make it easier, not to re-do everything.</p>
+</div>
+</div>
+<div class="section" id="id1">
+<span id="id2"></span><h2>SimpleClient<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">SimpleClient</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">SimpleClient.exec_command</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">SimpleClient.client</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">SimpleClient.__getattr__</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">SimpleClient.__str__</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">SimpleClient.close</span></tt></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p class="plantuml">
+<img src="../../_images/plantuml-05dea4857fe059ece1c6a1cefe630954279f9fcd.png" alt="SimpleClient -|&gt; BaseClient
+SimpleClient o-- SSHClient
+SimpleClient : client
+SimpleClient : hostname
+SimpleClient : username
+SimpleClient : password
+SimpleClient : port
+SimpleClient : timeout
+SimpleClient : exec_command(command, timeout)
+SimpleClient : __str__()
+SimpleClient : close()" />
+</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">I&#8217;m using <a href="#id3"><span class="problematic" id="id4">*</span></a>args, <a href="#id5"><span class="problematic" id="id6">**</span></a>kwargs when connecting to the client so anything other than hostname, username and timeout will be passed in that way, but the string representation (<tt class="docutils literal"><span class="pre">__str__</span></tt>) expects the kwargs dictionary to have &#8216;port&#8217; and &#8216;password&#8217; arguments &#8211; to be safe use keyword arguments, not positional arguments when instantiating the SimpleClient.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">SimpleClient</a><ul>
+<li><a class="reference internal" href="#paramiko-s-sshclient">Paramiko&#8217;s SSHClient</a></li>
+<li><a class="reference internal" href="#id1">SimpleClient</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../_sources/parts/connections/simpleclient.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

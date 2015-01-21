@@ -1,0 +1,6 @@
+theape.parts.sleep.sleep.TheBigSleep.end
+========================================
+
+.. currentmodule:: theape.parts.sleep.sleep
+
+.. autoattribute:: TheBigSleep.end

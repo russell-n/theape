@@ -1,0 +1,6 @@
+theape.plugins.apeplugin.Ape.product
+====================================
+
+.. currentmodule:: theape.plugins.apeplugin
+
+.. autoattribute:: Ape.product

@@ -1,0 +1,424 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pylint.pyreverse.main.Run &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Exploring Pyreverse" href="../explore_pyreverse.html" />
+    <link rel="next" title="pylint.pyreverse.main.Run.load_command_line_configuration" href="pylint.pyreverse.main.Run.load_command_line_configuration.html" />
+    <link rel="prev" title="ape.components.component.Composite" href="ape.components.component.Composite.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pylint.pyreverse.main.Run.load_command_line_configuration.html" title="pylint.pyreverse.main.Run.load_command_line_configuration"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ape.components.component.Composite.html" title="ape.components.component.Composite"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >The Ape Developer Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >The Explorations</a> &raquo;</li>
+          <li><a href="../index.html" >Call Graphs</a> &raquo;</li>
+          <li><a href="../explore_pyreverse.html" accesskey="U">Exploring Pyreverse</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="pylint-pyreverse-main-run">
+<h1>pylint.pyreverse.main.Run<a class="headerlink" href="#pylint-pyreverse-main-run" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pylint.pyreverse.main.Run">
+<em class="property">class </em><tt class="descclassname">pylint.pyreverse.main.</tt><tt class="descname">Run</tt><big>(</big><em>args</em><big>)</big><a class="headerlink" href="#pylint.pyreverse.main.Run" title="Permalink to this definition">¶</a></dt>
+<dd><p>base class providing common behaviour for pyreverse commands</p>
+<dl class="method">
+<dt id="pylint.pyreverse.main.Run.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>args</em><big>)</big><a class="headerlink" href="#pylint.pyreverse.main.Run.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#pylint.pyreverse.main.Run.__init__" title="pylint.pyreverse.main.Run.__init__"><tt class="xref py py-obj docutils literal"><span class="pre">__init__</span></tt></a>(args)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pylint.pyreverse.main.Run.add_help_section" title="pylint.pyreverse.main.Run.add_help_section"><tt class="xref py py-obj docutils literal"><span class="pre">add_help_section</span></tt></a>(title,&nbsp;description[,&nbsp;level])</td>
+<td>add a dummy option section for help purpose</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_optik_option</span></tt>(provider,&nbsp;optikcontainer,&nbsp;...)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pylint.pyreverse.main.Run.add_option_group" title="pylint.pyreverse.main.Run.add_option_group"><tt class="xref py py-obj docutils literal"><span class="pre">add_option_group</span></tt></a>(group_name,&nbsp;doc,&nbsp;options,&nbsp;...)</td>
+<td>add an option group including the listed options</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pylint.pyreverse.main.Run.all_options" title="pylint.pyreverse.main.Run.all_options"><tt class="xref py py-obj docutils literal"><span class="pre">all_options</span></tt></a>()</td>
+<td>return an iterator on available options for this provider</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pylint.pyreverse.main.Run.cb_set_provider_option" title="pylint.pyreverse.main.Run.cb_set_provider_option"><tt class="xref py py-obj docutils literal"><span class="pre">cb_set_provider_option</span></tt></a>(option,&nbsp;opt,&nbsp;value,&nbsp;...)</td>
+<td>optik callback for option setting</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pylint.pyreverse.main.Run.generate_config" title="pylint.pyreverse.main.Run.generate_config"><tt class="xref py py-obj docutils literal"><span class="pre">generate_config</span></tt></a>([stream,&nbsp;skipsections,&nbsp;encoding])</td>
+<td>write a configuration file according to the current configuration</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pylint.pyreverse.main.Run.generate_manpage" title="pylint.pyreverse.main.Run.generate_manpage"><tt class="xref py py-obj docutils literal"><span class="pre">generate_manpage</span></tt></a>(pkginfo[,&nbsp;section,&nbsp;stream])</td>
+<td>write a man page for the current configuration into the given</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get</span></tt>(key[,&nbsp;default])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pylint.pyreverse.main.Run.get_option_def" title="pylint.pyreverse.main.Run.get_option_def"><tt class="xref py py-obj docutils literal"><span class="pre">get_option_def</span></tt></a>(opt)</td>
+<td>return the dictionary defining an option given it&#8217;s name</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pylint.pyreverse.main.Run.global_set_option" title="pylint.pyreverse.main.Run.global_set_option"><tt class="xref py py-obj docutils literal"><span class="pre">global_set_option</span></tt></a>(opt,&nbsp;value)</td>
+<td>set option on the correct option provider</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pylint.pyreverse.main.Run.help" title="pylint.pyreverse.main.Run.help"><tt class="xref py py-obj docutils literal"><span class="pre">help</span></tt></a>([level])</td>
+<td>return the usage string for available options</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pylint.pyreverse.main.Run.input_config" title="pylint.pyreverse.main.Run.input_config"><tt class="xref py py-obj docutils literal"><span class="pre">input_config</span></tt></a>([onlysection,&nbsp;inputlevel,&nbsp;stream])</td>
+<td>interactively get configuration values by asking to the user and generate</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">input_option</span></tt>(option,&nbsp;optdict[,&nbsp;inputlevel])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="pylint.pyreverse.main.Run.load_command_line_configuration.html#pylint.pyreverse.main.Run.load_command_line_configuration" title="pylint.pyreverse.main.Run.load_command_line_configuration"><tt class="xref py py-obj docutils literal"><span class="pre">load_command_line_configuration</span></tt></a>([args])</td>
+<td>override configuration according to command line parameters</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pylint.pyreverse.main.Run.load_config_file" title="pylint.pyreverse.main.Run.load_config_file"><tt class="xref py py-obj docutils literal"><span class="pre">load_config_file</span></tt></a>()</td>
+<td>dispatch values previously read from a configuration file to each</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pylint.pyreverse.main.Run.load_configuration" title="pylint.pyreverse.main.Run.load_configuration"><tt class="xref py py-obj docutils literal"><span class="pre">load_configuration</span></tt></a>(**kwargs)</td>
+<td>override configuration according to given parameters</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">load_defaults</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pylint.pyreverse.main.Run.load_file_configuration" title="pylint.pyreverse.main.Run.load_file_configuration"><tt class="xref py py-obj docutils literal"><span class="pre">load_file_configuration</span></tt></a>([config_file])</td>
+<td>load the configuration from file</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pylint.pyreverse.main.Run.load_provider_defaults" title="pylint.pyreverse.main.Run.load_provider_defaults"><tt class="xref py py-obj docutils literal"><span class="pre">load_provider_defaults</span></tt></a>()</td>
+<td>initialize configuration using default values</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pylint.pyreverse.main.Run.optik_option" title="pylint.pyreverse.main.Run.optik_option"><tt class="xref py py-obj docutils literal"><span class="pre">optik_option</span></tt></a>(provider,&nbsp;opt,&nbsp;optdict)</td>
+<td>get our personal option definition and return a suitable form for</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pylint.pyreverse.main.Run.option_attrname" title="pylint.pyreverse.main.Run.option_attrname"><tt class="xref py py-obj docutils literal"><span class="pre">option_attrname</span></tt></a>(opt[,&nbsp;optdict])</td>
+<td>get the config attribute corresponding to opt</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pylint.pyreverse.main.Run.option_default" title="pylint.pyreverse.main.Run.option_default"><tt class="xref py py-obj docutils literal"><span class="pre">option_default</span></tt></a>(opt[,&nbsp;optdict])</td>
+<td>return the default value for an option</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">option_name</span></tt>(*args,&nbsp;**kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pylint.pyreverse.main.Run.option_value" title="pylint.pyreverse.main.Run.option_value"><tt class="xref py py-obj docutils literal"><span class="pre">option_value</span></tt></a>(opt)</td>
+<td>get the current value for the given option</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">options_and_values</span></tt>([options])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pylint.pyreverse.main.Run.options_by_section" title="pylint.pyreverse.main.Run.options_by_section"><tt class="xref py py-obj docutils literal"><span class="pre">options_by_section</span></tt></a>()</td>
+<td>return an iterator on options grouped by section</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pylint.pyreverse.main.Run.read_config_file" title="pylint.pyreverse.main.Run.read_config_file"><tt class="xref py py-obj docutils literal"><span class="pre">read_config_file</span></tt></a>([config_file])</td>
+<td>read the configuration file but do not load it (i.e. dispatching</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pylint.pyreverse.main.Run.register_options" title="pylint.pyreverse.main.Run.register_options"><tt class="xref py py-obj docutils literal"><span class="pre">register_options</span></tt></a>(options)</td>
+<td>add some options to the configuration</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pylint.pyreverse.main.Run.register_options_provider" title="pylint.pyreverse.main.Run.register_options_provider"><tt class="xref py py-obj docutils literal"><span class="pre">register_options_provider</span></tt></a>(provider[,&nbsp;own_group])</td>
+<td>register an options provider</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">reset_parsers</span></tt>([usage,&nbsp;version])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pylint.pyreverse.main.Run.run" title="pylint.pyreverse.main.Run.run"><tt class="xref py py-obj docutils literal"><span class="pre">run</span></tt></a>(args)</td>
+<td>checking arguments and run project</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pylint.pyreverse.main.Run.set_option" title="pylint.pyreverse.main.Run.set_option"><tt class="xref py py-obj docutils literal"><span class="pre">set_option</span></tt></a>(opt,&nbsp;value[,&nbsp;action,&nbsp;optdict])</td>
+<td>method called to set an option (registered in the options list)</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">level</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">name</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">options</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">priority</span></tt></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pylint.pyreverse.main.Run.add_help_section">
+<tt class="descname">add_help_section</tt><big>(</big><em>title</em>, <em>description</em>, <em>level=0</em><big>)</big><a class="headerlink" href="#pylint.pyreverse.main.Run.add_help_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>add a dummy option section for help purpose</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pylint.pyreverse.main.Run.add_option_group">
+<tt class="descname">add_option_group</tt><big>(</big><em>group_name</em>, <em>doc</em>, <em>options</em>, <em>provider</em><big>)</big><a class="headerlink" href="#pylint.pyreverse.main.Run.add_option_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>add an option group including the listed options</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pylint.pyreverse.main.Run.all_options">
+<tt class="descname">all_options</tt><big>(</big><big>)</big><a class="headerlink" href="#pylint.pyreverse.main.Run.all_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>return an iterator on available options for this provider
+option are actually described by a 3-uple:
+(section, option name, option dictionary)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pylint.pyreverse.main.Run.cb_set_provider_option">
+<tt class="descname">cb_set_provider_option</tt><big>(</big><em>option</em>, <em>opt</em>, <em>value</em>, <em>parser</em><big>)</big><a class="headerlink" href="#pylint.pyreverse.main.Run.cb_set_provider_option" title="Permalink to this definition">¶</a></dt>
+<dd><p>optik callback for option setting</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pylint.pyreverse.main.Run.generate_config">
+<tt class="descname">generate_config</tt><big>(</big><em>stream=None</em>, <em>skipsections=()</em>, <em>encoding=None</em><big>)</big><a class="headerlink" href="#pylint.pyreverse.main.Run.generate_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>write a configuration file according to the current configuration
+into the given stream or stdout</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pylint.pyreverse.main.Run.generate_manpage">
+<tt class="descname">generate_manpage</tt><big>(</big><em>pkginfo</em>, <em>section=1</em>, <em>stream=None</em><big>)</big><a class="headerlink" href="#pylint.pyreverse.main.Run.generate_manpage" title="Permalink to this definition">¶</a></dt>
+<dd><p>write a man page for the current configuration into the given
+stream or stdout</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pylint.pyreverse.main.Run.get_option_def">
+<tt class="descname">get_option_def</tt><big>(</big><em>opt</em><big>)</big><a class="headerlink" href="#pylint.pyreverse.main.Run.get_option_def" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the dictionary defining an option given it&#8217;s name</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pylint.pyreverse.main.Run.global_set_option">
+<tt class="descname">global_set_option</tt><big>(</big><em>opt</em>, <em>value</em><big>)</big><a class="headerlink" href="#pylint.pyreverse.main.Run.global_set_option" title="Permalink to this definition">¶</a></dt>
+<dd><p>set option on the correct option provider</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pylint.pyreverse.main.Run.help">
+<tt class="descname">help</tt><big>(</big><em>level=0</em><big>)</big><a class="headerlink" href="#pylint.pyreverse.main.Run.help" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the usage string for available options</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pylint.pyreverse.main.Run.input_config">
+<tt class="descname">input_config</tt><big>(</big><em>onlysection=None</em>, <em>inputlevel=0</em>, <em>stream=None</em><big>)</big><a class="headerlink" href="#pylint.pyreverse.main.Run.input_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>interactively get configuration values by asking to the user and generate
+a configuration file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pylint.pyreverse.main.Run.load_command_line_configuration">
+<tt class="descname">load_command_line_configuration</tt><big>(</big><em>args=None</em><big>)</big><a class="headerlink" href="#pylint.pyreverse.main.Run.load_command_line_configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>override configuration according to command line parameters</p>
+<p>return additional arguments</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pylint.pyreverse.main.Run.load_config_file">
+<tt class="descname">load_config_file</tt><big>(</big><big>)</big><a class="headerlink" href="#pylint.pyreverse.main.Run.load_config_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>dispatch values previously read from a configuration file to each
+options provider)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pylint.pyreverse.main.Run.load_configuration">
+<tt class="descname">load_configuration</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pylint.pyreverse.main.Run.load_configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>override configuration according to given parameters</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pylint.pyreverse.main.Run.load_file_configuration">
+<tt class="descname">load_file_configuration</tt><big>(</big><em>config_file=None</em><big>)</big><a class="headerlink" href="#pylint.pyreverse.main.Run.load_file_configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>load the configuration from file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pylint.pyreverse.main.Run.load_provider_defaults">
+<tt class="descname">load_provider_defaults</tt><big>(</big><big>)</big><a class="headerlink" href="#pylint.pyreverse.main.Run.load_provider_defaults" title="Permalink to this definition">¶</a></dt>
+<dd><p>initialize configuration using default values</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pylint.pyreverse.main.Run.optik_option">
+<tt class="descname">optik_option</tt><big>(</big><em>provider</em>, <em>opt</em>, <em>optdict</em><big>)</big><a class="headerlink" href="#pylint.pyreverse.main.Run.optik_option" title="Permalink to this definition">¶</a></dt>
+<dd><p>get our personal option definition and return a suitable form for
+use with optik/optparse</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pylint.pyreverse.main.Run.option_attrname">
+<tt class="descname">option_attrname</tt><big>(</big><em>opt</em>, <em>optdict=None</em><big>)</big><a class="headerlink" href="#pylint.pyreverse.main.Run.option_attrname" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the config attribute corresponding to opt</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pylint.pyreverse.main.Run.option_default">
+<tt class="descname">option_default</tt><big>(</big><em>opt</em>, <em>optdict=None</em><big>)</big><a class="headerlink" href="#pylint.pyreverse.main.Run.option_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the default value for an option</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pylint.pyreverse.main.Run.option_value">
+<tt class="descname">option_value</tt><big>(</big><em>opt</em><big>)</big><a class="headerlink" href="#pylint.pyreverse.main.Run.option_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the current value for the given option</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pylint.pyreverse.main.Run.options_by_section">
+<tt class="descname">options_by_section</tt><big>(</big><big>)</big><a class="headerlink" href="#pylint.pyreverse.main.Run.options_by_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>return an iterator on options grouped by section</p>
+<p>(section, [list of (optname, optdict, optvalue)])</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pylint.pyreverse.main.Run.read_config_file">
+<tt class="descname">read_config_file</tt><big>(</big><em>config_file=None</em><big>)</big><a class="headerlink" href="#pylint.pyreverse.main.Run.read_config_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>read the configuration file but do not load it (i.e. dispatching
+values to each options provider)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pylint.pyreverse.main.Run.register_options">
+<tt class="descname">register_options</tt><big>(</big><em>options</em><big>)</big><a class="headerlink" href="#pylint.pyreverse.main.Run.register_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>add some options to the configuration</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pylint.pyreverse.main.Run.register_options_provider">
+<tt class="descname">register_options_provider</tt><big>(</big><em>provider</em>, <em>own_group=True</em><big>)</big><a class="headerlink" href="#pylint.pyreverse.main.Run.register_options_provider" title="Permalink to this definition">¶</a></dt>
+<dd><p>register an options provider</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pylint.pyreverse.main.Run.run">
+<tt class="descname">run</tt><big>(</big><em>args</em><big>)</big><a class="headerlink" href="#pylint.pyreverse.main.Run.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>checking arguments and run project</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pylint.pyreverse.main.Run.set_option">
+<tt class="descname">set_option</tt><big>(</big><em>opt</em>, <em>value</em>, <em>action=None</em>, <em>optdict=None</em><big>)</big><a class="headerlink" href="#pylint.pyreverse.main.Run.set_option" title="Permalink to this definition">¶</a></dt>
+<dd><p>method called to set an option (registered in the options list)</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../user/index.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../plugins/index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../../../_sources/documentation/developer/explorations/explore_graphs/api/pylint.pyreverse.main.Run.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

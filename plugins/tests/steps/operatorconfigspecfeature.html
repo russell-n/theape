@@ -1,0 +1,344 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Operator Config Spec &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../index.html" />
+    <link rel="up" title="Plugins Features" href="index.html" />
+    <link rel="next" title="Operator Configuration" href="operatorconfigurationfeature.html" />
+    <link rel="prev" title="Operation Configuration" href="operationconfigurationfeature.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="operatorconfigurationfeature.html" title="Operator Configuration"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="operationconfigurationfeature.html" title="Operation Configuration"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Plugins</a> &raquo;</li>
+          <li><a href="../index.html" >Testing the Plugins</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Plugins Features</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="operator-config-spec">
+<h1>Operator Config Spec<a class="headerlink" href="#operator-config-spec" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">Feature:</span><span class="nf"> OperatorConfigSpec</span>
+<span class="nf"> </span><span class="k">Scenario:</span><span class="nf"> User validates empty settings</span>
+<span class="k">  Given </span><span class="nf">an empty configuration file</span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">the file is validated by the operator configspec</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">it has the default settings</span>
+
+<span class="nf"> </span><span class="k">Scenario:</span><span class="nf"> User validates filled settings</span>
+<span class="k">  Given </span><span class="nf">a configuration file with settings</span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">the file is validated by the operator configspec</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">it has the user settings</span>
+
+<span class="nf"> </span><span class="k">Scenario:</span><span class="nf"> User validates operations</span>
+<span class="k">  Given </span><span class="nf">a configuration with operations</span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">the file is validated by the operator configspec</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">it has the operations dictionary</span>
+
+<span class="nf"> </span><span class="k">Scenario:</span><span class="nf"> User validates plugins</span>
+<span class="k">  Given </span><span class="nf">a configuration with plugins</span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">the file is validated by the operator configspec</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">it has the plugins dictionary</span>
+</pre></div>
+</div>
+<div class="section" id="scenario-user-validates-empty-settings">
+<h2>Scenario: User validates empty settings<a class="headerlink" href="#scenario-user-validates-empty-settings" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;an empty configuration file&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">empty_configuration</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configspec</span> <span class="o">=</span> <span class="n">OperatorConfigspec</span><span class="p">()</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">([</span><span class="s">&quot;&quot;</span><span class="p">],</span>
+                                      <span class="n">configspec</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">configspec</span><span class="o">.</span><span class="n">configspec</span><span class="p">)</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@when</span><span class="p">(</span><span class="s">&quot;the file is validated by the operator configspec&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">validate_config</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">validator</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">configspec</span><span class="o">.</span><span class="n">validator</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">validator</span><span class="p">)</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;it has the default settings&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">assert_default_settings</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">constants</span> <span class="o">=</span> <span class="n">OperatorConfigurationConstants</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">settings_section</span><span class="p">]</span>
+
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">repetitions_option</span><span class="p">],</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">equal_to</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">default_repetitions</span><span class="p">)))</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">config_glob_option</span><span class="p">],</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">equal_to</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">default_config_glob</span><span class="p">)))</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">total_time_option</span><span class="p">],</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">equal_to</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">default_total_time</span><span class="p">)))</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">end_time_option</span><span class="p">],</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">equal_to</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">default_end_time</span><span class="p">)))</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">subfolder_option</span><span class="p">],</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">equal_to</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">default_subfolder</span><span class="p">)))</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">modules_option</span><span class="p">],</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">equal_to</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">default_modules</span><span class="p">)))</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">timestamp_option</span><span class="p">],</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">equal_to</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">default_timestamp</span><span class="p">)))</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="scenario-user-validates-filled-settings">
+<h2>Scenario: User validates filled settings<a class="headerlink" href="#scenario-user-validates-filled-settings" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">configuration</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">[SETTINGS]</span>
+<span class="s">repetitions = {rep}</span>
+<span class="s">config_glob = {glob}</span>
+<span class="s">total_time = {total}</span>
+<span class="s">end_time = {abtime}</span>
+<span class="s">subfolder = {sub}</span>
+<span class="s">external_modules = {mods}</span>
+<span class="s">timestamp = {stamp}</span>
+<span class="s">&quot;&quot;&quot;</span>
+
+<span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configuration file with settings&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">configuration_settings</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configspec</span> <span class="o">=</span> <span class="n">OperatorConfigspec</span><span class="p">()</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">repetitions</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">config_glob</span> <span class="o">=</span> <span class="s">&#39;asonetuglrcg&#39;</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">subfolder</span> <span class="o">=</span> <span class="s">&#39;output&#39;</span>
+    <span class="n">relative_time</span> <span class="o">=</span> <span class="s">&#39;1 day 3 hours&#39;</span>
+    <span class="n">absolute_time</span> <span class="o">=</span> <span class="s">&#39;8:00 pm&#39;</span>
+    <span class="n">modules</span> <span class="o">=</span> <span class="s">&#39;external.module.a,ex.mod.b,emc&#39;</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="s">&#39;%a_%b_</span><span class="si">%d</span><span class="s">&#39;</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">modules</span> <span class="o">=</span> <span class="n">modules</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;,&#39;</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">total_time</span> <span class="o">=</span> <span class="n">RelativeTime</span><span class="p">(</span><span class="n">relative_time</span><span class="p">)</span>
+    <span class="n">ab_time</span> <span class="o">=</span> <span class="n">AbsoluteTime</span><span class="p">()</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">end_time</span> <span class="o">=</span> <span class="n">ab_time</span><span class="p">(</span><span class="n">absolute_time</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">configuration</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rep</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">repetitions</span><span class="p">,</span>
+                                                           <span class="n">glob</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">config_glob</span><span class="p">,</span>
+                                                           <span class="n">total</span><span class="o">=</span><span class="n">relative_time</span><span class="p">,</span>
+                                                           <span class="n">abtime</span><span class="o">=</span><span class="n">absolute_time</span><span class="p">,</span>
+                                                           <span class="n">sub</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">subfolder</span><span class="p">,</span>
+                                                           <span class="n">stamp</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span>
+                                                           <span class="n">mods</span><span class="o">=</span><span class="n">modules</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">(),</span>
+                                      <span class="n">configspec</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">configspec</span><span class="o">.</span><span class="n">configspec</span><span class="p">)</span>
+
+    <span class="k">return</span>
+</pre></div>
+</div>
+<p>When the file is validated by the operator configspec</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;it has the user settings&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">assert_user_settings</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">constants</span> <span class="o">=</span> <span class="n">OperatorConfigurationConstants</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">settings_section</span><span class="p">]</span>
+
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">repetitions_option</span><span class="p">],</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">equal_to</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">repetitions</span><span class="p">)))</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">config_glob_option</span><span class="p">],</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">equal_to</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">config_glob</span><span class="p">)))</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">total_time_option</span><span class="p">]</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">(),</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">equal_to</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">total_time</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">())))</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">end_time_option</span><span class="p">],</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">equal_to</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">end_time</span><span class="p">)))</span>
+
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">subfolder_option</span><span class="p">],</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">equal_to</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">subfolder</span><span class="p">)))</span>
+
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">modules_option</span><span class="p">],</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">equal_to</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">modules</span><span class="p">)))</span>
+
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">timestamp_option</span><span class="p">],</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">equal_to</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">timestamp</span><span class="p">)))</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="scenario-user-validates-operations">
+<h2>Scenario: User validates operations<a class="headerlink" href="#scenario-user-validates-operations" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre>  operations_configuration = &quot;&quot;&quot;
+  [OPERATIONS]
+  op1 = p1, p2
+  op2 = p3, p2, p4
+  &quot;&quot;&quot;.splitlines()
+
+  @given(&quot;a configuration with operations&quot;)
+  def configuration_operations(context):
+      context.configspec = OperatorConfigspec()
+      context.operations = &#39;op1 op2&#39;.split()
+      context.op_dict = {&#39;op1&#39;: &#39;p1 p2&#39;.split(),
+                         &#39;op2&#39;: &#39;p3 p2 p4&#39;.split()}
+      context.configuration = ConfigObj(operations_configuration,
+                                        configspec=context.configspec.configspec)
+      return
+
+
+When the file is validated by the operator configspec
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;it has the operations dictionary&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">operations_dictionary</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">constants</span> <span class="o">=</span> <span class="n">OperatorConfigurationConstants</span>
+    <span class="n">operations</span> <span class="o">=</span>  <span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">operations_section</span><span class="p">]</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">operations</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span>
+                <span class="n">contains</span><span class="p">(</span><span class="o">*</span><span class="n">context</span><span class="o">.</span><span class="n">operations</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">operation</span> <span class="ow">in</span> <span class="n">context</span><span class="o">.</span><span class="n">operations</span><span class="p">:</span>
+        <span class="n">assert_that</span><span class="p">(</span><span class="n">operations</span><span class="p">[</span><span class="n">operation</span><span class="p">],</span>
+                    <span class="n">contains</span><span class="p">(</span><span class="o">*</span><span class="n">context</span><span class="o">.</span><span class="n">op_dict</span><span class="p">[</span><span class="n">operation</span><span class="p">]))</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="scenario-user-validates-plugins">
+<h2>Scenario: User validates plugins<a class="headerlink" href="#scenario-user-validates-plugins" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">plugins_configuration</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">[SETTINGS]</span>
+<span class="s">repetitions = 1000</span>
+
+<span class="s">[OPERATIONS]</span>
+<span class="s">op = p1, p2</span>
+
+<span class="s">[PLUGINS]</span>
+<span class="s"> [[p1]]</span>
+<span class="s"> plugin = fake1</span>
+
+<span class="s"> option1 = value1</span>
+
+<span class="s"> [[p2]]</span>
+<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+
+<span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configuration with plugins&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">plugins_config</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configspec</span> <span class="o">=</span> <span class="n">OperatorConfigspec</span><span class="p">()</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">plugins_configuration</span><span class="p">,</span>
+                                      <span class="n">configspec</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">configspec</span><span class="o">.</span><span class="n">configspec</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">subsections</span> <span class="o">=</span> <span class="s">&#39;p1 p2&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<p>When the file is validated by the operator configspec</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;it has the plugins dictionary&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">assert_plugins</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">section</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="n">OperatorConfigurationConstants</span><span class="o">.</span><span class="n">plugins_section</span><span class="p">]</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">section</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span>
+                <span class="n">contains</span><span class="p">(</span><span class="o">*</span><span class="n">context</span><span class="o">.</span><span class="n">subsections</span><span class="p">))</span>
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">section</span><span class="p">[</span><span class="s">&#39;p1&#39;</span><span class="p">][</span><span class="s">&#39;plugin&#39;</span><span class="p">],</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">equal_to</span><span class="p">(</span><span class="s">&#39;fake1&#39;</span><span class="p">)))</span>
+
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">section</span><span class="p">[</span><span class="s">&#39;p1&#39;</span><span class="p">][</span><span class="s">&#39;option1&#39;</span><span class="p">],</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">equal_to</span><span class="p">(</span><span class="s">&#39;value1&#39;</span><span class="p">)))</span>
+
+    <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s">&#39;SETTINGS&#39;</span><span class="p">][</span><span class="s">&#39;repetitions&#39;</span><span class="p">],</span>
+                <span class="n">is_</span><span class="p">(</span><span class="n">equal_to</span><span class="p">(</span><span class="mi">1000</span><span class="p">)))</span>
+
+    <span class="k">return</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Operator Config Spec</a><ul>
+<li><a class="reference internal" href="#scenario-user-validates-empty-settings">Scenario: User validates empty settings</a></li>
+<li><a class="reference internal" href="#scenario-user-validates-filled-settings">Scenario: User validates filled settings</a></li>
+<li><a class="reference internal" href="#scenario-user-validates-operations">Scenario: User validates operations</a></li>
+<li><a class="reference internal" href="#scenario-user-validates-plugins">Scenario: User validates plugins</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../../_sources/plugins/tests/steps/operatorconfigspecfeature.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

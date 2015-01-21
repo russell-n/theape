@@ -1,0 +1,6 @@
+theape.parts.oatbran.Group.followed_by
+======================================
+
+.. currentmodule:: theape.parts.oatbran
+
+.. automethod:: Group.followed_by

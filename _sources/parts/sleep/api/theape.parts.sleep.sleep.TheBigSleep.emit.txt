@@ -1,0 +1,6 @@
+theape.parts.sleep.sleep.TheBigSleep.emit
+=========================================
+
+.. currentmodule:: theape.parts.sleep.sleep
+
+.. automethod:: TheBigSleep.emit

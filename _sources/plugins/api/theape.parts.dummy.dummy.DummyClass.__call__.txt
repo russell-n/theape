@@ -1,0 +1,6 @@
+theape.parts.dummy.dummy.DummyClass.__call__
+============================================
+
+.. currentmodule:: theape.parts.dummy.dummy
+
+.. automethod:: DummyClass.__call__

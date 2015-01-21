@@ -1,0 +1,6 @@
+theape.parts.sleep.sleep.TheBigSleep.timer
+==========================================
+
+.. currentmodule:: theape.parts.sleep.sleep
+
+.. autoattribute:: TheBigSleep.timer

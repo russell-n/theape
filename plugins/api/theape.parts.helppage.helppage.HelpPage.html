@@ -1,0 +1,292 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>theape.parts.helppage.helppage.HelpPage &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../index.html" />
+    <link rel="up" title="The Base Plugin" href="../base_plugin.html" />
+    <link rel="next" title="theape.parts.helppage.helppage.HelpPage.__call__" href="theape.parts.helppage.helppage.HelpPage.__call__.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="theape.parts.helppage.helppage.HelpPage.__call__.html" title="theape.parts.helppage.helppage.HelpPage.__call__"
+             accesskey="N">next</a> |</li>
+        <li><a href="../../index.html">Ape Documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Plugins</a> &raquo;</li>
+          <li><a href="../base_plugin.html" accesskey="U">The Base Plugin</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="theape-parts-helppage-helppage-helppage">
+<h1>theape.parts.helppage.helppage.HelpPage<a class="headerlink" href="#theape-parts-helppage-helppage-helppage" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="theape.parts.helppage.helppage.HelpPage">
+<em class="property">class </em><tt class="descclassname">theape.parts.helppage.helppage.</tt><tt class="descname">HelpPage</tt><big>(</big><em>sections</em>, <em>headers=None</em>, <em>wrap=70</em>, <em>pager='less -R'</em>, <em>body_indent='    '</em>, <em>add_formatting=True</em><big>)</big><a class="headerlink" href="#theape.parts.helppage.helppage.HelpPage" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class to construct and print help-pages.</p>
+<p>HelpPage constructor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
+<li><cite>sections</cite>: a dict of header: section-text</li>
+<li><cite>headers</cite> : a list of keys for the sections (in the order you want them)</li>
+<li><cite>wrap</cite>: Maximum width for the output</li>
+<li><cite>pager</cite>: Command to pipe the output to</li>
+<li><cite>body_indent</cite>: string to use to indent the section-text</li>
+<li><cite>add_formatting</cite>: If False, print without ANSI codes</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="theape.parts.helppage.helppage.HelpPage.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>sections</em>, <em>headers=None</em>, <em>wrap=70</em>, <em>pager='less -R'</em>, <em>body_indent='    '</em>, <em>add_formatting=True</em><big>)</big><a class="headerlink" href="#theape.parts.helppage.helppage.HelpPage.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>HelpPage constructor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
+<li><cite>sections</cite>: a dict of header: section-text</li>
+<li><cite>headers</cite> : a list of keys for the sections (in the order you want them)</li>
+<li><cite>wrap</cite>: Maximum width for the output</li>
+<li><cite>pager</cite>: Command to pipe the output to</li>
+<li><cite>body_indent</cite>: string to use to indent the section-text</li>
+<li><cite>add_formatting</cite>: If False, print without ANSI codes</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#theape.parts.helppage.helppage.HelpPage.__init__" title="theape.parts.helppage.helppage.HelpPage.__init__"><tt class="xref py py-obj docutils literal"><span class="pre">__init__</span></tt></a>(sections[,&nbsp;headers,&nbsp;wrap,&nbsp;pager,&nbsp;...])</td>
+<td>HelpPage constructor</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#theape.parts.helppage.helppage.HelpPage.log_error" title="theape.parts.helppage.helppage.HelpPage.log_error"><tt class="xref py py-obj docutils literal"><span class="pre">log_error</span></tt></a>(error[,&nbsp;message])</td>
+<td>Logs the error in bold red</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#theape.parts.helppage.helppage.HelpPage.bold_headers" title="theape.parts.helppage.helppage.HelpPage.bold_headers"><tt class="xref py py-obj docutils literal"><span class="pre">bold_headers</span></tt></a></td>
+<td>A dictionary of header: formatted bold header</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#theape.parts.helppage.helppage.HelpPage.command" title="theape.parts.helppage.helppage.HelpPage.command"><tt class="xref py py-obj docutils literal"><span class="pre">command</span></tt></a></td>
+<td>List of strings to send to the Popen</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#theape.parts.helppage.helppage.HelpPage.formatted_text" title="theape.parts.helppage.helppage.HelpPage.formatted_text"><tt class="xref py py-obj docutils literal"><span class="pre">formatted_text</span></tt></a></td>
+<td>A dictionary of header:formatted body text</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#theape.parts.helppage.helppage.HelpPage.formatting" title="theape.parts.helppage.helppage.HelpPage.formatting"><tt class="xref py py-obj docutils literal"><span class="pre">formatting</span></tt></a></td>
+<td>Dictionary of format-name: ANSI code</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#theape.parts.helppage.helppage.HelpPage.headers" title="theape.parts.helppage.helppage.HelpPage.headers"><tt class="xref py py-obj docutils literal"><span class="pre">headers</span></tt></a></td>
+<td>The headers for the text</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#theape.parts.helppage.helppage.HelpPage.logger" title="theape.parts.helppage.helppage.HelpPage.logger"><tt class="xref py py-obj docutils literal"><span class="pre">logger</span></tt></a></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">A logging object.</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#theape.parts.helppage.helppage.HelpPage.text" title="theape.parts.helppage.helppage.HelpPage.text"><tt class="xref py py-obj docutils literal"><span class="pre">text</span></tt></a></td>
+<td>The concatenated and formatted text</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#theape.parts.helppage.helppage.HelpPage.text_wrapper" title="theape.parts.helppage.helppage.HelpPage.text_wrapper"><tt class="xref py py-obj docutils literal"><span class="pre">text_wrapper</span></tt></a></td>
+<td>TextWrapper to fill the text</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="theape.parts.helppage.helppage.HelpPage.log_error">
+<tt class="descname">log_error</tt><big>(</big><em>error</em>, <em>message=''</em><big>)</big><a class="headerlink" href="#theape.parts.helppage.helppage.HelpPage.log_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logs the error in bold red</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
+<li><cite>error</cite>: error type (prefix in red and bold)</li>
+<li><cite>message</cite>: descriptive message (red but not bold)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.parts.helppage.helppage.HelpPage.bold_headers">
+<tt class="descname">bold_headers</tt><a class="headerlink" href="#theape.parts.helppage.helppage.HelpPage.bold_headers" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dictionary of header: formatted bold header</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.parts.helppage.helppage.HelpPage.command">
+<tt class="descname">command</tt><a class="headerlink" href="#theape.parts.helppage.helppage.HelpPage.command" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of strings to send to the Popen</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.parts.helppage.helppage.HelpPage.formatted_text">
+<tt class="descname">formatted_text</tt><a class="headerlink" href="#theape.parts.helppage.helppage.HelpPage.formatted_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dictionary of header:formatted body text</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.parts.helppage.helppage.HelpPage.formatting">
+<tt class="descname">formatting</tt><a class="headerlink" href="#theape.parts.helppage.helppage.HelpPage.formatting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary of format-name: ANSI code</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.parts.helppage.helppage.HelpPage.headers">
+<tt class="descname">headers</tt><a class="headerlink" href="#theape.parts.helppage.helppage.HelpPage.headers" title="Permalink to this definition">¶</a></dt>
+<dd><p>The headers for the text</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.parts.helppage.helppage.HelpPage.logger">
+<tt class="descname">logger</tt><a class="headerlink" href="#theape.parts.helppage.helppage.HelpPage.logger" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A logging object.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.parts.helppage.helppage.HelpPage.text">
+<tt class="descname">text</tt><a class="headerlink" href="#theape.parts.helppage.helppage.HelpPage.text" title="Permalink to this definition">¶</a></dt>
+<dd><p>The concatenated and formatted text</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="theape.parts.helppage.helppage.HelpPage.text_wrapper">
+<tt class="descname">text_wrapper</tt><a class="headerlink" href="#theape.parts.helppage.helppage.HelpPage.text_wrapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>TextWrapper to fill the text</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../parts/index.html">Parts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Plugins</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, the cloistered monkey.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      
+      |
+      <a href="../../_sources/plugins/api/theape.parts.helppage.helppage.HelpPage.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

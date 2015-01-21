@@ -1,0 +1,6 @@
+theape.parts.helppage.helppage.HelpPage.__call__
+================================================
+
+.. currentmodule:: theape.parts.helppage.helppage
+
+.. automethod:: HelpPage.__call__

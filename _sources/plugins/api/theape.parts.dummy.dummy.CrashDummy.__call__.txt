@@ -1,0 +1,6 @@
+theape.parts.dummy.dummy.CrashDummy.__call__
+============================================
+
+.. currentmodule:: theape.parts.dummy.dummy
+
+.. automethod:: CrashDummy.__call__

@@ -1,0 +1,6 @@
+theape.parts.wifi.iwconfig.IwconfigQuery.missed_beacons
+=======================================================
+
+.. currentmodule:: theape.parts.wifi.iwconfig
+
+.. autoattribute:: IwconfigQuery.missed_beacons

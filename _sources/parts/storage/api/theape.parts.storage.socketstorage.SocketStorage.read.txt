@@ -1,0 +1,6 @@
+theape.parts.storage.socketstorage.SocketStorage.read
+=====================================================
+
+.. currentmodule:: theape.parts.storage.socketstorage
+
+.. automethod:: SocketStorage.read

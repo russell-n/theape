@@ -1,0 +1,6 @@
+theape.plugins.dummyplugin.Dummy.help
+=====================================
+
+.. currentmodule:: theape.plugins.dummyplugin
+
+.. automethod:: Dummy.help

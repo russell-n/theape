@@ -1,0 +1,6 @@
+theape.parts.connections.testsshconnection.TestSSHConnection.test_sudo
+======================================================================
+
+.. currentmodule:: theape.parts.connections.testsshconnection
+
+.. automethod:: TestSSHConnection.test_sudo
