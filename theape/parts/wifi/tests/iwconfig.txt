@@ -1,0 +1,9 @@
+wlan2     IEEE 802.11abgn  ESSID:"simio_claustro"  
+          Mode:Managed  Frequency:2.462 GHz  Access Point: 00:30:44:07:B2:92   
+          Bit Rate=36 Mb/s   Tx-Power=15 dBm   
+          Retry  long limit:7   RTS thr:off   Fragment thr:off
+          Power Management:off
+          Link Quality=40/70  Signal level=-70 dBm  
+          Rx invalid nwid:0  Rx invalid crypt:0  Rx invalid frag:0
+          Tx excessive retries:65239  Invalid misc:855   Missed beacon:0
+

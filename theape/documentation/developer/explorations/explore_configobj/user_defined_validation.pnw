@@ -1,0 +1,94 @@
+User Defined Validation
+=======================
+
+<<name='imports', echo=False>>=
+# third-party
+from configobj import ConfigObj
+from validate import Validator
+
+# this package
+from ape.infrastructure.timemap import RelativeTime, AbsoluteTime
+@
+
+A More Complete Settings Section
+--------------------------------
+
+One of the things that differs about the 'SETTINGS' section in the `ape` is that I'm using ape-classes to create the time-objects (`total_time` and `end_time`).
+
+.. '
+
+<<name='settings_config', wrap=False>>=
+settings_config = """
+[SETTINGS]
+repetitions = 11
+total_time = 3 days 2 Hours 12 minutes
+end_time = 8:00 pm
+external_modules = tuna.annealing
+subfolder = output
+timestamp = HH:MM
+""".splitlines()
+@
+
+The original APE used the configuration map to get them.
+
+.. module:: ape.infrastructure.configurationmap
+.. autosummary::
+   :toctree: api
+
+   ConfigurationMap.get_relativetime
+   ConfigurationMap.get_datetime
+
+.. module:: ape.infrastructure.timemap
+.. autosummary::
+   :toctree: api
+
+   RelativeTime
+   AbsoluteTime
+
+This means we have to tell the validator to use these classes.
+
+<<name='section_configspec', wrap=False>>=
+section_spec = """
+[SETTINGS]
+repetitions = integer(min=0, default=1)
+total_time = relative_time(default=None)
+end_time = absolute_time(default=None)
+external_modules = string(default=None)
+subfolder = string(default=None)
+timestamp = string(default=YY:HH:MM:SS)
+""".splitlines()
+
+settings_configspec = ConfigObj(section_spec,
+                                list_values=False,
+                                _inspec=True)
+@
+
+Now we add the constructors to the validator. The key-names have to match what's in the spec and the values have to be the actual function definitions (in this case the class definitions). This could also be set by passing in a dictionary when the Validator was created.
+
+.. '
+
+<<name='update_validator', wrap=False>>=
+validator = Validator()
+validator.functions['relative_time'] = RelativeTime
+validator.functions['absolute_time'] = AbsoluteTime()
+@
+
+Now we try and validate the configuration.
+
+<<name='settings_validation', wrap=False>>=
+config = ConfigObj(settings_config,
+                   configspec=settings_configspec)
+config.validate(validator)
+@
+
+Now the output.
+
+.. csv-table:: Settings
+   :header: Option, Value, Type
+
+<<name='settings_check', echo=False, results='sphinx', wrap=False>>=
+for option, value in config['SETTINGS'].iteritems():
+    print "   {0},{1},{2}".format(option, value,
+                                    type(value))
+@
+

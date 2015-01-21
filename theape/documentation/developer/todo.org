@@ -1,0 +1,11 @@
+Things To Do
+============
+
+* Plugins [/]
+  - [ ] Write up how to create a plugin
+  - [ ] Add a watcher plugin
+* Parts [/]
+  - [ ] Consider adding a generic `command` part (to execute arbitrary commands)
+
+* Documentation []
+  - [ ] Write-up pudb-behave-fish post-mortem

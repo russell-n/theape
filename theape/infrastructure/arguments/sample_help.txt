@@ -1,0 +1,22 @@
+usage: theape.interface [-h] [--debug] [--silent] [--pudb] [--pdb]
+                            [--trace]
+                            {run,fetch,list,check,help} ...
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --debug               Sets the logging level to debug
+  --silent              Sets the logging level to off (for stdout)
+  --pudb                Enables the pudb debugger
+  --pdb                 Enables the pdb debugger
+  --trace               Turn on code-tracing
+
+Sub-Commands Help:
+  Available Subcommands
+
+  {run,fetch,list,check,help}
+                        SubCommands
+    run                 Run the ArachneApe
+    fetch               Fetch a sample config file.
+    list                List available plugins.
+    check               Check your setup.
+    help                Show more help

@@ -1,0 +1,14 @@
+Testing the Sleep
+=====
+
+.. _ape-sleep:
+
+<<name='imports', echo=False>>=
+# this package
+from theape.infrastructure.indexbuilder import create_toctree
+@
+
+<<Name='toctree', echo=False, results='sphinx'>>=
+create_toctree()
+@
+

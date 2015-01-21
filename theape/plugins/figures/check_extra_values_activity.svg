@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="check_extra_values_activity.svg"
+   inkscape:version="0.48.4 r9939"
+   version="1.1"
+   id="svg3229"
+   viewBox="20 -1 812 344"
+   height="18cm"
+   width="41cm">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1056"
+     id="namedview3429"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:zoom="0.66001234"
+     inkscape:cx="1155.5428"
+     inkscape:cy="518.07988"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg3229">
+    <sodipodi:guide
+       id="guide3472"
+       position="1646.7495,239.01068"
+       orientation="1,0" />
+    <sodipodi:guide
+       id="guide3474"
+       position="1678.9459,234.08653"
+       orientation="1,0" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata3433">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3431" />
+  <ellipse
+     id="ellipse3231"
+     ry="10"
+     rx="10"
+     cy="104.207"
+     cx="37"
+     style="fill: #000000" />
+  <g
+     id="g3233">
+    <rect
+       id="rect3235"
+       ry="20"
+       rx="20"
+       height="36"
+       width="135.35"
+       y="24"
+       x="193"
+       style="fill: #ffffff" />
+    <rect
+       id="rect3237"
+       ry="20"
+       rx="20"
+       height="36"
+       width="135.35"
+       y="24"
+       x="193"
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+    <text
+       id="text3239"
+       y="45.9"
+       x="260.675"
+       style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal"
+       font-size="12.8">
+      <tspan
+         id="tspan3241"
+         y="45.9"
+         x="260.675">set log to warning</tspan>
+    </text>
+  </g>
+  <g
+     id="g3243">
+    <rect
+       id="rect3245"
+       ry="20"
+       rx="20"
+       height="36"
+       width="124.55"
+       y="151"
+       x="198.4"
+       style="fill: #ffffff" />
+    <rect
+       id="rect3247"
+       ry="20"
+       rx="20"
+       height="36"
+       width="124.55"
+       y="151"
+       x="198.4"
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+    <text
+       id="text3249"
+       y="172.9"
+       x="260.675"
+       style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal"
+       font-size="12.8">
+      <tspan
+         id="tspan3251"
+         y="172.9"
+         x="260.675">set log to debug</tspan>
+    </text>
+  </g>
+  <g
+     id="g3253">
+    <rect
+       id="rect3255"
+       ry="20"
+       rx="20"
+       height="36"
+       width="118.1"
+       y="86.2071"
+       x="443"
+       style="fill: #ffffff" />
+    <rect
+       id="rect3257"
+       ry="20"
+       rx="20"
+       height="36"
+       width="118.1"
+       y="86.2071"
+       x="443"
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+    <text
+       id="text3259"
+       y="108.107"
+       x="502.05"
+       style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal"
+       font-size="12.8">
+      <tspan
+         id="tspan3261"
+         y="108.107"
+         x="502.05">get extra items</tspan>
+    </text>
+  </g>
+  <g
+     id="g3263">
+    <rect
+       id="rect3265"
+       ry="20"
+       rx="20"
+       height="36"
+       width="114.1"
+       y="86.2071"
+       x="680.825"
+       style="fill: #ffffff" />
+    <rect
+       id="rect3267"
+       ry="20"
+       rx="20"
+       height="36"
+       width="114.1"
+       y="86.2071"
+       x="680.825"
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+    <text
+       id="text3269"
+       y="108.107"
+       x="737.875"
+       style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal"
+       font-size="12.8">
+      <tspan
+         id="tspan3271"
+         y="108.107"
+         x="737.875">get subsection</tspan>
+    </text>
+  </g>
+  <g
+     id="g3273">
+    <rect
+       id="rect3275"
+       ry="20"
+       rx="20"
+       height="52"
+       width="95.75"
+       y="169"
+       x="690"
+       style="fill: #ffffff" />
+    <rect
+       id="rect3277"
+       ry="20"
+       rx="20"
+       height="52"
+       width="95.75"
+       y="169"
+       x="690"
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+    <text
+       id="text3279"
+       y="190.9"
+       x="737.875"
+       style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal"
+       font-size="12.8">
+      <tspan
+         id="tspan3281"
+         y="190.9"
+         x="737.875">get option's</tspan>
+      <tspan
+         id="tspan3283"
+         y="206.9"
+         x="737.875">value</tspan>
+    </text>
+  </g>
+  <g
+     id="g3285">
+    <rect
+       id="rect3287"
+       ry="20"
+       rx="20"
+       height="36"
+       width="123.4"
+       y="278"
+       x="676.175"
+       style="fill: #ffffff" />
+    <rect
+       id="rect3289"
+       ry="20"
+       rx="20"
+       height="36"
+       width="123.4"
+       y="278"
+       x="676.175"
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+    <text
+       id="text3291"
+       y="299.9"
+       x="737.875"
+       style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal"
+       font-size="12.8">
+      <tspan
+         id="tspan3293"
+         y="299.9"
+         x="737.875">log option:value</tspan>
+    </text>
+  </g>
+  <g
+     id="g3295">
+    <ellipse
+       id="ellipse3297"
+       ry="15"
+       rx="15"
+       cy="296"
+       cx="37"
+       style="fill: #ffffff" />
+    <ellipse
+       id="ellipse3299"
+       ry="15"
+       rx="15"
+       cy="296"
+       cx="37"
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+    <ellipse
+       id="ellipse3301"
+       ry="10"
+       rx="10"
+       cy="296"
+       cx="37"
+       style="fill: #000000" />
+  </g>
+  <g
+     id="g3303">
+    <polygon
+       id="polygon3305"
+       points="358,104.207 378,84.2071 398,104.207 378,124.207 "
+       style="fill: #ffffff" />
+    <polygon
+       id="polygon3307"
+       points="358,104.207 378,84.2071 398,104.207 378,124.207 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+  </g>
+  <g
+     id="g3309">
+    <polygon
+       id="polygon3311"
+       points="90,104.207 110,84.2071 130,104.207 110,124.207 "
+       style="fill: #ffffff" />
+    <polygon
+       id="polygon3313"
+       points="90,104.207 110,84.2071 130,104.207 110,124.207 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+  </g>
+  <g
+     id="g3315">
+    <polyline
+       id="polyline3317"
+       points="48.0054,104.207 58.0054,104.207 80,104.207 85.5279,104.207 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+    <polyline
+       id="polyline3319"
+       points="77.7639,109.207 87.7639,104.207 77.7639,99.2071 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+  </g>
+  <g
+     id="g3321">
+    <polyline
+       id="polyline3323"
+       points="110,84.2071 110,42 188.528,42 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+    <polyline
+       id="polyline3325"
+       points="180.764,47 190.764,42 180.764,37 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+    <text
+       id="text3327"
+       y="31"
+       x="131"
+       style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal"
+       font-size="12.7998">[warn_users]</text>
+  </g>
+  <g
+     id="g3329">
+    <polyline
+       id="polyline3331"
+       points="110,124.207 110,169 193.928,169 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+    <polyline
+       id="polyline3333"
+       points="186.164,174 196.164,169 186.164,164 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+    <text
+       id="text3335"
+       y="190"
+       x="149"
+       style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal"
+       font-size="12.7998">[else]</text>
+  </g>
+  <g
+     id="g3337">
+    <polyline
+       id="polyline3339"
+       points="328.35,42 378,42 378,79.735 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+    <polyline
+       id="polyline3341"
+       points="373,71.971 378,81.971 383,71.971 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+  </g>
+  <g
+     id="g3343">
+    <polyline
+       id="polyline3345"
+       points="322.95,169 378,169 378,128.679 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+    <polyline
+       id="polyline3347"
+       points="383,136.443 378,126.443 373,136.443 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+  </g>
+  <g
+     id="g3349">
+    <polyline
+       id="polyline3351"
+       points="398,104.207 408,104.207 433,104.207 438.528,104.207 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+    <polyline
+       id="polyline3353"
+       points="430.764,109.207 440.764,104.207 430.764,99.2071 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+  </g>
+  <g
+     id="g3355">
+    <rect
+       id="rect3357"
+       ry="20"
+       rx="20"
+       height="68"
+       width="80"
+       y="262"
+       x="453"
+       style="fill: #ffffff" />
+    <rect
+       id="rect3359"
+       ry="20"
+       rx="20"
+       height="68"
+       width="80"
+       y="262"
+       x="453"
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+    <text
+       id="text3361"
+       y="283.9"
+       x="493"
+       style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal"
+       font-size="12.8">
+      <tspan
+         id="tspan3363"
+         y="283.9"
+         x="493">check</tspan>
+      <tspan
+         id="tspan3365"
+         y="299.9"
+         x="493">extra</tspan>
+      <tspan
+         id="tspan3367"
+         y="315.9"
+         x="493">items</tspan>
+    </text>
+  </g>
+  <rect
+     id="rect3369"
+     height="290"
+     width="217"
+     y="52"
+     x="614"
+     style="fill: none; fill-opacity:0; stroke-width: 2; stroke-dasharray: 4; stroke: #000000" />
+  <g
+     id="g3371">
+    <rect
+       id="rect3373"
+       height="49"
+       width="18"
+       y="79.7071"
+       x="606.45"
+       style="fill: #ffffff" />
+    <rect
+       id="rect3375"
+       height="49"
+       width="18"
+       y="79.7071"
+       x="606.45"
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+  </g>
+  <g
+     id="g3377">
+    <rect
+       id="rect3379"
+       height="49"
+       width="18"
+       y="271.5"
+       x="606.45"
+       style="fill: #ffffff" />
+    <rect
+       id="rect3381"
+       height="49"
+       width="18"
+       y="271.5"
+       x="606.45"
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+  </g>
+  <g
+     id="g3383">
+    <polyline
+       id="polyline3385"
+       points="453,296 443,296 62,296 56.4721,296 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+    <polyline
+       id="polyline3387"
+       points="64.2361,291 54.2361,296 64.2361,301 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+    <text
+       id="text3389"
+       y="266"
+       x="242.5"
+       style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal"
+       font-size="12.7998">had_extra_items</text>
+  </g>
+  <g
+     id="g3391">
+    <polyline
+       id="polyline3393"
+       points="624.45,104.207 634.45,104.207 670.825,104.207 676.353,104.207 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+    <polyline
+       id="polyline3395"
+       points="668.589,109.207 678.589,104.207 668.589,99.2071 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+    <text
+       id="text3397"
+       y="74"
+       x="681"
+       style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal"
+       font-size="12.7998">sections, name</text>
+  </g>
+  <g
+     id="g3399">
+    <polyline
+       id="polyline3401"
+       points="676.175,296 666.175,296 634.45,296 628.922,296 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+    <polyline
+       id="polyline3403"
+       points="636.686,291 626.686,296 636.686,301 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+  </g>
+  <g
+     id="g3405">
+    <polyline
+       id="polyline3407"
+       points="606.45,296 596.45,296 543,296 537.472,296 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+    <polyline
+       id="polyline3409"
+       points="545.236,291 535.236,296 545.236,301 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+  </g>
+  <g
+     id="g3411">
+    <polyline
+       id="polyline3413"
+       points="561.1,104.207 571.1,104.207 596.45,104.207 601.978,104.207 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+    <polyline
+       id="polyline3415"
+       points="594.214,109.207 604.214,104.207 594.214,99.2071 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+  </g>
+  <g
+     id="g3417">
+    <polyline
+       id="polyline3419"
+       points="737.875,122.207 737.875,132.207 737.875,159 737.875,164.528 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+    <polyline
+       id="polyline3421"
+       points="732.875,156.764 737.875,166.764 742.875,156.764 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+  </g>
+  <g
+     id="g3423">
+    <polyline
+       id="polyline3425"
+       points="737.875,221 737.875,231 737.875,268 737.875,273.528 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+    <polyline
+       id="polyline3427"
+       points="732.875,265.764 737.875,275.764 742.875,265.764 "
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" />
+  </g>
+  <g
+     id="g3952"
+     transform="translate(-334.29777,-132.11007)">
+    <path
+       id="path3954"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 940.43036,260.7471 c 0,0 17.99578,0 17.99578,0"
+       inkscape:connector-curvature="0" />
+    <path
+       id="path3956"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 940.43036,248.41471 c 0,0 17.99578,0 17.99578,0"
+       inkscape:connector-curvature="0" />
+    <path
+       id="path3958"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 940.43036,236.08232 c 0,0 17.99578,0 17.99578,0"
+       inkscape:connector-curvature="0" />
+    <path
+       id="path3960"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 940.43036,223.74993 c 0,0 17.99578,0 17.99578,0"
+       inkscape:connector-curvature="0" />
+    <path
+       id="path3962"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 940.43036,211.41754 c 0,0 17.99578,0 17.99578,0"
+       inkscape:connector-curvature="0" />
+  </g>
+  <g
+     id="g3952-6"
+     transform="translate(-334.50949,59.809442)">
+    <path
+       id="path3954-9"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 940.43036,260.7471 c 0,0 17.99578,0 17.99578,0"
+       inkscape:connector-curvature="0" />
+    <path
+       id="path3956-2"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 940.43036,248.41471 c 0,0 17.99578,0 17.99578,0"
+       inkscape:connector-curvature="0" />
+    <path
+       id="path3958-2"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 940.43036,236.08232 c 0,0 17.99578,0 17.99578,0"
+       inkscape:connector-curvature="0" />
+    <path
+       id="path3960-0"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 940.43036,223.74993 c 0,0 17.99578,0 17.99578,0"
+       inkscape:connector-curvature="0" />
+    <path
+       id="path3962-8"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 940.43036,211.41754 c 0,0 17.99578,0 17.99578,0"
+       inkscape:connector-curvature="0" />
+  </g>
+  <text
+     xml:space="preserve"
+     style="font-size:22.35750771px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Garamond;-inkscape-font-specification:Garamond"
+     x="534.89056"
+     y="258.62994"
+     id="text4111"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       id="tspan4113"
+       x="534.89056"
+       y="258.62994"
+       style="font-size:13.414505px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:FreeSans;-inkscape-font-specification:FreeSans">extra_items</tspan></text>
+</svg>

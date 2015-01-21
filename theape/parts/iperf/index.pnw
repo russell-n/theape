@@ -1,0 +1,15 @@
+Iperf
+=====
+<<name='imports', echo=False>>=
+# this package
+from theape.infrastructure.indexbuilder import create_toctree
+@
+
+.. _ape-parts-iperf:
+
+This contains code for iperf testing. I'm currently making it in the `iperfsession` package and stealing it as I need it, since `iperfsession` isn't on pypi.
+        
+<<name='toctree', echo=False, results='sphinx'>>=
+create_toctree()
+@
+

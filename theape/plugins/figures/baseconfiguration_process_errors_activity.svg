@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created by diasvg.py -->
+<svg width="56.300cm" height="22.050cm" viewBox="1.100 1.550 57.400 23.600"
+ xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+<ellipse cx="2.000" cy="5.373" rx="0.500" ry="0.500" fill="#000000" stroke="none"  /><rect x="7.750" y="4.072" width="2.000" height="2.600" fill="#FFFFFF" stroke="none" stroke-width="0"/>
+<path stroke="none" fill="#FFFFFF" d ="M 7.750,4.072 A 1.000,1.000 0 0,0 6.750,5.072 "/>
+<path stroke="none" fill="#FFFFFF" d ="M 10.750,5.072 A 1.000,1.000 0 0,0 9.750,4.072 "/>
+<rect x="6.750" y="5.072" width="4.000" height="0.600" fill="#FFFFFF" stroke="none" stroke-width="0"/>
+<path stroke="none" fill="#FFFFFF" d ="M 6.750,5.672 A 1.000,1.000 0 0,0 7.750,6.672 "/>
+<path stroke="none" fill="#FFFFFF" d ="M 9.750,6.672 A 1.000,1.000 0 0,0 10.750,5.672 "/>
+<line x1="7.750" y1="4.072" x2="9.750" y2="4.072" stroke="#000000" stroke-width="0.100" />
+<line x1="7.750" y1="6.672" x2="9.750" y2="6.672" stroke="#000000" stroke-width="0.100" />
+<path stroke="#000000" fill="none" stroke-width="0.100"  d ="M 7.750,4.072 A 1.000,1.000 0 0,0 6.750,5.072 "/>
+<path stroke="#000000" fill="none" stroke-width="0.100"  d ="M 10.750,5.072 A 1.000,1.000 0 0,0 9.750,4.072 "/>
+<line x1="6.750" y1="5.072" x2="6.750" y2="5.672" stroke="#000000" stroke-width="0.100" />
+<line x1="10.750" y1="5.072" x2="10.750" y2="5.672" stroke="#000000" stroke-width="0.100" />
+<path stroke="#000000" fill="none" stroke-width="0.100"  d ="M 6.750,5.672 A 1.000,1.000 0 0,0 7.750,6.672 "/>
+<path stroke="#000000" fill="none" stroke-width="0.100"  d ="M 9.750,6.672 A 1.000,1.000 0 0,0 10.750,5.672 "/>
+<text x="8.750" y="5.167"  fill="#000000" text-anchor="middle" font-size="0.80" font-family="sans" font-style="normal" font-weight="400">
+flatten</text>
+<text x="8.750" y="5.967"  fill="#000000" text-anchor="middle" font-size="0.80" font-family="sans" font-style="normal" font-weight="400">
+errors</text>
+<polygon fill="#FFFFFF" stroke="none" stroke-width="0.100" points="26.750,5.373 27.750,4.373 28.750,5.373 27.750,6.373 "/>
+<polygon fill="none" stroke="#000000" stroke-width="0.100"  points="26.750,5.373 27.750,4.373 28.750,5.373 27.750,6.373 "/>
+<rect x="39.950" y="3.673" width="2.447" height="3.400" fill="#FFFFFF" stroke="none" stroke-width="0"/>
+<path stroke="none" fill="#FFFFFF" d ="M 39.950,3.673 A 1.000,1.000 0 0,0 38.950,4.673 "/>
+<path stroke="none" fill="#FFFFFF" d ="M 43.398,4.673 A 1.000,1.000 0 0,0 42.398,3.673 "/>
+<rect x="38.950" y="4.673" width="4.447" height="1.400" fill="#FFFFFF" stroke="none" stroke-width="0"/>
+<path stroke="none" fill="#FFFFFF" d ="M 38.950,6.073 A 1.000,1.000 0 0,0 39.950,7.073 "/>
+<path stroke="none" fill="#FFFFFF" d ="M 42.398,7.073 A 1.000,1.000 0 0,0 43.398,6.073 "/>
+<line x1="39.950" y1="3.673" x2="42.398" y2="3.673" stroke="#000000" stroke-width="0.100" />
+<line x1="39.950" y1="7.073" x2="42.398" y2="7.073" stroke="#000000" stroke-width="0.100" />
+<path stroke="#000000" fill="none" stroke-width="0.100"  d ="M 39.950,3.673 A 1.000,1.000 0 0,0 38.950,4.673 "/>
+<path stroke="#000000" fill="none" stroke-width="0.100"  d ="M 43.398,4.673 A 1.000,1.000 0 0,0 42.398,3.673 "/>
+<line x1="38.950" y1="4.673" x2="38.950" y2="6.073" stroke="#000000" stroke-width="0.100" />
+<line x1="43.398" y1="4.673" x2="43.398" y2="6.073" stroke="#000000" stroke-width="0.100" />
+<path stroke="#000000" fill="none" stroke-width="0.100"  d ="M 38.950,6.073 A 1.000,1.000 0 0,0 39.950,7.073 "/>
+<path stroke="#000000" fill="none" stroke-width="0.100"  d ="M 42.398,7.073 A 1.000,1.000 0 0,0 43.398,6.073 "/>
+<text x="41.174" y="4.768"  fill="#000000" text-anchor="middle" font-size="0.80" font-family="sans" font-style="normal" font-weight="400">
+get</text>
+<text x="41.174" y="5.568"  fill="#000000" text-anchor="middle" font-size="0.80" font-family="sans" font-style="normal" font-weight="400">
+configspec</text>
+<text x="41.174" y="6.368"  fill="#000000" text-anchor="middle" font-size="0.80" font-family="sans" font-style="normal" font-weight="400">
+section</text>
+<rect x="49.750" y="3.673" width="2.000" height="3.400" fill="#FFFFFF" stroke="none" stroke-width="0"/>
+<path stroke="none" fill="#FFFFFF" d ="M 49.750,3.673 A 1.000,1.000 0 0,0 48.750,4.673 "/>
+<path stroke="none" fill="#FFFFFF" d ="M 52.750,4.673 A 1.000,1.000 0 0,0 51.750,3.673 "/>
+<rect x="48.750" y="4.673" width="4.000" height="1.400" fill="#FFFFFF" stroke="none" stroke-width="0"/>
+<path stroke="none" fill="#FFFFFF" d ="M 48.750,6.073 A 1.000,1.000 0 0,0 49.750,7.073 "/>
+<path stroke="none" fill="#FFFFFF" d ="M 51.750,7.073 A 1.000,1.000 0 0,0 52.750,6.073 "/>
+<line x1="49.750" y1="3.673" x2="51.750" y2="3.673" stroke="#000000" stroke-width="0.100" />
+<line x1="49.750" y1="7.073" x2="51.750" y2="7.073" stroke="#000000" stroke-width="0.100" />
+<path stroke="#000000" fill="none" stroke-width="0.100"  d ="M 49.750,3.673 A 1.000,1.000 0 0,0 48.750,4.673 "/>
+<path stroke="#000000" fill="none" stroke-width="0.100"  d ="M 52.750,4.673 A 1.000,1.000 0 0,0 51.750,3.673 "/>
+<line x1="48.750" y1="4.673" x2="48.750" y2="6.073" stroke="#000000" stroke-width="0.100" />
+<line x1="52.750" y1="4.673" x2="52.750" y2="6.073" stroke="#000000" stroke-width="0.100" />
+<path stroke="#000000" fill="none" stroke-width="0.100"  d ="M 48.750,6.073 A 1.000,1.000 0 0,0 49.750,7.073 "/>
+<path stroke="#000000" fill="none" stroke-width="0.100"  d ="M 51.750,7.073 A 1.000,1.000 0 0,0 52.750,6.073 "/>
+<text x="50.750" y="4.768"  fill="#000000" text-anchor="middle" font-size="0.80" font-family="sans" font-style="normal" font-weight="400">
+get</text>
+<text x="50.750" y="5.568"  fill="#000000" text-anchor="middle" font-size="0.80" font-family="sans" font-style="normal" font-weight="400">
+option</text>
+<text x="50.750" y="6.368"  fill="#000000" text-anchor="middle" font-size="0.80" font-family="sans" font-style="normal" font-weight="400">
+type</text>
+<rect x="49.750" y="19.090" width="2.000" height="2.600" fill="#FFFFFF" stroke="none" stroke-width="0"/>
+<path stroke="none" fill="#FFFFFF" d ="M 49.750,19.090 A 1.000,1.000 0 0,0 48.750,20.090 "/>
+<path stroke="none" fill="#FFFFFF" d ="M 52.750,20.090 A 1.000,1.000 0 0,0 51.750,19.090 "/>
+<rect x="48.750" y="20.090" width="4.000" height="0.600" fill="#FFFFFF" stroke="none" stroke-width="0"/>
+<path stroke="none" fill="#FFFFFF" d ="M 48.750,20.690 A 1.000,1.000 0 0,0 49.750,21.690 "/>
+<path stroke="none" fill="#FFFFFF" d ="M 51.750,21.690 A 1.000,1.000 0 0,0 52.750,20.690 "/>
+<line x1="49.750" y1="19.090" x2="51.750" y2="19.090" stroke="#000000" stroke-width="0.100" />
+<line x1="49.750" y1="21.690" x2="51.750" y2="21.690" stroke="#000000" stroke-width="0.100" />
+<path stroke="#000000" fill="none" stroke-width="0.100"  d ="M 49.750,19.090 A 1.000,1.000 0 0,0 48.750,20.090 "/>
+<path stroke="#000000" fill="none" stroke-width="0.100"  d ="M 52.750,20.090 A 1.000,1.000 0 0,0 51.750,19.090 "/>
+<line x1="48.750" y1="20.090" x2="48.750" y2="20.690" stroke="#000000" stroke-width="0.100" />
+<line x1="52.750" y1="20.090" x2="52.750" y2="20.690" stroke="#000000" stroke-width="0.100" />
+<path stroke="#000000" fill="none" stroke-width="0.100"  d ="M 48.750,20.690 A 1.000,1.000 0 0,0 49.750,21.690 "/>
+<path stroke="#000000" fill="none" stroke-width="0.100"  d ="M 51.750,21.690 A 1.000,1.000 0 0,0 52.750,20.690 "/>
+<text x="50.750" y="20.185"  fill="#000000" text-anchor="middle" font-size="0.80" font-family="sans" font-style="normal" font-weight="400">
+log</text>
+<text x="50.750" y="20.985"  fill="#000000" text-anchor="middle" font-size="0.80" font-family="sans" font-style="normal" font-weight="400">
+error</text>
+<rect x="8.950" y="19.490" width="7.560" height="1.800" fill="#FFFFFF" stroke="none" stroke-width="0"/>
+<path stroke="none" fill="#FFFFFF" d ="M 8.950,19.490 A 0.900,0.900 0 0,0 8.050,20.390 "/>
+<path stroke="none" fill="#FFFFFF" d ="M 17.410,20.390 A 0.900,0.900 0 0,0 16.510,19.490 "/>
+<rect x="8.050" y="20.390" width="9.360" height="0.000" fill="#FFFFFF" stroke="none" stroke-width="0"/>
+<path stroke="none" fill="#FFFFFF" d ="M 8.050,20.390 A 0.900,0.900 0 0,0 8.950,21.290 "/>
+<path stroke="none" fill="#FFFFFF" d ="M 16.510,21.290 A 0.900,0.900 0 0,0 17.410,20.390 "/>
+<line x1="8.950" y1="19.490" x2="16.510" y2="19.490" stroke="#000000" stroke-width="0.100" />
+<line x1="8.950" y1="21.290" x2="16.510" y2="21.290" stroke="#000000" stroke-width="0.100" />
+<path stroke="#000000" fill="none" stroke-width="0.100"  d ="M 8.950,19.490 A 0.900,0.900 0 0,0 8.050,20.390 "/>
+<path stroke="#000000" fill="none" stroke-width="0.100"  d ="M 17.410,20.390 A 0.900,0.900 0 0,0 16.510,19.490 "/>
+<line x1="8.050" y1="20.390" x2="8.050" y2="20.390" stroke="#000000" stroke-width="0.100" />
+<line x1="17.410" y1="20.390" x2="17.410" y2="20.390" stroke="#000000" stroke-width="0.100" />
+<path stroke="#000000" fill="none" stroke-width="0.100"  d ="M 8.050,20.390 A 0.900,0.900 0 0,0 8.950,21.290 "/>
+<path stroke="#000000" fill="none" stroke-width="0.100"  d ="M 16.510,21.290 A 0.900,0.900 0 0,0 17.410,20.390 "/>
+<text x="12.730" y="20.585"  fill="#000000" text-anchor="middle" font-size="0.80" font-family="sans" font-style="normal" font-weight="400">
+check validation_outcome</text>
+<ellipse cx="1.900" cy="20.390" rx="0.750" ry="0.750" fill="#FFFFFF" stroke="none"  /><ellipse cx="1.900" cy="20.390" rx="0.750" ry="0.750" fill="none" stroke="#000000"  stroke-width="0.100" /><ellipse cx="1.900" cy="20.390" rx="0.500" ry="0.500" fill="#000000" stroke="none"  /><polyline fill="none" stroke="#000000" stroke-width="0.100"  points="2.550,5.373 3.050,5.373 6.250,5.372 6.526,5.372 "/>
+<polyline fill="none" stroke="#000000" stroke-width="0.100"  points="6.138,5.622 6.638,5.372 6.138,5.122 "/>
+<polyline fill="none" stroke="#000000" stroke-width="0.100"  points="43.398,5.373 43.898,5.373 48.250,5.373 48.526,5.373 "/>
+<polyline fill="none" stroke="#000000" stroke-width="0.100"  points="48.138,5.623 48.638,5.373 48.138,5.123 "/>
+<polyline fill="none" stroke="#000000" stroke-width="0.100"  points="8.050,20.390 7.550,20.390 3.150,20.390 2.874,20.390 "/>
+<polyline fill="none" stroke="#000000" stroke-width="0.100"  points="3.262,20.140 2.762,20.390 3.262,20.640 "/>
+<text x="4.850" y="18.890"  fill="#000000" text-anchor="middle" font-size="0.80" font-family="sans" font-style="normal" font-weight="400">
+had_errors</text>
+<rect x="34.800" y="2.400" width="19.350" height="9.000" fill="none" stroke="#000000" stroke-width="0.100" stroke-dasharray="0.10,0.10"/>
+<rect x="20.500" y="1.600" width="36.850" height="21.950" fill="none" stroke="#000000" stroke-width="0.100" stroke-dasharray="0.10,0.10"/>
+<rect x="20.000" y="3.898" width="0.950" height="2.950" fill="#FFFFFF" stroke="none" stroke-width="0"/>
+<rect x="20.000" y="3.898" width="0.950" height="2.950" fill="none" stroke="#000000" stroke-width="0.100" />
+<rect x="20.045" y="18.915" width="0.950" height="2.950" fill="#FFFFFF" stroke="none" stroke-width="0"/>
+<rect x="20.045" y="18.915" width="0.950" height="2.950" fill="none" stroke="#000000" stroke-width="0.100" />
+<rect x="34.335" y="3.897" width="0.950" height="2.950" fill="#FFFFFF" stroke="none" stroke-width="0"/>
+<rect x="34.335" y="3.897" width="0.950" height="2.950" fill="none" stroke="#000000" stroke-width="0.100" />
+<rect x="48.925" y="10.900" width="3.650" height="0.900" fill="#FFFFFF" stroke="none" stroke-width="0"/>
+<rect x="48.925" y="10.900" width="3.650" height="0.900" fill="none" stroke="#000000" stroke-width="0.100" />
+<polyline fill="none" stroke="#000000" stroke-width="0.100"  points="20.045,20.390 19.545,20.390 17.910,20.390 17.634,20.390 "/>
+<polyline fill="none" stroke="#000000" stroke-width="0.100"  points="18.022,20.140 17.522,20.390 18.022,20.640 "/>
+<polyline fill="none" stroke="#000000" stroke-width="0.100"  points="35.285,5.372 37.118,5.372 37.118,5.373 38.726,5.373 "/>
+<polyline fill="none" stroke="#000000" stroke-width="0.100"  points="38.338,5.623 38.838,5.373 38.338,5.123 "/>
+<text x="37.500" y="3.500"  fill="#000000" text-anchor="middle" font-size="0.80" font-family="sans" font-style="normal" font-weight="400">
+section_name</text>
+<polyline fill="none" stroke="#000000" stroke-width="0.100"  points="50.750,7.073 50.750,7.573 50.750,10.400 50.750,10.676 "/>
+<polyline fill="none" stroke="#000000" stroke-width="0.100"  points="50.500,10.288 50.750,10.788 51.000,10.288 "/>
+<polyline fill="none" stroke="#000000" stroke-width="0.100"  points="48.750,20.390 48.250,20.390 21.495,20.390 21.219,20.390 "/>
+<polyline fill="none" stroke="#000000" stroke-width="0.100"  points="21.607,20.140 21.107,20.390 21.607,20.640 "/>
+<polyline fill="none" stroke="#000000" stroke-width="0.100"  points="10.750,5.372 11.250,5.372 19.500,5.373 19.776,5.373 "/>
+<polyline fill="none" stroke="#000000" stroke-width="0.100"  points="19.388,5.623 19.888,5.373 19.388,5.123 "/>
+<text x="14.875" y="3.873"  fill="#000000" text-anchor="middle" font-size="0.80" font-family="sans" font-style="normal" font-weight="400">
+flattened_errors</text>
+<polyline fill="none" stroke="#000000" stroke-width="0.100"  points="20.950,5.373 21.450,5.373 26.250,5.373 26.526,5.373 "/>
+<polyline fill="none" stroke="#000000" stroke-width="0.100"  points="26.138,5.623 26.638,5.373 26.138,5.123 "/>
+<text x="24.550" y="3.450"  fill="#000000" text-anchor="middle" font-size="0.80" font-family="sans" font-style="normal" font-weight="400">
+sections, option, error</text>
+<polyline fill="none" stroke="#000000" stroke-width="0.100"  points="28.750,5.373 31.543,5.373 31.543,5.372 34.111,5.372 "/>
+<polyline fill="none" stroke="#000000" stroke-width="0.100"  points="33.723,5.622 34.223,5.372 33.723,5.122 "/>
+<text x="31.043" y="4.873"  fill="#000000" text-anchor="middle" font-size="0.80" font-family="sans" font-style="normal" font-weight="400">
+[option=True]</text>
+<polyline fill="none" stroke="#000000" stroke-width="0.100"  points="50.750,11.800 50.750,13.350 50.750,13.350 50.750,14.676 "/>
+<polyline fill="none" stroke="#000000" stroke-width="0.100"  points="50.500,14.288 50.750,14.788 51.000,14.288 "/>
+<text x="45.400" y="12.900"  fill="#000000" text-anchor="middle" font-size="0.80" font-family="sans" font-style="normal" font-weight="400">
+section,option,error,option_type, plugin_name</text>
+<polygon fill="#FFFFFF" stroke="none" stroke-width="0.100" points="49.750,15.900 50.750,14.900 51.750,15.900 50.750,16.900 "/>
+<polygon fill="none" stroke="#000000" stroke-width="0.100"  points="49.750,15.900 50.750,14.900 51.750,15.900 50.750,16.900 "/>
+<polyline fill="none" stroke="#000000" stroke-width="0.100"  points="27.750,6.373 27.750,15.900 49.526,15.900 "/>
+<polyline fill="none" stroke="#000000" stroke-width="0.100"  points="49.138,16.150 49.638,15.900 49.138,15.650 "/>
+<text x="45.000" y="16.650"  fill="#000000" text-anchor="middle" font-size="0.80" font-family="sans" font-style="normal" font-weight="400">
+section,plugin_name</text>
+<polyline fill="none" stroke="#000000" stroke-width="0.100"  points="50.750,16.900 50.750,17.400 50.750,18.590 50.750,18.866 "/>
+<polyline fill="none" stroke="#000000" stroke-width="0.100"  points="50.500,18.478 50.750,18.978 51.000,18.478 "/>
+</svg>

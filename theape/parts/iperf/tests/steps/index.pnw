@@ -1,0 +1,11 @@
+IperfSession Feature Steps
+==========================
+<<name='imports', echo=False>>=
+# this package
+from iperfsession.infrastructure.indexbuilder import create_toctree
+@
+
+<<name='toctree', echo=False, results='sphinx'>>=
+create_toctree()
+@
+
