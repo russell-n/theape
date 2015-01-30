@@ -3,17 +3,6 @@ Exploring Paramiko's Errors
 
 .. '
 
-Contents:
-
-    * :ref:`Bad Hostname <paramiko-bad-hostname>`
-
-    * :ref:`Bad Username <paramiko-bad-username>`
-
-    * :ref:`Bad Password <paramiko-bad-password>`
-
-    * :ref:`Socket Timeout <paramiko-socket-timeout>`
-
-    * :ref:`Paramiko and StandardError <paramiko-stderr-checking>`
 
 
 
@@ -24,7 +13,8 @@ Bad Hostname
 
 What happens if you give it a bad host-name?
 
-::
+
+.. code:: python
 
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -33,24 +23,23 @@ What happens if you give it a bad host-name?
     try:
         client.connect('badhostname', username='fakeuser')
     except IOError as error:
-        print error
-    
+        print(error)
 
-::
+.. code::
 
-    [Errno 2] No such file or directory
+    [Errno -2] Name or service not known
     
 
 
 
 That is dissapointingly vague, but at least I know how to catch the exception (it's actually raising a `socket.error` but that's a child of IOError so you can catch either one). The error number is a system error number:
 
-::
 
-    print "ENOENT: {0} '{1}'".format(errno.ENOENT, os.strerror(errno.ENOENT))
-    
+.. code:: python
 
-::
+    print("ENOENT: {0} '{1}'".format(errno.ENOENT, os.strerror(errno.ENOENT)))
+
+.. code::
 
     ENOENT: 2 'No such file or directory'
     
@@ -90,15 +79,15 @@ What happens if the address is okay but the user-name is wrong (it doesn't exist
 
 .. '
 
-::
+
+.. code:: python
 
     try:
         client.connect('localhost', username='ummagumma')
     except paramiko.PasswordRequiredException as error:
-        print error
-    
+        print(error)
 
-::
+.. code::
 
     Private key file is encrypted
     
@@ -129,12 +118,17 @@ I assume that the bad username and the bad password errors will be the same, sin
 
 .. '
 
-::
+
+.. code:: python
 
     try:
         client.connect('localhost', username='fakeuser', password='badpassword')
     except paramiko.AuthenticationException as error:
-        print error
+        print(error)
+
+.. code::
+
+    Authentication failed.
     
 
 
@@ -154,9 +148,10 @@ The last thing to check is the socket timeouts. These will pop up if you give pa
 
 .. '
 
-::
 
-    client.connect('localhost', username='fakeuser', password=None)
+.. code:: python
+
+    client.connect('localhost', username='tester_tester', password=None)
     i,o,e = client.exec_command('ps -e | grep iperf')
     for line in o:
         pid = line.split()[0]
@@ -167,15 +162,14 @@ The last thing to check is the socket timeouts. These will pop up if you give pa
     
     try:
         for line in stdout:
-            print line
+            print(line)
         for line in stderr:
-            print line
+            print(line)
     except socket.timeout as error:
-        print "socket.timeout doesn't give an error message"
-        print error
-    
+        print( "socket.timeout doesn't give an error message")
+        print( error)
 
-::
+.. code::
 
     ------------------------------------------------------------
     
@@ -198,14 +192,14 @@ On StandardError
 
 When I was working with the previous section I initially forgot to kill the `iperf` process between runs of this code and was not getting any output because I wasn't checking stderr -- an error from the command won't raise an exception in paramiko, so to be safe you have to always check stderr. But also note that not all stderr output is an error:
 
-::
+
+.. code:: python
 
     stdin, stdout, stderr = client.exec_command('iperf -v')
     for line in stderr:
-        print line
-    
+        print( line)
 
-::
+.. code::
 
     iperf version 2.0.5 (08 Jul 2010) pthreads
     

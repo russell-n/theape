@@ -1,5 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -8,8 +7,10 @@
     
     <title>An Exec Command Example &mdash; The Ape 0.0.1 documentation</title>
     
-    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -23,43 +24,123 @@
     <script type="text/javascript" src="../../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
     <link rel="up" title="Exploring Paramiko" href="index.html" />
     <link rel="next" title="paramiko.client.SSHClient.exec_command" href="api/paramiko.client.SSHClient.exec_command.html" />
-    <link rel="prev" title="paramiko.client.SSHClient.connect" href="api/paramiko.client.SSHClient.connect.html" />
-   
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
   <body>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="api/paramiko.client.SSHClient.exec_command.html" title="paramiko.client.SSHClient.exec_command"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="api/paramiko.client.SSHClient.connect.html" title="paramiko.client.SSHClient.connect"
-             accesskey="P">previous</a> |</li>
-        <li><a href="../../../../index.html">Ape Documentation</a> &raquo;</li>
-          <li><a href="../../index.html" >The Ape Developer Documentation</a> &raquo;</li>
-          <li><a href="../index.html" >The Explorations</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Exploring Paramiko</a> &raquo;</li> 
-      </ul>
-    </div>  
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body">
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../../../index.html">
+          The Ape</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.0.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
             
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../user/index.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../plugins/index.html">Plugins</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">An Exec Command Example</a><ul>
+<li><a class="reference internal" href="#the-sshclient-exec-command">The SSHClient exec_command</a></li>
+<li><a class="reference internal" href="#nmap">nmap</a></li>
+<li><a class="reference internal" href="#nmap-with-sudo">nmap with sudo</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="api/paramiko.client.SSHClient.exec_command.html" title="Next Chapter: paramiko.client.SSHClient.exec_command"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">paramiko.client.... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="../../../../_sources/documentation/developer/explorations/explore_paramiko/exploring_exec_command.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
   <div class="section" id="an-exec-command-example">
 <h1>An Exec Command Example<a class="headerlink" href="#an-exec-command-example" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="the-sshclient-exec-command">
@@ -84,185 +165,70 @@
 <div class="section" id="nmap">
 <span id="paramiko-exploration-nmap"></span><h2>nmap<a class="headerlink" href="#nmap" title="Permalink to this headline">¶</a></h2>
 <p>I want to see if paramiko will allow me to run commands as sudo. Since <cite>nmap</cite> will change its behavior (adding MAC addresses) if you run the ping-scan using <cite>sudo</cite> I can run it with and without root privileges and see if I get the expected output.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">client</span> <span class="o">=</span> <span class="n">SSHClient</span><span class="p">()</span>
-<span class="n">client</span><span class="o">.</span><span class="n">set_missing_host_key_policy</span><span class="p">(</span><span class="n">paramiko</span><span class="o">.</span><span class="n">AutoAddPolicy</span><span class="p">())</span>
-<span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s">&#39;fakeuser&#39;</span><span class="p">)</span>
-<span class="n">stdin</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="s">&quot;nmap -sP &#39;192.168.103.*&#39;&quot;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">stdout</span><span class="p">:</span>
-    <span class="k">print</span> <span class="n">line</span>
+<div class="code python highlight-python"><div class="highlight"><pre>client = SSHClient()
+client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+client.connect(&#39;localhost&#39;, username=&#39;tester_tester&#39;)
+stdin, stdout, stderr = client.exec_command(&quot;nmap -sP &#39;192.168.103.*&#39;&quot;)
+for line in stdout:
+    print(line, end=&#39;&#39;)
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>Starting Nmap 6.00 ( http://nmap.org ) at 2013-11-04 11:50 PST
-
+<div class="code highlight-python"><div class="highlight"><pre>Starting Nmap 6.40 ( http://nmap.org ) at 2015-01-22 15:29 MST
 Nmap scan report for 192.168.103.1
-
-Host is up (0.012s latency).
-
-Nmap scan report for acheron (192.168.103.15)
-
-Host is up (0.00057s latency).
-
+Host is up (0.018s latency).
 Nmap scan report for 192.168.103.16
-
-Host is up (0.00070s latency).
-
-Nmap scan report for 192.168.103.17
-
-Host is up (0.00069s latency).
-
-Nmap scan report for 192.168.103.19
-
-Host is up (0.026s latency).
-
-Nmap scan report for 192.168.103.20
-
-Host is up (0.00065s latency).
-
-Nmap scan report for 192.168.103.33
-
-Host is up (0.00073s latency).
-
-Nmap scan report for 192.168.103.50
-
-Host is up (0.00032s latency).
-
-Nmap done: 256 IP addresses (8 hosts up) scanned in 2.52 seconds
+Host is up (0.00035s latency).
+Nmap done: 256 IP addresses (2 hosts up) scanned in 2.54 seconds
 </pre></div>
 </div>
+</div>
+<div class="section" id="nmap-with-sudo">
+<h2>nmap with sudo<a class="headerlink" href="#nmap-with-sudo" title="Permalink to this headline">¶</a></h2>
 <p>And now with sudo.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">stdin</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="s">&#39;sudo nmap -sP &quot;192.168.103.*&quot;&#39;</span><span class="p">,</span> <span class="n">get_pty</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">stdin</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;fakepassword</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">stdout</span><span class="p">:</span>
-    <span class="k">print</span> <span class="n">line</span>
+<div class="code python highlight-python"><div class="highlight"><pre>stdin, stdout, stderr = client.exec_command(&#39;sudo nmap -sP &quot;192.168.103.*&quot;&#39;, get_pty=True)
+stdin.write(&#39;testertester\n&#39;)
+for line in stdout:
+    print(line, end=&#39;&#39;)
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>fakepassword
+<div class="code highlight-python"><div class="highlight"><pre>testertester
+[sudo] password for tester_tester:
 
-[sudo] password for fakeuser:
-
-
-
-Starting Nmap 6.00 ( http://nmap.org ) at 2013-11-04 11:50 PST
-
+Starting Nmap 6.40 ( http://nmap.org ) at 2015-01-22 15:29 MST
 Nmap scan report for 192.168.103.1
-
-Host is up (0.078s latency).
-
-MAC Address: 6C:41:6A:D8:90:47 (Unknown)
-
-Nmap scan report for acheron (192.168.103.15)
-
-Host is up (0.00018s latency).
-
-MAC Address: E8:E0:B7:A6:23:5F (Toshiba)
-
+Host is up (0.0031s latency).
 Nmap scan report for 192.168.103.16
-
-Host is up (0.00015s latency).
-
-MAC Address: 70:5A:B6:23:6C:1F (Compal Information (kunshan) CO.)
-
-Nmap scan report for 192.168.103.17
-
-Host is up (0.00045s latency).
-
-MAC Address: D4:BE:D9:38:4B:0F (Dell)
-
-Nmap scan report for 192.168.103.19
-
-Host is up (0.095s latency).
-
-MAC Address: 00:BB:3A:AB:47:37 (Unknown)
-
-Nmap scan report for 192.168.103.20
-
-Host is up (0.00056s latency).
-
-MAC Address: 00:14:D1:B0:D5:F0 (Trendnet)
-
-Nmap scan report for 192.168.103.33
-
-Host is up (0.00040s latency).
-
-MAC Address: D4:BE:D9:5B:AE:4B (Dell)
-
-Nmap scan report for 192.168.103.50
-
-Host is up.
-
-Nmap done: 256 IP addresses (8 hosts up) scanned in 9.91 seconds
+Host is up (0.051s latency).
+Nmap done: 256 IP addresses (2 hosts up) scanned in 6.65 seconds
 </pre></div>
 </div>
 <p>Two things to note &#8211; one is that I didn&#8217;t need to call the load_system_host_keys. It seems that the AutoAddPolicy takes care of that. The other thing to note is that I needed to set <cite>get_pty</cite> to True. If I didn&#8217;t it would close the channel with this error (on my machine):</p>
 <div class="highlight-python"><div class="highlight"><pre>sudo: no tty present and no askpass program specified
 </pre></div>
 </div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The <tt class="docutils literal"><span class="pre">testertester</span></tt> line above <tt class="docutils literal"><span class="pre">[sudo]</span> <span class="pre">password</span> <span class="pre">for</span> <span class="pre">tester_tester:</span></tt> is the actual password that I entered so if you use this method the sudoer&#8217;s password will be visible in the output.</p>
 </div>
 </div>
+</div>
 
 
-          </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">An Exec Command Example</a><ul>
-<li><a class="reference internal" href="#the-sshclient-exec-command">The SSHClient exec_command</a></li>
-<li><a class="reference internal" href="#nmap">nmap</a></li>
-</ul>
-</li>
-</ul>
-<h3>Navigation</h3>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../../user/index.html">User Documentation</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Developer Documentation</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../log_setter.html">Log Setter</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../main.html">The Main Entry Point</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html">The APE (Read Me)</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../components/index.html">The Components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../parts/index.html">Parts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../plugins/index.html">Plugins</a></li>
-</ul>
-
-
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
     </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2014, the cloistered monkey.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
-      
-      |
-      <a href="../../../../_sources/documentation/developer/explorations/explore_paramiko/exploring_exec_command.txt"
-          rel="nofollow">Page source</a></li>
-    </div>
-
-    
-
-    
+    <p>
+        &copy; Copyright 2014, the cloistered monkey.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+    </p>
+  </div>
+</footer>
   </body>
 </html>

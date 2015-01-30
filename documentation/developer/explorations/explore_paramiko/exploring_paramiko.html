@@ -1,5 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -8,8 +7,10 @@
     
     <title>Exploring Paramiko &mdash; The Ape 0.0.1 documentation</title>
     
-    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -23,39 +24,142 @@
     <script type="text/javascript" src="../../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
     <link rel="up" title="Exploring Paramiko" href="index.html" />
     <link rel="next" title="paramiko.SSHClient" href="api/paramiko.SSHClient.html" />
-   
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+    <link rel="prev" title="paramiko.client.SSHClient.invoke_shell" href="api/paramiko.client.SSHClient.invoke_shell.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
   <body>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="api/paramiko.SSHClient.html" title="paramiko.SSHClient"
-             accesskey="N">next</a> |</li>
-        <li><a href="../../../../index.html">Ape Documentation</a> &raquo;</li>
-          <li><a href="../../index.html" >The Ape Developer Documentation</a> &raquo;</li>
-          <li><a href="../index.html" >The Explorations</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Exploring Paramiko</a> &raquo;</li> 
-      </ul>
-    </div>  
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body">
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../../../index.html">
+          The Ape</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.0.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
             
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../user/index.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../plugins/index.html">Plugins</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Exploring Paramiko</a><ul>
+<li><a class="reference internal" href="#paramiko-what">Paramiko What?</a><ul>
+<li><a class="reference internal" href="#what">What</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-api">The API</a></li>
+<li><a class="reference internal" href="#the-module-diagram">The Module Diagram</a></li>
+<li><a class="reference internal" href="#class-diagram">Class Diagram</a></li>
+<li><a class="reference internal" href="#a-localhost-experiment">A Localhost Experiment</a><ul>
+<li><a class="reference internal" href="#the-connect-api">The connect API</a></li>
+<li><a class="reference internal" href="#the-connect-call">The Connect Call</a></li>
+<li><a class="reference internal" href="#load-system-host-keys-api">Load System Host Keys API</a></li>
+<li><a class="reference internal" href="#the-related-api">The Related API</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-sshclient-connect">The SSHClient.connect</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="api/paramiko.client.SSHClient.invoke_shell.html" title="Previous Chapter: paramiko.client.SSHClient.invoke_shell"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; paramiko.client....</span>
+    </a>
+  </li>
+  <li>
+    <a href="api/paramiko.SSHClient.html" title="Next Chapter: paramiko.SSHClient"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">paramiko.SSHClie... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="../../../../_sources/documentation/developer/explorations/explore_paramiko/exploring_paramiko.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
   <div class="section" id="exploring-paramiko">
 <h1>Exploring Paramiko<a class="headerlink" href="#exploring-paramiko" title="Permalink to this headline">¶</a></h1>
 <div class="figure align-center">
@@ -63,17 +167,6 @@
 <p class="caption">Thorazine Advertisement (<a class="reference external" href="http://simple.wikipedia.org/wiki/File:Thorazine_advert.jpg">source: wikipedia</a>)</p>
 </div>
 <p>This is an exploration of <a class="reference external" href="http://www.lag.net/paramiko/">paramiko,</a> a python implementation of an <a class="reference external" href="http://en.wikipedia.org/wiki/Secure_Shell">SSH client</a>. I will focus primarily on the <a class="reference external" href="http://www.lag.net/paramiko/docs/paramiko.SSHClient-class.html">SSHClient</a> class that it provides, as this is what I work with the most.</p>
-<p>Contents:</p>
-<blockquote>
-<div><ul class="simple">
-<li><a class="reference internal" href="#paramiko-readme-what"><em>Paramiko&#8217;s What</em></a></li>
-<li><a class="reference internal" href="#paramiko-api"><em>Paramiko&#8217;s API</em></a></li>
-<li><a class="reference internal" href="#paramiko-module-diagram"><em>Paramiko Module Diagram</em></a></li>
-<li><a class="reference internal" href="#paramiko-sshclient-class-diagram"><em>Paramiko SSHClient Class Diagram</em></a></li>
-<li><a class="reference internal" href="#paramiko-localhost-experiment"><em>A Localhost Experiment</em></a></li>
-<li><a class="reference internal" href="#paramiko-sshclient-connect"><em>Paramiko&#8217;s SSHClient.connect Method</em></a></li>
-</ul>
-</div></blockquote>
 <div class="section" id="paramiko-what">
 <span id="paramiko-readme-what"></span><h2>Paramiko What?<a class="headerlink" href="#paramiko-what" title="Permalink to this headline">¶</a></h2>
 <p>This is taken from the README file:</p>
@@ -133,14 +226,14 @@
 </div>
 <div class="section" id="the-connect-call">
 <h3>The Connect Call<a class="headerlink" href="#the-connect-call" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">client</span> <span class="o">=</span> <span class="n">SSHClient</span><span class="p">()</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">client</span> <span class="o">=</span> <span class="n">SSHClient</span><span class="p">()</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s">&#39;fakeuser&#39;</span><span class="p">)</span>
 <span class="k">except</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">SSHException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-    <span class="k">print</span> <span class="n">error</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>Server &#39;localhost&#39; not found in known_hosts
+<div class="code highlight-python"><div class="highlight"><pre>Server &#39;localhost&#39; not found in known_hosts
 </pre></div>
 </div>
 <p>Well, that didn&#8217;t work. If you look in the docstring for the SSHClient you will see that they recommend making a call to <tt class="docutils literal"><span class="pre">client.load_system_host_keys</span></tt>:</p>
@@ -163,18 +256,18 @@
 </tbody>
 </table>
 <p>So, let&#8217;s try that again.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">client</span><span class="o">.</span><span class="n">load_system_host_keys</span><span class="p">()</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">client</span><span class="o">.</span><span class="n">load_system_host_keys</span><span class="p">()</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s">&#39;fakeuser&#39;</span><span class="p">)</span>
 <span class="k">except</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">SSHException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-    <span class="k">print</span> <span class="n">error</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>Server &#39;localhost&#39; not found in known_hosts
+<div class="code highlight-python"><div class="highlight"><pre>Server &#39;localhost&#39; not found in known_hosts
 </pre></div>
 </div>
 <p>Looking at my earlier code (from the original <cite>ApeTools</cite>), I&#8217;m setting the missing-host-key-policy with a method call:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c"># this was in the ape</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c"># this was in the ape</span>
 <span class="n">client</span><span class="o">.</span><span class="n">set_missing_host_key_policy</span><span class="p">(</span><span class="n">paramiko</span><span class="o">.</span><span class="n">AutoAddPolicy</span><span class="p">())</span>
 <span class="n">client</span><span class="o">.</span><span class="n">load_system_host_keys</span><span class="p">()</span>
 
@@ -182,13 +275,13 @@
     <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s">&#39;fakeuser&#39;</span><span class="p">)</span>
     <span class="n">stdin</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="s">&#39;ls&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">stdout</span><span class="p">:</span>
-        <span class="k">print</span> <span class="s">&quot;StdOut: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;StdOut: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
 
 <span class="k">except</span> <span class="p">(</span><span class="ne">IOError</span><span class="p">,</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">SSHException</span><span class="p">)</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-    <span class="k">print</span> <span class="n">error</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>StdOut: examples.desktop
+<div class="code highlight-python"><div class="highlight"><pre>Private key file is encrypted
 </pre></div>
 </div>
 <p>Which seems to have fixed it (the output has the files my <cite>fakeuser</cite> has in  the home directory (I used <cite>adduser</cite> to add the <cite>fakeuser</cite> so there&#8217;s none of the default folders like <cite>Desktop</cite> or <cite>Documents</cite>)).</p>
@@ -248,7 +341,9 @@
 </tbody>
 </table>
 <p>Now that I know how to get it to work, maybe I can look at what actually happened. This is the the signature for the <tt class="docutils literal"><span class="pre">SSHClient.connect</span></tt> method:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">SSHClient</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">hostname</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">pkey</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">key_filename</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">allow_agent</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">look_for_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">sock</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">SSHClient</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">hostname</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">pkey</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                  <span class="n">key_filename</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">allow_agent</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                  <span class="n">look_for_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">sock</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>And the start of the docstring:</p>
@@ -271,83 +366,21 @@
 </div>
 
 
-          </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Exploring Paramiko</a><ul>
-<li><a class="reference internal" href="#paramiko-what">Paramiko What?</a><ul>
-<li><a class="reference internal" href="#what">What</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#the-api">The API</a></li>
-<li><a class="reference internal" href="#the-module-diagram">The Module Diagram</a></li>
-<li><a class="reference internal" href="#class-diagram">Class Diagram</a></li>
-<li><a class="reference internal" href="#a-localhost-experiment">A Localhost Experiment</a><ul>
-<li><a class="reference internal" href="#the-connect-api">The connect API</a></li>
-<li><a class="reference internal" href="#the-connect-call">The Connect Call</a></li>
-<li><a class="reference internal" href="#load-system-host-keys-api">Load System Host Keys API</a></li>
-<li><a class="reference internal" href="#the-related-api">The Related API</a><ul>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#the-sshclient-connect">The SSHClient.connect</a></li>
-</ul>
-</li>
-</ul>
-<h3>Navigation</h3>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../../user/index.html">User Documentation</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Developer Documentation</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../log_setter.html">Log Setter</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../main.html">The Main Entry Point</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html">The APE (Read Me)</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../components/index.html">The Components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../parts/index.html">Parts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../plugins/index.html">Plugins</a></li>
-</ul>
-
-
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
+    </div>
+      
+  </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2014, the cloistered monkey.
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
       
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
-      
-      |
-      <a href="../../../../_sources/documentation/developer/explorations/explore_paramiko/exploring_paramiko.txt"
-          rel="nofollow">Page source</a></li>
-    </div>
-
-    
-
-    
+    </p>
+    <p>
+        &copy; Copyright 2014, the cloistered monkey.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+    </p>
+  </div>
+</footer>
   </body>
 </html>

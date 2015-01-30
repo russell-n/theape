@@ -1,6 +1,8 @@
 An Exec Command Example
 =======================
 
+
+
 .. _paramiko-sshclient-exec_command:
 
 The SSHClient exec_command
@@ -24,128 +26,55 @@ nmap
 
 I want to see if paramiko will allow me to run commands as sudo. Since `nmap` will change its behavior (adding MAC addresses) if you run the ping-scan using `sudo` I can run it with and without root privileges and see if I get the expected output.
 
-::
+.. language:: python
+
+
+.. code:: python
 
     client = SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    client.connect('localhost', username='fakeuser')
+    client.connect('localhost', username='tester_tester')
     stdin, stdout, stderr = client.exec_command("nmap -sP '192.168.103.*'")
     for line in stdout:
-        print line
-    
+        print(line, end='')
 
-::
+.. code::
 
     
-    
-    Starting Nmap 6.00 ( http://nmap.org ) at 2013-11-04 11:50 PST
-    
+    Starting Nmap 6.40 ( http://nmap.org ) at 2015-01-22 15:29 MST
     Nmap scan report for 192.168.103.1
-    
-    Host is up (0.012s latency).
-    
-    Nmap scan report for acheron (192.168.103.15)
-    
-    Host is up (0.00057s latency).
-    
+    Host is up (0.018s latency).
     Nmap scan report for 192.168.103.16
-    
-    Host is up (0.00070s latency).
-    
-    Nmap scan report for 192.168.103.17
-    
-    Host is up (0.00069s latency).
-    
-    Nmap scan report for 192.168.103.19
-    
-    Host is up (0.026s latency).
-    
-    Nmap scan report for 192.168.103.20
-    
-    Host is up (0.00065s latency).
-    
-    Nmap scan report for 192.168.103.33
-    
-    Host is up (0.00073s latency).
-    
-    Nmap scan report for 192.168.103.50
-    
-    Host is up (0.00032s latency).
-    
-    Nmap done: 256 IP addresses (8 hosts up) scanned in 2.52 seconds
-    
+    Host is up (0.00035s latency).
+    Nmap done: 256 IP addresses (2 hosts up) scanned in 2.54 seconds
     
 
 
+
+nmap with sudo
+--------------
 
 And now with sudo.
 
-::
+
+.. code:: python
 
     stdin, stdout, stderr = client.exec_command('sudo nmap -sP "192.168.103.*"', get_pty=True)
-    stdin.write('fakepassword\n')
+    stdin.write('testertester\n')
     for line in stdout:
-        print line    
-    
+        print(line, end='')
 
-::
+.. code::
 
-    fakepassword
+    testertester
+    [sudo] password for tester_tester: 
     
-    [sudo] password for fakeuser: 
-    
-    
-    
-    Starting Nmap 6.00 ( http://nmap.org ) at 2013-11-04 11:50 PST
-    
+    Starting Nmap 6.40 ( http://nmap.org ) at 2015-01-22 15:29 MST
     Nmap scan report for 192.168.103.1
-    
-    Host is up (0.078s latency).
-    
-    MAC Address: 6C:41:6A:D8:90:47 (Unknown)
-    
-    Nmap scan report for acheron (192.168.103.15)
-    
-    Host is up (0.00018s latency).
-    
-    MAC Address: E8:E0:B7:A6:23:5F (Toshiba)
-    
+    Host is up (0.0031s latency).
     Nmap scan report for 192.168.103.16
-    
-    Host is up (0.00015s latency).
-    
-    MAC Address: 70:5A:B6:23:6C:1F (Compal Information (kunshan) CO.)
-    
-    Nmap scan report for 192.168.103.17
-    
-    Host is up (0.00045s latency).
-    
-    MAC Address: D4:BE:D9:38:4B:0F (Dell)
-    
-    Nmap scan report for 192.168.103.19
-    
-    Host is up (0.095s latency).
-    
-    MAC Address: 00:BB:3A:AB:47:37 (Unknown)
-    
-    Nmap scan report for 192.168.103.20
-    
-    Host is up (0.00056s latency).
-    
-    MAC Address: 00:14:D1:B0:D5:F0 (Trendnet)
-    
-    Nmap scan report for 192.168.103.33
-    
-    Host is up (0.00040s latency).
-    
-    MAC Address: D4:BE:D9:5B:AE:4B (Dell)
-    
-    Nmap scan report for 192.168.103.50
-    
-    Host is up.
-    
-    Nmap done: 256 IP addresses (8 hosts up) scanned in 9.91 seconds
-    
+    Host is up (0.051s latency).
+    Nmap done: 256 IP addresses (2 hosts up) scanned in 6.65 seconds
     
 
 
@@ -154,5 +83,4 @@ Two things to note -- one is that I didn't need to call the load_system_host_key
 
     sudo: no tty present and no askpass program specified
 
-
-
+.. warning:: The ``testertester`` line above ``[sudo] password for tester_tester:`` is the actual password that I entered so if you use this method the sudoer's password will be visible in the output.

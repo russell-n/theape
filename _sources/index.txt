@@ -1,12 +1,12 @@
 TheApe
 ======
 
-.. image:: figures/ape_in_suit.jpg
-   :align: center
+.. .. image:: figures/ape_in_suit.jpg
+..    :align: center
 
 
 
-It is being re-designed as a code runner as well as a repository of code components for building testing programs.
+This is an re-creation of an older framework using a rudimentary plugin system to make it easier to extend and  and to allow the user to run external code within it (provided that a plugin has been made for it).
 
 Written Documentation
 ---------------------
@@ -36,7 +36,6 @@ These are the documents created from the source files.
 .. toctree::
    :maxdepth: 1
 
-   Client Connections <clients/index.rst>
    The Components <components/index.rst>
    The Ape's Infrastructure <infrastructure/index.rst>
    Parts <parts/index.rst>
