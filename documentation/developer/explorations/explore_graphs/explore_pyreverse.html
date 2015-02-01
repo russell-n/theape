@@ -303,6 +303,33 @@ rankdir=BT
 <div class="section" id="plantuml">
 <h2>PlantUml<a class="headerlink" href="#plantuml" title="Permalink to this headline">¶</a></h2>
 <p>Now that I look at it, it seems like the formatting is not as nice as I would like. Compare this to plantuml:</p>
+<p class="plantuml">
+<img src="../../../../_images/plantuml-4e37b4e33d36fd271aa18b0fb5e96b5a88a2d0af.png" alt="BaseClass : NoneType _logger
+BaseClass: logger()
+BaseClass: __init__()
+TheHortator --|&gt; BaseClass
+TheHortator: Operations
+TheHortator: NoneType _countdown
+TheHortator : countdown()
+TheHortator: __call__()
+TheHortator: __init__()
+DummyClass --|&gt; BaseClass
+DummyClass: NoneType _logger
+DummyClass: __call__()
+DummyClass: __str__()
+DummyClass: __getattr__()
+DummyClass: __init__()
+CountDown o-- TheHortator : _countdown
+CountDown --|&gt; DummyClass
+CountDown : lap_start_time
+CountDown : start_time
+CountDown : IntType iteration
+CountDown : iterations
+CountDown : time_remaining()
+CountDown : start_timer()
+CountDown : next_iteration()
+CountDown : __init__()" />
+</p>
 <p>But the creation of the <cite>plantuml</cite> diagram was tedious and required a lot of building and looking up of syntax. On top of that, this is only a temporary implementation, thus the inclusion of the <tt class="docutils literal"><span class="pre">DummyClass</span></tt>, as the code changes I can re-generate this file and the <cite>pyreverse</cite> graph will update on its own. Additionally, if this is embedded directly into the hortator module then every time I weave it, the diagram will update itself without me paying any attention to it.</p>
 </div>
 <div class="section" id="conclusion">

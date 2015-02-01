@@ -3,7 +3,7 @@ The APE (Read Me)
 
 
 
-The `All-Purpose Experimenter` is a plugin-based system meant to create a unified front-end for different device-related testing. The documentation is on `pythonhosted <http://pythonhosted.org//theape/>`_.
+The `All-Purpose Experimenter` is a plugin-based system meant to create a unified front-end for different device-related testing. The stable documentation is on `pythonhosted <http://pythonhosted.org//theape/>`_, and the documentation for the on-going updates are on `github <https://rsnakamura.github.io/theape/>`_.
 
 Installation
 ------------
