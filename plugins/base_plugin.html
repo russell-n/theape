@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,19 +26,18 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../index.html" />
     <link rel="up" title="Plugins" href="index.html" />
     <link rel="next" title="theape.plugins.base_plugin.BasePlugin" href="api/theape.plugins.base_plugin.BasePlugin.html" />
-    <link rel="prev" title="theape.plugins.apeplugin.Ape.sections" href="api/theape.plugins.apeplugin.Ape.sections.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -149,11 +148,7 @@
               
                 
   <li>
-    <a href="api/theape.plugins.apeplugin.Ape.sections.html" title="Previous Chapter: theape.plugins.apeplugin.Ape.sections"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; theape.plugins.a...</span>
-    </a>
-  </li>
-  <li>
-    <a href="api/theape.plugins.base_plugin.BasePlugin.html" title="Next Chapter: theape.plugins.base_plugin.BasePlugin"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">theape.plugins.b... &raquo;</span>
+    <a href="api/theape.plugins.base_plugin.BasePlugin.html" title="Next Chapter: theape.plugins.base_plugin.BasePlugin"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">theape.plugin... &raquo;</span>
     </a>
   </li>
               
@@ -185,18 +180,18 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="module-theape.plugins.base_plugin">
 <span id="the-base-plugin"></span><h1>The Base Plugin<a class="headerlink" href="#module-theape.plugins.base_plugin" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="background">
 <span id="base-plugin"></span><h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
 <p>This module contains a <cite>BasePlugin</cite> class that forms the foundation of the <cite>ape</cite> plugin-system. Creating a <cite>BasePlugin</cite> makes it easier to add code as it provides a concrete target for the person adding the code, removes the need for the infrastructure code to be changed when plugins are added, and encourages documentation by providing a built-in online help-interface and auto-included <cite>rst</cite> files.</p>
-<p>In order to create a child of the <cite>BasePlugin</cite> you are required to implement two properties and one method: <tt class="docutils literal"><span class="pre">sections</span></tt>, <tt class="docutils literal"><span class="pre">product</span></tt>, and <tt class="docutils literal"><span class="pre">fetch_config()</span></tt>. The <tt class="docutils literal"><span class="pre">sections</span></tt> and <tt class="docutils literal"><span class="pre">fetch_config</span></tt> are for the user-interface while the <tt class="docutils literal"><span class="pre">product</span></tt> should be the object to run. The <tt class="docutils literal"><span class="pre">sections</span></tt> can be <tt class="docutils literal"><span class="pre">None</span></tt> if you do not want the online help, but should otherwise be a dictionary with section-names as keys and content-strings as values. It will be passed to the <a class="reference internal" href="../parts/helppage/helppage.html#id1"><em>HelpPage</em></a> so you should see that if you want to know what will be done with the <tt class="docutils literal"><span class="pre">sections</span></tt> property. If the ordering is important use a <tt class="docutils literal"><span class="pre">collections.OrderedDict</span></tt>. The
-<tt class="docutils literal"><span class="pre">fetch_config</span></tt> is expected to be a method that sends a sample config-file snippet to stdout. I chose stdout rather than to disk because it allows the user to append it to existing files using redirection <tt class="docutils literal"><span class="pre">&gt;&gt;</span></tt> and it also serves as a prompt for those who just need to remember what the configuration should look like (I also had problems with users accidentally clobbering their configurations by pulling sample files). The <tt class="docutils literal"><span class="pre">product</span></tt> should be the built-object for the code to run (only the <tt class="docutils literal"><span class="pre">__call__</span></tt> method will be used so that has to be implemented on the <tt class="docutils literal"><span class="pre">product</span></tt>). When the child-plugin is implemented, it will be passed a <cite>ConfigObj</cite>.</p>
-<p>The <em class="xref std std-ref">QuarterMaster</em> looks for child-classes of the <cite>BasePlugin</cite> when deciding what is a valid plugin, so besides defining an implementation expectation for the new plugin, the <cite>BasePlugin</cite> also provides the means for inclusion in the <cite>ape</cite> (even if you drop a module in this folder, if nothing in it is a child of the <cite>BasePlugin</cite> it will be ignored). To check if it contains a <cite>BasePlugin</cite> the module has to be imported so be careful with globals and imports.</p>
-<p>The <cite>BasePlugin</cite> class and the <tt class="docutils literal"><span class="pre">plugins</span></tt> package also provides the foundation for user help. As noted above, the <tt class="docutils literal"><span class="pre">sections</span></tt> and <tt class="docutils literal"><span class="pre">fetch_config</span></tt> are meant for online help and in addition to this the <tt class="docutils literal"><span class="pre">index.pnw</span></tt> file contains code to include any <tt class="docutils literal"><span class="pre">rst</span></tt> files in the <tt class="docutils literal"><span class="pre">plugins</span></tt> directory so adding documentation files here will add the text to the documentation when it is regenerated:</p>
-<div class="highlight-python"><div class="highlight"><pre>Pweave index.pnw
+<p>In order to create a child of the <cite>BasePlugin</cite> you are required to implement two properties and one method: <code class="docutils literal"><span class="pre">sections</span></code>, <code class="docutils literal"><span class="pre">product</span></code>, and <code class="docutils literal"><span class="pre">fetch_config()</span></code>. The <code class="docutils literal"><span class="pre">sections</span></code> and <code class="docutils literal"><span class="pre">fetch_config</span></code> are for the user-interface while the <code class="docutils literal"><span class="pre">product</span></code> should be the object to run. The <code class="docutils literal"><span class="pre">sections</span></code> can be <code class="docutils literal"><span class="pre">None</span></code> if you do not want the online help, but should otherwise be a dictionary with section-names as keys and content-strings as values. It will be passed to the <a class="reference internal" href="../parts/helppage/helppage.html#id1"><span>HelpPage</span></a> so you should see that if you want to know what will be done with the <code class="docutils literal"><span class="pre">sections</span></code> property. If the ordering is important use a <code class="docutils literal"><span class="pre">collections.OrderedDict</span></code>. The
+<code class="docutils literal"><span class="pre">fetch_config</span></code> is expected to be a method that sends a sample config-file snippet to stdout. I chose stdout rather than to disk because it allows the user to append it to existing files using redirection <code class="docutils literal"><span class="pre">&gt;&gt;</span></code> and it also serves as a prompt for those who just need to remember what the configuration should look like (I also had problems with users accidentally clobbering their configurations by pulling sample files). The <code class="docutils literal"><span class="pre">product</span></code> should be the built-object for the code to run (only the <code class="docutils literal"><span class="pre">__call__</span></code> method will be used so that has to be implemented on the <code class="docutils literal"><span class="pre">product</span></code>). When the child-plugin is implemented, it will be passed a <cite>ConfigObj</cite>.</p>
+<p>The <span class="xref std std-ref">QuarterMaster</span> looks for child-classes of the <cite>BasePlugin</cite> when deciding what is a valid plugin, so besides defining an implementation expectation for the new plugin, the <cite>BasePlugin</cite> also provides the means for inclusion in the <cite>ape</cite> (even if you drop a module in this folder, if nothing in it is a child of the <cite>BasePlugin</cite> it will be ignored). To check if it contains a <cite>BasePlugin</cite> the module has to be imported so be careful with globals and imports.</p>
+<p>The <cite>BasePlugin</cite> class and the <code class="docutils literal"><span class="pre">plugins</span></code> package also provides the foundation for user help. As noted above, the <code class="docutils literal"><span class="pre">sections</span></code> and <code class="docutils literal"><span class="pre">fetch_config</span></code> are meant for online help and in addition to this the <code class="docutils literal"><span class="pre">index.pnw</span></code> file contains code to include any <code class="docutils literal"><span class="pre">rst</span></code> files in the <code class="docutils literal"><span class="pre">plugins</span></code> directory so adding documentation files here will add the text to the documentation when it is regenerated:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>Pweave index.pnw
 </pre></div>
 </div>
 <p>To summarize, the <cite>BasePlugin</cite> is the main way to add code that will be exposed to the end user.</p>
@@ -222,11 +217,11 @@ BasePlugin : section_header" />
 </div>
 <div class="section" id="public-properties-and-methods">
 <h2>Public Properties and Methods<a class="headerlink" href="#public-properties-and-methods" title="Permalink to this headline">¶</a></h2>
-<p>The following are the public propeties and methods. The <tt class="docutils literal"><span class="pre">help_page</span></tt> and <tt class="docutils literal"><span class="pre">help()</span></tt> are the only implemented attributes, the rest need to be implemented by the inheriting classes.</p>
+<p>The following are the public propeties and methods. The <code class="docutils literal"><span class="pre">help_page</span></code> and <code class="docutils literal"><span class="pre">help()</span></code> are the only implemented attributes, the rest need to be implemented by the inheriting classes.</p>
 <div class="section" id="sections">
 <h3>Sections<a class="headerlink" href="#sections" title="Permalink to this headline">¶</a></h3>
 <p>The <cite>sections</cite> are a dictionary used by the help-page to create the screen-output. By defining this dictionary you are defining what the user will see when they enter:</p>
-<div class="highlight-python"><div class="highlight"><pre>ape help &lt;plugin-name&gt;
+<div class="highlight-python"><div class="highlight"><pre><span></span>ape help &lt;plugin-name&gt;
 </pre></div>
 </div>
 </div>
@@ -237,7 +232,7 @@ BasePlugin : section_header" />
 <div class="section" id="the-fetch-config">
 <h3>The Fetch Config<a class="headerlink" href="#the-fetch-config" title="Permalink to this headline">¶</a></h3>
 <p>The <cite>fetch_config</cite> method used to copy an example configuration file to the current working directory (thus its name). Since each plugin can provide its own sample, I decided that they should instead output them to standard out. Thus the user could do something like this:</p>
-<div class="highlight-python"><div class="highlight"><pre>ape fetch &gt; ape.ini
+<div class="highlight-python"><div class="highlight"><pre><span></span>ape fetch &gt; ape.ini
 ape fetch IperfSession &gt;&gt; ape.ini
 </pre></div>
 </div>
@@ -248,22 +243,22 @@ ape fetch IperfSession &gt;&gt; ape.ini
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.base_plugin.BasePlugin.html#theape.plugins.base_plugin.BasePlugin" title="theape.plugins.base_plugin.BasePlugin"><tt class="xref py py-obj docutils literal"><span class="pre">BasePlugin</span></tt></a>([configuration,&nbsp;section_header])</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.base_plugin.BasePlugin.html#theape.plugins.base_plugin.BasePlugin" title="theape.plugins.base_plugin.BasePlugin"><code class="xref py py-obj docutils literal"><span class="pre">BasePlugin</span></code></a>([configuration,&nbsp;section_header])</td>
 <td>An abstract base-class for plugins</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.base_plugin.BasePlugin.sections.html#theape.plugins.base_plugin.BasePlugin.sections" title="theape.plugins.base_plugin.BasePlugin.sections"><tt class="xref py py-obj docutils literal"><span class="pre">BasePlugin.sections</span></tt></a></td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.base_plugin.BasePlugin.sections.html#theape.plugins.base_plugin.BasePlugin.sections" title="theape.plugins.base_plugin.BasePlugin.sections"><code class="xref py py-obj docutils literal"><span class="pre">BasePlugin.sections</span></code></a></td>
 <td>A (ordered) dictionary for the help page</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.base_plugin.BasePlugin.help_page.html#theape.plugins.base_plugin.BasePlugin.help_page" title="theape.plugins.base_plugin.BasePlugin.help_page"><tt class="xref py py-obj docutils literal"><span class="pre">BasePlugin.help_page</span></tt></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.base_plugin.BasePlugin.help_page.html#theape.plugins.base_plugin.BasePlugin.help_page" title="theape.plugins.base_plugin.BasePlugin.help_page"><code class="xref py py-obj docutils literal"><span class="pre">BasePlugin.help_page</span></code></a></td>
 <td>A HelpPage to use if self.sections has been defined</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.base_plugin.BasePlugin.help.html#theape.plugins.base_plugin.BasePlugin.help" title="theape.plugins.base_plugin.BasePlugin.help"><tt class="xref py py-obj docutils literal"><span class="pre">BasePlugin.help</span></tt></a>([width])</td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.base_plugin.BasePlugin.help.html#theape.plugins.base_plugin.BasePlugin.help" title="theape.plugins.base_plugin.BasePlugin.help"><code class="xref py py-obj docutils literal"><span class="pre">BasePlugin.help</span></code></a>([width])</td>
 <td>Prints a help-string for the plugin</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.base_plugin.BasePlugin.product.html#theape.plugins.base_plugin.BasePlugin.product" title="theape.plugins.base_plugin.BasePlugin.product"><tt class="xref py py-obj docutils literal"><span class="pre">BasePlugin.product</span></tt></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.base_plugin.BasePlugin.product.html#theape.plugins.base_plugin.BasePlugin.product" title="theape.plugins.base_plugin.BasePlugin.product"><code class="xref py py-obj docutils literal"><span class="pre">BasePlugin.product</span></code></a></td>
 <td>Abstract Property: The plugin (Component implementation)</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.base_plugin.BasePlugin.fetch_config.html#theape.plugins.base_plugin.BasePlugin.fetch_config" title="theape.plugins.base_plugin.BasePlugin.fetch_config"><tt class="xref py py-obj docutils literal"><span class="pre">BasePlugin.fetch_config</span></tt></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.base_plugin.BasePlugin.fetch_config.html#theape.plugins.base_plugin.BasePlugin.fetch_config" title="theape.plugins.base_plugin.BasePlugin.fetch_config"><code class="xref py py-obj docutils literal"><span class="pre">BasePlugin.fetch_config</span></code></a>()</td>
 <td>Abstract Method: Get sample config-file snippet required by this plugin</td>
 </tr>
 </tbody>
@@ -279,7 +274,7 @@ ape fetch IperfSession &gt;&gt; ape.ini
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">BaseClass.logger</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">BaseClass.logger</span></code></td>
 <td></td>
 </tr>
 </tbody>
@@ -290,10 +285,10 @@ ape fetch IperfSession &gt;&gt; ape.ini
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.helppage.helppage.HelpPage.html#theape.parts.helppage.helppage.HelpPage" title="theape.parts.helppage.helppage.HelpPage"><tt class="xref py py-obj docutils literal"><span class="pre">HelpPage</span></tt></a>(sections[,&nbsp;headers,&nbsp;wrap,&nbsp;pager,&nbsp;...])</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.helppage.helppage.HelpPage.html#theape.parts.helppage.helppage.HelpPage" title="theape.parts.helppage.helppage.HelpPage"><code class="xref py py-obj docutils literal"><span class="pre">HelpPage</span></code></a>(sections[,&nbsp;headers,&nbsp;wrap,&nbsp;pager,&nbsp;...])</td>
 <td>A class to construct and print help-pages.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.helppage.helppage.HelpPage.__call__.html#theape.parts.helppage.helppage.HelpPage.__call__" title="theape.parts.helppage.helppage.HelpPage.__call__"><tt class="xref py py-obj docutils literal"><span class="pre">HelpPage.__call__</span></tt></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.helppage.helppage.HelpPage.__call__.html#theape.parts.helppage.helppage.HelpPage.__call__" title="theape.parts.helppage.helppage.HelpPage.__call__"><code class="xref py py-obj docutils literal"><span class="pre">HelpPage.__call__</span></code></a>()</td>
 <td>Sends the help-message to the pager</td>
 </tr>
 </tbody>
@@ -303,28 +298,28 @@ ape fetch IperfSession &gt;&gt; ape.ini
 <span id="ape-subconfiguration"></span><h2>The SubConfiguration<a class="headerlink" href="#the-subconfiguration" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="subconfigurationconstants">
 <h3>SubConfigurationConstants<a class="headerlink" href="#subconfigurationconstants" title="Permalink to this headline">¶</a></h3>
-<p>A holder of constants for the <tt class="docutils literal"><span class="pre">SubConfiguration</span></tt> so other code can reference them.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">SubConfigurationConstants</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<p>A holder of constants for the <code class="docutils literal"><span class="pre">SubConfiguration</span></code> so other code can reference them.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SubConfigurationConstants</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Holder of SubConfiguration constants</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__slots__</span> <span class="o">=</span> <span class="p">()</span>
-    <span class="n">plugin_option</span> <span class="o">=</span><span class="s">&#39;plugin&#39;</span>
-    <span class="n">updates_section_option</span> <span class="o">=</span> <span class="s">&#39;updates_section&#39;</span>
-    <span class="n">error_name</span> <span class="o">=</span> <span class="s">&#39;ConfigurationError&#39;</span>
-    <span class="n">bad_option_message</span> <span class="o">=</span> <span class="s">&quot;Option &#39;{option}&#39; in section &#39;{section}&#39; failed validation (error=&#39;{error}&#39;, should be {option_type})&quot;</span>
-    <span class="n">missing_option_message</span> <span class="o">=</span> <span class="s">&quot;Option &#39;{option}&#39; in section &#39;{section}&#39; of type {option_type} for plugin &#39;{plugin}&#39; required but missing&quot;</span>
-    <span class="n">missing_section_message</span> <span class="o">=</span> <span class="s">&quot;Section &#39;{section}&#39; to configure &#39;{plugin}&#39; not found in configuration&quot;</span>
-    <span class="n">missing_plugin_option_message</span> <span class="o">=</span> <span class="s">&quot;&#39;plugin&#39; option missing in section &#39;{0}&#39;&quot;</span>
-    <span class="n">missing_plugin_replacement</span> <span class="o">=</span> <span class="s">&quot;&lt;non-plugin&gt;&quot;</span>
-    <span class="n">extra_message</span> <span class="o">=</span> <span class="s">&quot;Extra {item_type} in section [{section}] - &#39;{name}&#39;&quot;</span>
-    <span class="n">check_rep_failure_message</span> <span class="o">=</span> <span class="s">&quot;Errors in section [{0}] in the configuration&quot;</span>
+    <span class="n">plugin_option</span> <span class="o">=</span><span class="s1">&#39;plugin&#39;</span>
+    <span class="n">updates_section_option</span> <span class="o">=</span> <span class="s1">&#39;updates_section&#39;</span>
+    <span class="n">error_name</span> <span class="o">=</span> <span class="s1">&#39;ConfigurationError&#39;</span>
+    <span class="n">bad_option_message</span> <span class="o">=</span> <span class="s2">&quot;Option &#39;{option}&#39; in section &#39;{section}&#39; failed validation (error=&#39;{error}&#39;, should be {option_type})&quot;</span>
+    <span class="n">missing_option_message</span> <span class="o">=</span> <span class="s2">&quot;Option &#39;{option}&#39; in section &#39;{section}&#39; of type {option_type} for plugin &#39;{plugin}&#39; required but missing&quot;</span>
+    <span class="n">missing_section_message</span> <span class="o">=</span> <span class="s2">&quot;Section &#39;{section}&#39; to configure &#39;{plugin}&#39; not found in configuration&quot;</span>
+    <span class="n">missing_plugin_option_message</span> <span class="o">=</span> <span class="s2">&quot;&#39;plugin&#39; option missing in section &#39;{0}&#39;&quot;</span>
+    <span class="n">missing_plugin_replacement</span> <span class="o">=</span> <span class="s2">&quot;&lt;non-plugin&gt;&quot;</span>
+    <span class="n">extra_message</span> <span class="o">=</span> <span class="s2">&quot;Extra {item_type} in section [{section}] - &#39;{name}&#39;&quot;</span>
+    <span class="n">check_rep_failure_message</span> <span class="o">=</span> <span class="s2">&quot;Errors in section [{0}] in the configuration&quot;</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="the-subconfiguration-abstract-sub-class">
 <h3>The SubConfiguration Abstract Sub Class<a class="headerlink" href="#the-subconfiguration-abstract-sub-class" title="Permalink to this headline">¶</a></h3>
-<p>The <em>SubConfiguration</em> is an abstract base class that provides both implemented methods and properties as well as abstract properties which child classes must implement. The intention is for plugin-building classes to build on it so that there is a reasonably uniform pattern across these builders. It is also meant to be a bridge between ConfigObj and the components of the APE or other code that underlies an Ape-plugin. The implementation is based around how ConfigObj handles the expected form of the plugin configuration file sections. This was originally the <tt class="docutils literal"><span class="pre">BaseConfiguration</span></tt> but when creating plugins for external code I found having one Configuration made things difficult, so this was created to allow the creation of configuration classes that only create the configuration without requiring that a <tt class="docutils literal"><span class="pre">product</span></tt> property be implemented.</p>
+<p>The <em>SubConfiguration</em> is an abstract base class that provides both implemented methods and properties as well as abstract properties which child classes must implement. The intention is for plugin-building classes to build on it so that there is a reasonably uniform pattern across these builders. It is also meant to be a bridge between ConfigObj and the components of the APE or other code that underlies an Ape-plugin. The implementation is based around how ConfigObj handles the expected form of the plugin configuration file sections. This was originally the <code class="docutils literal"><span class="pre">BaseConfiguration</span></code> but when creating plugins for external code I found having one Configuration made things difficult, so this was created to allow the creation of configuration classes that only create the configuration without requiring that a <code class="docutils literal"><span class="pre">product</span></code> property be implemented.</p>
 <p class="plantuml">
 <img src="../_images/plantuml-e141327eda81df38ec2d556bbe29a331984f0b9a.png" alt="SubClass &lt;|-- SubConfiguration
 SubConfiguration o- validate.Validator
@@ -337,7 +332,7 @@ SubConfiguration o- SubConfigurationConstants" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.html#theape.plugins.base_plugin.SubConfiguration" title="theape.plugins.base_plugin.SubConfiguration"><tt class="xref py py-obj docutils literal"><span class="pre">SubConfiguration</span></tt></a>(source,&nbsp;section_name[,&nbsp;...])</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.html#theape.plugins.base_plugin.SubConfiguration" title="theape.plugins.base_plugin.SubConfiguration"><code class="xref py py-obj docutils literal"><span class="pre">SubConfiguration</span></code></a>(source,&nbsp;section_name[,&nbsp;...])</td>
 <td>Abstract base class for configurations</td>
 </tr>
 </tbody>
@@ -351,17 +346,17 @@ SubConfiguration o- SubConfigurationConstants" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.configspec_source.html#theape.plugins.base_plugin.SubConfiguration.configspec_source" title="theape.plugins.base_plugin.SubConfiguration.configspec_source"><tt class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.configspec_source</span></tt></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.configspec_source.html#theape.plugins.base_plugin.SubConfiguration.configspec_source" title="theape.plugins.base_plugin.SubConfiguration.configspec_source"><code class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.configspec_source</span></code></a></td>
 <td>abstract: implement as configspec string</td>
 </tr>
 </tbody>
 </table>
 <div class="section" id="configspec-source">
 <h5>configspec_source<a class="headerlink" href="#configspec-source" title="Permalink to this headline">¶</a></h5>
-<p>The <tt class="docutils literal"><span class="pre">configspec_source</span></tt> property should be a string that specifies the form of the configuration for the plugin. The ConfigObj documentation on <a class="reference external" href="http://configobj.readthedocs.org/en/latest/configobj.html#validate">validation</a> has some information about it and the <a class="reference external" href="http://configobj.readthedocs.org/en/latest/validate.html#the-standard-functions">validate</a> documentation has a list of the functions that you can put in the configspec.</p>
+<p>The <code class="docutils literal"><span class="pre">configspec_source</span></code> property should be a string that specifies the form of the configuration for the plugin. The ConfigObj documentation on <a class="reference external" href="http://configobj.readthedocs.org/en/latest/configobj.html#validate">validation</a> has some information about it and the <a class="reference external" href="http://configobj.readthedocs.org/en/latest/validate.html#the-standard-functions">validate</a> documentation has a list of the functions that you can put in the configspec.</p>
 <div class="section" id="plugin">
 <h6><cite>plugin</cite><a class="headerlink" href="#plugin" title="Permalink to this headline">¶</a></h6>
-<p>The <cite>plugin</cite> option is used to match the configuration-file section with the plugin implementation so it is required (but there&#8217;s no way to enforce it within the configuration classes so the configurations will have to defer to the ApePlugin itself to raise an error when no <cite>plugin</cite> option is found). The value for the <cite>plugin</cite> option should be the name of the plugin class (it&#8217;s what the <a class="reference internal" href="quartermaster.html#ape-plugins-quartermaster"><em>QuarterMaster</em></a> uses as the key to the dictionary returned by the <a class="reference internal" href="../infrastructure/ryemother.html#ape-infrastructure-rye-mother"><em>RyeMother</em></a>).</p>
+<p>The <cite>plugin</cite> option is used to match the configuration-file section with the plugin implementation so it is required (but there&#8217;s no way to enforce it within the configuration classes so the configurations will have to defer to the ApePlugin itself to raise an error when no <cite>plugin</cite> option is found). The value for the <cite>plugin</cite> option should be the name of the plugin class (it&#8217;s what the <a class="reference internal" href="quartermaster.html#ape-plugins-quartermaster"><span>QuarterMaster</span></a> uses as the key to the dictionary returned by the <a class="reference internal" href="../infrastructure/ryemother.html#ape-infrastructure-rye-mother"><span>RyeMother</span></a>).</p>
 </div>
 <div class="section" id="updates-section">
 <h6><cite>updates_section</cite><a class="headerlink" href="#updates-section" title="Permalink to this headline">¶</a></h6>
@@ -370,25 +365,25 @@ SubConfiguration o- SubConfigurationConstants" />
 <div class="section" id="example">
 <h6>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h6>
 <p>As an example, suppose there is a plugin named <cite>FakePlugin</cite> that allows updating sections and has one required integer option (&#8216;age&#8217;) and one optional string option (&#8216;name&#8217;). The configspec_source for this configuration might be:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">configspec_source</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">plugin = option(FakePlugin)</span>
-<span class="s">updates_section = string(default=None)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">configspec_source</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">plugin = option(FakePlugin)</span>
+<span class="s2">updates_section = string(default=None)</span>
 
-<span class="s">age = integer</span>
-<span class="s">name = string(default=&#39;Ted&#39;)</span>
+<span class="s2">age = integer</span>
+<span class="s2">name = string(default=&#39;Ted&#39;)</span>
 
-<span class="s">[sub_section]</span>
-<span class="s">hwp = boolean(default=False)</span>
-<span class="s">&quot;&quot;&quot;</span>
+<span class="s2">[sub_section]</span>
+<span class="s2">hwp = boolean(default=False)</span>
+<span class="s2">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
-<p>The <tt class="docutils literal"><span class="pre">option(FakePlugin)</span></tt> specification requires that the term <tt class="docutils literal"><span class="pre">FakePlugin</span></tt> match exactly but as I mentioned it&#8217;s used by the Ape to find the plugin configuration so if it&#8217;s wrong then the configuration will never be validated anyway, but I figured it wouldn&#8217;t hurt to have an extra check in there.</p>
+<p>The <code class="docutils literal"><span class="pre">option(FakePlugin)</span></code> specification requires that the term <code class="docutils literal"><span class="pre">FakePlugin</span></code> match exactly but as I mentioned it&#8217;s used by the Ape to find the plugin configuration so if it&#8217;s wrong then the configuration will never be validated anyway, but I figured it wouldn&#8217;t hurt to have an extra check in there.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">There&#8217;s no section name in the configspec. Since there can be multiple plugin configurations in the <cite>PLUGINS</cite> section the section for a particular plugin has to be extracted from the <cite>PLUGINS</cite> section first so it won&#8217;t have the section header. This also means that any sub-sections added should start with first-level section headers (one-bracket pair, e.g. <tt class="docutils literal"><span class="pre">[sub_section]</span></tt>).</p>
+<p class="last">There&#8217;s no section name in the configspec. Since there can be multiple plugin configurations in the <cite>PLUGINS</cite> section the section for a particular plugin has to be extracted from the <cite>PLUGINS</cite> section first so it won&#8217;t have the section header. This also means that any sub-sections added should start with first-level section headers (one-bracket pair, e.g. <code class="docutils literal"><span class="pre">[sub_section]</span></code>).</p>
 </div>
 <p>An example configuration file might look like this.</p>
-<div class="highlight-ini"><div class="highlight"><pre><span class="k">[OPERATIONS]</span>
+<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="k">[OPERATIONS]</span>
 <span class="na">operation_1</span> <span class="o">=</span> <span class="s">fake_section</span>
 
 <span class="k">[PLUGINS]</span>
@@ -414,63 +409,63 @@ SubConfiguration o- SubConfigurationConstants" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.configspec.html#theape.plugins.base_plugin.SubConfiguration.configspec" title="theape.plugins.base_plugin.SubConfiguration.configspec"><tt class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.configspec</span></tt></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.configspec.html#theape.plugins.base_plugin.SubConfiguration.configspec" title="theape.plugins.base_plugin.SubConfiguration.configspec"><code class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.configspec</span></code></a></td>
 <td>A configspec built from configspec_source for validation</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.configuration.html#theape.plugins.base_plugin.SubConfiguration.configuration" title="theape.plugins.base_plugin.SubConfiguration.configuration"><tt class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.configuration</span></tt></a></td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.configuration.html#theape.plugins.base_plugin.SubConfiguration.configuration" title="theape.plugins.base_plugin.SubConfiguration.configuration"><code class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.configuration</span></code></a></td>
 <td>validates and sets the configuration using the source configuration</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.constants.html#theape.plugins.base_plugin.SubConfiguration.constants" title="theape.plugins.base_plugin.SubConfiguration.constants"><tt class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.constants</span></tt></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.constants.html#theape.plugins.base_plugin.SubConfiguration.constants" title="theape.plugins.base_plugin.SubConfiguration.constants"><code class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.constants</span></code></a></td>
 <td>object with string constants (see SubConfigurationConstants)</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.plugin_name.html#theape.plugins.base_plugin.SubConfiguration.plugin_name" title="theape.plugins.base_plugin.SubConfiguration.plugin_name"><tt class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.plugin_name</span></tt></a></td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.plugin_name.html#theape.plugins.base_plugin.SubConfiguration.plugin_name" title="theape.plugins.base_plugin.SubConfiguration.plugin_name"><code class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.plugin_name</span></code></a></td>
 <td>Gets the plugin name from the section</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.sample.html#theape.plugins.base_plugin.SubConfiguration.sample" title="theape.plugins.base_plugin.SubConfiguration.sample"><tt class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.sample</span></tt></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.sample.html#theape.plugins.base_plugin.SubConfiguration.sample" title="theape.plugins.base_plugin.SubConfiguration.sample"><code class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.sample</span></code></a></td>
 <td>Creates a sample configuration section using the configspec_source</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.validation_outcome.html#theape.plugins.base_plugin.SubConfiguration.validation_outcome" title="theape.plugins.base_plugin.SubConfiguration.validation_outcome"><tt class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.validation_outcome</span></tt></a></td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.validation_outcome.html#theape.plugins.base_plugin.SubConfiguration.validation_outcome" title="theape.plugins.base_plugin.SubConfiguration.validation_outcome"><code class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.validation_outcome</span></code></a></td>
 <td>Outcome of validating the configuration</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.validator.html#theape.plugins.base_plugin.SubConfiguration.validator" title="theape.plugins.base_plugin.SubConfiguration.validator"><tt class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.validator</span></tt></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.validator.html#theape.plugins.base_plugin.SubConfiguration.validator" title="theape.plugins.base_plugin.SubConfiguration.validator"><code class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.validator</span></code></a></td>
 <td>validator for the configuration</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.check_methods.html#theape.plugins.base_plugin.SubConfiguration.check_methods" title="theape.plugins.base_plugin.SubConfiguration.check_methods"><tt class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.check_methods</span></tt></a></td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.check_methods.html#theape.plugins.base_plugin.SubConfiguration.check_methods" title="theape.plugins.base_plugin.SubConfiguration.check_methods"><code class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.check_methods</span></code></a></td>
 <td>dict of extra check methods for the validator</td>
 </tr>
 </tbody>
 </table>
 <div class="section" id="configspec">
 <h5>configspec<a class="headerlink" href="#configspec" title="Permalink to this headline">¶</a></h5>
-<div class="figure align-center">
+<div class="figure align-center" id="id1">
 <img alt="../_images/baseconfiguration_configspec_activity.png" src="../_images/baseconfiguration_configspec_activity.png" />
-<p class="caption">Activity diagram for the configspec creation.</p>
+<p class="caption"><span class="caption-text">Activity diagram for the configspec creation.</span></p>
 </div>
 <p>This is a ConfigObj object that is created from the <cite>configspec_source</cite> and passed to the <cite>configuration</cite> when it is created so that it can be validated.</p>
 </div>
 <div class="section" id="configuration">
 <h5>configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h5>
-<div class="figure align-center">
+<div class="figure align-center" id="id2">
 <img alt="../_images/baseconfiguration_configuration_activity.png" src="../_images/baseconfiguration_configuration_activity.png" />
-<p class="caption">The <tt class="docutils literal"><span class="pre">configuration</span></tt> activity diagram.</p>
+<p class="caption"><span class="caption-text">The <code class="docutils literal"><span class="pre">configuration</span></code> activity diagram.</span></p>
 </div>
-<p>The <tt class="docutils literal"><span class="pre">configuration</span></tt> is a <cite>ConfigObj</cite> object built from the <tt class="docutils literal"><span class="pre">source</span></tt>, <tt class="docutils literal"><span class="pre">section_name</span></tt>, and <tt class="docutils literal"><span class="pre">configspec</span></tt> properties. If the <tt class="docutils literal"><span class="pre">updatable</span></tt> property is set to True, then the configuration will be passed to the <tt class="docutils literal"><span class="pre">update</span></tt> method before being validated and setting the <tt class="docutils literal"><span class="pre">validation_outcome</span></tt> property as a side-effect. The validation was put in this property so that child-classes wouldn&#8217;t have to do it as a separate step. This adds some redundancy if the <tt class="docutils literal"><span class="pre">validation_outcome</span></tt> is retrieved before the <tt class="docutils literal"><span class="pre">configuration</span></tt> is retrieved since the <tt class="docutils literal"><span class="pre">validation_outcome</span></tt> uses the <tt class="docutils literal"><span class="pre">configuration</span></tt> to call the <cite>validate</cite> method, but since validation is such an important thing, I decided it was worth it.</p>
+<p>The <code class="docutils literal"><span class="pre">configuration</span></code> is a <cite>ConfigObj</cite> object built from the <code class="docutils literal"><span class="pre">source</span></code>, <code class="docutils literal"><span class="pre">section_name</span></code>, and <code class="docutils literal"><span class="pre">configspec</span></code> properties. If the <code class="docutils literal"><span class="pre">updatable</span></code> property is set to True, then the configuration will be passed to the <code class="docutils literal"><span class="pre">update</span></code> method before being validated and setting the <code class="docutils literal"><span class="pre">validation_outcome</span></code> property as a side-effect. The validation was put in this property so that child-classes wouldn&#8217;t have to do it as a separate step. This adds some redundancy if the <code class="docutils literal"><span class="pre">validation_outcome</span></code> is retrieved before the <code class="docutils literal"><span class="pre">configuration</span></code> is retrieved since the <code class="docutils literal"><span class="pre">validation_outcome</span></code> uses the <code class="docutils literal"><span class="pre">configuration</span></code> to call the <cite>validate</cite> method, but since validation is such an important thing, I decided it was worth it.</p>
 </div>
 <div class="section" id="plugin-name">
 <h5>plugin_name<a class="headerlink" href="#plugin-name" title="Permalink to this headline">¶</a></h5>
-<div class="figure align-center">
+<div class="figure align-center" id="id3">
 <img alt="../_images/baseconfiguration_plugin_name_activity.png" src="../_images/baseconfiguration_plugin_name_activity.png" />
-<p class="caption">The <tt class="docutils literal"><span class="pre">plugin_name</span></tt> activity diagram.</p>
+<p class="caption"><span class="caption-text">The <code class="docutils literal"><span class="pre">plugin_name</span></code> activity diagram.</span></p>
 </div>
-<p>The <tt class="docutils literal"><span class="pre">plugin_name</span></tt> property is the name of the plugin as extracted from the configuration. As mentioned elsewhere, the configurations won&#8217;t be matched to the configuration section if this property is missing so this shouldn&#8217;t raise an error, but if for some reason it really is missing then calling this property will raise a <tt class="docutils literal"><span class="pre">ConfigurationError</span></tt>.</p>
+<p>The <code class="docutils literal"><span class="pre">plugin_name</span></code> property is the name of the plugin as extracted from the configuration. As mentioned elsewhere, the configurations won&#8217;t be matched to the configuration section if this property is missing so this shouldn&#8217;t raise an error, but if for some reason it really is missing then calling this property will raise a <code class="docutils literal"><span class="pre">ConfigurationError</span></code>.</p>
 </div>
 <div class="section" id="validation-outcome">
 <h5>validation_outcome<a class="headerlink" href="#validation-outcome" title="Permalink to this headline">¶</a></h5>
-<p>The <tt class="docutils literal"><span class="pre">validation_outcome</span></tt> holds the object returned by <cite>ConfigObj.validate</cite>.</p>
+<p>The <code class="docutils literal"><span class="pre">validation_outcome</span></code> holds the object returned by <cite>ConfigObj.validate</cite>.</p>
 </div>
 <div class="section" id="validator">
 <h5>validator<a class="headerlink" href="#validator" title="Permalink to this headline">¶</a></h5>
-<p>The <tt class="docutils literal"><span class="pre">validator</span></tt> is a <tt class="docutils literal"><span class="pre">validate.Validator</span></tt> object. It&#8217;s only used once but I put it here so I wouldn&#8217;t have to patch-mock it when testing.</p>
+<p>The <code class="docutils literal"><span class="pre">validator</span></code> is a <code class="docutils literal"><span class="pre">validate.Validator</span></code> object. It&#8217;s only used once but I put it here so I wouldn&#8217;t have to patch-mock it when testing.</p>
 </div>
 </div>
 <div class="section" id="methods">
@@ -481,63 +476,63 @@ SubConfiguration o- SubConfigurationConstants" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.check_extra_values.html#theape.plugins.base_plugin.SubConfiguration.check_extra_values" title="theape.plugins.base_plugin.SubConfiguration.check_extra_values"><tt class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.check_extra_values</span></tt></a>([warn_user])</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.check_extra_values.html#theape.plugins.base_plugin.SubConfiguration.check_extra_values" title="theape.plugins.base_plugin.SubConfiguration.check_extra_values"><code class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.check_extra_values</span></code></a>([warn_user])</td>
 <td>checks the configuration for values not in the configspec</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.check_rep.html#theape.plugins.base_plugin.SubConfiguration.check_rep" title="theape.plugins.base_plugin.SubConfiguration.check_rep"><tt class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.check_rep</span></tt></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.check_rep.html#theape.plugins.base_plugin.SubConfiguration.check_rep" title="theape.plugins.base_plugin.SubConfiguration.check_rep"><code class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.check_rep</span></code></a>()</td>
 <td>Calls process_errors</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.process_errors.html#theape.plugins.base_plugin.SubConfiguration.process_errors" title="theape.plugins.base_plugin.SubConfiguration.process_errors"><tt class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.process_errors</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.process_errors.html#theape.plugins.base_plugin.SubConfiguration.process_errors" title="theape.plugins.base_plugin.SubConfiguration.process_errors"><code class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.process_errors</span></code></a>()</td>
 <td>processes configuration, validation_outcome and logs the errors</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.update.html#theape.plugins.base_plugin.SubConfiguration.update" title="theape.plugins.base_plugin.SubConfiguration.update"><tt class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.update</span></tt></a>(section)</td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.update.html#theape.plugins.base_plugin.SubConfiguration.update" title="theape.plugins.base_plugin.SubConfiguration.update"><code class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.update</span></code></a>(section)</td>
 <td>Uses &#8216;updates_section&#8217; to build configuration from other section</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.__getattr__.html#theape.plugins.base_plugin.SubConfiguration.__getattr__" title="theape.plugins.base_plugin.SubConfiguration.__getattr__"><tt class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.__getattr__</span></tt></a>(key)</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.base_plugin.SubConfiguration.__getattr__.html#theape.plugins.base_plugin.SubConfiguration.__getattr__" title="theape.plugins.base_plugin.SubConfiguration.__getattr__"><code class="xref py py-obj docutils literal"><span class="pre">SubConfiguration.__getattr__</span></code></a>(key)</td>
 <td>Passes key to self.configuration</td>
 </tr>
 </tbody>
 </table>
 <div class="section" id="check-extra-values">
 <h5>check_extra_values<a class="headerlink" href="#check-extra-values" title="Permalink to this headline">¶</a></h5>
-<div class="figure align-center">
-<img src="../_images/check_extra_values_activity.svg" /><p class="caption">check_extra_values activity diagram</p>
+<div class="figure align-center" id="id4">
+<img src="../_images/check_extra_values_activity.svg" /><p class="caption"><span class="caption-text">check_extra_values activity diagram</span></p>
 </div>
-<p>The <tt class="docutils literal"><span class="pre">check_extra_values</span></tt> method uses the <tt class="docutils literal"><span class="pre">configobj.get_extra_values</span></tt> function to get the parts of the configuration that weren&#8217;t defined in the <tt class="docutils literal"><span class="pre">configspec</span></tt>. It logs the items it finds and then returns True if unrecognized items were in fact found in the configuration. The SubConfiguration doesn&#8217;t use this itself because I assume that some plugins won&#8217;t care if there are extra items (like the Dummy). It takes a single parameter (<tt class="docutils literal"><span class="pre">warn_users</span></tt>) that, if True (the default) will log the items found at the <cite>warning</cite> level, otherwise it logs them at the <cite>debug</cite> level.</p>
+<p>The <code class="docutils literal"><span class="pre">check_extra_values</span></code> method uses the <code class="docutils literal"><span class="pre">configobj.get_extra_values</span></code> function to get the parts of the configuration that weren&#8217;t defined in the <code class="docutils literal"><span class="pre">configspec</span></code>. It logs the items it finds and then returns True if unrecognized items were in fact found in the configuration. The SubConfiguration doesn&#8217;t use this itself because I assume that some plugins won&#8217;t care if there are extra items (like the Dummy). It takes a single parameter (<code class="docutils literal"><span class="pre">warn_users</span></code>) that, if True (the default) will log the items found at the <cite>warning</cite> level, otherwise it logs them at the <cite>debug</cite> level.</p>
 </div>
 <div class="section" id="check-rep">
 <h5>check_rep<a class="headerlink" href="#check-rep" title="Permalink to this headline">¶</a></h5>
-<div class="figure align-center">
+<div class="figure align-center" id="id5">
 <img alt="../_images/baseconfiguration_check_rep_activity.png" src="../_images/baseconfiguration_check_rep_activity.png" />
-<p class="caption">check_rep activity diagram</p>
+<p class="caption"><span class="caption-text">check_rep activity diagram</span></p>
 </div>
-<p>The <tt class="docutils literal"><span class="pre">check_rep</span></tt> method calls the <tt class="docutils literal"><span class="pre">process_errors</span></tt> method and the <tt class="docutils literal"><span class="pre">check_extra_values</span></tt> method, and if either returns True then <tt class="docutils literal"><span class="pre">check_rep</span></tt> raises a <tt class="docutils literal"><span class="pre">ConfigurationError</span></tt>. Child classes like the Dummy that don&#8217;t car about extra values should override this method.</p>
+<p>The <code class="docutils literal"><span class="pre">check_rep</span></code> method calls the <code class="docutils literal"><span class="pre">process_errors</span></code> method and the <code class="docutils literal"><span class="pre">check_extra_values</span></code> method, and if either returns True then <code class="docutils literal"><span class="pre">check_rep</span></code> raises a <code class="docutils literal"><span class="pre">ConfigurationError</span></code>. Child classes like the Dummy that don&#8217;t car about extra values should override this method.</p>
 </div>
 <div class="section" id="process-errors">
 <h5>process_errors<a class="headerlink" href="#process-errors" title="Permalink to this headline">¶</a></h5>
-<div class="figure align-center">
-<img src="../_images/baseconfiguration_process_errors_activity.svg" /><p class="caption">process_errors activity diagram</p>
+<div class="figure align-center" id="id6">
+<img src="../_images/baseconfiguration_process_errors_activity.svg" /><p class="caption"><span class="caption-text">process_errors activity diagram</span></p>
 </div>
-<p>The <tt class="docutils literal"><span class="pre">process_errors</span></tt> method uses <tt class="docutils literal"><span class="pre">configobj.flatten_errors</span></tt> to convert the validation outcome to a list of triples (sections, option-name, error). The first element in the tuple <tt class="docutils literal"><span class="pre">sections</span></tt> is a list of sections leading from the top-level of the configuration that was validated down to the sub-section where an error occurred. The SubConfiguration uses this and the <tt class="docutils literal"><span class="pre">section_name</span></tt> property to create a meaningful section name for the output. If the problem was that one of the options was invalid then the sections are traversed to the bottom section in sections and the missing or invalid option is logged. If the <tt class="docutils literal"><span class="pre">option</span></tt> value in the triple is None, then there was a missing section and so that is logged instead.</p>
-<p>If the validation was successful then the validation outcome will be True, so the <tt class="docutils literal"><span class="pre">process_errors</span></tt> method returns True if it failed and False if it passed (it&#8217;s almost the inverse of <tt class="docutils literal"><span class="pre">self.validation_outcome</span></tt> except that <tt class="docutils literal"><span class="pre">self.validation_outcome</span></tt> will only be a boolean if it&#8217;s True, otherwise it&#8217;s a dictionary that needs to be processed).</p>
+<p>The <code class="docutils literal"><span class="pre">process_errors</span></code> method uses <code class="docutils literal"><span class="pre">configobj.flatten_errors</span></code> to convert the validation outcome to a list of triples (sections, option-name, error). The first element in the tuple <code class="docutils literal"><span class="pre">sections</span></code> is a list of sections leading from the top-level of the configuration that was validated down to the sub-section where an error occurred. The SubConfiguration uses this and the <code class="docutils literal"><span class="pre">section_name</span></code> property to create a meaningful section name for the output. If the problem was that one of the options was invalid then the sections are traversed to the bottom section in sections and the missing or invalid option is logged. If the <code class="docutils literal"><span class="pre">option</span></code> value in the triple is None, then there was a missing section and so that is logged instead.</p>
+<p>If the validation was successful then the validation outcome will be True, so the <code class="docutils literal"><span class="pre">process_errors</span></code> method returns True if it failed and False if it passed (it&#8217;s almost the inverse of <code class="docutils literal"><span class="pre">self.validation_outcome</span></code> except that <code class="docutils literal"><span class="pre">self.validation_outcome</span></code> will only be a boolean if it&#8217;s True, otherwise it&#8217;s a dictionary that needs to be processed).</p>
 </div>
 <div class="section" id="update">
 <h5>update<a class="headerlink" href="#update" title="Permalink to this headline">¶</a></h5>
-<div class="figure align-center">
+<div class="figure align-center" id="id7">
 <img alt="../_images/baseconfiguration_update_activity.png" src="../_images/baseconfiguration_update_activity.png" />
-<p class="caption">update activity diagram</p>
+<p class="caption"><span class="caption-text">update activity diagram</span></p>
 </div>
-<p>The <tt class="docutils literal"><span class="pre">update</span></tt> method us used to create a plugin-configuration by updating another section. It checks if the section has the &#8216;updates_section&#8217; option (meaning the <tt class="docutils literal"><span class="pre">configspec</span></tt> for the plugin-configuration defined this option) and that its corresponding value is not None (meaning the user set a value for it in the configuration file). If it passes both of the conditions then a ConfigObj object is created from the section named by the <tt class="docutils literal"><span class="pre">updates_section</span></tt> value and then merges it with the current configuration. The merge will only change the values defined in the current section.</p>
-<p>In order for this to work properly, the configspec has to have default values for the options that the updating configuration leaves out and the updating configuration has to be merged with the base-configuration before it is validated (otherwise the defaults will be set and they&#8217;ll override the base-configuration). See the <a class="reference internal" href="../documentation/developer/explorations/explore_configobj/merging.html#ape-explorations-configobj-merging-defaults"><em>merging default values</em></a> section of the <cite>developer documentation</cite>.</p>
+<p>The <code class="docutils literal"><span class="pre">update</span></code> method us used to create a plugin-configuration by updating another section. It checks if the section has the &#8216;updates_section&#8217; option (meaning the <code class="docutils literal"><span class="pre">configspec</span></code> for the plugin-configuration defined this option) and that its corresponding value is not None (meaning the user set a value for it in the configuration file). If it passes both of the conditions then a ConfigObj object is created from the section named by the <code class="docutils literal"><span class="pre">updates_section</span></code> value and then merges it with the current configuration. The merge will only change the values defined in the current section.</p>
+<p>In order for this to work properly, the configspec has to have default values for the options that the updating configuration leaves out and the updating configuration has to be merged with the base-configuration before it is validated (otherwise the defaults will be set and they&#8217;ll override the base-configuration). See the <a class="reference internal" href="../documentation/developer/explorations/explore_configobj/merging.html#ape-explorations-configobj-merging-defaults"><span>merging default values</span></a> section of the <cite>developer documentation</cite>.</p>
 </div>
 <div class="section" id="getattr">
 <h5>__getattr__<a class="headerlink" href="#getattr" title="Permalink to this headline">¶</a></h5>
-<p>I implemented <tt class="docutils literal"><span class="pre">__getattr__</span></tt> so as a pass-through to the ConfigObj object that the SubConfiguration is holding. This is somewhat dangerous, but I wanted to use dot-notation. So these are equivalent:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">subconfiguration</span><span class="p">[</span><span class="s">&#39;someoption&#39;</span><span class="p">]</span>
+<p>I implemented <code class="docutils literal"><span class="pre">__getattr__</span></code> so as a pass-through to the ConfigObj object that the SubConfiguration is holding. This is somewhat dangerous, but I wanted to use dot-notation. So these are equivalent:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">subconfiguration</span><span class="p">[</span><span class="s1">&#39;someoption&#39;</span><span class="p">]</span>
 <span class="n">subconfiguration</span><span class="o">.</span><span class="n">someoption</span>
 </pre></div>
 </div>
-<p>But you&#8217;ll get a <tt class="docutils literal"><span class="pre">KeyValue</span></tt> error if the key doesn&#8217;t exist.</p>
+<p>But you&#8217;ll get a <code class="docutils literal"><span class="pre">KeyValue</span></code> error if the key doesn&#8217;t exist.</p>
 </div>
 </div>
 </div>
@@ -545,7 +540,7 @@ SubConfiguration o- SubConfigurationConstants" />
 <div class="section" id="baseconfiguration">
 <h2>BaseConfiguration<a class="headerlink" href="#baseconfiguration" title="Permalink to this headline">¶</a></h2>
 <p>In trying to implement a plugin for some external code, I realized that larger configurations are better handled by sub-configurations with a master-configuration grouping them together. But having the BaseConfiguration handle the configurations and building the product meant that these sub-configurations were forced to implement the <cite>product</cite> property even though they didn&#8217;t build anything. So the <cite>SubConfiguration</cite> was broken out and now the <cite>BaseConfiguration</cite> inherits from the <cite>SubConfiguration</cite> and handles the building of the product.</p>
-<p><strong>Update</strong>: I ran into a chicken-or-the-egg problem. If I try to instantiate the <cite>SubConfiguration</cite> instance it crashes because the <tt class="docutils literal"><span class="pre">configspec_source</span></tt> property is abstract. Looks like I&#8217;ll have to use inheritance.</p>
+<p><strong>Update</strong>: I ran into a chicken-or-the-egg problem. If I try to instantiate the <cite>SubConfiguration</cite> instance it crashes because the <code class="docutils literal"><span class="pre">configspec_source</span></code> property is abstract. Looks like I&#8217;ll have to use inheritance.</p>
 <p class="plantuml">
 <img src="../_images/plantuml-06b8e12da14406ac9a9b902970d42a29390d9d98.png" alt="SubConfiguration &lt;|-- BaseConfiguration
 BaseConfiguration : product" />
@@ -556,10 +551,10 @@ BaseConfiguration : product" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.base_plugin.BaseConfiguration.html#theape.plugins.base_plugin.BaseConfiguration" title="theape.plugins.base_plugin.BaseConfiguration"><tt class="xref py py-obj docutils literal"><span class="pre">BaseConfiguration</span></tt></a>(**kwargs)</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.base_plugin.BaseConfiguration.html#theape.plugins.base_plugin.BaseConfiguration" title="theape.plugins.base_plugin.BaseConfiguration"><code class="xref py py-obj docutils literal"><span class="pre">BaseConfiguration</span></code></a>(**kwargs)</td>
 <td>A BaseConfiguration to build the product and hold the configuration</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.base_plugin.BaseConfiguration.product.html#theape.plugins.base_plugin.BaseConfiguration.product" title="theape.plugins.base_plugin.BaseConfiguration.product"><tt class="xref py py-obj docutils literal"><span class="pre">BaseConfiguration.product</span></tt></a></td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.base_plugin.BaseConfiguration.product.html#theape.plugins.base_plugin.BaseConfiguration.product" title="theape.plugins.base_plugin.BaseConfiguration.product"><code class="xref py py-obj docutils literal"><span class="pre">BaseConfiguration.product</span></code></a></td>
 <td>abstract: A built product to run</td>
 </tr>
 </tbody>
@@ -580,7 +575,7 @@ BaseConfiguration : product" />
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

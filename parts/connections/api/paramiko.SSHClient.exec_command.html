@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../index.html" />
 <meta charset='utf-8'>
@@ -35,7 +35,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -128,16 +128,16 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="paramiko-sshclient-exec-command">
 <h1>paramiko.SSHClient.exec_command<a class="headerlink" href="#paramiko-sshclient-exec-command" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="paramiko.SSHClient.exec_command">
-<tt class="descclassname">SSHClient.</tt><tt class="descname">exec_command</tt><big>(</big><em>command</em>, <em>bufsize=-1</em>, <em>timeout=None</em>, <em>get_pty=False</em><big>)</big><a class="headerlink" href="#paramiko.SSHClient.exec_command" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">SSHClient.</code><code class="descname">exec_command</code><span class="sig-paren">(</span><em>command</em>, <em>bufsize=-1</em>, <em>timeout=None</em>, <em>get_pty=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/paramiko/client.html#SSHClient.exec_command"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#paramiko.SSHClient.exec_command" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute a command on the SSH server.  A new <cite>.Channel</cite> is opened and
 the requested command is executed.  The command&#8217;s input and output
-streams are returned as Python <tt class="docutils literal"><span class="pre">file</span></tt>-like objects representing
+streams are returned as Python <code class="docutils literal"><span class="pre">file</span></code>-like objects representing
 stdin, stdout, and stderr.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -145,7 +145,7 @@ stdin, stdout, and stderr.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>command</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the command to execute</li>
-<li><strong>bufsize</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; interpreted the same way as by the built-in <tt class="docutils literal"><span class="pre">file()</span></tt> function in
+<li><strong>bufsize</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; interpreted the same way as by the built-in <code class="docutils literal"><span class="pre">file()</span></code> function in
 Python</li>
 <li><strong>timeout</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; set command&#8217;s channel timeout. See <cite>Channel.settimeout</cite>.settimeout</li>
 </ul>
@@ -155,8 +155,7 @@ Python</li>
 3-tuple</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name" colspan="2">Raises SSHException:</th></tr>
-<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><p class="first last">if the server fails to execute the command</p>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>SSHException</strong> &#8211; if the server fails to execute the command</p>
 </td>
 </tr>
 </tbody>
@@ -178,7 +177,7 @@ Python</li>
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

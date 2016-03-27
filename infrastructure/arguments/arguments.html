@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../index.html" />
     <link rel="up" title="The Arguments" href="index.html" />
@@ -37,7 +37,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -140,11 +140,11 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="the-arguments">
 <h1>The Arguments<a class="headerlink" href="#the-arguments" title="Permalink to this headline">¶</a></h1>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="sd">&quot;&quot;&quot;APE (the all-purpose-evaluator)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;APE (the all-purpose-evaluator)</span>
 
 <span class="sd">Usage: ape -h | -v</span>
 <span class="sd">       ape [--debug|--silent] [--pudb|--pdb] &lt;command&gt; [&lt;argument&gt;...]</span>
@@ -189,36 +189,36 @@
 </div>
 <span class="target" id="module-theape.interface.arguments"></span><div class="section" id="the-argumentconstants">
 <span id="ape-interface-arguments-argumentconstants"></span><h2>The ArgumentConstants<a class="headerlink" href="#the-argumentconstants" title="Permalink to this headline">¶</a></h2>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ArgumentsConstants</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ArgumentsConstants</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Constants for the arguments</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__slots__</span> <span class="o">=</span> <span class="p">()</span>
-    <span class="n">debug</span> <span class="o">=</span> <span class="s">&quot;--debug&quot;</span>
-    <span class="n">silent</span> <span class="o">=</span> <span class="s">&#39;--silent&#39;</span>
-    <span class="n">pudb</span> <span class="o">=</span> <span class="s">&quot;--pudb&quot;</span>
-    <span class="n">pdb</span> <span class="o">=</span> <span class="s">&#39;--pdb&#39;</span>
-    <span class="n">trace</span> <span class="o">=</span> <span class="s">&#39;--trace&#39;</span>
-    <span class="n">callgraph</span> <span class="o">=</span> <span class="s">&#39;--callgraph&#39;</span>
-    <span class="n">command</span> <span class="o">=</span> <span class="s">&quot;&lt;command&gt;&quot;</span>
-    <span class="n">argument</span> <span class="o">=</span> <span class="s">&#39;&lt;argument&gt;&#39;</span>
-<span class="c"># end ArgumentConstants</span>
+    <span class="n">debug</span> <span class="o">=</span> <span class="s2">&quot;--debug&quot;</span>
+    <span class="n">silent</span> <span class="o">=</span> <span class="s1">&#39;--silent&#39;</span>
+    <span class="n">pudb</span> <span class="o">=</span> <span class="s2">&quot;--pudb&quot;</span>
+    <span class="n">pdb</span> <span class="o">=</span> <span class="s1">&#39;--pdb&#39;</span>
+    <span class="n">trace</span> <span class="o">=</span> <span class="s1">&#39;--trace&#39;</span>
+    <span class="n">callgraph</span> <span class="o">=</span> <span class="s1">&#39;--callgraph&#39;</span>
+    <span class="n">command</span> <span class="o">=</span> <span class="s2">&quot;&lt;command&gt;&quot;</span>
+    <span class="n">argument</span> <span class="o">=</span> <span class="s1">&#39;&lt;argument&gt;&#39;</span>
+<span class="c1"># end ArgumentConstants</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="the-basearguments">
 <span id="ape-interface-arguments-basearguments"></span><h2>The BaseArguments<a class="headerlink" href="#the-basearguments" title="Permalink to this headline">¶</a></h2>
-<p>This is the base-class for the newer docopt-based arguments. See the <a class="reference internal" href="../../documentation/developer/explorations/explore_docopt/reproducingape.html#docopt-reproducingape-ape-usage-string"><em>developer documentation</em></a> for a more detailed explanation of what&#8217;s going on. As a transitional feature, the BaseArgument class definition holds an instance of the UbootKommandant so that its children can access it.</p>
+<p>This is the base-class for the newer docopt-based arguments. See the <a class="reference internal" href="../../documentation/developer/explorations/explore_docopt/reproducingape.html#docopt-reproducingape-ape-usage-string"><span>developer documentation</span></a> for a more detailed explanation of what&#8217;s going on. As a transitional feature, the BaseArgument class definition holds an instance of the UbootKommandant so that its children can access it.</p>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/docopt.docopt.html#docopt.docopt" title="docopt.docopt"><tt class="xref py py-obj docutils literal"><span class="pre">docopt</span></tt></a>(doc[,&nbsp;argv,&nbsp;help,&nbsp;version,&nbsp;options_first])</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/docopt.docopt.html#docopt.docopt" title="docopt.docopt"><code class="xref py py-obj docutils literal"><span class="pre">docopt</span></code></a>(doc[,&nbsp;argv,&nbsp;help,&nbsp;version,&nbsp;options_first])</td>
 <td>Parse <cite>argv</cite> based on command-line interface described in <cite>doc</cite>.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/docopt.DocoptExit.html#docopt.DocoptExit" title="docopt.DocoptExit"><tt class="xref py py-obj docutils literal"><span class="pre">DocoptExit</span></tt></a>([message])</td>
+<tr class="row-even"><td><a class="reference internal" href="api/docopt.DocoptExit.html#docopt.DocoptExit" title="docopt.DocoptExit"><code class="xref py py-obj docutils literal"><span class="pre">DocoptExit</span></code></a>([message])</td>
 <td>Exit in case user invoked program with incorrect arguments.</td>
 </tr>
 </tbody>
@@ -237,34 +237,34 @@ BaseArguments o-- HelpArguments" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">BaseArguments</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">BaseArguments</span></code></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">BaseArguments.arguments</span></tt></td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">BaseArguments.arguments</span></code></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">BaseArguments.sub_arguments</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">BaseArguments.sub_arguments</span></code></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">BaseArguments.debug</span></tt></td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">BaseArguments.debug</span></code></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">BaseArguments.silent</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">BaseArguments.silent</span></code></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">BaseArguments.pudb</span></tt></td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">BaseArguments.pudb</span></code></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">BaseArguments.pdb</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">BaseArguments.pdb</span></code></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">BaseArguments.trace</span></tt></td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">BaseArguments.trace</span></code></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">BaseArguments.callgraph</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">BaseArguments.callgraph</span></code></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">BaseArguments.reset</span></tt></td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">BaseArguments.reset</span></code></td>
 <td></td>
 </tr>
 </tbody>
@@ -285,7 +285,7 @@ BaseArguments o-- HelpArguments" />
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

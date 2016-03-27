@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../index.html" />
     <link rel="up" title="Testing the Arguments" href="index.html" />
@@ -36,7 +36,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -132,7 +132,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="testing-the-runarguments">
 <h1>Testing The RunArguments<a class="headerlink" href="#testing-the-runarguments" title="Permalink to this headline">¶</a></h1>
@@ -143,17 +143,17 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestRunArguments.test_constructor</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">TestRunArguments.test_constructor</span></code></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestRunArguments.test_configfiles</span></tt></td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">TestRunArguments.test_configfiles</span></code></td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">TestRunArguments</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TestRunArguments</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;run&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">arguments</span> <span class="o">=</span> <span class="n">Run</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
         <span class="k">return</span>
 
@@ -161,9 +161,9 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Does it build properly?</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">arguments</span> <span class="o">=</span> <span class="n">Run</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="s">&#39;run&#39;</span><span class="p">)</span>
+        <span class="n">arguments</span> <span class="o">=</span> <span class="n">Run</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="s1">&#39;run&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">arguments</span><span class="p">,</span> <span class="n">BaseArguments</span><span class="p">)</span>
-        <span class="c"># test the inheritance</span>
+        <span class="c1"># test the inheritance</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">arguments</span><span class="o">.</span><span class="n">debug</span><span class="p">)</span>
         <span class="k">return</span>
 
@@ -171,13 +171,13 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Does it get the configfiles list?</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c"># test default</span>
+        <span class="c1"># test default</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arguments</span><span class="o">.</span><span class="n">configfiles</span><span class="p">,</span>
                          <span class="n">RunArgumentsConstants</span><span class="o">.</span><span class="n">default_configfiles</span><span class="p">)</span>
 
-        <span class="c">#test arguments</span>
+        <span class="c1">#test arguments</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">arguments</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
-        <span class="n">configfiles</span> <span class="o">=</span>  <span class="s">&#39;ape.ini cow.txt pie.bla&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">configfiles</span> <span class="o">=</span>  <span class="s1">&#39;ape.ini cow.txt pie.bla&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">arguments</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">+</span> <span class="n">configfiles</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arguments</span><span class="o">.</span><span class="n">configfiles</span><span class="p">,</span> <span class="n">configfiles</span><span class="p">)</span>
         <span class="k">return</span>
@@ -191,24 +191,24 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestRunStrategy.test_constructor</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">TestRunStrategy.test_constructor</span></code></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestRunStrategy.test_function</span></tt></td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">TestRunStrategy.test_function</span></code></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestRunStrategy.test_trace</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">TestRunStrategy.test_trace</span></code></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestRunStrategy.test_callgraph</span></tt></td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">TestRunStrategy.test_callgraph</span></code></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestRunStrategy.test_errors</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">TestRunStrategy.test_errors</span></code></td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">TestRunStrategy</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TestRunStrategy</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">build_ape</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span> <span class="o">=</span> <span class="n">RunStrategy</span><span class="p">()</span>
@@ -217,7 +217,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">callgraph</span> <span class="o">=</span> <span class="bp">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ape</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
 
-        <span class="c"># monkey-patch</span>
+        <span class="c1"># monkey-patch</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span><span class="o">.</span><span class="n">build_ape</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_ape</span>
         <span class="k">return</span>
 
@@ -233,14 +233,14 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Does it implement the strategy correctly?</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">configfiles</span> <span class="o">=</span> <span class="s">&#39;how now brown cow&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">configfiles</span> <span class="o">=</span> <span class="s1">&#39;how now brown cow&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">configfiles</span> <span class="o">=</span> <span class="n">configfiles</span>
-        <span class="c"># unsuccessful build</span>
+        <span class="c1"># unsuccessful build</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">build_ape</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">build_ape</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span><span class="n">configfiles</span><span class="p">)</span>
 
-        <span class="c"># succellful build</span>
+        <span class="c1"># succellful build</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">build_ape</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ape</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ape</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">()</span>
@@ -254,12 +254,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">trace</span> <span class="o">=</span> <span class="bp">True</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">build_ape</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ape</span>
 
-        <span class="c"># trace mocks the module import</span>
+        <span class="c1"># trace mocks the module import</span>
         <span class="n">trace</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
-        <span class="c"># tracer mocks the Trace object</span>
+        <span class="c1"># tracer mocks the Trace object</span>
         <span class="n">tracer</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
         <span class="n">trace</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">tracer</span>
-        <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s">&#39;trace.Trace&#39;</span><span class="p">,</span> <span class="n">trace</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s1">&#39;trace.Trace&#39;</span><span class="p">,</span> <span class="n">trace</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
             <span class="k">print</span><span class="p">(</span><span class="n">tracer</span><span class="o">.</span><span class="n">mock_calls</span><span class="p">)</span>
             <span class="n">tracer</span><span class="o">.</span><span class="n">runfunc</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ape</span><span class="p">)</span>
@@ -270,7 +270,7 @@
 <span class="sd">        Does it trap errors?</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">build_ape</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ape</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ape</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;oop&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ape</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;oop&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
         <span class="k">return</span>
 </pre></div>
@@ -291,7 +291,7 @@
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../index.html" />
     <link rel="up" title="The Ape’s Infrastructure" href="index.html" />
@@ -37,7 +37,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -108,7 +108,7 @@
               
                 
   <li>
-    <a href="api/theape.infrastructure.ryemother.RyeMother.__call__.html" title="Previous Chapter: theape.infrastructure.ryemother.RyeMother.__call__"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; theape.infrastru...</span>
+    <a href="api/theape.infrastructure.ryemother.RyeMother.__call__.html" title="Previous Chapter: theape.infrastructure.ryemother.RyeMother.__call__"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; theape.infras...</span>
     </a>
   </li>
               
@@ -140,11 +140,11 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="the-singletons">
 <h1>The Singletons<a class="headerlink" href="#the-singletons" title="Permalink to this headline">¶</a></h1>
-<p>This is a module to hold singletons. The (initial) problem it is trying to solve is the need for the plugins to be able to share a common composite without knowing about each other. In earlier incarnations if the APE I did something similar by having the <em>hortator</em> hold an object for others to share, but this ended up making the <em>hortator</em> large and complicated. The particular first-use will be for watchers which will be registered with a <a class="reference internal" href="../components/component.html#composite-class"><em>Composite</em></a> <a class="reference internal" href="../documentation/developer/explorations/explore_singletons/exploring_singeltons.html#ape-documentation-exploring-singletons"><em>Singleton</em></a>.</p>
+<p>This is a module to hold singletons. The (initial) problem it is trying to solve is the need for the plugins to be able to share a common composite without knowing about each other. In earlier incarnations if the APE I did something similar by having the <em>hortator</em> hold an object for others to share, but this ended up making the <em>hortator</em> large and complicated. The particular first-use will be for watchers which will be registered with a <a class="reference internal" href="../components/component.html#composite-class"><span>Composite</span></a> <a class="reference internal" href="../documentation/developer/explorations/explore_singletons/exploring_singeltons.html#ape-documentation-exploring-singletons"><span>Singleton</span></a>.</p>
 <div class="section" id="setting-up">
 <h2>Setting Up<a class="headerlink" href="#setting-up" title="Permalink to this headline">¶</a></h2>
 <p>The first thing to create is the <cite>singletons</cite> dictionary. I originally thought that it would be a <cite>name</cite>: object mapping but I think now it should be a <cite>name</cite>:{<cite>category</cite>:object} mapping so that categories of objects can share the same singleton. I am also creating a <cite>SingletonEnum</cite> to hold the string names for the types of singleton (the <cite>name</cite> in the previous sentence) so that any code that needs to refer to them can do so using dot-notation.</p>
@@ -154,7 +154,7 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">SingletonEnum</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">SingletonEnum</span></code></td>
 <td></td>
 </tr>
 </tbody>
@@ -162,14 +162,14 @@
 </div>
 <div class="section" id="get-composite">
 <h2>Get Composite<a class="headerlink" href="#get-composite" title="Permalink to this headline">¶</a></h2>
-<p>The Composite Singleton can be retrieved via the <tt class="docutils literal"><span class="pre">get_composite</span></tt> method. It takes a name to register the composite being retrieved so that multiple composites can be created (e.g. one composite for watchers, one for tests). Because I&#8217;m re-using the <a class="reference internal" href="../components/component.html#composite-class"><em>Composite</em></a> meant to create the Ape&#8217;s infrastructure the composite singleton&#8217;s need to have an exception and error-message passed in. To avoid interfering with the infrastructure&#8217;s error-handling I&#8217;m going to use a <a class="reference internal" href="errors.html#dont-catch-error"><em>DontCatchError</em></a> by default so that the Composite will crash if any of its components crashes. In the case of threaded components, this won&#8217;t work, of course, but we&#8217;ll se how it goes.</p>
+<p>The Composite Singleton can be retrieved via the <code class="docutils literal"><span class="pre">get_composite</span></code> method. It takes a name to register the composite being retrieved so that multiple composites can be created (e.g. one composite for watchers, one for tests). Because I&#8217;m re-using the <a class="reference internal" href="../components/component.html#composite-class"><span>Composite</span></a> meant to create the Ape&#8217;s infrastructure the composite singleton&#8217;s need to have an exception and error-message passed in. To avoid interfering with the infrastructure&#8217;s error-handling I&#8217;m going to use a <a class="reference internal" href="errors.html#dont-catch-error"><span>DontCatchError</span></a> by default so that the Composite will crash if any of its components crashes. In the case of threaded components, this won&#8217;t work, of course, but we&#8217;ll se how it goes.</p>
 <span class="target" id="module-theape.commoncode.singletons"></span><table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_composite</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">get_composite</span></code></td>
 <td></td>
 </tr>
 </tbody>
@@ -177,14 +177,14 @@
 </div>
 <div class="section" id="get-filestorage">
 <h2>Get FileStorage<a class="headerlink" href="#get-filestorage" title="Permalink to this headline">¶</a></h2>
-<p>The <tt class="docutils literal"><span class="pre">get_filestorage</span></tt> function gets a <em class="xref std std-ref">FileStorage</em> object. The intention is for each Operator Composite to set the path of the File Storage before creating its components, then each of the plugins can just open a file using the singleton. This creates a little bit of a different case from the composites in that if sub-groups are used they are going to need to copy the original file-storage and change its path (assuming the path will be different, which is the only case that I can think of where sub-groups might be useful).</p>
+<p>The <code class="docutils literal"><span class="pre">get_filestorage</span></code> function gets a <span class="xref std std-ref">FileStorage</span> object. The intention is for each Operator Composite to set the path of the File Storage before creating its components, then each of the plugins can just open a file using the singleton. This creates a little bit of a different case from the composites in that if sub-groups are used they are going to need to copy the original file-storage and change its path (assuming the path will be different, which is the only case that I can think of where sub-groups might be useful).</p>
 <span class="target" id="module-theape.commoncode.singletons"></span><table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_filestorage</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">get_filestorage</span></code></td>
 <td></td>
 </tr>
 </tbody>
@@ -192,21 +192,21 @@
 </div>
 <div class="section" id="refresh">
 <h2>Refresh<a class="headerlink" href="#refresh" title="Permalink to this headline">¶</a></h2>
-<p>The <tt class="docutils literal"><span class="pre">refresh</span></tt> function clears the <tt class="docutils literal"><span class="pre">singletons</span></tt> dictionary. It is meant to be called whenever a new operation is created so that the objects from previous operations aren&#8217;t still being held by the singletons. Since I don&#8217;t have a use-case for selectively destroying singletons it clears all of them, but you could selectively delete types or categories:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">theape.commoncode.singletons</span> <span class="kn">import</span> <span class="n">singletons</span><span class="p">,</span> <span class="n">SingletonEnum</span>
+<p>The <code class="docutils literal"><span class="pre">refresh</span></code> function clears the <code class="docutils literal"><span class="pre">singletons</span></code> dictionary. It is meant to be called whenever a new operation is created so that the objects from previous operations aren&#8217;t still being held by the singletons. Since I don&#8217;t have a use-case for selectively destroying singletons it clears all of them, but you could selectively delete types or categories:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">theape.commoncode.singletons</span> <span class="kn">import</span> <span class="n">singletons</span><span class="p">,</span> <span class="n">SingletonEnum</span>
 <span class="kn">from</span> <span class="nn">theape.commoncode.singletons</span> <span class="kn">import</span> <span class="n">refresh</span>
 
 <span class="n">enum</span> <span class="o">=</span> <span class="n">SingletonEnum</span>
 
-<span class="c"># delete a sub-category called &#39;test&#39;</span>
+<span class="c1"># delete a sub-category called &#39;test&#39;</span>
 
-<span class="k">del</span> <span class="n">singletons</span><span class="p">[</span><span class="n">enum</span><span class="o">.</span><span class="n">composite</span><span class="p">][</span><span class="s">&#39;test&#39;</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">singletons</span><span class="p">[</span><span class="n">enum</span><span class="o">.</span><span class="n">composite</span><span class="p">][</span><span class="s1">&#39;test&#39;</span><span class="p">]</span>
 
-<span class="c"># delete all the composites</span>
+<span class="c1"># delete all the composites</span>
 
 <span class="k">del</span> <span class="n">singletons</span><span class="p">[</span><span class="n">enum</span><span class="o">.</span><span class="n">composite</span><span class="p">]</span>
 
-<span class="c"># delete all the singletons</span>
+<span class="c1"># delete all the singletons</span>
 
 <span class="n">refresh</span><span class="p">()</span>
 </pre></div>
@@ -217,7 +217,7 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">refresh</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">refresh</span></code></td>
 <td></td>
 </tr>
 </tbody>
@@ -238,7 +238,7 @@
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

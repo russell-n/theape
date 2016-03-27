@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../../index.html" />
     <link rel="up" title="Sections" href="../sections.html" />
@@ -38,7 +38,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -103,11 +103,11 @@
               
                 
   <li>
-    <a href="configobj.Section.as_int.html" title="Previous Chapter: configobj.Section.as_int"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; configobj.Sectio...</span>
+    <a href="configobj.Section.as_int.html" title="Previous Chapter: configobj.Section.as_int"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; configobj.Sec...</span>
     </a>
   </li>
   <li>
-    <a href="configobj.Section.as_list.html" title="Next Chapter: configobj.Section.as_list"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">configobj.Sectio... &raquo;</span>
+    <a href="configobj.Section.as_list.html" title="Next Chapter: configobj.Section.as_list"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">configobj.Sec... &raquo;</span>
     </a>
   </li>
               
@@ -139,29 +139,27 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="configobj-section-as-float">
 <h1>configobj.Section.as_float<a class="headerlink" href="#configobj-section-as-float" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="configobj.Section.as_float">
-<tt class="descclassname">Section.</tt><tt class="descname">as_float</tt><big>(</big><em>key</em><big>)</big><a class="headerlink" href="#configobj.Section.as_float" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Section.</code><code class="descname">as_float</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/configobj.html#Section.as_float"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#configobj.Section.as_float" title="Permalink to this definition">¶</a></dt>
 <dd><p>A convenience method which coerces the specified value to a float.</p>
-<p>If the value is an invalid literal for <tt class="docutils literal"><span class="pre">float</span></tt>, a <tt class="docutils literal"><span class="pre">ValueError</span></tt> will
+<p>If the value is an invalid literal for <code class="docutils literal"><span class="pre">float</span></code>, a <code class="docutils literal"><span class="pre">ValueError</span></code> will
 be raised.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;fish&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">as_float</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">)</span>  
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;fish&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">as_float</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>  
 <span class="gt">Traceback (most recent call last):</span>
 <span class="gr">ValueError</span>: <span class="n">invalid literal for float(): fish</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="s">&#39;b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;1&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">as_float</span><span class="p">(</span><span class="s">&#39;b&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">as_float</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
 <span class="go">1.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="s">&#39;b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;3.2&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">as_float</span><span class="p">(</span><span class="s">&#39;b&#39;</span><span class="p">)</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;3.2&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">as_float</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>  
 <span class="go">3.2...</span>
-<span class="gt">Traceback (most recent call last):</span>
-<span class="gr">ValueError</span>: <span class="n">invalid literal for float(): fish</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -181,7 +179,7 @@ be raised.</p>
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

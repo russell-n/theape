@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../../index.html" />
 <meta charset='utf-8'>
@@ -35,7 +35,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -128,14 +128,14 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="the-help-sub-command">
 <h1>The Help Sub-Command<a class="headerlink" href="#the-help-sub-command" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="s">&#39;ape help -h&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="s1">&#39;ape help -h&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>usage: ape.interface.arguments help [-h] [-w WIDTH]
+<div class="highlight-python"><div class="highlight"><pre><span></span>usage: ape.interface.arguments help [-h] [-w WIDTH]
                                     [--modules [MODULES [MODULES ...]]]
                                     [name]
 
@@ -150,11 +150,11 @@ optional arguments:
                         Space-separated list of non-ape modules with plugins
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">commons</span> <span class="kn">import</span> <span class="n">help_usage</span>
-<span class="n">catch_exit</span><span class="p">(</span><span class="n">help_usage</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;--help&quot;</span><span class="p">])</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">commons</span> <span class="kn">import</span> <span class="n">help_usage</span>
+<span class="n">catch_exit</span><span class="p">(</span><span class="n">help_usage</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;--help&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>`help` sub-command
+<div class="highlight-python"><div class="highlight"><pre><span></span>`help` sub-command
 
 usage: ape help -h
        ape help [-w WIDTH] [--module &lt;module&gt;...] [&lt;name&gt;]
@@ -168,17 +168,17 @@ optional arguments:
     -m, --module &lt;module&gt;     non-ape module with plugins
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>output = docopt.docopt(usage, argv=&quot;help bob -w 30 -m cow.pipe&quot;.split(), op
+<div class="highlight-python"><div class="highlight"><pre><span></span>output = docopt.docopt(usage, argv=&quot;help bob -w 30 -m cow.pipe&quot;.split(), op
 tions_first=True)
 arguments = [output[&#39;&lt;command&gt;&#39;]] + output[&#39;&lt;argument&gt;&#39;]
 print docopt.docopt(help_usage, arguments)
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;--help&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
- <span class="s">&#39;--module&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;cow.pipe&#39;</span><span class="p">],</span>
- <span class="s">&#39;--width&#39;</span><span class="p">:</span> <span class="s">&#39;30&#39;</span><span class="p">,</span>
- <span class="s">&#39;&lt;name&gt;&#39;</span><span class="p">:</span> <span class="s">&#39;bob&#39;</span><span class="p">,</span>
- <span class="s">&#39;help&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;--help&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s1">&#39;--module&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;cow.pipe&#39;</span><span class="p">],</span>
+ <span class="s1">&#39;--width&#39;</span><span class="p">:</span> <span class="s1">&#39;30&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;&lt;name&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;bob&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;help&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -196,7 +196,7 @@ print docopt.docopt(help_usage, arguments)
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

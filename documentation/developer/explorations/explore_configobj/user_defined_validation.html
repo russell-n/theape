@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
     <link rel="up" title="Exploring ConfigObj" href="index.html" />
@@ -38,7 +38,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -108,11 +108,11 @@
               
                 
   <li>
-    <a href="api/configobj.Section.merge.html" title="Previous Chapter: configobj.Section.merge"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; configobj.Sectio...</span>
+    <a href="api/configobj.Section.merge.html" title="Previous Chapter: configobj.Section.merge"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; configobj.Sec...</span>
     </a>
   </li>
   <li>
-    <a href="api/ape.infrastructure.configurationmap.ConfigurationMap.get_relativetime.html" title="Next Chapter: ape.infrastructure.configurationmap.ConfigurationMap.get_relativetime"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">ape.infrastructu... &raquo;</span>
+    <a href="api/ape.infrastructure.configurationmap.ConfigurationMap.get_relativetime.html" title="Next Chapter: ape.infrastructure.configurationmap.ConfigurationMap.get_relativetime"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">ape.infrastru... &raquo;</span>
     </a>
   </li>
               
@@ -144,22 +144,22 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="user-defined-validation">
 <h1>User Defined Validation<a class="headerlink" href="#user-defined-validation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="a-more-complete-settings-section">
 <h2>A More Complete Settings Section<a class="headerlink" href="#a-more-complete-settings-section" title="Permalink to this headline">¶</a></h2>
 <p>One of the things that differs about the &#8216;SETTINGS&#8217; section in the <cite>ape</cite> is that I&#8217;m using ape-classes to create the time-objects (<cite>total_time</cite> and <cite>end_time</cite>).</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">settings_config</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">[SETTINGS]</span>
-<span class="s">repetitions = 11</span>
-<span class="s">total_time = 3 days 2 Hours 12 minutes</span>
-<span class="s">end_time = 8:00 pm</span>
-<span class="s">external_modules = tuna.annealing</span>
-<span class="s">subfolder = output</span>
-<span class="s">timestamp = HH:MM</span>
-<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">settings_config</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[SETTINGS]</span>
+<span class="s2">repetitions = 11</span>
+<span class="s2">total_time = 3 days 2 Hours 12 minutes</span>
+<span class="s2">end_time = 8:00 pm</span>
+<span class="s2">external_modules = tuna.annealing</span>
+<span class="s2">subfolder = output</span>
+<span class="s2">timestamp = HH:MM</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>The original APE used the configuration map to get them.</p>
@@ -169,10 +169,10 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../../plugins/api/ape.infrastructure.configurationmap.ConfigurationMap.get_relativetime.html#ape.infrastructure.configurationmap.ConfigurationMap.get_relativetime" title="ape.infrastructure.configurationmap.ConfigurationMap.get_relativetime"><tt class="xref py py-obj docutils literal"><span class="pre">ConfigurationMap.get_relativetime</span></tt></a>(section,&nbsp;...)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../../plugins/api/ape.infrastructure.configurationmap.ConfigurationMap.get_relativetime.html#ape.infrastructure.configurationmap.ConfigurationMap.get_relativetime" title="ape.infrastructure.configurationmap.ConfigurationMap.get_relativetime"><code class="xref py py-obj docutils literal"><span class="pre">ConfigurationMap.get_relativetime</span></code></a>(section,&nbsp;...)</td>
 <td>Gets a relativetime object based on the option (assumes value is timestamp) (see timemap.RelativeTime)</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../plugins/api/ape.infrastructure.configurationmap.ConfigurationMap.get_datetime.html#ape.infrastructure.configurationmap.ConfigurationMap.get_datetime" title="ape.infrastructure.configurationmap.ConfigurationMap.get_datetime"><tt class="xref py py-obj docutils literal"><span class="pre">ConfigurationMap.get_datetime</span></tt></a>(section,&nbsp;option)</td>
+<tr class="row-even"><td><a class="reference internal" href="../../plugins/api/ape.infrastructure.configurationmap.ConfigurationMap.get_datetime.html#ape.infrastructure.configurationmap.ConfigurationMap.get_datetime" title="ape.infrastructure.configurationmap.ConfigurationMap.get_datetime"><code class="xref py py-obj docutils literal"><span class="pre">ConfigurationMap.get_datetime</span></code></a>(section,&nbsp;option)</td>
 <td>Gets a datetime object based on the option (value is timestamp) (see timemap.AbsoluteTime)</td>
 </tr>
 </tbody>
@@ -183,24 +183,24 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../../../../infrastructure/api/ape.infrastructure.timemap.RelativeTime.html#ape.infrastructure.timemap.RelativeTime" title="ape.infrastructure.timemap.RelativeTime"><tt class="xref py py-obj docutils literal"><span class="pre">RelativeTime</span></tt></a>([source])</td>
+<tr class="row-odd"><td><a class="reference internal" href="../../../../infrastructure/api/ape.infrastructure.timemap.RelativeTime.html#ape.infrastructure.timemap.RelativeTime" title="ape.infrastructure.timemap.RelativeTime"><code class="xref py py-obj docutils literal"><span class="pre">RelativeTime</span></code></a>([source])</td>
 <td>A timedeltas extension</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/ape.infrastructure.timemap.AbsoluteTime.html#ape.infrastructure.timemap.AbsoluteTime" title="ape.infrastructure.timemap.AbsoluteTime"><tt class="xref py py-obj docutils literal"><span class="pre">AbsoluteTime</span></tt></a>([default,&nbsp;ignoretz,&nbsp;tzinfos,&nbsp;...])</td>
+<tr class="row-even"><td><a class="reference internal" href="api/ape.infrastructure.timemap.AbsoluteTime.html#ape.infrastructure.timemap.AbsoluteTime" title="ape.infrastructure.timemap.AbsoluteTime"><code class="xref py py-obj docutils literal"><span class="pre">AbsoluteTime</span></code></a>([default,&nbsp;ignoretz,&nbsp;tzinfos,&nbsp;...])</td>
 <td>A container for the dateutil.parser.parse</td>
 </tr>
 </tbody>
 </table>
 <p>This means we have to tell the validator to use these classes.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">section_spec</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">[SETTINGS]</span>
-<span class="s">repetitions = integer(min=0, default=1)</span>
-<span class="s">total_time = relative_time(default=None)</span>
-<span class="s">end_time = absolute_time(default=None)</span>
-<span class="s">external_modules = string(default=None)</span>
-<span class="s">subfolder = string(default=None)</span>
-<span class="s">timestamp = string(default=YY:HH:MM:SS)</span>
-<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">section_spec</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[SETTINGS]</span>
+<span class="s2">repetitions = integer(min=0, default=1)</span>
+<span class="s2">total_time = relative_time(default=None)</span>
+<span class="s2">end_time = absolute_time(default=None)</span>
+<span class="s2">external_modules = string(default=None)</span>
+<span class="s2">subfolder = string(default=None)</span>
+<span class="s2">timestamp = string(default=YY:HH:MM:SS)</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 
 <span class="n">settings_configspec</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">section_spec</span><span class="p">,</span>
                                 <span class="n">list_values</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
@@ -208,20 +208,20 @@
 </pre></div>
 </div>
 <p>Now we add the constructors to the validator. The key-names have to match what&#8217;s in the spec and the values have to be the actual function definitions (in this case the class definitions). This could also be set by passing in a dictionary when the Validator was created.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">validator</span> <span class="o">=</span> <span class="n">Validator</span><span class="p">()</span>
-<span class="n">validator</span><span class="o">.</span><span class="n">functions</span><span class="p">[</span><span class="s">&#39;relative_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">RelativeTime</span>
-<span class="n">validator</span><span class="o">.</span><span class="n">functions</span><span class="p">[</span><span class="s">&#39;absolute_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">AbsoluteTime</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">validator</span> <span class="o">=</span> <span class="n">Validator</span><span class="p">()</span>
+<span class="n">validator</span><span class="o">.</span><span class="n">functions</span><span class="p">[</span><span class="s1">&#39;relative_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">RelativeTime</span>
+<span class="n">validator</span><span class="o">.</span><span class="n">functions</span><span class="p">[</span><span class="s1">&#39;absolute_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">AbsoluteTime</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Now we try and validate the configuration.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">config</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">settings_config</span><span class="p">,</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">settings_config</span><span class="p">,</span>
                    <span class="n">configspec</span><span class="o">=</span><span class="n">settings_configspec</span><span class="p">)</span>
 <span class="n">config</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">validator</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Now the output.</p>
-<table border="1" class="docutils">
-<caption>Settings</caption>
+<table border="1" class="docutils" id="id1">
+<caption><span class="caption-text">Settings</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="33%" />
 <col width="33%" />
@@ -276,7 +276,7 @@
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

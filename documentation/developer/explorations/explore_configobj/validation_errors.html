@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
     <link rel="up" title="Exploring ConfigObj" href="index.html" />
@@ -38,7 +38,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -113,11 +113,11 @@
               
                 
   <li>
-    <a href="api/configobj.get_extra_values.html" title="Previous Chapter: configobj.get_extra_values"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; configobj.get_ex...</span>
+    <a href="api/configobj.get_extra_values.html" title="Previous Chapter: configobj.get_extra_values"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; configobj.get...</span>
     </a>
   </li>
   <li>
-    <a href="../explore_configparse/index.html" title="Next Chapter: Exploring ConfigParser"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Exploring Config... &raquo;</span>
+    <a href="../explore_configparse/index.html" title="Next Chapter: Exploring ConfigParser"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Exploring Con... &raquo;</span>
     </a>
   </li>
               
@@ -149,27 +149,27 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="validation-errors">
 <h1>Validation Errors<a class="headerlink" href="#validation-errors" title="Permalink to this headline">¶</a></h1>
 <p>This is an exploration of the <cite>flatten_errors</cite> function given to check validation errors.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">configobj</span> <span class="kn">import</span> <span class="n">ConfigObj</span><span class="p">,</span> <span class="n">flatten_errors</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">configobj</span> <span class="kn">import</span> <span class="n">ConfigObj</span><span class="p">,</span> <span class="n">flatten_errors</span>
 <span class="kn">from</span> <span class="nn">validate</span> <span class="kn">import</span> <span class="n">Validator</span>
 </pre></div>
 </div>
 <div class="section" id="literal-string">
 <h2>Literal String<a class="headerlink" href="#literal-string" title="Permalink to this headline">¶</a></h2>
 <p>One of the things that I want to check is to see if the plugin was given the correct configuration.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">configspec</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
-<span class="s">[TEST]</span>
-<span class="s">value = LiteralString</span>
-<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">configspec</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[TEST]</span>
+<span class="s2">value = LiteralString</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 
-<span class="n">config</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">[TEST]</span>
-<span class="s">value = NonLiteralString</span>
-<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<span class="n">config</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[TEST]</span>
+<span class="s2">value = NonLiteralString</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 
 <span class="n">config_spec</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">configspec</span><span class="p">,</span>
                         <span class="n">list_values</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
@@ -182,15 +182,15 @@
 <span class="k">print</span> <span class="n">outcome</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;TEST&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;value&#39;</span><span class="p">:</span> <span class="n">VdtUnknownCheckError</span><span class="p">(</span><span class="s">&#39;the check &quot;LiteralString&quot; is unknown.&#39;</span><span class="p">,)}}</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;TEST&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">VdtUnknownCheckError</span><span class="p">(</span><span class="s1">&#39;the check &quot;LiteralString&quot; is unknown.&#39;</span><span class="p">,)}}</span>
 </pre></div>
 </div>
 <p>So, it appears that you can&#8217;t just make up names in the configspec. What if we give it a single option?
 .. &#8216;</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">configspec</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
-<span class="s">[TEST]</span>
-<span class="s">value = option(&#39;LiteralString&#39;)</span>
-<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">configspec</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[TEST]</span>
+<span class="s2">value = option(&#39;LiteralString&#39;)</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 
 <span class="n">config_spec</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">configspec</span><span class="p">,</span>
                         <span class="n">list_values</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
@@ -201,15 +201,15 @@
 <span class="k">print</span> <span class="n">outcome</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;TEST&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;value&#39;</span><span class="p">:</span> <span class="n">VdtValueError</span><span class="p">(</span><span class="s">&#39;the value &quot;NonLiteralString&quot; is unacceptable.&#39;</span><span class="p">,)}}</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;TEST&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">VdtValueError</span><span class="p">(</span><span class="s1">&#39;the value &quot;NonLiteralString&quot; is unacceptable.&#39;</span><span class="p">,)}}</span>
 </pre></div>
 </div>
 <p>This seems to be what we want. But now how do you use <cite>flatten_errors</cite>? First, let&#8217;s see what <cite>outcome</cite> is when the value is correct.
 .. &#8216;</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">config</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">[TEST]</span>
-<span class="s">value = LiteralString</span>
-<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[TEST]</span>
+<span class="s2">value = LiteralString</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 
 <span class="n">configuration</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">config</span><span class="p">,</span>
                           <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
@@ -217,12 +217,12 @@
 <span class="k">print</span> <span class="n">outcome</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="bp">True</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="bp">True</span>
 </pre></div>
 </div>
 <p>So, instead of a dictionary it returns <cite>True</cite>. Now let&#8217;s try and flatten the errors.
 .. &#8216;</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">process_errors</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">outcome</span><span class="p">):</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">process_errors</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">outcome</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Uses `flatten_errors` to find bad values</span>
 
@@ -234,18 +234,18 @@
     <span class="k">if</span> <span class="n">outcome</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">section_list</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">flatten_errors</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">outcome</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="k">print</span> <span class="s">&quot;The &#39;{0}&#39; key in section &#39;{1}&#39; failed validation (error=&#39;{2}&#39;)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span>
-                                                                                <span class="s">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">section_list</span><span class="p">),</span>
+                <span class="k">print</span> <span class="s2">&quot;The &#39;{0}&#39; key in section &#39;{1}&#39; failed validation (error=&#39;{2}&#39;)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span>
+                                                                                <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">section_list</span><span class="p">),</span>
                                                                                 <span class="n">error</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">print</span> <span class="s">&quot;The &#39;{0}&#39; section was missing&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">section_list</span><span class="p">))</span>
+                <span class="k">print</span> <span class="s2">&quot;The &#39;{0}&#39; section was missing&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">section_list</span><span class="p">))</span>
     <span class="k">return</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">config</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">[TEST]</span>
-<span class="s">value = BadValue</span>
-<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[TEST]</span>
+<span class="s2">value = BadValue</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 
 <span class="n">configuration</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">config</span><span class="p">,</span>
                           <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
@@ -253,42 +253,42 @@
 <span class="n">process_errors</span><span class="p">(</span><span class="n">configuration</span><span class="p">,</span> <span class="n">outcome</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>The &#39;value&#39; key in section &#39;TEST&#39; failed validation (error=&#39;the value &quot;BadValue&quot; is unacceptable.&#39;)
+<div class="highlight-python"><div class="highlight"><pre><span></span>The &#39;value&#39; key in section &#39;TEST&#39; failed validation (error=&#39;the value &quot;BadValue&quot; is unacceptable.&#39;)
 </pre></div>
 </div>
 </div>
 <div class="section" id="missing-value">
 <h2>Missing Value<a class="headerlink" href="#missing-value" title="Permalink to this headline">¶</a></h2>
 <p>Okay, so that was the bad-value. What about a missing value?</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">config_spec</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">[TEST]</span>
-<span class="s">option_1 = option(&#39;LiteralStringValue&#39;)</span>
-<span class="s">option_2 = integer</span>
-<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">config_spec</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[TEST]</span>
+<span class="s2">option_1 = option(&#39;LiteralStringValue&#39;)</span>
+<span class="s2">option_2 = integer</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 <span class="n">configspec</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">config_spec</span><span class="p">,</span>
                        <span class="n">list_values</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
                        <span class="n">_inspec</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Now the configuration.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">config</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">[TEST]</span>
-<span class="s">option_1 = LiteralStringValue</span>
-<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[TEST]</span>
+<span class="s2">option_1 = LiteralStringValue</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 
 <span class="n">configuration</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
 <span class="n">outcome</span> <span class="o">=</span> <span class="n">configuration</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">validator</span><span class="p">,</span> <span class="n">preserve_errors</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">process_errors</span><span class="p">(</span><span class="n">configuration</span><span class="p">,</span> <span class="n">outcome</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>The &#39;option_2&#39; key in section &#39;TEST&#39; failed validation (error=&#39;False&#39;)
+<div class="highlight-python"><div class="highlight"><pre><span></span>The &#39;option_2&#39; key in section &#39;TEST&#39; failed validation (error=&#39;False&#39;)
 </pre></div>
 </div>
 <p>That didn&#8217;t work the way I thought it would. It looks like setting <cite>preserve_errors</cite> changes the behavior... I need to change <cite>process_errors</cite>.
 .. &#8216;</p>
 <div class="section" id="process-errors-2">
 <h3>Process Errors 2<a class="headerlink" href="#process-errors-2" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">process_errors_2</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">outcome</span><span class="p">):</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">process_errors_2</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">outcome</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Uses `flatten_errors` to find bad values</span>
 
@@ -299,27 +299,27 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">outcome</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">sections</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">flatten_errors</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">outcome</span><span class="p">):</span>
-            <span class="n">section</span> <span class="o">=</span> <span class="s">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sections</span><span class="p">)</span>
+            <span class="n">section</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sections</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">option</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
 
                 <span class="k">if</span> <span class="n">error</span><span class="p">:</span>
-                    <span class="k">print</span> <span class="s">&quot;Option &#39;{0}&#39; in section &#39;{1}&#39; failed validation (error=&#39;{2}&#39;)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">option</span><span class="p">,</span>
+                    <span class="k">print</span> <span class="s2">&quot;Option &#39;{0}&#39; in section &#39;{1}&#39; failed validation (error=&#39;{2}&#39;)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">option</span><span class="p">,</span>
                                                                                                 <span class="n">section</span><span class="p">,</span>
                                                                                                 <span class="n">error</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="k">print</span> <span class="s">&quot;Option &#39;{0}&#39; in section &#39;{1}&#39; was missing.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">option</span><span class="p">,</span>
+                    <span class="k">print</span> <span class="s2">&quot;Option &#39;{0}&#39; in section &#39;{1}&#39; was missing.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">option</span><span class="p">,</span>
                                                                                 <span class="n">section</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">print</span> <span class="s">&quot;The &#39;{0}&#39; section was missing&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
+                <span class="k">print</span> <span class="s2">&quot;The &#39;{0}&#39; section was missing&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
     <span class="k">return</span>
 </pre></div>
 </div>
 <p>Now check again.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">outcome</span> <span class="o">=</span> <span class="n">configuration</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">validator</span><span class="p">,</span> <span class="n">preserve_errors</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">outcome</span> <span class="o">=</span> <span class="n">configuration</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">validator</span><span class="p">,</span> <span class="n">preserve_errors</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">process_errors_2</span><span class="p">(</span><span class="n">configuration</span><span class="p">,</span> <span class="n">outcome</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>Option &#39;option_2&#39; in section &#39;TEST&#39; was missing.
+<div class="highlight-python"><div class="highlight"><pre><span></span>Option &#39;option_2&#39; in section &#39;TEST&#39; was missing.
 </pre></div>
 </div>
 </div>
@@ -328,11 +328,11 @@
 <h2>All Bad Values<a class="headerlink" href="#all-bad-values" title="Permalink to this headline">¶</a></h2>
 <p>Now that we have a working <cite>process_errors_2</cite> function, let&#8217;s see what happens if both the values are bad.
 .. &#8216;</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">config</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">[TEST]</span>
-<span class="s">option_1 = BadValue</span>
-<span class="s">option_2 = apple</span>
-<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[TEST]</span>
+<span class="s2">option_1 = BadValue</span>
+<span class="s2">option_2 = apple</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 
 <span class="n">configuration</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">config</span><span class="p">,</span>
                           <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
@@ -340,7 +340,7 @@
 <span class="n">process_errors_2</span><span class="p">(</span><span class="n">configuration</span><span class="p">,</span> <span class="n">outcome</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>Option &#39;option_1&#39; in section &#39;TEST&#39; failed validation (error=&#39;the value &quot;BadValue&quot; is unacceptable.&#39;)
+<div class="highlight-python"><div class="highlight"><pre><span></span>Option &#39;option_1&#39; in section &#39;TEST&#39; failed validation (error=&#39;the value &quot;BadValue&quot; is unacceptable.&#39;)
 Option &#39;option_2&#39; in section &#39;TEST&#39; failed validation (error=&#39;the value &quot;apple&quot; is of the wrong type.&#39;)
 </pre></div>
 </div>
@@ -349,22 +349,22 @@ Option &#39;option_2&#39; in section &#39;TEST&#39; failed validation (error=&#3
 <h2>Missing Section<a class="headerlink" href="#missing-section" title="Permalink to this headline">¶</a></h2>
 <p>Just for completeness, we&#8217;ll make sure that the <cite>process_errors_2</cite> function handles missing sections correctly.
 .. &#8216;</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">config_spec</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">[TEST]</span>
-<span class="s">option_1 = integer</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">config_spec</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[TEST]</span>
+<span class="s2">option_1 = integer</span>
 
-<span class="s">[[SUBTEST]]</span>
-<span class="s">option_2 = float</span>
-<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<span class="s2">[[SUBTEST]]</span>
+<span class="s2">option_2 = float</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 
 <span class="n">configspec</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">config_spec</span><span class="p">,</span>
                        <span class="n">list_values</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
                        <span class="n">_inspec</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">config</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">[TEST]</span>
-<span class="s">option_1 = 1</span>
-<span class="s">option_2 = 2</span>
-<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<span class="n">config</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[TEST]</span>
+<span class="s2">option_1 = 1</span>
+<span class="s2">option_2 = 2</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 
 <span class="n">configuration</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">config</span><span class="p">,</span>
                           <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
@@ -372,7 +372,7 @@ Option &#39;option_2&#39; in section &#39;TEST&#39; failed validation (error=&#3
 <span class="n">process_errors_2</span><span class="p">(</span><span class="n">configuration</span><span class="p">,</span> <span class="n">outcome</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>The &#39;TEST,SUBTEST&#39; section was missing
+<div class="highlight-python"><div class="highlight"><pre><span></span>The &#39;TEST,SUBTEST&#39; section was missing
 </pre></div>
 </div>
 <p>The output isn&#8217;t as intuitive as I would like, but I&#8217;m not sure it&#8217;s worth the effort to build up the brackets.
@@ -381,14 +381,14 @@ Option &#39;option_2&#39; in section &#39;TEST&#39; failed validation (error=&#3
 <div class="section" id="extras">
 <h2>Extras<a class="headerlink" href="#extras" title="Permalink to this headline">¶</a></h2>
 <p>Just to be safe, I&#8217;ll check to make sure that extra options don&#8217;t create errors.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">config</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">[TEST]</span>
-<span class="s">option_1 = 2</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[TEST]</span>
+<span class="s2">option_1 = 2</span>
 
-<span class="s">[[SUBTEST]]</span>
-<span class="s">option_2 = 3.5</span>
-<span class="s">option_4 = 5</span>
-<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<span class="s2">[[SUBTEST]]</span>
+<span class="s2">option_2 = 3.5</span>
+<span class="s2">option_4 = 5</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 <span class="n">configuration</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">config</span><span class="p">,</span>
                           <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
 <span class="n">outcome</span> <span class="o">=</span> <span class="n">configuration</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">validator</span><span class="p">,</span> <span class="n">preserve_errors</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -411,7 +411,7 @@ Option &#39;option_2&#39; in section &#39;TEST&#39; failed validation (error=&#3
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

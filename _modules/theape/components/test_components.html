@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>theape.components.test_components &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../../index.html">
+          The Ape</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.0.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/index.html">Plugins</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"></ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <h1>Source code for theape.components.test_components</h1><div class="highlight"><pre>
+<span></span>
+<span class="c1"># python standard library</span>
+<span class="kn">import</span> <span class="nn">unittest</span>
+
+<span class="c1"># third-party</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">mock</span> <span class="kn">import</span> <span class="n">MagicMock</span><span class="p">,</span> <span class="n">call</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="c1"># this package</span>
+<span class="kn">from</span> <span class="nn">theape</span> <span class="kn">import</span> <span class="n">ApeError</span><span class="p">,</span> <span class="n">ConfigurationError</span>
+<span class="kn">from</span> <span class="nn">theape.components.component</span> <span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Composite</span>
+<span class="kn">from</span> <span class="nn">theape.infrastructure.baseclass</span> <span class="kn">import</span> <span class="n">RED_ERROR</span>
+
+<span class="k">class</span> <span class="nc">BadComponent</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span>
+
+<span class="k">class</span> <span class="nc">StillBadComponent</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span>
+    
+<span class="k">class</span> <span class="nc">BetterComponent</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">check_rep</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span>
+
+<span class="k">class</span> <span class="nc">EvilComponent</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+
+<span class="k">class</span> <span class="nc">BrokenComponent</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">check_rep</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;check_rep is broken&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s1">&#39;close is broken&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s1">&#39;call is broken&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+<span class="k">class</span> <span class="nc">TestComponent</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span> <span class="o">=</span> <span class="n">Composite</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">component</span> <span class="o">=</span> <span class="n">BetterComponent</span><span class="p">()</span>
+        <span class="k">return</span>
+    
+<div class="viewcode-block" id="TestComponent.test_bad_component"><a class="viewcode-back" href="../../../components/api/theape.components.test_components.TestComponent.test_bad_component.html#theape.components.test_components.TestComponent.test_bad_component">[docs]</a>    <span class="k">def</span> <span class="nf">test_bad_component</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Does it raise a TypeError if you do not implement the __call__ or check_rep?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="n">BadComponent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="n">StillBadComponent</span><span class="p">)</span>
+        <span class="n">BetterComponent</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+<span class="k">class</span> <span class="nc">TestComposite</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span> <span class="o">=</span> <span class="n">Composite</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="ne">RuntimeError</span><span class="p">,</span>
+                                   <span class="n">error_message</span><span class="o">=</span><span class="s1">&#39;nunya&#39;</span><span class="p">,</span>
+                                   <span class="n">component_category</span><span class="o">=</span><span class="s1">&#39;mocks&#39;</span><span class="p">,</span>
+                                   <span class="n">identifier</span><span class="o">=</span><span class="s1">&#39;test component&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">component</span> <span class="o">=</span> <span class="n">BetterComponent</span><span class="p">()</span>
+        <span class="k">return</span>
+    
+<div class="viewcode-block" id="TestComposite.test_add_component"><a class="viewcode-back" href="../../../components/api/theape.components.test_components.TestComposite.test_add_component.html#theape.components.test_components.TestComposite.test_add_component">[docs]</a>    <span class="k">def</span> <span class="nf">test_add_component</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Can you add a component once and only once?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">component</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">component</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">component</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="TestComposite.test_remove_component"><a class="viewcode-back" href="../../../components/api/theape.components.test_components.TestComposite.test_remove_component.html#theape.components.test_components.TestComposite.test_remove_component">[docs]</a>    <span class="k">def</span> <span class="nf">test_remove_component</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Can you remove a component you added?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">component</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">component</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">component</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="TestComposite.test_slice"><a class="viewcode-back" href="../../../components/api/theape.components.test_components.TestComposite.test_slice.html#theape.components.test_components.TestComposite.test_slice">[docs]</a>    <span class="k">def</span> <span class="nf">test_slice</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Can you use the siice syntax to get a subset ofe the components?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">component</span><span class="p">)</span>
+        <span class="c1"># indexing</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">component</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">component</span> <span class="o">=</span> <span class="n">BetterComponent</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">component</span><span class="p">)</span>
+        <span class="c1"># slicing</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">component</span><span class="p">,</span> <span class="n">component</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="p">[:])</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="TestComposite.test_check_rep"><a class="viewcode-back" href="../../../components/api/theape.components.test_components.TestComposite.test_check_rep.html#theape.components.test_components.TestComposite.test_check_rep">[docs]</a>    <span class="k">def</span> <span class="nf">test_check_rep</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Does check_rep check the Composite and all its components?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="n">ApeError</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">error_message</span> <span class="o">=</span> <span class="s2">&quot;Die antwoort ist nicht in die aufreissen.&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">component_category</span> <span class="o">=</span> <span class="s2">&quot;Piltdown Mann&quot;</span>
+        <span class="c1"># this should not raise an error</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">check_rep</span><span class="p">()</span>
+
+        <span class="c1"># error cannot be None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="n">ConfigurationError</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">check_rep</span><span class="p">)</span>
+
+        <span class="c1"># error must be exception</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="n">Composite</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="n">ConfigurationError</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">check_rep</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="n">ApeError</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">error_message</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="n">ConfigurationError</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">check_rep</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">error_message</span> <span class="o">=</span> <span class="s1">&#39;Ausgezeichnet.&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">component_category</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="n">ConfigurationError</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">check_rep</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="TestComposite.test_evil_component"><a class="viewcode-back" href="../../../components/api/theape.components.test_components.TestComposite.test_evil_component.html#theape.components.test_components.TestComposite.test_evil_component">[docs]</a>    <span class="k">def</span> <span class="nf">test_evil_component</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Does a mis-implemented component raise an ApeError on call and a warning for others?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">evil</span> <span class="o">=</span> <span class="n">EvilComponent</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">evil</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="n">ApeError</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">error_message</span> <span class="o">=</span> <span class="s1">&#39;this is an error&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">component_category</span> <span class="o">=</span> <span class="s1">&#39;memyselfandi&#39;</span>
+
+        <span class="c1"># if check_rep is not implemented, just warn</span>
+        <span class="n">mock_logger</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">_logger</span> <span class="o">=</span> <span class="n">mock_logger</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">check_rep</span><span class="p">()</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">RED_ERROR</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="s2">&quot;&#39;EvilComponent&#39; hasn&#39;t implemented the &#39;check_rep&#39; method.&quot;</span><span class="p">,</span>
+                                   <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Thanks for the sour persimmons, cousin.&quot;</span><span class="p">)</span>
+        <span class="n">mock_logger</span><span class="o">.</span><span class="n">error</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        
+        <span class="c1"># if close not implemented just emit message</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">mock_logger</span><span class="o">.</span><span class="n">warning</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span><span class="s2">&quot;&#39;EvilComponent&#39; hasn&#39;t implemented the &#39;close&#39; method. We hate him.&quot;</span><span class="p">)</span>
+        <span class="c1"># if the call is not implemented, raise an ApeError to kill the operation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="n">ApeError</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="p">())</span>
+        <span class="k">return</span></div>
+
+    <span class="k">def</span> <span class="nf">test_broken_component</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        If the component has the required attributes by they raise AttributeErrors, will it crash the operation?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">broken</span> <span class="o">=</span> <span class="n">BrokenComponent</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">broken</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="n">ApeError</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">error_message</span> <span class="o">=</span> <span class="s1">&#39;this should never be shown&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">component_category</span> <span class="o">=</span> <span class="s1">&#39;broken&#39;</span>
+
+        <span class="c1"># call is implemented but raises AttributeError, should not be caught</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">AttributeError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="p">()</span>
+
+        <span class="c1"># same with check_rep</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">AttributeError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">check_rep</span><span class="p">()</span>
+
+        <span class="c1"># and again with close</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">AttributeError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>        
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">test_call</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Does it call the time-tracker and components?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">component_1</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">component_2</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">tracker</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="n">returns</span> <span class="o">=</span> <span class="p">[</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">]</span>
+        <span class="k">def</span> <span class="nf">side_effect</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">returns</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        
+        <span class="c1"># make it alteranate True and False for start and stop calls</span>
+        <span class="n">tracker</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="n">side_effect</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">_components</span> <span class="o">=</span> <span class="p">[</span><span class="n">component_1</span><span class="p">,</span> <span class="n">component_2</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">_time_remains</span> <span class="o">=</span> <span class="n">tracker</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="p">()</span>
+        <span class="n">component_1</span><span class="o">.</span><span class="n">check_rep</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">()</span>
+        <span class="n">component_2</span><span class="o">.</span><span class="n">check_rep</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">()</span>
+        <span class="n">expected_calls</span> <span class="o">=</span> <span class="p">[</span><span class="n">call</span><span class="p">(),</span> <span class="n">call</span><span class="p">()]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">tracker</span><span class="o">.</span><span class="n">mock_calls</span><span class="p">,</span> <span class="n">expected_calls</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">test_close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Does it close all the components and set the collection to None?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">component_1</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">component_2</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">component_1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">component_2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">component_1</span><span class="o">.</span><span class="n">close</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">()</span>
+        <span class="n">component_2</span><span class="o">.</span><span class="n">close</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">composite</span><span class="o">.</span><span class="n">_components</span><span class="p">)</span>
+        <span class="k">return</span>
+
+<span class="k">class</span> <span class="nc">TestHortator</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hortator</span> <span class="o">=</span> <span class="n">Composite</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="ne">Exception</span><span class="p">,</span>
+                                  <span class="n">error_message</span><span class="o">=</span><span class="s2">&quot;Operator Crash&quot;</span><span class="p">,</span>
+                                  <span class="n">component_category</span><span class="o">=</span><span class="s1">&#39;Operator&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+<div class="viewcode-block" id="TestHortator.test_exception"><a class="viewcode-back" href="../../../components/api/theape.components.test_components.TestHortator.test_exception.html#theape.components.test_components.TestHortator.test_exception">[docs]</a>    <span class="k">def</span> <span class="nf">test_exception</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Does the hortator&#39;s call catch Exceptions so the Ape doesn&#39;t crash and move to the next operator?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">bad_operator</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">side_effect</span> <span class="o">=</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;bad operator1&#39;</span><span class="p">))</span>        
+        <span class="n">next_operator</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hortator</span><span class="o">.</span><span class="n">_logger</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hortator</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">bad_operator</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hortator</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">next_operator</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hortator</span><span class="p">()</span>
+        <span class="n">next_operator</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+<span class="k">class</span> <span class="nc">TestOperator</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operator</span> <span class="o">=</span> <span class="n">Composite</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="n">ApeError</span><span class="p">,</span>
+                                  <span class="n">error_message</span><span class="o">=</span><span class="s1">&#39;Operation Crash&#39;</span><span class="p">,</span>
+                                  <span class="n">component_category</span><span class="o">=</span><span class="s1">&#39;Operation&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operator</span><span class="o">.</span><span class="n">_logger</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="k">return</span>
+
+<div class="viewcode-block" id="TestOperator.test_exception"><a class="viewcode-back" href="../../../components/api/theape.components.test_components.TestOperator.test_exception.html#theape.components.test_components.TestOperator.test_exception">[docs]</a>    <span class="k">def</span> <span class="nf">test_exception</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Does the operator catch ApeErrors but not Exceptions?</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="n">component</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">side_effect</span><span class="o">=</span><span class="n">ApeError</span><span class="p">)</span>
+        <span class="n">component_2</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operator</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">component</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operator</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">component_2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operator</span><span class="p">()</span>
+        <span class="c1"># the composite should catch the ApeError and move on to component_2</span>
+        <span class="n">component_2</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">()</span>
+
+        <span class="c1"># component_3 raises an Exception that should not be caught</span>
+        <span class="n">component_3</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">side_effect</span><span class="o">=</span><span class="ne">Exception</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operator</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">component_3</span><span class="p">)</span>
+
+        <span class="c1"># countdown isn&#39;t meant to re-run (bug?)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operator</span><span class="o">.</span><span class="n">_countdown</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="c1"># but it should not catch an Exception</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">Exception</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">operator</span><span class="p">)</span>
+        <span class="k">return</span></div>
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2014, the cloistered monkey.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

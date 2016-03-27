@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../index.html" />
     <link rel="up" title="About Plugins" href="index.html" />
@@ -38,7 +38,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -99,7 +99,7 @@
 <li><a class="reference internal" href="#create-an-example-configuration-file-snippet">2. Create an example configuration file snippet</a></li>
 <li><a class="reference internal" href="#create-a-help-dictionary">3. Create a help dictionary</a></li>
 <li><a class="reference internal" href="#implement-the-plugin">4. Implement the plugin</a><ul>
-<li><a class="reference internal" href="#sub-class-the-baseplugin">4.1 Sub-class the <tt class="docutils literal"><span class="pre">BasePlugin</span></tt></a></li>
+<li><a class="reference internal" href="#sub-class-the-baseplugin">4.1 Sub-class the <code class="docutils literal"><span class="pre">BasePlugin</span></code></a></li>
 <li><a class="reference internal" href="#implement-the-fetch-config-method">4.2 Implement the <cite>fetch_config</cite> method</a></li>
 <li><a class="reference internal" href="#implement-the-sections-property">4.3 Implement the <cite>sections</cite> property</a></li>
 <li><a class="reference internal" href="#implement-the-product-property">4.4 Implement the <cite>product</cite> property</a></li>
@@ -123,7 +123,7 @@
     </a>
   </li>
   <li>
-    <a href="api/theape.plugins.base_plugin.BasePlugin.html" title="Next Chapter: theape.plugins.base_plugin.BasePlugin"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">theape.plugins.b... &raquo;</span>
+    <a href="api/theape.plugins.base_plugin.BasePlugin.html" title="Next Chapter: theape.plugins.base_plugin.BasePlugin"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">theape.plugin... &raquo;</span>
     </a>
   </li>
               
@@ -155,7 +155,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="how-to-write-plugins">
 <h1>How to Write Plugins<a class="headerlink" href="#how-to-write-plugins" title="Permalink to this headline">¶</a></h1>
@@ -165,14 +165,14 @@
 <p>There are 5 steps needed to create a plugin:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li><a class="reference internal" href="#ht-write-plugin-import"><em>Import the BasePlugin and whatever is needed to build the parts of your plugin</em></a></li>
-<li><a class="reference internal" href="#ht-write-plugin-configuration"><em>Create an example configuration string that the user can base a configuration file on</em></a></li>
-<li><a class="reference internal" href="#ht-write-plugin-help"><em>Create a Help Dictionary</em></a></li>
-<li><a class="reference internal" href="#ht-write-plugin-implement"><em>Implement the plugin</em></a></li>
-<li><a class="reference internal" href="#ht-write-plugin-install"><em>Put the plugin somewhere it can be imported</em></a></li>
+<li><a class="reference internal" href="#ht-write-plugin-import"><span>Import the BasePlugin and whatever is needed to build the parts of your plugin</span></a></li>
+<li><a class="reference internal" href="#ht-write-plugin-configuration"><span>Create an example configuration string that the user can base a configuration file on</span></a></li>
+<li><a class="reference internal" href="#ht-write-plugin-help"><span>Create a Help Dictionary</span></a></li>
+<li><a class="reference internal" href="#ht-write-plugin-implement"><span>Implement the plugin</span></a></li>
+<li><a class="reference internal" href="#ht-write-plugin-install"><span>Put the plugin somewhere it can be imported</span></a></li>
 </ol>
 </div></blockquote>
-<p>There are probably other steps like planning and testing, but since the plugins themselves don&#8217;t do anything other than build and bundle other code, any other steps will be specific to the plugin created. I&#8217;ll work through these five steps using the <a class="reference internal" href="../../../plugins/sleep_plugin.html#id1"><em>SleepPlugin</em></a> which is one of the plugins that comes with the ape as a concrete example (it&#8217;s in the <cite>plugin</cite> folder &#8211; <tt class="docutils literal"><span class="pre">theape.plugins.sleep_plugin</span></tt>). The <cite>SleepPlugin</cite> is a plugin for <a class="reference internal" href="../../../parts/sleep/sleep.html#ape-big-sleep"><em>TheBigSleep</em></a>, a stand alone part that takes a time-string and sleeps when called.</p>
+<p>There are probably other steps like planning and testing, but since the plugins themselves don&#8217;t do anything other than build and bundle other code, any other steps will be specific to the plugin created. I&#8217;ll work through these five steps using the <a class="reference internal" href="../../../plugins/sleep_plugin.html#id1"><span>SleepPlugin</span></a> which is one of the plugins that comes with the ape as a concrete example (it&#8217;s in the <cite>plugin</cite> folder &#8211; <code class="docutils literal"><span class="pre">theape.plugins.sleep_plugin</span></code>). The <cite>SleepPlugin</cite> is a plugin for <a class="reference internal" href="../../../parts/sleep/sleep.html#ape-big-sleep"><span>TheBigSleep</span></a>, a stand alone part that takes a time-string and sleeps when called.</p>
 <p class="plantuml">
 <img src="../../../_images/plantuml-1ed3ad133953d26edf17b7a1fa6e6ff0aaf36154.png" alt="Component &lt;|-- TheBigSleep
 TheBigSleep : __init__(end, total, interval, verbose)
@@ -189,7 +189,7 @@ Sleep : TheBigSleep product" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../../../plugins/api/theape.plugins.base_plugin.BasePlugin.html#theape.plugins.base_plugin.BasePlugin" title="theape.plugins.base_plugin.BasePlugin"><tt class="xref py py-obj docutils literal"><span class="pre">BasePlugin</span></tt></a>([configuration,&nbsp;section_header])</td>
+<tr class="row-odd"><td><a class="reference internal" href="../../../plugins/api/theape.plugins.base_plugin.BasePlugin.html#theape.plugins.base_plugin.BasePlugin" title="theape.plugins.base_plugin.BasePlugin"><code class="xref py py-obj docutils literal"><span class="pre">BasePlugin</span></code></a>([configuration,&nbsp;section_header])</td>
 <td>An abstract base-class for plugins</td>
 </tr>
 </tbody>
@@ -200,7 +200,7 @@ Sleep : TheBigSleep product" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../../../plugins/api/theape.parts.sleep.sleep.TheBigSleep.html#theape.parts.sleep.sleep.TheBigSleep" title="theape.parts.sleep.sleep.TheBigSleep"><tt class="xref py py-obj docutils literal"><span class="pre">TheBigSleep</span></tt></a>([end,&nbsp;total,&nbsp;interval,&nbsp;verbose])</td>
+<tr class="row-odd"><td><a class="reference internal" href="../../../plugins/api/theape.parts.sleep.sleep.TheBigSleep.html#theape.parts.sleep.sleep.TheBigSleep" title="theape.parts.sleep.sleep.TheBigSleep"><code class="xref py py-obj docutils literal"><span class="pre">TheBigSleep</span></code></a>([end,&nbsp;total,&nbsp;interval,&nbsp;verbose])</td>
 <td>A sleeper</td>
 </tr>
 </tbody>
@@ -211,33 +211,33 @@ Sleep : TheBigSleep product" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../../../plugins/api/theape.plugins.sleep_plugin.Sleep.html#theape.plugins.sleep_plugin.Sleep" title="theape.plugins.sleep_plugin.Sleep"><tt class="xref py py-obj docutils literal"><span class="pre">Sleep</span></tt></a>(*args,&nbsp;**kwargs)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../../../plugins/api/theape.plugins.sleep_plugin.Sleep.html#theape.plugins.sleep_plugin.Sleep" title="theape.plugins.sleep_plugin.Sleep"><code class="xref py py-obj docutils literal"><span class="pre">Sleep</span></code></a>(*args,&nbsp;**kwargs)</td>
 <td>A plugin for TheBigSleep</td>
 </tr>
 </tbody>
 </table>
 <div class="section" id="import-what-you-need">
 <span id="ht-write-plugin-import"></span><h3>1. Import What You Need<a class="headerlink" href="#import-what-you-need" title="Permalink to this headline">¶</a></h3>
-<p>In order to be recognized by the APE your plugin has to inherit from the <a class="reference internal" href="../../../plugins/base_plugin.html#base-plugin"><em>BasePlugin</em></a> so you will need to import it along with the parts that are composed within your plugin:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c"># This package</span>
+<p>In order to be recognized by the APE your plugin has to inherit from the <a class="reference internal" href="../../../plugins/base_plugin.html#base-plugin"><span>BasePlugin</span></a> so you will need to import it along with the parts that are composed within your plugin:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># This package</span>
 <span class="kn">from</span> <span class="nn">theape</span> <span class="kn">import</span> <span class="n">BasePlugin</span>
 <span class="kn">from</span> <span class="nn">theape.parts.sleep.sleep</span> <span class="kn">import</span> <span class="n">TheBigSleep</span>
 </pre></div>
 </div>
 <p>In addition, the Help section of the plugin uses the keys of a dictionary when building the help string so I like to use an ordered dictionary so I can control what order the sections appear in:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c"># python standard library</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># python standard library</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="create-an-example-configuration-file-snippet">
 <span id="ht-write-plugin-configuration"></span><h3>2. Create an example configuration file snippet<a class="headerlink" href="#create-an-example-configuration-file-snippet" title="Permalink to this headline">¶</a></h3>
-<p>The expected way for a user to get a sample configuration file is to use the <tt class="docutils literal"><span class="pre">fetch</span></tt> sub-command:</p>
-<div class="highlight-python"><div class="highlight"><pre>theape fetch &lt;plugin name&gt;
+<p>The expected way for a user to get a sample configuration file is to use the <code class="docutils literal"><span class="pre">fetch</span></code> sub-command:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>theape fetch &lt;plugin name&gt;
 </pre></div>
 </div>
-<p>Where <tt class="docutils literal"><span class="pre">&lt;plugin</span> <span class="pre">name&gt;</span></tt> is the name of some plugin. When this sub-command is issued, the ape will build the plugin and call its <tt class="docutils literal"><span class="pre">fetch_config</span></tt> method, which should return a string with the sample configuration to the APE. As an example, if the user entered <tt class="docutils literal"><span class="pre">theape</span> <span class="pre">fetch</span> <span class="pre">Sleep</span></tt>, the following should be returned:</p>
-<div class="highlight-ini"><div class="highlight"><pre><span class="k">[SLEEP]</span>
+<p>Where <code class="docutils literal"><span class="pre">&lt;plugin</span> <span class="pre">name&gt;</span></code> is the name of some plugin. When this sub-command is issued, the ape will build the plugin and call its <code class="docutils literal"><span class="pre">fetch_config</span></code> method, which should return a string with the sample configuration to the APE. As an example, if the user entered <code class="docutils literal"><span class="pre">theape</span> <span class="pre">fetch</span> <span class="pre">Sleep</span></code>, the following should be returned:</p>
+<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="k">[SLEEP]</span>
 <span class="c1"># &#39;end&#39; should be a timestamp for the end-time (11-12-2013 8:45 pm)</span>
 <span class="c1"># &#39;total&#39; should be a timestamp for the run-time (1 hr 23 minutes)</span>
 <span class="c1"># &#39;interval&#39; should be &lt;amount&gt; &lt;units&gt; (1 minute)</span>
@@ -250,24 +250,24 @@ Sleep : TheBigSleep product" />
 </pre></div>
 </div>
 <p>Since the configuration-file is read-in using python&#8217;s <a class="reference external" href="http://docs.python.org/2/library/configparser.html">ConfigParser</a>, the sample needs to be in the <cite>ini</cite> format. This string could be created in the plugin itself, but I like to create it outside to make it easier to separate the parts that go into the plugin. Here&#8217;s more-or-less what&#8217;s in the <cite>sleep_plugin</cite> module:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">SLEEP_SECTION</span> <span class="o">=</span> <span class="s">&#39;SLEEP&#39;</span>
-<span class="n">END_OPTION</span> <span class="o">=</span> <span class="s">&#39;end&#39;</span>
-<span class="n">TOTAL_OPTION</span> <span class="o">=</span> <span class="s">&#39;total&#39;</span>
-<span class="n">INTERVAL_OPTION</span> <span class="o">=</span> <span class="s">&#39;interval&#39;</span>
-<span class="n">VERBOSE_OPTION</span> <span class="o">=</span> <span class="s">&#39;verbose&#39;</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">SLEEP_SECTION</span> <span class="o">=</span> <span class="s1">&#39;SLEEP&#39;</span>
+<span class="n">END_OPTION</span> <span class="o">=</span> <span class="s1">&#39;end&#39;</span>
+<span class="n">TOTAL_OPTION</span> <span class="o">=</span> <span class="s1">&#39;total&#39;</span>
+<span class="n">INTERVAL_OPTION</span> <span class="o">=</span> <span class="s1">&#39;interval&#39;</span>
+<span class="n">VERBOSE_OPTION</span> <span class="o">=</span> <span class="s1">&#39;verbose&#39;</span>
 
-<span class="n">configuration</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">[{0}]</span>
-<span class="s"># &#39;end&#39; should be a timestamp for the end-time (11-12-2013 8:45 pm)</span>
-<span class="s"># &#39;total&#39; should be a timestamp for the run-time (1 hr 23 minutes)</span>
-<span class="s"># &#39;interval&#39; should be &lt;amount&gt; &lt;units&gt; (1 minute)</span>
-<span class="s"># if verbose is False, sceen output will be off except at startup</span>
-<span class="s"># only one of absolute or relative time is required, although both can be used</span>
-<span class="s">{1} = &lt;absolute time&gt;</span>
-<span class="s">{2} = &lt;relative time&gt;</span>
-<span class="s">{3} = 1 second</span>
-<span class="s">{4} = True</span>
-<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">SLEEP_SECTION</span><span class="p">,</span> <span class="n">END_OPTION</span><span class="p">,</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[{0}]</span>
+<span class="s2"># &#39;end&#39; should be a timestamp for the end-time (11-12-2013 8:45 pm)</span>
+<span class="s2"># &#39;total&#39; should be a timestamp for the run-time (1 hr 23 minutes)</span>
+<span class="s2"># &#39;interval&#39; should be &lt;amount&gt; &lt;units&gt; (1 minute)</span>
+<span class="s2"># if verbose is False, sceen output will be off except at startup</span>
+<span class="s2"># only one of absolute or relative time is required, although both can be used</span>
+<span class="s2">{1} = &lt;absolute time&gt;</span>
+<span class="s2">{2} = &lt;relative time&gt;</span>
+<span class="s2">{3} = 1 second</span>
+<span class="s2">{4} = True</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">SLEEP_SECTION</span><span class="p">,</span> <span class="n">END_OPTION</span><span class="p">,</span>
            <span class="n">TOTAL_OPTION</span><span class="p">,</span>
            <span class="n">INTERVAL_OPTION</span><span class="p">,</span>
            <span class="n">VERBOSE_OPTION</span><span class="p">)</span>
@@ -277,12 +277,12 @@ Sleep : TheBigSleep product" />
 </div>
 <div class="section" id="create-a-help-dictionary">
 <span id="ht-write-plugin-help"></span><h3>3. Create a help dictionary<a class="headerlink" href="#create-a-help-dictionary" title="Permalink to this headline">¶</a></h3>
-<p>To provide an online help system the plugin should create a dictionary of <cite>&lt;section-name&gt;:&lt;section contents&gt;</cite> pairs. The idea is to provide something like a man-page. As an example, I&#8217;ll create an ordered dictionary called <tt class="docutils literal"><span class="pre">sections</span></tt> and add the <tt class="docutils literal"><span class="pre">name</span></tt> section to it:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">sections</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
-<span class="n">sections</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;{bold}sleep{reset} -- a countdown timer that blocks until time is over&#39;</span>
+<p>To provide an online help system the plugin should create a dictionary of <cite>&lt;section-name&gt;:&lt;section contents&gt;</cite> pairs. The idea is to provide something like a man-page. As an example, I&#8217;ll create an ordered dictionary called <code class="docutils literal"><span class="pre">sections</span></code> and add the <code class="docutils literal"><span class="pre">name</span></code> section to it:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">sections</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+<span class="n">sections</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;{bold}sleep{reset} -- a countdown timer that blocks until time is over&#39;</span>
 </pre></div>
 </div>
-<p>The key <cite>name</cite> will appear in bold as will the word <cite>sleep</cite> in the matching text. In the background the APE will be using string formatting to add the ASCII codes for the formatting (in this case the <cite>{bold}</cite> and <cite>{reset}</cite>). The <tt class="docutils literal"><span class="pre">{reset}</span></tt> turns of any prior formatting so there should always be a <cite>format-reset</cite> pair or the formatting won&#8217;t get turned off. Right now the only supported formating keywords are:</p>
+<p>The key <cite>name</cite> will appear in bold as will the word <cite>sleep</cite> in the matching text. In the background the APE will be using string formatting to add the ASCII codes for the formatting (in this case the <cite>{bold}</cite> and <cite>{reset}</cite>). The <code class="docutils literal"><span class="pre">{reset}</span></code> turns of any prior formatting so there should always be a <cite>format-reset</cite> pair or the formatting won&#8217;t get turned off. Right now the only supported formating keywords are:</p>
 <blockquote>
 <div><ul class="simple">
 <li>bold</li>
@@ -291,46 +291,46 @@ Sleep : TheBigSleep product" />
 </ul>
 </div></blockquote>
 <p>The rest of the help dictionary was created by adding more sections:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">sections</span><span class="p">[</span><span class="s">&#39;description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;{bold}sleep{reset} is a verbose no-op (by default) meant to allow the insertion of a pause in the execution of the APE. At this point all calls to sleep will get the same configuration.&#39;</span>
-<span class="n">sections</span><span class="p">[</span><span class="s">&#39;configuration&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">configuration</span>
-<span class="n">sections</span><span class="p">[</span><span class="s">&#39;see also&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;EventTimer, RelativeTime, AbsoluteTime&#39;</span>
-<span class="n">sections</span><span class="p">[</span><span class="s">&#39;options&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">The configuration options --</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">sections</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;{bold}sleep{reset} is a verbose no-op (by default) meant to allow the insertion of a pause in the execution of the APE. At this point all calls to sleep will get the same configuration.&#39;</span>
+<span class="n">sections</span><span class="p">[</span><span class="s1">&#39;configuration&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">configuration</span>
+<span class="n">sections</span><span class="p">[</span><span class="s1">&#39;see also&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;EventTimer, RelativeTime, AbsoluteTime&#39;</span>
+<span class="n">sections</span><span class="p">[</span><span class="s1">&#39;options&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">The configuration options --</span>
 
-<span class="s">    {bold}end{reset} : an absolute time given as a time-stamp that can be interpreted by `dateutil.parser.parse`. This is for the cases where you have a specific time that you want the sleep to end.</span>
+<span class="s2">    {bold}end{reset} : an absolute time given as a time-stamp that can be interpreted by `dateutil.parser.parse`. This is for the cases where you have a specific time that you want the sleep to end.</span>
 
-<span class="s">    {bold}total{reset} : a relative time given as pairs of &#39;&lt;amount&gt; &lt;units&gt;&#39; -- e.g. &#39;3.4 hours&#39;. Most units only use the first letter, but since `months` and `minutes` both start with `m`, you have to use two letters to specify them. The sleep will stop at the start of the sleep + the total time given.</span>
+<span class="s2">    {bold}total{reset} : a relative time given as pairs of &#39;&lt;amount&gt; &lt;units&gt;&#39; -- e.g. &#39;3.4 hours&#39;. Most units only use the first letter, but since `months` and `minutes` both start with `m`, you have to use two letters to specify them. The sleep will stop at the start of the sleep + the total time given.</span>
 
-<span class="s">    {bold}interval{reset} : The amount of time beween reports of the time remaining (default = 1 second). Use the same formatting as the `total` option.</span>
+<span class="s2">    {bold}interval{reset} : The amount of time beween reports of the time remaining (default = 1 second). Use the same formatting as the `total` option.</span>
 
-<span class="s">    {bold}verbose{reset} : If True (the default) then report time remaining at specified intervals while the sleep runs.</span>
+<span class="s2">    {bold}verbose{reset} : If True (the default) then report time remaining at specified intervals while the sleep runs.</span>
 
-<span class="s">One of {bold}end{reset} or {bold}total{reset} needs to be specified. Everything else is optional.</span>
-<span class="s">&quot;&quot;&quot;</span>
-<span class="n">sections</span><span class="p">[</span><span class="s">&#39;author&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;ape&#39;</span>
+<span class="s2">One of {bold}end{reset} or {bold}total{reset} needs to be specified. Everything else is optional.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">sections</span><span class="p">[</span><span class="s1">&#39;author&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;ape&#39;</span>
 </pre></div>
 </div>
 <p>To see how this was output type out the help sub-command for sleep:</p>
-<div class="highlight-python"><div class="highlight"><pre>theape help Sleep
+<div class="highlight-python"><div class="highlight"><pre><span></span>theape help Sleep
 </pre></div>
 </div>
-<p>Since the output goes through a pager (<cite>less</cite>) I can&#8217;t show the output here. Also note that the command is case-sensitive so <tt class="docutils literal"><span class="pre">ape</span> <span class="pre">help</span> <span class="pre">sleep</span></tt> will fail.</p>
+<p>Since the output goes through a pager (<cite>less</cite>) I can&#8217;t show the output here. Also note that the command is case-sensitive so <code class="docutils literal"><span class="pre">ape</span> <span class="pre">help</span> <span class="pre">sleep</span></code> will fail.</p>
 </div>
 <div class="section" id="implement-the-plugin">
 <span id="ht-write-plugin-implement"></span><h3>4. Implement the plugin<a class="headerlink" href="#implement-the-plugin" title="Permalink to this headline">¶</a></h3>
 <p>There are four parts to implementing the plugin:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li><a class="reference internal" href="#ht-write-plugin-subclass-baseplugin"><em>Sub-class the BasePlugin</em></a></li>
-<li><a class="reference internal" href="#ht-write-plugin-implement-fetch-config"><em>Implement the fetch_config method</em></a></li>
-<li><a class="reference internal" href="#ht-write-plugin-implement-sections"><em>Implement the sections property</em></a></li>
-<li><a class="reference internal" href="#ht-write-plugin-implement-product"><em>Implement the product property</em></a></li>
+<li><a class="reference internal" href="#ht-write-plugin-subclass-baseplugin"><span>Sub-class the BasePlugin</span></a></li>
+<li><a class="reference internal" href="#ht-write-plugin-implement-fetch-config"><span>Implement the fetch_config method</span></a></li>
+<li><a class="reference internal" href="#ht-write-plugin-implement-sections"><span>Implement the sections property</span></a></li>
+<li><a class="reference internal" href="#ht-write-plugin-implement-product"><span>Implement the product property</span></a></li>
 </ol>
 </div></blockquote>
 <div class="section" id="sub-class-the-baseplugin">
-<span id="ht-write-plugin-subclass-baseplugin"></span><h4>4.1 Sub-class the <tt class="docutils literal"><span class="pre">BasePlugin</span></tt><a class="headerlink" href="#sub-class-the-baseplugin" title="Permalink to this headline">¶</a></h4>
-<p>The way the plugin discovery works is that the <em class="xref std std-ref">QuarterMaster</em> looks in the <cite>plugins</cite> folder (or other modules passed in at run-time) for classes that are sub-classed from the <tt class="docutils literal"><span class="pre">theape.BasePlugin</span></tt> so anything that needs to be auto-discovered has to be a <a class="reference internal" href="../../../plugins/base_plugin.html#base-plugin"><em>BasePlugin</em></a> child:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Sleep</span><span class="p">(</span><span class="n">BasePlugin</span><span class="p">):</span>
+<span id="ht-write-plugin-subclass-baseplugin"></span><h4>4.1 Sub-class the <code class="docutils literal"><span class="pre">BasePlugin</span></code><a class="headerlink" href="#sub-class-the-baseplugin" title="Permalink to this headline">¶</a></h4>
+<p>The way the plugin discovery works is that the <span class="xref std std-ref">QuarterMaster</span> looks in the <cite>plugins</cite> folder (or other modules passed in at run-time) for classes that are sub-classed from the <code class="docutils literal"><span class="pre">theape.BasePlugin</span></code> so anything that needs to be auto-discovered has to be a <a class="reference internal" href="../../../plugins/base_plugin.html#base-plugin"><span>BasePlugin</span></a> child:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Sleep</span><span class="p">(</span><span class="n">BasePlugin</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A plugin for TheBigSleep</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -342,12 +342,12 @@ Sleep : TheBigSleep product" />
         <span class="k">return</span>
 </pre></div>
 </div>
-<p>The use of <tt class="docutils literal"><span class="pre">*args,</span> <span class="pre">**kwargs</span></tt> is so that the <tt class="docutils literal"><span class="pre">BasePlugin</span></tt> can have the <a class="reference internal" href="../../../infrastructure/configurationmap.html#configuration-map"><em>ConfigurationMap</em></a> and the expected section-name from the config-file passed to it &#8211; so every plugin should expect that it will have these attributes to use when building the <cite>product</cite>.</p>
+<p>The use of <code class="docutils literal"><span class="pre">*args,</span> <span class="pre">**kwargs</span></code> is so that the <code class="docutils literal"><span class="pre">BasePlugin</span></code> can have the <a class="reference internal" href="../../../infrastructure/configurationmap.html#configuration-map"><span>ConfigurationMap</span></a> and the expected section-name from the config-file passed to it &#8211; so every plugin should expect that it will have these attributes to use when building the <cite>product</cite>.</p>
 </div>
 <div class="section" id="implement-the-fetch-config-method">
 <span id="ht-write-plugin-implement-fetch-config"></span><h4>4.2 Implement the <cite>fetch_config</cite> method<a class="headerlink" href="#implement-the-fetch-config-method" title="Permalink to this headline">¶</a></h4>
-<p>When a user types <tt class="docutils literal"><span class="pre">the</span> <span class="pre">ape</span> <span class="pre">fetch</span> <span class="pre">&lt;plugin&gt;</span></tt> the APE calls the plugin&#8217;s <tt class="docutils literal"><span class="pre">fetch_config</span></tt> method to get the configuration string and (currently) sends it to stdout. In the case of our example <cite>Sleep</cite> plugin we already have a <cite>configuration</cite> variable which holds the string so we can just have the <cite>Sleep</cite> print it:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">fetch_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<p>When a user types <code class="docutils literal"><span class="pre">the</span> <span class="pre">ape</span> <span class="pre">fetch</span> <span class="pre">&lt;plugin&gt;</span></code> the APE calls the plugin&#8217;s <code class="docutils literal"><span class="pre">fetch_config</span></code> method to get the configuration string and (currently) sends it to stdout. In the case of our example <cite>Sleep</cite> plugin we already have a <cite>configuration</cite> variable which holds the string so we can just have the <cite>Sleep</cite> print it:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fetch_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    prints a config-file sample</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -357,17 +357,17 @@ Sleep : TheBigSleep product" />
 <p>This might seem excessive but the original APE saved the configuration to a file rather than sending to stdout which made it likely that a user would accidentally destroy a prior configuration so this method was created to allow the way the <cite>fetch</cite> sub-command is handled to be changed.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Plugin configurations need to have the line <tt class="docutils literal"><span class="pre">plugin</span> <span class="pre">=</span> <span class="pre">&lt;plugin</span> <span class="pre">class</span> <span class="pre">name&gt;</span></tt> for the APE to be able to find them.</p>
+<p class="last">Plugin configurations need to have the line <code class="docutils literal"><span class="pre">plugin</span> <span class="pre">=</span> <span class="pre">&lt;plugin</span> <span class="pre">class</span> <span class="pre">name&gt;</span></code> for the APE to be able to find them.</p>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">If the plugin is for an external module the <tt class="docutils literal"><span class="pre">[MODULES]</span></tt> section in the ini file needs to have the module name.</p>
+<p class="last">If the plugin is for an external module the <code class="docutils literal"><span class="pre">[MODULES]</span></code> section in the ini file needs to have the module name.</p>
 </div>
 </div>
 <div class="section" id="implement-the-sections-property">
 <span id="ht-write-plugin-implement-sections"></span><h4>4.3 Implement the <cite>sections</cite> property<a class="headerlink" href="#implement-the-sections-property" title="Permalink to this headline">¶</a></h4>
-<p>When a user calls the <tt class="docutils literal"><span class="pre">theape</span> <span class="pre">help</span> <span class="pre">&lt;plugin&gt;</span></tt> sub-command, the APE sends the plugin&#8217;s <cite>sections</cite> property to the <tt class="docutils literal"><span class="pre">less</span></tt> command. So to make it work for our <cite>Sleep</cite> plugin we can assign it the <tt class="docutils literal"><span class="pre">sections</span></tt> dictionary that we created earlier:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="nd">@property</span>
+<p>When a user calls the <code class="docutils literal"><span class="pre">theape</span> <span class="pre">help</span> <span class="pre">&lt;plugin&gt;</span></code> sub-command, the APE sends the plugin&#8217;s <cite>sections</cite> property to the <code class="docutils literal"><span class="pre">less</span></code> command. So to make it work for our <cite>Sleep</cite> plugin we can assign it the <code class="docutils literal"><span class="pre">sections</span></code> dictionary that we created earlier:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="nd">@property</span>
 <span class="k">def</span> <span class="nf">sections</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Help dictionary</span>
@@ -380,8 +380,8 @@ Sleep : TheBigSleep product" />
 </div>
 <div class="section" id="implement-the-product-property">
 <span id="ht-write-plugin-implement-product"></span><h4>4.4 Implement the <cite>product</cite> property<a class="headerlink" href="#implement-the-product-property" title="Permalink to this headline">¶</a></h4>
-<p>The <cite>product</cite> is the object that the APE will call when the program is run (<tt class="docutils literal"><span class="pre">theape</span> <span class="pre">run</span></tt>). This means that the <cite>product</cite> has to be a callable-object that can be fully configured by the plugin (because no parameters will be passed in to the call). In the case of our example we know that we want to return the <cite>TheBigSleep</cite> object:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="nd">@property</span>
+<p>The <cite>product</cite> is the object that the APE will call when the program is run (<code class="docutils literal"><span class="pre">theape</span> <span class="pre">run</span></code>). This means that the <cite>product</cite> has to be a callable-object that can be fully configured by the plugin (because no parameters will be passed in to the call). In the case of our example we know that we want to return the <cite>TheBigSleep</cite> object:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="nd">@property</span>
 <span class="k">def</span> <span class="nf">product</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A built TheBigSleep object</span>
@@ -412,24 +412,24 @@ Sleep : TheBigSleep product" />
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_product</span>
 </pre></div>
 </div>
-<p>As you can see, it uses the <tt class="docutils literal"><span class="pre">self.section_header</span></tt> attribute that it inherits from the <tt class="docutils literal"><span class="pre">BasePlugin</span></tt> in order to know what the name of the section-header in the configuration file should be. In the default configuration the header is <tt class="docutils literal"><span class="pre">SLEEP</span></tt> but in order for a plugin to be used with more than one set of configurations (so that it can have more than one set of behaviors) I needed to allow the specifying of section headers.</p>
-<p>The <tt class="docutils literal"><span class="pre">product</span></tt> builder, by and large, just calls the ConfigurationMap (<cite>self.configuration</cite>) and passes in the parameters to the object it&#8217;s building. Hopefully the calls being made are obvious enough but if not the API might help explain what&#8217;s being passed into the <tt class="docutils literal"><span class="pre">TheBigSleep</span></tt> constructor.</p>
+<p>As you can see, it uses the <code class="docutils literal"><span class="pre">self.section_header</span></code> attribute that it inherits from the <code class="docutils literal"><span class="pre">BasePlugin</span></code> in order to know what the name of the section-header in the configuration file should be. In the default configuration the header is <code class="docutils literal"><span class="pre">SLEEP</span></code> but in order for a plugin to be used with more than one set of configurations (so that it can have more than one set of behaviors) I needed to allow the specifying of section headers.</p>
+<p>The <code class="docutils literal"><span class="pre">product</span></code> builder, by and large, just calls the ConfigurationMap (<cite>self.configuration</cite>) and passes in the parameters to the object it&#8217;s building. Hopefully the calls being made are obvious enough but if not the API might help explain what&#8217;s being passed into the <code class="docutils literal"><span class="pre">TheBigSleep</span></code> constructor.</p>
 <span class="target" id="module-theape.infrastructure.configurationmap"></span><table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../../../infrastructure/api/theape.infrastructure.configurationmap.ConfigurationMap.html#theape.infrastructure.configurationmap.ConfigurationMap" title="theape.infrastructure.configurationmap.ConfigurationMap"><tt class="xref py py-obj docutils literal"><span class="pre">ConfigurationMap</span></tt></a>(filename)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../../../infrastructure/api/theape.infrastructure.configurationmap.ConfigurationMap.html#theape.infrastructure.configurationmap.ConfigurationMap" title="theape.infrastructure.configurationmap.ConfigurationMap"><code class="xref py py-obj docutils literal"><span class="pre">ConfigurationMap</span></code></a>(filename)</td>
 <td>A map from configuration files to data</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../../infrastructure/api/theape.infrastructure.configurationmap.ConfigurationMap.get_datetime.html#theape.infrastructure.configurationmap.ConfigurationMap.get_datetime" title="theape.infrastructure.configurationmap.ConfigurationMap.get_datetime"><tt class="xref py py-obj docutils literal"><span class="pre">ConfigurationMap.get_datetime</span></tt></a>(section,&nbsp;option)</td>
+<tr class="row-even"><td><a class="reference internal" href="../../../infrastructure/api/theape.infrastructure.configurationmap.ConfigurationMap.get_datetime.html#theape.infrastructure.configurationmap.ConfigurationMap.get_datetime" title="theape.infrastructure.configurationmap.ConfigurationMap.get_datetime"><code class="xref py py-obj docutils literal"><span class="pre">ConfigurationMap.get_datetime</span></code></a>(section,&nbsp;option)</td>
 <td>Gets a datetime object based on the option (value is timestamp) (see timemap.AbsoluteTime)</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../../../infrastructure/api/theape.infrastructure.configurationmap.ConfigurationMap.get_boolean.html#theape.infrastructure.configurationmap.ConfigurationMap.get_boolean" title="theape.infrastructure.configurationmap.ConfigurationMap.get_boolean"><tt class="xref py py-obj docutils literal"><span class="pre">ConfigurationMap.get_boolean</span></tt></a>(section,&nbsp;option)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../../../infrastructure/api/theape.infrastructure.configurationmap.ConfigurationMap.get_boolean.html#theape.infrastructure.configurationmap.ConfigurationMap.get_boolean" title="theape.infrastructure.configurationmap.ConfigurationMap.get_boolean"><code class="xref py py-obj docutils literal"><span class="pre">ConfigurationMap.get_boolean</span></code></a>(section,&nbsp;option)</td>
 <td>Gets a value and casts it to a boolean</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../../infrastructure/api/theape.infrastructure.configurationmap.ConfigurationMap.get_relativetime.html#theape.infrastructure.configurationmap.ConfigurationMap.get_relativetime" title="theape.infrastructure.configurationmap.ConfigurationMap.get_relativetime"><tt class="xref py py-obj docutils literal"><span class="pre">ConfigurationMap.get_relativetime</span></tt></a>(section,&nbsp;...)</td>
+<tr class="row-even"><td><a class="reference internal" href="../../../infrastructure/api/theape.infrastructure.configurationmap.ConfigurationMap.get_relativetime.html#theape.infrastructure.configurationmap.ConfigurationMap.get_relativetime" title="theape.infrastructure.configurationmap.ConfigurationMap.get_relativetime"><code class="xref py py-obj docutils literal"><span class="pre">ConfigurationMap.get_relativetime</span></code></a>(section,&nbsp;...)</td>
 <td>Gets a relativetime object based on the option (assumes value is timestamp) (see timemap.RelativeTime)</td>
 </tr>
 </tbody>
@@ -447,18 +447,18 @@ Sleep : TheBigSleep product" />
 </ol>
 </div></blockquote>
 <p>In the case of the <cite>Sleep</cite> plugin it is part of the APE so it sits in the <cite>theape.plugins</cite> folder (the default place the APE looks for plugins). For non-ape plugins the package they belong to has to be installed (e.g. with <cite>setup.py</cite>) and the module name passed in to the APE on the command line.</p>
-<p>Let&#8217;s suppose that instead of the default <cite>Sleep</cite> plugin you made a better one called <cite>BetterSleep</cite> that&#8217;s in the <cite>bettersleep</cite> package. Once the <cite>bettersleep</cite> package is installed then the user can access it using the <tt class="docutils literal"><span class="pre">--modules</span></tt> flag.</p>
+<p>Let&#8217;s suppose that instead of the default <cite>Sleep</cite> plugin you made a better one called <cite>BetterSleep</cite> that&#8217;s in the <cite>bettersleep</cite> package. Once the <cite>bettersleep</cite> package is installed then the user can access it using the <code class="docutils literal"><span class="pre">--modules</span></code> flag.</p>
 <p>To see what plugins the APE recognizes in the module:</p>
-<div class="highlight-python"><div class="highlight"><pre>theape list bettersleep
+<div class="highlight-python"><div class="highlight"><pre><span></span>theape list bettersleep
 </pre></div>
 </div>
 <p>To fetch the configuration snippet:</p>
-<div class="highlight-python"><div class="highlight"><pre>theape fetch --module bettersleep BetterSleep
+<div class="highlight-python"><div class="highlight"><pre><span></span>theape fetch --module bettersleep BetterSleep
 </pre></div>
 </div>
-<p>(this is somewhat confusing, but the <tt class="docutils literal"><span class="pre">list</span></tt> sub-command only takes one argument so you don&#8217;t need the <tt class="docutils literal"><span class="pre">--module</span></tt> flag, but the <tt class="docutils literal"><span class="pre">fetch</span></tt> sub-command takes either zero, one, or two arguments so I had to add the <tt class="docutils literal"><span class="pre">--module</span></tt> flag to make it specific that an external module was being called).</p>
+<p>(this is somewhat confusing, but the <code class="docutils literal"><span class="pre">list</span></code> sub-command only takes one argument so you don&#8217;t need the <code class="docutils literal"><span class="pre">--module</span></code> flag, but the <code class="docutils literal"><span class="pre">fetch</span></code> sub-command takes either zero, one, or two arguments so I had to add the <code class="docutils literal"><span class="pre">--module</span></code> flag to make it specific that an external module was being called).</p>
 <p>To run:</p>
-<div class="highlight-python"><div class="highlight"><pre>theape run
+<div class="highlight-python"><div class="highlight"><pre><span></span>theape run
 </pre></div>
 </div>
 <p>This requires that the user know what modules contain plugins so it isn&#8217;t an automatic system, but I&#8217;m assuming that these cases will be rare enough that this will work. For non-APE maintainers it would make sense just to put the plugin in the APE&#8217;s plugin folder, the external module solution is so that I can build and use plugins for code that won&#8217;t be added to the APE itself.</p>
@@ -479,7 +479,7 @@ Sleep : TheBigSleep product" />
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

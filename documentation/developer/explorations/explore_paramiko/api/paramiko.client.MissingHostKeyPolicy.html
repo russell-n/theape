@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../../index.html" />
     <link rel="up" title="Exploring Paramiko" href="../exploring_paramiko.html" />
@@ -38,7 +38,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -103,11 +103,11 @@
               
                 
   <li>
-    <a href="paramiko.client.SSHClient.load_system_host_keys.html" title="Previous Chapter: paramiko.client.SSHClient.load_system_host_keys"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; paramiko.client....</span>
+    <a href="paramiko.client.SSHClient.load_system_host_keys.html" title="Previous Chapter: paramiko.client.SSHClient.load_system_host_keys"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; paramiko.clie...</span>
     </a>
   </li>
   <li>
-    <a href="paramiko.client.AutoAddPolicy.html" title="Next Chapter: paramiko.client.AutoAddPolicy"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">paramiko.client.... &raquo;</span>
+    <a href="paramiko.client.AutoAddPolicy.html" title="Next Chapter: paramiko.client.AutoAddPolicy"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">paramiko.clie... &raquo;</span>
     </a>
   </li>
               
@@ -139,13 +139,13 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="paramiko-client-missinghostkeypolicy">
 <h1>paramiko.client.MissingHostKeyPolicy<a class="headerlink" href="#paramiko-client-missinghostkeypolicy" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="paramiko.client.MissingHostKeyPolicy">
-<em class="property">class </em><tt class="descclassname">paramiko.client.</tt><tt class="descname">MissingHostKeyPolicy</tt><a class="headerlink" href="#paramiko.client.MissingHostKeyPolicy" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">paramiko.client.</code><code class="descname">MissingHostKeyPolicy</code><a class="reference internal" href="../../../../../_modules/paramiko/client.html#MissingHostKeyPolicy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#paramiko.client.MissingHostKeyPolicy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Interface for defining the policy that <cite>.SSHClient</cite> should use when the
 SSH server&#8217;s hostname is not in either the system host keys or the
 application&#8217;s keys.  Pre-made classes implement policies for automatically
@@ -154,7 +154,7 @@ and for automatically rejecting the key (<cite>.RejectPolicy</cite>).</p>
 <p>This function may be used to ask the user to verify the key, for example.</p>
 <dl class="method">
 <dt id="paramiko.client.MissingHostKeyPolicy.__init__">
-<tt class="descname">__init__</tt><big>(</big><big>)</big><a class="headerlink" href="#paramiko.client.MissingHostKeyPolicy.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#paramiko.client.MissingHostKeyPolicy.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>x.__init__(...) initializes x; see help(type(x)) for signature</p>
 </dd></dl>
 
@@ -165,14 +165,14 @@ and for automatically rejecting the key (<cite>.RejectPolicy</cite>).</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#paramiko.client.MissingHostKeyPolicy.missing_host_key" title="paramiko.client.MissingHostKeyPolicy.missing_host_key"><tt class="xref py py-obj docutils literal"><span class="pre">missing_host_key</span></tt></a>(client,&nbsp;hostname,&nbsp;key)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#paramiko.client.MissingHostKeyPolicy.missing_host_key" title="paramiko.client.MissingHostKeyPolicy.missing_host_key"><code class="xref py py-obj docutils literal"><span class="pre">missing_host_key</span></code></a>(client,&nbsp;hostname,&nbsp;key)</td>
 <td>Called when an <cite>.SSHClient</cite> receives a server key for a server that isn&#8217;t in either the system or local <cite>.HostKeys</cite> object.</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="paramiko.client.MissingHostKeyPolicy.missing_host_key">
-<tt class="descname">missing_host_key</tt><big>(</big><em>client</em>, <em>hostname</em>, <em>key</em><big>)</big><a class="headerlink" href="#paramiko.client.MissingHostKeyPolicy.missing_host_key" title="Permalink to this definition">¶</a></dt>
+<code class="descname">missing_host_key</code><span class="sig-paren">(</span><em>client</em>, <em>hostname</em>, <em>key</em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/paramiko/client.html#MissingHostKeyPolicy.missing_host_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#paramiko.client.MissingHostKeyPolicy.missing_host_key" title="Permalink to this definition">¶</a></dt>
 <dd><p>Called when an <cite>.SSHClient</cite> receives a server key for a server that
 isn&#8217;t in either the system or local <cite>.HostKeys</cite> object.  To accept
 the key, simply return.  To reject, raised an exception (which will
@@ -196,7 +196,7 @@ be passed to the calling application).</p>
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

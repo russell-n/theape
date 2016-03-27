@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,11 +26,10 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../index.html" />
     <link rel="up" title="Plugins" href="index.html" />
-    <link rel="next" title="theape.plugins.quartermaster.QuarterMaster" href="api/theape.plugins.quartermaster.QuarterMaster.html" />
     <link rel="prev" title="theape.parts.dummy.dummy.HangingDummy.__call__" href="api/theape.parts.dummy.dummy.HangingDummy.__call__.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -38,7 +37,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -113,11 +112,7 @@
               
                 
   <li>
-    <a href="api/theape.parts.dummy.dummy.HangingDummy.__call__.html" title="Previous Chapter: theape.parts.dummy.dummy.HangingDummy.__call__"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; theape.parts.dum...</span>
-    </a>
-  </li>
-  <li>
-    <a href="api/theape.plugins.quartermaster.QuarterMaster.html" title="Next Chapter: theape.plugins.quartermaster.QuarterMaster"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">theape.plugins.q... &raquo;</span>
+    <a href="api/theape.parts.dummy.dummy.HangingDummy.__call__.html" title="Previous Chapter: theape.parts.dummy.dummy.HangingDummy.__call__"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; theape.parts....</span>
     </a>
   </li>
               
@@ -149,7 +144,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="module-theape.plugins.quartermaster">
 <span id="the-quartermaster"></span><h1>The QuarterMaster<a class="headerlink" href="#module-theape.plugins.quartermaster" title="Permalink to this headline">¶</a></h1>
@@ -167,17 +162,17 @@ QuarterMaster o- RyeMother" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.quartermaster.QuarterMaster.html#theape.plugins.quartermaster.QuarterMaster" title="theape.plugins.quartermaster.QuarterMaster"><tt class="xref py py-obj docutils literal"><span class="pre">QuarterMaster</span></tt></a>([external_modules])</td>
-<td>A plugin manager</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">QuarterMaster</span></code></td>
+<td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.quartermaster.QuarterMaster.list_plugins.html#theape.plugins.quartermaster.QuarterMaster.list_plugins" title="theape.plugins.quartermaster.QuarterMaster.list_plugins"><tt class="xref py py-obj docutils literal"><span class="pre">QuarterMaster.list_plugins</span></tt></a>()</td>
-<td>Prints the names of the plugins to standard out</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">QuarterMaster.list_plugins</span></code></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.quartermaster.QuarterMaster.plugins.html#theape.plugins.quartermaster.QuarterMaster.plugins" title="theape.plugins.quartermaster.QuarterMaster.plugins"><tt class="xref py py-obj docutils literal"><span class="pre">QuarterMaster.plugins</span></tt></a></td>
-<td>A dictionary of plugins (this is persistent, unlike the generators, in case it gets re-used)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">QuarterMaster.plugins</span></code></td>
+<td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.quartermaster.QuarterMaster.get_plugin.html#theape.plugins.quartermaster.QuarterMaster.get_plugin" title="theape.plugins.quartermaster.QuarterMaster.get_plugin"><tt class="xref py py-obj docutils literal"><span class="pre">QuarterMaster.get_plugin</span></tt></a>(name)</td>
-<td>Retrieves a plugin object.</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">QuarterMaster.get_plugin</span></code></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -189,7 +184,7 @@ QuarterMaster o- RyeMother" />
 <div class="section" id="some-messy-business">
 <h2>Some Messy Business<a class="headerlink" href="#some-messy-business" title="Permalink to this headline">¶</a></h2>
 <p>Since I am running code to create this documentation I am going to keep it from executing when it is not being compiled as documentation by setting up a flag. It is ugly, but I do not know how to exclude code from the tangling:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">document_this</span> <span class="o">=</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__builtin__&quot;</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">document_this</span> <span class="o">=</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__builtin__&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -204,7 +199,7 @@ QuarterMaster o- RyeMother" />
 </ol>
 </div></blockquote>
 <p>For the explicit imports I created a class and added properties that would import and return the class definitions, something like:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ImportClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ImportClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_aoeu</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="k">return</span>
@@ -217,41 +212,41 @@ QuarterMaster o- RyeMother" />
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_aoeu</span>
 </pre></div>
 </div>
-<p>The reason for the use of properties was so that if a specific class wasn&#8217;t needed it wouldn&#8217;t be imported. This worked okay as a quick hack, but as the classes piled up it quickly became too large (and it is just too inelegant). My attempt at using naming conventions (having all modules and classes have the same suffix) seemed too inflexible and clumsy. Yapsy seems like it would work, but having to dig through the API and do experiments to figure out how to get it working was proving to be too much work for the limited use I wanted out of it. So my solution here is to use the python standard library and a common base-class to create a primitive self-discovering plugin manager (the <cite>QuarterMaster</cite>). It will do file-discovery within the plugins directory to find candidate files, import their contents, then check to see which ones inherit from the <a class="reference internal" href="base_plugin.html#base-plugin"><em>BasePlugin</em></a>.</p>
+<p>The reason for the use of properties was so that if a specific class wasn&#8217;t needed it wouldn&#8217;t be imported. This worked okay as a quick hack, but as the classes piled up it quickly became too large (and it is just too inelegant). My attempt at using naming conventions (having all modules and classes have the same suffix) seemed too inflexible and clumsy. Yapsy seems like it would work, but having to dig through the API and do experiments to figure out how to get it working was proving to be too much work for the limited use I wanted out of it. So my solution here is to use the python standard library and a common base-class to create a primitive self-discovering plugin manager (the <cite>QuarterMaster</cite>). It will do file-discovery within the plugins directory to find candidate files, import their contents, then check to see which ones inherit from the <a class="reference internal" href="base_plugin.html#base-plugin"><span>BasePlugin</span></a>.</p>
 <div class="section" id="gathering-files">
 <h3>Gathering Files<a class="headerlink" href="#gathering-files" title="Permalink to this headline">¶</a></h3>
-<p>The first step is to gather the file-names of potential plugins. Potential plugins in this case are python files in the same directory as the QuarterMaster. To illustrate the next examples I am going to use the <tt class="docutils literal"><span class="pre">base_plugin</span></tt> module since it is in the same directory and I need a file I can import.</p>
-<p>The <a class="reference external" href="http://docs.python.org/2/library/os.html#files-and-directories">os.listdir</a> function takes a path string and returns a list of entries in the directory in arbitrary order (other than hidden directories). So we need the path to the <tt class="docutils literal"><span class="pre">plugins</span></tt> directory. In this case I am putting the <cite>QuarterMaster</cite> in the same directory so it is a matter of the QuarterMaster knowing its own directory. If you look at the <a class="reference external" href="http://docs.python.org/2/reference/simple_stmts.html#import">import</a> statement you will see that whenever a module is imported, it gets a <cite>__file__</cite> variable added to its namespace:</p>
+<p>The first step is to gather the file-names of potential plugins. Potential plugins in this case are python files in the same directory as the QuarterMaster. To illustrate the next examples I am going to use the <code class="docutils literal"><span class="pre">base_plugin</span></code> module since it is in the same directory and I need a file I can import.</p>
+<p>The <a class="reference external" href="http://docs.python.org/2/library/os.html#files-and-directories">os.listdir</a> function takes a path string and returns a list of entries in the directory in arbitrary order (other than hidden directories). So we need the path to the <code class="docutils literal"><span class="pre">plugins</span></code> directory. In this case I am putting the <cite>QuarterMaster</cite> in the same directory so it is a matter of the QuarterMaster knowing its own directory. If you look at the <a class="reference external" href="http://docs.python.org/2/reference/simple_stmts.html#import">import</a> statement you will see that whenever a module is imported, it gets a <cite>__file__</cite> variable added to its namespace:</p>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference external" href="http://docs.python.org/library/os.html#os.listdir" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">os.listdir</span></tt></a>((path)&nbsp;-&gt;&nbsp;list_of_strings)</td>
+<tr class="row-odd"><td><a class="reference external" href="http://docs.python.org/library/os.html#os.listdir" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">os.listdir</span></code></a>((path)&nbsp;-&gt;&nbsp;list_of_strings)</td>
 <td>Return a list containing the names of the entries in the directory.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../infrastructure/api/os.path.dirname.html#os.path.dirname" title="os.path.dirname"><tt class="xref py py-obj docutils literal"><span class="pre">os.path.dirname</span></tt></a>(p)</td>
+<tr class="row-even"><td><a class="reference internal" href="../infrastructure/api/os.path.dirname.html#os.path.dirname" title="os.path.dirname"><code class="xref py py-obj docutils literal"><span class="pre">os.path.dirname</span></code></a>(p)</td>
 <td>Returns the directory component of a pathname</td>
 </tr>
 </tbody>
 </table>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="n">document_this</span><span class="p">:</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">document_this</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">theape.plugins.base_plugin</span> <span class="kn">as</span> <span class="nn">base_plugin</span>
     <span class="k">print</span><span class="p">(</span><span class="n">base_plugin</span><span class="o">.</span><span class="n">__file__</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="code highlight-python"><div class="highlight"><pre>/home/charon/repositories/code/hortators/theape/theape/plugins/base_plugin.pyc
+<div class="code highlight-python"><div class="highlight"><pre><span></span>/home/charon/repositories/code/hortators/theape/theape/plugins/base_plugin.pyc
 </pre></div>
 </div>
-<p>Looking at the output you can see that the <tt class="docutils literal"><span class="pre">__file__</span></tt> contains the path to the compiled bytecode of the module. To get the <cite>path</cite> we want for the <tt class="docutils literal"><span class="pre">listdir</span></tt> function we can use <a class="reference external" href="http://docs.python.org/2/library/os.path.html#module-os.path">os.path.dirname</a> which takes a path and returns the directory without the file-name. So, with these three elements, and the fact that python files have the <cite>.py</cite> extension, we can find all the files in the same directory as that of a particular module:</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="n">document_this</span><span class="p">:</span>
+<p>Looking at the output you can see that the <code class="docutils literal"><span class="pre">__file__</span></code> contains the path to the compiled bytecode of the module. To get the <cite>path</cite> we want for the <code class="docutils literal"><span class="pre">listdir</span></code> function we can use <a class="reference external" href="http://docs.python.org/2/library/os.path.html#module-os.path">os.path.dirname</a> which takes a path and returns the directory without the file-name. So, with these three elements, and the fact that python files have the <cite>.py</cite> extension, we can find all the files in the same directory as that of a particular module:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">document_this</span><span class="p">:</span>
     <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">base_plugin</span><span class="o">.</span><span class="n">__file__</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;.py&#39;</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.py&#39;</span><span class="p">)):</span>
         <span class="k">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="code highlight-python"><div class="highlight"><pre><span class="n">__init__</span><span class="o">.</span><span class="n">py</span>
+<div class="code highlight-python"><div class="highlight"><pre><span></span><span class="n">__init__</span><span class="o">.</span><span class="n">py</span>
 <span class="n">apeplugin</span><span class="o">.</span><span class="n">py</span>
 <span class="n">base_plugin</span><span class="o">.</span><span class="n">py</span>
 <span class="n">compositeplugin</span><span class="o">.</span><span class="n">py</span>
@@ -260,23 +255,23 @@ QuarterMaster o- RyeMother" />
 <span class="n">sleep_plugin</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
-<p>I should point out, since it might not be obvious, that the classes within a module get the <tt class="docutils literal"><span class="pre">__file__</span></tt> variable added to their namespace as a global variable so the QuarterMaster can just use the <tt class="docutils literal"><span class="pre">__file__</span></tt> variable directly without importing anything (so in the QuarterMaster you will see <tt class="docutils literal"><span class="pre">__file__</span></tt>, not <tt class="docutils literal"><span class="pre">base_plugin.__file__</span></tt>) but the code I run while documenting this module cannot get access to it without referring to an imported module. I think it has to do with the fact that the import statement is what creates the variable so if this module were imported it would be created, but to generate the document, I run it through Pweave. Just keep that in mind if you look at the code.</p>
-<p>Anyway, did that work? Yes and no. Notice that it only printed out file-names, not the whole path. If we use this as the base for importing (after removing the extension) it will work for this documentation because I have to compile it while in the same directory, but the moment you run the code anywhere else python will raise an error (unless you happen to be in a directory with files of the same name). So do we just add the paths? That was my first notion, but this will raise an error when you try to import it. It  looks like <tt class="docutils literal"><span class="pre">importlib</span></tt> is importing a file, but the name you are passing in is actually the name of the module, not the file. This can be confusing but it just means that instead of the file-path, you need to refer to the module the way you would when you import it, using dot-notation:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">theape.plugins.apeplugin</span>
+<p>I should point out, since it might not be obvious, that the classes within a module get the <code class="docutils literal"><span class="pre">__file__</span></code> variable added to their namespace as a global variable so the QuarterMaster can just use the <code class="docutils literal"><span class="pre">__file__</span></code> variable directly without importing anything (so in the QuarterMaster you will see <code class="docutils literal"><span class="pre">__file__</span></code>, not <code class="docutils literal"><span class="pre">base_plugin.__file__</span></code>) but the code I run while documenting this module cannot get access to it without referring to an imported module. I think it has to do with the fact that the import statement is what creates the variable so if this module were imported it would be created, but to generate the document, I run it through Pweave. Just keep that in mind if you look at the code.</p>
+<p>Anyway, did that work? Yes and no. Notice that it only printed out file-names, not the whole path. If we use this as the base for importing (after removing the extension) it will work for this documentation because I have to compile it while in the same directory, but the moment you run the code anywhere else python will raise an error (unless you happen to be in a directory with files of the same name). So do we just add the paths? That was my first notion, but this will raise an error when you try to import it. It  looks like <code class="docutils literal"><span class="pre">importlib</span></code> is importing a file, but the name you are passing in is actually the name of the module, not the file. This can be confusing but it just means that instead of the file-path, you need to refer to the module the way you would when you import it, using dot-notation:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">theape.plugins.apeplugin</span>
 </pre></div>
 </div>
-<p>So how do we get this? Well, it turns out that import creates another variable in a module-namespace called <tt class="docutils literal"><span class="pre">__package__</span></tt> which contains the dotted-notation path to the package where the module is located. This was confusing to me at first (and I may still be wrong), but basically packages correspond to directories and modules correspond to files, but they are <em>not</em> files and directories and they are not referred to in the same way that the file-system would refer to them. The file-names still have their extensions so I will add the package prefix later, but this is what is in the <tt class="docutils literal"><span class="pre">__package__</span></tt>:</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="n">document_this</span><span class="p">:</span>
+<p>So how do we get this? Well, it turns out that import creates another variable in a module-namespace called <code class="docutils literal"><span class="pre">__package__</span></code> which contains the dotted-notation path to the package where the module is located. This was confusing to me at first (and I may still be wrong), but basically packages correspond to directories and modules correspond to files, but they are <em>not</em> files and directories and they are not referred to in the same way that the file-system would refer to them. The file-names still have their extensions so I will add the package prefix later, but this is what is in the <code class="docutils literal"><span class="pre">__package__</span></code>:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">document_this</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="n">base_plugin</span><span class="o">.</span><span class="n">__package__</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="code highlight-python"><div class="highlight"><pre><span class="n">theape</span><span class="o">.</span><span class="n">plugins</span>
+<div class="code highlight-python"><div class="highlight"><pre><span></span><span class="n">theape</span><span class="o">.</span><span class="n">plugins</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="finding-the-plugins">
 <h3>Finding the Plugins<a class="headerlink" href="#finding-the-plugins" title="Permalink to this headline">¶</a></h3>
-<p>To figure out if something in a file we have discovered is a Plugin we need to know that it is a child of the <tt class="docutils literal"><span class="pre">BasePlugin</span></tt>. To do that we need to import it then check that its <tt class="docutils literal"><span class="pre">__base__</span></tt> property is the <tt class="docutils literal"><span class="pre">BasePlugin</span></tt>. What we created previously was a list of strings (file-names), the next step is to get rid of the file extension using <tt class="docutils literal"><span class="pre">os.path.splitext</span></tt> (which returns a (basename, extension) tuple created from a file name) and import those basenames using the <a class="reference external" href="http://docs.python.org/2/library/importlib.html">importlib</a> module.</p>
+<p>To figure out if something in a file we have discovered is a Plugin we need to know that it is a child of the <code class="docutils literal"><span class="pre">BasePlugin</span></code>. To do that we need to import it then check that its <code class="docutils literal"><span class="pre">__base__</span></code> property is the <code class="docutils literal"><span class="pre">BasePlugin</span></code>. What we created previously was a list of strings (file-names), the next step is to get rid of the file extension using <code class="docutils literal"><span class="pre">os.path.splitext</span></code> (which returns a (basename, extension) tuple created from a file name) and import those basenames using the <a class="reference external" href="http://docs.python.org/2/library/importlib.html">importlib</a> module.</p>
 <p>Besides filtering on the extension, I am also going to exclude some other files because importing them executes all the code in them and I am getting extraneous strings appearing in the output for this documentation. Also, once the extension is removed from the name I prepend the package. The import module says that it takes the package name as an argument, but that uses relative importing so there would be some dot-notation to figure out. This seems easier.</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -284,46 +279,46 @@ QuarterMaster o- RyeMother" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../documentation/developer/explorations/explore_importlib/api/importlib.import_module.html#importlib.import_module" title="importlib.import_module"><tt class="xref py py-obj docutils literal"><span class="pre">importlib.import_module</span></tt></a>(name[,&nbsp;package])</td>
+<tr class="row-odd"><td><a class="reference internal" href="../documentation/developer/explorations/explore_importlib/api/importlib.import_module.html#importlib.import_module" title="importlib.import_module"><code class="xref py py-obj docutils literal"><span class="pre">importlib.import_module</span></code></a>(name[,&nbsp;package])</td>
 <td>Import a module.</td>
 </tr>
 </tbody>
 </table>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="n">document_this</span><span class="p">:</span>
-    <span class="c"># remember we need the package</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">document_this</span><span class="p">:</span>
+    <span class="c1"># remember we need the package</span>
     <span class="n">package</span> <span class="o">=</span> <span class="n">base_plugin</span><span class="o">.</span><span class="n">__package__</span>
-    <span class="n">exclude</span> <span class="o">=</span> <span class="s">&quot;__init__.py index.py constants.py quartermaster.py&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">exclude</span> <span class="o">=</span> <span class="s2">&quot;__init__.py index.py constants.py quartermaster.py&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
     <span class="n">names</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-                   <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;.py&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">exclude</span><span class="p">)</span>
+                   <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.py&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">exclude</span><span class="p">)</span>
     <span class="n">basenames_extensions</span> <span class="o">=</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">)</span>
-    <span class="n">modules</span> <span class="o">=</span> <span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">package</span><span class="p">,</span> <span class="n">base</span><span class="p">)))</span> <span class="k">for</span> <span class="n">base</span><span class="p">,</span> <span class="n">extension</span> <span class="ow">in</span> <span class="n">basenames_extensions</span><span class="p">)</span>
+    <span class="n">modules</span> <span class="o">=</span> <span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">package</span><span class="p">,</span> <span class="n">base</span><span class="p">)))</span> <span class="k">for</span> <span class="n">base</span><span class="p">,</span> <span class="n">extension</span> <span class="ow">in</span> <span class="n">basenames_extensions</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>At this point there is nothing really interesting to print yet &#8211; we need to find the things in the modules that are plugins. To get the objects in the modules we can use the <a class="reference external" href="http://docs.python.org/2/library/inspect.html#inspect.getmembers">inspect.getmembers</a> function. Once we have them, we can check the <tt class="docutils literal"><span class="pre">__base__</span></tt> variable that each class has which holds the parent class. Only classes have the <tt class="docutils literal"><span class="pre">__base__</span></tt> attribute so we will also filter non-classes out using the <a class="reference external" href="http://docs.python.org/2/library/inspect.html#inspect.getmembers">inspect.isclass</a> function to prevent AttributeErrors.</p>
-<p>The signature of the <tt class="docutils literal"><span class="pre">getmembers</span></tt> function is this:</p>
-<div class="highlight-python"><div class="highlight"><pre>inspect.getmembers(object[, predicate])
+<p>At this point there is nothing really interesting to print yet &#8211; we need to find the things in the modules that are plugins. To get the objects in the modules we can use the <a class="reference external" href="http://docs.python.org/2/library/inspect.html#inspect.getmembers">inspect.getmembers</a> function. Once we have them, we can check the <code class="docutils literal"><span class="pre">__base__</span></code> variable that each class has which holds the parent class. Only classes have the <code class="docutils literal"><span class="pre">__base__</span></code> attribute so we will also filter non-classes out using the <a class="reference external" href="http://docs.python.org/2/library/inspect.html#inspect.getmembers">inspect.isclass</a> function to prevent AttributeErrors.</p>
+<p>The signature of the <code class="docutils literal"><span class="pre">getmembers</span></code> function is this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>inspect.getmembers(object[, predicate])
 </pre></div>
 </div>
-<p>The <cite>predicate</cite> argument is an optional function that you pass in to filter what <tt class="docutils literal"><span class="pre">getmembers</span></tt> returns. <tt class="docutils literal"><span class="pre">getmembers</span></tt> will only return objects that evaluate to True when passed to the predicate function, so if we pass in a function that checks if an object is the child of the BasePlugin, this should give us our plugins:</p>
+<p>The <cite>predicate</cite> argument is an optional function that you pass in to filter what <code class="docutils literal"><span class="pre">getmembers</span></code> returns. <code class="docutils literal"><span class="pre">getmembers</span></code> will only return objects that evaluate to True when passed to the predicate function, so if we pass in a function that checks if an object is the child of the BasePlugin, this should give us our plugins:</p>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference external" href="http://docs.python.org/library/inspect.html#inspect.isclass" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">inspect.isclass</span></tt></a>(object)</td>
+<tr class="row-odd"><td><a class="reference external" href="http://docs.python.org/library/inspect.html#inspect.isclass" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">inspect.isclass</span></code></a>(object)</td>
 <td>Return true if the object is a class.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../infrastructure/api/inspect.getmembers.html#inspect.getmembers" title="inspect.getmembers"><tt class="xref py py-obj docutils literal"><span class="pre">inspect.getmembers</span></tt></a>(object[,&nbsp;predicate])</td>
+<tr class="row-even"><td><a class="reference internal" href="../infrastructure/api/inspect.getmembers.html#inspect.getmembers" title="inspect.getmembers"><code class="xref py py-obj docutils literal"><span class="pre">inspect.getmembers</span></code></a>(object[,&nbsp;predicate])</td>
 <td>Return all members of an object as (name, value) pairs sorted by name.</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">It looks like importing python-standard-library classes will not give them a <tt class="docutils literal"><span class="pre">__base__</span></tt> attribute so the <tt class="docutils literal"><span class="pre">is_plugin</span></tt> has to trap for <tt class="docutils literal"><span class="pre">AttributeError</span></tt> exceptions or any python file that imports a python standard library module has to be excluded from the files that are imported.</p>
+<p class="last">It looks like importing python-standard-library classes will not give them a <code class="docutils literal"><span class="pre">__base__</span></code> attribute so the <code class="docutils literal"><span class="pre">is_plugin</span></code> has to trap for <code class="docutils literal"><span class="pre">AttributeError</span></code> exceptions or any python file that imports a python standard library module has to be excluded from the files that are imported.</p>
 </div>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="n">document_this</span><span class="p">:</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">document_this</span><span class="p">:</span>
     <span class="n">isclass</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isclass</span>
     <span class="k">def</span> <span class="nf">is_plugin</span><span class="p">(</span><span class="n">o</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">isclass</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="ow">and</span> <span class="n">o</span><span class="o">.</span><span class="n">__base__</span> <span class="ow">is</span> <span class="n">BasePlugin</span>
@@ -332,30 +327,30 @@ QuarterMaster o- RyeMother" />
         <span class="n">members</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmembers</span><span class="p">(</span><span class="n">module</span><span class="p">,</span>
                                      <span class="n">predicate</span><span class="o">=</span><span class="n">is_plugin</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="n">members</span><span class="p">:</span>
-            <span class="c"># each member is a tuple</span>
+            <span class="c1"># each member is a tuple</span>
             <span class="n">name</span><span class="p">,</span> <span class="n">definition</span> <span class="o">=</span> <span class="n">member</span>
             <span class="k">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
             <span class="n">plugin</span> <span class="o">=</span> <span class="n">definition</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Oops. What happened there (the <tt class="docutils literal"><span class="pre">print</span></tt> statement should have created some output above this paragraph)? Well, it turns out that now that we are using the full import path, we need to add the full path for <tt class="docutils literal"><span class="pre">BasePlugin</span></tt> when we do our check or it will fail.</p>
+<p>Oops. What happened there (the <code class="docutils literal"><span class="pre">print</span></code> statement should have created some output above this paragraph)? Well, it turns out that now that we are using the full import path, we need to add the full path for <code class="docutils literal"><span class="pre">BasePlugin</span></code> when we do our check or it will fail.</p>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference external" href="http://docs.python.org/library/os.path.html#os.path.splitext" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">os.path.splitext</span></tt></a>(p)</td>
+<tr class="row-odd"><td><a class="reference external" href="http://docs.python.org/library/os.path.html#os.path.splitext" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">os.path.splitext</span></code></a>(p)</td>
 <td>Split the extension from a pathname.</td>
 </tr>
 </tbody>
 </table>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="n">document_this</span><span class="p">:</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">document_this</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">theape.plugins.base_plugin</span>
     <span class="n">names</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-                   <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;.py&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">exclude</span><span class="p">)</span>
+                   <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.py&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">exclude</span><span class="p">)</span>
     <span class="n">basenames_extensions</span> <span class="o">=</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">)</span>
-    <span class="n">modules</span> <span class="o">=</span> <span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">package</span><span class="p">,</span> <span class="n">base</span><span class="p">)))</span> <span class="k">for</span> <span class="n">base</span><span class="p">,</span> <span class="n">extension</span> <span class="ow">in</span> <span class="n">basenames_extensions</span><span class="p">)</span>
+    <span class="n">modules</span> <span class="o">=</span> <span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">package</span><span class="p">,</span> <span class="n">base</span><span class="p">)))</span> <span class="k">for</span> <span class="n">base</span><span class="p">,</span> <span class="n">extension</span> <span class="ow">in</span> <span class="n">basenames_extensions</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">is_plugin</span><span class="p">(</span><span class="n">o</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">isclass</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="ow">and</span> <span class="n">o</span><span class="o">.</span><span class="n">__base__</span> <span class="ow">is</span> <span class="n">theape</span><span class="o">.</span><span class="n">plugins</span><span class="o">.</span><span class="n">base_plugin</span><span class="o">.</span><span class="n">BasePlugin</span>
@@ -364,13 +359,13 @@ QuarterMaster o- RyeMother" />
         <span class="n">members</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmembers</span><span class="p">(</span><span class="n">module</span><span class="p">,</span>
                                      <span class="n">predicate</span><span class="o">=</span><span class="n">is_plugin</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="n">members</span><span class="p">:</span>
-            <span class="c"># each member is a tuple</span>
+            <span class="c1"># each member is a tuple</span>
             <span class="n">name</span><span class="p">,</span> <span class="n">definition</span> <span class="o">=</span> <span class="n">member</span>
             <span class="k">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
             <span class="n">plugin</span> <span class="o">=</span> <span class="n">definition</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="code highlight-python"><div class="highlight"><pre><span class="n">Ape</span>
+<div class="code highlight-python"><div class="highlight"><pre><span></span><span class="n">Ape</span>
 <span class="n">Sleep</span>
 <span class="n">CrashTestDummy</span>
 <span class="n">Dummy</span>
@@ -378,7 +373,7 @@ QuarterMaster o- RyeMother" />
 <span class="n">Sleep</span>
 </pre></div>
 </div>
-<p>The actual instantiation of the plugin (<tt class="docutils literal"><span class="pre">plugin</span> <span class="pre">=</span> <span class="pre">definition(None)</span></tt>) was done to show that it is a callable object (a Plugin class definition in this case).</p>
+<p>The actual instantiation of the plugin (<code class="docutils literal"><span class="pre">plugin</span> <span class="pre">=</span> <span class="pre">definition(None)</span></code>) was done to show that it is a callable object (a Plugin class definition in this case).</p>
 </div>
 </div>
 </div>
@@ -396,7 +391,7 @@ QuarterMaster o- RyeMother" />
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

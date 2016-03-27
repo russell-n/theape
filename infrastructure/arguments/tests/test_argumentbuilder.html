@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../index.html" />
     <link rel="up" title="Testing the Arguments" href="index.html" />
@@ -38,7 +38,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -103,11 +103,11 @@
               
                 
   <li>
-    <a href="index.html" title="Previous Chapter: Testing the Arguments"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Testing the Argu...</span>
+    <a href="index.html" title="Previous Chapter: Testing the Arguments"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Testing the A...</span>
     </a>
   </li>
   <li>
-    <a href="test_checkarguments.html" title="Next Chapter: Testing the Check"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Testing the Chec... &raquo;</span>
+    <a href="test_checkarguments.html" title="Next Chapter: Testing the Check"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Testing the C... &raquo;</span>
     </a>
   </li>
               
@@ -139,7 +139,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="module-theape.interface.arguments.tests.test_argumentbuilder">
 <span id="testing-the-argumentbuilder"></span><h1>Testing the ArgumentBuilder<a class="headerlink" href="#module-theape.interface.arguments.tests.test_argumentbuilder" title="Permalink to this headline">¶</a></h1>
@@ -149,18 +149,18 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">api</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">api</span></code></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestArgumentBuilder.test_constructor</span></tt></td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">TestArgumentBuilder.test_constructor</span></code></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TestArgumentBuilder.test_parse_args</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">TestArgumentBuilder.test_parse_args</span></code></td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<div class="code python highlight-python"><div class="highlight"><pre># python standard library
+<div class="code python highlight-python"><div class="highlight"><pre><span></span># python standard library
 import unittest
 
 # the ape
@@ -173,36 +173,36 @@ from theape.infrastructure.arguments.checkarguments import Check
 from theape.infrastructure.arguments.helparguments import Help
 </pre></div>
 </div>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">TestArgumentBuilder</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TestArgumentBuilder</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">test_constructor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Does it build?</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">builder</span> <span class="o">=</span> <span class="n">ArgumentBuilder</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;fetch&#39;</span><span class="p">])</span>
+        <span class="n">builder</span> <span class="o">=</span> <span class="n">ArgumentBuilder</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;fetch&#39;</span><span class="p">])</span>
         <span class="k">return</span>
 
     <span class="k">def</span> <span class="nf">test_parse_args</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Does it work like argparse?</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">builder</span> <span class="o">=</span> <span class="n">ArgumentBuilder</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;fetch&#39;</span><span class="p">])</span>
+        <span class="n">builder</span> <span class="o">=</span> <span class="n">ArgumentBuilder</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;fetch&#39;</span><span class="p">])</span>
         <span class="n">args</span> <span class="o">=</span> <span class="n">builder</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">command</span><span class="p">,</span> <span class="s">&#39;fetch&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">command</span><span class="p">,</span> <span class="s1">&#39;fetch&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">Fetch</span><span class="p">)</span>
 
-        <span class="n">builder</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;run&#39;</span><span class="p">]</span>
+        <span class="n">builder</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">]</span>
         <span class="n">args</span> <span class="o">=</span> <span class="n">builder</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">Run</span><span class="p">)</span>
 
-        <span class="n">builder</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;list&#39;</span><span class="p">]</span>
+        <span class="n">builder</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;list&#39;</span><span class="p">]</span>
         <span class="n">args</span> <span class="o">=</span> <span class="n">builder</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">List</span><span class="p">)</span>
 
-        <span class="n">builder</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;check&#39;</span><span class="p">]</span>
+        <span class="n">builder</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;check&#39;</span><span class="p">]</span>
         <span class="n">args</span> <span class="o">=</span> <span class="n">builder</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">Check</span><span class="p">)</span>
 
-        <span class="n">builder</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;help&#39;</span><span class="p">]</span>
+        <span class="n">builder</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;help&#39;</span><span class="p">]</span>
         <span class="n">args</span> <span class="o">=</span> <span class="n">builder</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">Help</span><span class="p">)</span>
         <span class="k">return</span>
@@ -223,7 +223,7 @@ from theape.infrastructure.arguments.helparguments import Help
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

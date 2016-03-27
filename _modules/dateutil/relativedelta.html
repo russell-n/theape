@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dateutil.relativedelta &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">
+          The Ape</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.0.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins/index.html">Plugins</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"></ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <h1>Source code for dateutil.relativedelta</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">calendar</span>
+
+<span class="kn">import</span> <span class="nn">operator</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">copysign</span>
+
+<span class="kn">from</span> <span class="nn">six</span> <span class="kn">import</span> <span class="n">integer_types</span>
+<span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;relativedelta&quot;</span><span class="p">,</span> <span class="s2">&quot;MO&quot;</span><span class="p">,</span> <span class="s2">&quot;TU&quot;</span><span class="p">,</span> <span class="s2">&quot;WE&quot;</span><span class="p">,</span> <span class="s2">&quot;TH&quot;</span><span class="p">,</span> <span class="s2">&quot;FR&quot;</span><span class="p">,</span> <span class="s2">&quot;SA&quot;</span><span class="p">,</span> <span class="s2">&quot;SU&quot;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="weekday"><a class="viewcode-back" href="../../documentation/developer/explorations/explore_dateutil/api/dateutil.relativedelta.weekday.html#dateutil.relativedelta.weekday">[docs]</a><span class="k">class</span> <span class="nc">weekday</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">__slots__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;weekday&quot;</span><span class="p">,</span> <span class="s2">&quot;n&quot;</span><span class="p">]</span>
+
+<div class="viewcode-block" id="weekday.__init__"><a class="viewcode-back" href="../../documentation/developer/explorations/explore_dateutil/api/dateutil.relativedelta.weekday.html#dateutil.relativedelta.weekday.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weekday</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weekday</span> <span class="o">=</span> <span class="n">weekday</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span></div>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weekday</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">weekday</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">weekday</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">n</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="bp">True</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;MO&quot;</span><span class="p">,</span> <span class="s2">&quot;TU&quot;</span><span class="p">,</span> <span class="s2">&quot;WE&quot;</span><span class="p">,</span> <span class="s2">&quot;TH&quot;</span><span class="p">,</span> <span class="s2">&quot;FR&quot;</span><span class="p">,</span> <span class="s2">&quot;SA&quot;</span><span class="p">,</span> <span class="s2">&quot;SU&quot;</span><span class="p">)[</span><span class="bp">self</span><span class="o">.</span><span class="n">weekday</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">s</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">(</span><span class="si">%+d</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)</span></div>
+
+<span class="n">MO</span><span class="p">,</span> <span class="n">TU</span><span class="p">,</span> <span class="n">WE</span><span class="p">,</span> <span class="n">TH</span><span class="p">,</span> <span class="n">FR</span><span class="p">,</span> <span class="n">SA</span><span class="p">,</span> <span class="n">SU</span> <span class="o">=</span> <span class="n">weekdays</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">weekday</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">)])</span>
+
+
+<div class="viewcode-block" id="relativedelta"><a class="viewcode-back" href="../../documentation/developer/explorations/explore_dateutil/api/dateutil.relativedelta.relativedelta.html#dateutil.relativedelta.relativedelta">[docs]</a><span class="k">class</span> <span class="nc">relativedelta</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The relativedelta type is based on the specification of the excellent</span>
+<span class="sd">    work done by M.-A. Lemburg in his</span>
+<span class="sd">    `mx.DateTime &lt;http://www.egenix.com/files/python/mxDateTime.html&gt;`_ extension.</span>
+<span class="sd">    However, notice that this type does *NOT* implement the same algorithm as</span>
+<span class="sd">    his work. Do *NOT* expect it to behave like mx.DateTime&#39;s counterpart.</span>
+
+<span class="sd">    There are two different ways to build a relativedelta instance. The</span>
+<span class="sd">    first one is passing it two date/datetime classes::</span>
+
+<span class="sd">        relativedelta(datetime1, datetime2)</span>
+
+<span class="sd">    The second one is passing it any number of the following keyword arguments::</span>
+
+<span class="sd">        relativedelta(arg1=x,arg2=y,arg3=z...)</span>
+
+<span class="sd">        year, month, day, hour, minute, second, microsecond:</span>
+<span class="sd">            Absolute information (argument is singular); adding or subtracting a</span>
+<span class="sd">            relativedelta with absolute information does not perform an aritmetic</span>
+<span class="sd">            operation, but rather REPLACES the corresponding value in the</span>
+<span class="sd">            original datetime with the value(s) in relativedelta.</span>
+
+<span class="sd">        years, months, weeks, days, hours, minutes, seconds, microseconds:</span>
+<span class="sd">            Relative information, may be negative (argument is plural); adding</span>
+<span class="sd">            or subtracting a relativedelta with relative information performs</span>
+<span class="sd">            the corresponding aritmetic operation on the original datetime value</span>
+<span class="sd">            with the information in the relativedelta.  </span>
+
+<span class="sd">        weekday:</span>
+<span class="sd">            One of the weekday instances (MO, TU, etc). These instances may</span>
+<span class="sd">            receive a parameter N, specifying the Nth weekday, which could</span>
+<span class="sd">            be positive or negative (like MO(+1) or MO(-2). Not specifying</span>
+<span class="sd">            it is the same as specifying +1. You can also use an integer,</span>
+<span class="sd">            where 0=MO.</span>
+
+<span class="sd">        leapdays:</span>
+<span class="sd">            Will add given days to the date found, if year is a leap</span>
+<span class="sd">            year, and the date found is post 28 of february.</span>
+
+<span class="sd">        yearday, nlyearday:</span>
+<span class="sd">            Set the yearday or the non-leap year day (jump leap days).</span>
+<span class="sd">            These are converted to day/month/leapdays information.</span>
+
+<span class="sd">    Here is the behavior of operations with relativedelta:</span>
+
+<span class="sd">    1. Calculate the absolute year, using the &#39;year&#39; argument, or the</span>
+<span class="sd">       original datetime year, if the argument is not present.</span>
+
+<span class="sd">    2. Add the relative &#39;years&#39; argument to the absolute year.</span>
+
+<span class="sd">    3. Do steps 1 and 2 for month/months.</span>
+
+<span class="sd">    4. Calculate the absolute day, using the &#39;day&#39; argument, or the</span>
+<span class="sd">       original datetime day, if the argument is not present. Then,</span>
+<span class="sd">       subtract from the day until it fits in the year and month</span>
+<span class="sd">       found after their operations.</span>
+
+<span class="sd">    5. Add the relative &#39;days&#39; argument to the absolute day. Notice</span>
+<span class="sd">       that the &#39;weeks&#39; argument is multiplied by 7 and added to</span>
+<span class="sd">       &#39;days&#39;.</span>
+
+<span class="sd">    6. Do steps 1 and 2 for hour/hours, minute/minutes, second/seconds,</span>
+<span class="sd">       microsecond/microseconds.</span>
+
+<span class="sd">    7. If the &#39;weekday&#39; argument is present, calculate the weekday,</span>
+<span class="sd">       with the given (wday, nth) tuple. wday is the index of the</span>
+<span class="sd">       weekday (0-6, 0=Mon), and nth is the number of weeks to add</span>
+<span class="sd">       forward or backward, depending on its signal. Notice that if</span>
+<span class="sd">       the calculated date is already Monday, for example, using</span>
+<span class="sd">       (0, 1) or (0, -1) won&#39;t change the day.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="relativedelta.__init__"><a class="viewcode-back" href="../../documentation/developer/explorations/explore_dateutil/api/dateutil.relativedelta.relativedelta.html#dateutil.relativedelta.relativedelta.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt1</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">dt2</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">years</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">months</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">days</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">leapdays</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">weeks</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                 <span class="n">hours</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">minutes</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">seconds</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">microseconds</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                 <span class="n">year</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">weekday</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">yearday</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">nlyearday</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">hour</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">minute</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">second</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">microsecond</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+
+        <span class="c1"># Check for non-integer values in integer-only quantities</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">!=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">months</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Non-integer years and months are &quot;</span>
+                             <span class="s2">&quot;ambiguous and not currently supported.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">dt1</span> <span class="ow">and</span> <span class="n">dt2</span><span class="p">:</span>
+            <span class="c1"># datetime is a subclass of date. So both must be date</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">dt1</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">)</span> <span class="ow">and</span>
+                    <span class="nb">isinstance</span><span class="p">(</span><span class="n">dt2</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">)):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;relativedelta only diffs datetime/date&quot;</span><span class="p">)</span>
+
+            <span class="c1"># We allow two dates, or two datetimes, so we coerce them to be</span>
+            <span class="c1"># of the same type</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">dt1</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">)</span> <span class="o">!=</span>
+                    <span class="nb">isinstance</span><span class="p">(</span><span class="n">dt2</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dt1</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">):</span>
+                    <span class="n">dt1</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromordinal</span><span class="p">(</span><span class="n">dt1</span><span class="o">.</span><span class="n">toordinal</span><span class="p">())</span>
+                <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dt2</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">):</span>
+                    <span class="n">dt2</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromordinal</span><span class="p">(</span><span class="n">dt2</span><span class="o">.</span><span class="n">toordinal</span><span class="p">())</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">years</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">months</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">days</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">leapdays</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hours</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">minutes</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">seconds</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">microseconds</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">day</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">weekday</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hour</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">minute</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">second</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">microsecond</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_has_time</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="c1"># Get year / month delta between the two</span>
+            <span class="n">months</span> <span class="o">=</span> <span class="p">(</span><span class="n">dt1</span><span class="o">.</span><span class="n">year</span> <span class="o">-</span> <span class="n">dt2</span><span class="o">.</span><span class="n">year</span><span class="p">)</span> <span class="o">*</span> <span class="mi">12</span> <span class="o">+</span> <span class="p">(</span><span class="n">dt1</span><span class="o">.</span><span class="n">month</span> <span class="o">-</span> <span class="n">dt2</span><span class="o">.</span><span class="n">month</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_months</span><span class="p">(</span><span class="n">months</span><span class="p">)</span>
+
+            <span class="c1"># Remove the year/month delta so the timedelta is just well-defined</span>
+            <span class="c1"># time units (seconds, days and microseconds)</span>
+            <span class="n">dtm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__radd__</span><span class="p">(</span><span class="n">dt2</span><span class="p">)</span>
+
+            <span class="c1"># If we&#39;ve overshot our target, make an adjustment</span>
+            <span class="k">if</span> <span class="n">dt1</span> <span class="o">&lt;</span> <span class="n">dt2</span><span class="p">:</span>
+                <span class="n">compare</span> <span class="o">=</span> <span class="n">operator</span><span class="o">.</span><span class="n">gt</span>
+                <span class="n">increment</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">compare</span> <span class="o">=</span> <span class="n">operator</span><span class="o">.</span><span class="n">lt</span>
+                <span class="n">increment</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+            <span class="k">while</span> <span class="n">compare</span><span class="p">(</span><span class="n">dt1</span><span class="p">,</span> <span class="n">dtm</span><span class="p">):</span>
+                <span class="n">months</span> <span class="o">+=</span> <span class="n">increment</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_set_months</span><span class="p">(</span><span class="n">months</span><span class="p">)</span>
+                <span class="n">dtm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__radd__</span><span class="p">(</span><span class="n">dt2</span><span class="p">)</span>
+
+            <span class="c1"># Get the timedelta between the &quot;months-adjusted&quot; date and dt1</span>
+            <span class="n">delta</span> <span class="o">=</span> <span class="n">dt1</span> <span class="o">-</span> <span class="n">dtm</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">seconds</span> <span class="o">=</span> <span class="n">delta</span><span class="o">.</span><span class="n">seconds</span> <span class="o">+</span> <span class="n">delta</span><span class="o">.</span><span class="n">days</span> <span class="o">*</span> <span class="mi">86400</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">microseconds</span> <span class="o">=</span> <span class="n">delta</span><span class="o">.</span><span class="n">microseconds</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Relative information</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">years</span> <span class="o">=</span> <span class="n">years</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">months</span> <span class="o">=</span> <span class="n">months</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">days</span> <span class="o">=</span> <span class="n">days</span> <span class="o">+</span> <span class="n">weeks</span> <span class="o">*</span> <span class="mi">7</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">leapdays</span> <span class="o">=</span> <span class="n">leapdays</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hours</span> <span class="o">=</span> <span class="n">hours</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">minutes</span> <span class="o">=</span> <span class="n">minutes</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">seconds</span> <span class="o">=</span> <span class="n">seconds</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">microseconds</span> <span class="o">=</span> <span class="n">microseconds</span>
+
+            <span class="c1"># Absolute information</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="n">year</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="o">=</span> <span class="n">month</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">day</span> <span class="o">=</span> <span class="n">day</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hour</span> <span class="o">=</span> <span class="n">hour</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">minute</span> <span class="o">=</span> <span class="n">minute</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">second</span> <span class="o">=</span> <span class="n">second</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">microsecond</span> <span class="o">=</span> <span class="n">microsecond</span>
+
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">!=</span> <span class="n">x</span>
+                   <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span> <span class="n">hour</span><span class="p">,</span>
+                             <span class="n">minute</span><span class="p">,</span> <span class="n">second</span><span class="p">,</span> <span class="n">microsecond</span><span class="p">)):</span>
+                <span class="c1"># For now we&#39;ll deprecate floats - later it&#39;ll be an error.</span>
+                <span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Non-integer value passed as absolute information. &quot;</span> <span class="o">+</span>
+                     <span class="s2">&quot;This is not a well-defined condition and will raise &quot;</span> <span class="o">+</span>
+                     <span class="s2">&quot;errors in future versions.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">weekday</span><span class="p">,</span> <span class="n">integer_types</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">weekday</span> <span class="o">=</span> <span class="n">weekdays</span><span class="p">[</span><span class="n">weekday</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">weekday</span> <span class="o">=</span> <span class="n">weekday</span>
+
+            <span class="n">yday</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="n">nlyearday</span><span class="p">:</span>
+                <span class="n">yday</span> <span class="o">=</span> <span class="n">nlyearday</span>
+            <span class="k">elif</span> <span class="n">yearday</span><span class="p">:</span>
+                <span class="n">yday</span> <span class="o">=</span> <span class="n">yearday</span>
+                <span class="k">if</span> <span class="n">yearday</span> <span class="o">&gt;</span> <span class="mi">59</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">leapdays</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="k">if</span> <span class="n">yday</span><span class="p">:</span>
+                <span class="n">ydayidx</span> <span class="o">=</span> <span class="p">[</span><span class="mi">31</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">151</span><span class="p">,</span> <span class="mi">181</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span>
+                           <span class="mi">243</span><span class="p">,</span> <span class="mi">273</span><span class="p">,</span> <span class="mi">304</span><span class="p">,</span> <span class="mi">334</span><span class="p">,</span> <span class="mi">366</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">ydays</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ydayidx</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">yday</span> <span class="o">&lt;=</span> <span class="n">ydays</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="o">=</span> <span class="n">idx</span><span class="o">+</span><span class="mi">1</span>
+                        <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">day</span> <span class="o">=</span> <span class="n">yday</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">day</span> <span class="o">=</span> <span class="n">yday</span><span class="o">-</span><span class="n">ydayidx</span><span class="p">[</span><span class="n">idx</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                        <span class="k">break</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid year day (</span><span class="si">%d</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="n">yday</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fix</span><span class="p">()</span></div>
+
+    <span class="k">def</span> <span class="nf">_fix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">microseconds</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">999999</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">_sign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">microseconds</span><span class="p">)</span>
+            <span class="n">div</span><span class="p">,</span> <span class="n">mod</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">microseconds</span> <span class="o">*</span> <span class="n">s</span><span class="p">,</span> <span class="mi">1000000</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">microseconds</span> <span class="o">=</span> <span class="n">mod</span> <span class="o">*</span> <span class="n">s</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">seconds</span> <span class="o">+=</span> <span class="n">div</span> <span class="o">*</span> <span class="n">s</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seconds</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">59</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">_sign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seconds</span><span class="p">)</span>
+            <span class="n">div</span><span class="p">,</span> <span class="n">mod</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seconds</span> <span class="o">*</span> <span class="n">s</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">seconds</span> <span class="o">=</span> <span class="n">mod</span> <span class="o">*</span> <span class="n">s</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">minutes</span> <span class="o">+=</span> <span class="n">div</span> <span class="o">*</span> <span class="n">s</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minutes</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">59</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">_sign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minutes</span><span class="p">)</span>
+            <span class="n">div</span><span class="p">,</span> <span class="n">mod</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minutes</span> <span class="o">*</span> <span class="n">s</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">minutes</span> <span class="o">=</span> <span class="n">mod</span> <span class="o">*</span> <span class="n">s</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hours</span> <span class="o">+=</span> <span class="n">div</span> <span class="o">*</span> <span class="n">s</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hours</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">23</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">_sign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hours</span><span class="p">)</span>
+            <span class="n">div</span><span class="p">,</span> <span class="n">mod</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hours</span> <span class="o">*</span> <span class="n">s</span><span class="p">,</span> <span class="mi">24</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hours</span> <span class="o">=</span> <span class="n">mod</span> <span class="o">*</span> <span class="n">s</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">days</span> <span class="o">+=</span> <span class="n">div</span> <span class="o">*</span> <span class="n">s</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">months</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">11</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">_sign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">months</span><span class="p">)</span>
+            <span class="n">div</span><span class="p">,</span> <span class="n">mod</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">months</span> <span class="o">*</span> <span class="n">s</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">months</span> <span class="o">=</span> <span class="n">mod</span> <span class="o">*</span> <span class="n">s</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">years</span> <span class="o">+=</span> <span class="n">div</span> <span class="o">*</span> <span class="n">s</span>
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hours</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">minutes</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">seconds</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">microseconds</span>
+                <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">hour</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">minute</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">or</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">second</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">microsecond</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_has_time</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_has_time</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">weeks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">days</span> <span class="o">//</span> <span class="mi">7</span>
+    <span class="nd">@weeks.setter</span>
+    <span class="k">def</span> <span class="nf">weeks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">days</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">days</span> <span class="o">-</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weeks</span> <span class="o">*</span> <span class="mi">7</span><span class="p">)</span> <span class="o">+</span> <span class="n">value</span> <span class="o">*</span> <span class="mi">7</span>
+
+    <span class="k">def</span> <span class="nf">_set_months</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">months</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">months</span> <span class="o">=</span> <span class="n">months</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">months</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">11</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">_sign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">months</span><span class="p">)</span>
+            <span class="n">div</span><span class="p">,</span> <span class="n">mod</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">months</span> <span class="o">*</span> <span class="n">s</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">months</span> <span class="o">=</span> <span class="n">mod</span> <span class="o">*</span> <span class="n">s</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">years</span> <span class="o">=</span> <span class="n">div</span> <span class="o">*</span> <span class="n">s</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">years</span> <span class="o">=</span> <span class="mi">0</span>
+
+<div class="viewcode-block" id="relativedelta.normalized"><a class="viewcode-back" href="../../documentation/developer/explorations/explore_dateutil/api/dateutil.relativedelta.relativedelta.html#dateutil.relativedelta.relativedelta.normalized">[docs]</a>    <span class="k">def</span> <span class="nf">normalized</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a version of this object represented entirely using integer</span>
+<span class="sd">        values for the relative attributes.</span>
+
+<span class="sd">        &gt;&gt;&gt; relativedelta(days=1.5, hours=2).normalized()</span>
+<span class="sd">        relativedelta(days=1, hours=14)</span>
+<span class="sd">        </span>
+<span class="sd">        :return:</span>
+<span class="sd">            Returns a :class:`dateutil.relativedelta.relativedelta` object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Cascade remainders down (rounding each to roughly nearest microsecond)</span>
+        <span class="n">days</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">days</span><span class="p">)</span>
+        
+        <span class="n">hours_f</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hours</span> <span class="o">+</span> <span class="mi">24</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">days</span> <span class="o">-</span> <span class="n">days</span><span class="p">),</span> <span class="mi">11</span><span class="p">)</span>
+        <span class="n">hours</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hours_f</span><span class="p">)</span>
+        
+        <span class="n">minutes_f</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minutes</span> <span class="o">+</span> <span class="mi">60</span> <span class="o">*</span> <span class="p">(</span><span class="n">hours_f</span> <span class="o">-</span> <span class="n">hours</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="n">minutes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">minutes_f</span><span class="p">)</span>
+
+        <span class="n">seconds_f</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seconds</span> <span class="o">+</span> <span class="mi">60</span> <span class="o">*</span> <span class="p">(</span><span class="n">minutes_f</span> <span class="o">-</span> <span class="n">minutes</span><span class="p">),</span> <span class="mi">8</span><span class="p">)</span>
+        <span class="n">seconds</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">seconds_f</span><span class="p">)</span>
+
+        <span class="n">microseconds</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">microseconds</span> <span class="o">+</span> <span class="mf">1e6</span> <span class="o">*</span> <span class="p">(</span><span class="n">seconds_f</span> <span class="o">-</span> <span class="n">seconds</span><span class="p">))</span>
+
+        <span class="c1"># Constructor carries overflow back up with call to _fix()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">(</span><span class="n">years</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">years</span><span class="p">,</span> <span class="n">months</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">months</span><span class="p">,</span>
+                              <span class="n">days</span><span class="o">=</span><span class="n">days</span><span class="p">,</span> <span class="n">hours</span><span class="o">=</span><span class="n">hours</span><span class="p">,</span> <span class="n">minutes</span><span class="o">=</span><span class="n">minutes</span><span class="p">,</span>
+                              <span class="n">seconds</span><span class="o">=</span><span class="n">seconds</span><span class="p">,</span> <span class="n">microseconds</span><span class="o">=</span><span class="n">microseconds</span><span class="p">,</span>
+                              <span class="n">leapdays</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">leapdays</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span>
+                              <span class="n">month</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">,</span>
+                              <span class="n">weekday</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">weekday</span><span class="p">,</span> <span class="n">hour</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span>
+                              <span class="n">minute</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span> <span class="n">second</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">second</span><span class="p">,</span>
+                              <span class="n">microsecond</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">microsecond</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">relativedelta</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">(</span><span class="n">years</span><span class="o">=</span><span class="n">other</span><span class="o">.</span><span class="n">years</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">years</span><span class="p">,</span>
+                                 <span class="n">months</span><span class="o">=</span><span class="n">other</span><span class="o">.</span><span class="n">months</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">months</span><span class="p">,</span>
+                                 <span class="n">days</span><span class="o">=</span><span class="n">other</span><span class="o">.</span><span class="n">days</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">days</span><span class="p">,</span>
+                                 <span class="n">hours</span><span class="o">=</span><span class="n">other</span><span class="o">.</span><span class="n">hours</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">hours</span><span class="p">,</span>
+                                 <span class="n">minutes</span><span class="o">=</span><span class="n">other</span><span class="o">.</span><span class="n">minutes</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">minutes</span><span class="p">,</span>
+                                 <span class="n">seconds</span><span class="o">=</span><span class="n">other</span><span class="o">.</span><span class="n">seconds</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">seconds</span><span class="p">,</span>
+                                 <span class="n">microseconds</span><span class="o">=</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">microseconds</span> <span class="o">+</span>
+                                               <span class="bp">self</span><span class="o">.</span><span class="n">microseconds</span><span class="p">),</span>
+                                 <span class="n">leapdays</span><span class="o">=</span><span class="n">other</span><span class="o">.</span><span class="n">leapdays</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">leapdays</span><span class="p">,</span>
+                                 <span class="n">year</span><span class="o">=</span><span class="n">other</span><span class="o">.</span><span class="n">year</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span>
+                                 <span class="n">month</span><span class="o">=</span><span class="n">other</span><span class="o">.</span><span class="n">month</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">,</span>
+                                 <span class="n">day</span><span class="o">=</span><span class="n">other</span><span class="o">.</span><span class="n">day</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">,</span>
+                                 <span class="n">weekday</span><span class="o">=</span><span class="n">other</span><span class="o">.</span><span class="n">weekday</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">weekday</span><span class="p">,</span>
+                                 <span class="n">hour</span><span class="o">=</span><span class="n">other</span><span class="o">.</span><span class="n">hour</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span>
+                                 <span class="n">minute</span><span class="o">=</span><span class="n">other</span><span class="o">.</span><span class="n">minute</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span>
+                                 <span class="n">second</span><span class="o">=</span><span class="n">other</span><span class="o">.</span><span class="n">second</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">second</span><span class="p">,</span>
+                                 <span class="n">microsecond</span><span class="o">=</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">microsecond</span> <span class="ow">or</span>
+                                              <span class="bp">self</span><span class="o">.</span><span class="n">microsecond</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;unsupported type for add operation&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_time</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">):</span>
+            <span class="n">other</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromordinal</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">toordinal</span><span class="p">())</span>
+        <span class="n">year</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="ow">or</span> <span class="n">other</span><span class="o">.</span><span class="n">year</span><span class="p">)</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">years</span>
+        <span class="n">month</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="ow">or</span> <span class="n">other</span><span class="o">.</span><span class="n">month</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">months</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">months</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">12</span>
+            <span class="n">month</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">months</span>
+            <span class="k">if</span> <span class="n">month</span> <span class="o">&gt;</span> <span class="mi">12</span><span class="p">:</span>
+                <span class="n">year</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">month</span> <span class="o">-=</span> <span class="mi">12</span>
+            <span class="k">elif</span> <span class="n">month</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">year</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="n">month</span> <span class="o">+=</span> <span class="mi">12</span>
+        <span class="n">day</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">calendar</span><span class="o">.</span><span class="n">monthrange</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span>
+                  <span class="bp">self</span><span class="o">.</span><span class="n">day</span> <span class="ow">or</span> <span class="n">other</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
+        <span class="n">repl</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="n">year</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">:</span> <span class="n">month</span><span class="p">,</span> <span class="s2">&quot;day&quot;</span><span class="p">:</span> <span class="n">day</span><span class="p">}</span>
+        <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;hour&quot;</span><span class="p">,</span> <span class="s2">&quot;minute&quot;</span><span class="p">,</span> <span class="s2">&quot;second&quot;</span><span class="p">,</span> <span class="s2">&quot;microsecond&quot;</span><span class="p">]:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">repl</span><span class="p">[</span><span class="n">attr</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="n">days</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">days</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">leapdays</span> <span class="ow">and</span> <span class="n">month</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">calendar</span><span class="o">.</span><span class="n">isleap</span><span class="p">(</span><span class="n">year</span><span class="p">):</span>
+            <span class="n">days</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">leapdays</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="o">**</span><span class="n">repl</span><span class="p">)</span>
+               <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">days</span><span class="p">,</span>
+                                    <span class="n">hours</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hours</span><span class="p">,</span>
+                                    <span class="n">minutes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">minutes</span><span class="p">,</span>
+                                    <span class="n">seconds</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">seconds</span><span class="p">,</span>
+                                    <span class="n">microseconds</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">microseconds</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">weekday</span><span class="p">:</span>
+            <span class="n">weekday</span><span class="p">,</span> <span class="n">nth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weekday</span><span class="o">.</span><span class="n">weekday</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weekday</span><span class="o">.</span><span class="n">n</span> <span class="ow">or</span> <span class="mi">1</span>
+            <span class="n">jumpdays</span> <span class="o">=</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">nth</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">7</span>
+            <span class="k">if</span> <span class="n">nth</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">jumpdays</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">7</span> <span class="o">-</span> <span class="n">ret</span><span class="o">.</span><span class="n">weekday</span><span class="p">()</span> <span class="o">+</span> <span class="n">weekday</span><span class="p">)</span> <span class="o">%</span> <span class="mi">7</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">jumpdays</span> <span class="o">+=</span> <span class="p">(</span><span class="n">ret</span><span class="o">.</span><span class="n">weekday</span><span class="p">()</span> <span class="o">-</span> <span class="n">weekday</span><span class="p">)</span> <span class="o">%</span> <span class="mi">7</span>
+                <span class="n">jumpdays</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="n">ret</span> <span class="o">+=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">jumpdays</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span>
+
+    <span class="k">def</span> <span class="nf">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__add__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__rsub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__neg__</span><span class="p">()</span><span class="o">.</span><span class="n">__radd__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">relativedelta</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;unsupported type for sub operation&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">(</span><span class="n">years</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">years</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">years</span><span class="p">,</span>
+                             <span class="n">months</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">months</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">months</span><span class="p">,</span>
+                             <span class="n">days</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">days</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">days</span><span class="p">,</span>
+                             <span class="n">hours</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hours</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">hours</span><span class="p">,</span>
+                             <span class="n">minutes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">minutes</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">minutes</span><span class="p">,</span>
+                             <span class="n">seconds</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">seconds</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">seconds</span><span class="p">,</span>
+                             <span class="n">microseconds</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">microseconds</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">microseconds</span><span class="p">,</span>
+                             <span class="n">leapdays</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">leapdays</span> <span class="ow">or</span> <span class="n">other</span><span class="o">.</span><span class="n">leapdays</span><span class="p">,</span>
+                             <span class="n">year</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="ow">or</span> <span class="n">other</span><span class="o">.</span><span class="n">year</span><span class="p">,</span>
+                             <span class="n">month</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="ow">or</span> <span class="n">other</span><span class="o">.</span><span class="n">month</span><span class="p">,</span>
+                             <span class="n">day</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">day</span> <span class="ow">or</span> <span class="n">other</span><span class="o">.</span><span class="n">day</span><span class="p">,</span>
+                             <span class="n">weekday</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">weekday</span> <span class="ow">or</span> <span class="n">other</span><span class="o">.</span><span class="n">weekday</span><span class="p">,</span>
+                             <span class="n">hour</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hour</span> <span class="ow">or</span> <span class="n">other</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span>
+                             <span class="n">minute</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">minute</span> <span class="ow">or</span> <span class="n">other</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span>
+                             <span class="n">second</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">second</span> <span class="ow">or</span> <span class="n">other</span><span class="o">.</span><span class="n">second</span><span class="p">,</span>
+                             <span class="n">microsecond</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">microsecond</span> <span class="ow">or</span> <span class="n">other</span><span class="o">.</span><span class="n">microsecond</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">(</span><span class="n">years</span><span class="o">=-</span><span class="bp">self</span><span class="o">.</span><span class="n">years</span><span class="p">,</span>
+                             <span class="n">months</span><span class="o">=-</span><span class="bp">self</span><span class="o">.</span><span class="n">months</span><span class="p">,</span>
+                             <span class="n">days</span><span class="o">=-</span><span class="bp">self</span><span class="o">.</span><span class="n">days</span><span class="p">,</span>
+                             <span class="n">hours</span><span class="o">=-</span><span class="bp">self</span><span class="o">.</span><span class="n">hours</span><span class="p">,</span>
+                             <span class="n">minutes</span><span class="o">=-</span><span class="bp">self</span><span class="o">.</span><span class="n">minutes</span><span class="p">,</span>
+                             <span class="n">seconds</span><span class="o">=-</span><span class="bp">self</span><span class="o">.</span><span class="n">seconds</span><span class="p">,</span>
+                             <span class="n">microseconds</span><span class="o">=-</span><span class="bp">self</span><span class="o">.</span><span class="n">microseconds</span><span class="p">,</span>
+                             <span class="n">leapdays</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">leapdays</span><span class="p">,</span>
+                             <span class="n">year</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span>
+                             <span class="n">month</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">,</span>
+                             <span class="n">day</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">,</span>
+                             <span class="n">weekday</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">weekday</span><span class="p">,</span>
+                             <span class="n">hour</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span>
+                             <span class="n">minute</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span>
+                             <span class="n">second</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">second</span><span class="p">,</span>
+                             <span class="n">microsecond</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">microsecond</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="p">(</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">years</span> <span class="ow">and</span>
+                    <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">months</span> <span class="ow">and</span>
+                    <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">days</span> <span class="ow">and</span>
+                    <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">hours</span> <span class="ow">and</span>
+                    <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">minutes</span> <span class="ow">and</span>
+                    <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">seconds</span> <span class="ow">and</span>
+                    <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">microseconds</span> <span class="ow">and</span>
+                    <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">leapdays</span> <span class="ow">and</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">day</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">weekday</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">hour</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">minute</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">second</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">microsecond</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="c1"># Compatibility with Python 2.x</span>
+    <span class="n">__nonzero__</span> <span class="o">=</span> <span class="n">__bool__</span>
+
+    <span class="k">def</span> <span class="nf">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">(</span><span class="n">years</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">years</span> <span class="o">*</span> <span class="n">f</span><span class="p">),</span>
+                             <span class="n">months</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">months</span> <span class="o">*</span> <span class="n">f</span><span class="p">),</span>
+                             <span class="n">days</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">days</span> <span class="o">*</span> <span class="n">f</span><span class="p">),</span>
+                             <span class="n">hours</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hours</span> <span class="o">*</span> <span class="n">f</span><span class="p">),</span>
+                             <span class="n">minutes</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minutes</span> <span class="o">*</span> <span class="n">f</span><span class="p">),</span>
+                             <span class="n">seconds</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seconds</span> <span class="o">*</span> <span class="n">f</span><span class="p">),</span>
+                             <span class="n">microseconds</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">microseconds</span> <span class="o">*</span> <span class="n">f</span><span class="p">),</span>
+                             <span class="n">leapdays</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">leapdays</span><span class="p">,</span>
+                             <span class="n">year</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span>
+                             <span class="n">month</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">,</span>
+                             <span class="n">day</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">,</span>
+                             <span class="n">weekday</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">weekday</span><span class="p">,</span>
+                             <span class="n">hour</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span>
+                             <span class="n">minute</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span>
+                             <span class="n">second</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">second</span><span class="p">,</span>
+                             <span class="n">microsecond</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">microsecond</span><span class="p">)</span>
+
+    <span class="n">__rmul__</span> <span class="o">=</span> <span class="n">__mul__</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">relativedelta</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">weekday</span> <span class="ow">or</span> <span class="n">other</span><span class="o">.</span><span class="n">weekday</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">weekday</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">other</span><span class="o">.</span><span class="n">weekday</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">weekday</span><span class="o">.</span><span class="n">weekday</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">weekday</span><span class="o">.</span><span class="n">weekday</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+            <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weekday</span><span class="o">.</span><span class="n">n</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">weekday</span><span class="o">.</span><span class="n">n</span>
+            <span class="k">if</span> <span class="n">n1</span> <span class="o">!=</span> <span class="n">n2</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">((</span><span class="ow">not</span> <span class="n">n1</span> <span class="ow">or</span> <span class="n">n1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">n2</span> <span class="ow">or</span> <span class="n">n2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)):</span>
+                <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">years</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">years</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">months</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">months</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">days</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">days</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">hours</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">hours</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">minutes</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">minutes</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">seconds</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">seconds</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">microseconds</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">microseconds</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">leapdays</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">leapdays</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">year</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">month</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">day</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">day</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">hour</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">hour</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">minute</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">minute</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">second</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">second</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">microsecond</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">microsecond</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__div__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mul__</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">other</span><span class="p">))</span>
+
+    <span class="n">__truediv__</span> <span class="o">=</span> <span class="n">__div__</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;years&quot;</span><span class="p">,</span> <span class="s2">&quot;months&quot;</span><span class="p">,</span> <span class="s2">&quot;days&quot;</span><span class="p">,</span> <span class="s2">&quot;leapdays&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;hours&quot;</span><span class="p">,</span> <span class="s2">&quot;minutes&quot;</span><span class="p">,</span> <span class="s2">&quot;seconds&quot;</span><span class="p">,</span> <span class="s2">&quot;microseconds&quot;</span><span class="p">]:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">value</span><span class="p">:</span>
+                <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;{attr}={value:+g}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attr</span><span class="o">=</span><span class="n">attr</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">,</span> <span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="s2">&quot;weekday&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;hour&quot;</span><span class="p">,</span> <span class="s2">&quot;minute&quot;</span><span class="p">,</span> <span class="s2">&quot;second&quot;</span><span class="p">,</span> <span class="s2">&quot;microsecond&quot;</span><span class="p">]:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;{attr}={value}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attr</span><span class="o">=</span><span class="n">attr</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="nb">repr</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="s2">&quot;{classname}({attrs})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>
+                                             <span class="n">attrs</span><span class="o">=</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">l</span><span class="p">))</span></div>
+
+<span class="k">def</span> <span class="nf">_sign</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">copysign</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+
+<span class="c1"># vim:ts=4:sw=4:et</span>
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2014, the cloistered monkey.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

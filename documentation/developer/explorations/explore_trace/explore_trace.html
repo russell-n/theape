@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
     <link rel="up" title="Exploring Trace" href="index.html" />
@@ -38,7 +38,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -141,7 +141,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="exploring-trace">
 <h1>Exploring Trace<a class="headerlink" href="#exploring-trace" title="Permalink to this headline">¶</a></h1>
@@ -152,20 +152,20 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/trace.Trace.html#trace.Trace" title="trace.Trace"><tt class="xref py py-obj docutils literal"><span class="pre">Trace</span></tt></a>([count,&nbsp;trace,&nbsp;countfuncs,&nbsp;...])</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/trace.Trace.html#trace.Trace" title="trace.Trace"><code class="xref py py-obj docutils literal"><span class="pre">Trace</span></code></a>([count,&nbsp;trace,&nbsp;countfuncs,&nbsp;...])</td>
 <td>&#64;param count true iff it should count number of times each</td>
 </tr>
 </tbody>
 </table>
-<p>The <tt class="docutils literal"><span class="pre">trace</span></tt> module itself has a command-line interface so you can run code:</p>
-<div class="highlight-python"><div class="highlight"><pre>python -m trace &lt;filename&gt;
+<p>The <code class="docutils literal"><span class="pre">trace</span></code> module itself has a command-line interface so you can run code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>python -m trace &lt;filename&gt;
 </pre></div>
 </div>
-<p>but here I am more interested in the <tt class="docutils literal"><span class="pre">Trace</span></tt> class that you can import to run a trace from within your code. It seems to be meant to be used for code-coverage but I am interested in it to track function calls so that is all that I will explore here.</p>
+<p>but here I am more interested in the <code class="docutils literal"><span class="pre">Trace</span></code> class that you can import to run a trace from within your code. It seems to be meant to be used for code-coverage but I am interested in it to track function calls so that is all that I will explore here.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="default_trace.html">Default Trace</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="default_trace.html#the-exec-statement">The <tt class="docutils literal"><span class="pre">exec</span></tt> Statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_trace.html#the-exec-statement">The <code class="docutils literal"><span class="pre">exec</span></code> Statement</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_trace.html#id1">The Default Trace</a></li>
 </ul>
 </li>
@@ -189,7 +189,7 @@
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

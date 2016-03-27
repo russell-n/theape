@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,19 +26,16 @@
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../index.html" />
-    <link rel="up" title="The Ape Plugin" href="../apeplugin.html" />
-    <link rel="next" title="theape.plugins.apeplugin.OperationConfiguration.plugin_sections_names" href="theape.plugins.apeplugin.OperationConfiguration.plugin_sections_names.html" />
-    <link rel="prev" title="theape.plugins.apeplugin.OperatorConfiguration.save_configuration" href="theape.plugins.apeplugin.OperatorConfiguration.save_configuration.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -75,11 +72,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../../main.html">The Main Entry Point</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../readme.html">The APE (Read Me)</a></li>
 </ul>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../parts/index.html">Parts</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Plugins</a></li>
 </ul>
 </ul>
 </li>
@@ -102,14 +99,6 @@
             
               
                 
-  <li>
-    <a href="theape.plugins.apeplugin.OperatorConfiguration.save_configuration.html" title="Previous Chapter: theape.plugins.apeplugin.OperatorConfiguration.save_configuration"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; theape.plugins.a...</span>
-    </a>
-  </li>
-  <li>
-    <a href="theape.plugins.apeplugin.OperationConfiguration.plugin_sections_names.html" title="Next Chapter: theape.plugins.apeplugin.OperationConfiguration.plugin_sections_names"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">theape.plugins.a... &raquo;</span>
-    </a>
-  </li>
               
             
             
@@ -139,137 +128,10 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="theape-plugins-apeplugin-operationconfiguration">
 <h1>theape.plugins.apeplugin.OperationConfiguration<a class="headerlink" href="#theape-plugins-apeplugin-operationconfiguration" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
-<dt id="theape.plugins.apeplugin.OperationConfiguration">
-<em class="property">class </em><tt class="descclassname">theape.plugins.apeplugin.</tt><tt class="descname">OperationConfiguration</tt><big>(</big><em>plugins_section</em>, <em>plugin_subsections</em>, <em>operation_name</em>, <em>quartermaster</em>, <em>countdown_timer=None</em><big>)</big><a class="headerlink" href="#theape.plugins.apeplugin.OperationConfiguration" title="Permalink to this definition">¶</a></dt>
-<dd><p>a builder of plugins for operations</p>
-<p>OperationConfiguration builder</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
-<li><cite>plugins_section</cite>: dict with configuration (PLUGINS section)</li>
-<li><cite>operation_name</cite>: option in the identifier for the operation</li>
-<li><cite>plugin_subsections</cite>: list of sub-section-names for the plugins</li>
-<li><cite>quartermaster</cite>: QuarterMaster to retrieve plugins</li>
-<li><cite>countdown_timer</cite>: CountdownTimer for the operation composite</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
-<dt id="theape.plugins.apeplugin.OperationConfiguration.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>plugins_section</em>, <em>plugin_subsections</em>, <em>operation_name</em>, <em>quartermaster</em>, <em>countdown_timer=None</em><big>)</big><a class="headerlink" href="#theape.plugins.apeplugin.OperationConfiguration.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>OperationConfiguration builder</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
-<li><cite>plugins_section</cite>: dict with configuration (PLUGINS section)</li>
-<li><cite>operation_name</cite>: option in the identifier for the operation</li>
-<li><cite>plugin_subsections</cite>: list of sub-section-names for the plugins</li>
-<li><cite>quartermaster</cite>: QuarterMaster to retrieve plugins</li>
-<li><cite>countdown_timer</cite>: CountdownTimer for the operation composite</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<p class="rubric">Methods</p>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#theape.plugins.apeplugin.OperationConfiguration.__init__" title="theape.plugins.apeplugin.OperationConfiguration.__init__"><tt class="xref py py-obj docutils literal"><span class="pre">__init__</span></tt></a>(plugins_section,&nbsp;...[,&nbsp;countdown_timer])</td>
-<td>OperationConfiguration builder</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#theape.plugins.apeplugin.OperationConfiguration.log_error" title="theape.plugins.apeplugin.OperationConfiguration.log_error"><tt class="xref py py-obj docutils literal"><span class="pre">log_error</span></tt></a>(error[,&nbsp;message])</td>
-<td>Logs the error in bold red</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Attributes</p>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#theape.plugins.apeplugin.OperationConfiguration.logger" title="theape.plugins.apeplugin.OperationConfiguration.logger"><tt class="xref py py-obj docutils literal"><span class="pre">logger</span></tt></a></td>
-<td><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">A logging object.</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="theape.plugins.apeplugin.OperationConfiguration.operation.html#theape.plugins.apeplugin.OperationConfiguration.operation" title="theape.plugins.apeplugin.OperationConfiguration.operation"><tt class="xref py py-obj docutils literal"><span class="pre">operation</span></tt></a></td>
-<td>A composite of plugins</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="theape.plugins.apeplugin.OperationConfiguration.plugin_sections_names.html#theape.plugins.apeplugin.OperationConfiguration.plugin_sections_names" title="theape.plugins.apeplugin.OperationConfiguration.plugin_sections_names"><tt class="xref py py-obj docutils literal"><span class="pre">plugin_sections_names</span></tt></a></td>
-<td>creates a dict of plugin section-name:plugin-name pairs</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
-<dt id="theape.plugins.apeplugin.OperationConfiguration.log_error">
-<tt class="descname">log_error</tt><big>(</big><em>error</em>, <em>message=''</em><big>)</big><a class="headerlink" href="#theape.plugins.apeplugin.OperationConfiguration.log_error" title="Permalink to this definition">¶</a></dt>
-<dd><p>Logs the error in bold red</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
-<li><cite>error</cite>: error type (prefix in red and bold)</li>
-<li><cite>message</cite>: descriptive message (red but not bold)</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="theape.plugins.apeplugin.OperationConfiguration.logger">
-<tt class="descname">logger</tt><a class="headerlink" href="#theape.plugins.apeplugin.OperationConfiguration.logger" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A logging object.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="theape.plugins.apeplugin.OperationConfiguration.operation">
-<tt class="descname">operation</tt><a class="headerlink" href="#theape.plugins.apeplugin.OperationConfiguration.operation" title="Permalink to this definition">¶</a></dt>
-<dd><p>A composite of plugins</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="theape.plugins.apeplugin.OperationConfiguration.plugin_sections_names">
-<tt class="descname">plugin_sections_names</tt><a class="headerlink" href="#theape.plugins.apeplugin.OperationConfiguration.plugin_sections_names" title="Permalink to this definition">¶</a></dt>
-<dd><p>creates a dict of plugin section-name:plugin-name pairs</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 
 
@@ -285,7 +147,7 @@
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

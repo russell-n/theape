@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,18 +26,18 @@
     <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../../index.html" />
     <link rel="up" title="Validation" href="../validation.html" />
-    <link rel="prev" title="configobj.get_extra_values" href="configobj.get_extra_values.html" />
+    <link rel="prev" title="Validation" href="../validation.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -102,7 +102,7 @@
               
                 
   <li>
-    <a href="configobj.get_extra_values.html" title="Previous Chapter: configobj.get_extra_values"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; configobj.get_ex...</span>
+    <a href="../validation.html" title="Previous Chapter: Validation"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Validation</span>
     </a>
   </li>
               
@@ -134,39 +134,39 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="validate-validator">
 <h1>validate.Validator<a class="headerlink" href="#validate-validator" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="validate.Validator">
-<em class="property">class </em><tt class="descclassname">validate.</tt><tt class="descname">Validator</tt><big>(</big><em>functions=None</em><big>)</big><a class="headerlink" href="#validate.Validator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">validate.</code><code class="descname">Validator</code><span class="sig-paren">(</span><em>functions=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/validate.html#Validator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#validate.Validator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validator is an object that allows you to register a set of &#8216;checks&#8217;.
 These checks take input and test that it conforms to the check.</p>
 <p>This can also involve converting the value from a string into
 the correct datatype.</p>
-<p>The <tt class="docutils literal"><span class="pre">check</span></tt> method takes an input string which configures which
+<p>The <code class="docutils literal"><span class="pre">check</span></code> method takes an input string which configures which
 check is to be used and applies that check to a supplied value.</p>
 <p>An example input string would be:
 &#8216;int_range(param1, param2)&#8217;</p>
 <p>You would then provide something like:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">int_range_check</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">min</span><span class="p">,</span> <span class="nb">max</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="c"># turn min and max from strings to integers</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">int_range_check</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">min</span><span class="p">,</span> <span class="nb">max</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="c1"># turn min and max from strings to integers</span>
 <span class="gp">... </span>    <span class="nb">min</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">min</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="nb">max</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">max</span><span class="p">)</span>
-<span class="gp">... </span>    <span class="c"># check that value is of the correct type.</span>
-<span class="gp">... </span>    <span class="c"># possible valid inputs are integers or strings</span>
-<span class="gp">... </span>    <span class="c"># that represent integers</span>
+<span class="gp">... </span>    <span class="c1"># check that value is of the correct type.</span>
+<span class="gp">... </span>    <span class="c1"># possible valid inputs are integers or strings</span>
+<span class="gp">... </span>    <span class="c1"># that represent integers</span>
 <span class="gp">... </span>    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">long</span><span class="p">,</span> <span class="n">string_type</span><span class="p">)):</span>
 <span class="gp">... </span>        <span class="k">raise</span> <span class="n">VdtTypeError</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">string_type</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="c"># if we are given a string</span>
-<span class="gp">... </span>        <span class="c"># attempt to convert to an integer</span>
+<span class="gp">... </span>        <span class="c1"># if we are given a string</span>
+<span class="gp">... </span>        <span class="c1"># attempt to convert to an integer</span>
 <span class="gp">... </span>        <span class="k">try</span><span class="p">:</span>
 <span class="gp">... </span>            <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 <span class="gp">... </span>        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
 <span class="gp">... </span>            <span class="k">raise</span> <span class="n">VdtValueError</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-<span class="gp">... </span>    <span class="c"># check the value is between our constraints</span>
+<span class="gp">... </span>    <span class="c1"># check the value is between our constraints</span>
 <span class="gp">... </span>    <span class="k">if</span> <span class="ow">not</span> <span class="nb">min</span> <span class="o">&lt;=</span> <span class="n">value</span><span class="p">:</span>
 <span class="gp">... </span>         <span class="k">raise</span> <span class="n">VdtValueTooSmallError</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="nb">max</span><span class="p">:</span>
@@ -174,20 +174,18 @@ check is to be used and applies that check to a supplied value.</p>
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">value</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">fdict</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;int_range&#39;</span><span class="p">:</span> <span class="n">int_range_check</span><span class="p">}</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;int_range&#39;</span><span class="p">:</span> <span class="n">int_range_check</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vtr1</span> <span class="o">=</span> <span class="n">Validator</span><span class="p">(</span><span class="n">fdict</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">vtr1</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="s">&#39;int_range(20, 40)&#39;</span><span class="p">,</span> <span class="s">&#39;30&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vtr1</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="s1">&#39;int_range(20, 40)&#39;</span><span class="p">,</span> <span class="s1">&#39;30&#39;</span><span class="p">)</span>
 <span class="go">30</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">vtr1</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="s">&#39;int_range(20, 40)&#39;</span><span class="p">,</span> <span class="s">&#39;60&#39;</span><span class="p">)</span>
-<span class="gt">Traceback (most recent call last):</span>
-<span class="gr">VdtValueTooBigError</span>: <span class="n">the value &quot;60&quot; is too big.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vtr1</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="s1">&#39;int_range(20, 40)&#39;</span><span class="p">,</span> <span class="s1">&#39;60&#39;</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
 <span class="gr">VdtValueTooBigError</span>: <span class="n">the value &quot;60&quot; is too big.</span>
 </pre></div>
 </div>
 <p>New functions can be added with :</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">vtr2</span> <span class="o">=</span> <span class="n">Validator</span><span class="p">()</span>       
-<span class="gp">&gt;&gt;&gt; </span><span class="n">vtr2</span><span class="o">.</span><span class="n">functions</span><span class="p">[</span><span class="s">&#39;int_range&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">int_range_check</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vtr2</span> <span class="o">=</span> <span class="n">Validator</span><span class="p">()</span>       
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vtr2</span><span class="o">.</span><span class="n">functions</span><span class="p">[</span><span class="s1">&#39;int_range&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">int_range_check</span>
 </pre></div>
 </div>
 <p>Or by passing in a dictionary of functions when Validator 
@@ -197,7 +195,7 @@ but the first argument should always be &#8216;value&#8217;.</p>
 <p>If the function doesn&#8217;t take additional arguments,
 the parentheses are optional in the check.
 It can be written with either of :</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">keyword</span> <span class="o">=</span> <span class="n">function_name</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">keyword</span> <span class="o">=</span> <span class="n">function_name</span>
 <span class="n">keyword</span> <span class="o">=</span> <span class="n">function_name</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -206,13 +204,13 @@ ConfigObj, an alternative to ConfigParser which supports lists and
 can validate a config file using a config schema.
 For more details on using Validator with ConfigObj see:
 <a class="reference external" href="https://configobj.readthedocs.org/en/latest/configobj.html">https://configobj.readthedocs.org/en/latest/configobj.html</a></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">vtri</span> <span class="o">=</span> <span class="n">Validator</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vtri</span> <span class="o">=</span> <span class="n">Validator</span><span class="p">()</span>
 </pre></div>
 </div>
 <dl class="method">
 <dt id="validate.Validator.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>functions=None</em><big>)</big><a class="headerlink" href="#validate.Validator.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">vtri</span> <span class="o">=</span> <span class="n">Validator</span><span class="p">()</span>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>functions=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/validate.html#Validator.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#validate.Validator.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vtri</span> <span class="o">=</span> <span class="n">Validator</span><span class="p">()</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -224,23 +222,23 @@ For more details on using Validator with ConfigObj see:
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#validate.Validator.__init__" title="validate.Validator.__init__"><tt class="xref py py-obj docutils literal"><span class="pre">__init__</span></tt></a>([functions])</td>
-<td><div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">vtri</span> <span class="o">=</span> <span class="n">Validator</span><span class="p">()</span>
+<tr class="row-odd"><td><a class="reference internal" href="#validate.Validator.__init__" title="validate.Validator.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>([functions])</td>
+<td><div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vtri</span> <span class="o">=</span> <span class="n">Validator</span><span class="p">()</span>
 </pre></div>
 </div>
 </td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#validate.Validator.check" title="validate.Validator.check"><tt class="xref py py-obj docutils literal"><span class="pre">check</span></tt></a>(check,&nbsp;value[,&nbsp;missing])</td>
+<tr class="row-even"><td><a class="reference internal" href="#validate.Validator.check" title="validate.Validator.check"><code class="xref py py-obj docutils literal"><span class="pre">check</span></code></a>(check,&nbsp;value[,&nbsp;missing])</td>
 <td>Usage: check(check, value)</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#validate.Validator.get_default_value" title="validate.Validator.get_default_value"><tt class="xref py py-obj docutils literal"><span class="pre">get_default_value</span></tt></a>(check)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#validate.Validator.get_default_value" title="validate.Validator.get_default_value"><code class="xref py py-obj docutils literal"><span class="pre">get_default_value</span></code></a>(check)</td>
 <td>Given a check, return the default value for the check (converted to the right type).</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="validate.Validator.check">
-<tt class="descname">check</tt><big>(</big><em>check</em>, <em>value</em>, <em>missing=False</em><big>)</big><a class="headerlink" href="#validate.Validator.check" title="Permalink to this definition">¶</a></dt>
+<code class="descname">check</code><span class="sig-paren">(</span><em>check</em>, <em>value</em>, <em>missing=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/validate.html#Validator.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#validate.Validator.check" title="Permalink to this definition">¶</a></dt>
 <dd><p>Usage: check(check, value)</p>
 <dl class="docutils">
 <dt>Arguments:</dt>
@@ -248,18 +246,16 @@ For more details on using Validator with ConfigObj see:
 value: object to be checked</dd>
 </dl>
 <p>Returns value, converted to correct type if necessary</p>
-<p>If the check fails, raises a <tt class="docutils literal"><span class="pre">ValidateError</span></tt> subclass.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">vtor</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="s">&#39;yoda&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
+<p>If the check fails, raises a <code class="docutils literal"><span class="pre">ValidateError</span></code> subclass.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vtor</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="s1">&#39;yoda&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
 <span class="gr">VdtUnknownCheckError</span>: <span class="n">the check &quot;yoda&quot; is unknown.</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">vtor</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="s">&#39;yoda()&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
-<span class="gt">Traceback (most recent call last):</span>
-<span class="gr">VdtUnknownCheckError</span>: <span class="n">the check &quot;yoda&quot; is unknown.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vtor</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="s1">&#39;yoda()&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
 <span class="gr">VdtUnknownCheckError</span>: <span class="n">the check &quot;yoda&quot; is unknown.</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">vtor</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="s">&#39;string(default=&quot;&quot;)&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">missing</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vtor</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="s1">&#39;string(default=&quot;&quot;)&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">missing</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="go">&#39;&#39;</span>
 </pre></div>
 </div>
@@ -267,11 +263,11 @@ value: object to be checked</dd>
 
 <dl class="method">
 <dt id="validate.Validator.get_default_value">
-<tt class="descname">get_default_value</tt><big>(</big><em>check</em><big>)</big><a class="headerlink" href="#validate.Validator.get_default_value" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_default_value</code><span class="sig-paren">(</span><em>check</em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/validate.html#Validator.get_default_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#validate.Validator.get_default_value" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given a check, return the default value for the check
 (converted to the right type).</p>
 <p>If the check doesn&#8217;t specify a default value then a
-<tt class="docutils literal"><span class="pre">KeyError</span></tt> will be raised.</p>
+<code class="docutils literal"><span class="pre">KeyError</span></code> will be raised.</p>
 </dd></dl>
 
 </dd></dl>
@@ -291,7 +287,7 @@ value: object to be checked</dd>
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

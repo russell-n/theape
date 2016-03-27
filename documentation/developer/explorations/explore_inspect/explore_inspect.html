@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
     <link rel="up" title="Explore Inspect" href="index.html" />
@@ -37,7 +37,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -141,41 +141,41 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="python-inspect">
 <h1>Python Inspect<a class="headerlink" href="#python-inspect" title="Permalink to this headline">¶</a></h1>
-<p>This is an exploration of the python <a class="reference external" href="http://docs.python.org/2/library/inspect.html">inspect</a> module. I have come to the conclusion that the <a class="reference external" href="http://yapsy.sourceforge.net/">yapsy</a> system, while interesting in its own right, is too confusing and big to make sense for the limited things that I want to do with it so this is an attempt to get to know <tt class="docutils literal"><span class="pre">inspect</span></tt> in the hopes that it has enough for me to use.</p>
-<p>To start I will use a <em class="xref std std-ref">dummy module</em> and see what I can get from it.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c"># python standard library</span>
+<p>This is an exploration of the python <a class="reference external" href="http://docs.python.org/2/library/inspect.html">inspect</a> module. I have come to the conclusion that the <a class="reference external" href="http://yapsy.sourceforge.net/">yapsy</a> system, while interesting in its own right, is too confusing and big to make sense for the limited things that I want to do with it so this is an attempt to get to know <code class="docutils literal"><span class="pre">inspect</span></code> in the hopes that it has enough for me to use.</p>
+<p>To start I will use a <span class="xref std std-ref">dummy module</span> and see what I can get from it.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># python standard library</span>
 <span class="kn">import</span> <span class="nn">inspect</span>
 
-<span class="c"># this package</span>
+<span class="c1"># this package</span>
 <span class="kn">import</span> <span class="nn">dummy</span>
 </pre></div>
 </div>
 <div class="section" id="the-docstring">
 <h2>The Docstring<a class="headerlink" href="#the-docstring" title="Permalink to this headline">¶</a></h2>
-<p>The <tt class="docutils literal"><span class="pre">inspect.getdoc</span></tt> gets document strings for objects and formats them.</p>
+<p>The <code class="docutils literal"><span class="pre">inspect.getdoc</span></code> gets document strings for objects and formats them.</p>
 <p>First the module docstring:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getdoc</span><span class="p">(</span><span class="n">dummy</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getdoc</span><span class="p">(</span><span class="n">dummy</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="bp">None</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="bp">None</span>
 </pre></div>
 </div>
 <p>Now a class inside the module:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getdoc</span><span class="p">(</span><span class="n">dummy</span><span class="o">.</span><span class="n">DummyClass</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getdoc</span><span class="p">(</span><span class="n">dummy</span><span class="o">.</span><span class="n">DummyClass</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>This is a dummy class that inherits from `object`
+<div class="highlight-python"><div class="highlight"><pre><span></span>This is a dummy class that inherits from `object`
 </pre></div>
 </div>
 <p>What about a method for the class?</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getdoc</span><span class="p">(</span><span class="n">dummy</span><span class="o">.</span><span class="n">DummyClass</span><span class="o">.</span><span class="n">a_tuple</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getdoc</span><span class="p">(</span><span class="n">dummy</span><span class="o">.</span><span class="n">DummyClass</span><span class="o">.</span><span class="n">a_tuple</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>Puts self.a in a tuple and returns it
+<div class="highlight-python"><div class="highlight"><pre><span></span>Puts self.a in a tuple and returns it
 
 :return: (self.a, )
 </pre></div>
@@ -184,8 +184,8 @@
 </div>
 <div class="section" id="get-file">
 <h2>Get File<a class="headerlink" href="#get-file" title="Permalink to this headline">¶</a></h2>
-<p>The <tt class="docutils literal"><span class="pre">inspect.getfile</span></tt> method takes an object and tells you the file where it came from:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">dummy</span> <span class="kn">import</span> <span class="n">DummyClass</span>
+<p>The <code class="docutils literal"><span class="pre">inspect.getfile</span></code> method takes an object and tells you the file where it came from:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dummy</span> <span class="kn">import</span> <span class="n">DummyClass</span>
 <span class="n">d</span> <span class="o">=</span> <span class="n">DummyClass</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">print</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getfile</span><span class="p">(</span><span class="n">DummyClass</span><span class="p">)</span>
 
@@ -195,7 +195,7 @@
     <span class="k">print</span> <span class="n">error</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>./dummy.py
+<div class="highlight-python"><div class="highlight"><pre><span></span>./dummy.py
 &lt;dummy.DummyClass object at 0x3d2ed50&gt; is not a module, class, method, function, traceback, frame, or code object
 </pre></div>
 </div>
@@ -203,36 +203,36 @@
 </div>
 <div class="section" id="getargspec">
 <h2>getargspec<a class="headerlink" href="#getargspec" title="Permalink to this headline">¶</a></h2>
-<p><tt class="docutils literal"><span class="pre">inspect.getargspec</span></tt> should tell you what the arguments are for a method (I think).</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getargspec</span><span class="p">(</span><span class="n">DummyClass</span><span class="o">.</span><span class="n">convoluted</span><span class="p">)</span>
+<p><code class="docutils literal"><span class="pre">inspect.getargspec</span></code> should tell you what the arguments are for a method (I think).</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getargspec</span><span class="p">(</span><span class="n">DummyClass</span><span class="o">.</span><span class="n">convoluted</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">ArgSpec</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;self&#39;</span><span class="p">,</span> <span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;c&#39;</span><span class="p">,</span> <span class="s">&#39;d&#39;</span><span class="p">],</span> <span class="n">varargs</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">keywords</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">defaults</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s">&#39;9&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">))</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ArgSpec</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;self&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">],</span> <span class="n">varargs</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">keywords</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">defaults</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;9&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>That does not appear to be as useful as I thought it would be.</p>
 </div>
 <div class="section" id="getmembers">
 <h2>getmembers<a class="headerlink" href="#getmembers" title="Permalink to this headline">¶</a></h2>
-<p><tt class="docutils literal"><span class="pre">inspect.getmembers</span></tt> returns members of an object, allowing you to pass in a function to filter the particular members you want.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmembers</span><span class="p">(</span><span class="n">dummy</span><span class="p">,</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isclass</span><span class="p">)</span>
+<p><code class="docutils literal"><span class="pre">inspect.getmembers</span></code> returns members of an object, allowing you to pass in a function to filter the particular members you want.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmembers</span><span class="p">(</span><span class="n">dummy</span><span class="p">,</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isclass</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>[(&#39;ABCMeta&#39;, &lt;class &#39;abc.ABCMeta&#39;&gt;), (&#39;AnotherClass&#39;, &lt;class &#39;dummy.AnotherClass&#39;&gt;), (&#39;ConcretePlugin&#39;, &lt;class &#39;dummy.ConcretePlugin&#39;&gt;), (&#39;DummyClass&#39;, &lt;class &#39;dummy.DummyClass&#39;&gt;), (&#39;PluginBase&#39;, &lt;class &#39;dummy.PluginBase&#39;&gt;), (&#39;abstractproperty&#39;, &lt;class &#39;abc.abstractproperty&#39;&gt;)]
+<div class="highlight-python"><div class="highlight"><pre><span></span>[(&#39;ABCMeta&#39;, &lt;class &#39;abc.ABCMeta&#39;&gt;), (&#39;AnotherClass&#39;, &lt;class &#39;dummy.AnotherClass&#39;&gt;), (&#39;ConcretePlugin&#39;, &lt;class &#39;dummy.ConcretePlugin&#39;&gt;), (&#39;DummyClass&#39;, &lt;class &#39;dummy.DummyClass&#39;&gt;), (&#39;PluginBase&#39;, &lt;class &#39;dummy.PluginBase&#39;&gt;), (&#39;abstractproperty&#39;, &lt;class &#39;abc.abstractproperty&#39;&gt;)]
 </pre></div>
 </div>
 <p>I was thinking I could do something like:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmembers</span><span class="p">(</span><span class="n">dummy</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">o</span><span class="p">:</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isclass</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="ow">and</span> <span class="n">o</span><span class="o">.</span><span class="n">__name__</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;Dummy&#39;</span><span class="p">))</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmembers</span><span class="p">(</span><span class="n">dummy</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">o</span><span class="p">:</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isclass</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="ow">and</span> <span class="n">o</span><span class="o">.</span><span class="n">__name__</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Dummy&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>[(&#39;DummyClass&#39;, &lt;class &#39;dummy.DummyClass&#39;&gt;)]
+<div class="highlight-python"><div class="highlight"><pre><span></span>[(&#39;DummyClass&#39;, &lt;class &#39;dummy.DummyClass&#39;&gt;)]
 </pre></div>
 </div>
 <p>Or maybe (if the classes I want have to be children of the same class):</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmembers</span><span class="p">(</span><span class="n">dummy</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">o</span><span class="p">:</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isclass</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="ow">and</span> <span class="n">o</span><span class="o">.</span><span class="n">__base__</span> <span class="ow">is</span> <span class="n">DummyClass</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmembers</span><span class="p">(</span><span class="n">dummy</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">o</span><span class="p">:</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isclass</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="ow">and</span> <span class="n">o</span><span class="o">.</span><span class="n">__base__</span> <span class="ow">is</span> <span class="n">DummyClass</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>[(&#39;AnotherClass&#39;, &lt;class &#39;dummy.AnotherClass&#39;&gt;)]
+<div class="highlight-python"><div class="highlight"><pre><span></span>[(&#39;AnotherClass&#39;, &lt;class &#39;dummy.AnotherClass&#39;&gt;)]
 </pre></div>
 </div>
 <p>I had thought that I would be matching the name of the base-class but __base__ returns a type object.</p>
@@ -246,25 +246,25 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">ConcretePlugin</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">ConcretePlugin</span></code></td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">importlib</span>
 
 <span class="kn">from</span> <span class="nn">dummy</span> <span class="kn">import</span> <span class="n">PluginBase</span>
 
 <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()):</span>
-    <span class="c"># the print statements in this module are showing up in the output when I import it</span>
-    <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;.py&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">filename</span><span class="o">==</span><span class="s">&#39;explore_inspect.py&#39;</span><span class="p">:</span>
+    <span class="c1"># the print statements in this module are showing up in the output when I import it</span>
+    <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.py&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">filename</span><span class="o">==</span><span class="s1">&#39;explore_inspect.py&#39;</span><span class="p">:</span>
         <span class="n">base</span><span class="p">,</span> <span class="n">extension</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">candidate</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-            <span class="c"># for some reason nose is using /usr/lib/python2.7/importlib</span>
-            <span class="c"># and this is causing it to fail</span>
+            <span class="c1"># for some reason nose is using /usr/lib/python2.7/importlib</span>
+            <span class="c1"># and this is causing it to fail</span>
             <span class="k">print</span> <span class="n">error</span>
             <span class="k">continue</span>
         <span class="n">members</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmembers</span><span class="p">(</span><span class="n">candidate</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">o</span><span class="p">:</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isclass</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="ow">and</span> <span class="n">o</span><span class="o">.</span><span class="n">__base__</span> <span class="ow">is</span> <span class="n">PluginBase</span><span class="p">)</span>
@@ -272,15 +272,15 @@
             <span class="n">name</span><span class="p">,</span> <span class="n">definition</span> <span class="o">=</span> <span class="n">member</span>
             <span class="k">print</span> <span class="n">name</span>
             <span class="n">m</span> <span class="o">=</span> <span class="n">definition</span><span class="p">()</span>
-            <span class="k">print</span> <span class="s">&#39;Help:&#39;</span>
+            <span class="k">print</span> <span class="s1">&#39;Help:&#39;</span>
             <span class="k">print</span> <span class="n">m</span><span class="o">.</span><span class="n">help_string</span>
-            <span class="k">print</span> <span class="s">&quot;Config:&quot;</span>
+            <span class="k">print</span> <span class="s2">&quot;Config:&quot;</span>
             <span class="k">print</span> <span class="n">m</span><span class="o">.</span><span class="n">config</span>
-            <span class="k">print</span> <span class="s">&quot;Product:&quot;</span>
+            <span class="k">print</span> <span class="s2">&quot;Product:&quot;</span>
             <span class="k">print</span> <span class="n">m</span><span class="o">.</span><span class="n">product</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>.. toctree::
+<div class="highlight-python"><div class="highlight"><pre><span></span>.. toctree::
    :maxdepth: 2
 
    Python Inspect &lt;explore_inspect.rst&gt;
@@ -304,7 +304,7 @@ Product:
 0
 </pre></div>
 </div>
-<p>Presumably in the real code there would be some variation of <tt class="docutils literal"><span class="pre">__package__</span></tt> in there instead of current-working-directory, but in Pweave it returns None for some reason.</p>
+<p>Presumably in the real code there would be some variation of <code class="docutils literal"><span class="pre">__package__</span></code> in there instead of current-working-directory, but in Pweave it returns None for some reason.</p>
 </div>
 </div>
 
@@ -321,7 +321,7 @@ Product:
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
     <link rel="up" title="Exploring Importlib" href="index.html" />
@@ -38,7 +38,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -106,7 +106,7 @@
               
                 
   <li>
-    <a href="index.html" title="Previous Chapter: Exploring Importlib"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Exploring Import...</span>
+    <a href="index.html" title="Previous Chapter: Exploring Importlib"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Exploring Imp...</span>
     </a>
   </li>
   <li>
@@ -142,31 +142,31 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="exploring-external-imports">
 <h1>Exploring External Imports<a class="headerlink" href="#exploring-external-imports" title="Permalink to this headline">¶</a></h1>
 <p id="id1">The goal is to be able to import plugins that have been created in external packages so that there won&#8217;t be a need to put everything into the <cite>ape</cite>. This is an exploration of how that might work.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c"># python standard library</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># python standard library</span>
 <span class="kn">import</span> <span class="nn">importlib</span>
 <span class="kn">import</span> <span class="nn">inspect</span>
 
-<span class="c"># ape</span>
+<span class="c1"># ape</span>
 <span class="kn">from</span> <span class="nn">ape.plugins.base_plugin</span> <span class="kn">import</span> <span class="n">BasePlugin</span>
 </pre></div>
 </div>
 <div class="section" id="testing-an-import">
 <h2>Testing An Import<a class="headerlink" href="#testing-an-import" title="Permalink to this headline">¶</a></h2>
 <p>There is a folder structure below this one that looks like:</p>
-<div class="highlight-python"><div class="highlight"><pre>fake_package/
+<div class="highlight-python"><div class="highlight"><pre><span></span>fake_package/
     setup.py
     fakepackage/
         __init__.py
         fakeplugin.py
 </pre></div>
 </div>
-<p>Since there&#8217;s no <tt class="docutils literal"><span class="pre">__init__.py</span></tt> in the <cite>fake_package</cite> folder, it should not be picked up as part of this package. The goal is to import the <a class="reference internal" href="fake_package/fakepackage/fakeplugin.html#fake-plugin"><em>FakePlugin</em></a> from this package.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">module_name</span> <span class="o">=</span> <span class="s">&#39;fakepackage.fakeplugin&#39;</span>
+<p>Since there&#8217;s no <code class="docutils literal"><span class="pre">__init__.py</span></code> in the <cite>fake_package</cite> folder, it should not be picked up as part of this package. The goal is to import the <a class="reference internal" href="fake_package/fakepackage/fakeplugin.html#fake-plugin"><span>FakePlugin</span></a> from this package.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">module_name</span> <span class="o">=</span> <span class="s1">&#39;fakepackage.fakeplugin&#39;</span>
 <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span>
 <span class="n">members</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmembers</span><span class="p">(</span><span class="n">module</span><span class="p">,</span>
                              <span class="k">lambda</span> <span class="n">o</span><span class="p">:</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isclass</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="ow">and</span>
@@ -178,13 +178,13 @@
     <span class="n">d</span><span class="o">.</span><span class="n">fetch_config</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">BrokenPlugin</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">BrokenPlugin</span>
 <span class="n">FakePlugin</span>
 
 <span class="p">[</span><span class="n">FAKEPLUGIN</span><span class="p">]</span>
-<span class="c">#this is a fake plugin that creates a DummyClass instance</span>
-<span class="c"># anything put in this section will be logged</span>
-<span class="c"># but nothing will be done with it</span>
+<span class="c1">#this is a fake plugin that creates a DummyClass instance</span>
+<span class="c1"># anything put in this section will be logged</span>
+<span class="c1"># but nothing will be done with it</span>
 </pre></div>
 </div>
 </div>
@@ -203,7 +203,7 @@
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

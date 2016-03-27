@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../index.html" />
     <link rel="up" title="Countdown" href="index.html" />
@@ -38,7 +38,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -115,7 +115,7 @@
     </a>
   </li>
   <li>
-    <a href="api/theape.parts.countdown.countdown.TimeTracker.__init__.html" title="Next Chapter: theape.parts.countdown.countdown.TimeTracker.__init__"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">theape.parts.cou... &raquo;</span>
+    <a href="api/theape.parts.countdown.countdown.TimeTracker.__init__.html" title="Next Chapter: theape.parts.countdown.countdown.TimeTracker.__init__"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">theape.parts.... &raquo;</span>
     </a>
   </li>
               
@@ -147,11 +147,11 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="the-countdown">
 <h1>The Countdown<a class="headerlink" href="#the-countdown" title="Permalink to this headline">¶</a></h1>
-<p>The Countdown Timers are meant to be used by the composites and components to keep track of elapsed (and sometimes remaining) time. The <a class="reference internal" href="#ape-parts-countdown-timetracker"><em>Time Tracker</em></a> is used to keep track of how long execution is taking. This is meant primarily for someone wanting to estimate future times by looking at past logs. The <a class="reference internal" href="#ape-parts-countdown-countdowntimer"><em>CountDown Timer</em></a> also keeps track of execution time but is meant to also keep track of whether the composite should repeat or not (based on remaining repetitions or time).</p>
+<p>The Countdown Timers are meant to be used by the composites and components to keep track of elapsed (and sometimes remaining) time. The <a class="reference internal" href="#ape-parts-countdown-timetracker"><span>Time Tracker</span></a> is used to keep track of how long execution is taking. This is meant primarily for someone wanting to estimate future times by looking at past logs. The <a class="reference internal" href="#ape-parts-countdown-countdowntimer"><span>CountDown Timer</span></a> also keeps track of execution time but is meant to also keep track of whether the composite should repeat or not (based on remaining repetitions or time).</p>
 <span class="target" id="module-theape.parts.countdown.countdown"></span><div class="section" id="the-timetracker">
 <span id="ape-parts-countdown-timetracker"></span><h2>The TimeTracker<a class="headerlink" href="#the-timetracker" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="responsibilities">
@@ -180,7 +180,7 @@ TimeTracker : __init__(log_level)" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.countdown.countdown.TimeTracker.__init__.html#theape.parts.countdown.countdown.TimeTracker.__init__" title="theape.parts.countdown.countdown.TimeTracker.__init__"><tt class="xref py py-obj docutils literal"><span class="pre">TimeTracker.__init__</span></tt></a>([log_level])</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.countdown.countdown.TimeTracker.__init__.html#theape.parts.countdown.countdown.TimeTracker.__init__" title="theape.parts.countdown.countdown.TimeTracker.__init__"><code class="xref py py-obj docutils literal"><span class="pre">TimeTracker.__init__</span></code></a>([log_level])</td>
 <td><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -191,38 +191,38 @@ TimeTracker : __init__(log_level)" />
 </table>
 </td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.countdown.countdown.TimeTracker.log.html#theape.parts.countdown.countdown.TimeTracker.log" title="theape.parts.countdown.countdown.TimeTracker.log"><tt class="xref py py-obj docutils literal"><span class="pre">TimeTracker.log</span></tt></a></td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.countdown.countdown.TimeTracker.log.html#theape.parts.countdown.countdown.TimeTracker.log" title="theape.parts.countdown.countdown.TimeTracker.log"><code class="xref py py-obj docutils literal"><span class="pre">TimeTracker.log</span></code></a></td>
 <td>The logger method indicated by the log_level</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.countdown.countdown.TimeTracker.append.html#theape.parts.countdown.countdown.TimeTracker.append" title="theape.parts.countdown.countdown.TimeTracker.append"><tt class="xref py py-obj docutils literal"><span class="pre">TimeTracker.append</span></tt></a>(item)</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.countdown.countdown.TimeTracker.append.html#theape.parts.countdown.countdown.TimeTracker.append" title="theape.parts.countdown.countdown.TimeTracker.append"><code class="xref py py-obj docutils literal"><span class="pre">TimeTracker.append</span></code></a>(item)</td>
 <td>Appends the item to the times array</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.countdown.countdown.TimeTracker.percentile.html#theape.parts.countdown.countdown.TimeTracker.percentile" title="theape.parts.countdown.countdown.TimeTracker.percentile"><tt class="xref py py-obj docutils literal"><span class="pre">TimeTracker.percentile</span></tt></a>(percentile)</td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.countdown.countdown.TimeTracker.percentile.html#theape.parts.countdown.countdown.TimeTracker.percentile" title="theape.parts.countdown.countdown.TimeTracker.percentile"><code class="xref py py-obj docutils literal"><span class="pre">TimeTracker.percentile</span></code></a>(percentile)</td>
 <td>calculates the percentile (e.g. 50 gets the median (the 50% item))</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.countdown.countdown.TimeTracker.__call__.html#theape.parts.countdown.countdown.TimeTracker.__call__" title="theape.parts.countdown.countdown.TimeTracker.__call__"><tt class="xref py py-obj docutils literal"><span class="pre">TimeTracker.__call__</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.countdown.countdown.TimeTracker.__call__.html#theape.parts.countdown.countdown.TimeTracker.__call__" title="theape.parts.countdown.countdown.TimeTracker.__call__"><code class="xref py py-obj docutils literal"><span class="pre">TimeTracker.__call__</span></code></a>()</td>
 <td>The main interface - starts and stops (toggles) the timer</td>
 </tr>
 </tbody>
 </table>
 <p>The expected way to use the TimeTracker is as a sentinal in a while loop:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="c"># assumes self.t is a TimeTracker instance</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># assumes self.t is a TimeTracker instance</span>
     <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">():</span>
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">return</span>
 </pre></div>
 </div>
-<p>This would append a timedelta of about 1 second to the TimeTracker&#8217;s times array everytime <tt class="docutils literal"><span class="pre">run</span></tt> is called, and log the current elapsed time and the basic running statistics (which in this case shouldn&#8217;t show any variance)</p>
+<p>This would append a timedelta of about 1 second to the TimeTracker&#8217;s times array everytime <code class="docutils literal"><span class="pre">run</span></code> is called, and log the current elapsed time and the basic running statistics (which in this case shouldn&#8217;t show any variance)</p>
 </div>
 </div>
 <div class="section" id="the-countdowntimer">
 <span id="ape-parts-countdown-countdowntimer"></span><h2>The CountdownTimer<a class="headerlink" href="#the-countdowntimer" title="Permalink to this headline">¶</a></h2>
 <p>The CountdownTimer is an extension of the TimeTracker that takes a <cite>repetitions</cite> value and decrements it on each call, returning True until it is less than or equal to 0.</p>
-<p>I am also supporting time-outs (setting a total time or an end-time). The <tt class="docutils literal"><span class="pre">total_time</span></tt> should be a timedelta while the <tt class="docutils literal"><span class="pre">end_time</span></tt> should be a datetime (or something that acts like it). This adds a bit of complication so I&#8217;ve chosen a hierarchy where the end-time takes first precedence (if you reach the time quit even if there&#8217;s more repetitions or time), and the total-time take precedence over the repetitions.</p>
+<p>I am also supporting time-outs (setting a total time or an end-time). The <code class="docutils literal"><span class="pre">total_time</span></code> should be a timedelta while the <code class="docutils literal"><span class="pre">end_time</span></code> should be a datetime (or something that acts like it). This adds a bit of complication so I&#8217;ve chosen a hierarchy where the end-time takes first precedence (if you reach the time quit even if there&#8217;s more repetitions or time), and the total-time take precedence over the repetitions.</p>
 <p>To decide on the behavior of the CountdownTimer you set a combination of the three parameters. In the following table 0 means the attribute is None and 1 means it was set to an appropriate value.</p>
-<table border="1" class="docutils">
-<caption>CountdownTimer Parameters</caption>
+<table border="1" class="docutils" id="id1">
+<caption><span class="caption-text">CountdownTimer Parameters</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="25%" />
 <col width="25%" />
@@ -230,9 +230,9 @@ TimeTracker : __init__(log_level)" />
 <col width="25%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head"><tt class="docutils literal"><span class="pre">end_time</span></tt></th>
-<th class="head"><tt class="docutils literal"><span class="pre">total_time</span></tt></th>
-<th class="head"><tt class="docutils literal"><span class="pre">repetitions</span></tt></th>
+<tr class="row-odd"><th class="head"><code class="docutils literal"><span class="pre">end_time</span></code></th>
+<th class="head"><code class="docutils literal"><span class="pre">total_time</span></code></th>
+<th class="head"><code class="docutils literal"><span class="pre">repetitions</span></code></th>
 <th class="head">Interpretation</th>
 </tr>
 </thead>
@@ -293,7 +293,7 @@ CountdownTimer : __call__()" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.countdown.countdown.CountdownTimer.html#theape.parts.countdown.countdown.CountdownTimer" title="theape.parts.countdown.countdown.CountdownTimer"><tt class="xref py py-obj docutils literal"><span class="pre">CountdownTimer</span></tt></a>([repetitions,&nbsp;end_time,&nbsp;...])</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.countdown.countdown.CountdownTimer.html#theape.parts.countdown.countdown.CountdownTimer" title="theape.parts.countdown.countdown.CountdownTimer"><code class="xref py py-obj docutils literal"><span class="pre">CountdownTimer</span></code></a>([repetitions,&nbsp;end_time,&nbsp;...])</td>
 <td>A time-tracker that counts down</td>
 </tr>
 </tbody>
@@ -314,7 +314,7 @@ CountdownTimer : __call__()" />
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

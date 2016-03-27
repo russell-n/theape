@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
     <link rel="up" title="Exploring Exceptions" href="index.html" />
@@ -38,7 +38,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -110,11 +110,11 @@
               
                 
   <li>
-    <a href="index.html" title="Previous Chapter: Exploring Exceptions"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Exploring Except...</span>
+    <a href="index.html" title="Previous Chapter: Exploring Exceptions"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Exploring Exc...</span>
     </a>
   </li>
   <li>
-    <a href="api/exceptions.Exception.html" title="Next Chapter: exceptions.Exception"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">exceptions.Excep... &raquo;</span>
+    <a href="api/exceptions.Exception.html" title="Next Chapter: exceptions.Exception"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">exceptions.Ex... &raquo;</span>
     </a>
   </li>
               
@@ -146,7 +146,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="exploring-exceptions">
 <h1>Exploring Exceptions<a class="headerlink" href="#exploring-exceptions" title="Permalink to this headline">¶</a></h1>
@@ -163,15 +163,15 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/exceptions.Exception.html#exceptions.Exception" title="exceptions.Exception"><tt class="xref py py-obj docutils literal"><span class="pre">Exception</span></tt></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="api/exceptions.Exception.html#exceptions.Exception" title="exceptions.Exception"><code class="xref py py-obj docutils literal"><span class="pre">Exception</span></code></a></td>
 <td>Common base class for all non-exit exceptions.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/exceptions.Exception.__init__.html#exceptions.Exception.__init__" title="exceptions.Exception.__init__"><tt class="xref py py-obj docutils literal"><span class="pre">Exception.__init__</span></tt></a></td>
+<tr class="row-even"><td><a class="reference internal" href="api/exceptions.Exception.__init__.html#exceptions.Exception.__init__" title="exceptions.Exception.__init__"><code class="xref py py-obj docutils literal"><span class="pre">Exception.__init__</span></code></a></td>
 <td>x.__init__(...) initializes x; see help(type(x)) for signature</td>
 </tr>
 </tbody>
 </table>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">FakeException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">FakeException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
     <span class="k">pass</span>
 </pre></div>
 </div>
@@ -184,27 +184,27 @@
 <div class="section" id="what-does-overriding-init-do">
 <h2>What does overriding init do?<a class="headerlink" href="#what-does-overriding-init-do" title="Permalink to this headline">¶</a></h2>
 <p>The diagrams didn&#8217;t really tell us much so I will try to confirm my expectations using some simple experiments. First, the <a class="reference external" href="http://docs.python.org/2/tutorial/errors.html#user-defined-exceptions">python tutorial</a> shows an example of overriding the constructor. Does this really help us?</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">OverrideError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OverrideError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bum</span><span class="p">,</span> <span class="n">phillips</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bum</span> <span class="o">=</span> <span class="n">bum</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">phillips</span> <span class="o">=</span> <span class="n">phillips</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span>
 <span class="k">def</span> <span class="nf">raise_bum_phillips</span><span class="p">(</span><span class="n">bum</span><span class="p">,</span> <span class="n">phillips</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">bum</span> <span class="o">!=</span> <span class="s">&#39;tramp&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">bum</span> <span class="o">!=</span> <span class="s1">&#39;tramp&#39;</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">OverrideError</span><span class="p">(</span><span class="n">bum</span><span class="o">=</span><span class="n">bum</span><span class="p">,</span>
                             <span class="n">phillips</span><span class="o">=</span><span class="n">phillips</span><span class="p">,</span>
-                            <span class="n">message</span><span class="o">=</span><span class="s">&#39;I killed a {0} with my {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bum</span><span class="p">,</span> <span class="n">phillips</span><span class="p">))</span>
+                            <span class="n">message</span><span class="o">=</span><span class="s1">&#39;I killed a {0} with my {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bum</span><span class="p">,</span> <span class="n">phillips</span><span class="p">))</span>
 
 <span class="k">try</span><span class="p">:</span>
-    <span class="n">raise_bum_phillips</span><span class="p">(</span><span class="s">&#39;tramp&#39;</span><span class="p">,</span> <span class="s">&#39;pino&#39;</span><span class="p">)</span>
-    <span class="n">raise_bum_phillips</span><span class="p">(</span><span class="s">&#39;hobo&#39;</span><span class="p">,</span> <span class="s">&#39;screwdriver&#39;</span><span class="p">)</span>
+    <span class="n">raise_bum_phillips</span><span class="p">(</span><span class="s1">&#39;tramp&#39;</span><span class="p">,</span> <span class="s1">&#39;pino&#39;</span><span class="p">)</span>
+    <span class="n">raise_bum_phillips</span><span class="p">(</span><span class="s1">&#39;hobo&#39;</span><span class="p">,</span> <span class="s1">&#39;screwdriver&#39;</span><span class="p">)</span>
 <span class="k">except</span> <span class="n">OverrideError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-    <span class="k">print</span> <span class="s">&quot;Bum Type: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">bum</span><span class="p">)</span>
-    <span class="k">print</span> <span class="s">&quot;Phillips Classification: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">phillips</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s2">&quot;Bum Type: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">bum</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s2">&quot;Phillips Classification: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">phillips</span><span class="p">)</span>
     <span class="k">print</span> <span class="n">error</span><span class="o">.</span><span class="n">message</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>Bum Type: hobo
+<div class="highlight-python"><div class="highlight"><pre><span></span>Bum Type: hobo
 Phillips Classification: screwdriver
 I killed a hobo with my screwdriver
 </pre></div>
@@ -221,7 +221,7 @@ BError -&gt; CError
 BError -&gt; DError
 }" />
 </p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rank</span> <span class="o">=</span> <span class="n">rank</span>
@@ -239,51 +239,51 @@ BError -&gt; DError
 </pre></div>
 </div>
 <p>And now some functions that raise these Exceptions.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">d_run</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">rank</span><span class="p">):</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">d_run</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">rank</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    :raise: DError</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">raise</span> <span class="n">DError</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="n">rank</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s">&#39;{0} not like&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+    <span class="k">raise</span> <span class="n">DError</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="n">rank</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s1">&#39;{0} not like&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">c_run</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">rank</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    :raise: CError</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">raise</span> <span class="n">CError</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="n">rank</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s">&#39;My name is {0} and I approve this message&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+    <span class="k">raise</span> <span class="n">CError</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="n">rank</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s1">&#39;My name is {0} and I approve this message&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">b_run</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">children</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    :raise: BError</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">print</span> <span class="s">&quot;b_run says:&quot;</span>
-    <span class="k">if</span> <span class="n">children</span> <span class="o">==</span> <span class="s">&#39;c&#39;</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s2">&quot;b_run says:&quot;</span>
+    <span class="k">if</span> <span class="n">children</span> <span class="o">==</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">c_run</span><span class="p">(</span><span class="s">&#39;cable&#39;</span><span class="p">,</span> <span class="s">&#39;cougar&#39;</span><span class="p">)</span>
+            <span class="n">c_run</span><span class="p">(</span><span class="s1">&#39;cable&#39;</span><span class="p">,</span> <span class="s1">&#39;cougar&#39;</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">CError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="k">print</span> <span class="n">error</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">c_run</span><span class="p">(</span><span class="s">&#39;crusty&#39;</span><span class="p">,</span> <span class="s">&#39;captain&#39;</span><span class="p">)</span>
+            <span class="n">c_run</span><span class="p">(</span><span class="s1">&#39;crusty&#39;</span><span class="p">,</span> <span class="s1">&#39;captain&#39;</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">DError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-            <span class="c"># DError is a sibling to CError, you can&#39;t catch them</span>
-            <span class="k">print</span> <span class="s">&quot;This Won&#39;t Show&quot;</span>
-    <span class="k">elif</span> <span class="n">children</span> <span class="o">==</span> <span class="s">&#39;d&#39;</span><span class="p">:</span>
+            <span class="c1"># DError is a sibling to CError, you can&#39;t catch them</span>
+            <span class="k">print</span> <span class="s2">&quot;This Won&#39;t Show&quot;</span>
+    <span class="k">elif</span> <span class="n">children</span> <span class="o">==</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">d_run</span><span class="p">(</span><span class="s">&#39;dan&#39;</span><span class="p">,</span> <span class="s">&#39;donkey&#39;</span><span class="p">)</span>
+            <span class="n">d_run</span><span class="p">(</span><span class="s1">&#39;dan&#39;</span><span class="p">,</span> <span class="s1">&#39;donkey&#39;</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">DError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="k">print</span> <span class="n">error</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">d_run</span><span class="p">(</span><span class="s">&#39;don&#39;</span><span class="p">,</span> <span class="s">&#39;diablo&#39;</span><span class="p">)</span>
+            <span class="n">d_run</span><span class="p">(</span><span class="s1">&#39;don&#39;</span><span class="p">,</span> <span class="s1">&#39;diablo&#39;</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">CError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-            <span class="c">#CError is a sibling to DError</span>
-            <span class="k">print</span> <span class="s">&quot;This won&#39;t show&quot;</span>
-    <span class="k">raise</span> <span class="n">BError</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="s">&#39;{1} says: What the hell do I do with &quot;{0}&quot;?&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">children</span><span class="p">,</span>
+            <span class="c1">#CError is a sibling to DError</span>
+            <span class="k">print</span> <span class="s2">&quot;This won&#39;t show&quot;</span>
+    <span class="k">raise</span> <span class="n">BError</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="s1">&#39;{1} says: What the hell do I do with &quot;{0}&quot;?&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">children</span><span class="p">,</span>
                                                                      <span class="n">name</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">fatal_error</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    :raise: AError</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">raise</span> <span class="n">AError</span><span class="p">(</span><span class="s">&#39;adolph&#39;</span><span class="p">,</span> <span class="s">&#39;arschloch&#39;</span><span class="p">,</span> <span class="s">&quot;Catch this or die.&quot;</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="n">AError</span><span class="p">(</span><span class="s1">&#39;adolph&#39;</span><span class="p">,</span> <span class="s1">&#39;arschloch&#39;</span><span class="p">,</span> <span class="s2">&quot;Catch this or die.&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">a_run</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -291,43 +291,43 @@ BError -&gt; DError
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="c"># this raises a CError, child of BError</span>
-        <span class="n">b_run</span><span class="p">(</span><span class="s">&#39;bob&#39;</span><span class="p">,</span> <span class="s">&#39;builder&#39;</span><span class="p">,</span> <span class="s">&#39;c&#39;</span><span class="p">)</span>
+        <span class="c1"># this raises a CError, child of BError</span>
+        <span class="n">b_run</span><span class="p">(</span><span class="s1">&#39;bob&#39;</span><span class="p">,</span> <span class="s1">&#39;builder&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">BError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
         <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="c"># this raises a DError, child of BError</span>
-        <span class="n">b_run</span><span class="p">(</span><span class="s">&#39;babe&#39;</span><span class="p">,</span> <span class="s">&#39;bilder&#39;</span><span class="p">,</span> <span class="s">&#39;d&#39;</span><span class="p">)</span>
+        <span class="c1"># this raises a DError, child of BError</span>
+        <span class="n">b_run</span><span class="p">(</span><span class="s1">&#39;babe&#39;</span><span class="p">,</span> <span class="s1">&#39;bilder&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">BError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
         <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="c"># this raises a BError</span>
-        <span class="n">b_run</span><span class="p">(</span><span class="s">&#39;brunhilde&#39;</span><span class="p">,</span> <span class="s">&#39;butterball&#39;</span><span class="p">,</span> <span class="s">&#39;e&#39;</span><span class="p">)</span>
+        <span class="c1"># this raises a BError</span>
+        <span class="n">b_run</span><span class="p">(</span><span class="s1">&#39;brunhilde&#39;</span><span class="p">,</span> <span class="s1">&#39;butterball&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">BError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
         <span class="k">print</span> <span class="n">error</span>
 
-    <span class="k">print</span> <span class="s">&quot;a_run says:&quot;</span>
+    <span class="k">print</span> <span class="s2">&quot;a_run says:&quot;</span>
     <span class="k">for</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">errors</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">error</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s">&#39;don&#39;</span><span class="p">:</span>
-            <span class="k">print</span> <span class="s">&quot;{0} is dead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">rank</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">error</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;don&#39;</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s2">&quot;{0} is dead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">rank</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">print</span> <span class="s">&quot;I never much cared for {0} {1}.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">rank</span><span class="p">,</span>
+            <span class="k">print</span> <span class="s2">&quot;I never much cared for {0} {1}.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">rank</span><span class="p">,</span>
                                                            <span class="n">error</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-    <span class="c"># fatal_error raises AError, parent of BError</span>
+    <span class="c1"># fatal_error raises AError, parent of BError</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">fatal_error</span><span class="p">()</span>
     <span class="k">except</span> <span class="n">BError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-        <span class="k">print</span> <span class="s">&quot;This won&#39;t be seen.&quot;</span>
+        <span class="k">print</span> <span class="s2">&quot;This won&#39;t be seen.&quot;</span>
         <span class="k">print</span> <span class="n">error</span><span class="o">.</span><span class="n">message</span>
 
 <span class="k">try</span><span class="p">:</span>
     <span class="n">a_run</span><span class="p">()</span>
 <span class="k">except</span> <span class="n">AError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-    <span class="k">print</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">AError:&quot;</span>
+    <span class="k">print</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">AError:&quot;</span>
     <span class="k">print</span> <span class="n">error</span><span class="o">.</span><span class="n">message</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>b_run says:
+<div class="highlight-python"><div class="highlight"><pre><span></span>b_run says:
 
 b_run says:
 
@@ -341,18 +341,18 @@ AError:
 Catch this or die.
 </pre></div>
 </div>
-<p>Only the print statements from <tt class="docutils literal"><span class="pre">a_run</span></tt> seem to have made it to <tt class="docutils literal"><span class="pre">stdout</span></tt> &#8211; does that mean the ones in <tt class="docutils literal"><span class="pre">b_run</span></tt> weren&#8217;t reached, or that they just don&#8217;t get output here? Running this with python outside of the documentation shows that the <tt class="docutils literal"><span class="pre">b_run</span></tt> print messages don&#8217;t reach standard out. Maybe if I run <tt class="docutils literal"><span class="pre">b_run</span></tt> by itself it will change.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">try</span><span class="p">:</span>
-    <span class="n">b_run</span><span class="p">(</span><span class="s">&#39;bob&#39;</span><span class="p">,</span> <span class="s">&#39;builder&#39;</span><span class="p">,</span> <span class="s">&#39;c&#39;</span><span class="p">)</span>
+<p>Only the print statements from <code class="docutils literal"><span class="pre">a_run</span></code> seem to have made it to <code class="docutils literal"><span class="pre">stdout</span></code> &#8211; does that mean the ones in <code class="docutils literal"><span class="pre">b_run</span></code> weren&#8217;t reached, or that they just don&#8217;t get output here? Running this with python outside of the documentation shows that the <code class="docutils literal"><span class="pre">b_run</span></code> print messages don&#8217;t reach standard out. Maybe if I run <code class="docutils literal"><span class="pre">b_run</span></code> by itself it will change.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">b_run</span><span class="p">(</span><span class="s1">&#39;bob&#39;</span><span class="p">,</span> <span class="s1">&#39;builder&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)</span>
 <span class="k">except</span> <span class="n">BError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
     <span class="k">print</span> <span class="n">error</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>b_run says:
+<div class="highlight-python"><div class="highlight"><pre><span></span>b_run says:
 </pre></div>
 </div>
-<p>Nope. It turns out that the reason it didn&#8217;t print was because in overriding the constructor I messed up the string representation somehow. You can fix it, though, by defining the <tt class="docutils literal"><span class="pre">__str__</span></tt> method.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<p>Nope. It turns out that the reason it didn&#8217;t print was because in overriding the constructor I messed up the string representation somehow. You can fix it, though, by defining the <code class="docutils literal"><span class="pre">__str__</span></code> method.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rank</span> <span class="o">=</span> <span class="n">rank</span>
@@ -360,17 +360,17 @@ Catch this or die.
         <span class="k">return</span>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&quot;{0}: {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;{0}: {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">try</span><span class="p">:</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
     <span class="n">a_run</span><span class="p">()</span>
 <span class="k">except</span> <span class="n">AError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-    <span class="k">print</span> <span class="s">&quot;Un-Caught:&quot;</span>
+    <span class="k">print</span> <span class="s2">&quot;Un-Caught:&quot;</span>
     <span class="k">print</span> <span class="n">error</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>b_run says:
+<div class="highlight-python"><div class="highlight"><pre><span></span>b_run says:
 CError: My name is cable and I approve this message
 b_run says:
 DError: dan not like
@@ -403,7 +403,7 @@ AError: Catch this or die.
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

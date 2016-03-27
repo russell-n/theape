@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../../index.html" />
     <link rel="up" title="Validation" href="../validation.html" />
@@ -37,7 +37,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -102,7 +102,7 @@
               
                 
   <li>
-    <a href="../validation_errors.html" title="Next Chapter: Validation Errors"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Validation Error... &raquo;</span>
+    <a href="../validation_errors.html" title="Next Chapter: Validation Errors"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Validation Er... &raquo;</span>
     </a>
   </li>
               
@@ -134,23 +134,23 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="configobj-get-extra-values">
 <h1>configobj.get_extra_values<a class="headerlink" href="#configobj-get-extra-values" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="configobj.get_extra_values">
-<tt class="descclassname">configobj.</tt><tt class="descname">get_extra_values</tt><big>(</big><em>conf</em>, <em>_prepend=()</em><big>)</big><a class="headerlink" href="#configobj.get_extra_values" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">configobj.</code><code class="descname">get_extra_values</code><span class="sig-paren">(</span><em>conf</em>, <em>_prepend=()</em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/configobj.html#get_extra_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#configobj.get_extra_values" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find all the values and sections not in the configspec from a validated
 ConfigObj.</p>
-<p><tt class="docutils literal"><span class="pre">get_extra_values</span></tt> returns a list of tuples where each tuple represents
+<p><code class="docutils literal"><span class="pre">get_extra_values</span></code> returns a list of tuples where each tuple represents
 either an extra section, or an extra value.</p>
 <p>The tuples contain two values, a tuple representing the section the value 
 is in and the name of the extra values. For extra values in the top level
 section the first member will be an empty tuple. For values in the &#8216;foo&#8217;
-section the first member will be <tt class="docutils literal"><span class="pre">('foo',)</span></tt>. For members in the &#8216;bar&#8217;
-subsection of the &#8216;foo&#8217; section the first member will be <tt class="docutils literal"><span class="pre">('foo',</span> <span class="pre">'bar')</span></tt>.</p>
-<p>NOTE: If you call <tt class="docutils literal"><span class="pre">get_extra_values</span></tt> on a ConfigObj instance that hasn&#8217;t
+section the first member will be <code class="docutils literal"><span class="pre">('foo',)</span></code>. For members in the &#8216;bar&#8217;
+subsection of the &#8216;foo&#8217; section the first member will be <code class="docutils literal"><span class="pre">('foo',</span> <span class="pre">'bar')</span></code>.</p>
+<p>NOTE: If you call <code class="docutils literal"><span class="pre">get_extra_values</span></code> on a ConfigObj instance that hasn&#8217;t
 been validated it will return an empty list.</p>
 </dd></dl>
 
@@ -169,7 +169,7 @@ been validated it will return an empty list.</p>
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,11 +26,10 @@
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
     <link rel="up" title="Call Graphs" href="index.html" />
-    <link rel="next" title="pylint.pyreverse.main.Run" href="api/pylint.pyreverse.main.Run.html" />
     <link rel="prev" title="The Example Cases" href="example_cases.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -38,7 +37,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -115,11 +114,7 @@
               
                 
   <li>
-    <a href="example_cases.html" title="Previous Chapter: The Example Cases"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; The Example Case...</span>
-    </a>
-  </li>
-  <li>
-    <a href="api/pylint.pyreverse.main.Run.html" title="Next Chapter: pylint.pyreverse.main.Run"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">pylint.pyreverse... &raquo;</span>
+    <a href="example_cases.html" title="Previous Chapter: The Example Cases"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; The Example C...</span>
     </a>
   </li>
               
@@ -151,48 +146,48 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="exploring-pyreverse">
 <h1>Exploring Pyreverse<a class="headerlink" href="#exploring-pyreverse" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="background">
 <h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
 <p><em>What is the problem to be solved?</em></p>
-<p>Currently I am using <tt class="docutils literal"><span class="pre">plantuml</span></tt> to create class diagrams. It works well and is easy enough to create in sphinx but because it is created by hand it has a tendency to fall out of sync with the code.</p>
+<p>Currently I am using <code class="docutils literal"><span class="pre">plantuml</span></code> to create class diagrams. It works well and is easy enough to create in sphinx but because it is created by hand it has a tendency to fall out of sync with the code.</p>
 <p><em>What do you think will solve the problem?</em></p>
-<p>Pyreverse is an automatic class and dependency diagram generator which is included as part of a <tt class="docutils literal"><span class="pre">pylint</span></tt> installation. It is apparently meant to be run as a command-line command only, but looking at the <tt class="docutils literal"><span class="pre">pylint.__init__</span></tt> module you can see this function:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">run_pyreverse</span><span class="p">():</span>
+<p>Pyreverse is an automatic class and dependency diagram generator which is included as part of a <code class="docutils literal"><span class="pre">pylint</span></code> installation. It is apparently meant to be run as a command-line command only, but looking at the <code class="docutils literal"><span class="pre">pylint.__init__</span></code> module you can see this function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_pyreverse</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;run pyreverse&quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">pylint.pyreverse.main</span> <span class="kn">import</span> <span class="n">Run</span>
     <span class="n">Run</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
 </pre></div>
 </div>
-<p>As well as some other interesting things. By looking in the <tt class="docutils literal"><span class="pre">pylint/setup.py</span></tt> file I found that it installs the following commands:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="s">&#39;pylint = pylint:run_pylint&#39;</span>
-<span class="s">&#39;pylint-gui = pylint:run_pylint_gui&#39;</span>
-<span class="s">&#39;epylint = pylint:run_epylint&#39;</span>
-<span class="s">&#39;pyreverse = pylint:run_pyreverse&#39;</span>
-<span class="s">&#39;symilar = pylint:run_symilar&#39;</span>
+<p>As well as some other interesting things. By looking in the <code class="docutils literal"><span class="pre">pylint/setup.py</span></code> file I found that it installs the following commands:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="s1">&#39;pylint = pylint:run_pylint&#39;</span>
+<span class="s1">&#39;pylint-gui = pylint:run_pylint_gui&#39;</span>
+<span class="s1">&#39;epylint = pylint:run_epylint&#39;</span>
+<span class="s1">&#39;pyreverse = pylint:run_pyreverse&#39;</span>
+<span class="s1">&#39;symilar = pylint:run_symilar&#39;</span>
 </pre></div>
 </div>
-<p>but I will only explore <tt class="docutils literal"><span class="pre">pyreverse</span></tt> here (although I am curious to find out what <tt class="docutils literal"><span class="pre">symilar</span></tt> is).</p>
+<p>but I will only explore <code class="docutils literal"><span class="pre">pyreverse</span></code> here (although I am curious to find out what <code class="docutils literal"><span class="pre">symilar</span></code> is).</p>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/pylint.pyreverse.main.Run.html#pylint.pyreverse.main.Run" title="pylint.pyreverse.main.Run"><tt class="xref py py-obj docutils literal"><span class="pre">Run</span></tt></a>(args)</td>
-<td>base class providing common behaviour for pyreverse commands</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">Run</span></code></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<p>I think that by passing in arguments to the <tt class="docutils literal"><span class="pre">Run</span></tt> constructor the way the function does I can embed the creation of class and package diagrams into the source files.</p>
+<p>I think that by passing in arguments to the <code class="docutils literal"><span class="pre">Run</span></code> constructor the way the function does I can embed the creation of class and package diagrams into the source files.</p>
 </div>
 <div class="section" id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
-<p>To run <tt class="docutils literal"><span class="pre">pyreverse</span></tt> you need <tt class="docutils literal"><span class="pre">pylint</span></tt> and <tt class="docutils literal"><span class="pre">graphviz</span></tt>. Both are available via apt-get, but since I run things in a virtualenv I tend to use pip:</p>
-<div class="highlight-python"><div class="highlight"><pre>sudo apt-get install graphviz
+<p>To run <code class="docutils literal"><span class="pre">pyreverse</span></code> you need <code class="docutils literal"><span class="pre">pylint</span></code> and <code class="docutils literal"><span class="pre">graphviz</span></code>. Both are available via apt-get, but since I run things in a virtualenv I tend to use pip:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>sudo apt-get install graphviz
 pip install pylint
 </pre></div>
 </div>
@@ -200,7 +195,7 @@ pip install pylint
 <div class="section" id="default-class-and-package-diagrams">
 <h2>Default Class and Package Diagrams<a class="headerlink" href="#default-class-and-package-diagrams" title="Permalink to this headline">¶</a></h2>
 <p>By default <cite>pyreverse</cite> outputs a class diagram in <cite>dot</cite> format:</p>
-<div class="highlight-python"><div class="highlight"><pre>digraph &quot;classes_No_Name&quot; {
+<div class="highlight-python"><div class="highlight"><pre><span></span>digraph &quot;classes_No_Name&quot; {
 charset=&quot;utf-8&quot;
 rankdir=BT
 &quot;2&quot; [shape=&quot;record&quot;, label=&quot;{SampleCase|\l|}&quot;];
@@ -208,13 +203,13 @@ rankdir=BT
 </pre></div>
 </div>
 <p>which might be interesting to look at, but in this case I think it would be better to let <cite>pyreverse</cite> build the image file for me so that I can include it here.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">SampleCase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SampleCase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">args</span> <span class="o">=</span> <span class="n">shlex</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;-o png -p example explore_pyreverse.py&#39;</span><span class="p">)</span>
-<span class="c">#Run(args)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">args</span> <span class="o">=</span> <span class="n">shlex</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-o png -p example explore_pyreverse.py&#39;</span><span class="p">)</span>
+<span class="c1">#Run(args)</span>
 </pre></div>
 </div>
 <p>This actually turns out not to work. Although the <cite>run_pyreverse</cite> function is passing in the arguments, it (Run) has a method:</p>
@@ -224,13 +219,13 @@ rankdir=BT
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/pylint.pyreverse.main.Run.load_command_line_configuration.html#pylint.pyreverse.main.Run.load_command_line_configuration" title="pylint.pyreverse.main.Run.load_command_line_configuration"><tt class="xref py py-obj docutils literal"><span class="pre">Run.load_command_line_configuration</span></tt></a>([args])</td>
-<td>override configuration according to command line parameters</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">Run.load_command_line_configuration</span></code></td>
+<td></td>
 </tr>
 </tbody>
 </table>
 <p>That takes the <cite>args</cite> as an argument, but when the <cite>Run</cite> class uses it, it calls it without passing in the args it was given and instead duplicates the <cite>sys.argv</cite> slice that the <cite>run_pyreverse</cite> function made. To use the class I would have to patch the <cite>sys</cite> module, which seems wrong, and too much work. Perhaps sub-process will work.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="s">&#39;pyreverse&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">args</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="s1">&#39;pyreverse&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">args</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="../../../../_images/classes_example.png" src="../../../../_images/classes_example.png" />
@@ -241,29 +236,29 @@ rankdir=BT
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/ape.components.component.Composite.html#ape.components.component.Composite" title="ape.components.component.Composite"><tt class="xref py py-obj docutils literal"><span class="pre">Composite</span></tt></a>([error,&nbsp;error_message,&nbsp;...])</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/ape.components.component.Composite.html#ape.components.component.Composite" title="ape.components.component.Composite"><code class="xref py py-obj docutils literal"><span class="pre">Composite</span></code></a>([error,&nbsp;error_message,&nbsp;...])</td>
 <td>A Composite to hold and execute Components</td>
 </tr>
 </tbody>
 </table>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">ape.components.component</span> <span class="kn">as</span> <span class="nn">component</span>
-<span class="n">file_name</span> <span class="o">=</span> <span class="n">component</span><span class="o">.</span><span class="n">__file__</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s">&#39;c&#39;</span><span class="p">)</span>
-<span class="n">command</span> <span class="o">=</span> <span class="s">&#39;pyreverse -o png -p componentplain {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ape.components.component</span> <span class="kn">as</span> <span class="nn">component</span>
+<span class="n">file_name</span> <span class="o">=</span> <span class="n">component</span><span class="o">.</span><span class="n">__file__</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+<span class="n">command</span> <span class="o">=</span> <span class="s1">&#39;pyreverse -o png -p componentplain {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
 <span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">shlex</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">command</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>This produces a file called &#8216;classes_componentplain.png&#8217; (using <tt class="docutils literal"><span class="pre">-p</span></tt> makes it a module-level diagram, so it will pick up all the classes, thus the plural <cite>classes</cite>).</p>
+<p>This produces a file called &#8216;classes_componentplain.png&#8217; (using <code class="docutils literal"><span class="pre">-p</span></code> makes it a module-level diagram, so it will pick up all the classes, thus the plural <cite>classes</cite>).</p>
 <img alt="../../../../_images/classes_hortatorplain.png" src="../../../../_images/classes_hortatorplain.png" />
 </div>
 <div class="section" id="general-vue-of-a-module">
 <h2>General Vue of a Module<a class="headerlink" href="#general-vue-of-a-module" title="Permalink to this headline">¶</a></h2>
 <p>That still is not a particularly exciting example, at least not visually. Here is the example given on the <a class="reference external" href="http://www.logilab.org/blogentry/6883">pyreverse</a> blog for showing all dependencies but stripping out the detail to make it more comprehensible:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">command</span> <span class="o">=</span> <span class="s">&#39;pyreverse -o png -ASmy -k {0} -p hortator&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">command</span> <span class="o">=</span> <span class="s1">&#39;pyreverse -o png -ASmy -k {0} -p hortator&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
 <span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">shlex</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">command</span><span class="p">))</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
-<caption>Dependency Arguments</caption>
+<table border="1" class="docutils" id="id2">
+<caption><span class="caption-text">Dependency Arguments</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="50%" />
 <col width="50%" />
@@ -293,11 +288,11 @@ rankdir=BT
 <div class="section" id="more-detail">
 <h2>More Detail<a class="headerlink" href="#more-detail" title="Permalink to this headline">¶</a></h2>
 <p>The previous example was useful for showing the relationships between the Hortator class and other classes, but you can also get a more detailed view of just the hortator module:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">command</span> <span class="o">=</span> <span class="s">&#39;pyreverse -c Composite -mn -a1 -s1 -f ALL -o png {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">command</span> <span class="o">=</span> <span class="s1">&#39;pyreverse -c Composite -mn -a1 -s1 -f ALL -o png {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
 <span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">shlex</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">command</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>In this case we specified the class so it will only document the Composite, even if there are other classes in the file. It creates a file named <tt class="docutils literal"><span class="pre">Composite.png</span></tt></p>
+<p>In this case we specified the class so it will only document the Composite, even if there are other classes in the file. It creates a file named <code class="docutils literal"><span class="pre">Composite.png</span></code></p>
 <img alt="../../../../_images/Composite.png" src="../../../../_images/Composite.png" />
 </div>
 <div class="section" id="plantuml">
@@ -330,7 +325,7 @@ CountDown : start_timer()
 CountDown : next_iteration()
 CountDown : __init__()" />
 </p>
-<p>But the creation of the <cite>plantuml</cite> diagram was tedious and required a lot of building and looking up of syntax. On top of that, this is only a temporary implementation, thus the inclusion of the <tt class="docutils literal"><span class="pre">DummyClass</span></tt>, as the code changes I can re-generate this file and the <cite>pyreverse</cite> graph will update on its own. Additionally, if this is embedded directly into the hortator module then every time I weave it, the diagram will update itself without me paying any attention to it.</p>
+<p>But the creation of the <cite>plantuml</cite> diagram was tedious and required a lot of building and looking up of syntax. On top of that, this is only a temporary implementation, thus the inclusion of the <code class="docutils literal"><span class="pre">DummyClass</span></code>, as the code changes I can re-generate this file and the <cite>pyreverse</cite> graph will update on its own. Additionally, if this is embedded directly into the hortator module then every time I weave it, the diagram will update itself without me paying any attention to it.</p>
 </div>
 <div class="section" id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
@@ -346,7 +341,7 @@ CountDown : __init__()" />
 </div>
 <div class="section" id="file-formats-notes">
 <h2>File Formats Notes<a class="headerlink" href="#file-formats-notes" title="Permalink to this headline">¶</a></h2>
-<p>Pyreverse is using the <tt class="docutils literal"><span class="pre">dot</span></tt> command to compile the image so it supports whatever your installation of <cite>graphviz</cite> supports. On my system that would be:</p>
+<p>Pyreverse is using the <code class="docutils literal"><span class="pre">dot</span></code> command to compile the image so it supports whatever your installation of <cite>graphviz</cite> supports. On my system that would be:</p>
 <blockquote>
 <div><ul class="simple">
 <li>canon</li>
@@ -400,7 +395,7 @@ CountDown : __init__()" />
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

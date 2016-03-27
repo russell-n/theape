@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../index.html" />
     <link rel="up" title="The Command" href="index.html" />
@@ -37,7 +37,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -150,14 +150,14 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="the-command">
 <h1>The Command<a class="headerlink" href="#the-command" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
 <span id="command-introduction"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>This is a building block to execute non-blocking commands and extracting data from the output. It&#8217;s probably not the right choice for things like <cite>iperf</cite> where there is a lot of data (although if you aren&#8217;t using the <tt class="docutils literal"><span class="pre">--interval</span></tt> flag it might work).</p>
-<p>It is based on <em class="xref std std-ref">The Query</em> (and should be what the Query is using). The idea is to allow user&#8217;s an open-ended way to send commands to the device and get data. It&#8217;s assumed that this data will then be used in some way &#8211; as opposed to <em class="xref std std-ref">The Dump</em> which just dumps the output to a files. To make this possible three things are needed:</p>
+<p>This is a building block to execute non-blocking commands and extracting data from the output. It&#8217;s probably not the right choice for things like <cite>iperf</cite> where there is a lot of data (although if you aren&#8217;t using the <code class="docutils literal"><span class="pre">--interval</span></code> flag it might work).</p>
+<p>It is based on <span class="xref std std-ref">The Query</span> (and should be what the Query is using). The idea is to allow user&#8217;s an open-ended way to send commands to the device and get data. It&#8217;s assumed that this data will then be used in some way &#8211; as opposed to <span class="xref std std-ref">The Dump</span> which just dumps the output to a files. To make this possible three things are needed:</p>
 <blockquote>
 <div><ul class="simple">
 <li>The command string</li>
@@ -203,22 +203,22 @@
 <div class="section" id="command-constants">
 <span id="id1"></span><h2>Command Constants<a class="headerlink" href="#command-constants" title="Permalink to this headline">¶</a></h2>
 <p>A holder of constants for TheCommand.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">START_OF_STRING</span> <span class="o">=</span> <span class="s">r&#39;^&#39;</span>
-<span class="n">ANYTHING</span> <span class="o">=</span> <span class="s">r&#39;.&#39;</span>
-<span class="n">ZERO_OR_MORE</span> <span class="o">=</span> <span class="s">r&#39;*&#39;</span>
-<span class="n">GROUP</span> <span class="o">=</span> <span class="s">r&#39;({0})&#39;</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="n">START_OF_STRING</span> <span class="o">=</span> <span class="s1">r&#39;^&#39;</span>
+<span class="n">ANYTHING</span> <span class="o">=</span> <span class="s1">r&#39;.&#39;</span>
+<span class="n">ZERO_OR_MORE</span> <span class="o">=</span> <span class="s1">r&#39;*&#39;</span>
+<span class="n">GROUP</span> <span class="o">=</span> <span class="s1">r&#39;({0})&#39;</span>
 
 <span class="n">EVERYTHING</span> <span class="o">=</span> <span class="n">GROUP</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ANYTHING</span> <span class="o">+</span> <span class="n">ZERO_OR_MORE</span><span class="p">)</span>
-<span class="n">NOTHING</span> <span class="o">=</span> <span class="s">r&#39;a&#39;</span> <span class="o">+</span> <span class="n">START_OF_STRING</span>
-<span class="n">NEWLINE</span> <span class="o">=</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
+<span class="n">NOTHING</span> <span class="o">=</span> <span class="s1">r&#39;a&#39;</span> <span class="o">+</span> <span class="n">START_OF_STRING</span>
+<span class="n">NEWLINE</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
 
 <span class="k">class</span> <span class="nc">CommandConstants</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Constants for the Command</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__slots__</span> <span class="o">=</span> <span class="p">()</span>
-    <span class="c"># defaults</span>
-    <span class="n">default_arguments</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+    <span class="c1"># defaults</span>
+    <span class="n">default_arguments</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="n">default_timeout</span> <span class="o">=</span> <span class="mi">5</span>
     <span class="n">default_trap_errors</span> <span class="o">=</span> <span class="bp">True</span>
     <span class="n">default_data_expression</span> <span class="o">=</span> <span class="n">EVERYTHING</span>
@@ -235,7 +235,7 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">socketerrors</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">socketerrors</span></code></td>
 <td></td>
 </tr>
 </tbody>
@@ -261,42 +261,42 @@ TheCommand : String __call__" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TheCommand</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">TheCommand</span></code></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">TheCommand.command</span></tt></td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">TheCommand.command</span></code></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TheCommand.arguments</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">TheCommand.arguments</span></code></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">TheCommand.command_arguments</span></tt></td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">TheCommand.command_arguments</span></code></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TheCommand.data_expression</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">TheCommand.data_expression</span></code></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">TheCommand.error_expression</span></tt></td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">TheCommand.error_expression</span></code></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">TheCommand.identifier</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">TheCommand.identifier</span></code></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">TheCommand.__call__</span></tt></td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">TheCommand.__call__</span></code></td>
 <td></td>
 </tr>
 </tbody>
 </table>
 <p>The Command Class is responsible for maintaining a connection, a command and its arguments, and regular expressions to search the output. When called, it sends the command and searches the output, returning matched (group) strings or handles errors depending on how it was configured.</p>
-<p>Its main collaborator would be something that looks like one of the clients (hopefully the <a class="reference internal" href="../connections/simpleclient.html#id1"><em>SimpleClient</em></a>) or <em class="xref std std-ref">the Host</em> (it will only expect the <cite>exec_command</cite> method).</p>
+<p>Its main collaborator would be something that looks like one of the clients (hopefully the <a class="reference internal" href="../connections/simpleclient.html#id1"><span>SimpleClient</span></a>) or <span class="xref std std-ref">the Host</span> (it will only expect the <cite>exec_command</cite> method).</p>
 <div class="section" id="the-constructor">
 <h3>The Constructor<a class="headerlink" href="#the-constructor" title="Permalink to this headline">¶</a></h3>
 <p>The only required arguments are <cite>connection</cite> and <cite>command</cite>. Arguments are optional in the event that the <cite>command</cite> parameter is actual a complete string of <cite>command</cite> + <cite>arguments</cite> (e.g. &#8216;ls -a&#8217;).</p>
 </div>
 <div class="section" id="the-call">
 <h3>The Call<a class="headerlink" href="#the-call" title="Permalink to this headline">¶</a></h3>
-<div class="figure align-center">
-<img src="../../_images/command_activity.svg" /><p class="caption">TheCommand&#8217;s Activity Diagram</p>
+<div class="figure align-center" id="id2">
+<img src="../../_images/command_activity.svg" /><p class="caption"><span class="caption-text">TheCommand&#8217;s Activity Diagram</span></p>
 </div>
 </div>
 </div>
@@ -315,7 +315,7 @@ TheCommand : String __call__" />
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

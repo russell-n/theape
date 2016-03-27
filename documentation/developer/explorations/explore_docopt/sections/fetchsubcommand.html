@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../../index.html" />
 <meta charset='utf-8'>
@@ -35,7 +35,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -128,25 +128,25 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="fetch-subcommand">
 <h1>Fetch Subcommand<a class="headerlink" href="#fetch-subcommand" title="Permalink to this headline">¶</a></h1>
 <p>The <cite>fetch</cite> sub-command should be similar to the <cite>run</cite> sub-command.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c"># python standard library</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># python standard library</span>
 <span class="kn">import</span> <span class="nn">subprocess</span>
 
-<span class="c"># third-party</span>
+<span class="c1"># third-party</span>
 <span class="kn">import</span> <span class="nn">docopt</span>
 
-<span class="c"># this documentation</span>
+<span class="c1"># this documentation</span>
 <span class="kn">from</span> <span class="nn">commons</span> <span class="kn">import</span> <span class="n">catch_exit</span><span class="p">,</span> <span class="n">usage</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="s">&#39;ape fetch -h&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="s1">&#39;ape fetch -h&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>usage: ape.interface.arguments fetch [-h] [--modules [MODULES [MODULES ...]
+<div class="highlight-python"><div class="highlight"><pre><span></span>usage: ape.interface.arguments fetch [-h] [--modules [MODULES [MODULES ...]
 ]]
                                      [names [names ...]]
 
@@ -159,11 +159,11 @@ optional arguments:
                         Non-ape modules
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">commons</span> <span class="kn">import</span> <span class="n">fetch_usage</span>
-<span class="n">catch_exit</span><span class="p">(</span><span class="n">fetch_usage</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;--help&#39;</span><span class="p">])</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">commons</span> <span class="kn">import</span> <span class="n">fetch_usage</span>
+<span class="n">catch_exit</span><span class="p">(</span><span class="n">fetch_usage</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;--help&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>fetch subcommand
+<div class="highlight-python"><div class="highlight"><pre><span></span>fetch subcommand
 
 usage: ape fetch -h
        ape fetch [&lt;name&gt;...]  [--module &lt;module&gt; ...]
@@ -177,22 +177,22 @@ optional arguments:
 </pre></div>
 </div>
 <p>So it kind of looks like it works. I&#8217;m not sure if the <cite>help</cite> options should be optional or not, since all the arguments are optional. I guess it&#8217;s a matter of taste.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">arguments</span> <span class="o">=</span> <span class="s">&quot;fetch Dummy Sparky Iperf --module pig.thing --m cow.dog&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">arguments</span> <span class="o">=</span> <span class="s2">&quot;fetch Dummy Sparky Iperf --module pig.thing --m cow.dog&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
 <span class="n">output</span> <span class="o">=</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="n">arguments</span><span class="p">,</span> <span class="n">options_first</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
-<span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span><span class="n">output</span><span class="p">[</span><span class="s">&#39;&lt;command&gt;&#39;</span><span class="p">]]</span> <span class="o">+</span> <span class="n">output</span><span class="p">[</span><span class="s">&#39;&lt;argument&gt;&#39;</span><span class="p">]</span>
+<span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;&lt;command&gt;&#39;</span><span class="p">]]</span> <span class="o">+</span> <span class="n">output</span><span class="p">[</span><span class="s1">&#39;&lt;argument&gt;&#39;</span><span class="p">]</span>
 <span class="k">print</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">fetch_usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="n">arguments</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;--help&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
- <span class="s">&#39;--module&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;pig.thing&#39;</span><span class="p">,</span> <span class="s">&#39;cow.dog&#39;</span><span class="p">],</span>
- <span class="s">&#39;&lt;name&gt;&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;Dummy&#39;</span><span class="p">,</span> <span class="s">&#39;Sparky&#39;</span><span class="p">,</span> <span class="s">&#39;Iperf&#39;</span><span class="p">],</span>
- <span class="s">&#39;fetch&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;--help&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s1">&#39;--module&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;pig.thing&#39;</span><span class="p">,</span> <span class="s1">&#39;cow.dog&#39;</span><span class="p">],</span>
+ <span class="s1">&#39;&lt;name&gt;&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Dummy&#39;</span><span class="p">,</span> <span class="s1">&#39;Sparky&#39;</span><span class="p">,</span> <span class="s1">&#39;Iperf&#39;</span><span class="p">],</span>
+ <span class="s1">&#39;fetch&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
 </pre></div>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">the <tt class="docutils literal"><span class="pre">arguments</span> <span class="pre">=</span> <span class="pre">[output['&lt;command&gt;']]</span> <span class="pre">+</span> <span class="pre">output['&lt;argument&gt;']</span></tt> line in the above is necessary because the usage lines start with <tt class="docutils literal"><span class="pre">ape</span> <span class="pre">fetch</span></tt> but the <tt class="docutils literal"><span class="pre">fetch</span></tt> token is being assigned to the <tt class="docutils literal"><span class="pre">&lt;command&gt;</span></tt> key in the <tt class="docutils literal"><span class="pre">output</span></tt> dictionary so the <tt class="docutils literal"><span class="pre">&lt;argument&gt;</span></tt> list doesn&#8217;t have it. If you don&#8217;t re-add it to the arguments, <cite>docopt</cite> will print the usage string and quit. The <cite>run</cite> section above only worked because I cheated and assumed I was getting the list of file-names, not a list of arguments to pass to <cite>docopt</cite>.</p>
+<p class="last">the <code class="docutils literal"><span class="pre">arguments</span> <span class="pre">=</span> <span class="pre">[output['&lt;command&gt;']]</span> <span class="pre">+</span> <span class="pre">output['&lt;argument&gt;']</span></code> line in the above is necessary because the usage lines start with <code class="docutils literal"><span class="pre">ape</span> <span class="pre">fetch</span></code> but the <code class="docutils literal"><span class="pre">fetch</span></code> token is being assigned to the <code class="docutils literal"><span class="pre">&lt;command&gt;</span></code> key in the <code class="docutils literal"><span class="pre">output</span></code> dictionary so the <code class="docutils literal"><span class="pre">&lt;argument&gt;</span></code> list doesn&#8217;t have it. If you don&#8217;t re-add it to the arguments, <cite>docopt</cite> will print the usage string and quit. The <cite>run</cite> section above only worked because I cheated and assumed I was getting the list of file-names, not a list of arguments to pass to <cite>docopt</cite>.</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -213,7 +213,7 @@ optional arguments:
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

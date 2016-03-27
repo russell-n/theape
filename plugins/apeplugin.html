@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,11 +26,10 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../index.html" />
     <link rel="up" title="Plugins" href="index.html" />
-    <link rel="next" title="theape.plugins.apeplugin.OperatorConfigspec" href="api/theape.plugins.apeplugin.OperatorConfigspec.html" />
     <link rel="prev" title="Plugins" href="index.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -38,7 +37,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -119,10 +118,6 @@
     <a href="index.html" title="Previous Chapter: Plugins"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Plugins</span>
     </a>
   </li>
-  <li>
-    <a href="api/theape.plugins.apeplugin.OperatorConfigspec.html" title="Next Chapter: theape.plugins.apeplugin.OperatorConfigspec"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">theape.plugins.a... &raquo;</span>
-    </a>
-  </li>
               
             
             
@@ -152,14 +147,14 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="the-ape-plugin">
 <h1>The Ape Plugin<a class="headerlink" href="#the-ape-plugin" title="Permalink to this headline">¶</a></h1>
-<p>This is the plugin that creates the top driver to run <a class="reference internal" href="../components/component.html#composite-class"><em>Composites</em></a>. It will be used when the <cite>run</cite> subcommand is called by the user.</p>
+<p>This is the plugin that creates the top driver to run <a class="reference internal" href="../components/component.html#composite-class"><span>Composites</span></a>. It will be used when the <cite>run</cite> subcommand is called by the user.</p>
 <div class="section" id="introduction">
 <span id="apeplugin-introduction"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>Rather than implementing separate classes for the different levels of Composites used in executing the <cite>run</cite> sub-command of the APE, a single composite is defined which accepts error and message specifications (and composes <a class="reference internal" href="../components/component.html#component-class"><em>Components</em></a>) to define the particular instance of the Composite.</p>
+<p>Rather than implementing separate classes for the different levels of Composites used in executing the <cite>run</cite> sub-command of the APE, a single composite is defined which accepts error and message specifications (and composes <a class="reference internal" href="../components/component.html#component-class"><span>Components</span></a>) to define the particular instance of the Composite.</p>
 <p class="plantuml">
 <img src="../_images/plantuml-96eef8f95f36ad837c08dbc17225d7d3c0c93c79.png" alt="BaseClass &lt;|-- Component
 Component &lt;|-- Composite
@@ -173,12 +168,12 @@ Operation  o-  Leaf" />
 </p>
 <p>The <cite>Hortator</cite>, <cite>Operator</cite> and <cite>Operation</cite> are instances of the Composite and so aren&#8217;t functionally different but they catch different levels of exceptions so that there can be a certain level of self-recovery and error handling. Each execution of the <cite>ape</cite> will have one <cite>Hortator</cite> composed of <cite>Operators</cite> (one <cite>Operator</cite> per configuration file with an <cite>APE</cite> section). Each line in the APE will correspond to an <cite>Operation</cite> composed of <cite>Leafs</cite> (one <cite>Leaf</cite> per item on the comma-separated line). Each Leaf is a plugin&#8217;s product. Thus when a plugin is created, the product should inherit from the <cite>Component</cite> class in order to make sure it has the same interface.</p>
 <p>The reason for differentiating the three Composites is to allow different levels of error handling.  For instance, differentiating <cite>Operation</cite> vs  <cite>Operator</cite>  allows the user to decide on a set of plugins that will be called even if the first set crashes. e.g.:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">APE</span><span class="p">]</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">APE</span><span class="p">]</span>
 <span class="n">op_1</span> <span class="o">=</span> <span class="n">WatchRSSI</span><span class="p">,</span><span class="n">IperfSession</span>
 <span class="n">op_2</span> <span class="o">=</span> <span class="n">CleanUp</span>
 </pre></div>
 </div>
-<p>When translated to objects, this configuration would create one <cite>Operation</cite> composite for each line and both lines would be composed in an <cite>Operator</cite> (and if there are multiple config-files with <tt class="docutils literal"><span class="pre">[APE]</span></tt> sections, an <cite>Operator</cite> will be created for each and all <cite>Operators</cite> will be composed in the <cite>Hortator</cite>). If one of the <cite>Leafs</cite> in <cite>op_1</cite> (<cite>WatchRSSI</cite> or <cite>IperfSession</cite>) crashes in a predictable way (raising an <cite>ApeError</cite> or the equivalent) then the <cite>op_2</cite> Leaf (CleanUp) should still be executed. The reason for only catching ape-defined exceptions is so that if something is really wrong with the code or system and another exception is raised (either a python-built-in exception or from an external third-party package), it will be assumed that the configuration is un-runnable and the Hortator will move on to the next <cite>Operator</cite>.</p>
+<p>When translated to objects, this configuration would create one <cite>Operation</cite> composite for each line and both lines would be composed in an <cite>Operator</cite> (and if there are multiple config-files with <code class="docutils literal"><span class="pre">[APE]</span></code> sections, an <cite>Operator</cite> will be created for each and all <cite>Operators</cite> will be composed in the <cite>Hortator</cite>). If one of the <cite>Leafs</cite> in <cite>op_1</cite> (<cite>WatchRSSI</cite> or <cite>IperfSession</cite>) crashes in a predictable way (raising an <cite>ApeError</cite> or the equivalent) then the <cite>op_2</cite> Leaf (CleanUp) should still be executed. The reason for only catching ape-defined exceptions is so that if something is really wrong with the code or system and another exception is raised (either a python-built-in exception or from an external third-party package), it will be assumed that the configuration is un-runnable and the Hortator will move on to the next <cite>Operator</cite>.</p>
 </div>
 <div class="section" id="the-errors">
 <span id="apeplugin-errors"></span><h2>The Errors<a class="headerlink" href="#the-errors" title="Permalink to this headline">¶</a></h2>
@@ -186,32 +181,32 @@ Operation  o-  Leaf" />
 <img src="../_images/plantuml-a6722ab23a8a4d6ea3ffa8da886ad3707d87e09d.png" alt="ApeError --|&gt; Exception
 DontCatchError --|&gt; Exception" />
 </p>
-<p>Since the two errors are siblings, catching the <tt class="docutils literal"><span class="pre">ApeError</span></tt> won&#8217;t catch the <cite>DontCatchError</cite>.</p>
+<p>Since the two errors are siblings, catching the <code class="docutils literal"><span class="pre">ApeError</span></code> won&#8217;t catch the <cite>DontCatchError</cite>.</p>
 </div>
 <div class="section" id="constants">
 <h2>Constants<a class="headerlink" href="#constants" title="Permalink to this headline">¶</a></h2>
 <p>These are constants put into classes to make it easier for the tests to find them and to make the configuration-file settings more implicit.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">OperatorConfigurationConstants</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OperatorConfigurationConstants</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    constants for the OperatorConfiguration</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__slots__</span> <span class="o">=</span> <span class="p">()</span>
-    <span class="c"># sections</span>
-    <span class="n">settings_section</span> <span class="o">=</span> <span class="s">&#39;SETTINGS&#39;</span>
-    <span class="n">operations_section</span> <span class="o">=</span> <span class="s">&#39;OPERATIONS&#39;</span>
-    <span class="n">plugins_section</span> <span class="o">=</span> <span class="s">&quot;PLUGINS&quot;</span>
+    <span class="c1"># sections</span>
+    <span class="n">settings_section</span> <span class="o">=</span> <span class="s1">&#39;SETTINGS&#39;</span>
+    <span class="n">operations_section</span> <span class="o">=</span> <span class="s1">&#39;OPERATIONS&#39;</span>
+    <span class="n">plugins_section</span> <span class="o">=</span> <span class="s2">&quot;PLUGINS&quot;</span>
 
-    <span class="c"># options</span>
-    <span class="n">repetitions_option</span> <span class="o">=</span> <span class="s">&#39;repetitions&#39;</span>
-    <span class="n">config_glob_option</span> <span class="o">=</span> <span class="s">&#39;config_glob&#39;</span>
-    <span class="n">total_time_option</span> <span class="o">=</span> <span class="s">&#39;total_time&#39;</span>
-    <span class="n">end_time_option</span> <span class="o">=</span> <span class="s">&#39;end_time&#39;</span>
-    <span class="n">subfolder_option</span> <span class="o">=</span> <span class="s">&#39;subfolder&#39;</span>
-    <span class="n">modules_option</span> <span class="o">=</span> <span class="s">&#39;external_modules&#39;</span>
-    <span class="n">timestamp_option</span> <span class="o">=</span> <span class="s">&#39;timestamp&#39;</span>
-    <span class="n">plugin_option</span> <span class="o">=</span> <span class="s">&#39;plugin&#39;</span>
+    <span class="c1"># options</span>
+    <span class="n">repetitions_option</span> <span class="o">=</span> <span class="s1">&#39;repetitions&#39;</span>
+    <span class="n">config_glob_option</span> <span class="o">=</span> <span class="s1">&#39;config_glob&#39;</span>
+    <span class="n">total_time_option</span> <span class="o">=</span> <span class="s1">&#39;total_time&#39;</span>
+    <span class="n">end_time_option</span> <span class="o">=</span> <span class="s1">&#39;end_time&#39;</span>
+    <span class="n">subfolder_option</span> <span class="o">=</span> <span class="s1">&#39;subfolder&#39;</span>
+    <span class="n">modules_option</span> <span class="o">=</span> <span class="s1">&#39;external_modules&#39;</span>
+    <span class="n">timestamp_option</span> <span class="o">=</span> <span class="s1">&#39;timestamp&#39;</span>
+    <span class="n">plugin_option</span> <span class="o">=</span> <span class="s1">&#39;plugin&#39;</span>
 
-    <span class="c"># defaults</span>
+    <span class="c1"># defaults</span>
     <span class="n">default_repetitions</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">default_config_glob</span> <span class="o">=</span> <span class="bp">None</span>
     <span class="n">default_total_time</span> <span class="o">=</span> <span class="bp">None</span>
@@ -220,31 +215,31 @@ DontCatchError --|&gt; Exception" />
     <span class="n">default_modules</span> <span class="o">=</span> <span class="bp">None</span>
     <span class="n">default_timestamp</span> <span class="o">=</span> <span class="bp">None</span>
 
-    <span class="c">#extra</span>
-    <span class="n">file_storage_name</span> <span class="o">=</span> <span class="s">&#39;infrastructure&#39;</span>
+    <span class="c1">#extra</span>
+    <span class="n">file_storage_name</span> <span class="o">=</span> <span class="s1">&#39;infrastructure&#39;</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="operatorconfigspec">
 <h2>OperatorConfigspec<a class="headerlink" href="#operatorconfigspec" title="Permalink to this headline">¶</a></h2>
 <p>The Configuration Specification for the Operator Configuration. It&#8217;s used by configobj to validate a configuration, convert strings to types, and set defaults.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">config_spec</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">[SETTINGS]</span>
-<span class="s">config_glob = string(default=None)</span>
-<span class="s">repetitions = integer(default=1)</span>
-<span class="s">total_time = relative_time(default=None)</span>
-<span class="s">end_time = absolute_time(default=None)</span>
-<span class="s">subfolder = string(default=None)</span>
-<span class="s">external_modules = string_list(default=None)</span>
-<span class="s">timestamp = string(default=None)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="n">config_spec</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[SETTINGS]</span>
+<span class="s2">config_glob = string(default=None)</span>
+<span class="s2">repetitions = integer(default=1)</span>
+<span class="s2">total_time = relative_time(default=None)</span>
+<span class="s2">end_time = absolute_time(default=None)</span>
+<span class="s2">subfolder = string(default=None)</span>
+<span class="s2">external_modules = string_list(default=None)</span>
+<span class="s2">timestamp = string(default=None)</span>
 
-<span class="s">[OPERATIONS]</span>
-<span class="s">__many__ = force_list</span>
+<span class="s2">[OPERATIONS]</span>
+<span class="s2">__many__ = force_list</span>
 
-<span class="s">[PLUGINS]</span>
-<span class="s"> [[__many__]]</span>
-<span class="s"> plugin = string</span>
-<span class="s">&quot;&quot;&quot;</span>
+<span class="s2">[PLUGINS]</span>
+<span class="s2"> [[__many__]]</span>
+<span class="s2"> plugin = string</span>
+<span class="s2">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
 <p>It looks like the way configobj works there isn&#8217;t a way to force the plugins section with the configspec, it just shows up...</p>
@@ -257,17 +252,17 @@ DontCatchError --|&gt; Exception" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.apeplugin.OperatorConfigspec.html#theape.plugins.apeplugin.OperatorConfigspec" title="theape.plugins.apeplugin.OperatorConfigspec"><tt class="xref py py-obj docutils literal"><span class="pre">OperatorConfigspec</span></tt></a>()</td>
-<td>A configuration specification for the OperatorConfiguration</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.apeplugin.OperatorConfigspec.configspec.html#theape.plugins.apeplugin.OperatorConfigspec.configspec" title="theape.plugins.apeplugin.OperatorConfigspec.configspec"><tt class="xref py py-obj docutils literal"><span class="pre">OperatorConfigspec.configspec</span></tt></a></td>
-<td>A configspec that  matches the Operator&#8217;s Configuration</td>
-</tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">OperatorConfigspec.subconfigspec</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">OperatorConfigspec</span></code></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.apeplugin.OperatorConfigspec.validator.html#theape.plugins.apeplugin.OperatorConfigspec.validator" title="theape.plugins.apeplugin.OperatorConfigspec.validator"><tt class="xref py py-obj docutils literal"><span class="pre">OperatorConfigspec.validator</span></tt></a></td>
-<td>A validator with user-defined classes</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">OperatorConfigspec.configspec</span></code></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">OperatorConfigspec.subconfigspec</span></code></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">OperatorConfigspec.validator</span></code></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -292,35 +287,35 @@ OperatorConfiguration o- Composite" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.apeplugin.OperatorConfiguration.html#theape.plugins.apeplugin.OperatorConfiguration" title="theape.plugins.apeplugin.OperatorConfiguration"><tt class="xref py py-obj docutils literal"><span class="pre">OperatorConfiguration</span></tt></a>(source)</td>
-<td>Extracts arguments for operators from the configuration</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">OperatorConfiguration</span></code></td>
+<td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.apeplugin.OperatorConfiguration.configuration.html#theape.plugins.apeplugin.OperatorConfiguration.configuration" title="theape.plugins.apeplugin.OperatorConfiguration.configuration"><tt class="xref py py-obj docutils literal"><span class="pre">OperatorConfiguration.configuration</span></tt></a></td>
-<td>ConfigObj built from <cite>source</cite></td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">OperatorConfiguration.configuration</span></code></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.apeplugin.OperatorConfiguration.configspec.html#theape.plugins.apeplugin.OperatorConfiguration.configspec" title="theape.plugins.apeplugin.OperatorConfiguration.configspec"><tt class="xref py py-obj docutils literal"><span class="pre">OperatorConfiguration.configspec</span></tt></a></td>
-<td>OperatorConfigspec</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">OperatorConfiguration.configspec</span></code></td>
+<td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.apeplugin.OperatorConfiguration.countdown_timer.html#theape.plugins.apeplugin.OperatorConfiguration.countdown_timer" title="theape.plugins.apeplugin.OperatorConfiguration.countdown_timer"><tt class="xref py py-obj docutils literal"><span class="pre">OperatorConfiguration.countdown_timer</span></tt></a></td>
-<td>CountdownTimer built from the configuration for the operator</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">OperatorConfiguration.countdown_timer</span></code></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.apeplugin.OperatorConfiguration.initialize_file_storage.html#theape.plugins.apeplugin.OperatorConfiguration.initialize_file_storage" title="theape.plugins.apeplugin.OperatorConfiguration.initialize_file_storage"><tt class="xref py py-obj docutils literal"><span class="pre">OperatorConfiguration.initialize_file_storage</span></tt></a>()</td>
-<td>This has to be called before the plugins are built so the path will be set</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">OperatorConfiguration.initialize_file_storage</span></code></td>
+<td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.apeplugin.OperatorConfiguration.operation_configurations.html#theape.plugins.apeplugin.OperatorConfiguration.operation_configurations" title="theape.plugins.apeplugin.OperatorConfiguration.operation_configurations"><tt class="xref py py-obj docutils literal"><span class="pre">OperatorConfiguration.operation_configurations</span></tt></a></td>
-<td>Generator of Operation Configurations</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">OperatorConfiguration.operation_configurations</span></code></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.apeplugin.OperatorConfiguration.quartermaster.html#theape.plugins.apeplugin.OperatorConfiguration.quartermaster" title="theape.plugins.apeplugin.OperatorConfiguration.quartermaster"><tt class="xref py py-obj docutils literal"><span class="pre">OperatorConfiguration.quartermaster</span></tt></a></td>
-<td>QuarterMaster built with external_modules</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">OperatorConfiguration.quartermaster</span></code></td>
+<td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.apeplugin.OperatorConfiguration.operation_timer.html#theape.plugins.apeplugin.OperatorConfiguration.operation_timer" title="theape.plugins.apeplugin.OperatorConfiguration.operation_timer"><tt class="xref py py-obj docutils literal"><span class="pre">OperatorConfiguration.operation_timer</span></tt></a></td>
-<td>A countdown timer for operations to share (None if end_time not set)</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">OperatorConfiguration.operation_timer</span></code></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.apeplugin.OperatorConfiguration.operator.html#theape.plugins.apeplugin.OperatorConfiguration.operator" title="theape.plugins.apeplugin.OperatorConfiguration.operator"><tt class="xref py py-obj docutils literal"><span class="pre">OperatorConfiguration.operator</span></tt></a></td>
-<td>Operator composite built from the configuration</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">OperatorConfiguration.operator</span></code></td>
+<td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.apeplugin.OperatorConfiguration.save_configuration.html#theape.plugins.apeplugin.OperatorConfiguration.save_configuration" title="theape.plugins.apeplugin.OperatorConfiguration.save_configuration"><tt class="xref py py-obj docutils literal"><span class="pre">OperatorConfiguration.save_configuration</span></tt></a>(...)</td>
-<td>saves the configuration map to disk</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">OperatorConfiguration.save_configuration</span></code></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -345,21 +340,21 @@ OperationConfiguration o- Composite" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.apeplugin.OperationConfiguration.html#theape.plugins.apeplugin.OperationConfiguration" title="theape.plugins.apeplugin.OperationConfiguration"><tt class="xref py py-obj docutils literal"><span class="pre">OperationConfiguration</span></tt></a>(plugins_section,&nbsp;...)</td>
-<td>a builder of plugins for operations</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">OperationConfiguration</span></code></td>
+<td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.apeplugin.OperationConfiguration.plugin_sections_names.html#theape.plugins.apeplugin.OperationConfiguration.plugin_sections_names" title="theape.plugins.apeplugin.OperationConfiguration.plugin_sections_names"><tt class="xref py py-obj docutils literal"><span class="pre">OperationConfiguration.plugin_sections_names</span></tt></a></td>
-<td>creates a dict of plugin section-name:plugin-name pairs</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">OperationConfiguration.plugin_sections_names</span></code></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.apeplugin.OperationConfiguration.operation.html#theape.plugins.apeplugin.OperationConfiguration.operation" title="theape.plugins.apeplugin.OperationConfiguration.operation"><tt class="xref py py-obj docutils literal"><span class="pre">OperationConfiguration.operation</span></tt></a></td>
-<td>A composite of plugins</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">OperationConfiguration.operation</span></code></td>
+<td></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="the-run-state-diagram">
 <span id="apeplugin-run-state-diagram"></span><h2>The Run State Diagram<a class="headerlink" href="#the-run-state-diagram" title="Permalink to this headline">¶</a></h2>
-<p>The assumed flow for the <tt class="docutils literal"><span class="pre">run</span></tt> sub-command is something like this:</p>
+<p>The assumed flow for the <code class="docutils literal"><span class="pre">run</span></code> sub-command is something like this:</p>
 <p class="graphviz">
 <img src="../_images/graphviz-d11479647088c6abaf0715805ff23c4a7a2a1752.png" alt="digraph run_state_diagram {
 rankdir = LR
@@ -384,71 +379,71 @@ run -&gt; data [label=&quot;datum&quot;]
 <div><ul class="simple">
 <li>The <cite>Parse Args</cite> state has been reached before this plugin is created.</li>
 <li>The <cite>Build Map</cite> uses a <cite>ConfigurationMap &lt;configuration-map&gt;</cite></li>
-<li>the <cite>Build Composites</cite> happens in creating the <tt class="docutils literal"><span class="pre">product</span></tt></li>
+<li>the <cite>Build Composites</cite> happens in creating the <code class="docutils literal"><span class="pre">product</span></code></li>
 </ul>
 </div></blockquote>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">CONFIGURATION</span> <span class="o">=</span> <span class="s">&#39;&#39;&#39;[OPERATIONS]</span>
-<span class="s"># the option names are just identifiers</span>
-<span class="s"># they will be executed in the order given.</span>
-<span class="s"># Each plugin has to have a corresponding section below</span>
-<span class="s"># e.g. if there is a `Sleep1` plugin listed as a right-hand-side value</span>
-<span class="s"># Then there needs to be a [[Sleep1]] section in the [PLUGINS] section</span>
-<span class="s"># to configure it</span>
-<span class="s">&lt;option_name_1&gt; = &lt;comma-separated-list of plugins&gt;</span>
-<span class="s">&lt;option_name_2&gt; = &lt;comma-separated-list of plugins&gt;</span>
-<span class="s">...</span>
-<span class="s">&lt;option_name_n&gt; = &lt;comma-separated-list of plugins&gt;</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="n">CONFIGURATION</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;[OPERATIONS]</span>
+<span class="s1"># the option names are just identifiers</span>
+<span class="s1"># they will be executed in the order given.</span>
+<span class="s1"># Each plugin has to have a corresponding section below</span>
+<span class="s1"># e.g. if there is a `Sleep1` plugin listed as a right-hand-side value</span>
+<span class="s1"># Then there needs to be a [[Sleep1]] section in the [PLUGINS] section</span>
+<span class="s1"># to configure it</span>
+<span class="s1">&lt;option_name_1&gt; = &lt;comma-separated-list of plugins&gt;</span>
+<span class="s1">&lt;option_name_2&gt; = &lt;comma-separated-list of plugins&gt;</span>
+<span class="s1">...</span>
+<span class="s1">&lt;option_name_n&gt; = &lt;comma-separated-list of plugins&gt;</span>
 
-<span class="s">#[SETTINGS]</span>
-<span class="s"># these are settings for the overall operation</span>
+<span class="s1">#[SETTINGS]</span>
+<span class="s1"># these are settings for the overall operation</span>
 
-<span class="s"># if you add a configuration-file-glob (config_glob),</span>
-<span class="s"># all matching files will be added to the configuration</span>
-<span class="s"># (the default is None)</span>
-<span class="s">#config_glob = settings*.config</span>
+<span class="s1"># if you add a configuration-file-glob (config_glob),</span>
+<span class="s1"># all matching files will be added to the configuration</span>
+<span class="s1"># (the default is None)</span>
+<span class="s1">#config_glob = settings*.config</span>
 
-<span class="s"># if you want to repeat the operation defined in this config, give it repetitions</span>
-<span class="s"># (default is 1)</span>
-<span class="s"># repetitions = 1000000</span>
+<span class="s1"># if you want to repeat the operation defined in this config, give it repetitions</span>
+<span class="s1"># (default is 1)</span>
+<span class="s1"># repetitions = 1000000</span>
 
-<span class="s"># If you want to put a time limit after which to quit (this overrides repetitions)</span>
-<span class="s"># (default is None)</span>
-<span class="s"># total_time = 1 day 3 hours</span>
+<span class="s1"># If you want to put a time limit after which to quit (this overrides repetitions)</span>
+<span class="s1"># (default is None)</span>
+<span class="s1"># total_time = 1 day 3 hours</span>
 
-<span class="s"># if you want to put an end time (this will override repetitions and total time):</span>
-<span class="s"># (default is None)</span>
-<span class="s"># end_time = November 23, 2013 8:00 am</span>
+<span class="s1"># if you want to put an end time (this will override repetitions and total time):</span>
+<span class="s1"># (default is None)</span>
+<span class="s1"># end_time = November 23, 2013 8:00 am</span>
 
-<span class="s"># if you want to store files in a sub-folder</span>
-<span class="s"># (default is None)</span>
-<span class="s"># subfolder = &lt;name&gt;</span>
+<span class="s1"># if you want to store files in a sub-folder</span>
+<span class="s1"># (default is None)</span>
+<span class="s1"># subfolder = &lt;name&gt;</span>
 
-<span class="s"># if one or more plugins is coming from the ape</span>
-<span class="s"># tell me which module to import it from</span>
-<span class="s"># comma-separated list</span>
-<span class="s"># (default is None)</span>
-<span class="s"># external_modules = package.module, package2.module2</span>
+<span class="s1"># if one or more plugins is coming from the ape</span>
+<span class="s1"># tell me which module to import it from</span>
+<span class="s1"># comma-separated list</span>
+<span class="s1"># (default is None)</span>
+<span class="s1"># external_modules = package.module, package2.module2</span>
 
-<span class="s"># if you want to override the file timestamp format</span>
-<span class="s"># (default is None)</span>
-<span class="s"># timestamp = &lt;strftime-formatted timestamp&gt;</span>
+<span class="s1"># if you want to override the file timestamp format</span>
+<span class="s1"># (default is None)</span>
+<span class="s1"># timestamp = &lt;strftime-formatted timestamp&gt;</span>
 
-<span class="s">[PLUGINS]</span>
-<span class="s"># for each plugin listed in the [OPERATIONS] there has to be a matching</span>
-<span class="s"># subsection below this section</span>
-<span class="s"># sub-sections are denoted by double-brackets (you can indent them too)</span>
-<span class="s"># the actual class name for the plugin is set with the &#39;plugin&#39; option</span>
-<span class="s"># the rest of each plugin sub-section has to be whatever configures the plugin</span>
+<span class="s1">[PLUGINS]</span>
+<span class="s1"># for each plugin listed in the [OPERATIONS] there has to be a matching</span>
+<span class="s1"># subsection below this section</span>
+<span class="s1"># sub-sections are denoted by double-brackets (you can indent them too)</span>
+<span class="s1"># the actual class name for the plugin is set with the &#39;plugin&#39; option</span>
+<span class="s1"># the rest of each plugin sub-section has to be whatever configures the plugin</span>
 
-<span class="s">#  [[plugin1]]</span>
-<span class="s">#  plugin = Sleep</span>
-<span class="s">#  updates_section = &lt;section_name&gt;</span>
-<span class="s">#  &lt;sleep configuration&gt;</span>
+<span class="s1">#  [[plugin1]]</span>
+<span class="s1">#  plugin = Sleep</span>
+<span class="s1">#  updates_section = &lt;section_name&gt;</span>
+<span class="s1">#  &lt;sleep configuration&gt;</span>
 
-<span class="s">#  [[plugin2]]</span>
-<span class="s">#  plugin = Iperf</span>
-<span class="s">#  &lt;Iperf configuration&gt;</span>
-<span class="s">&#39;&#39;&#39;</span>
+<span class="s1">#  [[plugin2]]</span>
+<span class="s1">#  plugin = Iperf</span>
+<span class="s1">#  &lt;Iperf configuration&gt;</span>
+<span class="s1">&#39;&#39;&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -476,38 +471,38 @@ Ape o-- FileStorage" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.apeplugin.Ape.html#theape.plugins.apeplugin.Ape" title="theape.plugins.apeplugin.Ape"><tt class="xref py py-obj docutils literal"><span class="pre">Ape</span></tt></a>([configfiles])</td>
-<td>The default plugin (provides the front-end for the APE)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">Ape</span></code></td>
+<td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.apeplugin.Ape.help.html#theape.plugins.apeplugin.Ape.help" title="theape.plugins.apeplugin.Ape.help"><tt class="xref py py-obj docutils literal"><span class="pre">Ape.help</span></tt></a>([width])</td>
-<td>Prints a help-string for the plugin</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">Ape.help</span></code></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.apeplugin.Ape.product.html#theape.plugins.apeplugin.Ape.product" title="theape.plugins.apeplugin.Ape.product"><tt class="xref py py-obj docutils literal"><span class="pre">Ape.product</span></tt></a></td>
-<td>This is the Hortator Composite product</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">Ape.product</span></code></td>
+<td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.apeplugin.Ape.fetch_config.html#theape.plugins.apeplugin.Ape.fetch_config" title="theape.plugins.apeplugin.Ape.fetch_config"><tt class="xref py py-obj docutils literal"><span class="pre">Ape.fetch_config</span></tt></a>()</td>
-<td>Prints example configuration to stdout</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">Ape.fetch_config</span></code></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.apeplugin.Ape.arguments.html#theape.plugins.apeplugin.Ape.arguments" title="theape.plugins.apeplugin.Ape.arguments"><tt class="xref py py-obj docutils literal"><span class="pre">Ape.arguments</span></tt></a></td>
-<td>The ArgumentBuilder (used to set up the help-string)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">Ape.arguments</span></code></td>
+<td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.plugins.apeplugin.Ape.sections.html#theape.plugins.apeplugin.Ape.sections" title="theape.plugins.apeplugin.Ape.sections"><tt class="xref py py-obj docutils literal"><span class="pre">Ape.sections</span></tt></a></td>
-<td>An ordered dictionary for the HelpPage</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">Ape.sections</span></code></td>
+<td></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="using-external-plugins">
 <span id="apeplugin-external-plugins"></span><h2>Using External Plugins<a class="headerlink" href="#using-external-plugins" title="Permalink to this headline">¶</a></h2>
-<p>In order to allow the execution of plugins that are not a part of the <tt class="docutils literal"><span class="pre">ape</span></tt>, I am allowing the declaration of
+<p>In order to allow the execution of plugins that are not a part of the <code class="docutils literal"><span class="pre">ape</span></code>, I am allowing the declaration of
 modules in the configuration file:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">MODULES</span><span class="p">]</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">MODULES</span><span class="p">]</span>
 <span class="n">package</span><span class="o">.</span><span class="n">module</span>
 </pre></div>
 </div>
 <p>Or something similar. The ape will search modules named in the MODULES section for children of the <cite>ape.plugins.base_plugin.BasePlugin</cite> class and load and call them if found. The idea is that rather than having to mix up the ape and other packages, a <cite>sandbox</cite> package can be setup with plugins that act as the interface between the <cite>ape</cite> and the other package(s).</p>
-<p>Using the <cite>FakePlugin</cite> created for the <a class="reference internal" href="../documentation/developer/explorations/explore_importlib/exploring_external_imports.html#id1"><em>Exploring External Imports</em></a> section, the config file for the ape could look something like this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">APE</span><span class="p">]</span>
+<p>Using the <cite>FakePlugin</cite> created for the <a class="reference internal" href="../documentation/developer/explorations/explore_importlib/exploring_external_imports.html#id1"><span>Exploring External Imports</span></a> section, the config file for the ape could look something like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">APE</span><span class="p">]</span>
 <span class="n">operation_1</span> <span class="o">=</span> <span class="n">FakePlugin</span>
 
 <span class="p">[</span><span class="n">MODULES</span><span class="p">]</span>
@@ -518,13 +513,13 @@ modules in the configuration file:</p>
 <span class="n">option</span> <span class="o">=</span> <span class="n">value</span>
 </pre></div>
 </div>
-<p>The FakePlugin returns a <a class="reference internal" href="../parts/dummy/dummy.html#dummy-class"><em>DummyClass</em></a> as its <cite>product</cite> so the FAKEPLUGIN section doesn&#8217;t really do anything.</p>
+<p>The FakePlugin returns a <a class="reference internal" href="../parts/dummy/dummy.html#dummy-class"><span>DummyClass</span></a> as its <cite>product</cite> so the FAKEPLUGIN section doesn&#8217;t really do anything.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">In order to allow more than one instance of a plugin to be created, the <tt class="docutils literal"><span class="pre">plugin=&lt;plugin</span> <span class="pre">class</span> <span class="pre">name&gt;</span></tt> line was added. Each section that configures a plugin needs it. The header for the section is arbitrary but must match the value defined in the APE section.</p>
+<p class="last">In order to allow more than one instance of a plugin to be created, the <code class="docutils literal"><span class="pre">plugin=&lt;plugin</span> <span class="pre">class</span> <span class="pre">name&gt;</span></code> line was added. Each section that configures a plugin needs it. The header for the section is arbitrary but must match the value defined in the APE section.</p>
 </div>
 <p>If we wanted to configure a second FakePlugin, for instance, we could do something like this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">APE</span><span class="p">]</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">APE</span><span class="p">]</span>
 <span class="n">operation_1</span> <span class="o">=</span> <span class="n">apple</span><span class="p">,</span> <span class="n">banana</span>
 
 <span class="p">[</span><span class="n">MODULES</span><span class="p">]</span>
@@ -539,7 +534,7 @@ modules in the configuration file:</p>
 <span class="n">options</span> <span class="o">=</span> <span class="n">other_value</span>
 </pre></div>
 </div>
-<p>This is the intended way for it to work, anyway. If the plugin wasn&#8217;t built to use the <tt class="docutils literal"><span class="pre">section_header</span></tt> attribute when retrieving section information it won&#8217;t work.</p>
+<p>This is the intended way for it to work, anyway. If the plugin wasn&#8217;t built to use the <code class="docutils literal"><span class="pre">section_header</span></code> attribute when retrieving section information it won&#8217;t work.</p>
 </div>
 </div>
 
@@ -556,7 +551,7 @@ modules in the configuration file:</p>
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

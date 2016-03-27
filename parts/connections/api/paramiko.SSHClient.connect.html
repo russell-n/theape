@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../index.html" />
 <meta charset='utf-8'>
@@ -35,7 +35,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -128,13 +128,13 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="paramiko-sshclient-connect">
 <h1>paramiko.SSHClient.connect<a class="headerlink" href="#paramiko-sshclient-connect" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="paramiko.SSHClient.connect">
-<tt class="descclassname">SSHClient.</tt><tt class="descname">connect</tt><big>(</big><em>hostname</em>, <em>port=22</em>, <em>username=None</em>, <em>password=None</em>, <em>pkey=None</em>, <em>key_filename=None</em>, <em>timeout=None</em>, <em>allow_agent=True</em>, <em>look_for_keys=True</em>, <em>compress=False</em>, <em>sock=None</em>, <em>gss_auth=False</em>, <em>gss_kex=False</em>, <em>gss_deleg_creds=True</em>, <em>gss_host=None</em>, <em>banner_timeout=None</em><big>)</big><a class="headerlink" href="#paramiko.SSHClient.connect" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">SSHClient.</code><code class="descname">connect</code><span class="sig-paren">(</span><em>hostname</em>, <em>port=22</em>, <em>username=None</em>, <em>password=None</em>, <em>pkey=None</em>, <em>key_filename=None</em>, <em>timeout=None</em>, <em>allow_agent=True</em>, <em>look_for_keys=True</em>, <em>compress=False</em>, <em>sock=None</em>, <em>gss_auth=False</em>, <em>gss_kex=False</em>, <em>gss_deleg_creds=True</em>, <em>gss_host=None</em>, <em>banner_timeout=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/paramiko/client.html#SSHClient.connect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#paramiko.SSHClient.connect" title="Permalink to this definition">¶</a></dt>
 <dd><p>Connect to an SSH server and authenticate to it.  The server&#8217;s host key
 is checked against the system host keys (see <cite>load_system_host_keys</cite>)
 and any local host keys (<cite>load_host_keys</cite>).  If the server&#8217;s hostname
@@ -144,10 +144,10 @@ to reject the key and raise an <cite>.SSHException</cite>.</p>
 <p>Authentication is attempted in the following order of priority:</p>
 <blockquote>
 <div><ul class="simple">
-<li>The <tt class="docutils literal"><span class="pre">pkey</span></tt> or <tt class="docutils literal"><span class="pre">key_filename</span></tt> passed in (if any)</li>
+<li>The <code class="docutils literal"><span class="pre">pkey</span></code> or <code class="docutils literal"><span class="pre">key_filename</span></code> passed in (if any)</li>
 <li>Any key we can find through an SSH agent</li>
 <li>Any &#8220;id_rsa&#8221;, &#8220;id_dsa&#8221; or &#8220;id_ecdsa&#8221; key discoverable in
-<tt class="docutils literal"><span class="pre">~/.ssh/</span></tt></li>
+<code class="docutils literal"><span class="pre">~/.ssh/</span></code></li>
 <li>Plain username/password auth, if a password was given</li>
 </ul>
 </div></blockquote>
@@ -163,17 +163,17 @@ passed in, that password will be used to attempt to unlock the key.</p>
 <li><strong>username</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the username to authenticate as (defaults to the current local
 username)</li>
 <li><strong>password</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; a password to use for authentication or for unlocking a private key</li>
-<li><strong>pkey</strong> (<em>.PKey</em>) &#8211; an optional private key to use for authentication</li>
+<li><strong>pkey</strong> (<em>PKey</em>) &#8211; an optional private key to use for authentication</li>
 <li><strong>key_filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the filename, or list of filenames, of optional private key(s) to
 try for authentication</li>
 <li><strong>timeout</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; an optional timeout (in seconds) for the TCP connect</li>
 <li><strong>allow_agent</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; set to False to disable connecting to the SSH agent</li>
 <li><strong>look_for_keys</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; set to False to disable searching for discoverable private key
-files in <tt class="docutils literal"><span class="pre">~/.ssh/</span></tt></li>
+files in <code class="docutils literal"><span class="pre">~/.ssh/</span></code></li>
 <li><strong>compress</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; set to True to turn on compression</li>
 <li><strong>sock</strong> (<a class="reference external" href="http://docs.python.org/library/socket.html#module-socket" title="(in Python v2.7)"><em>socket</em></a>) &#8211; an open socket or socket-like object (such as a <cite>.Channel</cite>) to use
 for communication to the target host</li>
-<li><strong>gss_auth</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; <tt class="docutils literal"><span class="pre">True</span></tt> if you want to use GSS-API authentication</li>
+<li><strong>gss_auth</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; <code class="docutils literal"><span class="pre">True</span></code> if you want to use GSS-API authentication</li>
 <li><strong>gss_kex</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Perform GSS-API Key Exchange and user authentication</li>
 <li><strong>gss_deleg_creds</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Delegate GSS-API client credentials or not</li>
 <li><strong>gss_host</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The targets name in the kerberos database. default: hostname</li>
@@ -195,8 +195,8 @@ establishing an SSH session</li>
 </tbody>
 </table>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 1.15: </span>Added the <tt class="docutils literal"><span class="pre">banner_timeout</span></tt>, <tt class="docutils literal"><span class="pre">gss_auth</span></tt>, <tt class="docutils literal"><span class="pre">gss_kex</span></tt>,
-<tt class="docutils literal"><span class="pre">gss_deleg_creds</span></tt> and <tt class="docutils literal"><span class="pre">gss_host</span></tt> arguments.</p>
+<p><span class="versionmodified">Changed in version 1.15: </span>Added the <code class="docutils literal"><span class="pre">banner_timeout</span></code>, <code class="docutils literal"><span class="pre">gss_auth</span></code>, <code class="docutils literal"><span class="pre">gss_kex</span></code>,
+<code class="docutils literal"><span class="pre">gss_deleg_creds</span></code> and <code class="docutils literal"><span class="pre">gss_host</span></code> arguments.</p>
 </div>
 </dd></dl>
 
@@ -215,7 +215,7 @@ establishing an SSH session</li>
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
     <link rel="up" title="IperfSession Feature Steps" href="index.html" />
@@ -38,7 +38,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -166,7 +166,7 @@
               
                 
   <li>
-    <a href="index.html" title="Previous Chapter: IperfSession Feature Steps"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; IperfSession Fea...</span>
+    <a href="index.html" title="Previous Chapter: IperfSession Feature Steps"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; IperfSession ...</span>
     </a>
   </li>
   <li>
@@ -202,32 +202,32 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="iperf-configspec">
 <h1>Iperf ConfigSpec<a class="headerlink" href="#iperf-configspec" title="Permalink to this headline">¶</a></h1>
 <p>The ConfigSpec is used by configobj to validate configurations.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">configspec</span> <span class="o">=</span> <span class="n">iperf_configspec</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="n">configspec</span> <span class="o">=</span> <span class="n">iperf_configspec</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 <span class="n">validator</span> <span class="o">=</span> <span class="n">get_validator</span><span class="p">()</span>
-<span class="n">BYTES_ONLY</span> <span class="o">=</span> <span class="s">&#39;bBkKmM &#39;</span>
-<span class="n">INTEGER_UNITS</span> <span class="o">=</span> <span class="s">&quot;{0}{1}&quot;</span>
-<span class="n">REPORTS</span> <span class="o">=</span> <span class="s">&#39;cdmsvCDMSV&#39;</span>
+<span class="n">BYTES_ONLY</span> <span class="o">=</span> <span class="s1">&#39;bBkKmM &#39;</span>
+<span class="n">INTEGER_UNITS</span> <span class="o">=</span> <span class="s2">&quot;{0}{1}&quot;</span>
+<span class="n">REPORTS</span> <span class="o">=</span> <span class="s1">&#39;cdmsvCDMSV&#39;</span>
 </pre></div>
 </div>
 <div class="section" id="scenario-outline-client-server-options">
 <h2>Scenario Outline: client/server options<a class="headerlink" href="#scenario-outline-client-server-options" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="example-valid-format">
 <h3>Example: Valid Format<a class="headerlink" href="#example-valid-format" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a valid format option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a valid format option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_format</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s">&#39;aAbBkKmMgG&#39;</span><span class="p">)</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;format = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">)]</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;format&#39;</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;aAbBkKmMgG&#39;</span><span class="p">)</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;format = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">)]</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;format&#39;</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
 </pre></div>
 </div>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@when</span><span class="p">(</span><span class="s">&quot;the configspec is validated&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@when</span><span class="p">(</span><span class="s2">&quot;the configspec is validated&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">context</span><span class="o">.</span><span class="n">valid</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">configobj</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">validator</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
@@ -237,81 +237,81 @@
     <span class="k">return</span>
 </pre></div>
 </div>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;the configspec outcome is as expected&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@then</span><span class="p">(</span><span class="s2">&quot;the configspec outcome is as expected&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">assert_outcome</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
                 <span class="n">is_</span><span class="p">(</span><span class="n">equal_to</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">)),</span>
-                <span class="s">&#39;actual: {0} != expected: {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                <span class="s1">&#39;actual: {0} != expected: {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
                                         <span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">))</span>
     <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">valid</span><span class="p">,</span>
                 <span class="n">is_</span><span class="p">(</span><span class="bp">True</span><span class="p">),</span>
-                <span class="s">&#39;{0} did not validate&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">configobj</span><span class="p">))</span>
+                <span class="s1">&#39;{0} did not validate&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">configobj</span><span class="p">))</span>
     <span class="k">return</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="example-invalid-format">
 <h3>Example: Invalid Format<a class="headerlink" href="#example-invalid-format" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a invalid format option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a invalid format option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">invalid_format</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s">&#39;q t o l&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;format = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">)]</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;format&#39;</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;q t o l&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;format = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">)]</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;format&#39;</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
 </pre></div>
 </div>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;the configspec outcome is False&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@then</span><span class="p">(</span><span class="s2">&quot;the configspec outcome is False&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">assert_false</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
                 <span class="n">is_</span><span class="p">(</span><span class="n">equal_to</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">)),</span>
-                <span class="s">&#39;actual: {0} != expected: {1}&#39;</span><span class="o">.</span>\
+                <span class="s1">&#39;actual: {0} != expected: {1}&#39;</span><span class="o">.</span>\
                 <span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
                        <span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">))</span>
     <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">valid</span><span class="p">,</span>
                 <span class="n">is_not</span><span class="p">(</span><span class="bp">True</span><span class="p">),</span>
-                <span class="s">&#39;{0} validated&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">configobj</span><span class="p">))</span>
+                <span class="s1">&#39;{0} validated&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">configobj</span><span class="p">))</span>
     <span class="k">return</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="example-missing-format">
 <h3>Example: Missing Format<a class="headerlink" href="#example-missing-format" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a missing format option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a missing format option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">missing_format</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;option=value&#39;</span><span class="p">]</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;format&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;option=value&#39;</span><span class="p">]</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;format&#39;</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
 </pre></div>
 </div>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&quot;the configspec outcome is None&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@then</span><span class="p">(</span><span class="s2">&quot;the configspec outcome is None&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">assert_none</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
                 <span class="n">is_</span><span class="p">(</span><span class="bp">None</span><span class="p">),</span>
-                <span class="s">&#39;{0} is not None&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">value</span><span class="p">))</span>
+                <span class="s1">&#39;{0} is not None&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">value</span><span class="p">))</span>
     <span class="k">return</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="example-valid-interval">
 <h3>Example: Valid Interval<a class="headerlink" href="#example-valid-interval" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a valid interval option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a valid interval option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_interval</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;interval&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;interval&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
 </pre></div>
 </div>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&#39;the configspec outcome is positive float&#39;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@then</span><span class="p">(</span><span class="s1">&#39;the configspec outcome is positive float&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">assert_float</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
                 <span class="n">is_</span><span class="p">(</span><span class="n">close_to</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                              <span class="mf">0.001</span><span class="p">)),</span>
-                <span class="s">&#39;actual: {0} != {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                <span class="s1">&#39;actual: {0} != {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
                     <span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">))</span>
     <span class="k">return</span>
 </pre></div>
@@ -319,14 +319,14 @@
 </div>
 <div class="section" id="example-invalid-interval">
 <h3>Example: Invalid Interval<a class="headerlink" href="#example-invalid-interval" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a invalid interval option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a invalid interval option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_interval</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="c"># invalid numbers are still gathered</span>
-    <span class="c"># they are just left as strings</span>
+    <span class="c1"># invalid numbers are still gathered</span>
+    <span class="c1"># they are just left as strings</span>
     <span class="n">context</span><span class="o">.</span><span class="n">actual</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">actual</span><span class="p">)</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;interval&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">actual</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;interval&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">actual</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -335,10 +335,10 @@
 </div>
 <div class="section" id="example-missing-interval">
 <h3>Example: Missing Interval<a class="headerlink" href="#example-missing-interval" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a missing interval option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a missing interval option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">missing_interval</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;option=value&#39;</span><span class="p">]</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;interval&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;option=value&#39;</span><span class="p">]</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;interval&#39;</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
 </pre></div>
@@ -346,14 +346,14 @@
 </div>
 <div class="section" id="example-valid-buffer-length">
 <h3>Example: Valid Buffer Length<a class="headerlink" href="#example-valid-buffer-length" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a valid len option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a valid len option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_len</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">context</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-    <span class="n">suffix</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s">&#39; BKMG&#39;</span><span class="p">)</span>
+    <span class="n">suffix</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39; BKMG&#39;</span><span class="p">)</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">INTEGER_UNITS</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
                                        <span class="n">suffix</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;len&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;len&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -362,12 +362,12 @@
 </div>
 <div class="section" id="example-invalid-len">
 <h3>Example: Invalid len<a class="headerlink" href="#example-invalid-len" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a invalid len option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a invalid len option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">invalid_len</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">context</span><span class="o">.</span><span class="n">actual</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">actual</span><span class="p">)</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;len&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">actual</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;len&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">actual</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -376,10 +376,10 @@
 </div>
 <div class="section" id="example-missing-len">
 <h3>Example: Missing Len<a class="headerlink" href="#example-missing-len" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a missing len option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a missing len option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">missing_interval</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;option=value&#39;</span><span class="p">]</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;len&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;option=value&#39;</span><span class="p">]</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;len&#39;</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
 </pre></div>
@@ -387,36 +387,36 @@
 </div>
 <div class="section" id="example-valid-print-mss">
 <h3>Example: Valid print_mss<a class="headerlink" href="#example-valid-print-mss" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a valid print_mss option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a valid print_mss option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_len</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;print_mss&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;print_mss&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
 </pre></div>
 </div>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@then</span><span class="p">(</span><span class="s">&#39;the configspec outcome is True&#39;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@then</span><span class="p">(</span><span class="s1">&#39;the configspec outcome is True&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">assert_true</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
                 <span class="n">is_</span><span class="p">(</span><span class="bp">True</span><span class="p">),</span>
-                <span class="s">&quot;&#39;{0}&#39; is not True&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">value</span><span class="p">))</span>
+                <span class="s2">&quot;&#39;{0}&#39; is not True&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">value</span><span class="p">))</span>
     <span class="n">assert_that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">valid</span><span class="p">,</span>
                 <span class="n">is_</span><span class="p">(</span><span class="bp">True</span><span class="p">),</span>
-                <span class="s">&quot;&#39;{0}&#39; did not validate&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">configobj</span><span class="p">))</span>
+                <span class="s2">&quot;&#39;{0}&#39; did not validate&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">configobj</span><span class="p">))</span>
     <span class="k">return</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="example-invalid-print-mss">
 <h3>Example: Invalid print_mss<a class="headerlink" href="#example-invalid-print-mss" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a invalid print_mss option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a invalid print_mss option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">invalid_print_mss</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">actual</span> <span class="o">=</span> <span class="s">&#39;aoeusnth&#39;</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">actual</span> <span class="o">=</span> <span class="s1">&#39;aoeusnth&#39;</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">actual</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;len&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">actual</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;len&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">actual</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -425,10 +425,10 @@
 </div>
 <div class="section" id="example-missing-print-mss">
 <h3>Example: Missing print_mss<a class="headerlink" href="#example-missing-print-mss" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a missing print_mss option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a missing print_mss option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">missing_print_mss</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;option=value&#39;</span><span class="p">]</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;print_mss&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;option=value&#39;</span><span class="p">]</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;print_mss&#39;</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
 </pre></div>
@@ -436,11 +436,11 @@
 </div>
 <div class="section" id="example-valid-output">
 <h3>Example: Valid Output<a class="headerlink" href="#example-valid-output" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a valid output option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a valid output option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_len</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="s">&#39;aoeunsthc.iperf&#39;</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;output&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="s1">&#39;aoeunsthc.iperf&#39;</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;output&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -449,10 +449,10 @@
 </div>
 <div class="section" id="example-missing-filename">
 <h3>Example: Missing Filename<a class="headerlink" href="#example-missing-filename" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a missing output option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a missing output option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">missing_print_mss</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;option=value&#39;</span><span class="p">]</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;output&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;option=value&#39;</span><span class="p">]</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;output&#39;</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
 </pre></div>
@@ -460,11 +460,11 @@
 </div>
 <div class="section" id="example-valid-port">
 <h3>Example: Valid Port<a class="headerlink" href="#example-valid-port" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a valid port option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a valid port option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_port</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">65536</span><span class="p">)</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;port&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;port&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -473,12 +473,12 @@
 </div>
 <div class="section" id="example-invalid-port">
 <h3>Example: Invalid Port<a class="headerlink" href="#example-invalid-port" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a invalid port option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a invalid port option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">invalid_print_mss</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">context</span><span class="o">.</span><span class="n">actual</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1024</span><span class="p">)</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">actual</span><span class="p">)</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;port&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">actual</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;port&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">actual</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -487,11 +487,11 @@
 </div>
 <div class="section" id="example-valid-udp">
 <h3>Example: Valid UDP<a class="headerlink" href="#example-valid-udp" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a valid udp option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a valid udp option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_port</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;udp&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;udp&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -500,14 +500,14 @@
 </div>
 <div class="section" id="example-valid-window">
 <h3>Example: Valid Window<a class="headerlink" href="#example-valid-window" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a valid window option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a valid window option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_port</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">prefix</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
     <span class="n">suffix</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">BYTES_ONLY</span><span class="p">)</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">INTEGER_UNITS</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span>
                                        <span class="n">suffix</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;window&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;window&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -516,14 +516,14 @@
 </div>
 <div class="section" id="example-invalid-window">
 <h3>Example: Invalid Window<a class="headerlink" href="#example-invalid-window" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a invalid window option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a invalid window option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">invalid_window</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">prefix</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-    <span class="n">suffix</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s">&#39;gzGq&#39;</span><span class="p">)</span>
+    <span class="n">suffix</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;gzGq&#39;</span><span class="p">)</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">INTEGER_UNITS</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span>
                                        <span class="n">suffix</span><span class="p">)</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;window&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;window&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -532,11 +532,11 @@
 </div>
 <div class="section" id="example-valid-bind">
 <h3>Example: Valid bind<a class="headerlink" href="#example-valid-bind" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a valid bind option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a valid bind option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_bind</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="s">&quot;aoentuh&quot;</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;bind&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="s2">&quot;aoentuh&quot;</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;bind&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -545,10 +545,10 @@
 </div>
 <div class="section" id="example-missing-bind">
 <h3>Example: Missing bind<a class="headerlink" href="#example-missing-bind" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a missing bind option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a missing bind option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">missing_print_mss</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;option=value&#39;</span><span class="p">]</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;bind&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;option=value&#39;</span><span class="p">]</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;bind&#39;</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
 </pre></div>
@@ -556,11 +556,11 @@
 </div>
 <div class="section" id="example-valid-compatibilty">
 <h3>Example: Valid compatibilty<a class="headerlink" href="#example-valid-compatibilty" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a valid compatibility option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a valid compatibility option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_bind</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;compatibility&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;compatibility&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -569,14 +569,14 @@
 </div>
 <div class="section" id="example-valid-mss">
 <h3>Example: Valid mss<a class="headerlink" href="#example-valid-mss" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a valid mss option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a valid mss option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_bind</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">prefix</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
     <span class="n">suffix</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">BYTES_ONLY</span><span class="p">)</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">INTEGER_UNITS</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span>
                                             <span class="n">suffix</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;mss&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;mss&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -585,14 +585,14 @@
 </div>
 <div class="section" id="example-invalid-mss">
 <h3>Example: Invalid MSS<a class="headerlink" href="#example-invalid-mss" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a invalid mss option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a invalid mss option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">invalid_window</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">prefix</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-    <span class="n">suffix</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s">&#39;gzGq&#39;</span><span class="p">)</span>
+    <span class="n">suffix</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;gzGq&#39;</span><span class="p">)</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">INTEGER_UNITS</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span>
                                        <span class="n">suffix</span><span class="p">)</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;mss&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;mss&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -602,11 +602,11 @@
 <div class="section" id="example-valid-nodelay">
 <h3>Example: Valid nodelay<a class="headerlink" href="#example-valid-nodelay" title="Permalink to this headline">¶</a></h3>
 <p>Disable Nagle&#8217;s algorithm.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a valid nodelay option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a valid nodelay option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_bind</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;nodelay&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;nodelay&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -616,11 +616,11 @@
 <div class="section" id="example-valid-ipv6version">
 <h3>Example: Valid IPv6Version<a class="headerlink" href="#example-valid-ipv6version" title="Permalink to this headline">¶</a></h3>
 <p>Set the domain to IPv6.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a valid IPv6Version option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a valid IPv6Version option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_bind</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;IPv6Version&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;IPv6Version&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -633,11 +633,11 @@
 <div class="section" id="example-valid-single-udp">
 <h3>Example: Valid single_udp<a class="headerlink" href="#example-valid-single-udp" title="Permalink to this headline">¶</a></h3>
 <p>Run in single threaded UDP mode.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a valid single_udp option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a valid single_udp option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_single_udp</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;single_udp&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;single_udp&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -647,11 +647,11 @@
 <div class="section" id="example-valid-daemon">
 <h3>Example: Valid daemon<a class="headerlink" href="#example-valid-daemon" title="Permalink to this headline">¶</a></h3>
 <p>Run as a daemon.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a valid daemon option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a valid daemon option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_daemon</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;daemon&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;daemon&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -664,13 +664,13 @@
 <div class="section" id="example-valid-bandwidth">
 <h3>Example: Valid bandwidth<a class="headerlink" href="#example-valid-bandwidth" title="Permalink to this headline">¶</a></h3>
 <p>Bandwidth to send UDP traffic in bits/second</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a valid bandwidth option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a valid bandwidth option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_bandwidth</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">prefix</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-    <span class="n">suffix</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s">&#39;kmKM&#39;</span><span class="p">)</span>
+    <span class="n">suffix</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;kmKM&#39;</span><span class="p">)</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">INTEGER_UNITS</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">suffix</span><span class="p">)</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;bandwidth&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;bandwidth&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -679,14 +679,14 @@
 </div>
 <div class="section" id="example-invalid-bandwidth">
 <h3>Example: Invalid Bandwidth<a class="headerlink" href="#example-invalid-bandwidth" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a invalid bandwidth option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a invalid bandwidth option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">invalid_window</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">prefix</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-    <span class="n">suffix</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s">&#39;sw &#39;</span><span class="p">)</span>
+    <span class="n">suffix</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;sw &#39;</span><span class="p">)</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">INTEGER_UNITS</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span>
                                        <span class="n">suffix</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;bandwidth&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;bandwidth&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -695,11 +695,11 @@
 </div>
 <div class="section" id="example-valid-dualtest">
 <h3>Example: Valid dualtest<a class="headerlink" href="#example-valid-dualtest" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a valid dualtest option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a valid dualtest option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_dualtest</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;dualtest&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;dualtest&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -709,13 +709,13 @@
 <div class="section" id="example-valid-num">
 <h3>Example: Valid num<a class="headerlink" href="#example-valid-num" title="Permalink to this headline">¶</a></h3>
 <p>Number of bytes to send (instead of using time to end the session).</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a valid num option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a valid num option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_bandwidth</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">prefix</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-    <span class="n">suffix</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s">&#39;bBkmKMgG&#39;</span><span class="p">)</span>
+    <span class="n">suffix</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;bBkmKMgG&#39;</span><span class="p">)</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">INTEGER_UNITS</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">suffix</span><span class="p">)</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;num&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;num&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -724,14 +724,14 @@
 </div>
 <div class="section" id="example-invalid-num">
 <h3>Example: Invalid num<a class="headerlink" href="#example-invalid-num" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a invalid num option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a invalid num option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">invalid_window</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">prefix</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-    <span class="n">suffix</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s">&#39;sw&#39;</span><span class="p">)</span>
+    <span class="n">suffix</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;sw&#39;</span><span class="p">)</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">INTEGER_UNITS</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span>
                                        <span class="n">suffix</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;num&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;num&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -741,11 +741,11 @@
 <div class="section" id="example-valid-tradeoff">
 <h3>Example: Valid tradeoff<a class="headerlink" href="#example-valid-tradeoff" title="Permalink to this headline">¶</a></h3>
 <p>Run both directions, one after the other.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a valid tradeoff option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a valid tradeoff option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_bandwidth</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;tradeoff&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;tradeoff&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -755,11 +755,11 @@
 <div class="section" id="example-valid-time">
 <h3>Example: Valid time<a class="headerlink" href="#example-valid-time" title="Permalink to this headline">¶</a></h3>
 <p>Iperf accepts negative numbers but that seems to be the flag to run forever, which I don&#8217;t think I want in this case so only positive floats will be accepted.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a valid time option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a valid time option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_bandwidth</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;time&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;time&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -768,12 +768,12 @@
 </div>
 <div class="section" id="example-invalid-time">
 <h3>Example: Invalid time<a class="headerlink" href="#example-invalid-time" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a invalid time option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a invalid time option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">invalid_time</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">111</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;time&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;time&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -783,11 +783,11 @@
 <div class="section" id="example-valid-fileinput">
 <h3>Example: Valid fileinput<a class="headerlink" href="#example-valid-fileinput" title="Permalink to this headline">¶</a></h3>
 <p>A filename for a file to send as data instead of a repeating pattern of string characters.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a valid fileinput option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a valid fileinput option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_fileinput</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="s">&#39;environment.py&#39;</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;fileinput&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="s1">&#39;environment.py&#39;</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;fileinput&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -796,10 +796,10 @@
 </div>
 <div class="section" id="example-missing-fileinput">
 <h3>Example: Missing fileinput<a class="headerlink" href="#example-missing-fileinput" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a missing fileinput option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a missing fileinput option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">missing_fileinput</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;option=value&#39;</span><span class="p">]</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;fileinput&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;option=value&#39;</span><span class="p">]</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;fileinput&#39;</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
 </pre></div>
@@ -807,12 +807,12 @@
 </div>
 <div class="section" id="example-invalid-fileinput">
 <h3>Example: Invalid fileinput<a class="headerlink" href="#example-invalid-fileinput" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a invalid fileinput option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a invalid fileinput option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">invalid_fileinput</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="s">&#39;aoeusnthc.wdes&#39;</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="s1">&#39;aoeusnthc.wdes&#39;</span>
 
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;fileinput&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;fileinput&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -822,11 +822,11 @@
 <div class="section" id="example-valid-listenport">
 <h3>Example: Valid listenport<a class="headerlink" href="#example-valid-listenport" title="Permalink to this headline">¶</a></h3>
 <p>A port to use for bi-directional traffic.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a valid listenport option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a valid listenport option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_fileinput</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;listenport&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;listenport&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -835,11 +835,11 @@
 </div>
 <div class="section" id="example-invalid-listenport">
 <h3>Example: Invalid listenport<a class="headerlink" href="#example-invalid-listenport" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a invalid listenport option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a invalid listenport option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">invalid_fileinput</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">1024</span><span class="p">))</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;listenport&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;listenport&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -849,11 +849,11 @@
 <div class="section" id="example-valid-parallel">
 <h3>Example: Valid parallel<a class="headerlink" href="#example-valid-parallel" title="Permalink to this headline">¶</a></h3>
 <p>Number of threads.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a valid parallel option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a valid parallel option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_parallel</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;parallel&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;parallel&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -863,11 +863,11 @@
 <div class="section" id="example-invalid-parallel">
 <h3>Example: Invalid parallel<a class="headerlink" href="#example-invalid-parallel" title="Permalink to this headline">¶</a></h3>
 <p>Iperf sets anything less than 2 to 1 thread but to make it less ambiguous I&#8217;m only going to force 1 or more (or None).</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a invalid parallel option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a invalid parallel option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">invalid_fileinput</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;parallel&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;parallel&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -877,11 +877,11 @@
 <div class="section" id="example-valid-ttl">
 <h3>Example: Valid ttl<a class="headerlink" href="#example-valid-ttl" title="Permalink to this headline">¶</a></h3>
 <p>Time to live. Once again iperf accepts any integer. But since I don&#8217;t really have a way to test the effects I&#8217;ll just let it all go.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a valid ttl option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a valid ttl option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_ttl</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;ttl&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;ttl&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -891,11 +891,11 @@
 <div class="section" id="example-valid-linux-congestion">
 <h3>Example: Valid linux-congestion<a class="headerlink" href="#example-valid-linux-congestion" title="Permalink to this headline">¶</a></h3>
 <p>TCP algorithm to use.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a valid linux-congestion option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a valid linux-congestion option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_linux_congestion</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="s">&quot;cubit&quot;</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;linux-congestion&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="s2">&quot;cubit&quot;</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;linux-congestion&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -907,11 +907,11 @@
 <h2>Examples: Miscellaneous Options<a class="headerlink" href="#examples-miscellaneous-options" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="example-valid-reportexclude">
 <h3>Example: Valid reportexclude<a class="headerlink" href="#example-valid-reportexclude" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a valid reportexclude option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a valid reportexclude option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_reportexclude</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">REPORTS</span><span class="p">)</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;reportexclude&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;reportexclude&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -920,13 +920,13 @@
 </div>
 <div class="section" id="example-invalid-reportexclude">
 <h3>Example: Invalid reportexclude<a class="headerlink" href="#example-invalid-reportexclude" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a invalid reportexclude option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a invalid reportexclude option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">invalid_fileinput</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
     <span class="n">choices</span> <span class="o">=</span> <span class="p">[</span><span class="n">letter</span> <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">letters</span> <span class="k">if</span> \
                <span class="n">letter</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">REPORTS</span><span class="p">]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">choices</span><span class="p">)</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;reportexclude&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;reportexclude&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -935,11 +935,11 @@
 </div>
 <div class="section" id="example-valid-reportstyle">
 <h3>Example: Valid reportstyle<a class="headerlink" href="#example-valid-reportstyle" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a valid reportstyle option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a valid reportstyle option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">valid_reportexclude</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s">&#39;cC&#39;</span><span class="p">)</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;reportstyle&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;cC&#39;</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;reportstyle&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -948,11 +948,11 @@
 </div>
 <div class="section" id="example-invalid-reportstyle">
 <h3>Example: Invalid reportstyle<a class="headerlink" href="#example-invalid-reportstyle" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@given</span><span class="p">(</span><span class="s">&quot;a configspec with a invalid reportstyle option&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="nd">@given</span><span class="p">(</span><span class="s2">&quot;a configspec with a invalid reportstyle option&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">invalid_fileinput</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s">&#39;4DLevt&#39;</span><span class="p">)</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s">&#39;reportstyle&#39;</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">expected</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;4DLevt&#39;</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;reportstyle&#39;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{1} = {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">expected</span><span class="p">,</span>
                                  <span class="n">context</span><span class="o">.</span><span class="n">option</span><span class="p">)]</span>
     <span class="n">context</span><span class="o">.</span><span class="n">configobj</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">configspec</span><span class="o">=</span><span class="n">configspec</span><span class="p">)</span>
     <span class="k">return</span>
@@ -975,7 +975,7 @@
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../index.html" />
     <link rel="up" title="Plugins" href="index.html" />
@@ -38,7 +38,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -108,11 +108,11 @@
               
                 
   <li>
-    <a href="api/theape.plugins.base_plugin.BaseConfiguration.product.html" title="Previous Chapter: theape.plugins.base_plugin.BaseConfiguration.product"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; theape.plugins.b...</span>
+    <a href="api/theape.plugins.base_plugin.BaseConfiguration.product.html" title="Previous Chapter: theape.plugins.base_plugin.BaseConfiguration.product"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; theape.plugin...</span>
     </a>
   </li>
   <li>
-    <a href="api/theape.plugins.sleep_plugin.Sleep.html" title="Next Chapter: theape.plugins.sleep_plugin.Sleep"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">theape.plugins.s... &raquo;</span>
+    <a href="api/theape.plugins.sleep_plugin.Sleep.html" title="Next Chapter: theape.plugins.sleep_plugin.Sleep"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">theape.plugin... &raquo;</span>
     </a>
   </li>
               
@@ -144,11 +144,11 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="composite-plugin">
 <h1>Composite Plugin<a class="headerlink" href="#composite-plugin" title="Permalink to this headline">¶</a></h1>
-<p>This is a plugin for <a class="reference internal" href="../parts/watchers/thewatcher.html#ape-thewatcher"><em>Composites</em></a>. The plugin creates as its product a singleton composite into which components are added. To specify the components the configuration-file will need a cascade of sections.</p>
+<p>This is a plugin for <a class="reference internal" href="../parts/watchers/thewatcher.html#ape-thewatcher"><span>Composites</span></a>. The plugin creates as its product a singleton composite into which components are added. To specify the components the configuration-file will need a cascade of sections.</p>
 <blockquote>
 <div><ul class="simple">
 <li>In the APE section, the name of the section with information for this plugin needs to be listed (as is the case for all plugins).</li>
@@ -162,10 +162,10 @@
 <div class="section" id="the-configuration">
 <h2>The Configuration<a class="headerlink" href="#the-configuration" title="Permalink to this headline">¶</a></h2>
 <p>The <cite>Watcher</cite> is a bundle of <cite>Watcher</cite>, <cite>Query</cite>, <cite>Connection</cite>, and <cite>FileStorage</cite>.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">configuration</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">[{0}]</span>
-<span class="s">#</span>
-<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">SECTION</span><span class="p">,</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="n">configuration</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[{0}]</span>
+<span class="s2">#</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">SECTION</span><span class="p">,</span>
            <span class="n">TOTAL_OPTION</span><span class="p">,</span>
            <span class="n">INTERVAL_OPTION</span><span class="p">,</span>
            <span class="n">VERBOSE_OPTION</span><span class="p">)</span>
@@ -175,25 +175,25 @@
 <div class="section" id="the-sections">
 <h2>The Sections<a class="headerlink" href="#the-sections" title="Permalink to this headline">¶</a></h2>
 <p>The help-sections.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">sections</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
-<span class="n">sections</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;{bold}sleep{reset} -- a countdown timer that blocks until time is over&#39;</span>
-<span class="n">sections</span><span class="p">[</span><span class="s">&#39;description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;{bold}sleep{reset} is a verbose no-op (by default) meant to allow the insertion of a pause in the execution of the APE. At this point all calls to sleep will get the same configuration.&#39;</span>
-<span class="n">sections</span><span class="p">[</span><span class="s">&#39;configuration&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">configuration</span>
-<span class="n">sections</span><span class="p">[</span><span class="s">&#39;see also&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;EventTimer, RelativeTime, AbsoluteTime&#39;</span>
-<span class="n">sections</span><span class="p">[</span><span class="s">&#39;options&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">The configuration options --</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="n">sections</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+<span class="n">sections</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;{bold}sleep{reset} -- a countdown timer that blocks until time is over&#39;</span>
+<span class="n">sections</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;{bold}sleep{reset} is a verbose no-op (by default) meant to allow the insertion of a pause in the execution of the APE. At this point all calls to sleep will get the same configuration.&#39;</span>
+<span class="n">sections</span><span class="p">[</span><span class="s1">&#39;configuration&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">configuration</span>
+<span class="n">sections</span><span class="p">[</span><span class="s1">&#39;see also&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;EventTimer, RelativeTime, AbsoluteTime&#39;</span>
+<span class="n">sections</span><span class="p">[</span><span class="s1">&#39;options&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">The configuration options --</span>
 
-<span class="s">    {bold}end{reset} : an absolute time given as a time-stamp that can be interpreted by `dateutil.parser.parse`. This is for the cases where you have a specific time that you want the sleep to end.</span>
+<span class="s2">    {bold}end{reset} : an absolute time given as a time-stamp that can be interpreted by `dateutil.parser.parse`. This is for the cases where you have a specific time that you want the sleep to end.</span>
 
-<span class="s">    {bold}total{reset} : a relative time given as pairs of &#39;&lt;amount&gt; &lt;units&gt;&#39; -- e.g. &#39;3.4 hours&#39;. Most units only use the first letter, but since `months` and `minutes` both start with `m`, you have to use two letters to specify them. The sleep will stop at the start of the sleep + the total time given.</span>
+<span class="s2">    {bold}total{reset} : a relative time given as pairs of &#39;&lt;amount&gt; &lt;units&gt;&#39; -- e.g. &#39;3.4 hours&#39;. Most units only use the first letter, but since `months` and `minutes` both start with `m`, you have to use two letters to specify them. The sleep will stop at the start of the sleep + the total time given.</span>
 
-<span class="s">    {bold}interval{reset} : The amount of time beween reports of the time remaining (default = 1 second). Use the same formatting as the `total` option.</span>
+<span class="s2">    {bold}interval{reset} : The amount of time beween reports of the time remaining (default = 1 second). Use the same formatting as the `total` option.</span>
 
-<span class="s">    {bold}verbose{reset} : If True (the default) then report time remaining at specified intervals while the sleep runs.</span>
+<span class="s2">    {bold}verbose{reset} : If True (the default) then report time remaining at specified intervals while the sleep runs.</span>
 
-<span class="s">One of {bold}end{reset} or {bold}total{reset} needs to be specified. Everything else is optional.</span>
-<span class="s">&quot;&quot;&quot;</span>
-<span class="n">sections</span><span class="p">[</span><span class="s">&#39;author&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;ape&#39;</span>
+<span class="s2">One of {bold}end{reset} or {bold}total{reset} needs to be specified. Everything else is optional.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">sections</span><span class="p">[</span><span class="s1">&#39;author&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;ape&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -205,7 +205,7 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.sleep_plugin.Sleep.html#theape.plugins.sleep_plugin.Sleep" title="theape.plugins.sleep_plugin.Sleep"><tt class="xref py py-obj docutils literal"><span class="pre">Sleep</span></tt></a>(*args,&nbsp;**kwargs)</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.plugins.sleep_plugin.Sleep.html#theape.plugins.sleep_plugin.Sleep" title="theape.plugins.sleep_plugin.Sleep"><code class="xref py py-obj docutils literal"><span class="pre">Sleep</span></code></a>(*args,&nbsp;**kwargs)</td>
 <td>A plugin for TheBigSleep</td>
 </tr>
 </tbody>
@@ -226,7 +226,7 @@
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

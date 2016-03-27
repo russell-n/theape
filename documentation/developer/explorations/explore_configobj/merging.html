@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
     <link rel="up" title="Exploring ConfigObj" href="index.html" />
@@ -38,7 +38,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -151,22 +151,22 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="merging-sections">
 <h1>Merging Sections<a class="headerlink" href="#merging-sections" title="Permalink to this headline">¶</a></h1>
-<p>The main reason for using ConfigObj is to enable sub-tree configurations under the <cite>PLUGINS</cite> section. My initial assumption that I could use <tt class="docutils literal"><span class="pre">configspec</span></tt> to filter out the other plugins was wrong (otherwise the <tt class="docutils literal"><span class="pre">check_extra_values</span></tt> function would not make as much sense) so I&#8217;m going to try and work it out here.</p>
+<p>The main reason for using ConfigObj is to enable sub-tree configurations under the <cite>PLUGINS</cite> section. My initial assumption that I could use <code class="docutils literal"><span class="pre">configspec</span></code> to filter out the other plugins was wrong (otherwise the <code class="docutils literal"><span class="pre">check_extra_values</span></code> function would not make as much sense) so I&#8217;m going to try and work it out here.</p>
 <div class="section" id="the-configspecs">
 <h2>The Configspecs<a class="headerlink" href="#the-configspecs" title="Permalink to this headline">¶</a></h2>
-<p>I&#8217;m going to assume that there is only one type of plugin and that both of them are the same plugin type. Rather than re-type the second plugin configuration completely, I&#8217;ll see if we can use <tt class="docutils literal"><span class="pre">merge</span></tt> to take the first plugin and update it with the second.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">plugin_configspec</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">plugin = string</span>
-<span class="s">updates_section = string(default=None)</span>
+<p>I&#8217;m going to assume that there is only one type of plugin and that both of them are the same plugin type. Rather than re-type the second plugin configuration completely, I&#8217;ll see if we can use <code class="docutils literal"><span class="pre">merge</span></code> to take the first plugin and update it with the second.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="n">plugin_configspec</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">plugin = string</span>
+<span class="s2">updates_section = string(default=None)</span>
 
-<span class="s">[sub_section]</span>
-<span class="s">op1 = integer</span>
-<span class="s">op2 = integer</span>
-<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<span class="s2">[sub_section]</span>
+<span class="s2">op1 = integer</span>
+<span class="s2">op2 = integer</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>The configspec doesn&#8217;t have the section name defined so that it can be used by multiple plugin sections. Now the test configuration.
@@ -174,31 +174,31 @@
 </div>
 <div class="section" id="the-configuration">
 <h2>The Configuration<a class="headerlink" href="#the-configuration" title="Permalink to this headline">¶</a></h2>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">plugin_configuration</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">[PLUGINS]</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="n">plugin_configuration</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[PLUGINS]</span>
 
-<span class="s">[[FAKE]]</span>
-<span class="s">plugin = Fake</span>
+<span class="s2">[[FAKE]]</span>
+<span class="s2">plugin = Fake</span>
 
-<span class="s">[[[sub_section]]]</span>
-<span class="s">op1 = 1</span>
-<span class="s">op2 = 2</span>
+<span class="s2">[[[sub_section]]]</span>
+<span class="s2">op1 = 1</span>
+<span class="s2">op2 = 2</span>
 
-<span class="s">[[FAKE2]]</span>
-<span class="s">updates_section = FAKE</span>
+<span class="s2">[[FAKE2]]</span>
+<span class="s2">updates_section = FAKE</span>
 
-<span class="s">[[[sub_section]]]</span>
-<span class="s">op2 = 3</span>
-<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<span class="s2">[[[sub_section]]]</span>
+<span class="s2">op2 = 3</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>First, the Operator is going to get the plugins section.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">sections</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">plugin_configuration</span><span class="p">)</span>
-<span class="n">plugin_sections</span>  <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">sections</span><span class="p">[</span><span class="s">&#39;PLUGINS&#39;</span><span class="p">])</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="n">sections</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">plugin_configuration</span><span class="p">)</span>
+<span class="n">plugin_sections</span>  <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">sections</span><span class="p">[</span><span class="s1">&#39;PLUGINS&#39;</span><span class="p">])</span>
 <span class="k">print</span><span class="p">(</span><span class="n">plugin_sections</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="code highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;FAKE&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;plugin&#39;</span><span class="p">:</span> <span class="s">&#39;Fake&#39;</span><span class="p">,</span> <span class="s">&#39;sub_section&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;op1&#39;</span><span class="p">:</span> <span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="s">&#39;op2&#39;</span><span class="p">:</span> <span class="s">&#39;2&#39;</span><span class="p">}},</span> <span class="s">&#39;FAKE2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;updates_section&#39;</span><span class="p">:</span> <span class="s">&#39;FAKE&#39;</span><span class="p">,</span> <span class="s">&#39;sub_section&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;op2&#39;</span><span class="p">:</span> <span class="s">&#39;3&#39;</span><span class="p">}}}</span>
+<div class="code highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;FAKE&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;plugin&#39;</span><span class="p">:</span> <span class="s1">&#39;Fake&#39;</span><span class="p">,</span> <span class="s1">&#39;sub_section&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;op1&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;op2&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">}},</span> <span class="s1">&#39;FAKE2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;updates_section&#39;</span><span class="p">:</span> <span class="s1">&#39;FAKE&#39;</span><span class="p">,</span> <span class="s1">&#39;sub_section&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;op2&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">}}}</span>
 </pre></div>
 </div>
 <p>That was pretty straight-forward, but I figured I might as well check and make sure it behaves like I thought it does. One thing to note is that if the code that gets the &#8216;PLUGINS&#8217; section requires that each section has a <cite>plugin</cite> defined then even the section that is being updated will need it. It might make more sense to require either the <cite>plugin</cite> or the <cite>updates_section</cite> but not both. Or don&#8217;t require either and raise an error if they are both missing. That might be the best option, especially since both of those options are just strings. That&#8217;s not what this is about, though, so we&#8217;ll just assume that it&#8217;s being checked elsewhere.</p>
@@ -206,18 +206,18 @@
 <div class="section" id="the-fake-section">
 <h2>The FAKE Section<a class="headerlink" href="#the-fake-section" title="Permalink to this headline">¶</a></h2>
 <p>The first order is to get the first (&#8216;FAKE&#8217;) section.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">fake_section</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">plugin_sections</span><span class="p">[</span><span class="s">&#39;FAKE&#39;</span><span class="p">],</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="n">fake_section</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">plugin_sections</span><span class="p">[</span><span class="s1">&#39;FAKE&#39;</span><span class="p">],</span>
                          <span class="n">configspec</span><span class="o">=</span><span class="n">plugin_configspec</span><span class="p">)</span>
 
 <span class="n">validator</span> <span class="o">=</span> <span class="n">Validator</span><span class="p">()</span>
 <span class="k">print</span><span class="p">(</span><span class="n">fake_section</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">validator</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="code highlight-python"><div class="highlight"><pre><span class="bp">True</span>
+<div class="code highlight-python"><div class="highlight"><pre><span></span><span class="bp">True</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
-<caption>Fake Section</caption>
+<table border="1" class="docutils" id="id1">
+<caption><span class="caption-text">Fake Section</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="25%" />
 <col width="25%" />
@@ -265,10 +265,10 @@
 <h2>Fake 2<a class="headerlink" href="#fake-2" title="Permalink to this headline">¶</a></h2>
 <p>Now comes the part that we&#8217;re really interested in, building the &#8216;FAKE2&#8217; section using the &#8216;FAKE&#8217; section.
 .. &#8216;</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">update_section</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">plugin_sections</span><span class="p">[</span><span class="s">&#39;FAKE2&#39;</span><span class="p">],</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="n">update_section</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">plugin_sections</span><span class="p">[</span><span class="s1">&#39;FAKE2&#39;</span><span class="p">],</span>
                            <span class="n">configspec</span><span class="o">=</span><span class="n">plugin_configspec</span><span class="p">)</span>
 
-<span class="n">other_section</span> <span class="o">=</span> <span class="n">update_section</span><span class="p">[</span><span class="s">&#39;updates_section&#39;</span><span class="p">]</span>
+<span class="n">other_section</span> <span class="o">=</span> <span class="n">update_section</span><span class="p">[</span><span class="s1">&#39;updates_section&#39;</span><span class="p">]</span>
 
 <span class="k">if</span> <span class="n">other_section</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
     <span class="n">fake_2_section_source</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">plugin_sections</span><span class="p">[</span><span class="n">other_section</span><span class="p">],</span>
@@ -279,11 +279,11 @@
 <span class="k">print</span><span class="p">(</span><span class="n">update_section</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">validator</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="code highlight-python"><div class="highlight"><pre><span class="bp">True</span>
+<div class="code highlight-python"><div class="highlight"><pre><span></span><span class="bp">True</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
-<caption>Fake2 Section</caption>
+<table border="1" class="docutils" id="id2">
+<caption><span class="caption-text">Fake2 Section</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="25%" />
 <col width="25%" />
@@ -325,74 +325,74 @@
 </tr>
 </tbody>
 </table>
-<p>So now the second section has the &#8216;FAKE&#8217; values but &#8216;updates_section&#8217; is True and &#8216;op2&#8217; has been changed to 3. I think this pattern will work. The conditional that checks if <tt class="docutils literal"><span class="pre">other_section</span></tt> wasn&#8217;t needed since we&#8217;re creating it specifically to have this option, but I think something like that is how it will be used so I put it there in case I forget later on. One thing to remember is that the sub-section level is being greatly reduced (triple-brackets for the &#8216;sub_section&#8217; in the original configuration, but single-brackets in the <cite>configspec</cite>) so this can get confusing. Sub-sections should probably be avoided if possible.</p>
+<p>So now the second section has the &#8216;FAKE&#8217; values but &#8216;updates_section&#8217; is True and &#8216;op2&#8217; has been changed to 3. I think this pattern will work. The conditional that checks if <code class="docutils literal"><span class="pre">other_section</span></code> wasn&#8217;t needed since we&#8217;re creating it specifically to have this option, but I think something like that is how it will be used so I put it there in case I forget later on. One thing to remember is that the sub-section level is being greatly reduced (triple-brackets for the &#8216;sub_section&#8217; in the original configuration, but single-brackets in the <cite>configspec</cite>) so this can get confusing. Sub-sections should probably be avoided if possible.</p>
 </div>
 <div class="section" id="an-alternative-scheme">
 <h2>An Alternative Scheme<a class="headerlink" href="#an-alternative-scheme" title="Permalink to this headline">¶</a></h2>
 <p>My original idea was that the configspec should be a string with string formatting to set the section name.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">plugin_configspec_2</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">[{section}]</span>
-<span class="s">plugin = string</span>
-<span class="s">updates_section = string(default=None)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="n">plugin_configspec_2</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[{section}]</span>
+<span class="s2">plugin = string</span>
+<span class="s2">updates_section = string(default=None)</span>
 
-<span class="s">[[sub_section]]</span>
-<span class="s">op1 = integer</span>
-<span class="s">op2 = integer</span>
-<span class="s">&quot;&quot;&quot;</span>
+<span class="s2">[[sub_section]]</span>
+<span class="s2">op1 = integer</span>
+<span class="s2">op2 = integer</span>
+<span class="s2">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
 <div class="section" id="alternate-fake-section">
 <h3>Alternate Fake Section<a class="headerlink" href="#alternate-fake-section" title="Permalink to this headline">¶</a></h3>
 <p>So to use the new plugin configspec you need to change it first.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">f_spec</span> <span class="o">=</span> <span class="n">plugin_configspec_2</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">section</span><span class="o">=</span><span class="s">&#39;FAKE&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="n">f_spec</span> <span class="o">=</span> <span class="n">plugin_configspec_2</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">section</span><span class="o">=</span><span class="s1">&#39;FAKE&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 <span class="n">f_section</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">plugin_sections</span><span class="p">,</span>
                       <span class="n">configspec</span><span class="o">=</span><span class="n">f_spec</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">f_section</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="code highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;FAKE&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;plugin&#39;</span><span class="p">:</span> <span class="s">&#39;Fake&#39;</span><span class="p">,</span> <span class="s">&#39;sub_section&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;op1&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;op2&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}},</span> <span class="s">&#39;FAKE2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;updates_section&#39;</span><span class="p">:</span> <span class="s">&#39;FAKE&#39;</span><span class="p">,</span> <span class="s">&#39;sub_section&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;op2&#39;</span><span class="p">:</span> <span class="s">&#39;3&#39;</span><span class="p">}}}</span>
+<div class="code highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;FAKE&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;plugin&#39;</span><span class="p">:</span> <span class="s1">&#39;Fake&#39;</span><span class="p">,</span> <span class="s1">&#39;sub_section&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;op1&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;op2&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}},</span> <span class="s1">&#39;FAKE2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;updates_section&#39;</span><span class="p">:</span> <span class="s1">&#39;FAKE&#39;</span><span class="p">,</span> <span class="s1">&#39;sub_section&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;op2&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">}}}</span>
 </pre></div>
 </div>
 <p>So, two observations. One is that both sections are there in the section (the &#8216;FAKE2&#8217; section will show up in an extra-values check) and the options in the section have already been converted, even though I didn&#8217;t validate. It looks like maybe there&#8217;s some kind of side-effect going on. Tray that again.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">sections</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">plugin_configuration</span><span class="p">)</span>
-<span class="n">plugin_sections_2</span>  <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">sections</span><span class="p">[</span><span class="s">&#39;PLUGINS&#39;</span><span class="p">])</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="n">sections</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">plugin_configuration</span><span class="p">)</span>
+<span class="n">plugin_sections_2</span>  <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">sections</span><span class="p">[</span><span class="s1">&#39;PLUGINS&#39;</span><span class="p">])</span>
 
 <span class="n">f_section</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">plugin_sections_2</span><span class="p">,</span>
                       <span class="n">configspec</span><span class="o">=</span><span class="n">f_spec</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">f_section</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="code highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;FAKE&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;plugin&#39;</span><span class="p">:</span> <span class="s">&#39;Fake&#39;</span><span class="p">,</span> <span class="s">&#39;sub_section&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;op1&#39;</span><span class="p">:</span> <span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="s">&#39;op2&#39;</span><span class="p">:</span> <span class="s">&#39;2&#39;</span><span class="p">}},</span> <span class="s">&#39;FAKE2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;updates_section&#39;</span><span class="p">:</span> <span class="s">&#39;FAKE&#39;</span><span class="p">,</span> <span class="s">&#39;sub_section&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;op2&#39;</span><span class="p">:</span> <span class="s">&#39;3&#39;</span><span class="p">}}}</span>
+<div class="code highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;FAKE&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;plugin&#39;</span><span class="p">:</span> <span class="s1">&#39;Fake&#39;</span><span class="p">,</span> <span class="s1">&#39;sub_section&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;op1&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;op2&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">}},</span> <span class="s1">&#39;FAKE2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;updates_section&#39;</span><span class="p">:</span> <span class="s1">&#39;FAKE&#39;</span><span class="p">,</span> <span class="s1">&#39;sub_section&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;op2&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">}}}</span>
 </pre></div>
 </div>
 <p>That&#8217;s more like it. <em>Now</em> try the validation.
 .. &#8216;</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="n">f_section</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">validator</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="n">f_section</span><span class="p">[</span><span class="s">&#39;FAKE&#39;</span><span class="p">])</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">f_section</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">validator</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f_section</span><span class="p">[</span><span class="s1">&#39;FAKE&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
-<div class="code highlight-python"><div class="highlight"><pre><span class="bp">True</span>
-<span class="p">{</span><span class="s">&#39;plugin&#39;</span><span class="p">:</span> <span class="s">&#39;Fake&#39;</span><span class="p">,</span> <span class="s">&#39;updates_section&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&#39;sub_section&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;op1&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;op2&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}}</span>
+<div class="code highlight-python"><div class="highlight"><pre><span></span><span class="bp">True</span>
+<span class="p">{</span><span class="s1">&#39;plugin&#39;</span><span class="p">:</span> <span class="s1">&#39;Fake&#39;</span><span class="p">,</span> <span class="s1">&#39;updates_section&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;sub_section&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;op1&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;op2&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}}</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="alternate-fake2-section">
 <h3>Alternate Fake2 Section<a class="headerlink" href="#alternate-fake2-section" title="Permalink to this headline">¶</a></h3>
 <p>So, now we can try the same thing with the second section.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">section_name</span> <span class="o">=</span> <span class="s">&#39;FAKE2&#39;</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="n">section_name</span> <span class="o">=</span> <span class="s1">&#39;FAKE2&#39;</span>
 <span class="n">f2_spec</span> <span class="o">=</span> <span class="n">plugin_configspec_2</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">section</span><span class="o">=</span><span class="n">section_name</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 
 <span class="n">sections</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">plugin_configuration</span><span class="p">)</span>
-<span class="n">plugin_sections_2</span>  <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">sections</span><span class="p">[</span><span class="s">&#39;PLUGINS&#39;</span><span class="p">])</span>
+<span class="n">plugin_sections_2</span>  <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">sections</span><span class="p">[</span><span class="s1">&#39;PLUGINS&#39;</span><span class="p">])</span>
 
 <span class="n">f_2_section</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">plugin_sections_2</span><span class="p">)</span>
 
 <span class="n">update_section_2</span> <span class="o">=</span> <span class="n">f_2_section</span><span class="p">[</span><span class="n">section_name</span><span class="p">]</span>
 
-<span class="k">if</span> <span class="n">update_section_2</span><span class="p">[</span><span class="s">&#39;updates_section&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-    <span class="n">other_section</span> <span class="o">=</span> <span class="n">update_section_2</span><span class="p">[</span><span class="s">&#39;updates_section&#39;</span><span class="p">]</span>
+<span class="k">if</span> <span class="n">update_section_2</span><span class="p">[</span><span class="s1">&#39;updates_section&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="n">other_section</span> <span class="o">=</span> <span class="n">update_section_2</span><span class="p">[</span><span class="s1">&#39;updates_section&#39;</span><span class="p">]</span>
 
-    <span class="c"># note the configspec</span>
+    <span class="c1"># note the configspec</span>
     <span class="n">source_section</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">f_2_section</span><span class="p">[</span><span class="n">other_section</span><span class="p">],</span>
                                <span class="n">configspec</span><span class="o">=</span><span class="n">f2_spec</span><span class="p">)</span>
     <span class="n">source_section</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">update_section_2</span><span class="p">)</span>
@@ -402,8 +402,8 @@
 <span class="k">print</span><span class="p">(</span><span class="n">update_section_2</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="code highlight-python"><div class="highlight"><pre><span class="bp">False</span>
-<span class="p">{</span><span class="s">&#39;plugin&#39;</span><span class="p">:</span> <span class="s">&#39;Fake&#39;</span><span class="p">,</span> <span class="s">&#39;updates_section&#39;</span><span class="p">:</span> <span class="s">&#39;FAKE&#39;</span><span class="p">,</span> <span class="s">&#39;sub_section&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;op1&#39;</span><span class="p">:</span> <span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="s">&#39;op2&#39;</span><span class="p">:</span> <span class="s">&#39;3&#39;</span><span class="p">},</span> <span class="s">&#39;FAKE2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;updates_section&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&#39;sub_section&#39;</span><span class="p">:</span> <span class="p">{}}}</span>
+<div class="code highlight-python"><div class="highlight"><pre><span></span><span class="bp">False</span>
+<span class="p">{</span><span class="s1">&#39;plugin&#39;</span><span class="p">:</span> <span class="s1">&#39;Fake&#39;</span><span class="p">,</span> <span class="s1">&#39;updates_section&#39;</span><span class="p">:</span> <span class="s1">&#39;FAKE&#39;</span><span class="p">,</span> <span class="s1">&#39;sub_section&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;op1&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;op2&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">},</span> <span class="s1">&#39;FAKE2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;updates_section&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;sub_section&#39;</span><span class="p">:</span> <span class="p">{}}}</span>
 </pre></div>
 </div>
 <p>You&#8217;ll note that this really doesn&#8217;t work. To merge the two you have to separate the sections, but once you do this the section names are lost so the configspec has to be the original one without the section-name in it. Time to abandon this idea.</p>
@@ -412,45 +412,45 @@
 <div class="section" id="default-values">
 <span id="ape-explorations-configobj-merging-defaults"></span><h2>Default Values<a class="headerlink" href="#default-values" title="Permalink to this headline">¶</a></h2>
 <p>The main reason why I was interested in this was to see if there would be an easy way to create partial configurations that updated a base configuration section that has all the options. In order for that to make sense, the options have to be optional. But does setting defaults cause the new configuration to overwrite the base with the defaults?</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">optional_configspec</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">plugin = option(&#39;Fake&#39;)</span>
-<span class="s">updates_section = string(default=None)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="n">optional_configspec</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">plugin = option(&#39;Fake&#39;)</span>
+<span class="s2">updates_section = string(default=None)</span>
 
-<span class="s">op1 = integer</span>
-<span class="s">op2 = integer(default=2)</span>
-<span class="s">op3 = integer(default=None)</span>
-<span class="s">&quot;&quot;&quot;</span>
+<span class="s2">op1 = integer</span>
+<span class="s2">op2 = integer(default=2)</span>
+<span class="s2">op3 = integer(default=None)</span>
+<span class="s2">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">optional_configuration</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">[Fake1]</span>
-<span class="s">plugin = Fake</span>
-<span class="s">op1 = 5</span>
-<span class="s">op2 = 6</span>
-<span class="s">op3 = 7</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="n">optional_configuration</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[Fake1]</span>
+<span class="s2">plugin = Fake</span>
+<span class="s2">op1 = 5</span>
+<span class="s2">op2 = 6</span>
+<span class="s2">op3 = 7</span>
 
-<span class="s">[Fake2]</span>
-<span class="s">updates_section = Fake1</span>
-<span class="s">plugin = Fake</span>
-<span class="s">op1 = 53</span>
-<span class="s">&quot;&quot;&quot;</span>
+<span class="s2">[Fake2]</span>
+<span class="s2">updates_section = Fake1</span>
+<span class="s2">plugin = Fake</span>
+<span class="s2">op1 = 53</span>
+<span class="s2">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">optional_configspec</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">optional_configspec</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="n">optional_configspec</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">optional_configspec</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span>
 <span class="n">optional_configuration</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">optional_configuration</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span>
 
-<span class="n">base_section</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">optional_configuration</span><span class="p">[</span><span class="s">&#39;Fake1&#39;</span><span class="p">],</span>
+<span class="n">base_section</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">optional_configuration</span><span class="p">[</span><span class="s1">&#39;Fake1&#39;</span><span class="p">],</span>
                          <span class="n">configspec</span><span class="o">=</span><span class="n">optional_configspec</span><span class="p">)</span>
-<span class="n">source_section</span> <span class="o">=</span> <span class="n">optional_configuration</span><span class="p">[</span><span class="s">&#39;Fake2&#39;</span><span class="p">]</span>
+<span class="n">source_section</span> <span class="o">=</span> <span class="n">optional_configuration</span><span class="p">[</span><span class="s1">&#39;Fake2&#39;</span><span class="p">]</span>
 <span class="n">base_section</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">source_section</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">base_section</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">validator</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="code highlight-python"><div class="highlight"><pre><span class="bp">True</span>
+<div class="code highlight-python"><div class="highlight"><pre><span></span><span class="bp">True</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
-<caption>Fake2 Updated</caption>
+<table border="1" class="docutils" id="id3">
+<caption><span class="caption-text">Fake2 Updated</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="50%" />
 <col width="50%" />
@@ -479,7 +479,7 @@
 </tbody>
 </table>
 <p>Now that I look at it, I never validated the source_section so it didn&#8217;t have the defaults in it. What happens if I do?</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">base_section</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">optional_configuration</span><span class="p">[</span><span class="s">&#39;Fake1&#39;</span><span class="p">],</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="n">base_section</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">optional_configuration</span><span class="p">[</span><span class="s1">&#39;Fake1&#39;</span><span class="p">],</span>
                          <span class="n">configspec</span><span class="o">=</span><span class="n">optional_configspec</span><span class="p">)</span>
 
 <span class="n">source_section</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">source_section</span><span class="p">,</span>
@@ -489,8 +489,8 @@
 <span class="n">base_section</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">source_section</span><span class="p">)</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
-<caption>Fake2 Validated and Updated</caption>
+<table border="1" class="docutils" id="id4">
+<caption><span class="caption-text">Fake2 Validated and Updated</span><a class="headerlink" href="#id4" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="50%" />
 <col width="50%" />
@@ -530,7 +530,7 @@
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

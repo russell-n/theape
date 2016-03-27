@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../../index.html" />
 <meta charset='utf-8'>
@@ -35,7 +35,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -132,15 +132,15 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="the-run-sub-command">
 <h1>The Run Sub-Command<a class="headerlink" href="#the-run-sub-command" title="Permalink to this headline">¶</a></h1>
 <p>Setting the options above by themselves doesn&#8217;t really seem useful because the Ape expects sub-commands as well so we&#8217;ll have to add them. First we&#8217;ll tackle the <cite>run</cite> sub-command.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="s">&#39;ape run -h&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="s1">&#39;ape run -h&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>usage: ape.interface.arguments run [-h]
+<div class="highlight-python"><div class="highlight"><pre><span></span>usage: ape.interface.arguments run [-h]
                                    [&lt;config-file list&gt; [&lt;config-file list&gt;
 ...]]
 
@@ -152,7 +152,7 @@ optional arguments:
 </pre></div>
 </div>
 <p>This looks easy enough, but first we have to add a <cite>&lt;command&gt;</cite> argument to the base usage-string so that we&#8217;ll know that the user wants to get the <cite>run</cite> sub-command. We&#8217;ll also need a list of optional <cite>&lt;argument&gt;</cite> inputs to pass to the sub-command.</p>
-<div class="highlight-python"><div class="highlight"><pre>APE
+<div class="highlight-python"><div class="highlight"><pre><span></span>APE
 Usage: ape -h | -v
        ape [--debug|--silent] [--pudb|--pdb] &lt;command&gt; [&lt;argument&gt;...]
        ape [--debug|--silent] [--trace|--callgraph] &lt;command&gt; [&lt;argument&gt;..
@@ -189,58 +189,58 @@ Available Sub-Commands:
     check  Check a configuration
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">run_args</span> <span class="o">=</span>  <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="s">&quot;run&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">run_args</span> <span class="o">=</span>  <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="s2">&quot;run&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
 <span class="k">print</span> <span class="n">run_args</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;--callgraph&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
- <span class="s">&#39;--debug&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
- <span class="s">&#39;--help&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
- <span class="s">&#39;--pdb&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
- <span class="s">&#39;--pudb&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
- <span class="s">&#39;--silent&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
- <span class="s">&#39;--trace&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
- <span class="s">&#39;--version&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
- <span class="s">&#39;&lt;argument&gt;&#39;</span><span class="p">:</span> <span class="p">[],</span>
- <span class="s">&#39;&lt;command&gt;&#39;</span><span class="p">:</span> <span class="s">&#39;run&#39;</span><span class="p">}</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;--callgraph&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s1">&#39;--debug&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s1">&#39;--help&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s1">&#39;--pdb&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s1">&#39;--pudb&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s1">&#39;--silent&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s1">&#39;--trace&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s1">&#39;--version&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s1">&#39;&lt;argument&gt;&#39;</span><span class="p">:</span> <span class="p">[],</span>
+ <span class="s1">&#39;&lt;command&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;run&#39;</span><span class="p">}</span>
 </pre></div>
 </div>
 <div class="section" id="on-variable-conventions">
 <h2>On Variable Conventions<a class="headerlink" href="#on-variable-conventions" title="Permalink to this headline">¶</a></h2>
-<p><cite>docopt</cite> allows you to name the variables (that hold the values users pass in to options and arguments) using either all uppercased letters (e.g. <tt class="docutils literal"><span class="pre">MODULES</span></tt>) or by lower-cased letters surrounded by angle brackets (e.g. <tt class="docutils literal"><span class="pre">&lt;modules&gt;</span></tt>). I looked at several commands on my machine and noticed the following:</p>
+<p><cite>docopt</cite> allows you to name the variables (that hold the values users pass in to options and arguments) using either all uppercased letters (e.g. <code class="docutils literal"><span class="pre">MODULES</span></code>) or by lower-cased letters surrounded by angle brackets (e.g. <code class="docutils literal"><span class="pre">&lt;modules&gt;</span></code>). I looked at several commands on my machine and noticed the following:</p>
 <blockquote>
 <div><ul>
-<li><p class="first"><cite>iperf</cite> uses brackets (<tt class="docutils literal"><span class="pre">-o</span> <span class="pre">&lt;filename&gt;</span></tt>) unless it expects a number in which case it uses a pound sign (<tt class="docutils literal"><span class="pre">-i</span> <span class="pre">#</span></tt>)</p>
+<li><p class="first"><cite>iperf</cite> uses brackets (<code class="docutils literal"><span class="pre">-o</span> <span class="pre">&lt;filename&gt;</span></code>) unless it expects a number in which case it uses a pound sign (<code class="docutils literal"><span class="pre">-i</span> <span class="pre">#</span></code>)</p>
 </li>
-<li><p class="first"><cite>nmap</cite> uses angle brackets (<tt class="docutils literal"><span class="pre">--max-retries</span> <span class="pre">&lt;tries&gt;</span></tt>)</p>
+<li><p class="first"><cite>nmap</cite> uses angle brackets (<code class="docutils literal"><span class="pre">--max-retries</span> <span class="pre">&lt;tries&gt;</span></code>)</p>
 </li>
-<li><p class="first"><cite>man</cite> uses all caps and an equals sign (<tt class="docutils literal"><span class="pre">-L=LOCALE</span></tt>)</p>
+<li><p class="first"><cite>man</cite> uses all caps and an equals sign (<code class="docutils literal"><span class="pre">-L=LOCALE</span></code>)</p>
 </li>
-<li><p class="first"><cite>ls</cite> uses uppercase and <cite>=</cite> (<tt class="docutils literal"><span class="pre">--sort=WORD</span></tt>)</p>
+<li><p class="first"><cite>ls</cite> uses uppercase and <cite>=</cite> (<code class="docutils literal"><span class="pre">--sort=WORD</span></code>)</p>
 </li>
-<li><p class="first"><cite>ping</cite> uses lower-cased variable names (<tt class="docutils literal"><span class="pre">-i</span> <span class="pre">interval</span></tt>)</p>
+<li><p class="first"><cite>ping</cite> uses lower-cased variable names (<code class="docutils literal"><span class="pre">-i</span> <span class="pre">interval</span></code>)</p>
 </li>
 <li><dl class="first docutils">
 <dt><cite>argparse</cite> (what the ape is using) uses UPPERCASE without an equal sign unless you set the <cite>metavar</cite> yourself in which case it uses angle brackets</dt>
 <dd><ul class="first last simple">
-<li><tt class="docutils literal"><span class="pre">--modules</span> <span class="pre">[MODULES</span> <span class="pre">[MODULES...]]</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">&lt;config-file</span> <span class="pre">list&gt;</span></tt></li>
+<li><code class="docutils literal"><span class="pre">--modules</span> <span class="pre">[MODULES</span> <span class="pre">[MODULES...]]</span></code></li>
+<li><code class="docutils literal"><span class="pre">&lt;config-file</span> <span class="pre">list&gt;</span></code></li>
 </ul>
 </dd>
 </dl>
 </li>
 </ul>
 </div></blockquote>
-<p>The <cite>ping</cite> convention won&#8217;t work with docopt, since it uses either brackets or upper-cased letters to decide what&#8217;s a variable. I can&#8217;t really decide which of the remaining conventions is better. I think the UPPERCASE convention makes them stand out more and angle brackets introduce extra visual noise, but using equals signs seems confusing, since you don&#8217;t actually use them in the command (then again, you don&#8217;t use ellipses and square brackets either (oh, well)). I was thinking about using the <cite>argparse</cite> default convention of using uppercased letters without an equals sign, but it occurred to me that using the angle brackets allows you to create arbitrary strings with punctuation and whitespace (<tt class="docutils literal"><span class="pre">&lt;config-file</span> <span class="pre">list&gt;</span></tt> vs <tt class="docutils literal"><span class="pre">CONFIGFILELIST</span></tt>) so I think I&#8217;ll stick to the angle-brackets for now. (although see the <a class="reference internal" href="../reproducingape.html#docopt-reproducingape-check-sub-command"><em>Check Sub-Command</em></a> section for a problem that I ran into)</p>
+<p>The <cite>ping</cite> convention won&#8217;t work with docopt, since it uses either brackets or upper-cased letters to decide what&#8217;s a variable. I can&#8217;t really decide which of the remaining conventions is better. I think the UPPERCASE convention makes them stand out more and angle brackets introduce extra visual noise, but using equals signs seems confusing, since you don&#8217;t actually use them in the command (then again, you don&#8217;t use ellipses and square brackets either (oh, well)). I was thinking about using the <cite>argparse</cite> default convention of using uppercased letters without an equals sign, but it occurred to me that using the angle brackets allows you to create arbitrary strings with punctuation and whitespace (<code class="docutils literal"><span class="pre">&lt;config-file</span> <span class="pre">list&gt;</span></code> vs <code class="docutils literal"><span class="pre">CONFIGFILELIST</span></code>) so I think I&#8217;ll stick to the angle-brackets for now. (although see the <a class="reference internal" href="../reproducingape.html#docopt-reproducingape-check-sub-command"><span>Check Sub-Command</span></a> section for a problem that I ran into)</p>
 </div>
 <div class="section" id="back-to-the-sub-command">
 <h2>Back to the Sub-Command<a class="headerlink" href="#back-to-the-sub-command" title="Permalink to this headline">¶</a></h2>
 <p>The kind of disappointing part of <cite>docopt</cite> is that we don&#8217;t have a way to automatically pass things off to the sub-command. Instead we have to create a new parser or interpret the running ourselves.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">commons</span> <span class="kn">import</span> <span class="n">run_usage</span>
-<span class="k">print</span> <span class="n">catch_exit</span><span class="p">(</span><span class="n">run_usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;-h&#39;</span><span class="p">])</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">commons</span> <span class="kn">import</span> <span class="n">run_usage</span>
+<span class="k">print</span> <span class="n">catch_exit</span><span class="p">(</span><span class="n">run_usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;-h&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>`run` sub-command
+<div class="highlight-python"><div class="highlight"><pre><span></span>`run` sub-command
 
 Usage: ape run -h
        ape run [&lt;configuration&gt;...]
@@ -255,28 +255,28 @@ Options;
     -h, --help  This help message.
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">run_usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;run&#39;</span><span class="p">])</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">run_usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;--help&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
- <span class="s">&#39;&lt;configuration&gt;&#39;</span><span class="p">:</span> <span class="p">[],</span>
- <span class="s">&#39;run&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;--help&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s1">&#39;&lt;configuration&gt;&#39;</span><span class="p">:</span> <span class="p">[],</span>
+ <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>It looks like it doesn&#8217;t allow you to set a default for positional arguments, so you&#8217;d have to check yourself or change the positional argument to an option. Let&#8217;s make sure that the &lt;config&gt; arguments are working at least.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">run_usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="s">&quot;run ape.ini man.ini&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">run_usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="s2">&quot;run ape.ini man.ini&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;--help&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
- <span class="s">&#39;&lt;configuration&gt;&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;ape.ini&#39;</span><span class="p">,</span> <span class="s">&#39;man.ini&#39;</span><span class="p">],</span>
- <span class="s">&#39;run&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;--help&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s1">&#39;&lt;configuration&gt;&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ape.ini&#39;</span><span class="p">,</span> <span class="s1">&#39;man.ini&#39;</span><span class="p">],</span>
+ <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>Okay, but the idea for using this is that the <cite>run</cite> help would be reached from the base ape configuration. How does that work?</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">catch_exit</span><span class="p">(</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="s">&quot;run -h&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">catch_exit</span><span class="p">(</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="s2">&quot;run -h&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>APE
+<div class="highlight-python"><div class="highlight"><pre><span></span>APE
 Usage: ape -h | -v
        ape [--debug|--silent] [--pudb|--pdb] &lt;command&gt; [&lt;argument&gt;...]
        ape [--debug|--silent] [--trace|--callgraph] &lt;command&gt; [&lt;argument&gt;..
@@ -313,35 +313,35 @@ Available Sub-Commands:
     check  Check a configuration
 </pre></div>
 </div>
-<p>Okay, so that wasn&#8217;t what I wanted &#8211; the <tt class="docutils literal"><span class="pre">-h</span></tt> got caught before the sub-command was set and the top-level help got dumped to the screen. It turns out that there&#8217;s a docopt parameter called <tt class="docutils literal"><span class="pre">options_first</span></tt> which is False by default. When it&#8217;s True, the top-level options are only intrepreted before you get to the first positional argument and then rest are passed to the argument. So this would get the ape&#8217;s help and ignore everything else:</p>
-<div class="highlight-python"><div class="highlight"><pre>ape -h run
+<p>Okay, so that wasn&#8217;t what I wanted &#8211; the <code class="docutils literal"><span class="pre">-h</span></code> got caught before the sub-command was set and the top-level help got dumped to the screen. It turns out that there&#8217;s a docopt parameter called <code class="docutils literal"><span class="pre">options_first</span></code> which is False by default. When it&#8217;s True, the top-level options are only intrepreted before you get to the first positional argument and then rest are passed to the argument. So this would get the ape&#8217;s help and ignore everything else:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>ape -h run
 </pre></div>
 </div>
-<p>While this would pass the -h in as an argument for the <tt class="docutils literal"><span class="pre">&lt;command&gt;</span></tt> entry in the returned dictionary.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">output</span> <span class="o">=</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="s">&quot;run -h&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span>
+<p>While this would pass the -h in as an argument for the <code class="docutils literal"><span class="pre">&lt;command&gt;</span></code> entry in the returned dictionary.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">output</span> <span class="o">=</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="s2">&quot;run -h&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span>
                        <span class="n">options_first</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="k">print</span> <span class="n">output</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;--callgraph&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
- <span class="s">&#39;--debug&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
- <span class="s">&#39;--help&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
- <span class="s">&#39;--pdb&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
- <span class="s">&#39;--pudb&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
- <span class="s">&#39;--silent&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
- <span class="s">&#39;--trace&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
- <span class="s">&#39;--version&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
- <span class="s">&#39;&lt;argument&gt;&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;-h&#39;</span><span class="p">],</span>
- <span class="s">&#39;&lt;command&gt;&#39;</span><span class="p">:</span> <span class="s">&#39;run&#39;</span><span class="p">}</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;--callgraph&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s1">&#39;--debug&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s1">&#39;--help&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s1">&#39;--pdb&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s1">&#39;--pudb&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s1">&#39;--silent&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s1">&#39;--trace&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s1">&#39;--version&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+ <span class="s1">&#39;&lt;argument&gt;&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;-h&#39;</span><span class="p">],</span>
+ <span class="s1">&#39;&lt;command&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;run&#39;</span><span class="p">}</span>
 </pre></div>
 </div>
-<p>So now to make it work we would need to check the <tt class="docutils literal"><span class="pre">&lt;command&gt;</span></tt> entry and pass the arguments to docopt using the run-usage string instead.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="n">output</span><span class="p">[</span><span class="s">&#39;&lt;command&gt;&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;run&#39;</span><span class="p">:</span>
-    <span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;run&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">output</span><span class="p">[</span><span class="s">&#39;&lt;argument&gt;&#39;</span><span class="p">]</span>
+<p>So now to make it work we would need to check the <code class="docutils literal"><span class="pre">&lt;command&gt;</span></code> entry and pass the arguments to docopt using the run-usage string instead.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">output</span><span class="p">[</span><span class="s1">&#39;&lt;command&gt;&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;run&#39;</span><span class="p">:</span>
+    <span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">output</span><span class="p">[</span><span class="s1">&#39;&lt;argument&gt;&#39;</span><span class="p">]</span>
     <span class="n">catch_exit</span><span class="p">(</span><span class="n">run_usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="n">arguments</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>`run` sub-command
+<div class="highlight-python"><div class="highlight"><pre><span></span>`run` sub-command
 
 Usage: ape run -h
        ape run [&lt;configuration&gt;...]
@@ -358,26 +358,26 @@ Options;
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This fixes the inability to pass in the <cite>help</cite> option to the sub-command, but the behavior is now different from ArgParse &#8211; ArgParse keeps all the arguments at the top level (e.g. if <cite>args</cite> is the argparse namespace object, <cite>args.configuration</cite> would have the list of configuration files) but now the arguments specific to the sub-command are kept in a list (<tt class="docutils literal"><span class="pre">output['&lt;argument&gt;']</span></tt>) and need to be re-parsed using the sub-command&#8217;s usage string and docopt.</p>
+<p class="last">This fixes the inability to pass in the <cite>help</cite> option to the sub-command, but the behavior is now different from ArgParse &#8211; ArgParse keeps all the arguments at the top level (e.g. if <cite>args</cite> is the argparse namespace object, <cite>args.configuration</cite> would have the list of configuration files) but now the arguments specific to the sub-command are kept in a list (<code class="docutils literal"><span class="pre">output['&lt;argument&gt;']</span></code>) and need to be re-parsed using the sub-command&#8217;s usage string and docopt.</p>
 </div>
-<p>Presumably the <cite>run_usage</cite> string would be imported from the module where the <cite>run</cite> function is (the <cite>docopt</cite> documentation says that the intention is for the usage-string to be in the module&#8217;s docstring (<tt class="docutils literal"><span class="pre">__doc__</span></tt>)).</p>
+<p>Presumably the <cite>run_usage</cite> string would be imported from the module where the <cite>run</cite> function is (the <cite>docopt</cite> documentation says that the intention is for the usage-string to be in the module&#8217;s docstring (<code class="docutils literal"><span class="pre">__doc__</span></code>)).</p>
 <p>Now we should check the case where the user passed in some configuration file names. Although we would normally have to check for the command, I&#8217;ll just assume it&#8217;s working correctly here to save space.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c"># pretend we imported this</span>
-<span class="n">MESSAGE</span> <span class="o">=</span> <span class="s">&quot;running &#39;{config}&#39;&quot;</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># pretend we imported this</span>
+<span class="n">MESSAGE</span> <span class="o">=</span> <span class="s2">&quot;running &#39;{config}&#39;&quot;</span>
 <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">configurations</span><span class="p">):</span>
-    <span class="c"># empty lists evaluate to False</span>
+    <span class="c1"># empty lists evaluate to False</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">configurations</span><span class="p">:</span>
-        <span class="n">configurations</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;ape.ini&#39;</span><span class="p">]</span>
+        <span class="n">configurations</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ape.ini&#39;</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">configuration</span> <span class="ow">in</span> <span class="n">configurations</span><span class="p">:</span>
         <span class="k">print</span> <span class="n">MESSAGE</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">configuration</span><span class="p">)</span>
     <span class="k">return</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">output</span> <span class="o">=</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="s">&#39;run cow.ini pie.ini&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
-<span class="n">run</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s">&#39;&lt;argument&gt;&#39;</span><span class="p">])</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">output</span> <span class="o">=</span> <span class="n">docopt</span><span class="o">.</span><span class="n">docopt</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="s1">&#39;run cow.ini pie.ini&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="n">run</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;&lt;argument&gt;&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>running &#39;cow.ini&#39;
+<div class="highlight-python"><div class="highlight"><pre><span></span>running &#39;cow.ini&#39;
 running &#39;pie.ini&#39;
 </pre></div>
 </div>
@@ -397,7 +397,7 @@ running &#39;pie.ini&#39;
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

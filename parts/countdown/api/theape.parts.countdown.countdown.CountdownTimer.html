@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../index.html" />
     <link rel="up" title="The Countdown" href="../countdown.html" />
@@ -38,7 +38,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -103,7 +103,7 @@
               
                 
   <li>
-    <a href="theape.parts.countdown.countdown.TimeTracker.__call__.html" title="Previous Chapter: theape.parts.countdown.countdown.TimeTracker.__call__"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; theape.parts.cou...</span>
+    <a href="theape.parts.countdown.countdown.TimeTracker.__call__.html" title="Previous Chapter: theape.parts.countdown.countdown.TimeTracker.__call__"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; theape.parts....</span>
     </a>
   </li>
   <li>
@@ -139,38 +139,38 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="theape-parts-countdown-countdown-countdowntimer">
 <h1>theape.parts.countdown.countdown.CountdownTimer<a class="headerlink" href="#theape-parts-countdown-countdown-countdowntimer" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="theape.parts.countdown.countdown.CountdownTimer">
-<em class="property">class </em><tt class="descclassname">theape.parts.countdown.countdown.</tt><tt class="descname">CountdownTimer</tt><big>(</big><em>repetitions=1</em>, <em>end_time=None</em>, <em>total_time=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#theape.parts.countdown.countdown.CountdownTimer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">theape.parts.countdown.countdown.</code><code class="descname">CountdownTimer</code><span class="sig-paren">(</span><em>repetitions=1</em>, <em>end_time=None</em>, <em>total_time=None</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/theape/parts/countdown/countdown.html#CountdownTimer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#theape.parts.countdown.countdown.CountdownTimer" title="Permalink to this definition">¶</a></dt>
 <dd><p>A time-tracker that counts down</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"></td>
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">repetitions</span></code>: number of calls to accept before stopping</li>
+<li><code class="docutils literal"><span class="pre">end_time</span></code>: datetime to stop</li>
+<li><code class="docutils literal"><span class="pre">total_time</span></code>: timedelta for amount of time to run</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
-<ul class="simple">
-<li><tt class="docutils literal"><span class="pre">repetitions</span></tt>: number of calls to accept before stopping</li>
-<li><tt class="docutils literal"><span class="pre">end_time</span></tt>: datetime to stop</li>
-<li><tt class="docutils literal"><span class="pre">total_time</span></tt>: timedelta for amount of time to run</li>
-</ul>
 <dl class="method">
 <dt id="theape.parts.countdown.countdown.CountdownTimer.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>repetitions=1</em>, <em>end_time=None</em>, <em>total_time=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#theape.parts.countdown.countdown.CountdownTimer.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>repetitions=1</em>, <em>end_time=None</em>, <em>total_time=None</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/theape/parts/countdown/countdown.html#CountdownTimer.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#theape.parts.countdown.countdown.CountdownTimer.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
-<li><tt class="docutils literal"><span class="pre">repetitions</span></tt>: number of calls to accept before stopping</li>
-<li><tt class="docutils literal"><span class="pre">end_time</span></tt>: datetime to stop</li>
-<li><tt class="docutils literal"><span class="pre">total_time</span></tt>: timedelta for amount of time to run</li>
+<li><code class="docutils literal"><span class="pre">repetitions</span></code>: number of calls to accept before stopping</li>
+<li><code class="docutils literal"><span class="pre">end_time</span></code>: datetime to stop</li>
+<li><code class="docutils literal"><span class="pre">total_time</span></code>: timedelta for amount of time to run</li>
 </ul>
 </td>
 </tr>
@@ -185,7 +185,7 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#theape.parts.countdown.countdown.CountdownTimer.__init__" title="theape.parts.countdown.countdown.CountdownTimer.__init__"><tt class="xref py py-obj docutils literal"><span class="pre">__init__</span></tt></a>([repetitions,&nbsp;end_time,&nbsp;total_time])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#theape.parts.countdown.countdown.CountdownTimer.__init__" title="theape.parts.countdown.countdown.CountdownTimer.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>([repetitions,&nbsp;end_time,&nbsp;total_time])</td>
 <td><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -196,25 +196,25 @@
 </table>
 </td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#theape.parts.countdown.countdown.CountdownTimer.append" title="theape.parts.countdown.countdown.CountdownTimer.append"><tt class="xref py py-obj docutils literal"><span class="pre">append</span></tt></a>(item)</td>
+<tr class="row-even"><td><a class="reference internal" href="#theape.parts.countdown.countdown.CountdownTimer.append" title="theape.parts.countdown.countdown.CountdownTimer.append"><code class="xref py py-obj docutils literal"><span class="pre">append</span></code></a>(item)</td>
 <td>Appends the item to the times array</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#theape.parts.countdown.countdown.CountdownTimer.close" title="theape.parts.countdown.countdown.CountdownTimer.close"><tt class="xref py py-obj docutils literal"><span class="pre">close</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#theape.parts.countdown.countdown.CountdownTimer.close" title="theape.parts.countdown.countdown.CountdownTimer.close"><code class="xref py py-obj docutils literal"><span class="pre">close</span></code></a>()</td>
 <td>Resets the attributes (makes __call__ always evaluate to false, not once like default)</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#theape.parts.countdown.countdown.CountdownTimer.log_error" title="theape.parts.countdown.countdown.CountdownTimer.log_error"><tt class="xref py py-obj docutils literal"><span class="pre">log_error</span></tt></a>(error[,&nbsp;message])</td>
+<tr class="row-even"><td><a class="reference internal" href="#theape.parts.countdown.countdown.CountdownTimer.log_error" title="theape.parts.countdown.countdown.CountdownTimer.log_error"><code class="xref py py-obj docutils literal"><span class="pre">log_error</span></code></a>(error[,&nbsp;message])</td>
 <td>Logs the error in bold red</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#theape.parts.countdown.countdown.CountdownTimer.log_estimated_time_remaining" title="theape.parts.countdown.countdown.CountdownTimer.log_estimated_time_remaining"><tt class="xref py py-obj docutils literal"><span class="pre">log_estimated_time_remaining</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#theape.parts.countdown.countdown.CountdownTimer.log_estimated_time_remaining" title="theape.parts.countdown.countdown.CountdownTimer.log_estimated_time_remaining"><code class="xref py py-obj docutils literal"><span class="pre">log_estimated_time_remaining</span></code></a>()</td>
 <td>Log an estitmated remaining time based on the median and repetitions  x xx</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#theape.parts.countdown.countdown.CountdownTimer.log_update" title="theape.parts.countdown.countdown.CountdownTimer.log_update"><tt class="xref py py-obj docutils literal"><span class="pre">log_update</span></tt></a>(elapsed)</td>
+<tr class="row-even"><td><a class="reference internal" href="#theape.parts.countdown.countdown.CountdownTimer.log_update" title="theape.parts.countdown.countdown.CountdownTimer.log_update"><code class="xref py py-obj docutils literal"><span class="pre">log_update</span></code></a>(elapsed)</td>
 <td>Outputs to the log the most recent elapsed time information</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#theape.parts.countdown.countdown.CountdownTimer.percentile" title="theape.parts.countdown.countdown.CountdownTimer.percentile"><tt class="xref py py-obj docutils literal"><span class="pre">percentile</span></tt></a>(percentile)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#theape.parts.countdown.countdown.CountdownTimer.percentile" title="theape.parts.countdown.countdown.CountdownTimer.percentile"><code class="xref py py-obj docutils literal"><span class="pre">percentile</span></code></a>(percentile)</td>
 <td>calculates the percentile (e.g. 50 gets the median (the 50% item))</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#theape.parts.countdown.countdown.CountdownTimer.time_remains" title="theape.parts.countdown.countdown.CountdownTimer.time_remains"><tt class="xref py py-obj docutils literal"><span class="pre">time_remains</span></tt></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#theape.parts.countdown.countdown.CountdownTimer.time_remains" title="theape.parts.countdown.countdown.CountdownTimer.time_remains"><code class="xref py py-obj docutils literal"><span class="pre">time_remains</span></code></a>()</td>
 <td>Evaluates if there is still time (or repetitions) remaining</td>
 </tr>
 </tbody>
@@ -226,10 +226,10 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#theape.parts.countdown.countdown.CountdownTimer.log" title="theape.parts.countdown.countdown.CountdownTimer.log"><tt class="xref py py-obj docutils literal"><span class="pre">log</span></tt></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="#theape.parts.countdown.countdown.CountdownTimer.log" title="theape.parts.countdown.countdown.CountdownTimer.log"><code class="xref py py-obj docutils literal"><span class="pre">log</span></code></a></td>
 <td>The logger method indicated by the log_level</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#theape.parts.countdown.countdown.CountdownTimer.logger" title="theape.parts.countdown.countdown.CountdownTimer.logger"><tt class="xref py py-obj docutils literal"><span class="pre">logger</span></tt></a></td>
+<tr class="row-even"><td><a class="reference internal" href="#theape.parts.countdown.countdown.CountdownTimer.logger" title="theape.parts.countdown.countdown.CountdownTimer.logger"><code class="xref py py-obj docutils literal"><span class="pre">logger</span></code></a></td>
 <td><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -240,14 +240,14 @@
 </table>
 </td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#theape.parts.countdown.countdown.CountdownTimer.times" title="theape.parts.countdown.countdown.CountdownTimer.times"><tt class="xref py py-obj docutils literal"><span class="pre">times</span></tt></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="#theape.parts.countdown.countdown.CountdownTimer.times" title="theape.parts.countdown.countdown.CountdownTimer.times"><code class="xref py py-obj docutils literal"><span class="pre">times</span></code></a></td>
 <td>collection of elapsed times</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="theape.parts.countdown.countdown.CountdownTimer.append">
-<tt class="descname">append</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#theape.parts.countdown.countdown.CountdownTimer.append" title="Permalink to this definition">¶</a></dt>
+<code class="descname">append</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="headerlink" href="#theape.parts.countdown.countdown.CountdownTimer.append" title="Permalink to this definition">¶</a></dt>
 <dd><p>Appends the item to the times array</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -267,18 +267,18 @@
 
 <dl class="method">
 <dt id="theape.parts.countdown.countdown.CountdownTimer.close">
-<tt class="descname">close</tt><big>(</big><big>)</big><a class="headerlink" href="#theape.parts.countdown.countdown.CountdownTimer.close" title="Permalink to this definition">¶</a></dt>
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/theape/parts/countdown/countdown.html#CountdownTimer.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#theape.parts.countdown.countdown.CountdownTimer.close" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resets the attributes (makes __call__ always evaluate to false, not once like default)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Postcondition:</th><td class="field-body"><ul class="first last simple">
-<li><tt class="docutils literal"><span class="pre">self.end_time</span></tt> is None</li>
-<li><tt class="docutils literal"><span class="pre">self.total_time</span></tt> is None</li>
-<li><tt class="docutils literal"><span class="pre">self.repetitions</span></tt> is 0</li>
-<li><tt class="docutils literal"><span class="pre">self.start</span></tt> is None</li>
-<li><tt class="docutils literal"><span class="pre">self._times</span></tt> is None</li>
+<li><code class="docutils literal"><span class="pre">self.end_time</span></code> is None</li>
+<li><code class="docutils literal"><span class="pre">self.total_time</span></code> is None</li>
+<li><code class="docutils literal"><span class="pre">self.repetitions</span></code> is 0</li>
+<li><code class="docutils literal"><span class="pre">self.start</span></code> is None</li>
+<li><code class="docutils literal"><span class="pre">self._times</span></code> is None</li>
 </ul>
 </td>
 </tr>
@@ -288,7 +288,7 @@
 
 <dl class="method">
 <dt id="theape.parts.countdown.countdown.CountdownTimer.log_error">
-<tt class="descname">log_error</tt><big>(</big><em>error</em>, <em>message=''</em><big>)</big><a class="headerlink" href="#theape.parts.countdown.countdown.CountdownTimer.log_error" title="Permalink to this definition">¶</a></dt>
+<code class="descname">log_error</code><span class="sig-paren">(</span><em>error</em>, <em>message=''</em><span class="sig-paren">)</span><a class="headerlink" href="#theape.parts.countdown.countdown.CountdownTimer.log_error" title="Permalink to this definition">¶</a></dt>
 <dd><p>Logs the error in bold red</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -306,13 +306,13 @@
 
 <dl class="method">
 <dt id="theape.parts.countdown.countdown.CountdownTimer.log_estimated_time_remaining">
-<tt class="descname">log_estimated_time_remaining</tt><big>(</big><big>)</big><a class="headerlink" href="#theape.parts.countdown.countdown.CountdownTimer.log_estimated_time_remaining" title="Permalink to this definition">¶</a></dt>
+<code class="descname">log_estimated_time_remaining</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/theape/parts/countdown/countdown.html#CountdownTimer.log_estimated_time_remaining"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#theape.parts.countdown.countdown.CountdownTimer.log_estimated_time_remaining" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log an estitmated remaining time based on the median and repetitions  x xx</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="theape.parts.countdown.countdown.CountdownTimer.log_update">
-<tt class="descname">log_update</tt><big>(</big><em>elapsed</em><big>)</big><a class="headerlink" href="#theape.parts.countdown.countdown.CountdownTimer.log_update" title="Permalink to this definition">¶</a></dt>
+<code class="descname">log_update</code><span class="sig-paren">(</span><em>elapsed</em><span class="sig-paren">)</span><a class="headerlink" href="#theape.parts.countdown.countdown.CountdownTimer.log_update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Outputs to the log the most recent elapsed time information</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -329,7 +329,7 @@
 
 <dl class="method">
 <dt id="theape.parts.countdown.countdown.CountdownTimer.percentile">
-<tt class="descname">percentile</tt><big>(</big><em>percentile</em><big>)</big><a class="headerlink" href="#theape.parts.countdown.countdown.CountdownTimer.percentile" title="Permalink to this definition">¶</a></dt>
+<code class="descname">percentile</code><span class="sig-paren">(</span><em>percentile</em><span class="sig-paren">)</span><a class="headerlink" href="#theape.parts.countdown.countdown.CountdownTimer.percentile" title="Permalink to this definition">¶</a></dt>
 <dd><p>calculates the percentile (e.g. 50 gets the median (the 50% item))</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -343,7 +343,7 @@
 
 <dl class="method">
 <dt id="theape.parts.countdown.countdown.CountdownTimer.time_remains">
-<tt class="descname">time_remains</tt><big>(</big><big>)</big><a class="headerlink" href="#theape.parts.countdown.countdown.CountdownTimer.time_remains" title="Permalink to this definition">¶</a></dt>
+<code class="descname">time_remains</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/theape/parts/countdown/countdown.html#CountdownTimer.time_remains"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#theape.parts.countdown.countdown.CountdownTimer.time_remains" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluates if there is still time (or repetitions) remaining</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -359,7 +359,7 @@
 
 <dl class="attribute">
 <dt id="theape.parts.countdown.countdown.CountdownTimer.log">
-<tt class="descname">log</tt><a class="headerlink" href="#theape.parts.countdown.countdown.CountdownTimer.log" title="Permalink to this definition">¶</a></dt>
+<code class="descname">log</code><a class="headerlink" href="#theape.parts.countdown.countdown.CountdownTimer.log" title="Permalink to this definition">¶</a></dt>
 <dd><p>The logger method indicated by the log_level</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -373,7 +373,7 @@
 
 <dl class="attribute">
 <dt id="theape.parts.countdown.countdown.CountdownTimer.logger">
-<tt class="descname">logger</tt><a class="headerlink" href="#theape.parts.countdown.countdown.CountdownTimer.logger" title="Permalink to this definition">¶</a></dt>
+<code class="descname">logger</code><a class="headerlink" href="#theape.parts.countdown.countdown.CountdownTimer.logger" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -386,7 +386,7 @@
 
 <dl class="attribute">
 <dt id="theape.parts.countdown.countdown.CountdownTimer.times">
-<tt class="descname">times</tt><a class="headerlink" href="#theape.parts.countdown.countdown.CountdownTimer.times" title="Permalink to this definition">¶</a></dt>
+<code class="descname">times</code><a class="headerlink" href="#theape.parts.countdown.countdown.CountdownTimer.times" title="Permalink to this definition">¶</a></dt>
 <dd><p>collection of elapsed times</p>
 </dd></dl>
 
@@ -407,7 +407,7 @@
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

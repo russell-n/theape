@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../index.html" />
     <link rel="up" title="Storage" href="index.html" />
@@ -38,7 +38,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -110,7 +110,7 @@
     </a>
   </li>
   <li>
-    <a href="api/theape.parts.storage.base_storage.BaseStorage.html" title="Next Chapter: theape.parts.storage.base_storage.BaseStorage"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">theape.parts.sto... &raquo;</span>
+    <a href="api/theape.parts.storage.base_storage.BaseStorage.html" title="Next Chapter: theape.parts.storage.base_storage.BaseStorage"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">theape.parts.... &raquo;</span>
     </a>
   </li>
               
@@ -142,11 +142,11 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="the-base-storage">
 <h1>The Base Storage<a class="headerlink" href="#the-base-storage" title="Permalink to this headline">¶</a></h1>
-<p id="base-storage">This is a module for an Abstract Base Class to create the minimal file-like interface for storage objects. Although the model for storage is <tt class="docutils literal"><span class="pre">file</span></tt>, it behaves a little differently in that it stores any paths that need to be added (e.g. for sub-folders).</p>
+<p id="base-storage">This is a module for an Abstract Base Class to create the minimal file-like interface for storage objects. Although the model for storage is <code class="docutils literal"><span class="pre">file</span></code>, it behaves a little differently in that it stores any paths that need to be added (e.g. for sub-folders).</p>
 <div class="section" id="module-theape.parts.storage.base_storage">
 <span id="the-basestorage"></span><h2>The BaseStorage<a class="headerlink" href="#module-theape.parts.storage.base_storage" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="longtable docutils">
@@ -155,25 +155,25 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.storage.base_storage.BaseStorage.html#theape.parts.storage.base_storage.BaseStorage" title="theape.parts.storage.base_storage.BaseStorage"><tt class="xref py py-obj docutils literal"><span class="pre">BaseStorage</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.storage.base_storage.BaseStorage.html#theape.parts.storage.base_storage.BaseStorage" title="theape.parts.storage.base_storage.BaseStorage"><code class="xref py py-obj docutils literal"><span class="pre">BaseStorage</span></code></a>()</td>
 <td>A base-class based on file-objects</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.storage.base_storage.BaseStorage.file.html#theape.parts.storage.base_storage.BaseStorage.file" title="theape.parts.storage.base_storage.BaseStorage.file"><tt class="xref py py-obj docutils literal"><span class="pre">BaseStorage.file</span></tt></a></td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.storage.base_storage.BaseStorage.file.html#theape.parts.storage.base_storage.BaseStorage.file" title="theape.parts.storage.base_storage.BaseStorage.file"><code class="xref py py-obj docutils literal"><span class="pre">BaseStorage.file</span></code></a></td>
 <td>The open file object</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.storage.base_storage.BaseStorage.close.html#theape.parts.storage.base_storage.BaseStorage.close" title="theape.parts.storage.base_storage.BaseStorage.close"><tt class="xref py py-obj docutils literal"><span class="pre">BaseStorage.close</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.storage.base_storage.BaseStorage.close.html#theape.parts.storage.base_storage.BaseStorage.close" title="theape.parts.storage.base_storage.BaseStorage.close"><code class="xref py py-obj docutils literal"><span class="pre">BaseStorage.close</span></code></a>()</td>
 <td>Closes self.file if it exists, sets self.closed to True</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.storage.base_storage.BaseStorage.open.html#theape.parts.storage.base_storage.BaseStorage.open" title="theape.parts.storage.base_storage.BaseStorage.open"><tt class="xref py py-obj docutils literal"><span class="pre">BaseStorage.open</span></tt></a>(name)</td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.storage.base_storage.BaseStorage.open.html#theape.parts.storage.base_storage.BaseStorage.open" title="theape.parts.storage.base_storage.BaseStorage.open"><code class="xref py py-obj docutils literal"><span class="pre">BaseStorage.open</span></code></a>(name)</td>
 <td>Opens a file for writing</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.storage.base_storage.BaseStorage.write.html#theape.parts.storage.base_storage.BaseStorage.write" title="theape.parts.storage.base_storage.BaseStorage.write"><tt class="xref py py-obj docutils literal"><span class="pre">BaseStorage.write</span></tt></a>(text[,&nbsp;exceptions])</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.storage.base_storage.BaseStorage.write.html#theape.parts.storage.base_storage.BaseStorage.write" title="theape.parts.storage.base_storage.BaseStorage.write"><code class="xref py py-obj docutils literal"><span class="pre">BaseStorage.write</span></code></a>(text[,&nbsp;exceptions])</td>
 <td>Writes the text to the file</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.storage.base_storage.BaseStorage.writeline.html#theape.parts.storage.base_storage.BaseStorage.writeline" title="theape.parts.storage.base_storage.BaseStorage.writeline"><tt class="xref py py-obj docutils literal"><span class="pre">BaseStorage.writeline</span></tt></a>(text)</td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.storage.base_storage.BaseStorage.writeline.html#theape.parts.storage.base_storage.BaseStorage.writeline" title="theape.parts.storage.base_storage.BaseStorage.writeline"><code class="xref py py-obj docutils literal"><span class="pre">BaseStorage.writeline</span></code></a>(text)</td>
 <td>Adds newline to end of text and writes it to the file</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.storage.base_storage.BaseStorage.writelines.html#theape.parts.storage.base_storage.BaseStorage.writelines" title="theape.parts.storage.base_storage.BaseStorage.writelines"><tt class="xref py py-obj docutils literal"><span class="pre">BaseStorage.writelines</span></tt></a>(texts[,&nbsp;exceptions])</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.storage.base_storage.BaseStorage.writelines.html#theape.parts.storage.base_storage.BaseStorage.writelines" title="theape.parts.storage.base_storage.BaseStorage.writelines"><code class="xref py py-obj docutils literal"><span class="pre">BaseStorage.writelines</span></code></a>(texts[,&nbsp;exceptions])</td>
 <td>Writes the lines to the file</td>
 </tr>
 </tbody>
@@ -194,7 +194,7 @@
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

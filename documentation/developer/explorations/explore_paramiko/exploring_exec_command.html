@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
     <link rel="up" title="Exploring Paramiko" href="index.html" />
@@ -37,7 +37,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -107,7 +107,7 @@
               
                 
   <li>
-    <a href="api/paramiko.client.SSHClient.exec_command.html" title="Next Chapter: paramiko.client.SSHClient.exec_command"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">paramiko.client.... &raquo;</span>
+    <a href="api/paramiko.client.SSHClient.exec_command.html" title="Next Chapter: paramiko.client.SSHClient.exec_command"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">paramiko.clie... &raquo;</span>
     </a>
   </li>
               
@@ -139,23 +139,23 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="an-exec-command-example">
 <h1>An Exec Command Example<a class="headerlink" href="#an-exec-command-example" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="the-sshclient-exec-command">
 <span id="paramiko-sshclient-exec-command"></span><h2>The SSHClient exec_command<a class="headerlink" href="#the-sshclient-exec-command" title="Permalink to this headline">¶</a></h2>
-<p>Now that I&#8217;ve managed to get a connection going it&#8217;s time to turn my attenttion to actually doing things on the machine. Paramiko has two ways to work with the shell &#8211; interactively using <tt class="docutils literal"><span class="pre">invoke_shell</span></tt> and non-interactively using <tt class="docutils literal"><span class="pre">exec_command</span></tt>. Since my intention is to use this within code I will focus on the <tt class="docutils literal"><span class="pre">exec_command</span></tt> method.</p>
+<p>Now that I&#8217;ve managed to get a connection going it&#8217;s time to turn my attenttion to actually doing things on the machine. Paramiko has two ways to work with the shell &#8211; interactively using <code class="docutils literal"><span class="pre">invoke_shell</span></code> and non-interactively using <code class="docutils literal"><span class="pre">exec_command</span></code>. Since my intention is to use this within code I will focus on the <code class="docutils literal"><span class="pre">exec_command</span></code> method.</p>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../../../../parts/connections/api/paramiko.client.SSHClient.exec_command.html#paramiko.client.SSHClient.exec_command" title="paramiko.client.SSHClient.exec_command"><tt class="xref py py-obj docutils literal"><span class="pre">SSHClient.exec_command</span></tt></a>(command[,&nbsp;bufsize,&nbsp;...])</td>
+<tr class="row-odd"><td><a class="reference internal" href="../../../../parts/connections/api/paramiko.client.SSHClient.exec_command.html#paramiko.client.SSHClient.exec_command" title="paramiko.client.SSHClient.exec_command"><code class="xref py py-obj docutils literal"><span class="pre">SSHClient.exec_command</span></code></a>(command[,&nbsp;bufsize,&nbsp;...])</td>
 <td>Execute a command on the SSH server.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../../../../parts/connections/api/paramiko.client.SSHClient.html#paramiko.client.SSHClient.invoke_shell" title="paramiko.client.SSHClient.invoke_shell"><tt class="xref py py-obj docutils literal"><span class="pre">SSHClient.invoke_shell</span></tt></a>([term,&nbsp;width,&nbsp;...])</td>
+<tr class="row-even"><td><a class="reference internal" href="../../../../parts/connections/api/paramiko.client.SSHClient.html#paramiko.client.SSHClient.invoke_shell" title="paramiko.client.SSHClient.invoke_shell"><code class="xref py py-obj docutils literal"><span class="pre">SSHClient.invoke_shell</span></code></a>([term,&nbsp;width,&nbsp;...])</td>
 <td>Start an interactive shell session on the SSH server.</td>
 </tr>
 </tbody>
@@ -165,7 +165,7 @@
 <div class="section" id="nmap">
 <span id="paramiko-exploration-nmap"></span><h2>nmap<a class="headerlink" href="#nmap" title="Permalink to this headline">¶</a></h2>
 <p>I want to see if paramiko will allow me to run commands as sudo. Since <cite>nmap</cite> will change its behavior (adding MAC addresses) if you run the ping-scan using <cite>sudo</cite> I can run it with and without root privileges and see if I get the expected output.</p>
-<div class="code python highlight-python"><div class="highlight"><pre>client = SSHClient()
+<div class="code python highlight-python"><div class="highlight"><pre><span></span>client = SSHClient()
 client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 client.connect(&#39;localhost&#39;, username=&#39;tester_tester&#39;)
 stdin, stdout, stderr = client.exec_command(&quot;nmap -sP &#39;192.168.103.*&#39;&quot;)
@@ -173,7 +173,7 @@ for line in stdout:
     print(line, end=&#39;&#39;)
 </pre></div>
 </div>
-<div class="code highlight-python"><div class="highlight"><pre>Starting Nmap 6.40 ( http://nmap.org ) at 2015-01-22 15:29 MST
+<div class="code highlight-python"><div class="highlight"><pre><span></span>Starting Nmap 6.40 ( http://nmap.org ) at 2015-01-22 15:29 MST
 Nmap scan report for 192.168.103.1
 Host is up (0.018s latency).
 Nmap scan report for 192.168.103.16
@@ -185,13 +185,13 @@ Nmap done: 256 IP addresses (2 hosts up) scanned in 2.54 seconds
 <div class="section" id="nmap-with-sudo">
 <h2>nmap with sudo<a class="headerlink" href="#nmap-with-sudo" title="Permalink to this headline">¶</a></h2>
 <p>And now with sudo.</p>
-<div class="code python highlight-python"><div class="highlight"><pre>stdin, stdout, stderr = client.exec_command(&#39;sudo nmap -sP &quot;192.168.103.*&quot;&#39;, get_pty=True)
+<div class="code python highlight-python"><div class="highlight"><pre><span></span>stdin, stdout, stderr = client.exec_command(&#39;sudo nmap -sP &quot;192.168.103.*&quot;&#39;, get_pty=True)
 stdin.write(&#39;testertester\n&#39;)
 for line in stdout:
     print(line, end=&#39;&#39;)
 </pre></div>
 </div>
-<div class="code highlight-python"><div class="highlight"><pre>testertester
+<div class="code highlight-python"><div class="highlight"><pre><span></span>testertester
 [sudo] password for tester_tester:
 
 Starting Nmap 6.40 ( http://nmap.org ) at 2015-01-22 15:29 MST
@@ -203,12 +203,12 @@ Nmap done: 256 IP addresses (2 hosts up) scanned in 6.65 seconds
 </pre></div>
 </div>
 <p>Two things to note &#8211; one is that I didn&#8217;t need to call the load_system_host_keys. It seems that the AutoAddPolicy takes care of that. The other thing to note is that I needed to set <cite>get_pty</cite> to True. If I didn&#8217;t it would close the channel with this error (on my machine):</p>
-<div class="highlight-python"><div class="highlight"><pre>sudo: no tty present and no askpass program specified
+<div class="highlight-python"><div class="highlight"><pre><span></span>sudo: no tty present and no askpass program specified
 </pre></div>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">The <tt class="docutils literal"><span class="pre">testertester</span></tt> line above <tt class="docutils literal"><span class="pre">[sudo]</span> <span class="pre">password</span> <span class="pre">for</span> <span class="pre">tester_tester:</span></tt> is the actual password that I entered so if you use this method the sudoer&#8217;s password will be visible in the output.</p>
+<p class="last">The <code class="docutils literal"><span class="pre">testertester</span></code> line above <code class="docutils literal"><span class="pre">[sudo]</span> <span class="pre">password</span> <span class="pre">for</span> <span class="pre">tester_tester:</span></code> is the actual password that I entered so if you use this method the sudoer&#8217;s password will be visible in the output.</p>
 </div>
 </div>
 </div>
@@ -226,7 +226,7 @@ Nmap done: 256 IP addresses (2 hosts up) scanned in 6.65 seconds
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

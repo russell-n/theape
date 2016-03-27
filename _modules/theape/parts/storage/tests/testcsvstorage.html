@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>theape.parts.storage.tests.testcsvstorage &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../../../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../../../../index.html">
+          The Ape</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.0.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../../../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../plugins/index.html">Plugins</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"></ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../../../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <h1>Source code for theape.parts.storage.tests.testcsvstorage</h1><div class="highlight"><pre>
+<span></span>
+<span class="c1"># python standard library</span>
+<span class="kn">import</span> <span class="nn">unittest</span>
+
+<span class="c1"># third-party</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">mock</span> <span class="kn">import</span> <span class="n">MagicMock</span><span class="p">,</span> <span class="n">mock_open</span><span class="p">,</span> <span class="n">patch</span><span class="p">,</span> <span class="n">call</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="k">pass</span>    
+
+<span class="c1"># the ape</span>
+<span class="kn">from</span> <span class="nn">theape.parts.storage.csvstorage</span> <span class="kn">import</span> <span class="n">CsvDictStorage</span>
+<span class="kn">from</span> <span class="nn">theape.parts.storage.filestorage</span> <span class="kn">import</span> <span class="n">FileStorage</span>
+<span class="kn">from</span> <span class="nn">theape</span> <span class="kn">import</span> <span class="n">ApeError</span>
+
+<span class="k">class</span> <span class="nc">TestCsvStorage</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1">#self.mocked_file = mock_open()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">patcher</span> <span class="o">=</span> <span class="n">patch</span><span class="p">(</span><span class="s1">&#39;__builtin__.open&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mocked_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">patcher</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;folder&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="s2">&quot;able baker charley&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;cow&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_storage</span> <span class="o">=</span> <span class="n">FileStorage</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">storage</span> <span class="o">=</span> <span class="n">CsvDictStorage</span><span class="p">(</span><span class="n">storage</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file_storage</span><span class="p">,</span>
+                                      <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">tearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">patcher</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="k">return</span>
+
+<div class="viewcode-block" id="TestCsvStorage.test_constructor"><a class="viewcode-back" href="../../../../../parts/storage/tests/api/theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_constructor.html#theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_constructor">[docs]</a>    <span class="k">def</span> <span class="nf">test_constructor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Does it take the expected fields?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">storage</span> <span class="o">=</span> <span class="n">CsvDictStorage</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span>
+                                 <span class="n">storage</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file_storage</span><span class="p">)</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">storage</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span> <span class="n">storage</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_storage</span><span class="p">,</span> <span class="n">storage</span><span class="o">.</span><span class="n">storage</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="TestCsvStorage.test_path_only"><a class="viewcode-back" href="../../../../../parts/storage/tests/api/theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_path_only.html#theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_path_only">[docs]</a>    <span class="k">def</span> <span class="nf">test_path_only</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Does it create the storage if only the path is given?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">file_storage</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">file_mock</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">file_storage</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">file_mock</span>
+
+        <span class="n">storage</span> <span class="o">=</span> <span class="n">CsvDictStorage</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s1">&#39;theape.parts.storage.filestorage.FileStorage&#39;</span><span class="p">,</span> <span class="n">file_storage</span><span class="p">):</span>
+            <span class="n">opened_storage</span> <span class="o">=</span> <span class="n">storage</span><span class="o">.</span><span class="n">storage</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">opened_storage</span><span class="p">,</span> <span class="n">file_mock</span><span class="p">)</span>
+            <span class="n">file_storage</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="TestCsvStorage.test_writer"><a class="viewcode-back" href="../../../../../parts/storage/tests/api/theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_writer.html#theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_writer">[docs]</a>    <span class="k">def</span> <span class="nf">test_writer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Does it create a new DictWriter if the file-storage allows it?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># should crash if no file was opened</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="n">ApeError</span><span class="p">):</span>
+            <span class="n">writer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">writer</span>
+        <span class="n">dict_writer</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">dict_writer_instance</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">dict_writer</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">dict_writer_instance</span>
+
+        <span class="c1"># should work once the file is opened</span>
+        <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s1">&#39;csv.DictWriter&#39;</span><span class="p">,</span> <span class="n">dict_writer</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">storage</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;test.csv&#39;</span><span class="p">)</span>
+            <span class="n">writer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">writer</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">dict_writer_instance</span><span class="p">)</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="TestCsvStorage.test_bad_constructor"><a class="viewcode-back" href="../../../../../parts/storage/tests/api/theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_bad_constructor.html#theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_bad_constructor">[docs]</a>    <span class="k">def</span> <span class="nf">test_bad_constructor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Does it raise an error if neither path nor storage are given?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="n">ApeError</span><span class="p">):</span>
+            <span class="n">CsvDictStorage</span><span class="p">(</span><span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="c1"># headers are required too</span>
+            <span class="n">CsvDictStorage</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+            
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>            
+            <span class="n">CsvDictStorage</span><span class="p">(</span><span class="n">storage</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_storage</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">CsvDictStorage</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="TestCsvStorage.test_writerow"><a class="viewcode-back" href="../../../../../parts/storage/tests/api/theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_writerow.html#theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_writerow">[docs]</a>    <span class="k">def</span> <span class="nf">test_writerow</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Does it write the row?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">)))</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">_writer</span> <span class="o">=</span> <span class="n">writer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">rowdict</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span><span class="n">rowdict</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># keys don&#39;t match header, should raise ValueError</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;argh&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="n">ApeError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># keys don&#39;t match header, data wasn&#39;t strings</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;double bad&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="n">ApeError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># something other than a dict was given to the method</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="n">ApeError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="TestCsvStorage.test_writerows"><a class="viewcode-back" href="../../../../../parts/storage/tests/api/theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_writerows.html#theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_writerows">[docs]</a>    <span class="k">def</span> <span class="nf">test_writerows</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Does it write each dict in the list?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="s1">&#39;fake&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">_writer</span> <span class="o">=</span> <span class="n">writer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># CsvDictStorage uses its writerow method instead of writerows</span>
+        <span class="c1"># so the errors are tested in test_writerow</span>
+        <span class="n">calls</span> <span class="o">=</span> <span class="p">[</span><span class="n">call</span><span class="p">(</span><span class="n">rowdict</span><span class="o">=</span><span class="n">letter</span><span class="p">)</span> <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">calls</span><span class="p">,</span> <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="o">.</span><span class="n">mock_calls</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="TestCsvStorage.test_open"><a class="viewcode-back" href="../../../../../parts/storage/tests/api/theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_open.html#theape.parts.storage.tests.testcsvstorage.TestCsvStorage.test_open">[docs]</a>    <span class="k">def</span> <span class="nf">test_open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Does it open a file with the given filename?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;aoeu&#39;</span>
+        <span class="n">dict_writer</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">dict_writer_instance</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">storage</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">dict_writer</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">dict_writer_instance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_storage</span><span class="o">.</span><span class="n">open</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">opened</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_storage</span><span class="o">.</span><span class="n">open</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">opened</span>
+        
+        <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s1">&#39;csv.DictWriter&#39;</span><span class="p">,</span> <span class="n">dict_writer</span><span class="p">):</span>
+            <span class="c1"># the call to `open`</span>
+            <span class="n">writer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+            <span class="c1"># did it open a file using the filename?</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">file_storage</span><span class="o">.</span><span class="n">open</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+            <span class="c1"># Did it create and store a DictWriter?</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">writer</span><span class="o">.</span><span class="n">writer</span><span class="p">,</span> <span class="n">dict_writer_instance</span><span class="p">)</span>
+
+            <span class="c1"># Did it create the DictWriter using the opened file and headers?</span>
+            <span class="n">dict_writer</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span><span class="n">opened</span><span class="p">,</span>
+                                           <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+
+            <span class="c1"># Did it write the header to the file?</span>
+            <span class="n">dict_writer_instance</span><span class="o">.</span><span class="n">writeheader</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">()</span>
+
+            <span class="c1"># did it return a copy of itself?</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">CsvDictStorage</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertNotEqual</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="p">)</span>
+        <span class="k">return</span></div>
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2014, the cloistered monkey.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

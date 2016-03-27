@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,19 +26,16 @@
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../index.html" />
-    <link rel="up" title="The QuarterMaster" href="../quartermaster.html" />
-    <link rel="next" title="theape.plugins.quartermaster.QuarterMaster.list_plugins" href="theape.plugins.quartermaster.QuarterMaster.list_plugins.html" />
-    <link rel="prev" title="theape.plugins.quartermaster.QuarterMaster.get_plugin" href="theape.plugins.quartermaster.QuarterMaster.get_plugin.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -75,11 +72,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../../main.html">The Main Entry Point</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../readme.html">The APE (Read Me)</a></li>
 </ul>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../parts/index.html">Parts</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Plugins</a></li>
 </ul>
 </ul>
 </li>
@@ -102,14 +99,6 @@
             
               
                 
-  <li>
-    <a href="theape.plugins.quartermaster.QuarterMaster.get_plugin.html" title="Previous Chapter: theape.plugins.quartermaster.QuarterMaster.get_plugin"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; theape.plugins.q...</span>
-    </a>
-  </li>
-  <li>
-    <a href="theape.plugins.quartermaster.QuarterMaster.list_plugins.html" title="Next Chapter: theape.plugins.quartermaster.QuarterMaster.list_plugins"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">theape.plugins.q... &raquo;</span>
-    </a>
-  </li>
               
             
             
@@ -139,162 +128,10 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="theape-plugins-quartermaster-quartermaster">
 <h1>theape.plugins.quartermaster.QuarterMaster<a class="headerlink" href="#theape-plugins-quartermaster-quartermaster" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
-<dt id="theape.plugins.quartermaster.QuarterMaster">
-<em class="property">class </em><tt class="descclassname">theape.plugins.quartermaster.</tt><tt class="descname">QuarterMaster</tt><big>(</big><em>external_modules=None</em><big>)</big><a class="headerlink" href="#theape.plugins.quartermaster.QuarterMaster" title="Permalink to this definition">¶</a></dt>
-<dd><p>A plugin manager</p>
-<p>The Plugin Manager</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
-<li><cite>external_modules</cite>: iterable collection of module-names</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
-<dt id="theape.plugins.quartermaster.QuarterMaster.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>external_modules=None</em><big>)</big><a class="headerlink" href="#theape.plugins.quartermaster.QuarterMaster.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>The Plugin Manager</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
-<li><cite>external_modules</cite>: iterable collection of module-names</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<p class="rubric">Methods</p>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#theape.plugins.quartermaster.QuarterMaster.__init__" title="theape.plugins.quartermaster.QuarterMaster.__init__"><tt class="xref py py-obj docutils literal"><span class="pre">__init__</span></tt></a>([external_modules])</td>
-<td>The Plugin Manager</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="theape.plugins.quartermaster.QuarterMaster.get_plugin.html#theape.plugins.quartermaster.QuarterMaster.get_plugin" title="theape.plugins.quartermaster.QuarterMaster.get_plugin"><tt class="xref py py-obj docutils literal"><span class="pre">get_plugin</span></tt></a>(name)</td>
-<td>Retrieves a plugin object.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="theape.plugins.quartermaster.QuarterMaster.list_plugins.html#theape.plugins.quartermaster.QuarterMaster.list_plugins" title="theape.plugins.quartermaster.QuarterMaster.list_plugins"><tt class="xref py py-obj docutils literal"><span class="pre">list_plugins</span></tt></a>()</td>
-<td>Prints the names of the plugins to standard out</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#theape.plugins.quartermaster.QuarterMaster.log_error" title="theape.plugins.quartermaster.QuarterMaster.log_error"><tt class="xref py py-obj docutils literal"><span class="pre">log_error</span></tt></a>(error[,&nbsp;message])</td>
-<td>Logs the error in bold red</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Attributes</p>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#theape.plugins.quartermaster.QuarterMaster.import_plugins" title="theape.plugins.quartermaster.QuarterMaster.import_plugins"><tt class="xref py py-obj docutils literal"><span class="pre">import_plugins</span></tt></a></td>
-<td>A RyeMother instance</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#theape.plugins.quartermaster.QuarterMaster.logger" title="theape.plugins.quartermaster.QuarterMaster.logger"><tt class="xref py py-obj docutils literal"><span class="pre">logger</span></tt></a></td>
-<td><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">A logging object.</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="theape.plugins.quartermaster.QuarterMaster.plugins.html#theape.plugins.quartermaster.QuarterMaster.plugins" title="theape.plugins.quartermaster.QuarterMaster.plugins"><tt class="xref py py-obj docutils literal"><span class="pre">plugins</span></tt></a></td>
-<td>A dictionary of plugins (this is persistent, unlike the generators, in case it gets re-used)</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
-<dt id="theape.plugins.quartermaster.QuarterMaster.get_plugin">
-<tt class="descname">get_plugin</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#theape.plugins.quartermaster.QuarterMaster.get_plugin" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieves a plugin object.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first simple">
-<li><cite>name</cite>: The name of a plugin class</li>
-<li><cite>configuration</cite>: A configuration map instance</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">An un-built plugin object definition</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="theape.plugins.quartermaster.QuarterMaster.list_plugins">
-<tt class="descname">list_plugins</tt><big>(</big><big>)</big><a class="headerlink" href="#theape.plugins.quartermaster.QuarterMaster.list_plugins" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prints the names of the plugins to standard out</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="theape.plugins.quartermaster.QuarterMaster.log_error">
-<tt class="descname">log_error</tt><big>(</big><em>error</em>, <em>message=''</em><big>)</big><a class="headerlink" href="#theape.plugins.quartermaster.QuarterMaster.log_error" title="Permalink to this definition">¶</a></dt>
-<dd><p>Logs the error in bold red</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first last simple">
-<li><cite>error</cite>: error type (prefix in red and bold)</li>
-<li><cite>message</cite>: descriptive message (red but not bold)</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="theape.plugins.quartermaster.QuarterMaster.import_plugins">
-<tt class="descname">import_plugins</tt><a class="headerlink" href="#theape.plugins.quartermaster.QuarterMaster.import_plugins" title="Permalink to this definition">¶</a></dt>
-<dd><p>A RyeMother instance</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="theape.plugins.quartermaster.QuarterMaster.logger">
-<tt class="descname">logger</tt><a class="headerlink" href="#theape.plugins.quartermaster.QuarterMaster.logger" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A logging object.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="theape.plugins.quartermaster.QuarterMaster.plugins">
-<tt class="descname">plugins</tt><a class="headerlink" href="#theape.plugins.quartermaster.QuarterMaster.plugins" title="Permalink to this definition">¶</a></dt>
-<dd><p>A dictionary of plugins (this is persistent, unlike the generators, in case it gets re-used)</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 
 
@@ -310,7 +147,7 @@
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

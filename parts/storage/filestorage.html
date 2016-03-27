@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../index.html" />
     <link rel="up" title="Storage" href="index.html" />
@@ -38,7 +38,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -106,7 +106,7 @@
 <li><a class="reference internal" href="#module-theape.parts.storage.filestorage">FileStorage API</a></li>
 <li><a class="reference internal" href="#filestorage-definition">FileStorage Definition</a><ul>
 <li><a class="reference internal" href="#constructor">Constructor</a></li>
-<li><a class="reference internal" href="#the-open-method">The <tt class="docutils literal"><span class="pre">open</span></tt> Method</a></li>
+<li><a class="reference internal" href="#the-open-method">The <code class="docutils literal"><span class="pre">open</span></code> Method</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-diagram">Module Diagram</a></li>
@@ -121,11 +121,11 @@
               
                 
   <li>
-    <a href="api/theape.parts.storage.csvstorage.CsvDictStorage.writerows.html" title="Previous Chapter: theape.parts.storage.csvstorage.CsvDictStorage.writerows"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; theape.parts.sto...</span>
+    <a href="api/theape.parts.storage.csvstorage.CsvDictStorage.writerows.html" title="Previous Chapter: theape.parts.storage.csvstorage.CsvDictStorage.writerows"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; theape.parts....</span>
     </a>
   </li>
   <li>
-    <a href="api/theape.parts.storage.filestorage.FileStorage.html" title="Next Chapter: theape.parts.storage.filestorage.FileStorage"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">theape.parts.sto... &raquo;</span>
+    <a href="api/theape.parts.storage.filestorage.FileStorage.html" title="Next Chapter: theape.parts.storage.filestorage.FileStorage"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">theape.parts.... &raquo;</span>
     </a>
   </li>
               
@@ -157,14 +157,14 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="file-storage">
 <h1>File Storage<a class="headerlink" href="#file-storage" title="Permalink to this headline">¶</a></h1>
 <p>This is a module for classes that implement a file-like interface to disk-files but also add some extra features meant to make them easier to use within the APE.</p>
 <div class="section" id="filestorage-model">
 <span id="file-storage-model"></span><h2>FileStorage Model<a class="headerlink" href="#filestorage-model" title="Permalink to this headline">¶</a></h2>
-<p>Since the ultimate model for all storage classes is <tt class="docutils literal"><span class="pre">__builtin__.file</span></tt> (see: <em class="xref std std-ref">exploring files</em> for the API and some notes), this class will implement all the non-optional methods and attributes. In addition it will inherit from the <a class="reference internal" href="../../components/component.html#composite-class"><em>Composite</em></a> in order to allow non-homogeneous storage (e.g. stdout and disk &#8211; the equivalent of the unix <cite>tee</cite>).</p>
+<p>Since the ultimate model for all storage classes is <code class="docutils literal"><span class="pre">__builtin__.file</span></code> (see: <span class="xref std std-ref">exploring files</span> for the API and some notes), this class will implement all the non-optional methods and attributes. In addition it will inherit from the <a class="reference internal" href="../../components/component.html#composite-class"><span>Composite</span></a> in order to allow non-homogeneous storage (e.g. stdout and disk &#8211; the equivalent of the unix <cite>tee</cite>).</p>
 <p class="plantuml">
 <img src="../../_images/plantuml-91fb4cba792ff326687a14a464598533145c1c70.png" alt="FileStorage : FileStorage __init__(path, [,mode])
 FileStorage : open(name[, mode])
@@ -189,7 +189,7 @@ FileStorage : __iter__" />
 </div>
 <div class="section" id="extras">
 <span id="file-storage-extras"></span><h2>Extras<a class="headerlink" href="#extras" title="Permalink to this headline">¶</a></h2>
-<p>Although the built-in <tt class="docutils literal"><span class="pre">file</span></tt> is the model for the <tt class="docutils literal"><span class="pre">FileStorage</span></tt>, it wouldn&#8217;t make much sense to replicate it exactly. The main impetus for creating this (besides keeping an eye on non-disk output in the future) is to have something that can keep track of extra persistent data &#8211; in particular:</p>
+<p>Although the built-in <code class="docutils literal"><span class="pre">file</span></code> is the model for the <code class="docutils literal"><span class="pre">FileStorage</span></code>, it wouldn&#8217;t make much sense to replicate it exactly. The main impetus for creating this (besides keeping an eye on non-disk output in the future) is to have something that can keep track of extra persistent data &#8211; in particular:</p>
 <blockquote>
 <div><ul class="simple">
 <li>Sub-folders</li>
@@ -202,23 +202,23 @@ FileStorage : __iter__" />
 <div class="section" id="sub-folders">
 <span id="file-storage-sub-folders"></span><h2>Sub-Folders<a class="headerlink" href="#sub-folders" title="Permalink to this headline">¶</a></h2>
 <p>In order to help tame the explosion of files that can often happen from the repeated execution of code that collects data the FileStorage will accept a path which it will then prepend to any file-name when it is opened. If the sub-folder does not exist it will be created.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="n">IN_PWEAVE</span><span class="p">:</span>
-    <span class="n">example_path</span> <span class="o">=</span> <span class="s">&#39;aoeu/snth&#39;</span>
-    <span class="n">example_file</span> <span class="o">=</span> <span class="s">&#39;umma.gumma&#39;</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">IN_PWEAVE</span><span class="p">:</span>
+    <span class="n">example_path</span> <span class="o">=</span> <span class="s1">&#39;aoeu/snth&#39;</span>
+    <span class="n">example_file</span> <span class="o">=</span> <span class="s1">&#39;umma.gumma&#39;</span>
 
 
-    <span class="c"># this is the part that should be part of the path property</span>
+    <span class="c1"># this is the part that should be part of the path property</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">example_path</span><span class="p">):</span>
         <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">example_path</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s">&#39;aoeu&#39;</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;aoeu&#39;</span><span class="p">):</span>
         <span class="k">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 
-    <span class="c"># this will be run multiple times, remove the example so it gets started fresh</span>
+    <span class="c1"># this will be run multiple times, remove the example so it gets started fresh</span>
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">example_path</span><span class="p">):</span>
         <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">example_path</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="code highlight-python"><div class="highlight"><pre><span class="n">snth</span>
+<div class="code highlight-python"><div class="highlight"><pre><span></span><span class="n">snth</span>
 </pre></div>
 </div>
 </div>
@@ -235,12 +235,12 @@ FileStorage : __iter__" />
 <div class="section" id="adding-timestamps">
 <h3>Adding Timestamps<a class="headerlink" href="#adding-timestamps" title="Permalink to this headline">¶</a></h3>
 <p>The timestamp will be added using string formatting &#8211; it will look for a <cite>timestamp</cite> keyword:</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="n">IN_PWEAVE</span><span class="p">:</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;test_{timestamp}.csv&quot;</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">IN_PWEAVE</span><span class="p">:</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;test_{timestamp}.csv&quot;</span>
     <span class="k">print</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">timestamp</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">FILE_TIMESTAMP</span><span class="p">)))</span>
 </pre></div>
 </div>
-<div class="code highlight-python"><div class="highlight"><pre>test_2015_01_15_04:48:15_PM.csv
+<div class="code highlight-python"><div class="highlight"><pre><span></span>test_2015_01_15_04:48:15_PM.csv
 </pre></div>
 </div>
 </div>
@@ -251,34 +251,34 @@ FileStorage : __iter__" />
 <div class="section" id="side-effects">
 <h3>Side Effects<a class="headerlink" href="#side-effects" title="Permalink to this headline">¶</a></h3>
 <p>Because the name is being made to never match an existing file, the FileStorage can only write files, not read them. A separate file-reader needs to be built if that&#8217;s something needed.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="n">IN_PWEAVE</span><span class="p">:</span>
-    <span class="c"># what&#39;s here?</span>
-    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span> <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;txt&#39;</span><span class="p">)):</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">IN_PWEAVE</span><span class="p">:</span>
+    <span class="c1"># what&#39;s here?</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span> <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;txt&#39;</span><span class="p">)):</span>
         <span class="k">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 
-    <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;innagaddadavida.txt&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;innagaddadavida.txt&quot;</span>
     <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
     <span class="n">full_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">full_name</span><span class="p">):</span>
         <span class="n">base</span><span class="p">,</span> <span class="n">extension</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 
-        <span class="n">digit</span> <span class="o">=</span> <span class="s">r&#39;\d&#39;</span>
-        <span class="n">one_or_more</span> <span class="o">=</span> <span class="s">&#39;+&#39;</span>
-        <span class="n">underscore</span> <span class="o">=</span> <span class="s">&#39;_&#39;</span>
+        <span class="n">digit</span> <span class="o">=</span> <span class="s1">r&#39;\d&#39;</span>
+        <span class="n">one_or_more</span> <span class="o">=</span> <span class="s1">&#39;+&#39;</span>
+        <span class="n">underscore</span> <span class="o">=</span> <span class="s1">&#39;_&#39;</span>
 
         <span class="n">suffix</span> <span class="o">=</span> <span class="n">underscore</span> <span class="o">+</span> <span class="n">digit</span> <span class="o">+</span> <span class="n">one_or_more</span>
-        <span class="n">expression</span> <span class="o">=</span> <span class="s">r&quot;{b}{s}{e}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="n">base</span><span class="p">,</span>
+        <span class="n">expression</span> <span class="o">=</span> <span class="s2">r&quot;{b}{s}{e}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="n">base</span><span class="p">,</span>
                                           <span class="n">s</span><span class="o">=</span><span class="n">suffix</span><span class="p">,</span>
                                             <span class="n">e</span><span class="o">=</span><span class="n">extension</span><span class="p">)</span>
         <span class="n">regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">expression</span><span class="p">)</span>
         <span class="n">count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">if</span> <span class="n">regex</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
         <span class="n">count</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-        <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;{b}_{c}{e}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="n">base</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">count</span><span class="p">,</span> <span class="n">e</span><span class="o">=</span><span class="n">extension</span><span class="p">)</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;{b}_{c}{e}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="n">base</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">count</span><span class="p">,</span> <span class="n">e</span><span class="o">=</span><span class="n">extension</span><span class="p">)</span>
 
     <span class="k">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="code highlight-python"><div class="highlight"><pre><span class="n">innagaddadavida</span><span class="o">.</span><span class="n">txt</span>
+<div class="code highlight-python"><div class="highlight"><pre><span></span><span class="n">innagaddadavida</span><span class="o">.</span><span class="n">txt</span>
 </pre></div>
 </div>
 </div>
@@ -291,28 +291,28 @@ FileStorage : __iter__" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.storage.filestorage.FileStorage.html#theape.parts.storage.filestorage.FileStorage" title="theape.parts.storage.filestorage.FileStorage"><tt class="xref py py-obj docutils literal"><span class="pre">FileStorage</span></tt></a>([path,&nbsp;timestamp,&nbsp;name,&nbsp;...])</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.storage.filestorage.FileStorage.html#theape.parts.storage.filestorage.FileStorage" title="theape.parts.storage.filestorage.FileStorage"><code class="xref py py-obj docutils literal"><span class="pre">FileStorage</span></code></a>([path,&nbsp;timestamp,&nbsp;name,&nbsp;...])</td>
 <td>A class to store data to a file</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.storage.filestorage.FileStorage.path.html#theape.parts.storage.filestorage.FileStorage.path" title="theape.parts.storage.filestorage.FileStorage.path"><tt class="xref py py-obj docutils literal"><span class="pre">FileStorage.path</span></tt></a></td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.storage.filestorage.FileStorage.path.html#theape.parts.storage.filestorage.FileStorage.path" title="theape.parts.storage.filestorage.FileStorage.path"><code class="xref py py-obj docutils literal"><span class="pre">FileStorage.path</span></code></a></td>
 <td>The path to prepend to files (cwd if not set by client)</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.storage.filestorage.FileStorage.safe_name.html#theape.parts.storage.filestorage.FileStorage.safe_name" title="theape.parts.storage.filestorage.FileStorage.safe_name"><tt class="xref py py-obj docutils literal"><span class="pre">FileStorage.safe_name</span></tt></a>(name[,&nbsp;overwrite])</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.storage.filestorage.FileStorage.safe_name.html#theape.parts.storage.filestorage.FileStorage.safe_name" title="theape.parts.storage.filestorage.FileStorage.safe_name"><code class="xref py py-obj docutils literal"><span class="pre">FileStorage.safe_name</span></code></a>(name[,&nbsp;overwrite])</td>
 <td>Adds a timestamp if formatted for it, increments if already exists</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.storage.filestorage.FileStorage.open.html#theape.parts.storage.filestorage.FileStorage.open" title="theape.parts.storage.filestorage.FileStorage.open"><tt class="xref py py-obj docutils literal"><span class="pre">FileStorage.open</span></tt></a>(name[,&nbsp;overwrite,&nbsp;mode,&nbsp;...])</td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.storage.filestorage.FileStorage.open.html#theape.parts.storage.filestorage.FileStorage.open" title="theape.parts.storage.filestorage.FileStorage.open"><code class="xref py py-obj docutils literal"><span class="pre">FileStorage.open</span></code></a>(name[,&nbsp;overwrite,&nbsp;mode,&nbsp;...])</td>
 <td>Opens a file for writing</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.storage.filestorage.FileStorage.close.html#theape.parts.storage.filestorage.FileStorage.close" title="theape.parts.storage.filestorage.FileStorage.close"><tt class="xref py py-obj docutils literal"><span class="pre">FileStorage.close</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.storage.filestorage.FileStorage.close.html#theape.parts.storage.filestorage.FileStorage.close" title="theape.parts.storage.filestorage.FileStorage.close"><code class="xref py py-obj docutils literal"><span class="pre">FileStorage.close</span></code></a>()</td>
 <td>Closes self.file if it exists, sets self.closed to True</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.storage.filestorage.FileStorage.write.html#theape.parts.storage.filestorage.FileStorage.write" title="theape.parts.storage.filestorage.FileStorage.write"><tt class="xref py py-obj docutils literal"><span class="pre">FileStorage.write</span></tt></a>(text[,&nbsp;exceptions])</td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.storage.filestorage.FileStorage.write.html#theape.parts.storage.filestorage.FileStorage.write" title="theape.parts.storage.filestorage.FileStorage.write"><code class="xref py py-obj docutils literal"><span class="pre">FileStorage.write</span></code></a>(text[,&nbsp;exceptions])</td>
 <td>Writes the text to the file</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.storage.filestorage.FileStorage.writeline.html#theape.parts.storage.filestorage.FileStorage.writeline" title="theape.parts.storage.filestorage.FileStorage.writeline"><tt class="xref py py-obj docutils literal"><span class="pre">FileStorage.writeline</span></tt></a>(text)</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.parts.storage.filestorage.FileStorage.writeline.html#theape.parts.storage.filestorage.FileStorage.writeline" title="theape.parts.storage.filestorage.FileStorage.writeline"><code class="xref py py-obj docutils literal"><span class="pre">FileStorage.writeline</span></code></a>(text)</td>
 <td>Adds newline to end of text and writes it to the file</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.storage.filestorage.FileStorage.writelines.html#theape.parts.storage.filestorage.FileStorage.writelines" title="theape.parts.storage.filestorage.FileStorage.writelines"><tt class="xref py py-obj docutils literal"><span class="pre">FileStorage.writelines</span></tt></a>(texts[,&nbsp;exceptions])</td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.parts.storage.filestorage.FileStorage.writelines.html#theape.parts.storage.filestorage.FileStorage.writelines" title="theape.parts.storage.filestorage.FileStorage.writelines"><code class="xref py py-obj docutils literal"><span class="pre">FileStorage.writelines</span></code></a>(texts[,&nbsp;exceptions])</td>
 <td>Writes the lines to the file</td>
 </tr>
 </tbody>
@@ -329,18 +329,18 @@ FileStorage : __iter__" />
 <li>timestamp</li>
 </ul>
 </div></blockquote>
-<p>The <tt class="docutils literal"><span class="pre">path</span></tt> is the main reason for using the <tt class="docutils literal"><span class="pre">FileStorage</span></tt> &#8211; by keeping it persistent it frees the users of the <tt class="docutils literal"><span class="pre">FileStorage</span></tt> from having to know about sub-folders. The <tt class="docutils literal"><span class="pre">timestamp</span></tt> is a <cite>strftime</cite> string-format. The default is stored in the global-space of this module as a constant called <tt class="docutils literal"><span class="pre">FILE_TIMESTAMP</span></tt>.</p>
+<p>The <code class="docutils literal"><span class="pre">path</span></code> is the main reason for using the <code class="docutils literal"><span class="pre">FileStorage</span></code> &#8211; by keeping it persistent it frees the users of the <code class="docutils literal"><span class="pre">FileStorage</span></code> from having to know about sub-folders. The <code class="docutils literal"><span class="pre">timestamp</span></code> is a <cite>strftime</cite> string-format. The default is stored in the global-space of this module as a constant called <code class="docutils literal"><span class="pre">FILE_TIMESTAMP</span></code>.</p>
 </div>
 <div class="section" id="the-open-method">
-<h3>The <tt class="docutils literal"><span class="pre">open</span></tt> Method<a class="headerlink" href="#the-open-method" title="Permalink to this headline">¶</a></h3>
-<p>The <tt class="docutils literal"><span class="pre">open</span></tt> method is where things get kind of different from a regular file (and may not be a good idea if examined too closely). In order to preserve the path a copy of the <tt class="docutils literal"><span class="pre">FileStorage</span></tt> is created and a new opened-file is added to it before returning the copy.</p>
+<h3>The <code class="docutils literal"><span class="pre">open</span></code> Method<a class="headerlink" href="#the-open-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">open</span></code> method is where things get kind of different from a regular file (and may not be a good idea if examined too closely). In order to preserve the path a copy of the <code class="docutils literal"><span class="pre">FileStorage</span></code> is created and a new opened-file is added to it before returning the copy.</p>
 <p>Path:</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li>Append an integer if needed (or asked for) to requested filename to prevent over-writing an existing file with the same name</li>
 <li>Create a copy of the FileStorage</li>
 <li>Open a writeable file-object using the (possibly fixed) filename</li>
-<li>Set the FileStorage copy&#8217;s <tt class="docutils literal"><span class="pre">file</span></tt> attribute to the opened file</li>
+<li>Set the FileStorage copy&#8217;s <code class="docutils literal"><span class="pre">file</span></code> attribute to the opened file</li>
 <li>Set the mode for the FileStorage copy</li>
 <li>Set the <cite>closed</cite> attribute of the copy to False</li>
 <li>Return the new FileStorage copy</li>
@@ -369,7 +369,7 @@ Is pylint installed?
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

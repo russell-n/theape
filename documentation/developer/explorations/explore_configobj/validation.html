@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
     <link rel="up" title="Exploring ConfigObj" href="index.html" />
@@ -38,7 +38,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -111,11 +111,11 @@
               
                 
   <li>
-    <a href="api/ape.infrastructure.timemap.AbsoluteTime.html" title="Previous Chapter: ape.infrastructure.timemap.AbsoluteTime"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; ape.infrastructu...</span>
+    <a href="api/ape.infrastructure.timemap.AbsoluteTime.html" title="Previous Chapter: ape.infrastructure.timemap.AbsoluteTime"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; ape.infrastru...</span>
     </a>
   </li>
   <li>
-    <a href="api/validate.Validator.html" title="Next Chapter: validate.Validator"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">validate.Validat... &raquo;</span>
+    <a href="api/validate.Validator.html" title="Next Chapter: validate.Validator"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">validate.Vali... &raquo;</span>
     </a>
   </li>
               
@@ -147,7 +147,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="validation">
 <h1>Validation<a class="headerlink" href="#validation" title="Permalink to this headline">¶</a></h1>
@@ -155,7 +155,7 @@
 <div class="section" id="getting-section-names">
 <h2>Getting Section Names<a class="headerlink" href="#getting-section-names" title="Permalink to this headline">¶</a></h2>
 <p>The idea for the ape is that the top-level config will look something like:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">APE</span><span class="p">]</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">APE</span><span class="p">]</span>
 <span class="n">op1</span> <span class="o">=</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span>
 <span class="n">o2</span> <span class="o">=</span> <span class="n">p4</span><span class="p">,</span> <span class="n">p5</span>
 </pre></div>
@@ -168,10 +168,10 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/validate.Validator.html#validate.Validator" title="validate.Validator"><tt class="xref py py-obj docutils literal"><span class="pre">Validator</span></tt></a>([functions])</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/validate.Validator.html#validate.Validator" title="validate.Validator"><code class="xref py py-obj docutils literal"><span class="pre">Validator</span></code></a>([functions])</td>
 <td>Validator is an object that allows you to register a set of &#8216;checks&#8217;.</td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">string_list</span></tt></td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">string_list</span></code></td>
 <td></td>
 </tr>
 </tbody>
@@ -182,26 +182,26 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/configobj.ConfigObj.html#configobj.ConfigObj" title="configobj.ConfigObj"><tt class="xref py py-obj docutils literal"><span class="pre">ConfigObj</span></tt></a>([infile,&nbsp;options,&nbsp;configspec,&nbsp;...])</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/configobj.ConfigObj.html#configobj.ConfigObj" title="configobj.ConfigObj"><code class="xref py py-obj docutils literal"><span class="pre">ConfigObj</span></code></a>([infile,&nbsp;options,&nbsp;configspec,&nbsp;...])</td>
 <td>An object to read, create, and write config files.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/configobj.ConfigObj.validate.html#configobj.ConfigObj.validate" title="configobj.ConfigObj.validate"><tt class="xref py py-obj docutils literal"><span class="pre">ConfigObj.validate</span></tt></a>(validator[,&nbsp;...])</td>
+<tr class="row-even"><td><a class="reference internal" href="api/configobj.ConfigObj.validate.html#configobj.ConfigObj.validate" title="configobj.ConfigObj.validate"><code class="xref py py-obj docutils literal"><span class="pre">ConfigObj.validate</span></code></a>(validator[,&nbsp;...])</td>
 <td>Test the ConfigObj against a configspec.</td>
 </tr>
 </tbody>
 </table>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">configuration</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">[APE]</span>
-<span class="s">operation_1 = plugin1, plugin2</span>
-<span class="s">operation_2 = plugin3</span>
-<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">configuration</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[APE]</span>
+<span class="s2">operation_1 = plugin1, plugin2</span>
+<span class="s2">operation_2 = plugin3</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Now the configspec to match.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">spec</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">[APE]</span>
-<span class="s">__many__ = string_list</span>
-<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">spec</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[APE]</span>
+<span class="s2">__many__ = string_list</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 
 <span class="n">config_spec</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span>
                         <span class="n">list_values</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
@@ -210,19 +210,19 @@
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">The <tt class="docutils literal"><span class="pre">list_values</span></tt> and <tt class="docutils literal"><span class="pre">_inspec</span></tt> arguments need to be set the way they are shown here. If they aren&#8217;t type-casting will work for basic python types (integers, floats, strings) but none of the list-based validators will work.</p>
+<p class="last">The <code class="docutils literal"><span class="pre">list_values</span></code> and <code class="docutils literal"><span class="pre">_inspec</span></code> arguments need to be set the way they are shown here. If they aren&#8217;t type-casting will work for basic python types (integers, floats, strings) but none of the list-based validators will work.</p>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">config</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">configuration</span><span class="p">,</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">configuration</span><span class="p">,</span>
                    <span class="n">configspec</span><span class="o">=</span><span class="n">config_spec</span><span class="p">)</span>
 
 <span class="n">validator</span> <span class="o">=</span> <span class="n">Validator</span><span class="p">()</span>
 <span class="n">config</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">validator</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;APE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
-    <span class="k">print</span> <span class="s">&quot;{0}: ({1}) {2}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;APE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s2">&quot;{0}: ({1}) {2}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>operation_1: (&lt;type &#39;list&#39;&gt;) [&#39;plugin1&#39;, &#39;plugin2&#39;]
+<div class="highlight-python"><div class="highlight"><pre><span></span>operation_1: (&lt;type &#39;list&#39;&gt;) [&#39;plugin1&#39;, &#39;plugin2&#39;]
 operation_2: (&lt;type &#39;str&#39;&gt;) plugin3
 </pre></div>
 </div>
@@ -233,15 +233,15 @@ operation_2: (&lt;type &#39;str&#39;&gt;) plugin3
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/validate.force_list.html#validate.force_list" title="validate.force_list"><tt class="xref py py-obj docutils literal"><span class="pre">force_list</span></tt></a>(value[,&nbsp;min,&nbsp;max])</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/validate.force_list.html#validate.force_list" title="validate.force_list"><code class="xref py py-obj docutils literal"><span class="pre">force_list</span></code></a>(value[,&nbsp;min,&nbsp;max])</td>
 <td>Check that a value is a list, coercing strings into a list with one member.</td>
 </tr>
 </tbody>
 </table>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">spec</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">[APE]</span>
-<span class="s">__many__ = force_list</span>
-<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">spec</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[APE]</span>
+<span class="s2">__many__ = force_list</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 
 <span class="n">config_spec</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span>
                         <span class="n">list_values</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
@@ -251,11 +251,11 @@ operation_2: (&lt;type &#39;str&#39;&gt;) plugin3
                    <span class="n">configspec</span><span class="o">=</span><span class="n">config_spec</span><span class="p">)</span>
 <span class="n">config</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">validator</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;APE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
-    <span class="k">print</span> <span class="s">&quot;{0}: ({1}) {2}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;APE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s2">&quot;{0}: ({1}) {2}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>operation_1: (&lt;type &#39;list&#39;&gt;) [&#39;plugin1&#39;, &#39;plugin2&#39;]
+<div class="highlight-python"><div class="highlight"><pre><span></span>operation_1: (&lt;type &#39;list&#39;&gt;) [&#39;plugin1&#39;, &#39;plugin2&#39;]
 operation_2: (&lt;type &#39;list&#39;&gt;) [&#39;plugin3&#39;]
 </pre></div>
 </div>
@@ -265,36 +265,36 @@ operation_2: (&lt;type &#39;list&#39;&gt;) [&#39;plugin3&#39;]
 <h2>APE Settings<a class="headerlink" href="#ape-settings" title="Permalink to this headline">¶</a></h2>
 <p>My original thought was that the <cite>APE</cite> section would be kept for the plugin lists and there would be a separate section for other settings (perhaps called SETTINGS). But if validation is used, this might not be necessary. Let&#8217;s see.</p>
 <p>Here&#8217;s the new configuration.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">configuration</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">[APE]</span>
-<span class="s"># the settings</span>
-<span class="s">## modules is a list of external modules with plugins</span>
-<span class="s">modules = fakemod, othermod</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">configuration</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[APE]</span>
+<span class="s2"># the settings</span>
+<span class="s2">## modules is a list of external modules with plugins</span>
+<span class="s2">modules = fakemod, othermod</span>
 
-<span class="s"># config_glob is a glob to find other configuration files to add to this one</span>
-<span class="s">config_glob = settings*.config</span>
+<span class="s2"># config_glob is a glob to find other configuration files to add to this one</span>
+<span class="s2">config_glob = settings*.config</span>
 
-<span class="s"># repetitions is the number of times to repeat this configuration</span>
-<span class="s">repetitions = 100000</span>
+<span class="s2"># repetitions is the number of times to repeat this configuration</span>
+<span class="s2">repetitions = 100000</span>
 
-<span class="s"># subfolder is a place for output files</span>
-<span class="s">subfolder = output</span>
+<span class="s2"># subfolder is a place for output files</span>
+<span class="s2">subfolder = output</span>
 
-<span class="s"># the plugins</span>
-<span class="s">operation_1 = plugin1, plugin2</span>
-<span class="s">operation_2 = plugin3</span>
-<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<span class="s2"># the plugins</span>
+<span class="s2">operation_1 = plugin1, plugin2</span>
+<span class="s2">operation_2 = plugin3</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>And the new configspec.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">spec</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">[APE]</span>
-<span class="s">modules = force_list</span>
-<span class="s">config_glob = string</span>
-<span class="s">repetitions = integer</span>
-<span class="s">subfolder = string</span>
-<span class="s">__many__ = force_list</span>
-<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">spec</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[APE]</span>
+<span class="s2">modules = force_list</span>
+<span class="s2">config_glob = string</span>
+<span class="s2">repetitions = integer</span>
+<span class="s2">subfolder = string</span>
+<span class="s2">__many__ = force_list</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 
 <span class="n">config_spec</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span>
                         <span class="n">list_values</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
@@ -304,11 +304,11 @@ operation_2: (&lt;type &#39;list&#39;&gt;) [&#39;plugin3&#39;]
                    <span class="n">configspec</span><span class="o">=</span><span class="n">config_spec</span><span class="p">)</span>
 <span class="n">config</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">validator</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;APE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
-    <span class="k">print</span> <span class="s">&quot;{0}: ({1}) {2}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;APE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s2">&quot;{0}: ({1}) {2}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>modules: (&lt;type &#39;list&#39;&gt;) [&#39;fakemod&#39;, &#39;othermod&#39;]
+<div class="highlight-python"><div class="highlight"><pre><span></span>modules: (&lt;type &#39;list&#39;&gt;) [&#39;fakemod&#39;, &#39;othermod&#39;]
 config_glob: (&lt;type &#39;str&#39;&gt;) settings*.config
 repetitions: (&lt;type &#39;int&#39;&gt;) 100000
 subfolder: (&lt;type &#39;str&#39;&gt;) output
@@ -322,13 +322,13 @@ operation_2: (&lt;type &#39;list&#39;&gt;) [&#39;plugin3&#39;]
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/validate.force_list.html#validate.force_list" title="validate.force_list"><tt class="xref py py-obj docutils literal"><span class="pre">force_list</span></tt></a>(value[,&nbsp;min,&nbsp;max])</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/validate.force_list.html#validate.force_list" title="validate.force_list"><code class="xref py py-obj docutils literal"><span class="pre">force_list</span></code></a>(value[,&nbsp;min,&nbsp;max])</td>
 <td>Check that a value is a list, coercing strings into a list with one member.</td>
 </tr>
-<tr class="row-even"><td><a class="reference external" href="http://docs.python.org/library/string.html#module-string" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">string</span></tt></a></td>
+<tr class="row-even"><td><a class="reference external" href="http://docs.python.org/library/string.html#module-string" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">string</span></code></a></td>
 <td>A collection of string operations (most are no longer used).</td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">integer</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">integer</span></code></td>
 <td></td>
 </tr>
 </tbody>
@@ -337,29 +337,29 @@ operation_2: (&lt;type &#39;list&#39;&gt;) [&#39;plugin3&#39;]
 <div class="section" id="the-plugin-section">
 <h2>The Plugin Section<a class="headerlink" href="#the-plugin-section" title="Permalink to this headline">¶</a></h2>
 <p>So far, so good, but so what? The idea is that we get the sub-sections from the APE section and then validate them separately.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">plugin_config</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">[APE]</span>
-<span class="s">op = p1, p2, p3</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">plugin_config</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[APE]</span>
+<span class="s2">op = p1, p2, p3</span>
 
-<span class="s">[[p1]]</span>
-<span class="s">plugin = Fake</span>
-<span class="s">ages = 12, 15</span>
+<span class="s2">[[p1]]</span>
+<span class="s2">plugin = Fake</span>
+<span class="s2">ages = 12, 15</span>
 
-<span class="s">[[p2]]</span>
-<span class="s">plugin = Fake</span>
-<span class="s">ages = 10</span>
+<span class="s2">[[p2]]</span>
+<span class="s2">plugin = Fake</span>
+<span class="s2">ages = 10</span>
 
-<span class="s">[[p3]]</span>
-<span class="s">plugin = NotFake</span>
-<span class="s">age = 12</span>
-<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<span class="s2">[[p3]]</span>
+<span class="s2">plugin = NotFake</span>
+<span class="s2">age = 12</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>The APE configspec.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">ape_spec</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">[APE]</span>
-<span class="s">__many__ = force_list</span>
-<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ape_spec</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[APE]</span>
+<span class="s2">__many__ = force_list</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 
 <span class="n">ape_config_spec</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">ape_spec</span><span class="p">,</span>
                         <span class="n">list_values</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
@@ -367,10 +367,10 @@ operation_2: (&lt;type &#39;list&#39;&gt;) [&#39;plugin3&#39;]
 </pre></div>
 </div>
 <p>The Plugin configspec.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">plugin_spec</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">plugin = string</span>
-<span class="s">ages = float_list</span>
-<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">plugin_spec</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">plugin = string</span>
+<span class="s2">ages = float_list</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 
 <span class="n">plugin_config_spec</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">plugin_spec</span><span class="p">,</span>
                         <span class="n">list_values</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
@@ -378,27 +378,27 @@ operation_2: (&lt;type &#39;list&#39;&gt;) [&#39;plugin3&#39;]
 </pre></div>
 </div>
 <p>Now the configuration check.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">config</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">plugin_config</span><span class="p">,</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">plugin_config</span><span class="p">,</span>
                    <span class="n">configspec</span><span class="o">=</span><span class="n">config_spec</span><span class="p">)</span>
 <span class="n">config</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">validator</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>And the outcome.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">ape_config</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;APE&quot;</span><span class="p">]</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ape_config</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;APE&quot;</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">op_name</span><span class="p">,</span> <span class="n">sub_sections</span> <span class="ow">in</span> <span class="n">ape_config</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
-    <span class="k">print</span> <span class="s">&quot;OP name: &quot;</span><span class="p">,</span> <span class="n">op_name</span>
+    <span class="k">print</span> <span class="s2">&quot;OP name: &quot;</span><span class="p">,</span> <span class="n">op_name</span>
     <span class="k">for</span> <span class="n">section_name</span> <span class="ow">in</span> <span class="n">sub_sections</span><span class="p">:</span>
-        <span class="c">#section = ape_config[section_name]</span>
-        <span class="c">#plugin_name = section[&#39;plugin&#39;]</span>
-        <span class="c">#ages = section[&#39;ages&#39;]</span>
+        <span class="c1">#section = ape_config[section_name]</span>
+        <span class="c1">#plugin_name = section[&#39;plugin&#39;]</span>
+        <span class="c1">#ages = section[&#39;ages&#39;]</span>
 
-        <span class="k">print</span> <span class="s">&quot;    Section: &quot;</span><span class="p">,</span> <span class="n">section_name</span>
-        <span class="c">#print plugin_name</span>
-        <span class="c">#print ages</span>
-        <span class="c">#print section.get_extra_values()</span>
+        <span class="k">print</span> <span class="s2">&quot;    Section: &quot;</span><span class="p">,</span> <span class="n">section_name</span>
+        <span class="c1">#print plugin_name</span>
+        <span class="c1">#print ages</span>
+        <span class="c1">#print section.get_extra_values()</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>OP name:  op
+<div class="highlight-python"><div class="highlight"><pre><span></span>OP name:  op
     Section:  p1
     Section:  p2
     Section:  p3
@@ -437,38 +437,38 @@ PLUGINS -&gt; plugin3
 }" />
 </p>
 <p>So first a new-configuration matching the tree.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">ape_config</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">[SETTINGS]</span>
-<span class="s">repetitions = 1</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ape_config</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[SETTINGS]</span>
+<span class="s2">repetitions = 1</span>
 
-<span class="s">[OPERATIONS]</span>
-<span class="s">some_op = p1, p2</span>
-<span class="s">another_op = p3</span>
+<span class="s2">[OPERATIONS]</span>
+<span class="s2">some_op = p1, p2</span>
+<span class="s2">another_op = p3</span>
 
-<span class="s">[PLUGINS]</span>
-<span class="s"> [[p1]]</span>
-<span class="s"> plugin = Fake</span>
-<span class="s"> ages = 1,2</span>
+<span class="s2">[PLUGINS]</span>
+<span class="s2"> [[p1]]</span>
+<span class="s2"> plugin = Fake</span>
+<span class="s2"> ages = 1,2</span>
 
-<span class="s"> [[p2]]</span>
-<span class="s"> plugin = Fake</span>
-<span class="s"> ages = 4</span>
+<span class="s2"> [[p2]]</span>
+<span class="s2"> plugin = Fake</span>
+<span class="s2"> ages = 4</span>
 
-<span class="s"> [[p3]]</span>
-<span class="s"> plugin = NotFake</span>
-<span class="s"> age = 12</span>
-<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<span class="s2"> [[p3]]</span>
+<span class="s2"> plugin = NotFake</span>
+<span class="s2"> age = 12</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>And a new configspec for the sections.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">ape_spec</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">[OPERATIONS]</span>
-<span class="s">__many__ = force_list</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ape_spec</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">[OPERATIONS]</span>
+<span class="s2">__many__ = force_list</span>
 
-<span class="s">[SETTINGS]</span>
-<span class="s">repetitions = integer(default=1)</span>
-<span class="s">girth = float(min=0, max=12,default=6)</span>
-<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<span class="s2">[SETTINGS]</span>
+<span class="s2">repetitions = integer(default=1)</span>
+<span class="s2">girth = float(min=0, max=12,default=6)</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 
 <span class="n">ape_config_spec</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">ape_spec</span><span class="p">,</span>
                         <span class="n">list_values</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
@@ -476,29 +476,29 @@ PLUGINS -&gt; plugin3
 </pre></div>
 </div>
 <p>Now the configuration check.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">config</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">ape_config</span><span class="p">,</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">ape_config</span><span class="p">,</span>
                    <span class="n">configspec</span><span class="o">=</span><span class="n">ape_config_spec</span><span class="p">)</span>
 <span class="n">config</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">validator</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>And the outcome.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">op_name</span><span class="p">,</span> <span class="n">sub_sections</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;OPERATIONS&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
-    <span class="k">print</span> <span class="s">&quot;OP name: &quot;</span><span class="p">,</span> <span class="n">op_name</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">op_name</span><span class="p">,</span> <span class="n">sub_sections</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;OPERATIONS&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s2">&quot;OP name: &quot;</span><span class="p">,</span> <span class="n">op_name</span>
     <span class="k">for</span> <span class="n">section_name</span> <span class="ow">in</span> <span class="n">sub_sections</span><span class="p">:</span>
-        <span class="n">section</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;PLUGINS&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">]</span>
-        <span class="n">plugin_name</span> <span class="o">=</span> <span class="n">section</span><span class="p">[</span><span class="s">&#39;plugin&#39;</span><span class="p">]</span>
+        <span class="n">section</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;PLUGINS&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">]</span>
+        <span class="n">plugin_name</span> <span class="o">=</span> <span class="n">section</span><span class="p">[</span><span class="s1">&#39;plugin&#39;</span><span class="p">]</span>
 
-        <span class="k">print</span> <span class="s">&quot;    Section: &quot;</span><span class="p">,</span> <span class="n">section_name</span>
-        <span class="k">print</span> <span class="s">&quot;       Plugin: &quot;</span><span class="p">,</span> <span class="n">plugin_name</span>
+        <span class="k">print</span> <span class="s2">&quot;    Section: &quot;</span><span class="p">,</span> <span class="n">section_name</span>
+        <span class="k">print</span> <span class="s2">&quot;       Plugin: &quot;</span><span class="p">,</span> <span class="n">plugin_name</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">ages</span> <span class="o">=</span> <span class="n">section</span><span class="p">[</span><span class="s">&#39;ages&#39;</span><span class="p">]</span>
-            <span class="k">print</span> <span class="s">&quot;       ages:&quot;</span><span class="p">,</span> <span class="n">ages</span>
+            <span class="n">ages</span> <span class="o">=</span> <span class="n">section</span><span class="p">[</span><span class="s1">&#39;ages&#39;</span><span class="p">]</span>
+            <span class="k">print</span> <span class="s2">&quot;       ages:&quot;</span><span class="p">,</span> <span class="n">ages</span>
         <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-            <span class="k">print</span> <span class="s">&quot;            KeyError: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+            <span class="k">print</span> <span class="s2">&quot;            KeyError: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
 <span class="k">print</span> <span class="n">configobj</span><span class="o">.</span><span class="n">get_extra_values</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>OP name:  some_op
+<div class="highlight-python"><div class="highlight"><pre><span></span>OP name:  some_op
     Section:  p1
        Plugin:  Fake
        ages: [&#39;1&#39;, &#39;2&#39;]
@@ -518,16 +518,16 @@ OP name:  another_op
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/configobj.get_extra_values.html#configobj.get_extra_values" title="configobj.get_extra_values"><tt class="xref py py-obj docutils literal"><span class="pre">get_extra_values</span></tt></a>(conf[,&nbsp;_prepend])</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/configobj.get_extra_values.html#configobj.get_extra_values" title="configobj.get_extra_values"><code class="xref py py-obj docutils literal"><span class="pre">get_extra_values</span></code></a>(conf[,&nbsp;_prepend])</td>
 <td>Find all the values and sections not in the configspec from a validated ConfigObj.</td>
 </tr>
 </tbody>
 </table>
 <p>What may not be so obvious from the output was that this actually failed &#8211; I never used the plugin-configspec. One more time</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">op_name</span><span class="p">,</span> <span class="n">sub_sections</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;OPERATIONS&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
-    <span class="k">print</span> <span class="s">&quot;OP name: &quot;</span><span class="p">,</span> <span class="n">op_name</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">op_name</span><span class="p">,</span> <span class="n">sub_sections</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;OPERATIONS&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s2">&quot;OP name: &quot;</span><span class="p">,</span> <span class="n">op_name</span>
     <span class="k">for</span> <span class="n">section_name</span> <span class="ow">in</span> <span class="n">sub_sections</span><span class="p">:</span>
-        <span class="n">section</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;PLUGINS&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">]</span>
+        <span class="n">section</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;PLUGINS&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">]</span>
 
         <span class="n">section</span><span class="o">.</span><span class="n">configspec</span> <span class="o">=</span> <span class="n">plugin_config_spec</span>
         <span class="k">try</span><span class="p">:</span>
@@ -537,38 +537,38 @@ OP name:  another_op
             <span class="k">break</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>OP name:  some_op
+<div class="highlight-python"><div class="highlight"><pre><span></span>OP name:  some_op
 &#39;Section&#39; object has no attribute &#39;validate&#39;
 OP name:  another_op
 &#39;Section&#39; object has no attribute &#39;validate&#39;
 </pre></div>
 </div>
 <p>So, once again we have a problem. I can get the section but it&#8217;s a Section, not a ConfigObj object so it doesn&#8217;t validate.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">op_name</span><span class="p">,</span> <span class="n">sub_sections</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;OPERATIONS&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
-    <span class="k">print</span> <span class="s">&quot;OP name: &quot;</span><span class="p">,</span> <span class="n">op_name</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">op_name</span><span class="p">,</span> <span class="n">sub_sections</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;OPERATIONS&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s2">&quot;OP name: &quot;</span><span class="p">,</span> <span class="n">op_name</span>
     <span class="k">for</span> <span class="n">section_name</span> <span class="ow">in</span> <span class="n">sub_sections</span><span class="p">:</span>
-        <span class="n">section</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;PLUGINS&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">]</span>
-        <span class="c"># cross your fingers</span>
+        <span class="n">section</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;PLUGINS&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">]</span>
+        <span class="c1"># cross your fingers</span>
         <span class="n">section</span> <span class="o">=</span> <span class="n">ConfigObj</span><span class="p">(</span><span class="n">section</span><span class="p">,</span>
                             <span class="n">configspec</span><span class="o">=</span><span class="n">plugin_config_spec</span><span class="p">)</span>
 
         <span class="n">section</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">validator</span><span class="p">)</span>
-        <span class="n">plugin_name</span> <span class="o">=</span> <span class="n">section</span><span class="p">[</span><span class="s">&#39;plugin&#39;</span><span class="p">]</span>
+        <span class="n">plugin_name</span> <span class="o">=</span> <span class="n">section</span><span class="p">[</span><span class="s1">&#39;plugin&#39;</span><span class="p">]</span>
 
-        <span class="k">print</span> <span class="s">&quot;    Section: &quot;</span><span class="p">,</span> <span class="n">section_name</span>
-        <span class="k">print</span> <span class="s">&quot;       Plugin: &quot;</span><span class="p">,</span> <span class="n">plugin_name</span>
+        <span class="k">print</span> <span class="s2">&quot;    Section: &quot;</span><span class="p">,</span> <span class="n">section_name</span>
+        <span class="k">print</span> <span class="s2">&quot;       Plugin: &quot;</span><span class="p">,</span> <span class="n">plugin_name</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">ages</span> <span class="o">=</span> <span class="n">section</span><span class="p">[</span><span class="s">&#39;ages&#39;</span><span class="p">]</span>
-            <span class="k">print</span> <span class="s">&quot;       ages:&quot;</span><span class="p">,</span> <span class="n">ages</span>
+            <span class="n">ages</span> <span class="o">=</span> <span class="n">section</span><span class="p">[</span><span class="s1">&#39;ages&#39;</span><span class="p">]</span>
+            <span class="k">print</span> <span class="s2">&quot;       ages:&quot;</span><span class="p">,</span> <span class="n">ages</span>
         <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-            <span class="k">print</span> <span class="s">&quot;            KeyError: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+            <span class="k">print</span> <span class="s2">&quot;            KeyError: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
             <span class="n">extras</span> <span class="o">=</span> <span class="n">configobj</span><span class="o">.</span><span class="n">get_extra_values</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">extra</span> <span class="ow">in</span> <span class="n">extras</span><span class="p">:</span>
-                <span class="k">print</span> <span class="s">&quot;option &#39;ages&#39; in section &#39;{1}&#39; was specified instead as &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">extra</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="k">print</span> <span class="s2">&quot;option &#39;ages&#39; in section &#39;{1}&#39; was specified instead as &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">extra</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
                                                                                             <span class="n">section_name</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>OP name:  some_op
+<div class="highlight-python"><div class="highlight"><pre><span></span>OP name:  some_op
     Section:  p1
        Plugin:  Fake
        ages: [1.0, 2.0]
@@ -598,7 +598,7 @@ option &#39;ages&#39; in section &#39;p3&#39; was specified instead as &#39;age&
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

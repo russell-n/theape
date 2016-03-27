@@ -6,7 +6,7 @@ TheApe
 
 
 
-This is an re-creation of an older framework using a rudimentary plugin system to make it easier to extend and  and to allow the user to run external code within it (provided that a plugin has been made for it).
+This is a device-testing framework with a rudimentary plugin system to make it easier to extend and to enable the user to run (with limitations) external code within it, provided that a plugin has been made for it. The code is on `github <https://github.com/russellnakamura/theape>`_.
 
 Written Documentation
 ---------------------

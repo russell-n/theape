@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>theape.parts.wifi.iwconfig &mdash; The Ape 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../../../index.html">
+          The Ape</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.0.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../documentation/user/index.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../documentation/developer/index.html">Developer Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../log_setter.html">Log Setter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../main.html">The Main Entry Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html">The APE (Read Me)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../components/index.html">The Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../infrastructure/index.html">The Ape&#8217;s Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../parts/index.html">Parts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../plugins/index.html">Plugins</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"></ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <h1>Source code for theape.parts.wifi.iwconfig</h1><div class="highlight"><pre>
+<span></span>
+<span class="c1"># The MIT License (MIT)</span>
+<span class="c1"># </span>
+<span class="c1"># Copyright (c) 2013 Russell Nakamura</span>
+<span class="c1"># </span>
+<span class="c1"># Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+<span class="c1"># of this software and associated documentation files (the &quot;Software&quot;), to deal</span>
+<span class="c1"># in the Software without restriction, including without limitation the rights</span>
+<span class="c1"># to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span>
+<span class="c1"># copies of the Software, and to permit persons to whom the Software is</span>
+<span class="c1"># furnished to do so, subject to the following conditions:</span>
+<span class="c1"># </span>
+<span class="c1"># The above copyright notice and this permission notice shall be included in</span>
+<span class="c1"># all copies or substantial portions of the Software.</span>
+<span class="c1"># </span>
+<span class="c1"># THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="c1"># IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="c1"># AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="c1"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
+<span class="c1"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN</span>
+<span class="c1"># THE SOFTWARE.</span>
+
+<span class="c1"># python standard library</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="c1"># this package</span>
+<span class="kn">from</span> <span class="nn">theape</span> <span class="kn">import</span> <span class="n">BaseClass</span><span class="p">,</span> <span class="n">ApeError</span>
+<span class="kn">from</span> <span class="nn">theape.parts.eventtimer</span> <span class="kn">import</span> <span class="n">EventTimer</span>
+<span class="kn">from</span> <span class="nn">theape.parts</span> <span class="kn">import</span> <span class="n">oatbran</span>
+
+<span class="n">DECIBEL_MILLIWATTS</span> <span class="o">=</span> <span class="s1">&#39;dBm&#39;</span>
+<span class="n">KILO_MEGA_GIGA</span> <span class="o">=</span> <span class="s1">&#39;kMG&#39;</span>
+<span class="n">HERZ</span> <span class="o">=</span> <span class="s1">&#39;Hz&#39;</span>
+<span class="n">BITS_PER_SECOND</span> <span class="o">=</span> <span class="s1">&#39;b/s&#39;</span>
+
+<span class="k">class</span> <span class="nc">IwconfigEnum</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    names for the regular expressions</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__slots__</span> <span class="o">=</span> <span class="p">()</span>
+    <span class="n">essid</span> <span class="o">=</span> <span class="s1">&#39;essid&#39;</span>
+    <span class="n">mac_protocol</span> <span class="o">=</span> <span class="s1">&#39;mac_protocol&#39;</span>
+    <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;mode&#39;</span>
+    <span class="n">frequency</span> <span class="o">=</span> <span class="s1">&#39;frequency&#39;</span>
+    <span class="n">access_point</span> <span class="o">=</span> <span class="s1">&#39;access_point&#39;</span>
+    <span class="n">bit_rate</span> <span class="o">=</span> <span class="s1">&#39;bit_rate&#39;</span>
+    <span class="n">tx_power</span> <span class="o">=</span> <span class="s1">&#39;tx_power&#39;</span>
+    <span class="n">link_quality</span> <span class="o">=</span> <span class="s1">&#39;link_quality&#39;</span>
+    <span class="n">signal_level</span> <span class="o">=</span> <span class="s1">&#39;signal_level&#39;</span>
+    <span class="n">rx_invalid_nwid</span> <span class="o">=</span> <span class="s1">&#39;rx_invalid_nwid&#39;</span>
+    <span class="n">rx_invalid_crypt</span> <span class="o">=</span> <span class="s1">&#39;rx_invalid_crypt&#39;</span>
+    <span class="n">rx_invalid_frag</span> <span class="o">=</span> <span class="s1">&#39;rx_invalid_frag&#39;</span>
+    <span class="n">tx_excessive_retries</span> <span class="o">=</span> <span class="s1">&#39;tx_excessive_retries&#39;</span>
+    <span class="n">invalid_misc</span> <span class="o">=</span> <span class="s1">&#39;invalid_misc&#39;</span>
+    <span class="n">missed_beacons</span> <span class="o">=</span> <span class="s1">&#39;missed_beacons&#39;</span>
+<span class="c1"># end IwconfigEnum</span>
+
+<span class="k">class</span> <span class="nc">IwconfigExpressions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Holds regular expressions to tokenize the output</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface</span><span class="o">=</span><span class="s1">&#39;wlan0&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        IwconfigExpressions constructor</span>
+
+<span class="sd">        :param:</span>
+
+<span class="sd">         - `interface`: the name of the interface to check (only used for MAC protocol)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span> <span class="o">=</span> <span class="n">interface</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_essid</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_mac_protocol</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_mode</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_frequency</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_access_point</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bit_rate</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tx_power</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_link_quality</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_signal_level</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rx_invalid_nwid</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rx_invalid_crypt</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rx_invalid_frag</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tx_excessive_retries</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_invalid_misc</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_missed_beacons</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">return</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">essid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;        </span>
+<span class="sd">        :return: compiled regular expression to match the essid</span>
+
+<span class="sd">        SSID&#39;s can have just about anything, even spaces, slashes, etc.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_essid</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_essid</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;ESSID:&#39;</span> <span class="o">+</span>
+                                     <span class="n">oatbran</span><span class="o">.</span><span class="n">Group</span><span class="o">.</span><span class="n">named</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">essid</span><span class="p">,</span>
+                                                         <span class="n">expression</span><span class="o">=</span><span class="n">oatbran</span><span class="o">.</span><span class="n">CommonPatterns</span><span class="o">.</span><span class="n">everything</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_essid</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">mac_protocol</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;        </span>
+<span class="sd">        :return: regex to match protocol (requires self.interface to be set)</span>
+
+<span class="sd">        Because the protocol can contain spaces might catch a trailing space</span>
+<span class="sd">        This could be fixed if you assume that it will always be 802.11</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mac_protocol</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_mac_protocol</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interface</span> <span class="o">+</span>
+                                            <span class="n">oatbran</span><span class="o">.</span><span class="n">CommonPatterns</span><span class="o">.</span><span class="n">spaces</span> <span class="o">+</span>
+                                            <span class="n">oatbran</span><span class="o">.</span><span class="n">Group</span><span class="o">.</span><span class="n">named</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">mac_protocol</span><span class="p">,</span>
+                                                                <span class="n">expression</span><span class="o">=</span><span class="n">oatbran</span><span class="o">.</span><span class="n">CommonPatterns</span><span class="o">.</span><span class="n">everything</span><span class="p">)</span> <span class="o">+</span>
+                                                                <span class="n">oatbran</span><span class="o">.</span><span class="n">CommonPatterns</span><span class="o">.</span><span class="n">spaces</span> <span class="o">+</span> <span class="s1">&#39;ESSID:&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mac_protocol</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">mode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: compiled regex to match the mode (e.g. Managed)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mode</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_mode</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;Mode:&quot;</span> <span class="o">+</span>
+                                    <span class="n">oatbran</span><span class="o">.</span><span class="n">Group</span><span class="o">.</span><span class="n">named</span><span class="p">(</span><span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
+                                                        <span class="n">oatbran</span><span class="o">.</span><span class="n">CommonPatterns</span><span class="o">.</span><span class="n">not_spaces</span><span class="p">)</span> <span class="o">+</span>
+                                                        <span class="n">oatbran</span><span class="o">.</span><span class="n">CommonPatterns</span><span class="o">.</span><span class="n">spaces</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mode</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">frequency</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: compiled regex to get the frequency</span>
+<span class="sd">        According to the man-page it might use channel instead of frequency</span>
+<span class="sd">        but I have no examples of that right now        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_frequency</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_frequency</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;Frequency:&#39;</span> <span class="o">+</span>
+                                         <span class="n">oatbran</span><span class="o">.</span><span class="n">Group</span><span class="o">.</span><span class="n">named</span><span class="p">(</span><span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">frequency</span><span class="p">,</span>
+                                                             <span class="p">(</span><span class="n">oatbran</span><span class="o">.</span><span class="n">Group</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">oatbran</span><span class="o">.</span><span class="n">Numbers</span><span class="o">.</span><span class="n">real</span><span class="p">)</span> <span class="o">+</span>
+                                                              <span class="n">oatbran</span><span class="o">.</span><span class="n">CommonPatterns</span><span class="o">.</span><span class="n">spaces</span> <span class="o">+</span>
+                                                              <span class="n">oatbran</span><span class="o">.</span><span class="n">Quantifier</span><span class="o">.</span><span class="n">zero_or_more</span><span class="p">(</span><span class="n">oatbran</span><span class="o">.</span><span class="n">CharacterClass</span><span class="o">.</span><span class="n">character_class</span><span class="p">(</span><span class="n">KILO_MEGA_GIGA</span><span class="p">))</span> <span class="o">+</span> 
+                                                              <span class="n">HERZ</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_frequency</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">access_point</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: compiled regex to get the access point        </span>
+<span class="sd">        the pattern matches anything not a space because ad-hoc mode won&#39;t return MAC</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_access_point</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_access_point</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;Access Point:&#39;</span> <span class="o">+</span>
+                                            <span class="n">oatbran</span><span class="o">.</span><span class="n">CommonPatterns</span><span class="o">.</span><span class="n">spaces</span> <span class="o">+</span>
+                <span class="n">oatbran</span><span class="o">.</span><span class="n">Group</span><span class="o">.</span><span class="n">named</span><span class="p">(</span><span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">access_point</span><span class="p">,</span>
+                                    <span class="n">oatbran</span><span class="o">.</span><span class="n">CommonPatterns</span><span class="o">.</span><span class="n">not_spaces</span><span class="p">)</span> <span class="o">+</span>
+                <span class="n">oatbran</span><span class="o">.</span><span class="n">CommonPatterns</span><span class="o">.</span><span class="n">spaces</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_access_point</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">bit_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: expression to get the bit rate        </span>
+<span class="sd">        According to the man-page &#39;Bit Rate=&lt;value&gt;&#39; means it is fixed,</span>
+<span class="sd">        &#39;Bit Rate:&lt;value&gt;&#39; means it can change        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bit_rate</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_bit_rate</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;Bit Rate&quot;</span> <span class="o">+</span>
+                                        <span class="n">oatbran</span><span class="o">.</span><span class="n">CharacterClass</span><span class="o">.</span><span class="n">character_class</span><span class="p">(</span><span class="s2">&quot;=:&quot;</span><span class="p">)</span> <span class="o">+</span>
+                                        <span class="n">oatbran</span><span class="o">.</span><span class="n">Group</span><span class="o">.</span><span class="n">named</span><span class="p">(</span><span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">bit_rate</span><span class="p">,</span>
+                                                            <span class="p">(</span><span class="n">oatbran</span><span class="o">.</span><span class="n">Group</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">oatbran</span><span class="o">.</span><span class="n">Numbers</span><span class="o">.</span><span class="n">real</span><span class="p">))</span> <span class="o">+</span>
+                                                             <span class="n">oatbran</span><span class="o">.</span><span class="n">CommonPatterns</span><span class="o">.</span><span class="n">spaces</span> <span class="o">+</span>
+                                                             <span class="n">oatbran</span><span class="o">.</span><span class="n">Quantifier</span><span class="o">.</span><span class="n">zero_or_more</span><span class="p">(</span><span class="n">oatbran</span><span class="o">.</span><span class="n">CharacterClass</span><span class="o">.</span><span class="n">character_class</span><span class="p">(</span><span class="n">KILO_MEGA_GIGA</span><span class="p">))</span> <span class="o">+</span>
+                                                             <span class="n">BITS_PER_SECOND</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bit_rate</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tx_power</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: compiled regex to match the tx-power</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tx_power</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c1"># I don&#39;t know if this can be Tx-Power: or not</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tx_power</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;Tx-Power=&quot;</span> <span class="o">+</span>
+                                        <span class="n">oatbran</span><span class="o">.</span><span class="n">Group</span><span class="o">.</span><span class="n">named</span><span class="p">(</span><span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">tx_power</span><span class="p">,</span>
+                                                            <span class="p">(</span><span class="n">oatbran</span><span class="o">.</span><span class="n">Numbers</span><span class="o">.</span><span class="n">digits</span> <span class="o">+</span>
+                                                             <span class="n">oatbran</span><span class="o">.</span><span class="n">CommonPatterns</span><span class="o">.</span><span class="n">spaces</span> <span class="o">+</span>
+                                                             <span class="s1">&#39;dBm&#39;</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tx_power</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">link_quality</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: compiled regular expression to get the link quality</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_link_quality</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_link_quality</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;Link Quality=&quot;</span> <span class="o">+</span> 
+                                            <span class="n">oatbran</span><span class="o">.</span><span class="n">Group</span><span class="o">.</span><span class="n">named</span><span class="p">(</span><span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">link_quality</span><span class="p">,</span>
+                                                                <span class="p">(</span><span class="n">oatbran</span><span class="o">.</span><span class="n">Numbers</span><span class="o">.</span><span class="n">digits</span> <span class="o">+</span>
+                                                                 <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">oatbran</span><span class="o">.</span><span class="n">Numbers</span><span class="o">.</span><span class="n">digits</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_link_quality</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">signal_level</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: compiled regex to get the signal level</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_signal_level</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_signal_level</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;Signal level=&#39;</span> <span class="o">+</span>
+                                            <span class="n">oatbran</span><span class="o">.</span><span class="n">Group</span><span class="o">.</span><span class="n">named</span><span class="p">(</span><span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">signal_level</span><span class="p">,</span>
+                                                                <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="n">oatbran</span><span class="o">.</span><span class="n">Numbers</span><span class="o">.</span><span class="n">digits</span> <span class="o">+</span>
+                                                                <span class="n">oatbran</span><span class="o">.</span><span class="n">CommonPatterns</span><span class="o">.</span><span class="n">spaces</span> <span class="o">+</span> <span class="n">DECIBEL_MILLIWATTS</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_signal_level</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rx_invalid_nwid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: compiled regex to get count of invalid nwid</span>
+<span class="sd">        Man Page: used to detect configuration problems or adjacent network existence        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rx_invalid_nwid</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rx_invalid_nwid</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;Rx invalid nwid:&quot;</span> <span class="o">+</span>
+                                               <span class="n">oatbran</span><span class="o">.</span><span class="n">Group</span><span class="o">.</span><span class="n">named</span><span class="p">(</span><span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">rx_invalid_nwid</span><span class="p">,</span>
+                                                                   <span class="n">oatbran</span><span class="o">.</span><span class="n">Numbers</span><span class="o">.</span><span class="n">digits</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rx_invalid_nwid</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rx_invalid_crypt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: compiled regex to get count of un-decryptable packets</span>
+<span class="sd">        Man page: used to detect invalid encryption settings</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rx_invalid_crypt</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rx_invalid_crypt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;Rx invalid crypt:&quot;</span> <span class="o">+</span>
+                                               <span class="n">oatbran</span><span class="o">.</span><span class="n">Group</span><span class="o">.</span><span class="n">named</span><span class="p">(</span><span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">rx_invalid_crypt</span><span class="p">,</span>
+                                                                   <span class="n">oatbran</span><span class="o">.</span><span class="n">Numbers</span><span class="o">.</span><span class="n">digits</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rx_invalid_crypt</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rx_invalid_frag</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: compiled regex to get count of invalid packet fragments</span>
+<span class="sd">        man page: count of packets that hardware couldn&#39;t properly re-assemble link-layer fragments</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rx_invalid_frag</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rx_invalid_frag</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;Rx invalid frag:&quot;</span> <span class="o">+</span>
+                                               <span class="n">oatbran</span><span class="o">.</span><span class="n">Group</span><span class="o">.</span><span class="n">named</span><span class="p">(</span><span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">rx_invalid_frag</span><span class="p">,</span>
+                                                                   <span class="n">oatbran</span><span class="o">.</span><span class="n">Numbers</span><span class="o">.</span><span class="n">digits</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rx_invalid_frag</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tx_excessive_retries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: compiled regex to get count of packets hardware failed to deliver</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tx_excessive_retries</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tx_excessive_retries</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;Tx excessive retries:&quot;</span> <span class="o">+</span>
+                                                    <span class="n">oatbran</span><span class="o">.</span><span class="n">Group</span><span class="o">.</span><span class="n">named</span><span class="p">(</span><span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">tx_excessive_retries</span><span class="p">,</span>
+                                                                        <span class="n">oatbran</span><span class="o">.</span><span class="n">Numbers</span><span class="o">.</span><span class="n">digits</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tx_excessive_retries</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">invalid_misc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: compiled regex to get count of packets lost for misc reasons</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_invalid_misc</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_invalid_misc</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;Invalid misc:&#39;</span> <span class="o">+</span>
+                                            <span class="n">oatbran</span><span class="o">.</span><span class="n">Group</span><span class="o">.</span><span class="n">named</span><span class="p">(</span><span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">invalid_misc</span><span class="p">,</span>
+                                                                <span class="n">oatbran</span><span class="o">.</span><span class="n">Numbers</span><span class="o">.</span><span class="n">digits</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_invalid_misc</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">missed_beacons</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: compiled regex to get count of beacons from Cell or AP missed</span>
+<span class="sd">        man page: missed beacons usually means the card is out of range        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_missed_beacons</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_missed_beacons</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;Missed beacon:&#39;</span> <span class="o">+</span>
+                                              <span class="n">oatbran</span><span class="o">.</span><span class="n">Group</span><span class="o">.</span><span class="n">named</span><span class="p">(</span><span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">missed_beacons</span><span class="p">,</span>
+                                                                  <span class="n">oatbran</span><span class="o">.</span><span class="n">Numbers</span><span class="o">.</span><span class="n">digits</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_missed_beacons</span>
+<span class="c1"># end class IwconfigExpressions</span>
+
+<div class="viewcode-block" id="IwconfigQuery"><a class="viewcode-back" href="../../../../parts/wifi/api/theape.parts.wifi.iwconfig.IwconfigQuery.html#theape.parts.wifi.iwconfig.IwconfigQuery">[docs]</a><span class="k">class</span> <span class="nc">IwconfigQuery</span><span class="p">(</span><span class="n">BaseClass</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Queries ``iwconfig`` for information</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="IwconfigQuery.__init__"><a class="viewcode-back" href="../../../../parts/wifi/api/theape.parts.wifi.iwconfig.IwconfigQuery.html#theape.parts.wifi.iwconfig.IwconfigQuery.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">interface</span><span class="o">=</span><span class="s1">&#39;wlan0&#39;</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                 <span class="n">missing_data</span><span class="o">=</span><span class="s1">&#39;NA&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        IwconfigQuery constructor</span>
+
+<span class="sd">        :param:</span>
+
+<span class="sd">         - `interface`: name of the interface to query</span>
+<span class="sd">         - `connection`: connection to the device to query</span>
+<span class="sd">         - `interval`: seconds to wait before refreshing output</span>
+<span class="sd">         - `missing_data`: symbol to use if the expression fails to match</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">IwconfigQuery</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span> <span class="o">=</span> <span class="n">interface</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connection</span> <span class="o">=</span> <span class="n">connection</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="n">interval</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">missing_data</span> <span class="o">=</span> <span class="n">missing_data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_expressions</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_command</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_event_timer</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">return</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">expressions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: IwconfigExpressions to parse output</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_expressions</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_expressions</span> <span class="o">=</span> <span class="n">IwconfigExpressions</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_expressions</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">event_timer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        An EventTimer to track intervals between calling iwconfig</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_event_timer</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_event_timer</span> <span class="o">=</span> <span class="n">EventTimer</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">interval</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_event_timer</span>        
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">output</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Output of the iwconfig command, refreshed after self.interval second intervals</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">event_timer</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_output</span> <span class="o">=</span> <span class="bp">self</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">event_timer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">command</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: command to send to connection to query iwconfig</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_command</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_command</span> <span class="o">=</span> <span class="s1">&#39;iwconfig {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_command</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">essid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: the essid from the iwconfig command</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_output</span><span class="p">(</span><span class="n">expression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">expressions</span><span class="o">.</span><span class="n">essid</span><span class="p">,</span>
+                                    <span class="n">name</span><span class="o">=</span><span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">essid</span><span class="p">)</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">mac_protocol</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: the MAC protocol</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_output</span><span class="p">(</span><span class="n">expression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">expressions</span><span class="o">.</span><span class="n">mac_protocol</span><span class="p">,</span>
+                                  <span class="n">name</span><span class="o">=</span><span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">mac_protocol</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">mode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: the mode</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_output</span><span class="p">(</span><span class="n">expression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">expressions</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
+                                  <span class="n">name</span><span class="o">=</span><span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">frequency</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: current frequency</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_output</span><span class="p">(</span><span class="n">expression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">expressions</span><span class="o">.</span><span class="n">frequency</span><span class="p">,</span>
+                                  <span class="n">name</span><span class="o">=</span><span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">frequency</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">access_point</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: MAC address of associated AP</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_output</span><span class="p">(</span><span class="n">expression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">expressions</span><span class="o">.</span><span class="n">access_point</span><span class="p">,</span>
+                                  <span class="n">name</span><span class="o">=</span><span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">access_point</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">bit_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: bit-rate</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_output</span><span class="p">(</span><span class="n">expression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">expressions</span><span class="o">.</span><span class="n">bit_rate</span><span class="p">,</span>
+                                  <span class="n">name</span><span class="o">=</span><span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">bit_rate</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tx_power</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: the TX-power for the node</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_output</span><span class="p">(</span><span class="n">expression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">expressions</span><span class="o">.</span><span class="n">tx_power</span><span class="p">,</span>
+                                  <span class="n">name</span><span class="o">=</span><span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">tx_power</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">link_quality</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: link-quality perceived by driver</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_output</span><span class="p">(</span><span class="n">expression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">expressions</span><span class="o">.</span><span class="n">link_quality</span><span class="p">,</span>
+                                  <span class="n">name</span><span class="o">=</span><span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">link_quality</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">signal_level</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: signal level (RSSI)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_output</span><span class="p">(</span><span class="n">expression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">expressions</span><span class="o">.</span><span class="n">signal_level</span><span class="p">,</span>
+                                  <span class="n">name</span><span class="o">=</span><span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">signal_level</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rx_invalid_nwid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: count of packets with SSID&#39;s not matching current cell</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_output</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">expressions</span><span class="o">.</span><span class="n">rx_invalid_nwid</span><span class="p">,</span>
+                                  <span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">rx_invalid_nwid</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rx_invalid_crypt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: count of packets not unencryptable</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_output</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">expressions</span><span class="o">.</span><span class="n">rx_invalid_crypt</span><span class="p">,</span>
+                                  <span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">rx_invalid_crypt</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rx_invalid_frag</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: count of packets whose fragments couldn&#39;t be re-assembled</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_output</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">expressions</span><span class="o">.</span><span class="n">rx_invalid_frag</span><span class="p">,</span>
+                                  <span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">rx_invalid_frag</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tx_excessive_retries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: count of packets not successfully transmitted</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_output</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">expressions</span><span class="o">.</span><span class="n">tx_excessive_retries</span><span class="p">,</span>
+                                  <span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">tx_excessive_retries</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">invalid_misc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: count of invalid packets (received only?)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_output</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">expressions</span><span class="o">.</span><span class="n">invalid_misc</span><span class="p">,</span>
+                                  <span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">invalid_misc</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">missed_beacons</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: count of beacons not received</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_output</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">expressions</span><span class="o">.</span><span class="n">missed_beacons</span><span class="p">,</span>
+                                  <span class="n">IwconfigEnum</span><span class="o">.</span><span class="n">missed_beacons</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_check_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expression</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Helper method to traverse output</span>
+
+<span class="sd">        :param:</span>
+
+<span class="sd">         - `expression`: regular expression to match the tokne</span>
+<span class="sd">         - `name`: group-name for matching cases</span>
+
+<span class="sd">        :return: matched text or self.missing_data if not found</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">:</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="n">expression</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">missing_data</span>
+
+<div class="viewcode-block" id="IwconfigQuery.__call__"><a class="viewcode-back" href="../../../../parts/wifi/api/theape.parts.wifi.iwconfig.IwconfigQuery.__call__.html#theape.parts.wifi.iwconfig.IwconfigQuery.__call__">[docs]</a>    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calls the iwconfig command and returns the output</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">stdin</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">iwconfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_errors</span><span class="p">(</span><span class="n">stderr</span><span class="p">)</span>
+        <span class="c1"># the stdout is re-used if the calls are made more frequently than self.interval</span>
+        <span class="c1"># so the iterator can&#39;t be used</span>
+        <span class="k">return</span> <span class="n">stdout</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="IwconfigQuery.check_errors"><a class="viewcode-back" href="../../../../parts/wifi/api/theape.parts.wifi.iwconfig.IwconfigQuery.check_errors.html#theape.parts.wifi.iwconfig.IwconfigQuery.check_errors">[docs]</a>    <span class="k">def</span> <span class="nf">check_errors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stderr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks for known errors</span>
+
+<span class="sd">        :param:</span>
+
+<span class="sd">         - `stderr`: file-like object for standard error</span>
+<span class="sd">        :raise: ApeError if an error is found</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">stderr</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;No such device&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">ApeError</span><span class="p">(</span><span class="s2">&quot;&#39;{0}&#39; is not a recognized interface&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="p">))</span>
+            <span class="k">if</span> <span class="s1">&#39;no wireless extensions&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">ApeError</span><span class="p">(</span><span class="s2">&quot;&#39;{0}&#39; is not a wireless interface&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="p">))</span>
+            <span class="k">if</span> <span class="s1">&#39;command not found&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">ApeError</span><span class="p">(</span><span class="s2">&quot;&#39;iwconfig&#39; doesn&#39;t seem to be installed on the path.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="p">))</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="IwconfigQuery.close"><a class="viewcode-back" href="../../../../parts/wifi/api/theape.parts.wifi.iwconfig.IwconfigQuery.close.html#theape.parts.wifi.iwconfig.IwconfigQuery.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Closes the event timer</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">event_timer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="IwconfigQuery.__str__"><a class="viewcode-back" href="../../../../parts/wifi/api/theape.parts.wifi.iwconfig.IwconfigQuery.__str__.html#theape.parts.wifi.iwconfig.IwconfigQuery.__str__">[docs]</a>    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: output of iwconfig command un-parsed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">)</span></div></div>
+<span class="c1"># end class IwconfigQuery</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">expressions</span> <span class="o">=</span> <span class="n">IwconfigExpressions</span><span class="p">()</span>
+    <span class="kn">import</span> <span class="nn">pudb</span><span class="p">;</span> <span class="n">pudb</span><span class="o">.</span><span class="n">set_trace</span><span class="p">()</span>
+    <span class="n">test</span> <span class="o">=</span> <span class="s1">&#39;Rx invalid nwid:0  Rx invalid crypt:0  Rx invalid frag:0&#39;</span>
+    <span class="n">match</span> <span class="o">=</span> <span class="n">expressions</span><span class="o">.</span><span class="n">rx_invalid_crypt</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2014, the cloistered monkey.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../index.html" />
     <link rel="up" title="The Components" href="index.html" />
@@ -38,7 +38,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -113,7 +113,7 @@
     </a>
   </li>
   <li>
-    <a href="api/theape.components.component.Component.html" title="Next Chapter: theape.components.component.Component"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">theape.component... &raquo;</span>
+    <a href="api/theape.components.component.Component.html" title="Next Chapter: theape.components.component.Component"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">theape.compon... &raquo;</span>
     </a>
   </li>
               
@@ -145,13 +145,13 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="the-components">
 <h1>The Components<a class="headerlink" href="#the-components" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
 <span id="components-introduction"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>This is a module to hold classes that (loosely) implement the <a class="reference external" href="http://en.wikipedia.org/wiki/Composite_pattern">Composite Pattern</a>. See the <a class="reference internal" href="../plugins/apeplugin.html#ape-plugin"><em>Ape Plugin</em></a> for how the Composites are being used in the <cite>ape</cite> (it is implemented in the <cite>product</cite> property).</p>
+<p>This is a module to hold classes that (loosely) implement the <a class="reference external" href="http://en.wikipedia.org/wiki/Composite_pattern">Composite Pattern</a>. See the <a class="reference internal" href="../plugins/apeplugin.html#ape-plugin"><span>Ape Plugin</span></a> for how the Composites are being used in the <cite>ape</cite> (it is implemented in the <cite>product</cite> property).</p>
 </div>
 <div class="section" id="module-diagram">
 <h2>Module Diagram<a class="headerlink" href="#module-diagram" title="Permalink to this headline">¶</a></h2>
@@ -159,7 +159,7 @@
 </div>
 <div class="section" id="the-component-class">
 <span id="component-class"></span><h2>The Component Class<a class="headerlink" href="#the-component-class" title="Permalink to this headline">¶</a></h2>
-<p>This is the base-class which the other classes will inherit from. All <a class="reference internal" href="../plugins/base_plugin.html#base-plugin-product"><em>Plugin products</em></a> should look like this (it doesn&#8217;t do much but every method is called at some point by the Composites so all plugin products should implement it).</p>
+<p>This is the base-class which the other classes will inherit from. All <a class="reference internal" href="../plugins/base_plugin.html#base-plugin-product"><span>Plugin products</span></a> should look like this (it doesn&#8217;t do much but every method is called at some point by the Composites so all plugin products should implement it).</p>
 <p class="plantuml">
 <img src="../_images/plantuml-54b7cf7d245e5112bf93b079ec2a6559ac23f820.png" alt="Component -|&gt; BaseClass
 Component : __call__()
@@ -172,16 +172,16 @@ Component : close()" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.component.Component.html#theape.components.component.Component" title="theape.components.component.Component"><tt class="xref py py-obj docutils literal"><span class="pre">Component</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.component.Component.html#theape.components.component.Component" title="theape.components.component.Component"><code class="xref py py-obj docutils literal"><span class="pre">Component</span></code></a>()</td>
 <td>A base-class for Composite and Leaf</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.components.component.Component.__call__.html#theape.components.component.Component.__call__" title="theape.components.component.Component.__call__"><tt class="xref py py-obj docutils literal"><span class="pre">Component.__call__</span></tt></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.components.component.Component.__call__.html#theape.components.component.Component.__call__" title="theape.components.component.Component.__call__"><code class="xref py py-obj docutils literal"><span class="pre">Component.__call__</span></code></a>()</td>
 <td>abstractmethod that will be the main invocation when implememented</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.component.Component.check_rep.html#theape.components.component.Component.check_rep" title="theape.components.component.Component.check_rep"><tt class="xref py py-obj docutils literal"><span class="pre">Component.check_rep</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.component.Component.check_rep.html#theape.components.component.Component.check_rep" title="theape.components.component.Component.check_rep"><code class="xref py py-obj docutils literal"><span class="pre">Component.check_rep</span></code></a>()</td>
 <td>abstract: Representation-check called by composite</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.components.component.Component.close.html#theape.components.component.Component.close" title="theape.components.component.Component.close"><tt class="xref py py-obj docutils literal"><span class="pre">Component.close</span></tt></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.components.component.Component.close.html#theape.components.component.Component.close" title="theape.components.component.Component.close"><code class="xref py py-obj docutils literal"><span class="pre">Component.close</span></code></a>()</td>
 <td>abstractmethod: called for Keyboard Interrupts to allow file-closing</td>
 </tr>
 </tbody>
@@ -199,40 +199,40 @@ Component : close()" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.component.Composite.html#theape.components.component.Composite" title="theape.components.component.Composite"><tt class="xref py py-obj docutils literal"><span class="pre">Composite</span></tt></a>([error,&nbsp;error_message,&nbsp;...])</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.component.Composite.html#theape.components.component.Composite" title="theape.components.component.Composite"><code class="xref py py-obj docutils literal"><span class="pre">Composite</span></code></a>([error,&nbsp;error_message,&nbsp;...])</td>
 <td>A Composite to hold and execute Components</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.components.component.Composite.components.html#theape.components.component.Composite.components" title="theape.components.component.Composite.components"><tt class="xref py py-obj docutils literal"><span class="pre">Composite.components</span></tt></a></td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.components.component.Composite.components.html#theape.components.component.Composite.components" title="theape.components.component.Composite.components"><code class="xref py py-obj docutils literal"><span class="pre">Composite.components</span></code></a></td>
 <td>The list of components</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.component.Composite.add.html#theape.components.component.Composite.add" title="theape.components.component.Composite.add"><tt class="xref py py-obj docutils literal"><span class="pre">Composite.add</span></tt></a>(component)</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.component.Composite.add.html#theape.components.component.Composite.add" title="theape.components.component.Composite.add"><code class="xref py py-obj docutils literal"><span class="pre">Composite.add</span></code></a>(component)</td>
 <td>appends the component to self.components</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.components.component.Composite.remove.html#theape.components.component.Composite.remove" title="theape.components.component.Composite.remove"><tt class="xref py py-obj docutils literal"><span class="pre">Composite.remove</span></tt></a>(component)</td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.components.component.Composite.remove.html#theape.components.component.Composite.remove" title="theape.components.component.Composite.remove"><code class="xref py py-obj docutils literal"><span class="pre">Composite.remove</span></code></a>(component)</td>
 <td>Removes the component from the components (if it was there)</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.component.Composite.__call__.html#theape.components.component.Composite.__call__" title="theape.components.component.Composite.__call__"><tt class="xref py py-obj docutils literal"><span class="pre">Composite.__call__</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.component.Composite.__call__.html#theape.components.component.Composite.__call__" title="theape.components.component.Composite.__call__"><code class="xref py py-obj docutils literal"><span class="pre">Composite.__call__</span></code></a>()</td>
 <td>The main interface &#8211; starts components after doing a check_rep</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.components.component.Composite.__iter__.html#theape.components.component.Composite.__iter__" title="theape.components.component.Composite.__iter__"><tt class="xref py py-obj docutils literal"><span class="pre">Composite.__iter__</span></tt></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.components.component.Composite.__iter__.html#theape.components.component.Composite.__iter__" title="theape.components.component.Composite.__iter__"><code class="xref py py-obj docutils literal"><span class="pre">Composite.__iter__</span></code></a>()</td>
 <td>Iterates over the components</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.component.Composite.__len__.html#theape.components.component.Composite.__len__" title="theape.components.component.Composite.__len__"><tt class="xref py py-obj docutils literal"><span class="pre">Composite.__len__</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.component.Composite.__len__.html#theape.components.component.Composite.__len__" title="theape.components.component.Composite.__len__"><code class="xref py py-obj docutils literal"><span class="pre">Composite.__len__</span></code></a>()</td>
 <td>Counts the components</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.components.component.Composite.__getitem__.html#theape.components.component.Composite.__getitem__" title="theape.components.component.Composite.__getitem__"><tt class="xref py py-obj docutils literal"><span class="pre">Composite.__getitem__</span></tt></a>(index)</td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.components.component.Composite.__getitem__.html#theape.components.component.Composite.__getitem__" title="theape.components.component.Composite.__getitem__"><code class="xref py py-obj docutils literal"><span class="pre">Composite.__getitem__</span></code></a>(index)</td>
 <td>gets slice or index of components</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.component.Composite.one_call.html#theape.components.component.Composite.one_call" title="theape.components.component.Composite.one_call"><tt class="xref py py-obj docutils literal"><span class="pre">Composite.one_call</span></tt></a>(*args,&nbsp;**kwargs)</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.component.Composite.one_call.html#theape.components.component.Composite.one_call" title="theape.components.component.Composite.one_call"><code class="xref py py-obj docutils literal"><span class="pre">Composite.one_call</span></code></a>(*args,&nbsp;**kwargs)</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.components.component.Composite.check_rep.html#theape.components.component.Composite.check_rep" title="theape.components.component.Composite.check_rep"><tt class="xref py py-obj docutils literal"><span class="pre">Composite.check_rep</span></tt></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.components.component.Composite.check_rep.html#theape.components.component.Composite.check_rep" title="theape.components.component.Composite.check_rep"><code class="xref py py-obj docutils literal"><span class="pre">Composite.check_rep</span></code></a>()</td>
 <td>Checks the representation invariant</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.component.Composite.close.html#theape.components.component.Composite.close" title="theape.components.component.Composite.close"><tt class="xref py py-obj docutils literal"><span class="pre">Composite.close</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/theape.components.component.Composite.close.html#theape.components.component.Composite.close" title="theape.components.component.Composite.close"><code class="xref py py-obj docutils literal"><span class="pre">Composite.close</span></code></a>()</td>
 <td>calls the <cite>close</cite> method on each component</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/theape.components.component.Composite.time_remains.html#theape.components.component.Composite.time_remains" title="theape.components.component.Composite.time_remains"><tt class="xref py py-obj docutils literal"><span class="pre">Composite.time_remains</span></tt></a></td>
+<tr class="row-even"><td><a class="reference internal" href="api/theape.components.component.Composite.time_remains.html#theape.components.component.Composite.time_remains" title="theape.components.component.Composite.time_remains"><code class="xref py py-obj docutils literal"><span class="pre">Composite.time_remains</span></code></a></td>
 <td><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -248,8 +248,8 @@ Component : close()" />
 <p>The <cite>Composite</cite> was created to be a generalization of the <cite>Hortator</cite>, <cite>Operator</cite> and <cite>Operations</cite>. By specifying the error that it will catch, the error message it will display if there is one, its components, and the component-category of its components, you specify what type of composite it is. It can also act as a regular composite to contain other parts, but this was the original use-case &#8211; to create the infrastructure for the APE.</p>
 <blockquote>
 <div><ul class="simple">
-<li>Each component call is wrapped by the <em class="xref std std-ref">try_except decorator</em> which catches the Exception in self.error</li>
-<li>The default for <tt class="docutils literal"><span class="pre">self.time_remains</span></tt> is a <a class="reference internal" href="../parts/countdown/countdown.html#ape-parts-countdown-timetracker"><em>TimeTracker</em></a> but can also be a <a class="reference internal" href="../parts/countdown/countdown.html#ape-parts-countdown-countdowntimer"><em>CountdownTimer</em></a></li>
+<li>Each component call is wrapped by the <span class="xref std std-ref">try_except decorator</span> which catches the Exception in self.error</li>
+<li>The default for <code class="docutils literal"><span class="pre">self.time_remains</span></code> is a <a class="reference internal" href="../parts/countdown/countdown.html#ape-parts-countdown-timetracker"><span>TimeTracker</span></a> but can also be a <a class="reference internal" href="../parts/countdown/countdown.html#ape-parts-countdown-countdowntimer"><span>CountdownTimer</span></a></li>
 </ul>
 </div></blockquote>
 </div>
@@ -268,7 +268,7 @@ Component : close()" />
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

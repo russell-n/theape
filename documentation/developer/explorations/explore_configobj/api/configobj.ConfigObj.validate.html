@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,19 +26,18 @@
     <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../../index.html" />
     <link rel="up" title="Validation" href="../validation.html" />
     <link rel="next" title="validate.force_list" href="validate.force_list.html" />
-    <link rel="prev" title="configobj.ConfigObj" href="configobj.ConfigObj.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -103,11 +102,7 @@
               
                 
   <li>
-    <a href="configobj.ConfigObj.html" title="Previous Chapter: configobj.ConfigObj"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; configobj.Config...</span>
-    </a>
-  </li>
-  <li>
-    <a href="validate.force_list.html" title="Next Chapter: validate.force_list"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">validate.force_l... &raquo;</span>
+    <a href="validate.force_list.html" title="Next Chapter: validate.force_list"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">validate.forc... &raquo;</span>
     </a>
   </li>
               
@@ -139,36 +134,36 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="configobj-configobj-validate">
 <h1>configobj.ConfigObj.validate<a class="headerlink" href="#configobj-configobj-validate" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="configobj.ConfigObj.validate">
-<tt class="descclassname">ConfigObj.</tt><tt class="descname">validate</tt><big>(</big><em>validator</em>, <em>preserve_errors=False</em>, <em>copy=False</em>, <em>section=None</em><big>)</big><a class="headerlink" href="#configobj.ConfigObj.validate" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">ConfigObj.</code><code class="descname">validate</code><span class="sig-paren">(</span><em>validator</em>, <em>preserve_errors=False</em>, <em>copy=False</em>, <em>section=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/configobj.html#ConfigObj.validate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#configobj.ConfigObj.validate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Test the ConfigObj against a configspec.</p>
-<p>It uses the <tt class="docutils literal"><span class="pre">validator</span></tt> object from <em>validate.py</em>.</p>
-<p>To run <tt class="docutils literal"><span class="pre">validate</span></tt> on the current ConfigObj, call:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">test</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">validator</span><span class="p">)</span>
+<p>It uses the <code class="docutils literal"><span class="pre">validator</span></code> object from <em>validate.py</em>.</p>
+<p>To run <code class="docutils literal"><span class="pre">validate</span></code> on the current ConfigObj, call:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">test</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">validator</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>(Normally having previously passed in the configspec when the ConfigObj
 was created - you can dynamically assign a dictionary of checks to the
-<tt class="docutils literal"><span class="pre">configspec</span></tt> attribute of a section though).</p>
-<p>It returns <tt class="docutils literal"><span class="pre">True</span></tt> if everything passes, or a dictionary of
+<code class="docutils literal"><span class="pre">configspec</span></code> attribute of a section though).</p>
+<p>It returns <code class="docutils literal"><span class="pre">True</span></code> if everything passes, or a dictionary of
 pass/fails (True/False). If every member of a subsection passes, it
-will just have the value <tt class="docutils literal"><span class="pre">True</span></tt>. (It also returns <tt class="docutils literal"><span class="pre">False</span></tt> if all
+will just have the value <code class="docutils literal"><span class="pre">True</span></code>. (It also returns <code class="docutils literal"><span class="pre">False</span></code> if all
 members fail).</p>
 <p>In addition, it converts the values from strings to their native
-types if their checks pass (and <tt class="docutils literal"><span class="pre">stringify</span></tt> is set).</p>
-<p>If <tt class="docutils literal"><span class="pre">preserve_errors</span></tt> is <tt class="docutils literal"><span class="pre">True</span></tt> (<tt class="docutils literal"><span class="pre">False</span></tt> is default) then instead
-of a marking a fail with a <tt class="docutils literal"><span class="pre">False</span></tt>, it will preserve the actual
+types if their checks pass (and <code class="docutils literal"><span class="pre">stringify</span></code> is set).</p>
+<p>If <code class="docutils literal"><span class="pre">preserve_errors</span></code> is <code class="docutils literal"><span class="pre">True</span></code> (<code class="docutils literal"><span class="pre">False</span></code> is default) then instead
+of a marking a fail with a <code class="docutils literal"><span class="pre">False</span></code>, it will preserve the actual
 exception object. This can contain info about the reason for failure.
-For example the <tt class="docutils literal"><span class="pre">VdtValueTooSmallError</span></tt> indicates that the value
+For example the <code class="docutils literal"><span class="pre">VdtValueTooSmallError</span></code> indicates that the value
 supplied was too small. If a value (or section) is missing it will
-still be marked as <tt class="docutils literal"><span class="pre">False</span></tt>.</p>
-<p>You must have the validate module to use <tt class="docutils literal"><span class="pre">preserve_errors=True</span></tt>.</p>
-<p>You can then use the <tt class="docutils literal"><span class="pre">flatten_errors</span></tt> function to turn your nested
+still be marked as <code class="docutils literal"><span class="pre">False</span></code>.</p>
+<p>You must have the validate module to use <code class="docutils literal"><span class="pre">preserve_errors=True</span></code>.</p>
+<p>You can then use the <code class="docutils literal"><span class="pre">flatten_errors</span></code> function to turn your nested
 results dictionary into a flattened list of failures - useful for
 displaying meaningful error messages.</p>
 </dd></dl>
@@ -188,7 +183,7 @@ displaying meaningful error messages.</p>
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

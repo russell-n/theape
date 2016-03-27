@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../../_static/bootswatch-3.2.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,19 +26,19 @@
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="The Ape 0.0.1 documentation" href="../../../../index.html" />
-    <link rel="up" title="Exploring Trace" href="index.html" />
-    <link rel="next" title="Countfuncs" href="countfuncs.html" />
-    <link rel="prev" title="trace.Trace" href="api/trace.Trace.html" />
+    <link rel="up" title="Exploring Trace" href="explore_trace.html" />
+    <link rel="next" title="How-To’s" href="../../how_tos/index.html" />
+    <link rel="prev" title="CountCallers" href="countcallers.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -103,11 +103,11 @@
               
                 
   <li>
-    <a href="api/trace.Trace.html" title="Previous Chapter: trace.Trace"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; trace.Trace</span>
+    <a href="countcallers.html" title="Previous Chapter: CountCallers"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; CountCallers</span>
     </a>
   </li>
   <li>
-    <a href="countfuncs.html" title="Next Chapter: Countfuncs"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Countfuncs &raquo;</span>
+    <a href="../../how_tos/index.html" title="Next Chapter: How-To’s"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">How-To’s &raquo;</span>
     </a>
   </li>
               
@@ -139,18 +139,18 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="runfunc">
 <h1>Runfunc<a class="headerlink" href="#runfunc" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-python"><div class="highlight"><pre><span class="c"># python standard library</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># python standard library</span>
 <span class="kn">from</span> <span class="nn">trace</span> <span class="kn">import</span> <span class="n">Trace</span>
 
 <span class="kn">from</span> <span class="nn">test_class</span> <span class="kn">import</span> <span class="n">TestExec</span>
 </pre></div>
 </div>
-<p>It looks like I had to pass in strings because I used the <tt class="docutils literal"><span class="pre">run</span></tt> method. To use an object you use <tt class="docutils literal"><span class="pre">runfunc</span></tt>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">trace</span> <span class="o">=</span> <span class="n">Trace</span><span class="p">()</span>
+<p>It looks like I had to pass in strings because I used the <code class="docutils literal"><span class="pre">run</span></code> method. To use an object you use <code class="docutils literal"><span class="pre">runfunc</span></code>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">trace</span> <span class="o">=</span> <span class="n">Trace</span><span class="p">()</span>
 <span class="n">t</span> <span class="o">=</span> <span class="n">TestExec</span><span class="p">()</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="n">trace</span><span class="o">.</span><span class="n">runfunc</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">run_this_and_that</span><span class="p">)</span>
@@ -158,7 +158,7 @@
     <span class="k">print</span> <span class="ne">NameError</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre> --- modulename: test_class, funcname: run_this_and_that
+<div class="highlight-python"><div class="highlight"><pre><span></span> --- modulename: test_class, funcname: run_this_and_that
 test_class.py(17):         self.run_this()
  --- modulename: test_class, funcname: run_this
 test_class.py(6):         x = 1
@@ -174,21 +174,21 @@ test_class.py(19):         return
 </pre></div>
 </div>
 <p>Now, pweave doesn&#8217;t raise an error, so it looks like this is what I should have used in the first place. But now you aren&#8217;t actually making a call, what about arguments?</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">args_func</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
-    <span class="k">print</span> <span class="s">&#39;a&#39;</span><span class="p">,</span><span class="n">a</span>
-    <span class="k">print</span> <span class="s">&#39;b&#39;</span><span class="p">,</span><span class="n">b</span>
-    <span class="k">print</span> <span class="s">&#39;c&#39;</span><span class="p">,</span><span class="n">c</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">args_func</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="n">a</span>
+    <span class="k">print</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">b</span>
+    <span class="k">print</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="n">c</span>
 
 <span class="n">trace</span><span class="o">.</span><span class="n">runfunc</span><span class="p">(</span><span class="n">args_func</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>a 1
+<div class="highlight-python"><div class="highlight"><pre><span></span>a 1
 b 2
 c 3
 </pre></div>
 </div>
-<p>So, it looks like there&#8217;s some kind of <tt class="docutils literal"><span class="pre">*args</span></tt> <tt class="docutils literal"><span class="pre">**kwargs</span></tt> thing going on inside there. If you look at the second output you might notice that it seems more sparse than the first. I think it might be because I define the function in this file, if you run it at the command line the output for both calls looks like this:</p>
-<div class="highlight-python"><div class="highlight"><pre> --- modulename: test_class, funcname: run_this_and_that
+<p>So, it looks like there&#8217;s some kind of <code class="docutils literal"><span class="pre">*args</span></code> <code class="docutils literal"><span class="pre">**kwargs</span></code> thing going on inside there. If you look at the second output you might notice that it seems more sparse than the first. I think it might be because I define the function in this file, if you run it at the command line the output for both calls looks like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span> --- modulename: test_class, funcname: run_this_and_that
 test_class.py(17):         self.run_this()
  --- modulename: test_class, funcname: run_this
 test_class.py(6):         x = 1
@@ -225,7 +225,7 @@ c 3
     </p>
     <p>
         &copy; Copyright 2014, the cloistered monkey.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>
