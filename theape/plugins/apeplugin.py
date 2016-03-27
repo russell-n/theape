@@ -510,7 +510,7 @@ class Ape(BasePlugin):
                                                          'execute in top-down, left-right ordering.'.format(APESECTION))
             self._sections["Configuration"] = CONFIGURATION
             self._sections['Examples'] = 'ape run *.ini\nape help\nape fetch\nape list\nape check *ini'
-            self._sections['Errors'] = '{bold}Oops, I crapped my pants:{reset} unexpected error (probably indicates implementation error)'
+            self._sections['Errors'] = '{bold}APE Crash:{reset} unexpected error (probably indicates implementation error)'
             self._sections['subcommands'] = ("help (this help), fetch (sample configuration), "
                                              "run <configuration-file(s)>, list (known plugins), check (configuration)")
             self._sections['Files'] = __file__

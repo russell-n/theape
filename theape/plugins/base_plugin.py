@@ -397,6 +397,8 @@ class SubConfiguration(BaseClass):
     def __getattr__(self, key):
         """
         Passes key to self.configuration
+
+        :raise: IndexError if key not in self.configuration
         """
         return self.configuration[key]
 # end SubConfiguration

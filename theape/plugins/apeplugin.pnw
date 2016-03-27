@@ -1,11 +1,11 @@
 The Ape Plugin
 ==============
 
-.. image:: ../figures/robot_monster_babe.jpg
-   :align: center
+.. .. image:: ../figures/robot_monster_babe.jpg
+..    :align: center
 
 .. _ape-plugin:
-This is the plugin that creates the Hortator to run :ref:`Composites <composite-class>`. It will be used when the `run` subcommand is called by the user.
+This is the plugin that creates the top driver to run :ref:`Composites <composite-class>`. It will be used when the `run` subcommand is called by the user.
 
 <<name='imports', echo=False>>=
 # python standard library
@@ -46,15 +46,15 @@ Rather than implementing separate classes for the different levels of Composites
 
 .. uml::
 
-   Component --|> BaseClass
-   Composite --|> Component
-   Leaf --|> Component
-   Hortator --|> Composite
-   Operator --|> Composite
-   Operation --|> Composite
-   Hortator "1" o- "1..*" Operator
-   Operator "1" o- "1..*" Operation
-   Operation "1" o- "1..*" Leaf
+   BaseClass <|-- Component
+   Component <|-- Composite
+   Component <|-- Leaf
+   Composite <|-- Hortator
+   Composite <|-- Operator
+   Composite <|-- Operation
+   Hortator o-  Operator
+   Operator  o-  Operation
+   Operation  o-  Leaf
 
 The `Hortator`, `Operator` and `Operation` are instances of the Composite and so aren't functionally different but they catch different levels of exceptions so that there can be a certain level of self-recovery and error handling. Each execution of the `ape` will have one `Hortator` composed of `Operators` (one `Operator` per configuration file with an `APE` section). Each line in the APE will correspond to an `Operation` composed of `Leafs` (one `Leaf` per item on the comma-separated line). Each Leaf is a plugin's product. Thus when a plugin is created, the product should inherit from the `Component` class in order to make sure it has the same interface.
 

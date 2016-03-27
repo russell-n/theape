@@ -8,17 +8,6 @@ Exploring Paramiko
 
 This is an exploration of `paramiko, <http://www.lag.net/paramiko/>`_ a python implementation of an `SSH client <http://en.wikipedia.org/wiki/Secure_Shell>`_. I will focus primarily on the `SSHClient <http://www.lag.net/paramiko/docs/paramiko.SSHClient-class.html>`_ class that it provides, as this is what I work with the most.
 
-Contents:
-
-    * :ref:`Paramiko's What <paramiko-readme-what>`
-    * :ref:`Paramiko's API <paramiko-api>`
-    * :ref:`Paramiko Module Diagram <paramiko-module-diagram>`
-    * :ref:`Paramiko SSHClient Class Diagram <paramiko-sshclient-class-diagram>`
-    * :ref:`A Localhost Experiment <paramiko-localhost-experiment>`
-    * :ref:`Paramiko's SSHClient.connect Method <paramiko-sshclient-connect>`
-
-.. '
-    
 .. _paramiko-readme-what:
 
 Paramiko What?
@@ -34,6 +23,7 @@ What
 .. '
 
 .. note:: According to `Google Translate <http://translate.google.com/translate_t?safe=off&bav=on.2,or.r_cp.r_qf.&bvm=bv.55819444,d.cGE&biw=1152&bih=651&um=1&ie=UTF-8&hl=en&sl=en&tl=eo&text=paranoid+friend&client=ob>`_ 'paranoid friend' translates to 'paranoja amiko' in esperanto.
+
 
 
 
@@ -55,7 +45,10 @@ The Module Diagram
 
 Let's see what the module looks like.
 
-.. superfluous '
+.. '
+
+
+
 
 .. image:: classes_paramiko.png
    :align: center
@@ -64,7 +57,8 @@ Let's see what the module looks like.
 
 Well, there's a lot there. If nothing else, this might indicate how complicated the SSHClient is.
 
-.. superfluous '
+.. '
+
 .. _paramiko-sshclient-class-diagram:
    
 Class Diagram
@@ -72,7 +66,8 @@ Class Diagram
 
 Okay, having looked at the module-dependencies for paramiko.client, let's look at the SSHClient class itself.
 
-.. superfluous '
+.. '
+
 
 .. figure:: SSHClient.png
    :align: center
@@ -85,7 +80,7 @@ A Localhost Experiment
 
 Okay, so now that I see the diagrams and the API, how would I use this to connect to a host? As it turns out I have a user called `fakeuser` on this computer set-up, along with a running open-ssh-server, so let's try a `connect` call.
 
-.. superfluous '
+.. '
 
 The connect API
 ~~~~~~~~~~~~~~~
@@ -99,16 +94,16 @@ The connect API
 The Connect Call
 ~~~~~~~~~~~~~~~~
 
-::
+
+.. code:: python
 
     client = SSHClient()
     try:
         client.connect('localhost', username='fakeuser')
     except paramiko.SSHException as error:
-        print error    
-    
+        print(error)
 
-::
+.. code::
 
     Server 'localhost' not found in known_hosts
     
@@ -120,7 +115,7 @@ Well, that didn't work. If you look in the docstring for the SSHClient you will 
     client = SSHClient
     client.load_system_host_keys()
 
-.. superfluous '
+.. '
 
 Load System Host Keys API
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -133,18 +128,18 @@ Load System Host Keys API
     
 So, let's try that again.
 
-.. superfluous '
+.. '
 
-::
+
+.. code:: python
 
     client.load_system_host_keys()
     try:
         client.connect('localhost', username='fakeuser')
     except paramiko.SSHException as error:
-        print error
-    
+        print(error)
 
-::
+.. code::
 
     Server 'localhost' not found in known_hosts
     
@@ -153,9 +148,10 @@ So, let's try that again.
 
 Looking at my earlier code (from the original `ApeTools`), I'm setting the missing-host-key-policy with a method call:
 
-.. superfluous '
+.. '
 
-::
+
+.. code:: python
 
     # this was in the ape
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -165,16 +161,14 @@ Looking at my earlier code (from the original `ApeTools`), I'm setting the missi
         client.connect('localhost', username='fakeuser')
         stdin, stdout, stderr = client.exec_command('ls')
         for line in stdout:
-            print "StdOut: {0}".format(line)
+            print("StdOut: {0}".format(line))
     
     except (IOError, paramiko.SSHException) as error:
-        print error
-    
+        print(error)
 
-::
+.. code::
 
-    StdOut: examples.desktop
-    
+    Private key file is encrypted
     
 
 
@@ -220,7 +214,9 @@ The SSHClient.connect
 
 Now that I know how to get it to work, maybe I can look at what actually happened. This is the the signature for the ``SSHClient.connect`` method::
 
-   SSHClient.connect(hostname, port=22, username=None, password=None, pkey=None, key_filename=None, timeout=None, allow_agent=True, look_for_keys=True, compress=False, sock=None)
+   SSHClient.connect(hostname, port=22, username=None, password=None, pkey=None,
+                     key_filename=None, timeout=None, allow_agent=True,
+                     look_for_keys=True, compress=False, sock=None)
 
 And the start of the docstring:
 

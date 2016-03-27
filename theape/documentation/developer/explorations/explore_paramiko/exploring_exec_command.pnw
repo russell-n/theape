@@ -1,5 +1,10 @@
 An Exec Command Example
 =======================
+<<name='imports', echo=False>>=
+from __future__ import print_function
+from paramiko import SSHClient
+import paramiko
+@
 
 .. _paramiko-sshclient-exec_command:
 
@@ -24,31 +29,31 @@ nmap
 
 I want to see if paramiko will allow me to run commands as sudo. Since `nmap` will change its behavior (adding MAC addresses) if you run the ping-scan using `sudo` I can run it with and without root privileges and see if I get the expected output.
 
-<<name='imports', echo=False>>=
-from paramiko import SSHClient
-import paramiko
-@
+.. language:: python
+
 <<name='nmap_sp', wrap=False>>=
 client = SSHClient()
 client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-client.connect('localhost', username='fakeuser')
+client.connect('localhost', username='tester_tester')
 stdin, stdout, stderr = client.exec_command("nmap -sP '192.168.103.*'")
 for line in stdout:
-    print line
+    print(line, end='')
 @
+
+nmap with sudo
+--------------
 
 And now with sudo.
 
 <<name='nmap_sudo', wrap=False>>=
 stdin, stdout, stderr = client.exec_command('sudo nmap -sP "192.168.103.*"', get_pty=True)
-stdin.write('fakepassword\n')
+stdin.write('testertester\n')
 for line in stdout:
-    print line    
+    print(line, end='')
 @
 
 Two things to note -- one is that I didn't need to call the load_system_host_keys. It seems that the AutoAddPolicy takes care of that. The other thing to note is that I needed to set `get_pty` to True. If I didn't it would close the channel with this error (on my machine)::
 
     sudo: no tty present and no askpass program specified
 
-
-
+.. warning:: The ``testertester`` line above ``[sudo] password for tester_tester:`` is the actual password that I entered so if you use this method the sudoer's password will be visible in the output.

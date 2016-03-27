@@ -1,12 +1,12 @@
 TheApe
 ======
 
-.. image:: figures/ape_in_suit.jpg
-   :align: center
+.. .. image:: figures/ape_in_suit.jpg
+..    :align: center
 
 
 
-It is being re-designed as a code runner as well as a repository of code components for building testing programs.
+This is a device-testing framework with a rudimentary plugin system to make it easier to extend and to enable the user to run (with limitations) external code within it, provided that a plugin has been made for it. The code is on `github <https://github.com/russellnakamura/theape>`_.
 
 Written Documentation
 ---------------------
@@ -36,7 +36,6 @@ These are the documents created from the source files.
 .. toctree::
    :maxdepth: 1
 
-   Client Connections <clients/index.rst>
    The Components <components/index.rst>
    The Ape's Infrastructure <infrastructure/index.rst>
    Parts <parts/index.rst>

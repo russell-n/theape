@@ -6,7 +6,7 @@ from __future__ import print_function
 import subprocess
 @
 
-The `All-Purpose Experimenter` is a plugin-based system meant to create a unified front-end for different device-related testing. The documentation is on `pythonhosted <http://pythonhosted.org//theape/>`_.
+The `All-Purpose Experimenter` is a plugin-based system meant to create a unified front-end for different device-related testing. The stable documentation is on `pythonhosted <http://pythonhosted.org//theape/>`_, and the documentation for the on-going updates are on `github <https://russellnakamura.github.io/theape/>`_ and the repository itself is on `github <https://github.com/russellnakamura/theape>`_ as well.
 
 Installation
 ------------
